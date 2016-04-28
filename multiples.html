@@ -1,7 +1,7 @@
 <html>
   <head>
     <script>
-      var side;
+      var side,points=50;
       
       function setCanvas(){
         if (window.innerHeight<window.innerWidth){
@@ -23,10 +23,16 @@
         var ctx=document.getElementById("canvas").getContext("2d");
         ctx.clearRect(0,0,side,side);
         ctx.strokeStyle="#222";
-        ctx.lineWidth=5; 
+        ctx.fillStyle="#222";
+        ctx.lineWidth=3; 
         ctx.beginPath();
         ctx.arc(side/2,side/2,side/2-5,0,2*Math.PI);
         ctx.stroke();
+        for (i=0;i<points;i++){
+          ctx.beginPath();
+          ctx.arc(Math.cos(-Math.PI/2+(Math.PI*2/points)*i)*(side/2-5),Math.sin(-Math.PI/2+(Math.PI*2/points)*i)*(side/2-5),6,0,2*Math.PI);
+          ctx.fill();
+        }
       }
     </script>
     <style>
