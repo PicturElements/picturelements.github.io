@@ -30,7 +30,7 @@
         ctx.stroke();
         for (i=0;i<points;i++){
           ctx.beginPath();
-          ctx.arc(Math.cos(-Math.PI/2+(Math.PI*2/points)*i)*(side/2-5),Math.sin(-Math.PI/2+(Math.PI*2/points)*i)*(side/2-5),6,0,2*Math.PI);
+          ctx.arc(side/2+Math.cos(-Math.PI/2+(Math.PI*2/points)*i)*(side/2-5),side/2+Math.sin(-Math.PI/2+(Math.PI*2/points)*i)*(side/2-5),6,0,2*Math.PI);
           ctx.fill();
         }
       }
