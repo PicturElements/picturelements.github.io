@@ -43,7 +43,7 @@
         for (i=0;i<points;i++){
           ctx.beginPath();
           ctx.moveTo(side/2+Math.cos(-Math.PI+(Math.PI*2/points)*i)*(side/2-10),side/2+Math.sin(-Math.PI+(Math.PI*2/points)*i)*(side/2-10));
-          ctx.lineTo(side/2+Math.cos(-Math.PI+(Math.PI*2*(i*multiple)%points/points))*(side/2-10),side/2+Math.sin(-Math.PI+(Math.PI*2*(i*multiple)%points/points))*(side/2-10));
+          ctx.lineTo(side/2+Math.cos(-Math.PI+((Math.PI*2*Math.floor((i*multiple)%points))/points))*(side/2-10),side/2+Math.sin(-Math.PI+((Math.PI*2*Math.floor((i*multiple)%points))/points))*(side/2-10));
           ctx.stroke();
         }
       }
