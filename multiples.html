@@ -1,7 +1,7 @@
 <html>
   <head>
     <script>
-      var side,points=50;
+      var side,points=10;
       
       function setCanvas(){
         if (window.innerHeight<window.innerWidth){
@@ -18,6 +18,11 @@
       window.onresize = function(event) {
         setCanvas();
       };
+      
+      function setPoints(){
+        points=document.getElementById("points").value;
+        paint();
+      }
       
       function paint(){
         var ctx=document.getElementById("canvas").getContext("2d");
@@ -40,10 +45,17 @@
         background-color:white;
         margin:0;
       }
+      #points{
+        position:fixed;
+        display:block;
+        bottom:5px;
+        left:5px;
+      }
     </style>
   </head>
   <body onload=setCanvas()>
     <canvas id="canvas">
     </canvas>
+    <input type="range" id="points" min="10" max="500" oninput=setPoints()></input>
   </body>
 </html>
