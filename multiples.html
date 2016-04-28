@@ -1,8 +1,9 @@
 <html>
   <head>
     <script>
+      var side;
+      
       function setCanvas(){
-        var side;
         if (window.innerHeight<window.innerWidth){
           side=window.innerHeight-100;
         }else{
@@ -11,6 +12,20 @@
         document.getElementById("canvas").width=side;
         document.getElementById("canvas").height=side;
         document.getElementById("canvas").style="display:block; position:fixed; width:"+side+"px; height:"+side+"px; left:"+(window.innerWidth-side)/2+"px; top:"+(window.innerHeight-side)/2+"px;";
+      }
+      
+      window.onresize = function(event) {
+        setCanvas();
+      };
+      
+      function paint(){
+        var ctx=document.getElementById("fractarea").getContext("2d");
+        ctx.clearRect(0,0,side,side);
+        ctx.strokeStyle="#222";
+        ctx.lineWidth=5; 
+        ctx.beginPath();
+        ctx.arc(side/2,side/2,side/2-5,0,2*Math.PI);
+        ctx.stroke();
       }
     </script>
     <style>
