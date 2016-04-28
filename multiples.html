@@ -53,25 +53,25 @@
         background-color:white;
         margin:0;
       }
-      #points,#multiple{
-        position:fixed;
+      #sliderContainer{
         display:block;
-        width:90vh;
-        bottom:55vw;
-        left:-40vw;
-        transform:rotate(-90deg);
+        width:100vh;
+        min-height:10px;
+        overflow:hidden;
       }
-      #points{
-        left:5px;
-      }
-      #multiple{
-        right:5px;
+      #points,#multiple{
+        position:relative;
+        display:block;
+        width:85%;
+        left:5%;
       }
     </style>
   </head>
   <body onload=setCanvas()>
     <canvas id="canvas"></canvas>
-    <input type="range" id="points" min="10" max="500" value="10" oninput=setStuff()></input>
-    <input type="range" id="multiple" min="1" max="100" value="2" oninput=setStuff()></input>
+    <div id="sliderContainer">
+      <input type="range" id="points" min="10" max="500" value="10" oninput=setStuff()></input>
+      <input type="range" id="multiple" min="1" max="100" value="2" oninput=setStuff()></input>
+    </div>
   </body>
 </html>
