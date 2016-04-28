@@ -25,7 +25,7 @@
           var x=e.clientX-(window.innerWidth-side)/2;
           var y=e.clientY-(window.innerHeight-side)/2;
           points=Math.floor((x/(side/491))+10);
-          multiple=100-Math.floor((y/(side/100))+1);
+          multiple=100-Math.floor((y/(side/100)));
           document.getElementById("points").value=points;
           document.getElementById("multiple").value=multiple;
           document.getElementById("canvas").style.cursor="default";
