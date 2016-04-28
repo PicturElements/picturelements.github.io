@@ -12,6 +12,7 @@
         document.getElementById("canvas").width=side;
         document.getElementById("canvas").height=side;
         document.getElementById("canvas").style="display:block; position:fixed; width:"+side+"px; height:"+side+"px; left:"+(window.innerWidth-side)/2+"px; top:"+(window.innerHeight-side)/2+"px;";
+        paint();
       }
       
       window.onresize = function(event) {
