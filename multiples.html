@@ -29,13 +29,13 @@
         ctx.clearRect(0,0,side,side);
         ctx.strokeStyle="#222";
         ctx.fillStyle="#222";
-        ctx.lineWidth=3; 
+        ctx.lineWidth=2; 
         ctx.beginPath();
         ctx.arc(side/2,side/2,side/2-10,0,2*Math.PI);
         ctx.stroke();
         for (i=0;i<points;i++){
           ctx.beginPath();
-          ctx.arc(side/2+Math.cos(-Math.PI/2+(Math.PI*2/points)*i)*(side/2-10),side/2+Math.sin(-Math.PI/2+(Math.PI*2/points)*i)*(side/2-10),5,0,2*Math.PI);
+          ctx.arc(side/2+Math.cos(-Math.PI/2+(Math.PI*2/points)*i)*(side/2-10),side/2+Math.sin(-Math.PI/2+(Math.PI*2/points)*i)*(side/2-10),3,0,2*Math.PI);
           ctx.fill();
         }
       }
@@ -48,14 +48,14 @@
       #points{
         position:fixed;
         display:block;
+        width:50vw;
         bottom:5px;
         left:5px;
       }
     </style>
   </head>
   <body onload=setCanvas()>
-    <canvas id="canvas">
-    </canvas>
-    <input type="range" id="points" min="10" max="500" oninput=setPoints()></input>
+    <canvas id="canvas"></canvas>
+    <input type="range" id="points" min="10" max="500" value="10" oninput=setPoints()></input>
   </body>
 </html>
