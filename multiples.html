@@ -58,6 +58,9 @@
         width:100vh;
         min-height:10px;
         overflow:hidden;
+        transform: rotate(-90deg);
+        margin-left: -35vh;
+        margin-top:42h;
       }
       #points,#multiple{
         position:relative;
@@ -71,7 +74,7 @@
     <canvas id="canvas"></canvas>
     <div id="sliderContainer">
       <input type="range" id="points" min="10" max="500" value="10" oninput=setStuff()></input>
-      <input type="range" id="multiple" min="1" max="100" value="2" oninput=setStuff()></input>
+      <input type="range" id="multiple" min="1" max="100" value="2" style="margin-top: 10vh;" oninput=setStuff()></input>
     </div>
   </body>
 </html>
