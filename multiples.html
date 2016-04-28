@@ -2,6 +2,7 @@
   <head>
     <script>
       var side,points=10,multiple=2;
+      var pressed;
       
       function setCanvas(){
         if (window.innerHeight<window.innerWidth){
@@ -13,6 +14,22 @@
         document.getElementById("canvas").height=side;
         document.getElementById("canvas").style="display:block; position:fixed; width:"+side+"px; height:"+side+"px; left:"+(window.innerWidth-side)/2+"px; top:"+(window.innerHeight-side)/2+"px;";
         paint();
+      }
+      
+      function press(in){
+        pressed=in;
+      }
+      
+      function move(e){
+        if (pressed==1){
+          var x=e.clientX-(window.innerWidth-side)/2;
+          var y=e.clientY-(window.innerHeight-side)/2;
+          points=Math.floor((x/(side/290))+10);
+          multiple=Math.floor((y/(side/89))+1);
+          document.getElementById("points").value=points;
+          document.getElementById("multiple").value=multiple;
+          paint();
+        }
       }
       
       window.onresize = function(event) {
@@ -71,7 +88,9 @@
     </style>
   </head>
   <body onload=setCanvas()>
-    <canvas id="canvas"></canvas>
+    <canvas id="canvas" onmousedown=press(1) onmousemove=move(event) onmoueup=press(0)>
+      
+    </canvas>
     <div id="sliderContainer">
       <input type="range" id="points" min="10" max="500" value="10" oninput=setStuff()></input>
       <input type="range" id="multiple" min="1" max="100" value="2" style="margin-top: 5vh;" oninput=setStuff()></input>
