@@ -19,8 +19,9 @@
         setCanvas();
       };
       
-      function setPoints(){
+      function setStuff(){
         points=document.getElementById("points").value;
+        multiple=document.getElementById("multiple").value;
         paint();
       }
       
@@ -52,17 +53,23 @@
         background-color:white;
         margin:0;
       }
-      #points{
+      #points,#multiple{
         position:fixed;
         display:block;
-        width:50vw;
+        width:47vw;
         bottom:5px;
+      }
+      #points{
         left:5px;
+      }
+      #multiple{
+        right:5px;
       }
     </style>
   </head>
   <body onload=setCanvas()>
     <canvas id="canvas"></canvas>
-    <input type="range" id="points" min="10" max="500" value="10" oninput=setPoints()></input>
+    <input type="range" id="points" min="10" max="500" value="10" oninput=setStuff()></input>
+    <input type="range" id="multiple" min="1" max="100" value="2" oninput=setStuff()></input>
   </body>
 </html>
