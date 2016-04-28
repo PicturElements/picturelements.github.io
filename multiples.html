@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <script>
+      function setCanvas(){
+        var side;
+        if (window.innerHeight<window.innerWidth){
+          side=window.innerHeight-100;
+        }else{
+          side=window.innerWidth-100;
+        }
+        document.getElementById("canvas").width=side;
+        document.getElementById("canvas").height=side;
+        document.getElementById("canvas").style="display:block; position:fixed; width:"+side+"px; height:"+side+"px; left:"+(window.innerWidth-side)/2+"px; top:"+(window.innerHeight-side)/2+"px;";
+      }
+    </script>
+    <style>
+      body{
+        background-color:white;
+        margin:0;
+      }
+    </style>
+  </head>
+  <body onload=setCanvas()>
+    <canvas id="canvas">
+    </canvas>
+  </body>
+</html>
