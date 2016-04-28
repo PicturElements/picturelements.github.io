@@ -1,7 +1,7 @@
 <html>
   <head>
     <script>
-      var side,points=10;
+      var side,points=10,multiple=2;
       
       function setCanvas(){
         if (window.innerHeight<window.innerWidth){
@@ -35,8 +35,15 @@
         ctx.stroke();
         for (i=0;i<points;i++){
           ctx.beginPath();
-          ctx.arc(side/2+Math.cos(-Math.PI/2+(Math.PI*2/points)*i)*(side/2-10),side/2+Math.sin(-Math.PI/2+(Math.PI*2/points)*i)*(side/2-10),3,0,2*Math.PI);
+          ctx.arc(side/2+Math.cos(-Math.PI+(Math.PI*2/points)*i)*(side/2-10),side/2+Math.sin(-Math.PI+(Math.PI*2/points)*i)*(side/2-10),3,0,2*Math.PI);
           ctx.fill();
+        }
+        ctx.strokeStyle="#909";
+        for (i=0;i<points;i++){
+          ctx.beginPath();
+          ctx.moveTo(side/2+Math.cos(-Math.PI+(Math.PI*2/points)*i)*(side/2-10),side/2+Math.sin(-Math.PI+(Math.PI*2/points)*i)*(side/2-10));
+          ctx.lineTo(side/2+Math.cos(-Math.PI+(Math.PI*2/points)*(i*multiple)%points)*(side/2-10),side/2+Math.sin(-Math.PI+(Math.PI*2/points)*(i*multiple)%points)*(side/2-10));
+          ctx.stroke();
         }
       }
     </script>
