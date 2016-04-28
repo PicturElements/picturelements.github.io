@@ -88,9 +88,7 @@
     </style>
   </head>
   <body onload=setCanvas()>
-    <canvas id="canvas" onmousedown=press(1) onmousemove=move(event) onmoueup=press(0)>
-      
-    </canvas>
+    <canvas id="canvas" onmousedown=press(1) onmousemove=move(event) onmouseup=press(0)></canvas>
     <div id="sliderContainer">
       <input type="range" id="points" min="10" max="500" value="10" oninput=setStuff()></input>
       <input type="range" id="multiple" min="1" max="100" value="2" style="margin-top: 5vh;" oninput=setStuff()></input>
