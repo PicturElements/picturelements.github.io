@@ -106,6 +106,11 @@
         padding: 0.5vw;
       }
       
+      #inP,#inM{
+        border:none;
+        background-color:transparent;
+      }
+      
       input[type=range] {
         -webkit-appearance: none;
         width: 100%;
@@ -199,7 +204,7 @@
   <body onload=setCanvas() onmouseup=press(0)>
     <canvas id="canvas" onmousedown=press(1) onmousemove=move(event) onmouseup=press(0)></canvas>
     <div id="sliderContainer">
-      <div id="data">points: 10 | multiple: 2</div>
+      <div id="data">points: <input id="inP" value=10></input> | multiple: <input id="inM" value=2></input></div>
       <input type="range" id="points" min="10" max="500" value="10" oninput=setStuff()></input>
       <input type="range" id="multiple" min="1" max="100" value="2" style="margin-top: 40px;" oninput=setStuff()></input>
     </div>
