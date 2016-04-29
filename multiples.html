@@ -27,6 +27,7 @@
           var y=e.clientY-(window.innerHeight-side)/2;
           points=Math.floor((x/(side/491))+10);
           multiple=100-Math.floor((y/(side/100)));
+          document.getElementById("data").innerHTML="points: "+points+" | multiple: "+multiple;
           document.getElementById("points").value=points;
           document.getElementById("multiple").value=multiple;
           document.getElementById("canvas").style.cursor="default";
@@ -198,7 +199,7 @@
   <body onload=setCanvas() onmouseup=press(0)>
     <canvas id="canvas" onmousedown=press(1) onmousemove=move(event) onmouseup=press(0)></canvas>
     <div id="sliderContainer">
-      <div id="data">Points:10  Multiple:2</div>
+      <div id="data">points: 10 | multiple: 2</div>
       <input type="range" id="points" min="10" max="500" value="10" oninput=setStuff()></input>
       <input type="range" id="multiple" min="1" max="100" value="2" style="margin-top: 40px;" oninput=setStuff()></input>
     </div>
