@@ -91,11 +91,17 @@
       }
       
       #data{
-        position:absolute;
-        display:block;
-        min-width:20px;
-        height:20px;
-        background-color:red;
+        position: absolute;
+        display: block;
+        min-width: 20px;
+        /* height: 2.5vw; */
+        background-color: #DDDDDD;
+        top: -2.75vw;
+        left: 0;
+        font-family: Roboto,Arial,sans-serif;
+        color: #444;
+        font-size: 1.5vw;
+        padding: 0.5vw;
       }
       
       input[type=range] {
@@ -191,7 +197,7 @@
   <body onload=setCanvas() onmouseup=press(0)>
     <canvas id="canvas" onmousedown=press(1) onmousemove=move(event) onmouseup=press(0)></canvas>
     <div id="sliderContainer">
-      <div id="data">Lol</div>
+      <div id="data">Points:10  Multiple:2</div>
       <input type="range" id="points" min="10" max="500" value="10" oninput=setStuff()></input>
       <input type="range" id="multiple" min="1" max="100" value="2" style="margin-top: 40px;" oninput=setStuff()></input>
     </div>
