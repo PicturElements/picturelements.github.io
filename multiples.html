@@ -85,7 +85,10 @@
       body{
         background-color:white;
         margin:0;
+        box-sizing: border-box;
+        border: 10px solid #ddd;
       }
+      
       #sliderContainer{
         display:block;
         position:fixed;
@@ -127,6 +130,20 @@
         font-family: Roboto,Arial,sans-serif;
         font-size: 1.5vw;
         color: #444;
+      }
+      
+      #expando{
+        display: block;
+        position: absolute;
+        height: 100%;
+        width: 3vw;
+        background-color: #aaa;
+        margin-left: 31vw;
+        top: 0;
+        font-family: Roboto,Arial,sans-serif;
+        font-size:2vw;
+        color:white;
+        cursor:pointer;
       }
       
       input[type=range] {
@@ -222,6 +239,7 @@
   <body onload=setCanvas() onmouseup=press(0)>
     <canvas id="canvas" onmousedown=press(1) onmousemove=move(event) onmouseup=press(0)></canvas>
     <div id="sliderContainer">
+      <div id="expando"><</div>
       <div id="data">Points: <input id="inP" value=10 onkeyup=typeIn()></input>Multiple: <input id="inM" value=2 onkeyup=typeIn()></input></div>
       <input type="range" id="points" min="10" max="500" value="10" oninput=setStuff()></input>
       <input type="range" id="multiple" min="1" max="100" value="2" style="margin-top: 40px;" oninput=setStuff()></input>
