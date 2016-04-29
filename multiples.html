@@ -27,8 +27,8 @@
           var y=e.clientY-(window.innerHeight-side)/2;
           points=Math.floor((x/(side/491))+10);
           multiple=100-Math.floor((y/(side/100)));
-          document.getElementById("inP").innerHTML=points;
-          document.getElementById("inM").innerHTML=multiple;
+          document.getElementById("inP").value=points;
+          document.getElementById("inM").value=multiple;
           document.getElementById("points").value=points;
           document.getElementById("multiple").value=multiple;
           document.getElementById("canvas").style.cursor="default";
@@ -39,8 +39,8 @@
       function typeIn(){
         points=document.getElementById("inP").value;
         multiple=document.getElementById("inM").value;
-        document.getElementById("inP").innerHTML=points;
-        document.getElementById("inM").innerHTML=multiple;
+        document.getElementById("inP").value=points;
+        document.getElementById("inM").value=multiple;
         paint();
       }
       
@@ -51,8 +51,8 @@
       function setStuff(){
         points=document.getElementById("points").value;
         multiple=document.getElementById("multiple").value;
-        document.getElementById("inP").innerHTML=points;
-        document.getElementById("inM").innerHTML=multiple;
+        document.getElementById("inP").value=points;
+        document.getElementById("inM").value=multiple;
         paint();
       }
       
