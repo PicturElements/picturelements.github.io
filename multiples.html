@@ -85,7 +85,94 @@
       #points,#multiple{
         position:relative;
         display:block;
-        width:93.75%;
+        width:100%;
+      }
+      
+      input[type=range] {
+        -webkit-appearance: none;
+        width: 100%;
+      }
+      
+      input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+      }
+      
+      input[type=range]:focus {
+        outline: none;
+      }
+      
+      input[type=range]::-ms-track {
+        width: 100%;
+        cursor: pointer;
+        background: transparent;
+        border-color: transparent;
+        color: transparent;
+      }
+      
+      input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        height: 36px;
+        width: 16px;
+        background-color:#444;
+        cursor: pointer;
+        margin-top: 0;
+      }
+      
+      input[type=range]::-moz-range-thumb {
+        height: 36px;
+        width: 16px;
+        background-color:#444;
+        cursor: pointer;
+      }
+      
+      input[type=range]::-ms-thumb {
+        height: 36px;
+        width: 16px;
+        background-color:#444;
+        cursor: pointer;
+      }
+      
+      input[type=range]::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 8.4px;
+        cursor: pointer;
+        background-color: #aaa;
+      }
+      
+      input[type=range]:focus::-webkit-slider-runnable-track {
+        background: #aaa;
+      }
+      
+      input[type=range]::-moz-range-track {
+        width: 100%;
+        height: 8.4px;
+        cursor: pointer;
+        background-color: #aaa;
+      }
+      
+      input[type=range]::-ms-track {
+        width: 100%;
+        height: 8.4px;
+        cursor: pointer;
+        background-color: #aaa;
+      }
+      input[type=range]::-ms-fill-lower {
+        width: 100%;
+        height: 8.4px;
+        cursor: pointer;
+        background-color: #aaa;
+      }
+      input[type=range]:focus::-ms-fill-lower {
+        background: #aaa;
+      }
+      input[type=range]::-ms-fill-upper {
+        width: 100%;
+        height: 8.4px;
+        cursor: pointer;
+        background-color: #aaa;
+      }
+      input[type=range]:focus::-ms-fill-upper {
+        background: #aaa;
       }
     </style>
   </head>
