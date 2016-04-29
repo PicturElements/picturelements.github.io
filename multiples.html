@@ -1,5 +1,6 @@
 <html>
   <head>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:500' rel='stylesheet' type='text/css'>
     <script>
       var side,points=10,multiple=2;
       var pressed;
@@ -40,6 +41,7 @@
       function setStuff(){
         points=document.getElementById("points").value;
         multiple=document.getElementById("multiple").value;
+        document.getElementById("data").innerHTML="points: "+points+" | multiple: "+multiple;
         paint();
       }
       
@@ -94,7 +96,6 @@
         position: absolute;
         display: block;
         min-width: 20px;
-        /* height: 2.5vw; */
         background-color: #DDDDDD;
         top: -2.75vw;
         left: 0;
