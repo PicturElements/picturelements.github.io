@@ -37,14 +37,14 @@
           points=Math.floor((x/(side/491))+10);
           multiple=100-Math.floor((y/(side/100)));
           document.getElementById("canvas").style.cursor="default";
-          setStuff();
+          setInfo();
         }
       }
       
       function typeIn(){
         points=document.getElementById("inP").value;
         multiple=document.getElementById("inM").value;
-        setStuff();
+        setInfo();
         paint();
       }
       
@@ -52,13 +52,21 @@
         setCanvas();
       };
       
-      function setStuff(){
+      functon setStuff(){
+        document.getElementById("inP").value=points;
+        document.getElementById("inM").value=multiple;
+        localStorage.setItem("points",points);
+        localStorage.setItem("multiple",multiple);
+        paint();
+      }
+      
+      function setInfo(){
         document.getElementById("inP").value=points;
         document.getElementById("inM").value=multiple;
         document.getElementById("points").value=points;
         document.getElementById("multiple").value=multiple;
-        localStorage.getItem("points",points);
-        localStorage.getItem("multiple",multiple);
+        localStorage.setItem("points",points);
+        localStorage.setItem("multiple",multiple);
         paint();
       }
       
