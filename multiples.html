@@ -73,18 +73,19 @@
       }
       #sliderContainer{
         display:block;
-        width:100vh;
+        position:fixed;
+        width:40vw;
         min-height:10px;
         overflow:hidden;
-        transform: rotate(-90deg);
-        margin-left:-40vh;
-        margin-top:45vh;
+        bottom:10px;
+        left:10px;
+        padding:2vw;
+        background-color:#eee;
       }
       #points,#multiple{
         position:relative;
         display:block;
-        width:85%;
-        left:5%;
+        width:96%;
       }
     </style>
   </head>
@@ -92,7 +93,7 @@
     <canvas id="canvas" onmousedown=press(1) onmousemove=move(event) onmouseup=press(0)></canvas>
     <div id="sliderContainer">
       <input type="range" id="points" min="10" max="500" value="10" oninput=setStuff()></input>
-      <input type="range" id="multiple" min="1" max="100" value="2" style="margin-top: 5vh;" oninput=setStuff()></input>
+      <input type="range" id="multiple" min="1" max="100" value="2" style="margin-top: 10px;" oninput=setStuff()></input>
     </div>
   </body>
 </html>
