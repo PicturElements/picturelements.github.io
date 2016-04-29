@@ -4,7 +4,7 @@
     <link rel="icon" href="pelement.png">
     <title>Multiples - PicturElements</title>
     <script>
-      var side,points=10,multiple=2;
+      var side,points=10,multiple=2,expanded=1;
       var pressed;
       
       function setCanvas(){
@@ -58,6 +58,15 @@
         paint();
       }
       
+      function expand(){
+        expanded=Math.abs(expanded-1);
+        if (expanded==0){
+          document.getElementById("sliderContainer").left="-32vw";
+        }else{
+          document.getElementById("sliderContainer").left="0";
+        }
+      }
+      
       function paint(){
         var ctx=document.getElementById("canvas").getContext("2d");
         ctx.clearRect(0,0,side,side);
@@ -85,8 +94,8 @@
       body{
         background-color:white;
         margin:0;
-        box-sizing: border-box;
-        border: 10px solid #ddd;
+        /*box-sizing: border-box;
+        border: 10px solid #ddd;*/
       }
       
       #sliderContainer{
@@ -94,10 +103,11 @@
         position:fixed;
         width:30vw;
         min-height:10px;
-        bottom:10px;
-        left:10px;
+        bottom:0;
+        left:0;
         padding:1vw;
         background-color:#ddd;
+        transition:left 300ms;
       }
       
       #points,#multiple{
@@ -239,7 +249,7 @@
   <body onload=setCanvas() onmouseup=press(0)>
     <canvas id="canvas" onmousedown=press(1) onmousemove=move(event) onmouseup=press(0)></canvas>
     <div id="sliderContainer">
-      <div id="expando"><</div>
+      <div id="expando" onclick=expand()></div>
       <div id="data">Points: <input id="inP" value=10 onkeyup=typeIn()></input>Multiple: <input id="inM" value=2 onkeyup=typeIn()></input></div>
       <input type="range" id="points" min="10" max="500" value="10" oninput=setStuff()></input>
       <input type="range" id="multiple" min="1" max="100" value="2" style="margin-top: 40px;" oninput=setStuff()></input>
