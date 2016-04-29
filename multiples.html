@@ -133,6 +133,7 @@
         font-size: 1.5vw;
         padding: 0.5vw;
         padding-left:3.5vw;
+        font-weight: 900;
       }
       
       #inP,#inM{
@@ -270,7 +271,7 @@
     <canvas id="canvas" onmousedown=press(1) onmousemove=move(event) onmouseup=press(0)></canvas>
     <div id="sliderContainer">
       <div id="expando" onclick=expand()>
-        <div id="expandoIcon"></div>
+        <div id="expandoIcon"><</div>
       </div>
       <div id="data">Points: <input id="inP" value=10 onkeyup=typeIn()></input>Multiple: <input id="inM" value=2 onkeyup=typeIn()></input></div>
       <input type="range" id="points" min="10" max="500" value="10" oninput=setStuff()></input>
