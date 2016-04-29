@@ -7,13 +7,6 @@
       var side,points=10,multiple=2,expanded=1;
       var pressed;
       
-      if (localStorage.getItem("points")!=null){
-        points=localStorage.getItem("points");
-      }
-      if (localStorage.getItem("multiple")!=null){
-        multiple=localStorage.getItem("multiple");
-      }
-      
       function setCanvas(){
         if (window.innerHeight<window.innerWidth){
           side=window.innerHeight-100;
@@ -23,6 +16,19 @@
         document.getElementById("canvas").width=side;
         document.getElementById("canvas").height=side;
         document.getElementById("canvas").style="display:block; position:fixed; width:"+side+"px; height:"+side+"px; left:"+(window.innerWidth-side)/2+"px; top:"+(window.innerHeight-side)/2+"px;";
+        
+        if (localStorage.getItem("points")!=null){
+          points=localStorage.getItem("points");
+        }
+        if (localStorage.getItem("multiple")!=null){
+          multiple=localStorage.getItem("multiple");
+        }
+        if (localStorage.getItem("expanded")==0){
+          expanded=0;
+          document.getElementById("sliderContainer").style.left="-35vw";
+          document.getElementById("expandoIcon").style.transform="rotate(180deg)";
+        }
+        
         setInfo();
       }
       
@@ -81,6 +87,7 @@
           document.getElementById("sliderContainer").style.left="-3vw";
           document.getElementById("expandoIcon").style.transform="rotate(0deg)";
         }
+        localStorage.setItem("expanded",expanded);
       }
       
       function paint(){
