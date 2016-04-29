@@ -27,12 +27,21 @@
           var y=e.clientY-(window.innerHeight-side)/2;
           points=Math.floor((x/(side/491))+10);
           multiple=100-Math.floor((y/(side/100)));
-          document.getElementById("data").innerHTML="points: "+points+" | multiple: "+multiple;
+          document.getElementById("inP").innerHTML=points;
+          document.getElementById("inM").innerHTML=multiple;
           document.getElementById("points").value=points;
           document.getElementById("multiple").value=multiple;
           document.getElementById("canvas").style.cursor="default";
           paint();
         }
+      }
+      
+      function type(){
+        points=document.getElementById("inP").value;
+        multiple=document.getElementById("inM").value;
+        document.getElementById("inP").innerHTML=points;
+        document.getElementById("inM").innerHTML=multiple;
+        paint();
       }
       
       window.onresize = function(event) {
@@ -42,7 +51,8 @@
       function setStuff(){
         points=document.getElementById("points").value;
         multiple=document.getElementById("multiple").value;
-        document.getElementById("data").innerHTML="points: "+points+" | multiple: "+multiple;
+        document.getElementById("inP").innerHTML=points;
+        document.getElementById("inM").innerHTML=multiple;
         paint();
       }
       
@@ -107,8 +117,14 @@
       }
       
       #inP,#inM{
-        border:none;
-        background-color:transparent;
+        position: relative;
+        border: none;
+        background-color: transparent;
+        width: 3vw;
+        overflow: hidden;
+        font-family: Roboto,Arial,sans-serif;
+        font-size: 1.5vw;
+        color: #444;
       }
       
       input[type=range] {
@@ -204,7 +220,7 @@
   <body onload=setCanvas() onmouseup=press(0)>
     <canvas id="canvas" onmousedown=press(1) onmousemove=move(event) onmouseup=press(0)></canvas>
     <div id="sliderContainer">
-      <div id="data">points: <input id="inP" value=10></input> | multiple: <input id="inM" value=2></input></div>
+      <div id="data">points: <input id="inP" value=10 onmouseup=type()></input> | multiple: <input id="inM" value=2 onmouseup=type()></input></div>
       <input type="range" id="points" min="10" max="500" value="10" oninput=setStuff()></input>
       <input type="range" id="multiple" min="1" max="100" value="2" style="margin-top: 40px;" oninput=setStuff()></input>
     </div>
