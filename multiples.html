@@ -36,7 +36,7 @@
         }
       }
       
-      function type(){
+      function typeIn(){
         points=document.getElementById("inP").value;
         multiple=document.getElementById("inM").value;
         document.getElementById("inP").innerHTML=points;
@@ -220,7 +220,7 @@
   <body onload=setCanvas() onmouseup=press(0)>
     <canvas id="canvas" onmousedown=press(1) onmousemove=move(event) onmouseup=press(0)></canvas>
     <div id="sliderContainer">
-      <div id="data">points: <input id="inP" value=10 onmouseup=type()></input> | multiple: <input id="inM" value=2 onmouseup=type()></input></div>
+      <div id="data">points: <input id="inP" value=10 onmouseup=typeIn()></input> | multiple: <input id="inM" value=2 onmouseup=typeIn()></input></div>
       <input type="range" id="points" min="10" max="500" value="10" oninput=setStuff()></input>
       <input type="range" id="multiple" min="1" max="100" value="2" style="margin-top: 40px;" oninput=setStuff()></input>
     </div>
