@@ -23,7 +23,7 @@
         document.getElementById("canvas").width=side;
         document.getElementById("canvas").height=side;
         document.getElementById("canvas").style="display:block; position:fixed; width:"+side+"px; height:"+side+"px; left:"+(window.innerWidth-side)/2+"px; top:"+(window.innerHeight-side)/2+"px;";
-        paint();
+        setInfo();
       }
       
       function press(i){
@@ -53,6 +53,8 @@
       };
       
       function setStuff(){
+        points=document.getElementById("points").value;
+        multiple=document.getElementById("multiple").value;
         document.getElementById("inP").value=points;
         document.getElementById("inM").value=multiple;
         localStorage.setItem("points",points);
