@@ -7,6 +7,13 @@
       var side,points=10,multiple=2,expanded=1;
       var pressed;
       
+      if (localStorage.getItem("points")!=null){
+        points=localStorage.getItem("points");
+      }
+      if (localStorage.getItem("multiple")!=null){
+        multiple=localStorage.getItem("multiple");
+      }
+      
       function setCanvas(){
         if (window.innerHeight<window.innerWidth){
           side=window.innerHeight-100;
@@ -29,20 +36,15 @@
           var y=e.clientY-(window.innerHeight-side)/2;
           points=Math.floor((x/(side/491))+10);
           multiple=100-Math.floor((y/(side/100)));
-          document.getElementById("inP").value=points;
-          document.getElementById("inM").value=multiple;
-          document.getElementById("points").value=points;
-          document.getElementById("multiple").value=multiple;
           document.getElementById("canvas").style.cursor="default";
-          paint();
+          setStuff();
         }
       }
       
       function typeIn(){
         points=document.getElementById("inP").value;
         multiple=document.getElementById("inM").value;
-        document.getElementById("points").value=points;
-        document.getElementById("multiple").value=multiple;
+        setStuff();
         paint();
       }
       
@@ -51,10 +53,12 @@
       };
       
       function setStuff(){
-        points=document.getElementById("points").value;
-        multiple=document.getElementById("multiple").value;
         document.getElementById("inP").value=points;
         document.getElementById("inM").value=multiple;
+        document.getElementById("points").value=points;
+        document.getElementById("multiple").value=multiple;
+        localStorage.getItem("points",points);
+        localStorage.getItem("multiple",multiple);
         paint();
       }
       
