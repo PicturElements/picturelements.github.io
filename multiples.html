@@ -86,8 +86,8 @@
         position:relative;
         display:block;
         width:100%;
-        margin-top:20px;
-        margin-bottom:20px;
+        margin-top:15px;
+        margin-bottom:15px;
       }
       
       input[type=range] {
@@ -184,7 +184,7 @@
     <canvas id="canvas" onmousedown=press(1) onmousemove=move(event) onmouseup=press(0)></canvas>
     <div id="sliderContainer">
       <input type="range" id="points" min="10" max="500" value="10" oninput=setStuff()></input>
-      <input type="range" id="multiple" min="1" max="100" value="2" oninput=setStuff()></input>
+      <input type="range" id="multiple" min="1" max="100" value="2" style="margin-top: 40px;" oninput=setStuff()></input>
     </div>
   </body>
 </html>
