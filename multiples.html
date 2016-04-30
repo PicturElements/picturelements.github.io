@@ -7,16 +7,7 @@
       var side,points=10,multiple=2,expanded=1;
       var pressed,nuanced=0;
       
-      function setCanvas(){
-        if (window.innerHeight<window.innerWidth){
-          side=window.innerHeight-100;
-        }else{
-          side=window.innerWidth-100;
-        }
-        document.getElementById("canvas").width=side;
-        document.getElementById("canvas").height=side;
-        document.getElementById("canvas").style="display:block; position:fixed; width:"+side+"px; height:"+side+"px; left:"+(window.innerWidth-side)/2+"px; top:"+(window.innerHeight-side)/2+"px;";
-        
+      function init(){
         if (localStorage.getItem("points")!=null){
           points=localStorage.getItem("points");
         }
@@ -48,11 +39,21 @@
             }
           }
         }
-        console.log(sub);
-        if (id==2){
+        if (id==3){
           nuanced=parseInt(sub);
         }
-        
+        setCanvas();
+      }
+      
+      function setCanvas(){
+        if (window.innerHeight<window.innerWidth){
+          side=window.innerHeight-100;
+        }else{
+          side=window.innerWidth-100;
+        }
+        document.getElementById("canvas").width=side;
+        document.getElementById("canvas").height=side;
+        document.getElementById("canvas").style="display:block; position:fixed; width:"+side+"px; height:"+side+"px; left:"+(window.innerWidth-side)/2+"px; top:"+(window.innerHeight-side)/2+"px;";
         setInfo();
       }
       
@@ -352,7 +353,7 @@
       }
     </style>
   </head>
-  <body onload=setCanvas() onmouseup=press(0)>
+  <body onload=init() onmouseup=press(0)>
     <canvas id="canvas" onmousedown=press(1) onmousemove=move(event) onmouseup=press(0)></canvas>
     <div id="sliderContainer">
       <div id="expando" onclick=expand()>
