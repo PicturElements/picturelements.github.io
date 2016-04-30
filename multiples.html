@@ -271,8 +271,9 @@
       
       #selection{
         height: 1.7vw;
-        width: 5.9vw;
+        width: 5.4vw;
         top: 0;
+        margin-right: 0.5vw;
       }
       
       input[type=range] {
@@ -375,7 +376,7 @@
       <select id="selection" onchange=setNuance()>
         <option value="0">normal</option>
         <option value="1">nuanced</option>
-        <option value="2">smart</option>
+        <option value="2">smart (β)</option>
       </select><div id="save" onclick=saveUrl()>save</div></div>
       <input type="range" id="points" min="10" max="500" value="10" oninput=setStuff()></input>
       <input type="range" id="multiple" min="1" max="100" value="2" style="margin-top: 40px;" oninput=setStuff()></input>
