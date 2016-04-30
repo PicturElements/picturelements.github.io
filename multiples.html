@@ -68,7 +68,10 @@
       function typeIn(){
         points=document.getElementById("inP").value;
         multiple=document.getElementById("inM").value;
-        setInfo();
+        document.getElementById("points").value=points;
+        document.getElementById("multiple").value=multiple;
+        localStorage.setItem("points",points);
+        localStorage.setItem("multiple",multiple);
         paint();
       }
       
