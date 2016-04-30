@@ -42,6 +42,7 @@
         if (id==3){
           nuanced=parseInt(sub);
         }
+        document.getElementById("selection").selectedIndex=nuanced;
         setCanvas();
       }
       
@@ -79,6 +80,11 @@
         document.getElementById("multiple").value=multiple;
         localStorage.setItem("points",points);
         localStorage.setItem("multiple",multiple);
+        paint();
+      }
+      
+      function setNuance(){
+        nuanced=document.getElementById("selection").selectedIndex;
         paint();
       }
       
@@ -366,7 +372,7 @@
         <div id="expandoIcon"><</div>
       </div>
       <div id="data">Points: <input id="inP" value=10 onkeyup=typeIn()></input>Multiple: <input id="inM" value=2 onkeyup=typeIn()></input>Fill:
-      <select id="selection">
+      <select id="selection" onchange=setNuance()>
         <option value="0">normal</option>
         <option value="1">nuanced</option>
         <option value="2">clever</option>
