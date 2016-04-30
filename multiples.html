@@ -135,7 +135,7 @@
           var y1=side/2+Math.sin(-Math.PI+(Math.PI*2/points)*i)*(side/2-10),y2=side/2+Math.sin(-Math.PI+((Math.PI*2*Math.floor((i*multiple)%points))/points))*(side/2-10);
           var length=Math.sqrt(Math.pow((x2-x1),2)+Math.pow((y2-y1),2));
           console.log(length);
-          ctx.strokeStyle="rgb("+(255-(length/(side-20))*255)+",0,"+(length/(side-20))*255+")";
+          ctx.strokeStyle="rgb("+Math.floor(255-(length/(side-20))*255)+",0,"+Math.floor((length/(side-20))*255)+")";
           ctx.beginPath();
           ctx.moveTo(x1,y1);
           ctx.lineTo(x2,y2);
