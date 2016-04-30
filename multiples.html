@@ -37,7 +37,7 @@
         var sub="";
         for (i=0;i<url.length;i++){
           if (url.charAt(i)=='#'){id=1;}
-          else if (id==1){
+          else if (id>0){
             if (url.charAt(i)==','){
               if (id==1){points=parseInt(sub);}
               else{multiple=parseInt(sub);}
