@@ -4,7 +4,7 @@
     <link rel="icon" href="pelement.png">
     <title>Multiples - PicturElements</title>
     <script>
-      var side,points=10,multiple=2,expanded=1;
+      var side,points=100,multiple=2,expanded=1;
       var pressed,nuanced=0;
       
       function init(){
@@ -378,7 +378,7 @@
       <div id="expando" onclick=expand()>
         <div id="expandoIcon"><</div>
       </div>
-      <div id="data">Points: <input id="inP" value=10 onkeyup=typeIn()></input>Multiple: <input id="inM" value=2 onkeyup=typeIn()></input>Fill:
+      <div id="data">Points: <input id="inP" value=10 onkeyup=typeIn()></input>Multiply: <input id="inM" value=2 onkeyup=typeIn()></input>Fill:
       <select id="selection" onchange=setNuance()>
         <option value="0">normal</option>
         <option value="1">nuanced</option>
