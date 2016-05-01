@@ -159,12 +159,12 @@
         }else{
           for (mod=points-1;mod>0;mod--){
             for (i=0;i<points;i++){
-              var max;
+              //var max;
               var length1=Math.abs((i*multiple)%points-i);
-              var length2=points-(i*multiple)%points+i;
+              /*var length2=points-(i*multiple)%points+i;
               if (length1<length2){max=length1}
-              else{max=length2}
-              if (max==mod){
+              else{max=length2}*/
+              if (length1==mod){
                 var x1=side/2+Math.cos(-Math.PI+(Math.PI*2/points)*i)*(side/2-10),x2=side/2+Math.cos(-Math.PI+((Math.PI*2*Math.floor((i*multiple)%points))/points))*(side/2-10);
                 var y1=side/2+Math.sin(-Math.PI+(Math.PI*2/points)*i)*(side/2-10),y2=side/2+Math.sin(-Math.PI+((Math.PI*2*Math.floor((i*multiple)%points))/points))*(side/2-10);
                 var length=Math.sqrt(Math.pow((x2-x1),2)+Math.pow((y2-y1),2));
