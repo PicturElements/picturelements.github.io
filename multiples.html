@@ -30,7 +30,7 @@
           if (url.charAt(i)=='='){
             parse=1;
           }else if(url.charAt(i)=='&'){
-            if (id==1){points=parseInt(sub);}
+            if (id==0){points=parseInt(sub);}
             else{multiple=parseInt(sub);}
             id++;
             sub="";
@@ -39,7 +39,7 @@
             sub+=url.charAt(i);
           }
         }
-        if (id==3){
+        if (id==2){
           nuanced=parseInt(sub);
         }
         /*for (i=0;i<url.length;i++){
