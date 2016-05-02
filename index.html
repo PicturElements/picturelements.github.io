@@ -83,8 +83,10 @@
     </style>
     <script>
       var leftmost=0,rightmost;
-      var stepsMoved=1000;
+      var stepsMoved=100000;
       var itemCount
+      var sincePress=0;
+      
       function init(){
         var items=document.getElementsByClassName("item");
         itemCount=items.length;
@@ -94,6 +96,12 @@
         }
         items[1].style.display="none";
         rightmost=items.length-1;
+        setInterval(time,100);
+      }
+      
+      function time(){
+        sincePress++;
+        if (sincePress==50){move(-1)}
       }
       
       function move(moveDir){
@@ -106,6 +114,7 @@
           }
           items[i].style.left=""+(25+(55)*((i+stepsMoved)%itemCount-2))+"vw";
         }
+        sincePress=0;
       }
     </script>
   </head>
@@ -115,17 +124,22 @@
     </div>
     <div id="content">
       <div id="showcasearea">
-        <div class="item"></div>
-        <div class="item"></div>
-        <div class="item"></div>
         <div class="item">
+          <a href="http://aquaplexus.net/firework" style="background-image:url(images/firework.png)"></a>
+        </div>
+        <div class="item"></div>
+        <div class="item"></div>
           <a href="http://picturelements.github.io/hitLawyer" style="background-image:url(images/hitLawyer.png)"></a>
+        <div class="item">
+          <a href="http://aquaplexus.net/fractal" style="background-image:url(images/fractal.png)"></a>
         </div>
         <div class="item">
           <a href="http://picturelements.github.io/multiples" style="background-image:url(images/multiples.png)"></a>
         </div>
         <div class="item">
-          <a href="http://picturelements.github.io/egghunt" style="background-image:url(images/egghunt.png)"></a></div>
+          <a href="http://picturelements.github.io/egghunt" style="background-image:url(images/egghunt.png)"></a>
+        </div>
+        <!--Buttons-->
         <div id="swipeBtn" style="left:0" onclick=move(1)><</div>
         <div id="swipeBtn" style="right:0" onclick=move(-1)>></div>
       </div>
