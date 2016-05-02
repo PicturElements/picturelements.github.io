@@ -85,7 +85,7 @@
       var leftmost=0,rightmost;
       var stepsMoved=100000;
       var itemCount
-      var sincePress=0;
+      var sincePress=0,movable=1;
       
       function init(){
         var items=document.getElementsByClassName("item");
@@ -100,12 +100,14 @@
       }
       
       function time(){
-        sincePress++;
-        if (sincePress==50){move(-1)}
+        if (movable==1){
+          sincePress++;
+          if (sincePress==50){move(-1)}
+        }
       }
       
-      function hover(){
-        console.log("HOVER!");
+      function hover(input){
+        movable=input;
       }
       
       function move(moveDir){
@@ -127,7 +129,7 @@
       <div id="logo"></div>
     </div>
     <div id="content">
-      <div id="showcasearea" onhover=hover()>
+      <div id="showcasearea" onmouseover=hover(0) onmouseleave=hover(1)>
         <div class="item">
           <a href="http://aquaplexus.net/firework" style="background-image:url(images/firework.png)"></a>
         </div>
