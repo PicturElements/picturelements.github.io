@@ -75,11 +75,11 @@
     </style>
     <script>
       var leftmost=0,rightmost;
-      var stepsMoved=-2;
+      var stepsMoved=0;
       function init(){
         var items=document.getElementsByClassName("item");
         for (i=0;i<items.length;i++){
-          items[i].style.left=""+(25+(55)*(i+stepsMoved))+"vw";
+          items[i].style.left=""+(25+(55)*(i+stepsMoved-2))+"vw";
           items[i].style.display="block";
         }
         rightmost=items.length-1;
@@ -89,7 +89,7 @@
         var items=document.getElementsByClassName("item");
         stepsMoved+=moveDir;
         for (i=0;i<items.length;i++){
-          items[i].style.left=""+(25+(55)*(i+stepsMoved))+"vw";
+          items[i].style.left=""+(25+(55)*(i+stepsMoved%items.length-2))+"vw";
         }
       }
     </script>
