@@ -123,6 +123,14 @@
         movable=input;
       }
       
+      window.onfocus = function () { 
+        movable=1;
+      }; 
+      
+      window.onblur = function () { 
+        movable=0;
+      }; 
+      
       function move(moveDir){
         var items=document.getElementsByClassName("item");
         stepsMoved+=moveDir;
