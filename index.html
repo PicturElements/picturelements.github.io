@@ -104,6 +104,10 @@
         if (sincePress==50){move(-1)}
       }
       
+      function hover(){
+        console.log("HOVER!");
+      }
+      
       function move(moveDir){
         var items=document.getElementsByClassName("item");
         stepsMoved+=moveDir;
@@ -123,7 +127,7 @@
       <div id="logo"></div>
     </div>
     <div id="content">
-      <div id="showcasearea">
+      <div id="showcasearea" onhover=hover()>
         <div class="item">
           <a href="http://aquaplexus.net/firework" style="background-image:url(images/firework.png)"></a>
         </div>
