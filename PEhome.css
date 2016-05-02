@@ -14,9 +14,9 @@
 }
 
 @keyframes flip{
-  80%{transform: perspective(500px) rotate3d(0, 1, 0, 190deg);}
-  85%{transform: perspective(500px) rotate3d(0, 1, 0, 170deg);}
-  90%{transform: perspective(500px) rotate3d(0, 1, 0, 185deg);}
-  95%{transform: perspective(500px) rotate3d(0, 1, 0, 175deg);}
+  60%{transform: perspective(500px) rotate3d(0, 1, 0, 190deg);}
+  70%{transform: perspective(500px) rotate3d(0, 1, 0, 170deg);}
+  80%{transform: perspective(500px) rotate3d(0, 1, 0, 185deg);}
+  90%{transform: perspective(500px) rotate3d(0, 1, 0, 175deg);}
   100%{transform: perspective(500px) rotate3d(0, 1, 0, 180deg);}
 }
