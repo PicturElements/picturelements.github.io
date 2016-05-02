@@ -75,20 +75,20 @@
     </style>
     <script>
       var leftmost=0,rightmost;
-      var stepsMoved=0;
+      var stepsMoved=-2;
       function init(){
         var items=document.getElementsByClassName("item");
-        for (i=-2;i<items.length-2;i++){
-          items[i+2].style.left=""+(25+(55)*i)+"vw";
-          items[i+2].style.display="block";
+        for (i=0;i<items.length;i++){
+          items[i].style.left=""+(25+(55)*(i+stepsMoved))+"vw";
+          items[i].style.display="block";
         }
         rightmost=items.length-1;
       }
       
       function move(moveDir){
         var items=document.getElementsByClassName("item");
+        stepsMoved+=moveDir;
         for (i=0;i<items.length;i++){
-          stepsMoved+=moveDir;
           items[i].style.left=""+(25+(55)*(i+stepsMoved))+"vw";
         }
       }
