@@ -87,7 +87,7 @@
           items[i].style.left=""+(25+(55)*((i+stepsMoved)%itemCount-2))+"vw";
           items[i].style.display="block";
         }
-        items[itemCount-1].style.display="none";
+        items[1].style.display="none";
         rightmost=items.length-1;
       }
       
@@ -111,11 +111,11 @@
     <div id="content">
       <div id="showcasearea">
         <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
         <div class="item" style="background-image:url(images/hitLawyer.png)"></div>
         <div class="item" style="background-image:url(images/multiples.png)"></div>
         <div class="item" style="background-image:url(images/egghunt.png)"></div>
-        <div class="item"></div>
-        <div class="item"></div>
         <div id="swipeBtn" style="left:0" onclick=move(1)><</div>
         <div id="swipeBtn" style="right:0" onclick=move(-1)>></div>
       </div>
