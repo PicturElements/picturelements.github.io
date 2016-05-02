@@ -10,7 +10,7 @@
 }
 
 #logo:hover{
-  animation:flip 2s forwards 1;
+  animation:flip 1s forwards 1;
 }
 
 @keyframes flip{
@@ -20,5 +20,5 @@
   70%{transform: perspective(500px) rotate3d(0, 1, 0, 175deg);}
   80%{transform: perspective(500px) rotate3d(0, 1, 0, 182.5deg);}
   90%{transform: perspective(500px) rotate3d(0, 1, 0, 177.5deg);}
-  80%{transform: perspective(500px) rotate3d(0, 1, 0, 180deg);}
+  100%{transform: perspective(500px) rotate3d(0, 1, 0, 180deg);}
 }
