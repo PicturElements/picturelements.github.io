@@ -1,10 +1,10 @@
 .item a:hover{
   opacity: 0.5;
   -webkit-filter: blur(5px);
-  left: -1vw;
+  /*left: -1vw;
   top: -1vw;
   background-size: 52vw 30vw;
   width: 52vw;
-  height: 30vw;
+  height: 30vw;*/
   transition:300ms;
 }
