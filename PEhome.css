@@ -14,9 +14,11 @@
 }
 
 @keyframes flip{
-  60%{transform: perspective(500px) rotate3d(0, 1, 0, 190deg);}
-  70%{transform: perspective(500px) rotate3d(0, 1, 0, 170deg);}
-  80%{transform: perspective(500px) rotate3d(0, 1, 0, 185deg);}
-  90%{transform: perspective(500px) rotate3d(0, 1, 0, 175deg);}
-  100%{transform: perspective(500px) rotate3d(0, 1, 0, 180deg);}
+  40%{transform: perspective(500px) rotate3d(0, 1, 0, 190deg);}
+  50%{transform: perspective(500px) rotate3d(0, 1, 0, 170deg);}
+  60%{transform: perspective(500px) rotate3d(0, 1, 0, 185deg);}
+  70%{transform: perspective(500px) rotate3d(0, 1, 0, 175deg);}
+  80%{transform: perspective(500px) rotate3d(0, 1, 0, 182.5deg);}
+  90%{transform: perspective(500px) rotate3d(0, 1, 0, 177.5deg);}
+  80%{transform: perspective(500px) rotate3d(0, 1, 0, 180deg);}
 }
