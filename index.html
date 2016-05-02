@@ -81,7 +81,7 @@
         var items=document.getElementsByClassName("item");
         itemCount=items.length;
         for (i=0;i<items.length;i++){
-          items[i].style.left=""+(25+(55)*(i+stepsMoved%itemCount-2))+"vw";
+          items[i].style.left=""+(25+(55)*((i+stepsMoved)%itemCount-2))+"vw";
           items[i].style.display="block";
         }
         rightmost=items.length-1;
@@ -91,7 +91,7 @@
         var items=document.getElementsByClassName("item");
         stepsMoved+=moveDir;
         for (i=0;i<items.length;i++){
-          items[i].style.left=""+(25+(55)*(i+stepsMoved%itemCount-2))+"vw";
+          items[i].style.left=""+(25+(55)*((i+stepsMoved)%itemCount-2))+"vw";
         }
       }
     </script>
