@@ -36,7 +36,7 @@
         height:28vw;
         top:1vw;
         background-color: #3c005b;
-        transition:left 500ms;
+        transition:left 1s;
       }
       #swipeBtn{
         display: block;
@@ -90,6 +90,12 @@
       function move(moveDir){
         var items=document.getElementsByClassName("item");
         stepsMoved+=moveDir;
+        for (i=0;i<items.length;i++){
+          items[i].style.display="block";
+          if (items[i].style.left==""+(25+55*-2+"vw"||items[i].style.left==""+(25+55*(itemCount-3)+"vw"){
+            items[i].style.display="none";
+          }
+        }
         for (i=0;i<items.length;i++){
           items[i].style.left=""+(25+(55)*((i+stepsMoved)%itemCount-2))+"vw";
         }
