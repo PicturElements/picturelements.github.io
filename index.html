@@ -91,10 +91,8 @@
         var items=document.getElementsByClassName("item");
         stepsMoved+=moveDir;
         for (i=0;i<items.length;i++){
-          items[i].style.left=""+(25+(55)*((i+stepsMoved)%itemCount-2))+"vw";
-        }
-        for (i=0;i<items.length;i++){
           items[i].style.display="block";
+          items[i].style.left=""+(25+(55)*((i+stepsMoved)%itemCount-2))+"vw";
           if ((i+stepsMoved)%itemCount==0||(i+stepsMoved)%itemCount==itemCount-1){
             items[i].style.display="none";
           }
