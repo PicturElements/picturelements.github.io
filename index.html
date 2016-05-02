@@ -36,6 +36,7 @@
         height:28vw;
         top:1vw;
         background-color: #3c005b;
+        transition:left 500ms;
       }
       #swipeBtn{
         display: block;
@@ -73,11 +74,22 @@
       }
     </style>
     <script>
+      var leftmost=0,rightmost;
+      var stepsMoved=0;
       function init(){
         var items=document.getElementsByClassName("item");
         for (i=-2;i<items.length-2;i++){
           items[i+2].style.left=""+(25+(55)*i)+"vw";
           items[i+2].style.display="block";
+        }
+        rightmost=items.length-1;
+      }
+      
+      function move(moveDir){
+        var items=document.getElementsByClassName("item");
+        for (i=0;i<items.length;i++){
+          stepsMoved+=moveDir;
+          items[i].style.left=""+(25+(55)*(i+stepsMoved))+"vw";
         }
       }
     </script>
@@ -94,8 +106,8 @@
         <div class="item"></div>
         <div class="item"></div>
         <div class="item"></div>
-        <div id="swipeBtn" style="left:0"><</div>
-        <div id="swipeBtn" style="right:0">></div>
+        <div id="swipeBtn" style="left:0" onclick=move(-1)><</div>
+        <div id="swipeBtn" style="right:0" onclick=move(1)>></div>
       </div>
     </div> 
     <div id="footer">
