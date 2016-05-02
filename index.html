@@ -29,6 +29,14 @@
         margin-top:2vw;
         margin-bottom:2vw;
       }
+      .item{
+        display:none;
+        position:absolute;
+        width:50vw;
+        height:28vw;
+        top:1vw;
+        background-color: #3c005b;
+      }
       #swipeBtn{
         display: block;
         position: absolute;
@@ -64,6 +72,15 @@
         bottom:0;
       }
     </style>
+    <script>
+      function init(){
+        var items=document.getElementsByClassName("item");
+        for (i=-2;i<items.length-2;i++){
+          items[i].style.left=""+(25+(55)*i)+"vw";
+          items[i].style.display="block";
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="header">
@@ -71,6 +88,12 @@
     </div>
     <div id="content">
       <div id="showcasearea">
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
         <div id="swipeBtn" style="left:0"><</div>
         <div id="swipeBtn" style="right:0">></div>
       </div>
