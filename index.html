@@ -1,6 +1,7 @@
 <html>
   <title>PicturElements - home</title>
   <link rel="icon" href="pelement.png">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:100,700' rel='stylesheet' type='text/css'>
   <head>
     <style>
       body{
@@ -28,6 +29,21 @@
         margin-top:2vw;
         margin-bottom:2vw;
       }
+      #swipeBtn{
+        display:block;
+        position:absolute;
+        width:2vw;
+        height:5vw;
+        line-height:5vw;
+        top:12.5vw;
+        font-family:Roboto,Arial,sans-serif;
+        font-weight:100;
+        text-align:center;
+        background-color:#999;
+        color:#444;
+        cursor:pointer;
+        z-index:100;
+      }
       #logo{
         display:block;
         position:absolute;
@@ -54,7 +70,8 @@
     </div>
     <div id="content">
       <div id="showcasearea">
-        
+        <div id="swipeBtn" style="left:0"><</div>
+        <div id="swipeBtn" style="right:0">></div>
       </div>
     </div> 
     <div id="footer">
