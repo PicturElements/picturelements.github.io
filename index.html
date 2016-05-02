@@ -92,7 +92,7 @@
         stepsMoved+=moveDir;
         for (i=0;i<items.length;i++){
           items[i].style.display="block";
-          if ((i+stepsMoved)%itemCount==itemCount-2||(i+stepsMoved)%itemCount==itemCount-1){
+          if ((i+stepsMoved)%itemCount==itemCount-1){
             items[i].style.display="none";
           }
           items[i].style.left=""+(25+(55)*((i+stepsMoved)%itemCount-2))+"vw";
