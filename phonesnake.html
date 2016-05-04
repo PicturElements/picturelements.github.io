@@ -159,11 +159,11 @@
         var count=0;
         for (h=0;h<23;h++){
           for (w=0;w<22;w++){
-            ctx.fillStyle="#ccc";
+            ctx.fillStyle="#ddd";
             ctx.fillRect(spacing+w*(sqSize+spacing),spacing+h*(sqSize+spacing),sqSize,sqSize);
             if (h%2==1&&w!=0&&w!=21&&h<20&&w%2==((h+1)/2)%2){
               if (nos[count]<10){
-                ctx.fillStyle="#a06";
+                ctx.fillStyle="#60a";
                 ctx.fillRect(spacing+w*(sqSize+spacing),spacing+h*(sqSize+spacing),sqSize,sqSize);
                 ctx.fillStyle="white";
                 ctx.font = ""+(sqSize-1)+"px Arial";
@@ -182,7 +182,7 @@
               count++;
             }
             if (cells[h*22+w]>0){
-              ctx.fillStyle="#093";
+              ctx.fillStyle="#a06";
               ctx.fillRect(spacing+w*(sqSize+spacing),spacing+h*(sqSize+spacing),sqSize,sqSize);
             }
           }
