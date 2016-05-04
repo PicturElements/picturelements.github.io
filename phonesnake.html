@@ -43,11 +43,15 @@
         for (h=0;h<21;h++){
           for (w=0;w<22;w++){
             if (h%2==1&&w!=0&&w!=21&&w%2==((h+1)/2)%2){
-              ctx.fillStyle="#60f";
+              ctx.fillStyle="#60a";
+              ctx.fillRect(spacing+w*(sqSize+spacing),spacing+h*(sqSize+spacing),sqSize,sqSize);
+              ctx.fillStyle="white";
+              ctx.font = ""+sqSize+"px Arial";
+              ctx.fillText(""+Math.floor(Math.random()*10),spacing+w*(sqSize+spacing),spacing+h*(sqSize+spacing));
             }else{
               ctx.fillStyle="#aaa";
+              ctx.fillRect(spacing+w*(sqSize+spacing),spacing+h*(sqSize+spacing),sqSize,sqSize);
             }
-            ctx.fillRect(spacing+w*(sqSize+spacing),spacing+h*(sqSize+spacing),sqSize,sqSize);
           }
         }
       }
