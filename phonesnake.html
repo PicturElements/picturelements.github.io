@@ -53,18 +53,20 @@
       #btn{
         display:none;
         position:fixed;
-        width:150px;
-        height:30px;
+        width:200px;
+        height:40px;
         background-color:#60a;
         border:3px solid #509;
         font-family:Roboto,Arial,sans-serif;
+        font-weight:bold;
         font-size:20px;
+        color:white;
         line-height:30px;
         text-align:center;
         top:50%;
         left:50%;
-        margin-left:-78px;
-        margin-top:50px;
+        margin-left:-103px;
+        margin-top:60px;
         cursor:pointer;
       }
     </style>
@@ -229,6 +231,6 @@
     <div id="insert">Insert phone number: XXX-XXX-XXXX</div>
     <div id="help">move: up,down,left,right | restart: esc | play/pause: enter</div>
     <div id="overlay">Press enter to start</div>
-    <div id="btn">Submit</div>
+    <div id="btn" onclick=link()>Submit</div>   <!--I ain't bein' bothered by no <a> elements.-->
   </body>
 </html>
