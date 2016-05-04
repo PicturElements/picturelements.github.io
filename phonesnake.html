@@ -33,7 +33,7 @@
       #overlay{
         position:fixed;
         display:block;
-        background-color:rgba(255,255,255,0.5);
+        background-color:rgba(255,255,255,0.8);
         top:50%;
         left:50%;
         text-align:center;
@@ -56,9 +56,9 @@
         document.getElementById("canvas").style.height=height;
         document.getElementById("canvas").style.marginTop=""+(-height/2-3)+"px";
         document.getElementById("canvas").style.marginLeft=""+(-width/2-3)+"px";
-        document.getElementById("overlay").style.width=width;
-        document.getElementById("overlay").style.height=height;
-        document.getElementById("overlay").style.lineHeight=height;
+        document.getElementById("overlay").style.width=""+(width+3)+"px";
+        document.getElementById("overlay").style.height=""+(height+3)+"px";
+        document.getElementById("overlay").style.lineHeight=""+(height)+"px";;
         document.getElementById("overlay").style.marginTop=""+(-height/2-3)+"px";
         document.getElementById("overlay").style.marginLeft=""+(-width/2-3)+"px";
         document.getElementById("insert").style.marginTop=""+(-height/2-50)+"px";
