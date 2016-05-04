@@ -31,7 +31,7 @@
       }
     </style>
     <script>
-      var sqSize=20,spacing=3,snakeLength=3;
+      var sqSize=20,spacing=3,snakeLength;
       var width=22*sqSize+23*spacing,height=23*sqSize+24*spacing;
       var nos=[],cells=[],out=[];
       var playing=1,snakePos,moveDir=2,delta=1;  //0=left, 1=up, 2=right, 3=down
@@ -54,6 +54,8 @@
         cells=[];
         out=[];
         snakeLength=3;
+        moveDir=2;
+        noCount=0;
         for (i=0;i<506;i++){cells.push(0)}
         for (i=0;i<10;i++){out.push('X');}
         cells[463]=1;
