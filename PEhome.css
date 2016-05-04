@@ -1,4 +1,4 @@
-.item a:hover{
+/*.item a:hover{
   opacity: 0.5;
   -webkit-filter: blur(5px);
   /*left: -1vw;
@@ -7,6 +7,11 @@
   width: 52vw;
   height: 30vw;*/
   transition:300ms;
+}*/
+
+.item:hover{
+  transform:perspective(5000px) rotate3d(0,1,0,180deg);
+  transition:500ms;
 }
 
 #logo:hover{
