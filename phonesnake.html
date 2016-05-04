@@ -42,7 +42,11 @@
         ctx.clearRect(0,0,278,254);
         for (h=0;h<21;h++){
           for (w=0;w<23;w++){
-            if (h%2==1&&w!=0&&w!=22&&w%2==((w+1)/2)%2)
+            if (h%2==1&&w!=0&&w!=22&&w%2==((w+1)/2)%2){
+              ctx.fillStyle="#222";
+            }else{
+              ctx.fillStyle="#aaa";
+            }
             ctx.fillRect(spacing+w*(sqSize+spacing),spacing+h*(sqSize+spacing),sqSize,sqSize);
           }
         }
