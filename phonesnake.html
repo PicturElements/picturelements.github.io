@@ -45,15 +45,23 @@
         document.getElementById("canvas").style.marginTop=""+(-height/2-3)+"px";
         document.getElementById("canvas").style.marginLeft=""+(-width/2-3)+"px";
         document.getElementById("insert").style.marginTop=""+(-height/2-50)+"px";
+        start();
+        paint();
+        setInterval(move,300);
+      }
+      
+      function start(){
+        cells=[];
+        out=[];
+        snakeLength=3;
         for (i=0;i<506;i++){cells.push(0)}
         for (i=0;i<10;i++){out.push('X');}
         cells[463]=1;
         cells[464]=2;
         cells[465]=3;
         snakePos=465;
+        document.getElementById("insert").innerHTML="Insert phone number: XXX-XXX-XXXX";
         generate();
-        paint();
-        setInterval(move,300);
       }
       
       function move(){
@@ -100,6 +108,10 @@
       function changeDir(e){
         if (e.keyCode>36&&e.keyCode<41&&Math.abs(moveDir-(e.keyCode-37))!=2){
           moveDir=e.keyCode-37;
+        }else if(e.keyCode==27){
+          start();
+        }else if(e.keyCode==13){
+          playing=Math.abs(playing-1);
         }
       }
       
