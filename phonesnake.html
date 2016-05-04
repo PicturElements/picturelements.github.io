@@ -45,6 +45,10 @@
         document.getElementById("canvas").style.height=height;
         document.getElementById("canvas").style.marginTop=""+(-height/2-3)+"px";
         document.getElementById("canvas").style.marginLeft=""+(-width/2-3)+"px";
+        document.getElementById("overlay").style.width=width;
+        document.getElementById("overlay").style.height=height;
+        document.getElementById("overlay").style.marginTop=""+(-height/2-3)+"px";
+        document.getElementById("overlay").style.marginLeft=""+(-width/2-3)+"px";
         document.getElementById("insert").style.marginTop=""+(-height/2-50)+"px";
         document.getElementById("help").style.marginTop=""+(height/2+10)+"px";
         start();
@@ -165,5 +169,6 @@
     <canvas id="canvas" width=278 height=254></canvas>
     <div id="insert">Insert phone number: XXX-XXX-XXXX</div>
     <div id="help">move: up,down,left,right | restart: esc | play/pause: enter</div>
+    <div id="overlay" style="position:fixed; display:block; background-color:rgba(255,255,255,0.5);"></div>
   </body>
 </html>
