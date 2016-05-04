@@ -6,11 +6,11 @@
   background-size: 52vw 30vw;
   width: 52vw;
   height: 30vw;*/
-  transition:300ms;
+  /*transition:300ms;
 }*/
 
-.item:hover{
-  transform:perspective(5000px) rotate3d(0,1,0,180deg);
+.item a:hover{
+  transform:perspective(2000px) rotate3d(0,1,0,180deg);
   transition:500ms;
 }
 
