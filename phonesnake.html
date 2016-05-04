@@ -102,8 +102,8 @@
             for (i=0;i<506;i++){
               if (cells[i]>0){cells[i]--;}
             }
-            if ((snakePos-delta)%22==21){snakePos-=22;}
-            else if((snakePos-delta)%22==0){snakePos+=22;}
+            if ((snakePos-delta)%22==21&&moveDir==2){snakePos-=22;}
+            else if((snakePos-delta)%22==0&&moveDir==0){snakePos+=22;}
             else if(snakePos>506){snakePos-=506;}
             else if(snakePos<0){snakePos+=506;}
             cells[snakePos]=snakeLength;
