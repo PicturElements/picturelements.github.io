@@ -80,6 +80,9 @@
         cells[465]=3;
         snakePos=465;
         document.getElementById("insert").innerHTML="Insert phone number: XXX-XXX-XXXX";
+        document.getElementById("overlay").style.display="block";
+        document.getElementById("overlay").style.backgroundColor="rgba(255,255,255,0.8)";
+        document.getElementById("overlay").innerHTML="Press enter to start";
         generate();
         paint();
       }
@@ -88,6 +91,9 @@
         if (playing==1){
           if (cells[snakePos+delta]>0){
             playing=0
+            document.getElementById("overlay").style.display="block";
+            document.getElementById("overlay").style.backgroundColor="rgba(255,100,100,0.8)";
+            document.getElementById("overlay").innerHTML="WEIRD NUMBER";
           }else{
             if (moveDir==0){
               delta=-1;
