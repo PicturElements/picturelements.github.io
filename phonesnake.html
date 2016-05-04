@@ -121,7 +121,7 @@
       
       function move(){
         if (playing==1){
-          if (cells[snakePos+delta]>0){
+          if (cells[snakePos+delta]>0||cells[snakePos]>0&&cells[snakePos]!=snakeLength){
             playing=0
             document.getElementById("overlay").style.display="block";
             document.getElementById("overlay").style.backgroundColor="rgba(255,100,100,0.8)";
@@ -178,6 +178,8 @@
           playing=Math.abs(playing-1);
           if (playing==1){
             document.getElementById("overlay").style.display="none";
+            document.getElementById("btn").style.display="none";
+            document.getElementById("overlay").style.lineHeight=""+height+"px";;
           }else{
             document.getElementById("overlay").style.display="block";
           }
