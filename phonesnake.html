@@ -25,6 +25,7 @@
       var spacing=3;
       var width=22*sqSize+23*spacing;
       var height=21*sqSize+22*spacing;
+      var nos=[];
     
       function init(){
         document.getElementById("canvas").width=width;
@@ -33,13 +34,32 @@
         document.getElementById("canvas").style.height=height;
         document.getElementById("canvas").style.marginTop=""+(-height/2-3)+"px";
         document.getElementById("canvas").style.marginLeft=""+(-width/2-3)+"px";
+        generate();
         paint();
+      }
+      
+      function generate(){
+        var rand;
+        nos=[];
+        for (i=0;i<100;i++){nos.push(10)}
+        for (i=0;i<10;i++){
+          for (n=0;n<10;n++){
+            for (m=0;m>=0;m++){
+              rand=Math.floor(Math.random()*100);
+              if (nos[rand]==10){
+                nos[rand]=i;
+                break;
+              }
+            }
+          }
+        }
       }
       
       function paint(){
         var ctx = document.getElementById("canvas").getContext("2d");
         ctx.fillStyle="#aaa";
         ctx.clearRect(0,0,278,254);
+        var count=0;
         for (h=0;h<21;h++){
           for (w=0;w<22;w++){
             if (h%2==1&&w!=0&&w!=21&&w%2==((h+1)/2)%2){
@@ -47,7 +67,8 @@
               ctx.fillRect(spacing+w*(sqSize+spacing),spacing+h*(sqSize+spacing),sqSize,sqSize);
               ctx.fillStyle="white";
               ctx.font = ""+(sqSize-1)+"px Arial";
-              ctx.fillText(""+Math.floor(Math.random()*10),spacing+w*(sqSize+spacing)+4.5,spacing+h*(sqSize+spacing)+sqSize-3);
+              ctx.fillText(""+nos[count],spacing+w*(sqSize+spacing)+4.5,spacing+h*(sqSize+spacing)+sqSize-3);
+              count++;
             }else{
               ctx.fillStyle="#aaa";
               ctx.fillRect(spacing+w*(sqSize+spacing),spacing+h*(sqSize+spacing),sqSize,sqSize);
