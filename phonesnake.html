@@ -75,7 +75,7 @@
       var width=22*sqSize+23*spacing,height=23*sqSize+24*spacing;
       var nos=[],cells=[],out=[];
       var playing=0,snakePos,moveDir=2,delta=1,pressed=0;  //0=left, 1=up, 2=right, 3=down
-      var noCount=0;
+      var noCount=0,phNo="";
     
       function init(){
         document.getElementById("canvas").width=width;
@@ -187,7 +187,7 @@
       }
       
       function link(){
-        window.location.href="http://picturelements.github.io/snakeSubmit";
+        window.location.href="https://www.reddit.com/r/nsa/submit?selftext=true&title=This%20is%20my%20phone%20number:"+phNo+"%20Plz%20call.%20I%20have%20murdered%2050%20people,%20just%20so%20you%20know.&text=Seriously,%20though,%20don%27t%20post%20your%20phone%20number.%20You%27ll%20probably%20get%20banned%20and%20I%20will%20get%20in%20trouble.%20So%20I%20put%20this%20thing%20here%20to%20relieve%20myself%20of%20any%20guilt.";
       }
       
       function paint(){
@@ -206,7 +206,7 @@
                 ctx.font = ""+(sqSize-1)+"px Arial";
                 ctx.fillText(""+nos[count],spacing+w*(sqSize+spacing)+4.5,spacing+h*(sqSize+spacing)+sqSize-3);
                 if (snakePos==h*22+w){
-                  var phNo=""+out[0]+""+out[1]+""+out[2]+"-"+out[3]+""+out[4]+""+out[5]+"-"+out[6]+""+out[7]+""+out[8]+""+out[9]+"";
+                  phNo=""+out[0]+""+out[1]+""+out[2]+"-"+out[3]+""+out[4]+""+out[5]+"-"+out[6]+""+out[7]+""+out[8]+""+out[9]+"";
                   out[noCount]=nos[count];
                   document.getElementById("insert").innerHTML="Insert phone number: "+phNo+"";
                   for (a=0;a<506;a++){
