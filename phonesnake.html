@@ -21,7 +21,18 @@
       }
     </style>
     <script>
+      var sqSize=15;
+      var spacing=2;
+      var width=23*sqSize+24*spacing;
+      var height=21*sqSize+22*spacing;
+    
       function init(){
+        document.getElementById("canvas").width=width;
+        document.getElementById("canvas").height=height;
+        document.getElementById("canvas").style.width=width;
+        document.getElementById("canvas").style.height=height;
+        document.getElementById("canvas").style.marginTop=""+(-height/2)+"px";
+        document.getElementById("canvas").style.marginLeft=""+(-width/2)+"px";
         paint();
       }
       
@@ -31,7 +42,7 @@
         ctx.clearRect(0,0,278,254);
         for (h=0;h<21;h++){
           for (w=0;w<23;w++){
-            ctx.fillRect(2+w*12,2+h*12,10,10);
+            ctx.fillRect(spacing+w*(sqSize+spacing),spacing+h*(sqSize+spacing),sqSize,sqSize);
           }
         }
       }
