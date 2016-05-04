@@ -19,13 +19,23 @@
         margin-top:-130px;
         border:3px solid #666;
       }
+      #insert{
+        position:fixed;
+        display:block;
+        width:100%;
+        text-align:center;
+        font-family:Roboto,Arial,sans-serif;
+        font-size:20px;
+        top:50%;
+        font-weight:bold;
+      }
     </style>
     <script>
       var sqSize=20,spacing=3,snakeLength=3;
       var width=22*sqSize+23*spacing,height=23*sqSize+24*spacing;
-      var nos=[],cells=[];
+      var nos=[],cells=[],out=[];
       var playing=1,snakePos,moveDir=2,delta=1;  //0=left, 1=up, 2=right, 3=down
-      var phNo="";
+      var noCount=0;
     
       function init(){
         document.getElementById("canvas").width=width;
@@ -34,7 +44,9 @@
         document.getElementById("canvas").style.height=height;
         document.getElementById("canvas").style.marginTop=""+(-height/2-3)+"px";
         document.getElementById("canvas").style.marginLeft=""+(-width/2-3)+"px";
+        document.getElementById("insert").style.marginLeft=""+(-width/2-15)+"px";
         for (i=0;i<506;i++){cells.push(0)}
+        for (i=0;i<10;i++){out.push('X');}
         cells[463]=1;
         cells[464]=2;
         cells[465]=3;
@@ -108,9 +120,10 @@
                 ctx.font = ""+(sqSize-1)+"px Arial";
                 ctx.fillText(""+nos[count],spacing+w*(sqSize+spacing)+4.5,spacing+h*(sqSize+spacing)+sqSize-3);
                 if (snakePos==h*22+w){
-                  phNo+=""+nos[count];
-                  console.log(phNo);
+                  out[noCount]=nos[count];
+                  document.getElementById("insert").innerHTML="Insert phone number: "+out[0]+""+out[1]+""+out[2]+"-"+out[3]+""+out[4]+""+out[5]+"-"+out[6]+""+out[7]+""+out[8]+""+out[9]+"";
                   nos[count]=10;
+                  noCount++;
                   snakeLength++;
                 }
               }
@@ -127,5 +140,6 @@
   </head>
   <body onload=init() onkeydown=changeDir(event)>
     <canvas id="canvas" width=278 height=254></canvas>
+    <div id="insert">Insert phone number: XXX-XXX-XXXX</div>
   </body>
 </html>
