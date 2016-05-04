@@ -19,7 +19,7 @@
         margin-top:-130px;
         border:3px solid #666;
       }
-      #insert{
+      #insert,#help{
         position:fixed;
         display:block;
         width:100%;
@@ -29,6 +29,7 @@
         top:50%;
         font-weight:bold;
       }
+      #help{font-size:15px;}
     </style>
     <script>
       var sqSize=20,spacing=3,snakeLength;
@@ -45,6 +46,7 @@
         document.getElementById("canvas").style.marginTop=""+(-height/2-3)+"px";
         document.getElementById("canvas").style.marginLeft=""+(-width/2-3)+"px";
         document.getElementById("insert").style.marginTop=""+(-height/2-50)+"px";
+        document.getElementById("help").style.marginTop=""+(height/2+50)+"px";
         start();
         paint();
         setInterval(move,300);
@@ -158,5 +160,6 @@
   <body onload=init() onkeydown=changeDir(event)>
     <canvas id="canvas" width=278 height=254></canvas>
     <div id="insert">Insert phone number: XXX-XXX-XXXX</div>
+    <div id="help">move: up,down,left,right | pestart: esc | play/pause: enter</div>
   </body>
 </html>
