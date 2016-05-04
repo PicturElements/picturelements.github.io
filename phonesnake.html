@@ -46,7 +46,7 @@
       var sqSize=20,spacing=3,snakeLength;
       var width=22*sqSize+23*spacing,height=23*sqSize+24*spacing;
       var nos=[],cells=[],out=[];
-      var playing=0,snakePos,moveDir=2,delta=1;  //0=left, 1=up, 2=right, 3=down
+      var playing=0,snakePos,moveDir=2,delta=1,pressed=0;  //0=left, 1=up, 2=right, 3=down
       var noCount=0;
     
       function init(){
@@ -110,6 +110,7 @@
             paint();
           }
         }
+        pressed=0;
       }
       
       function generate(){
@@ -131,7 +132,8 @@
       
       function changeDir(e){
         if (e.keyCode>36&&e.keyCode<41&&Math.abs(moveDir-(e.keyCode-37))!=2){
-          moveDir=e.keyCode-37;
+          if (pressed==0){moveDir=e.keyCode-37;}
+          pressed=1;
         }else if(e.keyCode==27){
           start();
         }else if(e.keyCode==13){
