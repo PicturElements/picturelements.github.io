@@ -96,6 +96,10 @@
               ctx.fillStyle="#aaa";
               ctx.fillRect(spacing+w*(sqSize+spacing),spacing+h*(sqSize+spacing),sqSize,sqSize);
             }
+            if (cells[h*22+w]>0){
+              ctx.fillStyle="#093";
+              ctx.fillRect(spacing+w*(sqSize+spacing),spacing+h*(sqSize+spacing),sqSize,sqSize);
+            }
           }
         }
       }
