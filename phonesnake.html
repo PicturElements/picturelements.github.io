@@ -185,7 +185,8 @@
                   snakeLength++;
                   if (noCount==10){
                     playing=0;
-                    document.getElementById("overoverlay").style.display="block";
+                    document.getElementById("overlay").style.display="block";
+                    document.getElementById("overlay").innerHTML=""+out[0]+""+out[1]+""+out[2]+"-"+out[3]+""+out[4]+""+out[5]+"-"+out[6]+""+out[7]+""+out[8]+""+out[9]+"";
                   }
                 }
               }
@@ -201,9 +202,7 @@
     </script>
   </head>
   <body onload=init() onkeydown=changeDir(event)>
-    <div id="overoverlay">
-      <canvas id="canvas" width=278 height=254></canvas>
-    </div>
+    <canvas id="canvas" width=278 height=254></canvas>
     <div id="insert">Insert phone number: XXX-XXX-XXXX</div>
     <div id="help">move: up,down,left,right | restart: esc | play/pause: enter</div>
     <div id="overlay">Press enter to start</div>
