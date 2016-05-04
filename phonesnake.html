@@ -82,7 +82,7 @@
       }
       
       function changeDir(e){
-        if (e.keyCode>36&&e.keyCode<41){
+        if (e.keyCode>36&&e.keyCode<41&&Math.abs(moveDir-(e.keyCode-37))!=2){
           moveDir=e.keyCode-37;
         }
       }
