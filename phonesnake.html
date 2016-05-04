@@ -48,7 +48,6 @@
         document.getElementById("insert").style.marginTop=""+(-height/2-50)+"px";
         document.getElementById("help").style.marginTop=""+(height/2+10)+"px";
         start();
-        paint();
         setInterval(move,300);
       }
       
@@ -66,6 +65,7 @@
         snakePos=465;
         document.getElementById("insert").innerHTML="Insert phone number: XXX-XXX-XXXX";
         generate();
+        paint();
       }
       
       function move(){
