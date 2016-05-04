@@ -80,12 +80,6 @@
         cells[465]=3;
         snakePos=465;
         document.getElementById("insert").innerHTML="Insert phone number: XXX-XXX-XXXX";
-        if (playing==1){
-          document.getElementById("overlay").style.display="none";
-        }else{
-          document.getElementById("overlay").style.display="block";
-          document.getElementById("overlay").innerHTML="Press enter to continue";
-        }
         generate();
         paint();
       }
@@ -146,7 +140,6 @@
             document.getElementById("overlay").style.display="none";
           }else{
             document.getElementById("overlay").style.display="block";
-            document.getElementById("overlay").innerHTML="Press enter to continue";
           }
         }
       }
