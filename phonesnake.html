@@ -79,6 +79,12 @@
         }
       }
       
+      function changeDir(e){
+        if (e.keyCode>36&&e.keyCode<41){
+          moveDir=e.keyCode-37;
+        }
+      }
+      
       function paint(){
         var ctx = document.getElementById("canvas").getContext("2d");
         ctx.fillStyle="#aaa";
@@ -106,7 +112,7 @@
       }
     </script>
   </head>
-  <body onload=init()>
+  <body onload=init() onkeydown=changeDir(event)>
     <canvas id="canvas" width=278 height=254></canvas>
   </body>
 </html>
