@@ -102,7 +102,7 @@
                 ctx.fillStyle="white";
                 ctx.font = ""+(sqSize-1)+"px Arial";
                 ctx.fillText(""+nos[count],spacing+w*(sqSize+spacing)+4.5,spacing+h*(sqSize+spacing)+sqSize-3);
-                if (snakePos==cells[h*22+w]){
+                if (snakePos==h*22+w){
                   phNo+=""+nos[count];
                   console.log(phNo);
                   nos[count]=10;
