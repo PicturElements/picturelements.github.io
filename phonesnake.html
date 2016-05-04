@@ -30,6 +30,17 @@
         font-weight:bold;
       }
       #help{font-size:15px;}
+      #overlay{
+        position:fixed;
+        display:block;
+        background-color:rgba(255,255,255,0.5);
+        top:50%;
+        left:50%;
+        text-align:center;
+        font-family:Roboto,Arial,sans-serif;
+        font-size:40px;
+        font-weight:bold;
+      }
     </style>
     <script>
       var sqSize=20,spacing=3,snakeLength;
@@ -47,6 +58,7 @@
         document.getElementById("canvas").style.marginLeft=""+(-width/2-3)+"px";
         document.getElementById("overlay").style.width=width;
         document.getElementById("overlay").style.height=height;
+        document.getElementById("overlay").style.lineHeight=height;
         document.getElementById("overlay").style.marginTop=""+(-height/2-3)+"px";
         document.getElementById("overlay").style.marginLeft=""+(-width/2-3)+"px";
         document.getElementById("insert").style.marginTop=""+(-height/2-50)+"px";
@@ -68,6 +80,12 @@
         cells[465]=3;
         snakePos=465;
         document.getElementById("insert").innerHTML="Insert phone number: XXX-XXX-XXXX";
+        if (playing==1){
+          document.getElementById("overlay").style.display="none";
+        }else{
+          document.getElementById("overlay").style.display="block";
+          document.getElementById("overlay").innerHTML="Press enter to continue";
+        }
         generate();
         paint();
       }
@@ -124,6 +142,12 @@
           start();
         }else if(e.keyCode==13){
           playing=Math.abs(playing-1);
+          if (playing==1){
+            document.getElementById("overlay").style.display="none";
+          }else{
+            document.getElementById("overlay").style.display="block";
+            document.getElementById("overlay").innerHTML="Press enter to continue";
+          }
         }
       }
       
@@ -169,6 +193,6 @@
     <canvas id="canvas" width=278 height=254></canvas>
     <div id="insert">Insert phone number: XXX-XXX-XXXX</div>
     <div id="help">move: up,down,left,right | restart: esc | play/pause: enter</div>
-    <div id="overlay" style="position:fixed; display:block; background-color:rgba(255,255,255,0.5);"></div>
+    <div id="overlay">Press enter to start</div>
   </body>
 </html>
