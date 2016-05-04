@@ -23,7 +23,7 @@
     <script>
       var sqSize=15;
       var spacing=2;
-      var width=23*sqSize+24*spacing;
+      var width=22*sqSize+23*spacing;
       var height=21*sqSize+22*spacing;
     
       function init(){
@@ -41,8 +41,8 @@
         ctx.fillStyle="#aaa";
         ctx.clearRect(0,0,278,254);
         for (h=0;h<21;h++){
-          for (w=0;w<23;w++){
-            if (h%2==1&&w!=0&&w!=22&&w%2==((h+1)/2)%2){
+          for (w=0;w<22;w++){
+            if (h%2==1&&w!=0&&w!=21&&w%2==((h+1)/2)%2){
               ctx.fillStyle="#222";
             }else{
               ctx.fillStyle="#aaa";
