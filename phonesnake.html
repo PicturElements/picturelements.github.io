@@ -46,8 +46,8 @@
               ctx.fillStyle="#60a";
               ctx.fillRect(spacing+w*(sqSize+spacing),spacing+h*(sqSize+spacing),sqSize,sqSize);
               ctx.fillStyle="white";
-              ctx.font = ""+sqSize+"px Arial";
-              ctx.fillText(""+Math.floor(Math.random()*10),spacing+w*(sqSize+spacing),spacing+h*(sqSize+spacing));
+              ctx.font = ""+(sqSize-2)+"px Arial";
+              ctx.fillText(""+Math.floor(Math.random()*10),spacing+w*(sqSize+spacing)+2,spacing+h*(sqSize+spacing)+sqSize-1);
             }else{
               ctx.fillStyle="#aaa";
               ctx.fillRect(spacing+w*(sqSize+spacing),spacing+h*(sqSize+spacing),sqSize,sqSize);
