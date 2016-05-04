@@ -21,11 +21,10 @@
       }
     </style>
     <script>
-      var sqSize=20;
-      var spacing=3;
-      var width=22*sqSize+23*spacing;
-      var height=23*sqSize+24*spacing;
-      var nos=[];
+      var sqSize=20,spacing=3,snakeLength=3;
+      var width=22*sqSize+23*spacing,height=23*sqSize+24*spacing;
+      var nos=[],cells=[];
+      var playing=1,snakePos,moveDir=2;  //0=left, 1=up, 2=right, 3=down
     
       function init(){
         document.getElementById("canvas").width=width;
@@ -34,8 +33,32 @@
         document.getElementById("canvas").style.height=height;
         document.getElementById("canvas").style.marginTop=""+(-height/2-3)+"px";
         document.getElementById("canvas").style.marginLeft=""+(-width/2-3)+"px";
+        for (i=0;i<506;i++){cells.push(0)}
+        cells[463]=1;
+        cells[464]=2;
+        cells[465]=3;
+        snakePos=465;
         generate();
         paint();
+        setInterval(move,40);
+      }
+      
+      function move(){
+        if (playing==1){
+          if (moveDir==0){
+            snakePos--;
+          }else if (moveDir==1){
+            snakePos-=22;
+          }else if (moveDir==2){
+            snakePos++;
+          }else if (moveDir==3){
+            snakePos+=22;
+          }
+          for (i=0;i<506;i++){
+            if (cells[i]>0){cells[i]--;}
+          }
+          cells[snakePos]=snakeLength;
+        }
       }
       
       function generate(){
