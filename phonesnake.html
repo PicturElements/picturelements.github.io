@@ -46,21 +46,25 @@
       
       function move(){
         if (playing==1){
-          if (moveDir==0){
-            delta=-1;
-          }else if (moveDir==1){
-            delta=-22;
-          }else if (moveDir==2){
-            delta=1;
-          }else if (moveDir==3){
-            delta=22;
+          if (cells[snakePos+delta]>0){
+            playing=0
+          }else{
+            if (moveDir==0){
+              delta=-1;
+            }else if (moveDir==1){
+              delta=-22;
+            }else if (moveDir==2){
+              delta=1;
+            }else if (moveDir==3){
+              delta=22;
+            }
+            snakePos+=delta;
+            for (i=0;i<506;i++){
+              if (cells[i]>0){cells[i]--;}
+            }
+            cells[snakePos]=snakeLength;
+            paint();
           }
-          snakePos+=delta;
-          for (i=0;i<506;i++){
-            if (cells[i]>0){cells[i]--;}
-          }
-          cells[snakePos]=snakeLength;
-          paint();
         }
       }
       
