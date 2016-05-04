@@ -8,10 +8,36 @@
         background-color:#bbb;
         margin:0;
       }
+      #canvas{
+        display:block;
+        position:fixed;
+        width:278px;
+        height:254px;
+        left:50%;
+        margin-left:-142px;
+        top:50%;
+        margin-top:-130px;
+        border:3px solid #666;
+      }
     </style>
     <script>
+      function init(){
+        paint();
+      }
+      
+      function paint(){
+        var ctx = document.getElementById("canvas").getContext("2d");
+        ctx.fillStyle="#aaa";
+        ctx.clearRect(0,0,278,254);
+        for (h=0;h<21;h++){
+          for (w=0;w<23;w++){
+            ctx.fillRect(2+w*12,2+h*12,10,10);
+          }
+        }
+      }
     </script>
   </head>
-  <body>
+  <body onload=init()>
+    <canvas id="canvas" width=278 height=254></canvas>
   </body>
 </html>
