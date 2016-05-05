@@ -152,13 +152,17 @@ https://www.google.com/chrome-->
       }; 
       
       function flip(linkID){
-        document.getElementsByClassName("item")[linkID].style.transform="perspective(2000px) rotate3d(0,1,0,180deg)";
-        document.getElementsByClassName("desc")[linkID].style.transform="perspective(2000px) rotate3d(0,1,0,360deg)";
+        if (document.getElementsByClassName("linkoverlay")[linkID].style.left=="25vw"){
+          document.getElementsByClassName("item")[linkID].style.transform="perspective(2000px) rotate3d(0,1,0,180deg)";
+          document.getElementsByClassName("desc")[linkID].style.transform="perspective(2000px) rotate3d(0,1,0,360deg)";
+        }
       }
       
       function flipBack(linkID){
-        document.getElementsByClassName("item")[linkID].style.transform="perspective(2000px) rotate3d(0,1,0,0deg)";
-        document.getElementsByClassName("desc")[linkID].style.transform="perspective(2000px) rotate3d(0,1,0,180deg)";
+        if (document.getElementsByClassName("linkoverlay")[linkID].style.left=="25vw"){
+          document.getElementsByClassName("item")[linkID].style.transform="perspective(2000px) rotate3d(0,1,0,0deg)";
+          document.getElementsByClassName("desc")[linkID].style.transform="perspective(2000px) rotate3d(0,1,0,180deg)";
+        }
       }
       
       function move(moveDir){
