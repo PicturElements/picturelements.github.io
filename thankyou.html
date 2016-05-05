@@ -42,7 +42,7 @@
         background-color:#00548b;
         opacity:0;
         animation:reveal 7s forwards 1;
-        animation-delay:5s;
+        animation-delay:2s;
       }
       #text{
         display:block;
@@ -69,7 +69,7 @@
     <script>
       function getData(){
         $.getJSON('//gd.geobytes.com/GetCityDetails?callback=?', function(data) {
-          document.getElementById("bigbrother").innerHTML="So you live in "+data.geobytestitle+", huh? That's pretty neat. We have been a little sloppy with<br>you "+data.geobytesnationalityplural+". I mean, out of "+data.geobytespopulation+" inhabitants, we should track at least 60%.";
+          document.getElementById("text").innerHTML="So you live in "+data.geobytestitle+", huh? That's pretty neat. We have been a little sloppy with<br>you "+data.geobytesnationalityplural+". I mean, out of "+data.geobytespopulation+" inhabitants, we should track at least 60%.";
         });
       }
     </script>
