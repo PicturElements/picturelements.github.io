@@ -131,7 +131,7 @@
         }else if (type==2){
           document.getElementById("insert").innerHTML="Insert phone number: XX XX XX XX";
         }else{
-          document.getElementById("insert").innerHTML="Insert phone number: XX XX XX XX";
+          document.getElementById("insert").innerHTML="Insert phone number: XXXXX XXX XXX";
         }
         document.getElementById("btn").style.display="none";
         var overlay=document.getElementById("overlay");
@@ -231,6 +231,7 @@
                 ctx.fillText(""+nos[count],spacing+w*(sqSize+spacing)+4.5,spacing+h*(sqSize+spacing)+sqSize-3);
                 if (snakePos==h*22+w){
                   out[noCount]=nos[count];
+                  //Looks hideous, but I guess this is the simplest way to do this...
                   if (type==0){
                     phNo=""+out[0]+""+out[1]+""+out[2]+"-"+out[3]+""+out[4]+""+out[5]+"-"+out[6]+""+out[7]+""+out[8]+""+out[9]+"";
                   }else if (type==1){
@@ -238,7 +239,7 @@
                   }else if (type==2){
                     phNo=""+out[0]+""+out[1]+" "+out[2]+""+out[3]+" "+out[4]+""+out[5]+" "+out[6]+""+out[7]+"";
                   }else if (type==3){
-                    phNo=""+out[0]+""+out[1]+" "+out[2]+""+out[3]+" "+out[4]+""+out[5]+" "+out[6]+""+out[7]+"";
+                    phNo=""+out[0]+""+out[1]+""+out[2]+""+out[3]+""+out[4]+" "+out[5]+""+out[6]+""+out[7]+" "+out[8]+""+out[9]+""+out[10]+"";
                   }
                   document.getElementById("insert").innerHTML="Insert phone number: "+phNo+"";
                   for (a=0;a<506;a++){
@@ -275,6 +276,8 @@
       move: up,down,left,right | restart: esc | play/pause: enter
       <br>
       Number types: <a href="http://picturelements.github.io/phonesnake">XXX-XXX-XXXX</a>, <a href="http://picturelements.github.io/phonesnake?type=nine">XXX XXX XXX</a>, <a href="http://picturelements.github.io/phonesnake?type=eight">XX XX XX XX</a>
+      <br>
+      <a href="http://picturelements.github.io/phonesnake?type=eleven">XXXXX XXX XXX</a>
     </div>
     <div id="overlay">Press enter to start</div>
     <div id="btn" onclick=link()>Submit</div>   <!--I ain't bein' bothered by no <a> tags!-->
