@@ -206,8 +206,8 @@
                 ctx.font = ""+(sqSize-1)+"px Arial";
                 ctx.fillText(""+nos[count],spacing+w*(sqSize+spacing)+4.5,spacing+h*(sqSize+spacing)+sqSize-3);
                 if (snakePos==h*22+w){
-                  phNo=""+out[0]+""+out[1]+""+out[2]+"-"+out[3]+""+out[4]+""+out[5]+"-"+out[6]+""+out[7]+""+out[8]+""+out[9]+"";
                   out[noCount]=nos[count];
+                  phNo=""+out[0]+""+out[1]+""+out[2]+"-"+out[3]+""+out[4]+""+out[5]+"-"+out[6]+""+out[7]+""+out[8]+""+out[9]+"";
                   document.getElementById("insert").innerHTML="Insert phone number: "+phNo+"";
                   for (a=0;a<506;a++){
                     if (cells[a]>0&&cells[a]!=snakeLength){cells[a]++;}
@@ -215,7 +215,7 @@
                   nos[count]=10;
                   noCount++;
                   snakeLength++;
-                  if (noCount==11){
+                  if (noCount==10){
                     playing=0;
                     document.getElementById("btn").style.display="block";
                     document.getElementById("overlay").style.display="block";
