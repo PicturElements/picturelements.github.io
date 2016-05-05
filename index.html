@@ -144,6 +144,10 @@ https://www.google.com/chrome-->
         movable=0;
       }; 
       
+      function flip(linkID){
+        document.getElementsByClassName("item")[likID].style.transform="perspective(2000px) rotate3d(0,1,0,180deg)";
+      }
+      
       function move(moveDir){
         var items=document.getElementsByClassName("linkoverlay");
         stepsMoved+=moveDir;
@@ -182,22 +186,22 @@ https://www.google.com/chrome-->
         <div class="item">
           <a href="http://aquaplexus.net/firework" style="background-image:url(images/firework.png)"></a>
         </div>*/-->
-        <a class="linkoverlay" href="http://picturelements.github.io/egghunt">
+        <a class="linkoverlay" href="http://picturelements.github.io/egghunt" onmouseover=flip(0)>
           <div class="item" style="background-image:url(images/egghunt.png);"></div>
         </a>
-        <a class="linkoverlay" href="http://aquaplexus.net/gameoflife">
+        <a class="linkoverlay" href="http://aquaplexus.net/gameoflife" onmouseover=flip(1)>
           <div class="item" style="background-image:url(images/gameoflife.png);"></div>
         </a>
-        <a class="linkoverlay" href="http://picturelements.github.io/hitLawyer">
+        <a class="linkoverlay" href="http://picturelements.github.io/hitLawyer" onmouseover=flip(2)>
           <div class="item" style="background-image:url(images/hitLawyer.png);"></div>
         </a>
-        <a class="linkoverlay" href="http://aquaplexus.net/fractal">
+        <a class="linkoverlay" href="http://aquaplexus.net/fractal" onmouseover=flip(3)>
           <div class="item" style="background-image:url(images/fractal.png);"></div>
         </a>
-        <a class="linkoverlay" href="http://picturelements.github.io/multiples">
+        <a class="linkoverlay" href="http://picturelements.github.io/multiples" onmouseover=flip(4)>
           <div class="item" style="background-image:url(images/multiples.png);"></div>
         </a>
-        <a class="linkoverlay" href="http://aquaplexus.net/firework">
+        <a class="linkoverlay" href="http://aquaplexus.net/firework" onmouseover=flip(5)>
           <div class="item" style="background-image:url(images/firework.png);"></div>
         </a>
         <!--Buttons-->
