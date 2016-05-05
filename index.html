@@ -38,7 +38,7 @@ https://www.google.com/chrome-->
         margin-top:2vw;
         margin-bottom:2vw;
       }
-      .item{
+      .linkoverlay{   /*LINK*/
         display:none;
         position:absolute;
         width:50vw;
@@ -48,7 +48,7 @@ https://www.google.com/chrome-->
         transition:left 1.5s;
         overflow:visible;
       }
-      .item a{
+      .item{   /*LINK CONTENT*/
         display: block;
         position:absolute;
         width: 100%;
@@ -114,7 +114,7 @@ https://www.google.com/chrome-->
       var sincePress=0,movable=1;
       
       function init(){
-        var items=document.getElementsByClassName("item");
+        var items=document.getElementsByClassName("linkoverlay");
         itemCount=items.length;
         for (i=0;i<itemCount;i++){
           items[i].style.left=""+(25+(55)*((i+stepsMoved)%itemCount-2))+"vw";
@@ -145,7 +145,7 @@ https://www.google.com/chrome-->
       }; 
       
       function move(moveDir){
-        var items=document.getElementsByClassName("item");
+        var items=document.getElementsByClassName("linkoverlay");
         stepsMoved+=moveDir;
         for (i=0;i<itemCount;i++){
           items[i].style.display="block";
@@ -164,7 +164,7 @@ https://www.google.com/chrome-->
     </div>
     <div id="content">
       <div id="showcasearea" onmouseover=hover(0) onmouseleave=hover(1)>
-        <div class="item">
+        <!--<div class="item">
           <a href="http://picturelements.github.io/egghunt" style="background-image:url(images/egghunt.png)"></a>
         </div>
         <div class="item">
@@ -181,7 +181,25 @@ https://www.google.com/chrome-->
         </div>
         <div class="item">
           <a href="http://aquaplexus.net/firework" style="background-image:url(images/firework.png)"></a>
-        </div>
+        </div>*/-->
+        <a class="linkoverlay" href="http://picturelements.github.io/egghunt">
+          <div class="item" style="background-image:url(egghunt.png);"></div>
+        </a>
+        <a class="linkoverlay" href="http://aquaplexus.net/gameoflife">
+          <div class="item" style="background-image:url(gameoflife.png);"></div>
+        </a>
+        <a class="linkoverlay" href="http://picturelements.github.io/hitLawyer">
+          <div class="item" style="background-image:url(hitLawyer.png);"></div>
+        </a>
+        <a class="linkoverlay" href="http://aquaplexus.net/fractal">
+          <div class="item" style="background-image:url(fractal.png);"></div>
+        </a>
+        <a class="linkoverlay" href="http://picturelements.github.io/multiples">
+          <div class="item" style="background-image:url(multiples.png);"></div>
+        </a>
+        <a class="linkoverlay" href="http://aquaplexus.net/firework">
+          <div class="item" style="background-image:url(firework.png);"></div>
+        </a>
         <!--Buttons-->
         <div id="swipeBtn" style="left:0" onclick=move(1)><</div>
         <div id="swipeBtn" style="right:0" onclick=move(-1)>></div>
