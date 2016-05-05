@@ -65,7 +65,7 @@ https://www.google.com/chrome-->
       .desc{
         z-index:80 !important;
         background-color:#ddd;
-        transform:perspective(2000px) rotate3d(0,1,0,180deg);
+        transform:perspective(2000px) rotate3d(1,0,0,180deg);
       }
       /*
         opacity: 0.5;
@@ -153,15 +153,15 @@ https://www.google.com/chrome-->
       
       function flip(linkID){
         if (document.getElementsByClassName("linkoverlay")[linkID].style.left=="25vw"){
-          document.getElementsByClassName("item")[linkID].style.transform="perspective(2000px) rotate3d(0,1,0,180deg)";
-          document.getElementsByClassName("desc")[linkID].style.transform="perspective(2000px) rotate3d(0,1,0,360deg)";
+          document.getElementsByClassName("item")[linkID].style.transform="perspective(2000px) rotate3d(1,0,0,180deg)";
+          document.getElementsByClassName("desc")[linkID].style.transform="perspective(2000px) rotate3d(1,0,0,360deg)";
         }
       }
       
       function flipBack(linkID){
         if (document.getElementsByClassName("linkoverlay")[linkID].style.left=="25vw"){
-          document.getElementsByClassName("item")[linkID].style.transform="perspective(2000px) rotate3d(0,1,0,0deg)";
-          document.getElementsByClassName("desc")[linkID].style.transform="perspective(2000px) rotate3d(0,1,0,180deg)";
+          document.getElementsByClassName("item")[linkID].style.transform="perspective(2000px) rotate3d(1,0,0,0deg)";
+          document.getElementsByClassName("desc")[linkID].style.transform="perspective(2000px) rotate3d(1,0,0,180deg)";
         }
       }
       
