@@ -259,8 +259,12 @@
   <body onload=init() onkeydown=changeDir(event)>
     <canvas id="canvas" width=278 height=254></canvas>
     <div id="insert">Insert phone number: XXX-XXX-XXXX</div>
-    <div id="help">move: up,down,left,right | restart: esc | play/pause: enter</div>
+    <div id="help">
+      move: up,down,left,right | restart: esc | play/pause: enter
+      <br>
+      Number types: <a href="http://picturelements.github.io/phonesnake">XXX-XXX-XXXX</a>
+    </div>
     <div id="overlay">Press enter to start</div>
-    <div id="btn" onclick=link()>Submit</div>   <!--I ain't bein' bothered by no <a> elements.-->
+    <div id="btn" onclick=link()>Submit</div>   <!--I ain't bein' bothered by no <a> tags!-->
   </body>
 </html>
