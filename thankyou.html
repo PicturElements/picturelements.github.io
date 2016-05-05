@@ -45,6 +45,8 @@
       function getData(){
         $.getJSON('//gd.geobytes.com/GetCityDetails?callback=?', function(data) {
           console.log(JSON.stringify(data, null, 2));
+          console.log("Lol: "+data.geobytestitle);
+          console.log("Lol2: "+JSON.stringify(data.geobytestitle, null, 2));
         });
       }
     </script>
