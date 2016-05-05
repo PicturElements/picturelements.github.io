@@ -38,8 +38,16 @@
         font-weight:100;
       }
     </style>
+    <script src="http://j.mp/jqymin"></script>
   </head>
-  <body>
+  <body onload=getData()>
+    <script>
+      function getData(){
+        $.getJSON('//gd.geobytes.com/GetCityDetails?callback=?', function(data) {
+          console.log(JSON.stringify(data, null, 2));
+        });
+      }
+    </script>
     <div id="logo"></div>
     <div id="thanks">
       Thank you for your cooperation.
