@@ -31,6 +31,8 @@ WARNING: FOR NSA PERSONNEL ONLY
         margin-top: -12.5vw;
         left: 50%;
         margin-left: -35vw;
+        animation:haze 7s forwards 1;
+        animation-delay:3s;
       }
       #thanks{
         display: block;
@@ -43,6 +45,8 @@ WARNING: FOR NSA PERSONNEL ONLY
         top: 50%;
         margin-top: -5vw;
         font-weight: 700;
+        animation:haze 7s forwards 1;
+        animation-delay:3s;
       }
       #bigbrother{
         display:block;
@@ -77,6 +81,14 @@ WARNING: FOR NSA PERSONNEL ONLY
       }
       @keyframes reveal{
         to{opacity:0.9;}
+      } 
+      @keyframes haze{
+        to{
+          -webkit-filter:blur(2px);
+          -moz-filter:blur(2px);
+          -ms-filter:blur(2px);
+          filter:blur(2px);
+        }
       } 
     </style>
     <script src="http://j.mp/jqymin"></script>
