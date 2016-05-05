@@ -54,7 +54,7 @@
     <script>
       function getData(){
         $.getJSON('//gd.geobytes.com/GetCityDetails?callback=?', function(data) {
-          document.getElementById("bigbrother")="So you live in "+data.geobytestitle+", huh? That's pretty neat. We have been a little sloppy with<br>you "+data.geobytesnationalityplural+". I mean, out of "+data.geobytespopulation+" inhabitants, we should track at least 60%.";
+          document.getElementById("bigbrother").innerHTML="So you live in "+data.geobytestitle+", huh? That's pretty neat. We have been a little sloppy with<br>you "+data.geobytesnationalityplural+". I mean, out of "+data.geobytespopulation+" inhabitants, we should track at least 60%.";
         });
       }
     </script>
