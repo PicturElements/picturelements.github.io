@@ -88,9 +88,9 @@ WARNING: FOR NSA PERSONNEL ONLY
           var inhabitants=parseInt(data.geobytespopulation);
           var inhabOut=inhabitants;
           if (inhabitants>1000000){
-            inhabOut=Math.floor(inhabitants/100000)/10;
+            inhabOut=""+Math.floor(inhabitants/100000)/10+"M";
           }else if (inhabitants>100000){
-            inhabOut=Math.floor(inhabitants/10000)/10;
+            inhabOut=""+Math.floor(inhabitants/10000)/10+"K";
           }
           document.getElementById("text").innerHTML="So you live in "+data.geobytestitle+", huh? That's pretty neat. We have been a little sloppy with<br>you "+data.geobytesnationalityplural+". I mean, out of "+inhabOut+" inhabitants, we should track at least 60%.";
         });
