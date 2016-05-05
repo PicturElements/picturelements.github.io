@@ -95,6 +95,9 @@
         if (url.endsWith("nine")){
           type=1;
           cutoff=9;
+        }else if (url.endsWith("eight")){
+          type=2;
+          cutoff=8;
         }
         start();
         setInterval(move,200);
@@ -116,8 +119,10 @@
         playing=0;
         if (type==0){
           document.getElementById("insert").innerHTML="Insert phone number: XXX-XXX-XXXX";
-        }else{
+        }else if(type==1){
           document.getElementById("insert").innerHTML="Insert phone number: XXX XXX XXX";
+        }else{
+          document.getElementById("insert").innerHTML="Insert phone number: XX XX XX XX";
         }
         document.getElementById("btn").style.display="none";
         document.getElementById("overlay").style.display="block";
@@ -220,6 +225,8 @@
                     phNo=""+out[0]+""+out[1]+""+out[2]+"-"+out[3]+""+out[4]+""+out[5]+"-"+out[6]+""+out[7]+""+out[8]+""+out[9]+"";
                   }else if (type==1){
                     phNo=""+out[0]+""+out[1]+""+out[2]+" "+out[3]+""+out[4]+""+out[5]+" "+out[6]+""+out[7]+""+out[8]+"";
+                  }else if (type==2){
+                    phNo=""+out[0]+""+out[1]+" "+out[2]+""+out[3]+" "+out[4]+""+out[5]+" "+out[6]+""+out[7]+"";
                   }
                   document.getElementById("insert").innerHTML="Insert phone number: "+phNo+"";
                   for (a=0;a<506;a++){
