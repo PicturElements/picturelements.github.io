@@ -93,7 +93,8 @@
         document.getElementById("help").style.marginTop=""+(height/2+10)+"px";
         var url=window.location.href;
         if (url.endsWith("nine")){
-          document.getElementById("insert").href="Insert phone number: XXX XXX XXX";
+          document.getElementById("insert").innerHTML="Insert phone number: XXX XXX XXX";
+          type=1;
           cutoff=9;
         }
         start();
