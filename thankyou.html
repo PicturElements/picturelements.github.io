@@ -1,28 +1,49 @@
 <html>
   <head>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,700" rel="stylesheet" type="text/css">
     <style>
       body{
         background-color:#00548b;
         margin:0;
       }
       #logo{
-        position:fixed;
+        position: fixed;
+        display: block;
+        background-image: url(images/nsa.png);
+        background-size: 25vw 25vw;
+        width: 25vw;
+        height: 25vw;
+        border-radius: 12.5vw;
+        box-shadow: 10px 10px 20px rgba(0,0,0,0.3);
+        top: 50%;
+        margin-top: -12.5vw;
+        left: 50%;
+        margin-left: -35vw;
+      }
+      #thanks{
         display:block;
-        background-image:url(images/nsa.png);
-        background-size:15vw 15vw;
-        width:15vw;
-        height:15vw;
-        border-radius:15vw;
-        box-shadow:10px 10px 20px rgba(0,0,0,0.3);
+        position:absolute;
+        font-family:Roboto,Arial,sans-serif;
+        font-size:5vw;
+        color:white;
+        left:50%;
+        margin-left:-15vw;
         top:50%;
         margin-top:-7.5vw;
-        left:50%;
-        margin-left:-25vw;
+        font-weight:700;
+      }
+      sm{
+        font-weight:100;
       }
     </style>
   </head>
   <body>
     <div id="logo"></div>
+    <div id="thanks">
+      Thank you for your cooperation.
+      <br>
+      <br>
+      <sm></sm>We will use your data with care.</sm>
+    </div>
   </body>
 </html>
