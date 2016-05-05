@@ -47,8 +47,9 @@ https://www.google.com/chrome-->
         background-color: white;
         transition:left 1.5s;
         overflow:visible;
+        z-index:100;
       }
-      .item{   /*LINK CONTENT*/
+      .item,.desc{   /*LINK CONTENT*/
         display: block;
         position:absolute;
         width: 100%;
@@ -59,6 +60,12 @@ https://www.google.com/chrome-->
         transition:300ms;
         -webkit-backface-visibility: hidden;
        	backface-visibility: hidden;
+       	z-index:90;
+      }
+      .desc{
+        z-index:80 !important;
+        background-color:#ddd;
+        transform:perspective(2000px) rotate3d(0,1,0,180deg);
       }
       /*
         opacity: 0.5;
@@ -146,6 +153,12 @@ https://www.google.com/chrome-->
       
       function flip(linkID){
         document.getElementsByClassName("item")[linkID].style.transform="perspective(2000px) rotate3d(0,1,0,180deg)";
+        document.getElementsByClassName("desc")[linkID].style.transform="perspective(2000px) rotate3d(0,1,0,360deg)";
+      }
+      
+      function flipBack(linkID){
+        document.getElementsByClassName("item")[linkID].style.transform="perspective(2000px) rotate3d(0,1,0,0deg)";
+        document.getElementsByClassName("desc")[linkID].style.transform="perspective(2000px) rotate3d(0,1,0,180deg)";
       }
       
       function move(moveDir){
@@ -186,22 +199,27 @@ https://www.google.com/chrome-->
         <div class="item">
           <a href="http://aquaplexus.net/firework" style="background-image:url(images/firework.png)"></a>
         </div>*/-->
-        <a class="linkoverlay" href="http://picturelements.github.io/egghunt" onmouseover=flip(0)>
+        <a class="linkoverlay" href="http://picturelements.github.io/egghunt" onmouseover=flip(0) onmouseleave=flipBack(0)>
+          <div class="desc"></div>
           <div class="item" style="background-image:url(images/egghunt.png);"></div>
         </a>
-        <a class="linkoverlay" href="http://aquaplexus.net/gameoflife" onmouseover=flip(1)>
+        <a class="linkoverlay" href="http://aquaplexus.net/gameoflife" onmouseover=flip(1) onmouseleave=flipBack(1)>
+          <div class="desc"></div>
           <div class="item" style="background-image:url(images/gameoflife.png);"></div>
         </a>
-        <a class="linkoverlay" href="http://picturelements.github.io/hitLawyer" onmouseover=flip(2)>
+        <a class="linkoverlay" href="http://picturelements.github.io/hitLawyer" onmouseover=flip(2) onmouseleave=flipBack(2)>
+          <div class="desc"></div>
           <div class="item" style="background-image:url(images/hitLawyer.png);"></div>
         </a>
-        <a class="linkoverlay" href="http://aquaplexus.net/fractal" onmouseover=flip(3)>
+        <a class="linkoverlay" href="http://aquaplexus.net/fractal" onmouseover=flip(3) onmouseleave=flipBack(3)>
+          <div class="desc"></div>
           <div class="item" style="background-image:url(images/fractal.png);"></div>
         </a>
-        <a class="linkoverlay" href="http://picturelements.github.io/multiples" onmouseover=flip(4)>
+        <a class="linkoverlay" href="http://picturelements.github.io/multiples" onmouseover=flip(4) onmouseleave=flipBack(4)>
           <div class="item" style="background-image:url(images/multiples.png);"></div>
         </a>
-        <a class="linkoverlay" href="http://aquaplexus.net/firework" onmouseover=flip(5)>
+        <a class="linkoverlay" href="http://aquaplexus.net/firework" onmouseover=flip(5) onmouseleave=flipBack(5)>
+          <div class="desc"></div>
           <div class="item" style="background-image:url(images/firework.png);"></div>
         </a>
         <!--Buttons-->
