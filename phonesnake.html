@@ -71,7 +71,7 @@
       }
     </style>
     <script>
-      var sqSize=20,spacing=3,snakeLength;
+      var sqSize=20,spacing=3,snakeLength,type=0,cutoff=10;
       var width=22*sqSize+23*spacing,height=23*sqSize+24*spacing;
       var nos=[],cells=[],out=[];
       var playing=0,snakePos,moveDir=2,delta=1,pressed=0;  //0=left, 1=up, 2=right, 3=down
@@ -91,6 +91,11 @@
         document.getElementById("overlay").style.marginLeft=""+(-width/2)+"px";
         document.getElementById("insert").style.marginTop=""+(-height/2-50)+"px";
         document.getElementById("help").style.marginTop=""+(height/2+10)+"px";
+        var url=window.location.href;
+        if (url.endsWith("nine")){
+          type=1;
+          cutoff=9;
+        }
         start();
         setInterval(move,200);
       }
@@ -207,7 +212,11 @@
                 ctx.fillText(""+nos[count],spacing+w*(sqSize+spacing)+4.5,spacing+h*(sqSize+spacing)+sqSize-3);
                 if (snakePos==h*22+w){
                   out[noCount]=nos[count];
-                  phNo=""+out[0]+""+out[1]+""+out[2]+"-"+out[3]+""+out[4]+""+out[5]+"-"+out[6]+""+out[7]+""+out[8]+""+out[9]+"";
+                  if (type==0){
+                    phNo=""+out[0]+""+out[1]+""+out[2]+"-"+out[3]+""+out[4]+""+out[5]+"-"+out[6]+""+out[7]+""+out[8]+""+out[9]+"";
+                  }else if (type==1){
+                    phNo=""+out[0]+""+out[1]+""+out[2]+" "+out[3]+""+out[4]+""+out[5]+" "+out[6]+""+out[7]+""+out[8]+"";
+                  }
                   document.getElementById("insert").innerHTML="Insert phone number: "+phNo+"";
                   for (a=0;a<506;a++){
                     if (cells[a]>0&&cells[a]!=snakeLength){cells[a]++;}
