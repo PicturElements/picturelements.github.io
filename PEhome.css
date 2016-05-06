@@ -14,7 +14,13 @@
   transition:500ms;
 }
 
-#logo:hover{
+@keyframes hinge{
+  10%{transform:perspective(400px) rotate3d(0,1,0,-30deg);}
+  90%{transform:perspective(400px) rotate3d(0,1,0,-30deg);}
+  100%{transform:perspective(400px) rotate3d(0,1,0,0deg);}
+}
+
+/*#logo:hover{
   animation:flip 1s forwards 1;
 }
 
@@ -26,4 +32,4 @@
   80%{transform: perspective(500px) rotate3d(0, 1, 0, 182.5deg);}
   90%{transform: perspective(500px) rotate3d(0, 1, 0, 177.5deg);}
   100%{transform: perspective(500px) rotate3d(0, 1, 0, 180deg);}
-}
+}*/
