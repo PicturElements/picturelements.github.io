@@ -43,6 +43,7 @@
     </style>
     <script>
       var sqSize;
+      var inString="";
       function init(){
         if (window.innerHeight>window.innerWidth){
           var content=document.getElementById("content").style;
@@ -53,9 +54,16 @@
           content.fontSize="5vw";
         }
       }
+      function insertChar(e){
+        var code=e.keyCode;
+        if (code==32||code==48||code==49){
+          inString+=String.fromCharCode(code);
+          document.getElementById("phonebinary").value=inString;
+        }
+      }
     </script>
   </head>
-  <body onload=init()>
+  <body onload=init() okeydown=insertChar(event)>
     <div id="content">
       <div id="phonedecimal"></div>
       <input id="phonebinary" placeholder="write."></input>
