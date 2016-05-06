@@ -106,15 +106,6 @@ https://www.google.com/chrome-->
         border-top: 2px solid #ccc;
         animation:scan 10s alternate linear infinite;
       }
-      /*
-        opacity: 0.5;
-        -webkit-filter: blur(5px);
-        left: -1vw;
-        top: -1vw;
-        background-size: 52vw 30vw;
-        width: 52vw;
-        height: 30vw;
-      */
       #swipeBtn{
         display: block;
         position: absolute;
@@ -207,6 +198,16 @@ https://www.google.com/chrome-->
         }
       }
       
+      function display(type){
+        if (type==1){
+          document.getElementById("logo").style.animation="hinge 2s forwards 1";
+          document.getElementById("textcontainer").style.animation="slide 2s forwards 1";
+        }else{
+          document.getElementById("logo").style.animation="hinge 2s backwards 1";
+          document.getElementById("textcontainer").style.animation="slide 2s backwards 1";
+        }
+      }
+      
       function move(moveDir){
         var items=document.getElementsByClassName("linkoverlay");
         stepsMoved+=moveDir;
@@ -223,7 +224,10 @@ https://www.google.com/chrome-->
   </head>
   <body onload=init()>
     <div id="header">
-      <div id="logo"></div>
+      <a href="https://github.com/PicturElements" title="My Git account" onmouseOver=display(1) onmouseleave=display(0)>
+        <div id="textcontainer">PicturElements</div>
+        <div id="logo"></div>
+      </a>
     </div>
     <div id="content">
       <div id="showcasearea" onmouseover=hover(0) onmouseleave=hover(1)>
