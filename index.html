@@ -122,6 +122,14 @@ https://www.google.com/chrome-->
         cursor: pointer;
         z-index: 100;
       }
+      #logolink{
+        display:block;
+        position:absolute;
+        width:10vw;
+        height:10vw;
+        top:2.5vw;
+        left:45vw;
+      }
       #logo{
         display:block;
         position:absolute;
@@ -129,11 +137,9 @@ https://www.google.com/chrome-->
         height:10vw;
         background-image:url(pelement.png);
         background-size:10vw 10vw;
-        top:2.5vw;
-        left:45vw;
+        top:0;
+        left:0;
         transform-origin: 0 50%;
-        transition:500ms;
-        cursor:pointer;
       }
       #footer{
         position:relative;
@@ -224,7 +230,7 @@ https://www.google.com/chrome-->
   </head>
   <body onload=init()>
     <div id="header">
-      <a href="https://github.com/PicturElements" title="My Git account" onmouseOver=display(1) onmouseleave=display(0)>
+      <a href="https://github.com/PicturElements" id="logolink" title="My Git account" onmouseOver=display(1) onmouseleave=display(0)>
         <div id="textcontainer">PicturElements</div>
         <div id="logo"></div>
       </a>
