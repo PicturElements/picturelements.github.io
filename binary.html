@@ -2,6 +2,7 @@
   <head>
     <link rel="icon" href="pelement.png">
     <title>binary.</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet" type="text/css">
     <style>
       body{
         background-color:#eee;
@@ -16,7 +17,22 @@
         left:50%;
         margin-top:-50vh;
         margin-left:-50vh;
-        background-color:red;
+        font-family:Roboto,Arial,sans-serif;
+        font-size:5vh;
+        color:#333;
+      }
+      #phonedecimal{
+        display:block;
+        position:fixed;
+        width:80%;
+        height:10%;
+        top:50%;
+        left:10%;
+        margin-top:-30%;
+        text-align:center;
+        font-family:inherit;
+        font-size:inherit;
+        color:inherit;
       }
     </style>
     <script>
@@ -28,6 +44,7 @@
           content.height="100vw";
           content.marginTop="-50vw";
           content.marginLeft="-50vw";
+          content.font-size="5vw";
         }
       }
     </script>
@@ -35,7 +52,7 @@
   <body onload=init()>
     <div id="content">
       <div id="phonedecimal"></div>
-      <div id="phonebinary"></div>
+      <input id="phonebinary"></input>
       <div id="btn" onclick=pushDig(0)></div>
       <div id="btn" onclick=pushDig(1)></div>
     </div>
