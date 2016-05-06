@@ -35,7 +35,7 @@
         height:10%;
         top:50%;
         left:10%;
-        margin-top:-20%;
+        margin-top:-30%;
         text-align:center;
         font-family:inherit;
         font-size:inherit;
@@ -44,15 +44,13 @@
       #phonebinary{
         margin-top:-15%;
       }
-      #btn{
+      .btn{
         display:block;
-        position:relative;
+        position:asolute;
         width:15%;
         height:15%;
-        left:24.5%;
-        top:55%;
-        margin-right:3%;
-        float:left;
+        left:33.5%;
+        top:45%;
         text-align:center;
         font-family:inherit;
         font-size:150%;
@@ -60,6 +58,10 @@
         line-height:inherit;
         background-color:#ccc;
         cursor:pointer;
+      }
+      @keyframes fade{
+        from{background-color:#999;}
+        to{background-color:#ccc;}
       }
     </style>
     <script>
@@ -88,9 +90,12 @@
           inString+="0";
         }else if (input==1){
           inString+="1";
-        }else{
+        }else if (input==2){
           inString="";
+        }else{
+          //some submit stuff
         }
+        document.getElementsByClassName("btn")[input].style.animation="fade 300ms forwards 1";
         parseBinary();
       }
       function parseBinary(){
@@ -112,9 +117,10 @@
     <div id="content">
       <div id="phonedecimal"></div>
       <div id="phonebinary"></div>
-      <div id="btn" onclick=pushDig(0)>0</div>
-      <div id="btn" onclick=pushDig(2)>C</div>
-      <div id="btn" onclick=pushDig(1)>1</div>
+      <div class="btn" onclick=pushDig(0)>0</div>
+      <div class="btn" style="left:51.5%" onclick=pushDig(1)>1</div>
+      <div class="btn" style="top:63%" onclick=pushDig(2)>C</div>
+      <div class="btn" style="top:63%; left:51.5%" onclick=pushDig(3)>S</div>
     </div>
   </body>
 </html>
