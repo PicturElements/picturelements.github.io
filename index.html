@@ -67,6 +67,14 @@ https://www.google.com/chrome-->
         background-color:#ddd;
         transform:perspective(2000px) rotate3d(1,0,0,180deg);
       }
+      #descImg{
+        display:block;
+        position:absolute;
+        width:45%;
+        height:45%;
+        bottom:5%;
+        right:5%;
+      }
       /*
         opacity: 0.5;
         -webkit-filter: blur(5px);
@@ -186,27 +194,39 @@ https://www.google.com/chrome-->
     <div id="content">
       <div id="showcasearea" onmouseover=hover(0) onmouseleave=hover(1)>
         <a class="linkoverlay" href="http://picturelements.github.io/egghunt" onmouseover=flip(0) onmouseleave=flipBack(0)>
-          <div class="desc"></div>
+          <div class="desc">
+            <div id="descImg" style="background-image:url(images/egghunt.png);"></div>
+          </div>
           <div class="item" style="background-image:url(images/egghunt.png);"></div>
         </a>
         <a class="linkoverlay" href="http://aquaplexus.net/gameoflife" onmouseover=flip(1) onmouseleave=flipBack(1)>
-          <div class="desc"></div>
+          <div class="desc">
+            <div id="descImg" style="background-image:url(images/gameoflife.png);"></div>
+          </div>
           <div class="item" style="background-image:url(images/gameoflife.png);"></div>
         </a>
         <a class="linkoverlay" href="http://picturelements.github.io/hitLawyer" onmouseover=flip(2) onmouseleave=flipBack(2)>
-          <div class="desc"></div>
+          <div class="desc">
+            <div id="descImg" style="background-image:url(images/hitLawyer.png);"></div>
+          </div>
           <div class="item" style="background-image:url(images/hitLawyer.png);"></div>
         </a>
         <a class="linkoverlay" href="http://aquaplexus.net/fractal" onmouseover=flip(3) onmouseleave=flipBack(3)>
-          <div class="desc"></div>
+          <div class="desc">
+            <div id="descImg" style="background-image:url(images/fractal.png);"></div>
+          </div>
           <div class="item" style="background-image:url(images/fractal.png);"></div>
         </a>
         <a class="linkoverlay" href="http://picturelements.github.io/multiples" onmouseover=flip(4) onmouseleave=flipBack(4)>
-          <div class="desc"></div>
+          <div class="desc">
+            <div id="descImg" style="background-image:url(images/multiples.png);"></div>
+          </div>
           <div class="item" style="background-image:url(images/multiples.png);"></div>
         </a>
         <a class="linkoverlay" href="http://aquaplexus.net/firework" onmouseover=flip(5) onmouseleave=flipBack(5)>
-          <div class="desc"></div>
+          <div class="desc">
+            <div id="descImg" style="background-image:url(images/firework.png);"></div>
+          </div>
           <div class="item" style="background-image:url(images/firework.png);"></div>
         </a>
         <!--Buttons-->
