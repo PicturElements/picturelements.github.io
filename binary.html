@@ -1,6 +1,43 @@
 <html>
   <head>
+    <link rel="icon" href="pelement.png">
+    <title>binary.</title>
+    <style>
+      body{
+        background-color:#eee;
+        margin:0;
+      }
+      #content{
+        display:block;
+        position:fixed;
+        width:100vh;
+        height:100vh;
+        top:50%;
+        left:50%;
+        margin-top:-50vh;
+        margin-left:-50vh;
+        background-color:red;
+      }
+    </style>
+    <script>
+      var sqSize;
+      function init(){
+        if (window.innerHeight>window.innerWidth){
+          var content=document.getElementById("content").style;
+          content.width="100vw";
+          content.height="100vw";
+          content.marginTop="-50vw";
+          content.marginLeft="-50vw";
+        }
+      }
+    </script>
   </head>
-  <body>
+  <body onload=init()>
+    <div id="content">
+      <div id="phonedecimal"></div>
+      <div id="phonebinary"></div>
+      <div id="btn" onclick=pushDig(0)></div>
+      <div id="btn" onclick=pushDig(1)></div>
+    </div>
   </body>
 </html>
