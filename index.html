@@ -129,6 +129,18 @@ https://www.google.com/chrome-->
         height:10vw;
         top:2.5vw;
         left:45vw;
+        transition:1s;
+      }
+      #textContainer{
+        display:block;
+        width:100%;
+        height:100%;
+        text-align:right;
+        line-height:10vw;
+        font-family:Roboto,Arial,sans-serif;
+        font-size:3vw;
+        color:white;
+        overflow:hidden;
       }
       #logo{
         display:block;
@@ -208,10 +220,12 @@ https://www.google.com/chrome-->
       function display(type){
         if (type==1){
           document.getElementById("logo").style.transform="perspective(400px) rotate3d(0,1,0,-30deg)";
-          document.getElementById("textcontainer").style.animation="slide 2s forwards 1";
+          document.getElementById("logolink").style.width="40vw";
+          document.getElementById("logolink").style.marginLeft="20vw";
         }else{
           document.getElementById("logo").style.transform="perspective(400px) rotate3d(0,1,0,0deg)";
-          document.getElementById("textcontainer").style.animation="slide 2s backwards 1";
+          document.getElementById("logolink").style.width="10vw";
+          document.getElementById("logolink").style.marginLeft="45vw";
         }
       }
       
