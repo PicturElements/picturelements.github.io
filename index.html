@@ -119,6 +119,7 @@ https://www.google.com/chrome-->
         background-color: #999;
         color: #444;
         cursor: pointer;
+        border:2px solid #555;
         z-index: 100;
       }
       #logolink{
@@ -129,6 +130,7 @@ https://www.google.com/chrome-->
         top:2.5vw;
         left:45vw;
         transition:1s;
+        text-decoration:none;
       }
       #textContainer,#name{
         display:block;
@@ -354,8 +356,8 @@ https://www.google.com/chrome-->
           <div class="item" style="background-image:url(images/phonesnake.png);"></div>
         </a>
         <!--Buttons-->
-        <div id="swipeBtn" style="left:0" onclick=move(1)><</div>
-        <div id="swipeBtn" style="right:0" onclick=move(-1)>></div>
+        <div id="swipeBtn" style="left:0; border-left:none;" onclick=move(1)><</div>
+        <div id="swipeBtn" style="right:0; border-right:none;" onclick=move(-1)>></div>
       </div>
     </div> 
     <div id="footer">
