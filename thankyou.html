@@ -96,7 +96,7 @@ WARNING: FOR NSA PERSONNEL ONLY
   <body onload=getData()>
     <script>
       function getData(){
-        $.getJSON('//gd.geobytes.com/GetCityDetails?callback=?', function(data) {
+        /*$.getJSON('//gd.geobytes.com/GetCityDetails?callback=?', function(data) {
           var inhabitants=parseInt(data.geobytespopulation);
           var inhabOut=inhabitants;
           if (inhabitants>1000000){
@@ -105,6 +105,9 @@ WARNING: FOR NSA PERSONNEL ONLY
             inhabOut=""+Math.floor(inhabitants/100)/10+"K";
           }
           document.getElementById("text").innerHTML="So you live in "+data.geobytestitle+", huh? That's pretty neat. We have been a little sloppy with<br>you "+data.geobytesnationalityplural+". I mean, out of "+inhabOut+" inhabitants, we should track at least 60%.";
+        });*/
+        $.getJSON('//www.geoplugin.net/json.gp?jsoncallback=?', function(data) {
+          document.getElementById("text").innerHTML="So you live in "+data.geoplugin_countryName+", huh? That's pretty neat. It says here that you IP is "+data.geoplugin_request+", correct?<br>Would you mind if we come to visit? The location is ("+data.geoplugin_longitude+","+data.geoplugin_latitude+"), if I'm not mistaken.";
         });
       }
     </script>
