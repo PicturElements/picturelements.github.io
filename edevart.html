@@ -2,118 +2,118 @@
 
 <html>
   <head>
+        <link rel="icon" href="pelement.png">
+          <style>
+            #background{
+              background: radial-gradient(ellipse at center, rgba(239,47,47,1) 0%,rgba(155,0,0,1) 100%);
+              color:#444;
+              font-weight:bold;
+              text-align:center;
+              font-family:Segoe UI,sans-serif;
+            }
+            #textField{
+              position:fixed;
+              display:block;
+              width:600px;
+              height:50px;
+              top:85%;
+              left:50%;
+              margin-top:-25px;
+              margin-left:-300px;
+              font-size:30px;
+              color:#444;
+              font-weight:bold;
+              text-align:center;
+              font-family:Segoe UI,sans-serif;
+              box-shadow:5px 5px 10px rgba(0,0,0,0.3);
+              text-transform: uppercase;
+            }
+            #frameStyle{
+              position:fixed;
+              display:block;
+              background-image:url(images/edevart/frame (1).png);
+              background-size:600px 455px;
+              width:600px;
+              height:455px;
+              top:40%;
+              left:50%;
+              margin-top:-227px;
+              margin-left:-300px;
+              z-index:1000;
+              line-height: 836px;
+              font-size: 20px;
+              font-family: Courier New;
+              text-shadow: 0 0 5px brown;
+            }
+            #content{
+              position:fixed;
+              display:block;
+              background-image:url(images/edevart/thinking.png);
+              background-color:white;
+              width:500px;
+              height:350px;
+              top:40%;
+              left:50%;
+              margin-top:-175px;
+              margin-left:-250px;
+            }
+          </style>
+        
+          <script>
+                var sum=0;
+                var type=0;  //0=undefined
+                var total;
+                localStorage.yes=42;
+                localStorage.no=0;
+                console.log(localStorage.yes);
+        
+            function vart(e){
+        	if (e.keyCode!=13){
+                  reset();
+                }else if (e.keyCode == 13){
+                    sum=0;
+                    var string=document.getElementById('textField').value;
+                    for (i=0;i<string.length;i++){
+                      sum+=string.charCodeAt(i);
+                    }
+                    if (sum%2==0){
+                      document.getElementById('content').style="background-image:url(images/edevart/yes.png); background-color:green;";
+        	      setText("DE E FAN VÄRT!");
+                      type=1;
+                    }else if (sum%2==1){
+                      document.getElementById('content').style="background-image:url(images/edevart/no.png); background-color:red;";
+        	      setText("INTE VÄRT!");
+                      type=2;
+                    }
+                    if (string=="420"){
+        	      document.getElementById('content').style="background-image:url(images/edevart/snoop.png); background-color:red;";
+        	      setText("SMÖGA GRÄS!");
+                    }else if (string=="lexby"||string=="Lexby"||string=="noob"||string=="n00b"){
+        	      document.getElementById('content').style="background-image:url(images/edevart/lexby.png); background-color:red;";
+        	      setText("N00B #1");
+        	    }else if (string==""){
+        	      document.getElementById('content').style="background-image:none; background-color:black;";
+        	      setText("static void");
+                    }
+               }
+            function reset(){
+        	document.getElementById('content').style="background-image:url(images/edevart/thinking.png); background-color:white;";
+                document.getElementById('content').title="E DE VÄRT?";
+                document.getElementById('frameStyle').innerHTML="E DE VÄRT?";
+            }
+            function setText(str){
+                document.getElementById('frameStyle').title=str;
+        	document.getElementById('frameStyle').innerHTML=str;}
+                //writeOutput();
+            }
+            /*function writeOutput(){  
+                if (type==1){total=localStorage.getItem(yes)+1; localStorage.setItem(yes,total);}
+                else if (type==2){total=localStorage.getItem(no)+1; localStorage.setItem(no,total);}
+                alert(total);
+            }*/
+          </script>
+
   </head>
-
-  <style>
-    #background{
-      background: radial-gradient(ellipse at center, rgba(239,47,47,1) 0%,rgba(155,0,0,1) 100%);
-      color:#444;
-      font-weight:bold;
-      text-align:center;
-      font-family:Segoe UI,sans-serif;
-    }
-    #textField{
-      position:fixed;
-      display:block;
-      width:600px;
-      height:50px;
-      top:85%;
-      left:50%;
-      margin-top:-25px;
-      margin-left:-300px;
-      font-size:30px;
-      color:#444;
-      font-weight:bold;
-      text-align:center;
-      font-family:Segoe UI,sans-serif;
-      box-shadow:5px 5px 10px rgba(0,0,0,0.3);
-      text-transform: uppercase;
-    }
-    #frameStyle{
-      position:fixed;
-      display:block;
-      background-image:url(images/edevart/frame(1).png);
-      background-size:600px 455px;
-      width:600px;
-      height:455px;
-      top:40%;
-      left:50%;
-      margin-top:-227px;
-      margin-left:-300px;
-      z-index:1000;
-      line-height: 836px;
-      font-size: 20px;
-      font-family: Courier New;
-      text-shadow: 0 0 5px brown;
-    }
-    #content{
-      position:fixed;
-      display:block;
-      background-image:url(images/edevart/thinking.png);
-      background-color:white;
-      width:500px;
-      height:350px;
-      top:40%;
-      left:50%;
-      margin-top:-175px;
-      margin-left:-250px;
-    }
-  </style>
-
-  <script>
-        var sum=0;
-        var type=0;  //0=undefined
-        var total;
-        localStorage.yes=42;
-        localStorage.no=0;
-        console.log(localStorage.yes);
-
-    function vart(e){
-	if (e.keyCode!=13){
-          reset();
-        }else if (e.keyCode == 13){
-            sum=0;
-            var string=document.getElementById('textField').value;
-            for (i=0;i<string.length;i++){
-              sum+=string.charCodeAt(i);
-            }
-            if (sum%2==0){
-              document.getElementById('content').style="background-image:url(images/edevart/yes.png); background-color:green;";
-	      setText("DE E FAN VÄRT!");
-              type=1;
-            }else if (sum%2==1){
-              document.getElementById('content').style="background-image:url(images/edevart/no.png); background-color:red;";
-	      setText("INTE VÄRT!");
-              type=2;
-            }
-            if (string=="420"){
-	      document.getElementById('content').style="background-image:url(images/edevart/snoop.png); background-color:red;";
-	      setText("SMÖGA GRÄS!");
-            }else if (string=="lexby"||string=="Lexby"||string=="noob"||string=="n00b"){
-	      document.getElementById('content').style="background-image:url(images/edevart/lexby.png); background-color:red;";
-	      setText("N00B #1");
-	    }else if (string==""){
-	      document.getElementById('content').style="background-image:none; background-color:black;";
-	      setText("static void");
-            }
-       }
-    function reset(){
-	document.getElementById('content').style="background-image:url(images/edevart/thinking.png); background-color:white;";
-        document.getElementById('content').title="E DE VÄRT?";
-        document.getElementById('frameStyle').innerHTML="E DE VÄRT?";
-    }
-    function setText(str){
-        document.getElementById('frameStyle').title=str;
-	document.getElementById('frameStyle').innerHTML=str;}
-        //writeOutput();
-    }
-    /*function writeOutput(){  
-        if (type==1){total=localStorage.getItem(yes)+1; localStorage.setItem(yes,total);}
-        else if (type==2){total=localStorage.getItem(no)+1; localStorage.setItem(no,total);}
-        alert(total);
-    }*/
-  </script>
-
   <body id="background">
     <input id="textField" type="text" spellcheck="false" value="E de värt?" onkeypress="vart(event)"></input>
     <frameContent id="content"></frameContent>
