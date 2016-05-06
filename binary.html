@@ -20,6 +20,7 @@
         font-family:Roboto,Arial,sans-serif;
         font-size:5vh;
         color:#333;
+        line-height:15vh;
       }
       #phonedecimal,#phonebinary{
         display:block;
@@ -35,10 +36,23 @@
         color:inherit;
       }
       #phonebinary{
-        margin-top:-5%;
-        border:none;
-        background-color:transparent;
-        outline:none;
+        margin-top:-15%;
+      }
+      #btn{
+        display:block;
+        position:relative;
+        width:15%;
+        height:15%;
+        left:23%;
+        top:10%;
+        margin-right:3%;
+        float:left;
+        text-align:center;
+        font-family:inherit;
+        font-size:300%;
+        color:inherit;
+        line-height:inherit:
+        background-color:#ccc;
       }
     </style>
     <script>
@@ -52,6 +66,7 @@
           content.marginTop="-50vw";
           content.marginLeft="-50vw";
           content.fontSize="5vw";
+          content.lineHeight=15vw;
         }
       }
       function insertChar(e){
@@ -79,9 +94,10 @@
   <body onload=init() onkeyup=parseBinary()>
     <div id="content">
       <div id="phonedecimal"></div>
-      <input id="phonebinary" placeholder="write."></input>
-      <div id="btn" onclick=pushDig(0)></div>
-      <div id="btn" onclick=pushDig(1)></div>
+      <div id="phonebinary"></div>
+      <div id="btn" onclick=pushDig(0)>0</div>
+      <div id="btn" onclick=pushDig(2)>C</div>
+      <div id="btn" onclick=pushDig(1)>1</div>
     </div>
   </body>
 </html>
