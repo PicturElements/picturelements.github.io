@@ -21,9 +21,9 @@
         font-size:5vh;
         color:#333;
       }
-      #phonedecimal{
+      #phonedecimal,#phonebinary{
         display:block;
-        position:fixed;
+        position:absolute;
         width:80%;
         height:10%;
         top:50%;
@@ -33,6 +33,11 @@
         font-family:inherit;
         font-size:inherit;
         color:inherit;
+      }
+      #phonebimary{
+        margin-top:-5%;
+        border:none;
+        background-color:transparent;
       }
     </style>
     <script>
@@ -44,7 +49,7 @@
           content.height="100vw";
           content.marginTop="-50vw";
           content.marginLeft="-50vw";
-          content.font-size="5vw";
+          content.fontSize="5vw";
         }
       }
     </script>
@@ -52,7 +57,7 @@
   <body onload=init()>
     <div id="content">
       <div id="phonedecimal"></div>
-      <input id="phonebinary"></input>
+      <input id="phonebinary">write.</input>
       <div id="btn" onclick=pushDig(0)></div>
       <div id="btn" onclick=pushDig(1)></div>
     </div>
