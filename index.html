@@ -140,6 +140,7 @@ https://www.google.com/chrome-->
         top:0;
         left:0;
         transform-origin: 0 50%;
+        transition:1s;
       }
       #footer{
         position:relative;
@@ -206,10 +207,10 @@ https://www.google.com/chrome-->
       
       function display(type){
         if (type==1){
-          document.getElementById("logo").style.animation="hinge 2s forwards 1";
+          document.getElementById("logo").style.transform="perspective(400px) rotate3d(0,1,0,-30deg)";
           document.getElementById("textcontainer").style.animation="slide 2s forwards 1";
         }else{
-          document.getElementById("logo").style.animation="hinge 2s backwards 1";
+          document.getElementById("logo").style.transform="perspective(400px) rotate3d(0,1,0,0deg)";
           document.getElementById("textcontainer").style.animation="slide 2s backwards 1";
         }
       }
