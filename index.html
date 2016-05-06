@@ -186,8 +186,10 @@ https://www.google.com/chrome-->
         for (i=0;i<itemCount;i++){
           items[i].style.left=""+(25+(55)*((i+stepsMoved)%itemCount-2))+"vw";
           items[i].style.display="block";
+          if ((i+stepsMoved)%itemCount==itemCount-1){
+            items[i].style.display="none";
+          }
         }
-        items[1].style.display="none";
         rightmost=items.length-1;
         setInterval(time,100);
       }
