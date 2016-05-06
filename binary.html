@@ -50,7 +50,7 @@
         width:15%;
         height:15%;
         left:33.5%;
-        top:45%;
+        top:55%;
         text-align:center;
         font-family:inherit;
         font-size:150%;
@@ -95,6 +95,7 @@
         }else{
           //some submit stuff
         }
+        document.getElementsByClassName("btn")[input].style.animation="none";
         document.getElementsByClassName("btn")[input].style.animation="fade 300ms forwards 1";
         parseBinary();
       }
@@ -119,8 +120,8 @@
       <div id="phonebinary"></div>
       <div class="btn" onclick=pushDig(0)>0</div>
       <div class="btn" style="left:51.5%" onclick=pushDig(1)>1</div>
-      <div class="btn" style="top:63%" onclick=pushDig(2)>C</div>
-      <div class="btn" style="top:63%; left:51.5%" onclick=pushDig(3)>S</div>
+      <div class="btn" style="top:73%" onclick=pushDig(2)>C</div>
+      <div class="btn" style="top:73%; left:51.5%" onclick=pushDig(3)>S</div>
     </div>
   </body>
 </html>
