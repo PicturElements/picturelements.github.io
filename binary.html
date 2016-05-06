@@ -44,15 +44,16 @@
         width:15%;
         height:15%;
         left:23%;
-        top:10%;
+        top:60%;
         margin-right:3%;
         float:left;
         text-align:center;
         font-family:inherit;
         font-size:200%;
         color:inherit;
-        line-height:inherit:
+        line-height:inherit;
         background-color:#ccc;
+        cursor:pointer;
       }
     </style>
     <script>
@@ -76,8 +77,18 @@
           document.getElementById("phonebinary").value=inString;
         }
       }
+      function pushDig(input){
+        if (input==0){
+          inString+="0";
+        }else if (input==1){
+          inString+="1";
+        }else{
+          inString="";
+        }
+        parseBinary();
+      }
       function parseBinary(){
-        var input=document.getElementById("phonebinary").value;
+        var input=inString;
         var decimal=0,pow=0;
         for (i=input.length-1;i>=0;i--){
           if (input.charAt(i)=='0'){
