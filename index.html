@@ -133,6 +133,7 @@ https://www.google.com/chrome-->
       }
       #textContainer,#name{
         display:block;
+        position:absolute;
         width:100%;
         height:100%;
         text-align:right;
@@ -146,6 +147,8 @@ https://www.google.com/chrome-->
       }
       #name{
         right:0;
+        margin-left:-11vw;
+        transition:1s;
       }
       #logo{
         display:block;
@@ -225,10 +228,12 @@ https://www.google.com/chrome-->
       function display(type){
         if (type==1){
           document.getElementById("logo").style.transform="perspective(400px) rotate3d(0,1,0,-30deg)";
+          document.getElementById("name").style.marginLeft="0";
           document.getElementById("logolink").style.width="32vw";
           document.getElementById("logolink").style.left="33vw";
         }else{
           document.getElementById("logo").style.transform="perspective(400px) rotate3d(0,1,0,0deg)";
+          document.getElementById("name").style.marginLeft="-11vw";
           document.getElementById("logolink").style.width="10vw";
           document.getElementById("logolink").style.left="45vw";
         }
@@ -250,7 +255,7 @@ https://www.google.com/chrome-->
   </head>
   <body onload=init()>
     <div id="header">
-      <a href="https://github.com/PicturElements" id="logolink" title="My Git account" onmouseOver=display(1) onmouseleave=display(0)>
+      <a href="https://github.com/PicturElements" id="logolink" onmouseOver=display(1) onmouseleave=display(0)>
         <div id="textcontainer">
           <div id="name">PicturElements</div>
         </div>
