@@ -1,10 +1,10 @@
 <html>
   <head>
     <title>Egg hunt</title>
-    <link rel="icon" href="icon.png" type="image/png">
+    <link rel="icon" href="images/egghunt/icon.png" type="image/png">
     <link href='https://fonts.googleapis.com/css?family=Bangers' rel='stylesheet' type='text/css'>
     <audio id="sound" src="soundtrack.mp3" type="audio/mpeg"></audio>
-    <audio id="plop" src="plop.wav" type="audio/wav"></audio>
+    <audio id="plop" src="images/egghunt/plop.wav" type="audio/wav"></audio>
   </head>
   <style>
     #body{
@@ -85,7 +85,7 @@
       position:absolute;
       width:300px;
       height:242px;
-      background-image:url(ConfusedTravoltaSprite.png);
+      background-image:url(images/egghunt/ConfusedTravoltaSprite.png);
       bottom:0;
       left:100px;
       animation: aniTravolta 2s steps(25) infinite;
@@ -144,17 +144,17 @@
     var eggs=[];
     var basket=[];
     eggs.push(new Image(80,80));
-    eggs[0].src="egg1.png";
+    eggs[0].src="images/egghunt/egg1.png";
     eggs.push(new Image(80,80));
-    eggs[1].src="egg2.png";
+    eggs[1].src="images/egghunt/egg2.png";
     eggs.push(new Image(80,80));
-    eggs[2].src="egg3.png";
+    eggs[2].src="images/egghunt/egg3.png";
     eggs.push(new Image(80,80));
-    eggs[3].src="egg4.png";
+    eggs[3].src="images/egghunt/egg4.png";
     basket.push(new Image(400,200));
-    basket[0].src="travoltaBasket1.png";
+    basket[0].src="images/egghunt/travoltaBasket1.png";
     basket.push(new Image(400,200));
-    basket[1].src="travoltaBasket2.png";
+    basket[1].src="images/egghunt/travoltaBasket2.png";
     var frameCount=0,travoltaPos=window.innerWidth/2,move=0;
     var dropped=0,caught=0,missed=0,score=0,hi=0,countUp;
     var thread,won=0,slideNo=0;
@@ -299,13 +299,13 @@
     
     
   <body id="body" onload=init() onkeydown=moveTravolta(event)>
-    <grass id="grass" style="background-image:url(grass.png)"></grass>
+    <grass id="grass" style="background-image:url(images/egghunt/grass.png)"></grass>
     <canvas id="canvas" style="display:block; position:fixed; top:0; left:0;"></canvas>
     <travolta id="travolta"></travolta>
     <div id="countdown">3</div>
     <div id="countdown2">2</div>
     <div id="countdown3">1</div>
-    <grass id="grass" style="background-image:url(grass2.png)"></grass>
+    <grass id="grass" style="background-image:url(images/egghunt/grass2.png)"></grass>
     <eggsDropped id="eggsDropped" style="top:5px">Eggs dropped: 0</eggsDropped>
     <eggsCaught id="eggsCaught" style="top:40px">Eggs caught: 0</eggsCaught>
     <eggsMissed id="eggsMissed" style="top:75px">Eggs missed: 0</eggsMissed>
@@ -313,10 +313,10 @@
     <score id="score" style="top:145px">Score: 0</score>
     <div id="shade"></div>
     <div id="infobox">
-      <div id="info4" style="background-image:url(info4.png)"></div>
-      <div id="info3" style="background-image:url(info3.png)"></div>
-      <div id="info2" style="background-image:url(info2.png)"></div>
-      <div id="info1" style="background-image:url(info1.png)"></div>
+      <div id="info4" style="background-image:url(images/egghunt/info4.png)"></div>
+      <div id="info3" style="background-image:url(images/egghunt/info3.png)"></div>
+      <div id="info2" style="background-image:url(images/egghunt/info2.png)"></div>
+      <div id="info1" style="background-image:url(images/egghunt/info1.png)"></div>
       <div id="btn" style="left:25px" onclick=nextSlide()>next</div>
       <div id="btn" style="left:262.5px" onclick=cross()>skip</div>
       <!--<div id="cross" onclick=cross()>✕</div>-->
