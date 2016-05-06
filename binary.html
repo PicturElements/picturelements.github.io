@@ -95,9 +95,12 @@
         }else{
           //some submit stuff
         }
-        document.getElementsByClassName("btn")[input].style.animation="initial";
         document.getElementsByClassName("btn")[input].style.animation="fade 300ms forwards 1";
+        setTimeout(resetBtn,300);
         parseBinary();
+      }
+      funtion resetBtn(input){
+        document.getElementsByClassName("btn")[input].style.animation="initial";
       }
       function parseBinary(){
         var input=inString;
