@@ -61,9 +61,22 @@
           document.getElementById("phonebinary").value=inString;
         }
       }
+      function parseBinary(){
+        var input=document.geteElementById("phonebinary").value;
+        var decimal=0,pow=0;
+        for (i=input.length-1;i>0;i--){
+          if (input.charAt(i)=='0'){
+            pow++;
+          }else if(input.charAt(i)=='1'){
+            decimal+=Math.floor(Math.pow(2,pow));
+            pow++;
+          }
+        }
+        document.getElementById("phonedecimal").innerHTML=decimal;
+      }
     </script>
   </head>
-  <body onload=init() onkeydown=insertChar(event)>
+  <body onload=init() onkeyup=parseBinary()>
     <div id="content">
       <div id="phonedecimal"></div>
       <input id="phonebinary" placeholder="write."></input>
