@@ -28,7 +28,7 @@
         color:#333;
         line-height:15vh;
       }
-      #phonedecimal,#thanks{
+      #phonedecimal,#ponebinary,#thanks{
         display:block;
         position:absolute;
         width:80%;
@@ -43,6 +43,8 @@
       }
       #phonebinary{
         margin-top:-15%;
+        font-size:60%;
+        display:none;
       }
       #thanks{
         margin-top:-5%;
@@ -82,6 +84,9 @@
           content.fontSize="7.5vw";
           content.lineHeight="15vw";
         }
+        if ((window.location.href).contains("noob")){
+          document.getElementById("phonebinary").style.display="block";
+        }
         console.log("Selected numbers will be visible here:");
       }
       function insertChar(e){
@@ -105,6 +110,7 @@
           }
           document.getElementById("phonedecimal").style.display="none";
           document.getElementById("thanks").style.display="block";
+          document.getElementById("phonebinary").style.display="none";
         }
         document.getElementsByClassName("btn")[input].style.animation="fade 300ms forwards 1";
         pressed=input;
@@ -115,17 +121,20 @@
         document.getElementsByClassName("btn")[pressed].style.animation="initial";
       }
       function parseBinary(){
-        var input=inString;
+        var input=inString,pure;
         var decimal=0,pow=0;
         for (i=input.length-1;i>=0;i--){
           if (input.charAt(i)=='0'){
             pow++;
+            pure+=input.charAt(i);
           }else if(input.charAt(i)=='1'){
             decimal+=Math.floor(Math.pow(2,pow));
             pow++;
+            pure+=input.charAt(i);
           }
         }
         document.getElementById("phonedecimal").innerHTML=decimal;
+        document.getElementById("phonebinary").innerHTML=pure;
         console.log("input: "+inString);
       }
     </script>
@@ -133,6 +142,7 @@
   <body onload=init() onkeyup=parseBinary()>
     <div id="content">
       <div id="phonedecimal">write.</div>
+      <div id="phonebinary">write.</div>
       <div class="btn" onclick=pushDig(0)>0</div>
       <div class="btn" style="left:51.5%" onclick=pushDig(1)>1</div>
       <div class="btn" style="top:73%" onclick=pushDig(2)>C</div>
