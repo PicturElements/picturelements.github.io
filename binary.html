@@ -28,7 +28,7 @@
         color:#333;
         line-height:15vh;
       }
-      #phonedecimal,#phonebinary{
+      #phonedecimal,#thanks{
         display:block;
         position:absolute;
         width:80%;
@@ -43,6 +43,10 @@
       }
       #phonebinary{
         margin-top:-15%;
+      }
+      #thanks{
+        margin-top:-5%;
+        display:none;
       }
       .btn{
         display:block;
@@ -78,6 +82,7 @@
           content.fontSize="7.5vw";
           content.lineHeight="15vw";
         }
+        cosole.log("Selected numbers will be visible here:");
       }
       function insertChar(e){
         var code=e.keyCode;
@@ -94,7 +99,12 @@
         }else if (input==2){
           inString="";
         }else{
-          //some submit stuff
+          var btns=document.getElementsByClassName("btn").style.display;
+          for (i=0;i<4;i++){
+            btns[i]="none";
+          }
+          document.getElementById("phonedecimal").style.display="none";
+          document.getElementById("thanks").style.display="block";
         }
         document.getElementsByClassName("btn")[input].style.animation="fade 300ms forwards 1";
         pressed=input;
@@ -116,17 +126,18 @@
           }
         }
         document.getElementById("phonedecimal").innerHTML=decimal;
+        console.log("input: "+inString);
       }
     </script>
   </head>
   <body onload=init() onkeyup=parseBinary()>
     <div id="content">
       <div id="phonedecimal"></div>
-      <div id="phonebinary"></div>
       <div class="btn" onclick=pushDig(0)>0</div>
       <div class="btn" style="left:51.5%" onclick=pushDig(1)>1</div>
       <div class="btn" style="top:73%" onclick=pushDig(2)>C</div>
       <div class="btn" style="top:73%; left:51.5%" onclick=pushDig(3)>S</div>
+      <div id="thanks">thanks.</div>
     </div>
   </body>
 </html>
