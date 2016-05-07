@@ -16,15 +16,15 @@ function parse(input){
             if (isNumber(extFormula.charAt(i+1))){
               tmp+=cAt;
             }else if(isOperator(extFormula.charAt(i+1))){
-              splitFormula.push(tmp,""+cAt);   //tmp=number, cAt=operator
+              splitFormula.push(tmp,cAt);   //tmp=number, cAt=operator
               tmp="";
             }
           }else if(isNumber(extFormula.charAt(i-1))){
-            splitFormula.push(tmp,""+cAt);   //tmp=number, cAt=operator
+            splitFormula.push(tmp,cAt);   //tmp=number, cAt=operator
             tmp="";
           }
         }else{
-          splitFormula.push(tmp,""+cAt);   //tmp=number, cAt=operator
+          splitFormula.push(tmp,cAt);   //tmp=number, cAt=operator
           tmp="";
         }
       }else{
