@@ -84,7 +84,8 @@
           content.fontSize="7.5vw";
           content.lineHeight="15vw";
         }
-        if ((window.location.href).contains("noob")){
+        var url=window.location.href;
+        if (url.contains("noob")){
           document.getElementById("phonebinary").style.display="block";
         }
         console.log("Selected numbers will be visible here:");
