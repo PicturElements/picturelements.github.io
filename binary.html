@@ -67,6 +67,7 @@
     <script>
       var sqSize,pressed;
       var inString="";
+      
       function init(){
         if (window.innerHeight>window.innerWidth){
           var content=document.getElementById("content").style;
@@ -100,7 +101,7 @@
         setTimeout(resetBtn,300);
         parseBinary();
       }
-      funtion resetBtn(){
+      function resetBtn(){
         document.getElementsByClassName("btn")[pressed].style.animation="initial";
       }
       function parseBinary(){
