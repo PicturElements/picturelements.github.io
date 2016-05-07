@@ -33,6 +33,7 @@ function parse(input){
       }
     }
     splitFormula.push(tmp);
+    console.log(splitFormula.length);
     for (i=0;i<splitFormula.length;i++){
       console.log(splitFormula[i]);
     }
