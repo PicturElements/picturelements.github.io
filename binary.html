@@ -99,9 +99,9 @@
         }else if (input==2){
           inString="";
         }else{
-          var btns=document.getElementsByClassName("btn").style.display;
+          var btns=document.getElementsByClassName("btn");
           for (i=0;i<4;i++){
-            btns[i]="none";
+            btns[i].style.display="none";
           }
           document.getElementById("phonedecimal").style.display="none";
           document.getElementById("thanks").style.display="block";
