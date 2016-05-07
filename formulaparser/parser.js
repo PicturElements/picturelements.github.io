@@ -6,8 +6,9 @@ function parse(input){
   var formula=input;
   var splitFormula=[];
   for (iterate=0;iterate>=0;iterate++){
-    var tmp="",charAt;
+    var tmp="",charAt='';
     var extFormula="-"+formula+"-";  //make the string a little longer
+    console.log(extFormula);
     for (i=1;i<extFormula.length-1;i++){
       cAt=extFormula.charAt(i);
       if (isOperator(cAt)){
