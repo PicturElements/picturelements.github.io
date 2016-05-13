@@ -16,10 +16,22 @@
         width:40%;
         height:100%;
         left:0;
+        top:0;background-color: #222;
+        font-family: monospace;
+        color: #7DFF54;
+        padding:10px;
+      }
+      
+      #displaypane{
+        display:block;
+        position:fixed;
+        width:-webkit-calc(60% - 20px);
+        width:-moz-calc(60% - 20px);
+        width:-ms-calc(60% - 20px);
+        width:calc(60% - 20px);
+        height:100%;
         top:0;
-        background-color:#666;
-        font-family:monospace;
-        color:#eee;
+        right:0;
       }
     </style>
     <style id="clientcss">
@@ -28,6 +40,7 @@
     <script></script>
   </head>
   <body>
-    <textarea spellcheck="false"></textarea>
+    <textarea id="editorpane" spellcheck="false"></textarea>
+    <iframe id="displaypane"></iframe>
   </body>
 </html>
