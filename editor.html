@@ -13,10 +13,11 @@
       button{
         display:block;
         position:fixed;
-        right:5px;
-        top:5px;
+        left:5px;
+        bottom:5px;
         z-index:100;
         cursor:pointer;
+        padding:5px;
       }
       
       textarea{
@@ -55,7 +56,7 @@
     </script>
   </head>
   <body>
-    <button onclick=setIt()>CLICK ME!</button>
+    <button onclick=setIt()>Update frame</button>
     <textarea id="editorpane" spellcheck="false"></textarea>
     <iframe id="displaypane"></iframe>
   </body>
