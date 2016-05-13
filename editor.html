@@ -47,14 +47,15 @@
         z-index:0;
       }
     </style>
+    <script src="http://j.mp/jqymin"></script>
     <script>
-      function logIt(){
-        console.log(document.getElementById("editorpane").value);
+      function setIt(){
+        $('#displaypane').contents().find('html').html(document.getElementById("editorpane").value);
       }
     </script>
   </head>
   <body>
-    <button onclick=logIt()>CLICK ME!</button>
+    <button onclick=setIt()>CLICK ME!</button>
     <textarea id="editorpane" spellcheck="false"></textarea>
     <iframe id="displaypane"></iframe>
   </body>
