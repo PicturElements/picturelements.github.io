@@ -12,5 +12,5 @@ Send <link href="https://fonts.googleapis.com/css?family=Roboto:300,700" rel="st
 return
 
 ::<html>::
-Send <!DOCTYPE html>{Enter}<html>{Enter}  <head>{Enter}  <title></title>{Enter}<link rel="icon" href="pelement.png">{Enter}<link href="https://fonts.googleapis.com/css?family=Roboto:300,700" rel="stylesheet" type="text/css">{Enter}{Enter}<style>{Enter}  body{{}{Enter}  background-color:white;{Enter}margin:0;{Enter}{BS}{}}{Enter}{BS}</style>{Enter}<script></script>{Enter}{BS}</head>{Enter}<body>{Enter}{Enter}</body>{Enter}{BS}</html>
+Send <{!}DOCTYPE html>{Enter}<html>{Enter}  <head>{Enter}  <title></title>{Enter}<link rel="icon" href="pelement.png">{Enter}<link href="https://fonts.googleapis.com/css?family=Roboto:300,700" rel="stylesheet" type="text/css">{Enter}{Enter}<style>{Enter}  body{{}{Enter}  background-color:white;{Enter}margin:0;{Enter}{BS}{}}{Enter}{BS}</style>{Enter}<script></script>{Enter}{BS}</head>{Enter}<body>{Enter}{Enter}</body>{Enter}{BS}</html>
 return
