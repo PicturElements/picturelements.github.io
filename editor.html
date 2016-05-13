@@ -21,6 +21,7 @@
         color: #7DFF54;
         padding:10px;
         border:none;
+        outline:none;
       }
       
       #displaypane{
@@ -36,12 +37,14 @@
         border:none;
       }
     </style>
-    <style id="clientcss">
-      
-    </style>
-    <script></script>
+    <script>
+      function logIt(){
+        console.log(document.getElementById("editorpane").value);
+      }
+    </script>
   </head>
   <body>
+    <button onclick=logIt()>CLICK ME!</button>
     <textarea id="editorpane" spellcheck="false"></textarea>
     <iframe id="displaypane"></iframe>
   </body>
