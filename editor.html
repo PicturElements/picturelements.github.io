@@ -121,7 +121,7 @@
           var calcX=e.clientX;
           if (calcX<10){calcX=10;}
           if (calcX>window.innerWidth-10){calcX=window.innerWidth-10;}
-          document.getElementById("resizebar").style.left="calc("+100*calcX/window.innerWidth+"% - 400px)";
+          document.getElementById("resizebar").style.left="calc("+100*calcX/window.innerWidth+"% - 200px)";
           document.getElementById("editorpane").style.width="calc("+100*calcX/window.innerWidth+"% - 30px)";
           document.getElementById("displaypane").style.width="calc("+100*(window.innerWidth-calcX)/window.innerWidth+"% - 10px)";
         }
