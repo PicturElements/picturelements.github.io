@@ -8,6 +8,8 @@
       body{
         background-color:white;
         margin:0;
+        width:100%;
+        height:100%;
       }
       
       button{
@@ -38,7 +40,10 @@
         display:block;
         position:relative;
         float:left;
-        left:0;
+        left:-webkit-calc(40% + 20px);
+        left:-moz-calc(40% + 20px);
+        left:-ms-calc(40% + 20px);
+        left:calc(40% + 20px);
         top:0;
         width:20px;
         height:100%;
@@ -49,10 +54,10 @@
       #displaypane{
         display:block;
         position:fixed;
-        width:-webkit-calc(60% - 20px);
-        width:-moz-calc(60% - 20px);
-        width:-ms-calc(60% - 20px);
-        width:calc(60% - 20px);
+        width:-webkit-calc(60% - 40px);
+        width:-moz-calc(60% - 40px);
+        width:-ms-calc(60% - 40px);
+        width:calc(60% - 40px);
         height:100%;
         top:0;
         right:0;
