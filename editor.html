@@ -101,14 +101,16 @@
       
       function resize(e){
         if (draggable==1){
-          document.getElementById("resizebar").style.left="calc("+100*e.clientX/window.innerWidth+"% - 10px)";
-          document.getElementById("editorpane").style.width="calc("+100*e.clientX/window.innerWidth+"% - 30px)";
-          document.getElementById("displaypane").style.width="calc("+100*(window.innerWidth-e.clientX)/window.innerWidth+"% - 10px)";
+          var calcX=e.clientX;
+          if (calcX<10){calcX=10;}
+          document.getElementById("resizebar").style.left="calc("+100*calcX/window.innerWidth+"% - 10px)";
+          document.getElementById("editorpane").style.width="calc("+100*calcX/window.innerWidth+"% - 30px)";
+          document.getElementById("displaypane").style.width="calc("+100*(window.innerWidth-calcX)/window.innerWidth+"% - 10px)";
         }
       }
     </script>
   </head>
-  <body onload=init()>
+  <body onload=init() onkeyup=press(0)>
     <button onclick=setIt()>Update frame</button>
     <textarea id="editorpane" spellcheck="false"></textarea>
     <div id="resizebar" onmousedown=press(1) onmousemove=resize(event) onmouseup=press(0)></div>
