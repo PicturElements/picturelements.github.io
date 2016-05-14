@@ -28,6 +28,7 @@
         padding-right:10px;
         background-color:#333;
         z-index:200;
+        animation: highlight 1s alternate 5;
       }
       
       button{
@@ -98,6 +99,10 @@
         right:0;
         border:none;
         z-index:0;
+      }
+      
+      @keyframes highlight{
+        to{box-shadow:-20px 0 200px white,-20px 0 200px white;}
       }
     </style>
     <script>
