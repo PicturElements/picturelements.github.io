@@ -51,7 +51,9 @@
     <script src="http://j.mp/jqymin"></script>
     <script>
       function setIt(){
-        $('#displaypane').contents().find('html').html(document.getElementById("editorpane").value);
+        //$('#displaypane').contents().find('html').html(document.getElementById("editorpane").value);
+        $("displaypane").append(document.getElementById("editorpane").value);
+        console.log("DID STUFF!");
       }
       
       function init(){
