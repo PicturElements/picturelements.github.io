@@ -140,6 +140,16 @@
         }
       }
       
+      function setStandard(){
+        document.getElementById("editorpane").value="\<!DOCTYPE html>\n\<html>\n  \<head>\n    \<link href=”https://fonts.googleapis.com/css?family=Roboto:300,700” rel=”stylesheet” type=”text/css”>\n    \<style>\n      body{\n        background-color:white;\n      margin:0;}\n    \</style>\n    \<script>\</script>\n  \</head>\n  \<body>\n  \</body>\n\</html>";
+        setIt();
+      }
+      
+      function setNone(){
+        document.getElementById("editorpane").value="";
+        setIt();
+      }
+      
       function resize(e){
         if (draggable==1){
           var calcX=e.clientX;
@@ -156,7 +166,8 @@
     <textarea id="editorpane" spellcheck="false"></textarea>
     <div id="buttoncontainer">
       <button onclick=setIt()>Update output</button>
-      <button>Clear</button>
+      <button onclick=setStandard()>Load standard HTML</button>
+      <button onclick=setNone()>Clear</button>
     </div>
     <div id="resizebar" onmousedown=press(1) onmousemove=resize(event) onmouseup=press(0)>
       <div id="inner"></div>
