@@ -17,10 +17,22 @@
         height:100%;
       }
       
-      button{
+      #buttoncontainer{
         display:block;
         position:fixed;
-        left:5px;
+        left:0;
+        bottom:0;
+        min-width:10px;
+        min-height:10px;
+        background-color:#333;
+      }
+      
+      button{
+        display:block;
+        position:relative;
+        margin-left:5px;
+        margin-top:5px;
+        float:left;
         bottom:5px;
         z-index:100;
         cursor:pointer;
@@ -64,8 +76,8 @@
         background-color:#444;
         margin-left:-10px;
         box-sizing:border-box;
-        border-left:2px solid #777;
-        border-right:2px solid #777;
+        border-left:3px solid #777;
+        border-right:3px solid #777;
       }
       
       #displaypane{
@@ -111,8 +123,11 @@
       function press(inId){
         draggable=inId;
         if (inId==0){
+          var calcX=event.clientX;
+          if (calcX<10){calcX=10;}
+          if (calcX>window.innerWidth-10){calcX=window.innerWidth-10;}
           document.getElementById("resizebar").style.width="20px";
-          document.getElementById("resizebar").style.left="calc("+100*event.clientX/window.innerWidth+"% - 10px)";
+          document.getElementById("resizebar").style.left="calc("+100*calcX/window.innerWidth+"% - 10px)";
         }else{
           document.getElementById("resizebar").style.width="400px";
           resize(event);
@@ -132,8 +147,11 @@
     </script>
   </head>
   <body onload=init()>
-    <button onclick=setIt()>Update frame</button>
     <textarea id="editorpane" spellcheck="false"></textarea>
+    <div id="buttoncontainer">
+      <button onclick=setIt()>Update output</button>
+      <button>Clear</button>
+    </div>
     <div id="resizebar" onmousedown=press(1) onmousemove=resize(event) onmouseup=press(0)>
       <div id="inner"></div>
     </div>
