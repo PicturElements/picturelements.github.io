@@ -63,6 +63,9 @@
         left:50%;
         background-color:#444;
         margin-left:-10px;
+        box-sizing:border-box;
+        border-left:2px solid #777;
+        border-right:2px solid #777;
       }
       
       #displaypane{
@@ -112,7 +115,7 @@
           document.getElementById("resizebar").style.left="calc("+100*event.clientX/window.innerWidth+"% - 10px)";
         }else{
           document.getElementById("resizebar").style.width="400px";
-          document.getElementById("resizebar").style.left="calc("+100*event.clientX/window.innerWidth+"% - 200px)";
+          resize(event);
         }
       }
       
