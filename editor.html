@@ -50,7 +50,6 @@
         left:-ms-calc(40% + 20px);
         left:calc(40% + 20px);
         top:0;
-        background-color:#444;
         cursor: col-resize;
         z-index:100;
       }
@@ -61,6 +60,7 @@
         width:20px;
         height:100%;
         left:50%;
+        background-color:#444;
         margin-left:-10px;
       }
       
@@ -108,8 +108,9 @@
         draggable=inId;
         if (inId==0){
           document.getElementById("resizebar").style.width="20px";
+          document.getElementById("resizebar").style.left=""+100*calcX/window.innerWidth+"%";
         }else{
-          document.getElementById("resizebar").style.width="100px";
+          document.getElementById("resizebar").style.width="200px";
         }
       }
       
@@ -117,7 +118,7 @@
         if (draggable==1){
           var calcX=e.clientX;
           if (calcX<10){calcX=10;}
-          document.getElementById("resizebar").style.left="calc("+100*calcX/window.innerWidth+"% - 50px)";
+          document.getElementById("resizebar").style.left="calc("+100*calcX/window.innerWidth+"% - 100px)";
           document.getElementById("editorpane").style.width="calc("+100*calcX/window.innerWidth+"% - 30px)";
           document.getElementById("displaypane").style.width="calc("+100*(window.innerWidth-calcX)/window.innerWidth+"% - 10px)";
         }
