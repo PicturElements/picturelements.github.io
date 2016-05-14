@@ -51,8 +51,19 @@
     <script src="http://j.mp/jqymin"></script>
     <script>
       function setIt(){
-        $('#displaypane').contents().find('html').html(document.getElementById("editorpane").value);
+        //$('#displaypane').contents().find('html').html(document.getElementById("editorpane").value);
         //$("displaypane").append("<!--Stuffs.-->"+document.getElementById("editorpane").value);
+        var iframe = document.getElementById("displaypane");
+        iframe = iframe.contentWindow ? 
+                 iframe.contentWindow : 
+                 (
+                     iframe.contentDocument.document ?
+                     iframe.contentDocument.document : 
+                     iframe.contentDocument
+                 );
+        iframe.document.open();
+        iframe.document.write(document.getElementById("editorpane").value);
+        iframe.document.close();
         console.log("DID STUFF!");
       }
       
