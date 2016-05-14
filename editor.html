@@ -103,7 +103,7 @@
         if (draggable==1){
           document.getElementById("resizebar").style.left="calc("+100*e.clientX/window.innerWidth+"% - 10px)";
           document.getElementById("editorpane").style.width="calc("+100*e.clientX/window.innerWidth+"% - 30px)";
-          document.getElementById("editorpane").style.width="calc("+100*(window.innerWidth-e.clientX)/window.innerWidth+"% - 10px)";
+          document.getElementById("displaypane").style.width="calc("+100*(window.innerWidth-e.clientX)/window.innerWidth+"% - 10px)";
         }
       }
     </script>
