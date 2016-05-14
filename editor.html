@@ -111,8 +111,8 @@
           document.getElementById("resizebar").style.width="20px";
           document.getElementById("resizebar").style.left="calc("+100*event.clientX/window.innerWidth+"% - 10px)";
         }else{
-          document.getElementById("resizebar").style.width="200px";
-          document.getElementById("resizebar").style.left="calc("+100*event.clientX/window.innerWidth+"% - 100px)";
+          document.getElementById("resizebar").style.width="400px";
+          document.getElementById("resizebar").style.left="calc("+100*event.clientX/window.innerWidth+"% - 200px)";
         }
       }
       
@@ -120,7 +120,8 @@
         if (draggable==1){
           var calcX=e.clientX;
           if (calcX<10){calcX=10;}
-          document.getElementById("resizebar").style.left="calc("+100*calcX/window.innerWidth+"% - 100px)";
+          if (calcX>window.innerWidth-10){calcX=window.innerWidth-10;}
+          document.getElementById("resizebar").style.left="calc("+100*calcX/window.innerWidth+"% - 400px)";
           document.getElementById("editorpane").style.width="calc("+100*calcX/window.innerWidth+"% - 30px)";
           document.getElementById("displaypane").style.width="calc("+100*(window.innerWidth-calcX)/window.innerWidth+"% - 10px)";
         }
