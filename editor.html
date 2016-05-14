@@ -7,6 +7,7 @@
     <style id="editorcss">
       html{
         height:100%;
+        overflow-x:hidden;
       }
     
       body{
@@ -108,9 +109,10 @@
         draggable=inId;
         if (inId==0){
           document.getElementById("resizebar").style.width="20px";
-          document.getElementById("resizebar").style.left=""+100*event.clientX/window.innerWidth+"%";
+          document.getElementById("resizebar").style.left="calc("+100*event.clientX/window.innerWidth+"% - 10px)";
         }else{
           document.getElementById("resizebar").style.width="200px";
+          document.getElementById("resizebar").style.left="calc("+100*event.clientX/window.innerWidth+"% - 100px)";
         }
       }
       
