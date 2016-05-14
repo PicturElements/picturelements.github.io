@@ -36,7 +36,8 @@
       
       #resize{
         display:block;
-        position:absolute;
+        position:relative;
+        float:left;
         left:0;
         top:0;
         width:20px;
@@ -89,9 +90,8 @@
   </head>
   <body onload=init()>
     <button onclick=setIt()>Update frame</button>
-    <textarea id="editorpane" spellcheck="false">
-      <div id="resize"></div>
-    </textarea>
+    <textarea id="editorpane" spellcheck="false"></textarea>
+    <div id="resize"></div>
     <iframe id="displaypane"></iframe>
   </body>
 </html>
