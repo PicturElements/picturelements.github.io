@@ -108,7 +108,7 @@
         draggable=inId;
         if (inId==0){
           document.getElementById("resizebar").style.width="20px";
-          document.getElementById("resizebar").style.left=""+100*calcX/window.innerWidth+"%";
+          document.getElementById("resizebar").style.left=""+100*event.clientX/window.innerWidth+"%";
         }else{
           document.getElementById("resizebar").style.width="200px";
         }
