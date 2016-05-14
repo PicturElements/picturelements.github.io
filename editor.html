@@ -5,6 +5,10 @@
     <link rel="icon" href="pelement.png">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,700" rel="stylesheet" type="text/css">
     <style id="editorcss">
+      html{
+        height:100%;
+      }
+    
       body{
         background-color:white;
         margin:0;
@@ -65,12 +69,11 @@
         z-index:0;
       }
     </style>
-    <script src="http://j.mp/jqymin"></script>
     <script>
+      var draggable=0;  //fuck it; easier than boolean...
+      
+      
       function setIt(){
-        //$('#displaypane').contents().find('html').html(document.getElementById("editorpane").value);
-        //$("displaypane").append("<!--Stuffs.-->"+document.getElementById("editorpane").value);
-        
         //thank god for stackoverflow!
         var iframe = document.getElementById("displaypane");
         iframe = iframe.contentWindow ? 
@@ -91,12 +94,24 @@
         document.getElementById("editorpane").value=clock;
         setIt();
       }
+      
+      function press(inId){
+        draggable=inId;
+      }
+      
+      function resize(e){
+        if (draggable==1){
+          document.getElementById("resizebar").style.left="calc("+100*e.clientX/window.innerWidth+"% - 10px)";
+          document.getElementById("editorpane").style.width="calc("+100*e.clientX/window.innerWidth+"% - 30px)";
+          document.getElementById("editorpane").style.width="calc("+100*(window.innerWidth-e.clientX)/window.innerWidth+"% - 10px)";
+        }
+      }
     </script>
   </head>
   <body onload=init()>
     <button onclick=setIt()>Update frame</button>
     <textarea id="editorpane" spellcheck="false"></textarea>
-    <div id="resize"></div>
+    <div id="resizebar" onmousedown=press(1) onmousemove=resize(event) onmouseup=press(0)></div>
     <iframe id="displaypane"></iframe>
   </body>
 </html>
