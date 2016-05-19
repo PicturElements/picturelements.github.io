@@ -8,20 +8,33 @@
       body{
         background-color:white;
         margin:0;
+        overflow:hidden;
       }
       #canvas{
-        overflow:hidden;
+        display:block;
+        position:fixed;
+        top:50%;
+        left:50%;
       }
     </style>
     <script>
       var pressed=0;
+      var side;  //canvas width
       var xPos=[],yPos=[];
       
       function init(){
-        document.getElementById("canvas").width=window.innerWidth;
-        document.getElementById("canvas").height=window.innerHeight;
-        document.getElementById("canvas").style.width=window.innerWidth;
-        document.getElementById("canvas").style.height=window.innerHeight;
+        if (window.innerHeight>window.innerWidth){
+          side=window.innerWidth*0.9;
+        }else{
+          side=window.innerHeight*0.9;
+        }
+        var canv=document.getElementById("canvas");
+        canv.width=side;
+        canv.height=side;
+        canv.style.width=side;
+        canv.style.height=side;
+        canv.style.top=-side/2;
+        canv.style.top=-side/2;
       }
       
       function press(inId){
