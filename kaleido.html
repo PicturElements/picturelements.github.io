@@ -9,15 +9,19 @@
         background-color:white;
         margin:0;
       }
+      
+      #canvas{
+        overflow:hidden;
+      }
     </style>
     <script>
       var pressed=0;
       
       function init(){
-        document.getElementById("canvas").width=body.innerWidth;
-        document.getElementById("canvas").height=body.innerHeight;
-        document.getElementById("canvas").style.width=body.innerWidth;
-        document.getElementById("canvas").style.width=body.innerHeight;
+        document.getElementById("canvas").width=window.innerWidth;
+        document.getElementById("canvas").height=window.innerHeight;
+        document.getElementById("canvas").style.width=window.innerWidth;
+        document.getElementById("canvas").style.width=window.innerHeight;
       }
       
       function press(inId){
