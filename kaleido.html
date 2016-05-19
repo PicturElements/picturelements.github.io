@@ -1,3 +1,5 @@
+<!--Kaleido - an experiment by PicturElements-->
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -19,22 +21,26 @@
     </style>
     <script>
       var pressed=0;
-      var side;  //canvas width
+      var side,xOff,yOff;  //canvas width
       var xPos=[],yPos=[];
       
       function init(){
         if (window.innerHeight>window.innerWidth){
           side=window.innerWidth*0.9;
+          xOff=window.innerWidth*0.05;
+          yOff=(window.innerHeight-window.innerWidth*0.9)/2;
         }else{
           side=window.innerHeight*0.9;
+          xOff=(window.innerWidth-window.innerHeight*0.9)/2;
+          yOff=window.innerHeight*0.05;
         }
         var canv=document.getElementById("canvas");
         canv.width=side;
         canv.height=side;
         canv.style.width=side;
         canv.style.height=side;
-        canv.style.top=-side/2;
-        canv.style.top=-side/2;
+        canv.style.marginTop="-"+side/2+"px";
+        canv.style.marginLeft="-"+side/2+"px";
       }
       
       function press(inId){
@@ -43,8 +49,8 @@
       
       function draw(){
         if (pressed==1){
-          xPos.push(event.clientX);
-          yPos.push(event.clientY);
+          xPos.push(event.clientX-xOff);
+          yPos.push(event.clientY-yOff);
           paint();
         }
       }
