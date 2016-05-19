@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kaleido - PicturElements</title>
+    <link rel="icon" href="pelement.png">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,700" rel="stylesheet" type="text/css">
+    <style>
+      body{
+        background-color:white;
+        margin:0;
+      }
+    </style>
+    <script>
+      function init(){
+        document.getElementById("canvas").width=window.innerWidth;
+        document.getElementById("canvas").height=window.innerHeight;
+        document.getElementById("canvas").style.width=window.innerWidth;
+        document.getElementById("canvas").style.width=window.innerHeight;
+      }
+    </script>
+  </head>
+  <body onload=init()>
+    <canvas id="canvas"></canvas>
+  </body>
+</html>
