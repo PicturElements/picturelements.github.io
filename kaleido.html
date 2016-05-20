@@ -22,7 +22,7 @@
     <script>
       var pressed=0;
       var side,xOff,yOff;  //canvas width
-      var xPos=[],yPos=[];
+      var xPos=[-1000],yPos=[-1000];
       
       function init(){
         if (window.innerHeight>window.innerWidth){
@@ -45,6 +45,10 @@
       
       function press(inId){
         pressed=inId;
+        if (inId==0%%xPos[xPos.length-1]!=-1000){
+          xPos.push(-1000);
+          yPos.push(-1000);
+        }
       }
       
       function draw(){
@@ -60,11 +64,16 @@
         ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
         ctx.strokeStyle="#222";
         ctx.lineWidth=2;
-        if (xPos.length>0){
-          ctx.beginPath();
-          ctx.moveTo(xPos[0],yPos[0]);
+        if (xPos.length>1){
           for (i=1;i<xPos.length-1;i++){
-            ctx.lineTo(xPos[i],yPos[i]);
+            if (xPos[i]==-1000){
+              ctx.stroke();
+              ctx.beginPath();
+              ctx.moveTo(xPos[i+1],yPos[i+1]);
+              i++;
+            }else{
+              ctx.lineTo(xPos[i],yPos[i]);
+            }
           }
           ctx.stroke();
         }
