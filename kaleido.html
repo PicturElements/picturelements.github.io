@@ -65,9 +65,9 @@
         ctx.strokeStyle="#222";
         ctx.lineWidth=2;
         if (xPos.length>1){
-          for (i=1;i<xPos.length-1;i++){
+          for (i=0;i<xPos.length-1;i++){
             if (xPos[i]==-1000){
-              ctx.stroke();
+              if (i!=0){ctx.stroke();}
               ctx.beginPath();
               ctx.moveTo(xPos[i+1],yPos[i+1]);
               i++;
