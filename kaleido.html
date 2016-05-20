@@ -53,7 +53,7 @@
       
       function draw(){
         if (pressed==1){
-          if (Math.hypot(event.clientX-xOff-xPos[xPos.length-1],event.clientY-yOff-xPos[yPos.length-1])>10){   //save points
+          if (Math.hypot(event.clientX-xOff-xPos[xPos.length-1],event.clientY-yOff-yPos[yPos.length-1])>10){   //save points
             xPos.push(event.clientX-xOff);
             yPos.push(event.clientY-yOff);
             paint();
