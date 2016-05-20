@@ -53,9 +53,11 @@
       
       function draw(){
         if (pressed==1){
-          xPos.push(event.clientX-xOff);
-          yPos.push(event.clientY-yOff);
-          paint();
+          if (Math.hypot(event.clientX-xOff-xPos[xPos.length-1],event.clientY-yOff-xPos[yPos.length-1])>5){   //save points
+            xPos.push(event.clientX-xOff);
+            yPos.push(event.clientY-yOff);
+            paint();
+          }
         }
       }
       
