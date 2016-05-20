@@ -47,6 +47,8 @@
       function press(inId){
         pressed=inId;
         if (inId==0&&xPos[xPos.length-1]!=-1000){
+          xPos.push(event.clientX-xOff);
+          yPos.push(event.clientY-yOff);
           xPos.push(-1000);
           yPos.push(-1000);
         }
@@ -57,8 +59,8 @@
           if (Math.hypot(event.clientX-xOff-xPos[xPos.length-1],event.clientY-yOff-yPos[yPos.length-1])>5){   //save points
             xPos.push(event.clientX-xOff);
             yPos.push(event.clientY-yOff);
-            paint();
           }
+          paint();
         }
       }
       
@@ -78,6 +80,7 @@
               ctx.lineTo(xPos[i],yPos[i]);
             }
           }
+          ctx.lineTo(event.clientX-xOff,event.clientY-yOff);
           ctx.stroke();
         }
       }
