@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,700" rel="stylesheet" type="text/css">
     <style>
       body{
-        background-color:white;
+        background-color:#333;
         margin:0;
         overflow:hidden;
       }
@@ -17,6 +17,8 @@
         position:fixed;
         top:50%;
         left:50%;
+        background-color:#eee;
+        border-radius:3000px;  /*ridiculously large radius to ensure circular canvas*/
         cursor:url(images/penCursor.png),url(images/penCursor.cur),auto;
       }
     </style>
@@ -56,7 +58,7 @@
       
       function draw(){
         if (pressed==1){
-          if (Math.hypot(event.clientX-xOff-xPos[xPos.length-1],event.clientY-yOff-yPos[yPos.length-1])>5){   //save points
+          if (Math.hypot(event.clientX-xOff-xPos[xPos.length-1],event.clientY-yOff-yPos[yPos.length-1])>2.5){   //save points
             xPos.push(event.clientX-xOff);
             yPos.push(event.clientY-yOff);
           }
