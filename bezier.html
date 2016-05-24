@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bézier - PicturElements</title>
+    <link rel="icon" href="pelement.png">
+    <style>
+      body{
+        background-color:#eee;
+        margin:0;
+        overflow:hidden;
+      }
+
+      #menubar{
+        display:block;
+        position:fixed;
+        width:70px;
+        min-height:70px;
+        top:0;
+        left:0;
+        background-color:#666;
+        transition:margin-top 500ms;
+      }
+
+      .btn{
+        display:block;
+        position:relative;
+        width:50px;
+        height:50px;
+        margin-top:10px;
+        margin-left:10px;
+        background-color:#ccc;
+        background-image:url(http://picturelements.github.io/images/btnSprite.png);
+        border-radius:5px;
+        transition:height 200ms;
+        cursor:pointer;
+      }
+
+      #nub{
+        display:block;
+        position:relative;
+        width:70px;
+        height:30px;
+        margin-top:10px;
+        background-color:#444;
+        color:white;
+        font-size:40px;
+        line-height:30px;
+        text-align:center;
+        cursor:pointer;
+      }
+    </style>
+    <script>
+      var ptsX=[],ptsY=[];
+      var resX=[],resY=[];
+      var defaultNo=8,hoverId=-1;  //-1=no hover
+      var pressed=0,step=0;
+      var diff=0.002,perc=0,points=1/diff;
+      console.log(points);
+      var resultX,resultY;
+      var ctx;
+
+      //Button-related variables
+      var paused=0;
+      var speed=1;
+      var lines=0;
+      var collapsed=0;
+
+      function init(){
+        ctx=document.getElementById("canvas").getContext("2d")
+        basicSetup();
+        var offset=0.1,tot=1-offset*2;
+        var top=(1/3*tot/(defaultNo-1))*window.innerWidth;
+        if (top>window.innerHeight/3){top=window.innerHeight/3;}
+        for (i=0;i<defaultNo;i++){
+          ptsX.push((offset+(tot/(defaultNo-1))*i)*window.innerWidth);
+          ptsY.push(window.innerHeight/2-top+i%2*top*2);
+        }
+        for (m=0;m<points;m++){
+          resX.push(0);
+          resY.push(0);
+        }
+        paint();
+        setInterval(setStep,25);
+      }
+
+      function stepper(inId){
+        perc+=inId*diff;
+        step=1;
+        paint();
+      }
+
+      function basicSetup(){
+        var canvas=document.getElementById("canvas");
+        canvas.width=window.innerWidth;
+        canvas.height=window.innerHeight;
+        canvas.style.width=window.innerWidth;
+        canvas.style.height=window.innerHeight;
+        paint();
+      }
+
+      window.onresize = function(event) {
+        basicSetup();
+      };
+
+      function press(inId){
+        pressed=inId;
+      }
+
+      function setHover(e){
+        //document.getElementById("body").innerHTML=e.clientX;
+        if (pressed==0){
+          hoverId=-1;
+          for (i=0;i<ptsX.length;i++){
+            if (Math.hypot(e.clientX-ptsX[i],e.clientY-ptsY[i])<8){
+              hoverId=i;
+              break;
+            }
+          }
+          if (hoverId>-1){
+            document.getElementById("canvas").style.cursor="pointer";
+          }else{
+            document.getElementById("canvas").style.cursor="default";
+          }
+        }else if(hoverId>-1){
+          ptsX[hoverId]=e.clientX;
+          ptsY[hoverId]=e.clientY;
+          paint();
+        }
+      }
+
+      function setStep(){
+        step=1;
+        if (paused==0){paint();}
+      }
+
+      function paint(){
+        var w=window.width,h=window.height;
+        ctx.clearRect(0,0,10000,10000);
+        if (lines<2){
+          ctx.beginPath();
+          ctx.lineWidth=2;
+          ctx.strokeStyle="#777";
+          ctx.moveTo(ptsX[0],ptsY[0]);
+          for (i=1;i<ptsX.length;i++){
+            ctx.lineTo(ptsX[i],ptsY[i]);
+          }
+          ctx.stroke();
+        }
+        calcBezier();
+        step=0;
+
+        ctx.lineWidth=3;
+        ctx.strokeStyle="red";
+        ctx.beginPath();
+        ctx.moveTo(ptsX[0],ptsY[0]);
+        for (a=0;a<points;a++){
+          if (a==Math.floor(perc*points)){
+            ctx.stroke();
+            ctx.strokeStyle="rgba(255,0,0,0.25)";
+            ctx.beginPath();
+          }
+          var tmpX=[],tmpY=[];
+          for (b=0;b<ptsX.length;b++){
+            tmpX.push(ptsX[b]);
+            tmpY.push(ptsY[b]);
+          }
+          for (m=tmpX.length-1;m>1;m--){
+            for (o=0;o<m;o++){
+              var tX=tmpX[o]+(tmpX[o+1]-tmpX[o])*(a/points);
+              var tY=tmpY[o]+(tmpY[o+1]-tmpY[o])*(a/points);
+              tmpX[o]=tX;
+              tmpY[o]=tY;
+            }
+          }
+          ctx.lineTo(tmpX[0]+(tmpX[1]-tmpX[0])*(a/points),tmpY[0]+(tmpY[1]-tmpY[0])*(a/points));
+        }
+        ctx.lineTo(ptsX[ptsX.length-1],ptsY[ptsX.length-1]);
+        ctx.stroke();
+        if (lines<3){
+          for (i=0;i<ptsX.length;i++){
+            ctx.fillStyle="#606";
+            ctx.beginPath();
+            ctx.arc(ptsX[i],ptsY[i],5,0,2*Math.PI);
+            ctx.fill();
+          }
+        }
+        ctx.fillStyle="red";
+        ctx.beginPath();
+        ctx.arc(resultX,resultY,5,0,2*Math.PI);
+        ctx.fill();
+      }
+
+      function calcBezier(){
+        var tmpX=[],tmpY=[];
+        for (m=0;m<ptsX.length;m++){
+          tmpX.push(ptsX[m]);
+          tmpY.push(ptsY[m]);
+        }
+        if (step==1&&paused==0){perc+=diff;}
+        ctx.fillStyle="#222";
+        ctx.strokeStyle="#bbb";
+        ctx.lineWidth=1;
+        for (m=tmpX.length-1;m>1;m--){
+          for (o=0;o<m;o++){
+            var tX=tmpX[o]+(tmpX[o+1]-tmpX[o])*perc;
+            var tY=tmpY[o]+(tmpY[o+1]-tmpY[o])*perc;
+            //ctx.beginPath();
+            //ctx.arc(tX,tY,3,0,2*Math.PI);
+            //ctx.fill();
+            tmpX[o]=tX;
+            tmpY[o]=tY;
+            if (lines<1){
+              if (o==0){
+                ctx.beginPath();
+                ctx.moveTo(tX,tY);
+              }else{
+                ctx.lineTo(tX,tY);
+              }
+            }
+          }
+          if (lines<1){ctx.stroke();}
+        }
+        resultX=tmpX[0]+(tmpX[1]-tmpX[0])*perc;
+        resultY=tmpY[0]+(tmpY[1]-tmpY[0])*perc;
+        /*for (n=0;n<ptsX.length-1;n++){
+          ctx.beginPath();
+          ctx.fillStyle="#222";
+          //ctx.arc(ptsX[n]+(ptsX[n+1]-ptsX[n])*perc,ptsY[n]+(ptsY[n+1]-ptsY[n])*perc,3,0,2*Math.PI);
+          ctx.fill();
+        }*/
+        if (perc>1||perc<0){
+          diff*=-1;
+          if (perc>1){perc=1;}
+          else{perc=0;}
+        }
+      }
+
+      function pause(){
+        paused=Math.abs(paused-1);
+        var btns=document.getElementsByClassName("btn");
+        btns[0].style.backgroundPositionX=""+(-50*paused)+"px";
+        if (paused==1){
+          btns[1].style.height="50px";
+          btns[2].style.height="50px";
+        }else{
+          btns[1].style.height="0";
+          btns[2].style.height="0";
+        }
+      }
+
+      function toggleLines(){
+        lines++;
+        if (lines==4){lines=0;}
+        paint();
+      }
+
+      function setSpeed(){
+        speed++;
+        var rev=0;
+        if (diff<0){rev=1;}
+        if (speed%3==0){
+          diff=0.0005;
+        }else if (speed%3==1){
+          diff=0.002;
+        }else{
+          diff=0.01;
+        }
+        if (rev==1){diff*=-1;}
+        document.getElementsByClassName("btn")[4].style.backgroundPositionX=""+(-50*(speed%3))+"px";
+      }
+
+      function slide(){
+        collapsed=Math.abs(collapsed-1);
+        if (paused==1){
+          document.getElementById("menubar").style.marginTop=""+(-310*collapsed)+"px";
+        }else{
+          document.getElementById("menubar").style.marginTop=""+(-190*collapsed)+"px";
+        }
+      }
+    </script>
+  </head>
+  <body id="body" onload=init()>
+    <canvas id="canvas" onmousedown=press(1) onmousemove=setHover(event) onmouseup=press(0)></canvas>
+    <div id="menubar">
+      <div class="btn" onclick=pause()></div>
+      <div class="btn" style="background-position:2px -50px; height:0" onclick=stepper(2)></div>
+      <div class="btn" style="background-position:0 -100px; height:0" onclick=stepper(-2)></div>
+      <div class="btn" style="background-position:0 -150px" onclick=toggleLines()></div>
+      <div class="btn" style="background-position:-50px -200px" onclick=setSpeed()></div>
+      <div id="nub" onclick=slide()>=</div>
+    </div>
+  </body>
+</html>
