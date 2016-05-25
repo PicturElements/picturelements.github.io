@@ -144,6 +144,18 @@
         left: 5%;
         top: 55%;
       }
+      
+      #closebtn{
+        display: block;
+        position: absolute;
+        font-size: 1vw;
+        color: #555;
+        font-weight: 300;
+        right: 0.7vw;
+        top: 0.5vw;
+        line-height: 1.5vw;
+        cursor: pointer;
+      }
     </style>
     <script>
       /*Lots and lots of global variables*/
@@ -520,6 +532,10 @@
         document.getElementById("overlay").style.display="block";
       }
       
+      function closeShare(){
+        document.getElementById("overlay").style.display="none";
+      }
+      
       function intToChar(no){
         return nos.charAt(no);
       }
@@ -545,6 +561,7 @@
     <div id="overlay">
       <div id="sharecontainer">
         Share your Bézier curve!
+        <div id="closebtn" onclick=closeShare()></div>
         <input id="urlout" spellcheck=false></input>
       </div>
     </div>
