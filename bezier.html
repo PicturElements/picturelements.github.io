@@ -109,6 +109,7 @@
     </style>
     <script>
       /*Lots and lots of global variables*/
+      var nos="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
       var ptsX=[],ptsY=[];
       var defaultNo=10,hoverId=-1;  //-1=no hover
       var pressed=0,step=0;
@@ -124,7 +125,7 @@
       var collapsed=0,collapsed2=1;
       
       function init(){
-        console.log("A".charCodeAt(0));
+        console.log("lol: "+intToChar(10));
         document.getElementById("pointsin").value=defaultNo;
         ctx=document.getElementById("canvas").getContext("2d")
         basicSetup();
@@ -448,19 +449,13 @@
         var url=window.location.href;
         var encoded="";
         for (a=0;a<ptsX.length;a++){
-          encoded+=""+toChar(ptsX[a]/60)+""+toChar(ptsX[a]%60)+""+toChar(ptsY[a]/60)+""+toChar(ptsY[a]%60)+"";
+          encoded+=""+intToChar(ptsX[a]/60)+""+intToChar(ptsX[a]%60)+""+intToChar(ptsY[a]/60)+""+intToChar(ptsY[a]%60)+"";
         }
         window.location.href=""+url+"#"+encoded;
       }
       
-      function toChar(no){
-        if (no<10){
-          return no;
-        }else if(no<35){
-          return String.fromCharCode(87+no);
-        }else{
-          return String.fromCharCode(30+no);
-        }
+      function intToChar(no){
+        return nos.charAt(no);
       }
     </script>
   </head>
