@@ -144,16 +144,16 @@
             if (inUrl.charAt(a)=='='){
               foundEqual=1;
             }else if(foundEqual==1){
-              ptsX.push(toInt(inUrl.charAt(a+at))*62+toInt(inUrl.charAt(a+at+1)));
-              ptsY.push(toInt(inUrl.charAt(a+at+2))*62+toInt(inUrl.charAt(a+at+3)));
-              at+=4;
+              ptsX.push(toInt(inUrl.charAt(a))*62+toInt(inUrl.charAt(a+1)));
+              ptsY.push(toInt(inUrl.charAt(a+2))*62+toInt(inUrl.charAt(a+3)));
+              a+=3;
               defaultNo++;
             }
           }
         }
         paint();
         thread=setInterval(setStep,25);
-        document.getElementById("pointsin").value=defaultNo;
+        document.getElementById("pointsin").value=defaultNo/4;
       }
       
       function toInt(inChar){
