@@ -450,7 +450,7 @@
         for (a=0;a<ptsX.length;a++){
           encoded+=""+toChar(ptsX[a]/60)+""+toChar(ptsX[a]%60)+""+toChar(ptsY[a]/60)+""+toChar(ptsY[a]%60)+"";
         }
-        window.location.href="#"+url+""+encoded;
+        window.location.href=""+url+"#"+encoded;
       }
       
       function toChar(no){
