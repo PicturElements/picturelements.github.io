@@ -529,8 +529,8 @@
           encoded+=""+intToChar(ptsX[a]/62)+""+intToChar(ptsX[a]%62)+""+intToChar(ptsY[a]/62)+""+intToChar(ptsY[a]%62)+"";
         }
         document.getElementById("urlout").value="http://picturelements.github.io/bezier?constellation="+encoded;
-        document.getElementById("urlout").select();
         document.getElementById("overlay").style.display="block";
+        document.getElementById("urlout").select();
       }
       
       function closeShare(){
