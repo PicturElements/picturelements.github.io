@@ -106,6 +106,44 @@
         font-size:1.2vw;
         pointer-events:none;
       }
+      
+      #overlay{
+        display: none;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.8);
+        z-index: 1000;
+      }
+      
+      #sharecontainer{
+        display: block;
+        position: fixed;
+        width: 55%;
+        left: 22.5%;
+        height: 10vw;
+        top: 50%;
+        margin-top: -5vw;
+        background-color: white;
+        border-radius: 0.3vw;
+        font-family: Roboto,Arial,sans-serif;
+        font-weight: 700;
+        font-size: 2vw;
+        text-align: center;
+        line-height: 5.5vw;
+      }
+      
+      #overlay #urlout{
+        display: block;
+        position: absolute;
+        width: 90%;
+        height: 2vw;
+        font-family: Roboto,Arial,sans-serif;
+        font-size: 1.2vw;
+        font-weight: 700;
+        left: 5%;
+        top: 55%;
+      }
     </style>
     <script>
       /*Lots and lots of global variables*/
@@ -478,7 +516,8 @@
         for (a=0;a<ptsX.length;a++){
           encoded+=""+intToChar(ptsX[a]/60)+""+intToChar(ptsX[a]%60)+""+intToChar(ptsY[a]/60)+""+intToChar(ptsY[a]%60)+"";
         }
-        window.location.href="http://picturelements.github.io/bezier?constellation="+encoded;
+        document.getElementById("urlout").value="http://picturelements.github.io/bezier?constellation="+encoded;
+        document.getElementById("overlay").style.display="block";
       }
       
       function intToChar(no){
@@ -488,7 +527,7 @@
   </head>
   <body id="body" onload=init()>
     <div id="desc">Cick and drag points to modify the curve. Double click to add/remove points; click on thick gray line to add point between two points.</div>
-    <canvas id="canvas" onmousedown=press(1) onmousemove=setHover(event) onmouseup=press(0)></canvas>
+    <canvas id="canvas" style="position:absolute" onmousedown=press(1) onmousemove=setHover(event) onmouseup=press(0)></canvas>
     <div id="menubar">
       <div class="btn" onclick=pause()></div>
       <div class="btn" style="background-position:2px -50px; height:0; transition:200ms; margin-top:0;" onclick=stepper(2)></div>
@@ -502,6 +541,12 @@
         <div id="inputbtn" title="cancel" style="margin-left:102px" onclick=collapse()>C</div>
       </div>
       <div id="nub" onclick=slide()>=</div>
+    </div>
+    <div id="overlay">
+      <div id="sharecontainer">
+        Share your Bézier curve!
+        <input id="urlout" spellcheck=false></input>
+      </div>
     </div>
   </body>
 </menu>
