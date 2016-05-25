@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,700" rel="stylesheet" type="text/css">
     <title>Bézier - PicturElements</title>
     <link rel="icon" href="pelement.png">
     <style>
@@ -8,8 +9,14 @@
         background-color:#eee;
         margin:0;
         overflow:hidden;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;    
       }
-
+      
       #menubar{
         display:block;
         position:fixed;
@@ -20,7 +27,7 @@
         background-color:#666;
         transition:margin-top 500ms;
       }
-
+      
       .btn{
         display:block;
         position:relative;
@@ -31,10 +38,50 @@
         background-color:#ccc;
         background-image:url(http://picturelements.github.io/images/btnSprite.png);
         border-radius:5px;
-        transition:height 200ms;
+        transition:width 200ms;
+        overflow:hidden;
         cursor:pointer;
+        z-index:10;
       }
-
+      
+      .btn #pointsin{
+        display:block;
+        position:absolute;
+        width:50px;
+        height:50px;
+        border:none;
+        background-color:transparent;
+        font-family:Roboto,Arial,sans-serif;
+        font-weight:700;
+        font-size:25px;
+        color:#3f3f3f;
+        line-height:50px;
+        text-align:center;
+        pointer-events:none;
+      }
+      
+      #inputbtn{
+        display:block;
+        position:absolute;
+        top:0;
+        left:0;
+        width:50px;
+        height:50px;
+        background-color:#bbb;
+        font-family:Roboto,Arial,sans-serif;
+        font-weight:700;
+        font-size:25px;
+        color:#3f3f3f;
+        line-height:50px;
+        border-left:2px solid #888;
+        text-align:center;
+        z-index:20;
+      }
+      
+      #inputbtn:hover,.btn:hover{
+        background-color:#aaa;
+      }
+      
       #nub{
         display:block;
         position:relative;
@@ -48,24 +95,37 @@
         text-align:center;
         cursor:pointer;
       }
+      
+      #desc{
+        display:block;
+        position:fixed;
+        width:100%;
+        bottom:0;
+        font-family:Roboto,Arial,sans-serif;
+        text-align:center;
+        font-size:1.2vw;
+        pointer-events:none;
+      }
     </style>
     <script>
+      /*Lots and lots of global variables*/
       var ptsX=[],ptsY=[];
-      var resX=[],resY=[];
-      var defaultNo=8,hoverId=-1;  //-1=no hover
+      var defaultNo=10,hoverId=-1;  //-1=no hover
       var pressed=0,step=0;
       var diff=0.002,perc=0,points=1/diff;
-      console.log(points);
-      var resultX,resultY;
+      var resultX,resultY,prevX=0,prevY=0;
+      var thread;
       var ctx;
-
+      
       //Button-related variables
       var paused=0;
       var speed=1;
       var lines=0;
-      var collapsed=0;
-
+      var collapsed=0,collapsed2=1;
+      
       function init(){
+        console.log("A".charCodeAt(0));
+        document.getElementById("pointsin").value=defaultNo;
         ctx=document.getElementById("canvas").getContext("2d")
         basicSetup();
         var offset=0.1,tot=1-offset*2;
@@ -75,20 +135,16 @@
           ptsX.push((offset+(tot/(defaultNo-1))*i)*window.innerWidth);
           ptsY.push(window.innerHeight/2-top+i%2*top*2);
         }
-        for (m=0;m<points;m++){
-          resX.push(0);
-          resY.push(0);
-        }
         paint();
-        setInterval(setStep,25);
+        thread=setInterval(setStep,25);
       }
-
+      
       function stepper(inId){
         perc+=inId*diff;
         step=1;
         paint();
       }
-
+      
       function basicSetup(){
         var canvas=document.getElementById("canvas");
         canvas.width=window.innerWidth;
@@ -97,17 +153,64 @@
         canvas.style.height=window.innerHeight;
         paint();
       }
-
+      
       window.onresize = function(event) {
         basicSetup();
       };
-
+      
       function press(inId){
         pressed=inId;
+        if (inId==1){
+          var tmX=event.clientX,tmY=event.clientY;
+          if (prevX==tmX&&prevY==tmY){
+            var onpoint=-1;
+            for (a=0;a<ptsX.length;a++){
+              if (Math.hypot(tmX-ptsX[a],tmY-ptsY[a])<8){
+                onpoint=a;
+                break;
+              }
+            }
+            if (onpoint==-1&&defaultNo<100){
+              var minLength=0,midLength=0,maxLength=0,offset=10;
+              var placeAt=-1;
+              for (a=0;a<ptsX.length-1;a++){
+                minLength=Math.hypot(ptsY[a+1]-ptsY[a],ptsX[a+1]-ptsX[a]);
+                maxLength=Math.sqrt(offset*offset+minLength*minLength)+offset;
+                midLength=Math.hypot(tmY-ptsY[a],tmX-ptsX[a])+Math.hypot(ptsY[a+1]-tmY,ptsX[a+1]-tmX);
+                if (midLength>=minLength&&midLength<=maxLength){
+                  placeAt=a+1;
+                  break;
+                }
+              }
+              if (placeAt==-1){
+                if (Math.hypot(ptsY[0]-tmY,ptsX[0]-tmX)<Math.hypot(ptsY[ptsX.length-1]-tmY,ptsX[ptsX.length-1]-tmX)){
+                  ptsX.splice(0,0,prevX);
+                  ptsY.splice(0,0,prevY);
+                }else{
+                  ptsX.push(tmX);
+                  ptsY.push(tmY);
+                }
+              }else{
+                ptsX.splice(placeAt,0,prevX);
+                ptsY.splice(placeAt,0,prevY);
+              }
+              defaultNo++;
+              tmX=-100;
+            }else if(defaultNo>2){
+              ptsX.splice(onpoint,1);
+              ptsY.splice(onpoint,1);
+              defaultNo--;
+              tmX=-100;
+            }
+            document.getElementById("pointsin").value=defaultNo;
+          }
+          prevX=tmX;
+          prevY=tmY;
+          paint();
+        }
       }
-
+      
       function setHover(e){
-        //document.getElementById("body").innerHTML=e.clientX;
         if (pressed==0){
           hoverId=-1;
           for (i=0;i<ptsX.length;i++){
@@ -127,19 +230,23 @@
           paint();
         }
       }
-
+      
       function setStep(){
         step=1;
         if (paused==0){paint();}
       }
-
+      
       function paint(){
         var w=window.width,h=window.height;
         ctx.clearRect(0,0,10000,10000);
-        if (lines<2){
+        if (lines<2||lines==3){
           ctx.beginPath();
           ctx.lineWidth=2;
           ctx.strokeStyle="#777";
+          if (lines==3){
+            ctx.strokeStyle="#bbb";
+            ctx.lineWidth=1;
+          }
           ctx.moveTo(ptsX[0],ptsY[0]);
           for (i=1;i<ptsX.length;i++){
             ctx.lineTo(ptsX[i],ptsY[i]);
@@ -148,7 +255,7 @@
         }
         calcBezier();
         step=0;
-
+        
         ctx.lineWidth=3;
         ctx.strokeStyle="red";
         ctx.beginPath();
@@ -189,7 +296,7 @@
         ctx.arc(resultX,resultY,5,0,2*Math.PI);
         ctx.fill();
       }
-
+      
       function calcBezier(){
         var tmpX=[],tmpY=[];
         for (m=0;m<ptsX.length;m++){
@@ -209,7 +316,7 @@
             //ctx.fill();
             tmpX[o]=tX;
             tmpY[o]=tY;
-            if (lines<1){
+            if (lines<1||lines==3){
               if (o==0){
                 ctx.beginPath();
                 ctx.moveTo(tX,tY);
@@ -218,7 +325,7 @@
               }
             }
           }
-          if (lines<1){ctx.stroke();}
+          if (lines<1||lines==3){ctx.stroke();}
         }
         resultX=tmpX[0]+(tmpX[1]-tmpX[0])*perc;
         resultY=tmpY[0]+(tmpY[1]-tmpY[0])*perc;
@@ -234,7 +341,7 @@
           else{perc=0;}
         }
       }
-
+      
       function pause(){
         paused=Math.abs(paused-1);
         var btns=document.getElementsByClassName("btn");
@@ -242,18 +349,22 @@
         if (paused==1){
           btns[1].style.height="50px";
           btns[2].style.height="50px";
+          btns[1].style.marginTop="10px";
+          btns[2].style.marginTop="10px";
         }else{
           btns[1].style.height="0";
           btns[2].style.height="0";
+          btns[1].style.marginTop="0";
+          btns[2].style.marginTop="0";
         }
       }
-
+      
       function toggleLines(){
         lines++;
-        if (lines==4){lines=0;}
+        if (lines==5){lines=0;}
         paint();
       }
-
+      
       function setSpeed(){
         speed++;
         var rev=0;
@@ -266,28 +377,110 @@
           diff=0.01;
         }
         if (rev==1){diff*=-1;}
-        document.getElementsByClassName("btn")[4].style.backgroundPositionX=""+(-50*(speed%3))+"px";
+        document.getElementsByClassName("btn")[5].style.backgroundPositionX=""+(-50*(speed%3))+"px";
       }
-
+      
       function slide(){
         collapsed=Math.abs(collapsed-1);
         if (paused==1){
-          document.getElementById("menubar").style.marginTop=""+(-310*collapsed)+"px";
+          document.getElementById("menubar").style.marginTop=""+(-430*collapsed)+"px";
         }else{
-          document.getElementById("menubar").style.marginTop=""+(-190*collapsed)+"px";
+          document.getElementById("menubar").style.marginTop=""+(-310*collapsed)+"px";
+        }
+      }
+      
+      function setPoints(x){
+        if (collapsed2==1){
+          x.style.width="154px";
+          var inp=document.getElementById("pointsin");
+          inp.style.pointerEvents="auto";
+          inp.style.backgroundColor="white";
+          inp.focus();
+        }else{
+          x.style.width="50px";
+          collapsed2=1;
+        }
+        //collapsed2=Math.abs(collapsed2-1);
+      }
+      
+      function confirm(){
+        collapsed2=0;
+        ptsX=[];
+        ptsY=[];
+        val=document.getElementById("pointsin").value;
+        if (val<2){
+          defaultNo=2;
+          val=2;
+        }else if (val>100){
+          defaultNo=100;
+          val=100;
+        }else{
+          defaultNo=val; 
+        }
+        clearInterval(thread);
+        var inp=document.getElementById("pointsin");
+        inp.style.pointerEvents="none";
+        inp.style.backgroundColor="transparent";
+        init();
+      }
+      
+      function dostuff(e){
+        var key=e.keyCode;
+        if (key==13){
+          confirm();
+          setPoints(document.getElementsByClassName("btn")[6]);
+        }else if(key==27){
+          collapse();
+          setPoints(document.getElementsByClassName("btn")[6]);
+        }
+      }
+      
+      function collapse(){
+        document.getElementsByClassName("btn")[6].style.width="50px";
+        var inp=document.getElementById("pointsin");
+        inp.value=defaultNo;
+        inp.style.pointerEvents="none";
+        inp.style.backgroundColor="transparent";
+        collapsed2=0;
+      }
+      
+      function createUrl(){
+        var url=window.location.href;
+        var encoded="";
+        for (a=0;a<ptsX.length;a++){
+          encoded+=""+toChar(ptsX[a]/60)+""+toChar(ptsX[a]%60)+""+toChar(ptsY[a]/60)+""+toChar(ptsY[a]%60)+"";
+        }
+        window.location.href="#"+url+""+encoded;
+      }
+      
+      function toChar(no){
+        if (no<10){
+          return no;
+        }else if(no<35){
+          return String.fromCharCode(87+no);
+        }else{
+          return String.fromCharCode(30+no);
         }
       }
     </script>
   </head>
   <body id="body" onload=init()>
+    <div id="desc">Cick and drag points to modify the curve. Double click to add/remove points; click on thick gray line to add point between two points.</div>
     <canvas id="canvas" onmousedown=press(1) onmousemove=setHover(event) onmouseup=press(0)></canvas>
     <div id="menubar">
       <div class="btn" onclick=pause()></div>
-      <div class="btn" style="background-position:2px -50px; height:0" onclick=stepper(2)></div>
-      <div class="btn" style="background-position:0 -100px; height:0" onclick=stepper(-2)></div>
-      <div class="btn" style="background-position:0 -150px" onclick=toggleLines()></div>
-      <div class="btn" style="background-position:-50px -200px" onclick=setSpeed()></div>
+      <div class="btn" style="background-position:2px -50px; height:0; transition:200ms; margin-top:0;" onclick=stepper(2)></div>
+      <div class="btn" style="background-position:0 -100px; height:0; transition:200ms; margin-top:0;" onclick=stepper(-2)></div>
+      <div class="btn" title="get shareable URL" style="background-position:2px -250px" onclick=createUrl()></div>
+      <div class="btn" style="background-position:0 -150px" onclick=toggleLines() title="hide/display points and lines"></div>
+      <div class="btn" title="change animation speed" style="background-position:-50px -200px" onclick=setSpeed()></div>
+      <div class="btn" title="edit points" style="background-image:none; transition:width 500ms" onclick=setPoints(this)>
+        <input id="pointsin" onkeydown=dostuff(event)></input>
+        <div id="inputbtn" title="set points" style="margin-left:50px" onclick=confirm()>OK</div>
+        <div id="inputbtn" title="cancel" style="margin-left:102px" onclick=collapse()>C</div>
+      </div>
       <div id="nub" onclick=slide()>=</div>
     </div>
   </body>
+</menu>
 </html>
