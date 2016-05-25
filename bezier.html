@@ -125,7 +125,6 @@
       var collapsed=0,collapsed2=1;
       
       function init(){
-        document.getElementById("pointsin").value=defaultNo;
         ctx=document.getElementById("canvas").getContext("2d")
         basicSetup();
         var offset=0.1,tot=1-offset*2;
@@ -137,6 +136,8 @@
             ptsY.push(window.innerHeight/2-top+i%2*top*2);
           }
         }else{
+          defaultNo=0;
+          console.log("LOL!");
           var inUrl=window.location.href;
           var foundEqual=0,at=0;
           for (a=0;a<inUrl.length;a++){
@@ -146,11 +147,13 @@
               ptsX.push(toInt(inUrl.charAt(a+at))*62+toInt(inUrl.charAt(a+at+1)));
               ptsY.push(toInt(inUrl.charAt(a+at+2))*62+toInt(inUrl.charAt(a+at+3)));
               at+=4;
+              defaultNo++;
             }
           }
         }
         paint();
         thread=setInterval(setStep,25);
+        document.getElementById("pointsin").value=defaultNo;
       }
       
       function toInt(inChar){
