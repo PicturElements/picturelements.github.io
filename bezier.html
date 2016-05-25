@@ -526,7 +526,7 @@
       function createUrl(){
         var encoded="";
         for (a=0;a<ptsX.length;a++){
-          encoded+=""+intToChar(ptsX[a]/60)+""+intToChar(ptsX[a]%60)+""+intToChar(ptsY[a]/60)+""+intToChar(ptsY[a]%60)+"";
+          encoded+=""+intToChar(ptsX[a]/62)+""+intToChar(ptsX[a]%62)+""+intToChar(ptsY[a]/62)+""+intToChar(ptsY[a]%62)+"";
         }
         document.getElementById("urlout").value="http://picturelements.github.io/bezier?constellation="+encoded;
         document.getElementById("overlay").style.display="block";
