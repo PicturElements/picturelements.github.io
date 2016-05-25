@@ -209,7 +209,7 @@
       }
       
       function toInt(inChar){
-        var converted=""+inChar+"".charCodeAt(0);
+        var converted=inChar.charCodeAt(0);
         if (converted>=97){
           return converted-87;
         }else if (converted>=65){
