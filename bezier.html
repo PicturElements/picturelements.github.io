@@ -416,10 +416,10 @@
           //ctx.arc(ptsX[n]+(ptsX[n+1]-ptsX[n])*perc,ptsY[n]+(ptsY[n+1]-ptsY[n])*perc,3,0,2*Math.PI);
           ctx.fill();
         }*/
-        if (perc>=1||perc<=0){
+        if (perc>1||perc<0){
           diff*=-1;
-          /*if (perc>1){perc=1;}
-          else{perc=0;}*/
+          if (perc>1){perc=1;}
+          else{perc=0;}
         }
       }
       
