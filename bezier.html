@@ -211,7 +211,10 @@
           tmpSettings=tmpString;  //mostly for clarity...
           paused=parseInt(tmpSettings.charAt(0));
           lines=parseInt(tmpSettings.charAt(1));
-          speed=parseInt(tmpSettings.charAt(2));
+          speed=parseInt(tmpSettings.charAt(2))+2;  //2 - modulo makes it -1
+          paused=Math.abs(paused-1);
+          pause();
+          setSpeed();
           console.log("width: "+prevWidth+", height:"+prevHeight);
         }
         paint();
