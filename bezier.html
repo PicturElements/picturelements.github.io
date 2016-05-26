@@ -341,7 +341,7 @@
         ctx.beginPath();
         ctx.moveTo(ptsX[0],ptsY[0]);
         for (a=0;a<points;a++){
-          if (a==Math.floor(perc*points)-1){
+          if (a==Math.floor(perc*points)+1){
             ctx.stroke();
             ctx.strokeStyle="rgba(255,0,0,0.25)";
             ctx.beginPath();
