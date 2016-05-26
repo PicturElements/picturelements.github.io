@@ -529,7 +529,7 @@
         for (a=0;a<ptsX.length;a++){
           encoded+=""+intToChar(ptsX[a]/62)+""+intToChar(ptsX[a]%62)+""+intToChar(ptsY[a]/62)+""+intToChar(ptsY[a]%62)+"";
         }
-        document.getElementById("urlout").value="http://picturelements.github.io/bezier?constellation="+encoded;
+        document.getElementById("urlout").value="http://picturelements.github.io/bezier?constellation="+encoded+"&w="+window.innerWidth+"&h="+window.innerHeight+"&settings="+paused+""+lines+""+(speed%3);
         document.getElementById("overlay").style.display="block";
         document.getElementById("urlout").select();
       }
