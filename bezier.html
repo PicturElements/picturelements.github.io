@@ -213,7 +213,7 @@
         if (converted>=97){
           return converted-87;
         }else if (converted>=65){
-          return converted-30;
+          return converted-29;
         }else{
           return converted-48;
         }
@@ -341,7 +341,7 @@
         ctx.beginPath();
         ctx.moveTo(ptsX[0],ptsY[0]);
         for (a=0;a<points;a++){
-          if (a==Math.floor(perc*points)){
+          if (a==Math.floor(perc*points)-1){
             ctx.stroke();
             ctx.strokeStyle="rgba(255,0,0,0.25)";
             ctx.beginPath();
