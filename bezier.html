@@ -341,11 +341,6 @@
         ctx.beginPath();
         ctx.moveTo(ptsX[0],ptsY[0]);
         for (a=0;a<points;a++){
-          if (a==Math.floor(perc*points)+1){
-            ctx.stroke();
-            ctx.strokeStyle="rgba(255,0,0,0.25)";
-            ctx.beginPath();
-          }
           var tmpX=[],tmpY=[];
           for (b=0;b<ptsX.length;b++){
             tmpX.push(ptsX[b]);
@@ -360,6 +355,11 @@
             }
           }
           ctx.lineTo(tmpX[0]+(tmpX[1]-tmpX[0])*(a/points),tmpY[0]+(tmpY[1]-tmpY[0])*(a/points));
+          if (tmpX[0]+(tmpX[1]-tmpX[0])*(a/points)==resultX&&tmpY[0]+(tmpY[1]-tmpY[0])*(a/points)==resultY){
+            ctx.stroke();
+            ctx.strokeStyle="rgba(255,0,0,0.25)";
+            ctx.beginPath();
+          }
         }
         ctx.lineTo(ptsX[ptsX.length-1],ptsY[ptsX.length-1]);
         ctx.stroke();
