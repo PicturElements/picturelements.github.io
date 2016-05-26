@@ -164,7 +164,7 @@
       var defaultNo=10,hoverId=-1;  //-1=no hover
       var pressed=0,step=0;
       var diff=0.002,perc=diff,points=1/diff;
-      var resultX,resultY,prevX=0,prevY=0;
+      var resultX,resultY,prevX=0,prevY=0,prevWidth,prevHeight;
       var alreadyLoaded=0;
       var thread;
       var ctx;
@@ -188,19 +188,30 @@
           }
         }else{
           defaultNo=0;
-          console.log("LOL!");
           var inUrl=window.location.href;
-          var foundEqual=0,at=0;
+          var foundEqual=0,at=0,register=1;
+          var tmpString="",tmpSettings;
           for (a=0;a<inUrl.length;a++){
             if (inUrl.charAt(a)=='='){
-              foundEqual=1;
+              foundEqual++;
+              register=1;
+              if (foundEqual==3){prevWidth=parseInt(tmpString); tmpString=""}
+              else if (foundEqual==4){prevHeight=parseInt(tmpString); tmpString=""}
+            }else if(inUrl.charAt(a)=='&'){
+              register=0;
             }else if(foundEqual==1){
               ptsX.push(toInt(inUrl.charAt(a))*62+toInt(inUrl.charAt(a+1)));
               ptsY.push(toInt(inUrl.charAt(a+2))*62+toInt(inUrl.charAt(a+3)));
               a+=3;
               defaultNo++;
+            }else if(foundEqual>=2&&register==1){
+              tmpString+=inUrl.charAt(a);
             }
           }
+          tmpSettings=tmpString;  //mostly for clarity...
+          paused=parseInt(tmpSettings.charAt(0));
+          lines=parseInt(tmpSettings.charAt(1));
+          speed=parseInt(tmpSettings.charAt(2));
         }
         paint();
         thread=setInterval(setStep,25);
@@ -529,7 +540,7 @@
         for (a=0;a<ptsX.length;a++){
           encoded+=""+intToChar(ptsX[a]/62)+""+intToChar(ptsX[a]%62)+""+intToChar(ptsY[a]/62)+""+intToChar(ptsY[a]%62)+"";
         }
-        document.getElementById("urlout").value="http://picturelements.github.io/bezier?constellation="+encoded+"&w="+window.innerWidth+"&h="+window.innerHeight+"&settings="+paused+""+lines+""+(speed%3);
+        document.getElementById("urlout").value="http://picturelements.github.io/bezier?id="+encoded+"&w="+window.innerWidth+"&h="+window.innerHeight+"&settings="+paused+""+lines+""+(speed%3);
         document.getElementById("overlay").style.display="block";
         document.getElementById("urlout").select();
       }
