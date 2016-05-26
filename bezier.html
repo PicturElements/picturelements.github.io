@@ -199,7 +199,7 @@
               else if (foundEqual==4){prevHeight=parseInt(tmpString); tmpString=""}
             }else if(inUrl.charAt(a)=='&'){
               register=0;
-            }else if(foundEqual==1){
+            }else if(foundEqual==1&&register==1){
               ptsX.push(toInt(inUrl.charAt(a))*62+toInt(inUrl.charAt(a+1)));
               ptsY.push(toInt(inUrl.charAt(a+2))*62+toInt(inUrl.charAt(a+3)));
               a+=3;
@@ -212,6 +212,7 @@
           paused=parseInt(tmpSettings.charAt(0));
           lines=parseInt(tmpSettings.charAt(1));
           speed=parseInt(tmpSettings.charAt(2));
+          console.log("width: "+prevWidth+", height:"+prevHeight);
         }
         paint();
         thread=setInterval(setStep,25);
