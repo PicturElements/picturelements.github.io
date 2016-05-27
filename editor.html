@@ -50,7 +50,10 @@
         display:block;
         position:fixed;
         width:40%;
-        height:100%;
+        height:-webkit-calc(100% - 70px);
+        height:-moz-calc(100% - 70px);
+        height:-ms-calc(100% - 70px);
+        height:calc(100% - 70px);
         left:0;
         top:0;background-color: #222;
         font-family: monospace;
@@ -58,6 +61,19 @@
         padding:10px;
         border:none;
         outline:none;
+      }
+      
+      #infopane{
+        display:block;
+        position:fixed;
+        width:40%;
+        height:70px;
+        font-family: monospace;
+        background-color:#111;
+        color:#7DFF54;
+        font-size:20px;
+        line-height:70px;
+        text-align:center;
       }
       
       #resizebar{
@@ -133,6 +149,7 @@
         documentId++;
         document.getElementById("initbtn").innerHTML=texts[documentId%2];
         setIt();
+        setInputInfo();
       }
       
       function press(inId){
@@ -159,6 +176,17 @@
         setIt();
       }
       
+      function setInputInfo(){
+        var code=document.getElementById("editorpane").value;
+        var lines=1;
+        for (var a=0;a<code.length;a++){
+          if (code.charAt(a)=='\n'){
+            lines++;
+          }
+        }
+        document.getElementById("infopane").innerHTML="Lines: "+lines;
+      }
+      
       function resize(e){
         if (draggable==1){
           var calcX=e.clientX;
@@ -166,13 +194,15 @@
           if (calcX>window.innerWidth-10){calcX=window.innerWidth-10;}
           document.getElementById("resizebar").style.left="calc("+100*calcX/window.innerWidth+"% - 200px)";
           document.getElementById("editorpane").style.width="calc("+100*calcX/window.innerWidth+"% - 30px)";
+          document.getElementById("infopane").style.width="calc("+100*calcX/window.innerWidth+"% - 30px)";
           document.getElementById("displaypane").style.width="calc("+100*(window.innerWidth-calcX)/window.innerWidth+"% - 10px)";
         }
       }
     </script>
   </head>
   <body onload=init()>
-    <textarea id="editorpane" spellcheck="false"></textarea>
+    <textarea id="editorpane" spellcheck="false" onmouseup=setInputInfo()></textarea>
+    <div id="infopane"></div>
     <div id="buttoncontainer">
       <button onclick=setIt() title="update frame with written code">Update output</button>
       <button onclick=setStandard() title="load convenient HTML template">Load HTML template</button>
