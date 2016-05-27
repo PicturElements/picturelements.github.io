@@ -68,6 +68,8 @@
         display:block;
         position:fixed;
         width:40%;
+        padding-left:15px;
+        padding-right:15px;
         height:70px;
         bottom:0;
         left:0;
@@ -185,7 +187,7 @@
         for (var a=0;a<code.length;a++){
           if (code.charAt(a)=='\n'){lines++;}
         }
-        for (var a=code.length-1;a>0;a--){
+        for (var a=code.length-1;a>=0;a--){
           if (code.charAt(a)=='\n'){lines--;}
           else {break;}
         }
