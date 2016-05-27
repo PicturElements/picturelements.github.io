@@ -68,7 +68,7 @@
         display:block;
         position:fixed;
         width:40%;
-        padding-left:15px;
+        padding-left:5px;
         padding-right:15px;
         height:70px;
         bottom:0;
@@ -183,11 +183,12 @@
       
       function setInputInfo(){
         var code=document.getElementById("editorpane").value;
-        var lines=1;
+        var lines=0;
+        if (code.length>0){lines=1;}
         for (var a=0;a<code.length;a++){
           if (code.charAt(a)=='\n'){lines++;}
         }
-        for (var a=code.length-1;a>=0;a--){
+        for (var a=code.length-1;a>0;a--){
           if (code.charAt(a)=='\n'){lines--;}
           else {break;}
         }
@@ -201,7 +202,7 @@
           if (calcX>window.innerWidth-10){calcX=window.innerWidth-10;}
           document.getElementById("resizebar").style.left="calc("+100*calcX/window.innerWidth+"% - 200px)";
           document.getElementById("editorpane").style.width="calc("+100*calcX/window.innerWidth+"% - 30px)";
-          document.getElementById("infopane").style.width=""+100*calcX/window.innerWidth+"%";
+          document.getElementById("infopane").style.width="calc("+100*calcX/window.innerWidth+"% - 30px)";
           document.getElementById("displaypane").style.width="calc("+100*(window.innerWidth-calcX)/window.innerWidth+"% - 10px)";
         }
       }
