@@ -247,8 +247,25 @@
       }
       
       $("html").on("touchmove", function(e){
-        ptsX[0]=touch.pageX;
+        if (hoverId>-1){
+          var touch=e.originalEvent.touches[0];
+          ptsX[hoverId]=touch.pageX;
+          ptsY[hoverId]=touch.pageY;
+        }
+        paint();
+      });
+      
+      $("html").on("tap", function(e){
+        var touch=e.originalEvent.touches[0];
+        ptsX[0]=;
         ptsY[0]=touch.pageY;
+        hoverId=-1;
+        for (b=0;b<ptsX.length;b++){
+          if (Math.hypot(touch.pageX-ptsX[b],touch.pageY-ptsY[b])<10){
+            hoverId=b;
+            break;
+          }
+        }
         paint();
       });
       
