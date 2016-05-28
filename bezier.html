@@ -126,7 +126,7 @@
         z-index: 1000;
       }
       
-      #sharecontainer{
+      #sharecontainer,#infocontainer{
         display: block;
         position: fixed;
         width: 55%;
@@ -141,6 +141,19 @@
         font-size: 2vw;
         text-align: center;
         line-height: 5.5vw;
+      }
+      
+      #infocontainer{
+        width:70%;
+        left:15%;
+        height:70%;
+        top:15%;
+      }
+      
+      #infocontainer h{
+        font-family:inherit;
+        font-size:2vw;
+        font-weight:700;
       }
       
       #overlay #urlout{
@@ -654,6 +667,9 @@
         Share your Bézier curve!
         <div id="closebtn" onclick=closeShare()>[close]</div>
         <input id="urlout" spellcheck=false></input>
+      </div>
+      <div id="infocontainer">
+        <h>What are Bézier curves?</h>
       </div>
     </div>
   </body>
