@@ -19,9 +19,6 @@
       }
       
       #canvas,body{
-        -webkit-touch-action: none;
-        -moz-touch-action: none;
-        -ie-touch-action: none;
         touch-action: none;
         -webkit-user-drag: none;
         -moz-user-drag: none;
@@ -250,8 +247,8 @@
       }
       
       $("html").on("touchmove", function(e){
-        ptsX[0]=e.pageX;
-        ptsY[0]=e.pageY;
+        ptsX[0]=100;
+        ptsY[0]=100;
         paint();
       });
       
