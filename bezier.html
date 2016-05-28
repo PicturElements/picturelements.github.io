@@ -4,6 +4,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,700" rel="stylesheet" type="text/css">
     <title>Bézier - PicturElements</title>
     <link rel="icon" href="pelement.png">
+    <script src=jQuery.js></script>
     <style>
       body{
         background-color:#eee;
@@ -237,6 +238,11 @@
         document.getElementById("pointsin").value=defaultNo;
         alreadyLoaded=1;
       }
+      
+      $("canvas").on("touchmove", function(e){
+        ptsX[0]=e.clientX;
+        ptsY[0]=e.clientY;
+      });
       
       function toInt(inChar){
         var converted=inChar.charCodeAt(0);
