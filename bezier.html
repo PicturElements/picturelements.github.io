@@ -23,6 +23,8 @@
         -webkit-user-drag: none;
         -moz-user-drag: none;
         -ie-user-drag: none;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        -moz-tap-highlight-color: rgba(0, 0, 0, 0);
       }
       
       #menubar{
@@ -255,7 +257,7 @@
         paint();
       });
       
-      $("html").on("tap", function(e){
+      $("html").on("touchstart", function(e){
         var touch=e.originalEvent.touches[0];
         hoverId=-1;
         for (b=0;b<ptsX.length;b++){
