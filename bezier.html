@@ -161,7 +161,7 @@
       /*Lots and lots of global variables*/
       var nos="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
       var ptsX=[],ptsY=[];
-      var defaultNo=10,hoverId=-1;  //-1=no hover
+      var defaultNo=4,hoverId=-1;  //-1=no hover
       var pressed=0,step=0;
       var diff=0.002,perc=diff,points=1/diff;
       var resultX,resultY,prevX=0,prevY=0,prevWidth,prevHeight;
@@ -216,6 +216,21 @@
           pause();
           setSpeed();
           console.log("width: "+prevWidth+", height:"+prevHeight);
+          if (prevWidth/prevHeight<window.innerWidth/window.innerHeight){
+            var scale=window.innerHeight/prevHeight;
+            var padding=(window.innerWidth-prevWidth*scale)/2;
+            for (a=0;a<ptsX.length;a++){
+              ptsX[a]=Math.floor(padding+ptsX[a]*scale);
+              ptsY[a]=Math.floor(ptsY[a]*scale);
+            }
+          }else{
+            var scale=window.innerWidth/prevWidth;
+            var padding=(window.innerHeight-prevHeight*scale)/2;
+            for (a=0;a<ptsX.length;a++){
+              ptsX[a]=Math.floor(ptsX[a]*scale);
+              ptsY[a]=Math.floor(padding+ptsY[a]*scale);
+            }
+          }
         }
         paint();
         thread=setInterval(setStep,25);
