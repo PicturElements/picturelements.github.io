@@ -247,8 +247,8 @@
       }
       
       $("html").on("touchmove", function(e){
-        ptsX[0]=100;
-        ptsY[0]=100;
+        ptsX[0]=touch.pageX;
+        ptsY[0]=touch.pageY;
         paint();
       });
       
