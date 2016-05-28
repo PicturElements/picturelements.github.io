@@ -174,7 +174,7 @@
       var defaultNo=4,hoverId=-1;  //-1=no hover
       var pressed=0,step=0;
       var diff=0.002,perc=diff,points=1/diff;
-      var resultX,resultY,prevX=0,prevY=0,prevWidth,prevHeight;
+      var resultX,resultY,prevX=0,prevY=0,prevWidth,prevHeight,tapX=-100,tapY=-100;
       var alreadyLoaded=0;
       var thread;
       var ctx;
@@ -261,11 +261,19 @@
         var touch=e.originalEvent.touches[0];
         hoverId=-1;
         for (b=0;b<ptsX.length;b++){
-          if (Math.hypot(touch.pageX-ptsX[b],touch.pageY-ptsY[b])<10){
+          if (Math.hypot(touch.pageX-ptsX[b],touch.pageY-ptsY[b])<20){
             hoverId=b;
             break;
           }
         }
+        paint();
+      });
+      
+      $("html").on("tap", function(e){
+        var touch=e.originalEvent.touches[0];
+        tapX=touch.pageX;
+        tapY=touch.pageY;
+        press(1,1);
         paint();
       });
       
@@ -299,10 +307,21 @@
         basicSetup();
       };
       
-      function press(inId){
+      function press(inId,type){
         pressed=inId;
         if (inId==1){
-          var tmX=event.clientX,tmY=event.clientY;
+          var tmX,tmY;
+          if (type==0){
+            tmX=event.clientX;
+            tmY=event.clientY;
+          }else{
+            tmX=tapX;
+            tmY=tapY;
+            if (Math.hypot(prevX-tmX,prevY-tmpY)<20){
+              prevX=tmX;
+              prevY=tmY;
+            }
+          }
           if (prevX==tmX&&prevY==tmY){
             var onpoint=-1;
             for (a=0;a<ptsX.length;a++){
@@ -606,7 +625,7 @@
   </head>
   <body id="body" onload=init()>
     <div id="desc">Cick and drag points to modify the curve. Double click to add/remove points; click on thick gray line to add point between two points.</div>
-    <canvas id="canvas" style="position:absolute" onmousedown=press(1) onmousemove=setHover(event) onmouseup=press(0)></canvas>
+    <canvas id="canvas" style="position:absolute" onmousedown=press(1,0) onmousemove=setHover(event) onmouseup=press(0,0)></canvas>
     <div id="menubar">
       <div class="btn" onclick=pause()></div>
       <div class="btn" style="background-position:2px -50px; height:0; transition:200ms; margin-top:0;" onclick=stepper(2)></div>
