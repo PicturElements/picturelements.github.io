@@ -18,6 +18,14 @@
         user-select: none;    
       }
       
+      #canvas{
+        touch-action: none;
+        -webkit-user-drag: none;
+        -moz-user-drag: none;
+        -ie-user-drag: none;
+        user-drag: none;
+      }
+      
       #menubar{
         display:block;
         position:fixed;
@@ -239,7 +247,7 @@
         alreadyLoaded=1;
       }
       
-      $("canvas").on("touchmove", function(e){
+      $("html").on("touchmove", function(e){
         ptsX[0]=e.clientX;
         ptsY[0]=e.clientY;
         paint();
