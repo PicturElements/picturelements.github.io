@@ -19,7 +19,7 @@
       }
       
       #canvas,body,html{
-        touch-action: none;
+        /*touch-action: none;*/
         -webkit-user-drag: none;
         -moz-user-drag: none;
         -ie-user-drag: none;
@@ -257,6 +257,14 @@
         paint();
       });
       
+      $("html").on("tap", function(e){
+        var touch=e.originalEvent.touches[0];
+        tapX=touch.pageX;
+        tapY=touch.pageY;
+        press(1,1);
+        paint();
+      });
+      
       $("html").on("touchstart", function(e){
         var touch=e.originalEvent.touches[0];
         hoverId=-1;
@@ -266,14 +274,6 @@
             break;
           }
         }
-        paint();
-      });
-      
-      $("html").on("tap", function(e){
-        var touch=e.originalEvent.touches[0];
-        tapX=touch.pageX;
-        tapY=touch.pageY;
-        press(1,1);
         paint();
       });
       
