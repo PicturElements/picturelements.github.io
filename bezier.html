@@ -227,6 +227,14 @@
         margin-left: -1vw;
       }
       
+      #bezimages{
+        display:block;
+        position:absolute;
+        width:100%;
+        background-image:url(images/chromeBez.png);
+        background-size:contain;
+      }
+      
       #overlay #urlout{
         display: block;
         position: absolute;
@@ -747,7 +755,7 @@
         <div id="inner">
           <h>What are Bézier curves?</h>
           <p>Bézier curves are used in many applications. They were first used to plot curves by Pierre Bézier in 1962, using them to model automotive bodies. In design, these curves are often used to greate so-called vector graphics; images that can be scaled without loss in quality, as opposed by raster graphics where pixels become visible if the image is scaled up.</p>
-          <p>A second application can be found in your browser. Sure, many browsers are capable of creating and displaying SVG (Scalable Vector Graphics) images, but the curves are more basic than that. Almost every animation/transition utilizes a Bézier curve for timing You may want your animation to start slow, then accelerate, then slow down. You bet there's a Bézier curve for that! Below are some examples of Bézier curve animations and their CSS code:</p>
+          <p>A second application can be found in your browser. Sure, many browsers are capable of creating and displaying SVG (Scalable Vector Graphics) images, but the curves are more basic and subtle than that. Almost every animation/transition utilizes a Bézier curve for timing. You may want your animation to start slow, then accelerate, then slow down. You bet there's a Bézier curve for that! Below are some examples of Bézier curve animations and their CSS code:</p>
           <div id="bezierdisplay">
             <div id="sliderbar"></div>
             <div id="slider" style="animation: oscillate 4s alternate cubic-bezier(1,1,0,0) infinite"></div>
@@ -760,14 +768,11 @@
           </div>
           <div id="bezierdisplay">
             <div id="sliderbar"></div>
-            <div id="slider" style="animation: oscillate 4s alternate cubic-bezier(0.31, 1.09, 0.57, 0.05) infinite"></div>
-            <p>cubic-bezier(0.31, 1.09, 0.57, 0.05)</p>
-          </div>
-          <div id="bezierdisplay">
-            <div id="sliderbar"></div>
             <div id="slider" style="animation: oscillate 4s alternate cubic-bezier(0.43, 1.63, 0.71, -0.59) infinite"></div>
             <p>cubic-bezier(0.43, 1.63, 0.71, -0.59)</p>
           </div>
+          <div id="bezimages"></div>
+          <p>These are just a few of many possible Bézier animation curves. In the figure to the right, we see how it all works. On the x-axis, time, the value of x is defined as the time the animation has run out of the time it is set to run. The value of y (the value of the curve for x) specifies the position, in this case, of the purple dot. In curve 1, we see that the value of y is always the same as x, but int curve 2 it moves a little in the start, relative to the diagonal, then speeds up and slows down as the value of y changes less and less per every new x.</p>
         </div>
       </div>
     </div>
