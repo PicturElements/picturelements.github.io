@@ -257,11 +257,19 @@
         paint();
       });
       
-      $("html").on("tap", function(e){
+      /*$("html").on("tap", function(e){
         var touch=e.originalEvent.touches[0];
         tapX=touch.pageX;
         tapY=touch.pageY;
+        press(1,1);
         paint();
+      });*/
+      
+      $("html").on("taphold", function(e){
+        var touch=e.originalEvent.touches[0];
+        tapX=touch.pageX;
+        tapY=touch.pageY;
+        press(1,1);
       });
       
       $("html").on("touchstart", function(e){
@@ -316,10 +324,12 @@
           }else{
             tmX=tapX;
             tmY=tapY;
-            if (Math.hypot(prevX-tmX,prevY-tmpY)<50){
+            prevX=tapX;
+            prevY=tapY;
+            /*if (Math.hypot(prevX-tmX,prevY-tmpY)<50){
               prevX=tmX;
               prevY=tmY;
-            }
+            }*/
           }
           if (prevX==tmX&&prevY==tmY){
             var onpoint=-1;
