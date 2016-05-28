@@ -747,7 +747,12 @@
         <div id="inner">
           <h>What are Bézier curves?</h>
           <p>Bézier curves are used in many applications. They were first used to plot curves by Pierre Bézier in 1962, using them to model automotive bodies. In design, these curves are often used to greate so-called vector graphics; images that can be scaled without loss in quality, as opposed by raster graphics where pixels become visible if the image is scaled up.</p>
-          <p>A second application can be found in your browser. Sure, many browsers are capable of creating and displaying SVG (Scalable Vector Graphics) images, but the curves are more basic than that. Almost every animation/transition utilizes a Bézier curve for timing You may want your animation to start slow, then accelerate, then slow down. You bet there's a Bézier curve for that!</p>
+          <p>A second application can be found in your browser. Sure, many browsers are capable of creating and displaying SVG (Scalable Vector Graphics) images, but the curves are more basic than that. Almost every animation/transition utilizes a Bézier curve for timing You may want your animation to start slow, then accelerate, then slow down. You bet there's a Bézier curve for that! Below are some examples of Bézier curve animations and their CSS code:</p>
+          <div id="bezierdisplay">
+            <div id="sliderbar"></div>
+            <div id="slider" style="animation: oscillate 4s alternate cubic-bezier(1,1,0,0) infinite"></div>
+            <p>cubic-bezier(1, 1, 0, 0)</p>
+          </div>
           <div id="bezierdisplay">
             <div id="sliderbar"></div>
             <div id="slider" style="animation: oscillate 4s alternate cubic-bezier(0.54, 0.01, 0.46, 0.99) infinite"></div>
