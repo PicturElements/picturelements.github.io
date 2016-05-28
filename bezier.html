@@ -200,6 +200,31 @@
         bottom:0.5vw;
         left:0.5vw;
         text-align:left;
+        margin-bottom:0;
+      }
+      
+      #sliderbar{
+        display:block;
+        position:absolute;
+        width:80%;
+        height:0.5vw;
+        left:10%;
+        top:2.5vw;
+        margin-top:-0.25vw;
+        background-color:#555;
+      }
+      
+      #slider{
+        display:block;
+        position:absolute;
+        width:2vw;
+        height:2vw;
+        border-radius:1vw;
+        background-color:606;
+        left:10%;
+        margin-top:-1vw;
+        margin-left:-1vw;
+        animation:oscillate 2s alternate infinite;
       }
       
       #overlay #urlout{
@@ -224,6 +249,10 @@
         top: 0.5vw;
         line-height: 1.5vw;
         cursor: pointer;
+      }
+      
+      @keyframes oscillate{
+        to{left:90%;}
       }
     </style>
     <script>
@@ -720,6 +749,8 @@
           <p>Bézier curves are used in many applications. They were first used to plot curves by Pierre Bézier in 1962, using them to model automotive bodies. In design, these curves are often used to greate so-called vector graphics; images that can be scaled without loss in quality, as opposed by raster graphics where pixels become visible if the image is scaled up.</p>
           <p>A second application can be found in your browser. Sure, many browsers are capable of creating and displaying SVG (Scalable Vector Graphics) images, but the curves are more basic than that. Almost every animation/transition utilizes a Bézier curve for timing You may want your animation to start slow, then accelerate, then slow down. You bet there's a Bézier curve for that!</p>
           <div id="bezierdisplay">
+            <div id="sliderbar"></div>
+            <div id="slider"></div>
             <p>cubic-bezier(0.25, 0.1, 0.49, 0.59)</p>
           </div>
         </div>
