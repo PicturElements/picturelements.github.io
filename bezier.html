@@ -148,9 +148,23 @@
         left:15%;
         height:70%;
         top:15%;
+        margin-top:0;
       }
       
-      #infocontainer h{
+      #inner{
+        display:block;
+        position:absolute;
+        font-family:inherit;
+        width:calc(100% - 6vw);
+        height:calc(100% - 6vw);
+        top:3vw;
+        left:3vw;
+        background-color:#eee;
+        overflow-x:hidden;
+        overflow-y:scroll;
+      }
+      
+      #inner h{
         font-family:inherit;
         font-size:2vw;
         font-weight:700;
@@ -669,7 +683,9 @@
         <input id="urlout" spellcheck=false></input>
       </div>
       <div id="infocontainer">
-        <h>What are Bézier curves?</h>
+        <div id="inner">
+          <h>What are Bézier curves?</h>
+        </div>
       </div>
     </div>
   </body>
