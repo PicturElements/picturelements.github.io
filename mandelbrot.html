@@ -19,7 +19,7 @@
       }
     </style>
     <script>
-      var xOff=100,yOff=0,zoom=2;
+      var xOff=200,yOff=0,zoom=2;
       var width=window.innerWidth,height=window.innerHeight;
       var iterations=50;
       var a,b,a2,b2;
@@ -35,8 +35,8 @@
         pixels=[];
         for (var h=0;h<height;h++){
           for (var w=0;w<width;w++){
-            a=(w-width/2-xOff)/(height/zoom);
-            b=(h-height/2-yOff)/(height/zoom);
+            a=(w-width/2-xOff)/(width/zoom);
+            b=(h-width/2-yOff)/(width/zoom);
             a2=a;
             b2=b;
             pixels.push(generateIndividual());
@@ -48,7 +48,7 @@
       function generateIndividual(){
         var aTmp;
         for (var i=0;i<iterations;i++){
-          if (Math.hypot(a2,b2)>=2){
+          if (a2*a2+b2*b2>=4){
             return i;
           }
           aTmp=a2;
@@ -59,11 +59,16 @@
       }
       
       function paint(){
+        var shade;
         var ctx=document.getElementById("mandelcanvas").getContext("2d");
-        ctx.fillStyle="black";
         for (var h=0;h<height;h++){
           for (var w=0;w<width;w++){
             if (pixels[h*width+w]==-1){
+              ctx.fillStyle="black";
+              ctx.fillRect(w,h,1,1);
+            }else{
+              shade=Math.floor((iterations-pixels[h*width+w])/iterations*255);
+              ctx.fillStyle="rgb("+shade+","+shade+","+shade+")";
               ctx.fillRect(w,h,1,1);
             }
           }
