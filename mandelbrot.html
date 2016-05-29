@@ -19,7 +19,7 @@
       }
     </style>
     <script>
-      var xOff=200,yOff=0,zoom=2;
+      var xOff=200,yOff=0,zoom=3;
       var width=window.innerWidth,height=window.innerHeight;
       var iterations=50;
       var a,b,a2,b2;
@@ -36,7 +36,7 @@
         for (var h=0;h<height;h++){
           for (var w=0;w<width;w++){
             a=(w-width/2-xOff)/(width/zoom);
-            b=(h-width/2-yOff)/(width/zoom);
+            b=(h-height/2-yOff)/(width/zoom);
             a2=a;
             b2=b;
             pixels.push(generateIndividual());
