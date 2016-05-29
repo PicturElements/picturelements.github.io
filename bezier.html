@@ -27,6 +27,31 @@
         -moz-tap-highlight-color: rgba(0, 0, 0, 0);
       }
       
+      #infobtn{
+        display: block;
+        position: fixed;
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        top: 5px;
+        right: 5px;
+        background-color: #bbb;
+        font-family: monospace;
+        color: white;
+        font-size: 60px;
+        font-weight: bold;
+        text-align: center;
+        overflow: hidden;
+        cursor: pointer;
+        pointer-events: auto;
+        z-index: 100;
+      }
+      
+      #infobtn:hover{
+        background-color:#999;
+        color:#eee;
+      }
+      
       #menubar{
         display:block;
         position:fixed;
@@ -739,6 +764,11 @@
         document.getElementById("urlout").select();
       }
       
+      function displayInfo(){
+        document.getElementById("overlay").style.display="block";
+        document.getElementById("infocontainer").style.display="block";
+      }
+      
       function closePopups(inId){
         document.getElementById("overlay").style.display="none";
         if (inId==0){
@@ -754,6 +784,7 @@
     </script>
   </head>
   <body id="body" onload=init()>
+    <div id="infobtn" onclick=displayInfo()>i</div>
     <div id="desc">Cick and drag points to modify the curve. Double click to add/remove points; click on thick gray line to add point between two points.</div>
     <canvas id="canvas" style="position:absolute" onmousedown=press(1,0) onmousemove=setHover(event) onmouseup=press(0,0)></canvas>
     <div id="menubar">
