@@ -799,7 +799,7 @@
         position:relative;
         width:95%;
         left:2.5%;
-        height:34.4vw;
+        height:25vw;
         background-color:#ccc;
       }
       
@@ -808,6 +808,23 @@
         position:absolute;
         width:100%;
         height:100%;
+      }
+      
+      #testbutton{
+        display:block;
+        position:absolute;
+        bottom:0.5vw;
+        left:0.5vw;
+        font-family:monospace;
+        font-size:1.5vw;
+        color:white;
+        background-color:#606;
+        padding:0.5vw;
+        border-radius:0.25vw;
+      }
+      
+      #testbutton:hover{
+        background-color:#505; 
       }
     </style>
     <script>
@@ -868,6 +885,7 @@
           <p>They might seem difficult to plot, but Bézier curves work on fairly simple principles. It's all about dividing lines and placing points. Try this interactive little thing to understand how it all works:</p>
           <div id="canvascontainer">
             <canvas id="testcanvas"></canvas>
+            <div id="testbtn">Add lines</div>
           </div>
         </div>
       </div>
