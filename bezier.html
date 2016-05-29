@@ -744,10 +744,12 @@
         if (key==13){
           confirm();
           setPoints(document.getElementsByClassName("btn")[6]);
+          collapsed=1;
           slide(0);
         }else if(key==27){
           collapse();
           setPoints(document.getElementsByClassName("btn")[6]);
+          collapsed=1;
           slide(0);
         }
       }
