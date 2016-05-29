@@ -39,7 +39,7 @@
             b=(h-height/2)/height*zoom;
             a2=a;
             b2=b;
-            pixels.push(generateIndividual(a,b));
+            pixels.push(generateIndividual());
           }
         }
         paint();
@@ -53,7 +53,7 @@
           }
           aTmp=a2;
           a2=a2*a2-b2*b2+a;
-          b2=aTmp*b2+b2*a2+b;
+          b2=aTmp*b2+b2*aTmp+b;
         }
         return -1;
       }
