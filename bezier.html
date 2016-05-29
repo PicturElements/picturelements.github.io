@@ -227,7 +227,7 @@
         margin-left: -1vw;
       }
       
-      #bezimages{
+      #bezimages,#beziergif{
         display: block;
         position: relative;
         width: 100%;
@@ -235,6 +235,13 @@
         background-image: url(images/chromeBez.png);
         background-size: contain;
         background-repeat: no-repeat;
+      }
+      
+      #beziergif{
+        right:0;
+        width:25%;
+        margin-top:-20vw;
+        background-image:url(images/bezierMove.gif);
       }
       
       #overlay #urlout{
@@ -775,7 +782,8 @@
           </div>
           <p>Here are the functions (Bézier curves) describing these three animations:</p>
           <div id="bezimages"></div>
-          <p>These are just a few of many possible Bézier animation curves. In the figure to the right, we see how it all works. On the x-axis, time, the value of x is defined as the time the animation has run out of the time it is set to run. The value of y (the value of the curve for x) specifies the position, in this case, of the purple dot. In fact, the gray line is the y axis and the dot the result of the function for each value x. In curve 1, we see that the value of y is always the same as x, and the dot moves ata constant rate, but in curve 2 it moves a little at the start, relative to the diagonal, then speeds up and slows down as the value of y changes less and less per every new, higher, value x.</p>
+          <div id="beziergif"></div>
+          <p>These are just a few of many possible Bézier animation curves. In the figure to the right, we see how it all works. On the x-axis, time, the value of x is defined as such: The leftmost side marks the start of the animation, and the rightmost the end, with x changing value smoothly during this time. The value of y (the value of the curve at a certain value of x) specifies how far the animation has run. In fact, the gray line is the y axis and the dot marks exactly how far the animation has run. In curve 1, we see that the value of y is always the same as x, and the dot moves at a constant rate, but in curve 2 it moves a little at the start, then speeds up and slows down as the value of y changes less and less per every new, higher, value x.</p>
         </div>
       </div>
     </div>
