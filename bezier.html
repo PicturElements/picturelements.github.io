@@ -127,7 +127,7 @@
       }
       
       #sharecontainer,#infocontainer{
-        display: block;
+        display: none;
         position: fixed;
         width: 55%;
         left: 22.5%;
@@ -149,6 +149,9 @@
         height:70%;
         top:15%;
         margin-top:0;
+        -webkit-user-select: auto;
+        -moz-user-select: auto;
+        -ie-user-select: auto;
       }
       
       #inner{
@@ -732,11 +735,17 @@
         }
         document.getElementById("urlout").value="http://picturelements.github.io/bezier?id="+encoded+"&w="+window.innerWidth+"&h="+window.innerHeight+"&s="+paused+""+lines+""+(speed%3);
         document.getElementById("overlay").style.display="block";
+        document.getElementById("sharecontainer").style.display="block";
         document.getElementById("urlout").select();
       }
       
-      function closeShare(){
+      function closePopups(inId){
         document.getElementById("overlay").style.display="none";
+        if (inId==0){
+          document.getElementById("sharecontainer").style.display="none";
+        }else{
+          document.getElementById("infocontainer").style.display="none";
+        }
       }
       
       function intToChar(no){
@@ -764,10 +773,11 @@
     <div id="overlay">
       <div id="sharecontainer">
         Share your Bézier curve!
-        <div id="closebtn" onclick=closeShare()>[close]</div>
+        <div id="closebtn" onclick=closePopups(0)>[close]</div>
         <input id="urlout" spellcheck=false></input>
       </div>
       <div id="infocontainer">
+        <div id="closebtn" onclick=closePopups(1)>[close]</div>
         <div id="inner">
           <h>What are Bézier curves?</h>
           <p>Bézier curves are used in many applications. They were first used to plot curves by Pierre Bézier in 1962, using them to model automotive bodies. In design, these curves are often used to greate so-called vector graphics; images that can be scaled without loss in quality, as opposed by raster graphics where pixels become visible if the image is scaled up.</p>
