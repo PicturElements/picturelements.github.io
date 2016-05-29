@@ -10,10 +10,68 @@
         background-color:white;
         margin:0;
       }
+      
+      #mandelcanvas{
+        display:block;
+        position:absolute;
+        width:100%;
+        height:100%;
+      }
     </style>
-    <script></script>
+    <script>
+      var xPos,yPos,zoom=1;
+      var width=window.innerWidth,height=window.innerHeight;
+      var iterations=50;
+      var a,b,a2,b2;
+      var pixels=[];
+      
+      function init(){
+        document.getElementById("mandelcanvas").width=width;
+        document.getElementById("mandelcanvas").height=height;
+        generate();
+      }
+      
+      function generate(){
+        pixels=[];
+        for (var h=0;h<height;h++){
+          for (var w=0;w<width;w++){
+            a=w-width/2;
+            b=h-height/2;
+            a2=a;
+            b2=b;
+            pixels.push(generateIndividual(a,b));
+          }
+        }
+        paint();
+      }
+      
+      function generateIndividual(re,im){
+        var aTmp;
+        for (var i=0;i<iterations;i++){
+          if (Math.hypot(a2,b2)>=2){
+            return i;
+          }
+          aTmp=a2;
+          a2=a2*re-b2*im+a;
+          b2=aTmp*im+b2*re+b;
+        }
+        return -1;
+      }
+      
+      function paint(){
+        var ctx=document.getElementById("canvas").getContext("2d");
+        ctx.fillStyle="black";
+        for (var h=0;h<height;h++){
+          for (var w=0;w<width;w++){
+            if (pixels[h*width+w]==-1){
+              ctx.fillRect(w,h,1,1);
+            }
+          }
+        }
+      }
+    </script>
   </head>
-  <body>
-    <canvas></canvas>
+  <body onload=init()>
+    <canvas id="mandelcanvas"></canvas>
   </body>
 </html>
