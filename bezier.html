@@ -705,7 +705,7 @@
       
       function setPoints(x){
         if (collapsed2==1){
-          slide(70);
+          if (collapsed==0){slide(70);}
           x.style.width="154px";
           var inp=document.getElementById("pointsin");
           inp.style.pointerEvents="auto";
