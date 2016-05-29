@@ -164,10 +164,17 @@
         overflow-y:scroll;
       }
       
-      #inner h{
+      #inner h,#inner h2{
         font-family:inherit;
         font-size:2vw;
         font-weight:700;
+      }
+      
+      #inner h2{
+        border-top: 1px solid #ddd;
+        width: 90%;
+        margin-left: 5%;
+        margin-top:3vw;
       }
       
       #inner p{
@@ -784,7 +791,7 @@
           <div id="bezimages"></div>
           <div id="beziergif"></div>
           <p>These are just a few of many possible Bézier animation curves. In the figure to the right, we see how it all works. On the x-axis, time, the value of x is defined as such: The leftmost side marks the start of the animation, and the rightmost the end, with x changing value smoothly during this time. The value of y (the value of the curve at a certain value of x) specifies how far the animation has run. In fact, the gray lines in the three animations above are y axes and the dots mark exactly how far the animations have run. In curve 1, we see that the value of y is always the same as x, and the dot moves at a constant rate, but in curve 2 it moves a little at the start, then speeds up and slows down as the value of y changes less and less per every new, higher, value x.</p>
-          <h>How are these curves constructed?</h>
+          <h2>How are these curves constructed?</h2>
           <p>They might seem difficult to plot, but Bézier curves work on fairly simple principles. It's all about dividing lines and placing points.</p>
         </div>
       </div>
