@@ -30,9 +30,9 @@
       #infobtn{
         display: block;
         position: fixed;
-        width: 50px;
-        height: 50px;
-        border: 4px solid white;
+        width: 40px;
+        height: 40px;
+        border: 3px solid white;
         border-radius: 30px;
         box-shadow: 0 0 10px rgba(0,0,0,0.2);
         top: 10px;
@@ -40,7 +40,7 @@
         background-color: #bbb;
         font-family: monospace;
         color: white;
-        font-size: 60px;
+        font-size: 50px;
         font-weight: bold;
         text-align: center;
         overflow: hidden;
@@ -297,11 +297,11 @@
       #closebtn{
         display: block;
         position: absolute;
-        font-size: 1vw;
+        font-size: 1.3vw;
         color: #555;
         font-weight: 300;
         right: 0.7vw;
-        top: 0.5vw;
+        top: 0.7vw;
         line-height: 1.5vw;
         cursor: pointer;
       }
@@ -693,13 +693,14 @@
         document.getElementsByClassName("btn")[5].style.backgroundPositionX=""+(-50*(speed%3))+"px";
       }
       
-      function slide(){
+      function slide(offs){
         collapsed=Math.abs(collapsed-1);
         if (paused==1){
-          document.getElementById("menubar").style.marginTop=""+(-430*collapsed)+"px";
+          document.getElementById("menubar").style.marginTop=""+(-430*collapsed+offs)+"px";
         }else{
-          document.getElementById("menubar").style.marginTop=""+(-310*collapsed)+"px";
+          document.getElementById("menubar").style.marginTop=""+(-310*collapsed+offs)+"px";
         }
+        document.getElementsByClassName("btn")[6].style.width="50px";
       }
       
       function setPoints(x){
@@ -709,6 +710,7 @@
           inp.style.pointerEvents="auto";
           inp.style.backgroundColor="white";
           inp.focus();
+          slide(60);
         }else{
           x.style.width="50px";
           collapsed2=1;
@@ -741,9 +743,11 @@
         if (key==13){
           confirm();
           setPoints(document.getElementsByClassName("btn")[6]);
+          slide(0);
         }else if(key==27){
           collapse();
           setPoints(document.getElementsByClassName("btn")[6]);
+          slide(0);
         }
       }
       
@@ -802,7 +806,7 @@
         <div id="inputbtn" title="set points" style="margin-left:50px" onclick=confirm()>OK</div>
         <div id="inputbtn" title="cancel" style="margin-left:102px" onclick=collapse()>C</div>
       </div>
-      <div id="nub" onclick=slide()>=</div>
+      <div id="nub" onclick=slide(0)>=</div>
     </div>
     <div id="overlay">
       <div id="sharecontainer">
