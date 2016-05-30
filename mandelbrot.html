@@ -7,8 +7,12 @@
     
     <style>
       body{
-        background-color:white;
-        margin:0;
+        display: block;
+        position: fixed;
+        background-color: white;
+        margin: 0;
+        height: 100%;
+        width: 100%;
       }
       
       #mandelcanvas,#overlaycanvas{
@@ -20,8 +24,7 @@
       
       input{
         display:block;
-        position:relative;
-        float:left;
+        position:absolute;
         left:1vw;
         bottom:1vw;
         width:8vw;
@@ -40,7 +43,7 @@
         width:5vw;
         height:2vw;
         bottom:1vw;
-        left:28vw;
+        left:29vw;
       }
     </style>
     <script>
@@ -156,9 +159,9 @@
   <body onload=init()>
     <canvas id="mandelcanvas"></canvas>
     <canvas id="overlaycanvas" onmousedown=press(1) onmousemove=drawRect() onmouseup=press(0)></canvas>
-    <input id="iterations"></input>
-    <input id="xOff"></input>
-    <input id="yOff"></input>
+    <input id="iterations">50</input>
+    <input id="xOff" style="left:10vw">200</input>
+    <input id="yOff" style="left:19vw">0</input>
     <button id="generate" onclick=setStuff()>Generate</button>
   </body>
 </html>
