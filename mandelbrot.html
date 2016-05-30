@@ -79,6 +79,23 @@
         height:100%;
         background-color:rgba(0,0,0,0.7);
       }
+      
+      #sharepanel,#functionpanel{
+        display: none;
+        position: fixed;
+        width: 55%;
+        left: 22.5%;
+        height: 10vw;
+        top: 50%;
+        margin-top: -5vw;
+        background-color: white;
+        border-radius: 0.3vw;
+        font-family: Roboto,Arial,sans-serif;
+        font-weight: 700;
+        font-size: 2vw;
+        text-align: center;
+        line-height: 5.5vw;
+      }
     </style>
     <script>
       var xOff=200,yOff=0,zoom=3;
@@ -171,6 +188,12 @@
         document.getElementById("functionpanel").display="block";
       }
       
+      function getUrl(){
+        document.getElementById("overlay").display="block";
+        document.getElementById("sharepanel").display="block";
+        document.getElementById("urlout").select;
+      }
+      
       function paint(){
         var shade;
         var ctx=document.getElementById("mandelcanvas").getContext("2d");
@@ -201,6 +224,15 @@
           ctx2.stroke();
         }
       }
+      
+      function closePopups(inId){
+        document.getElementById("overlay").style.display="none";
+        if (inId==0){
+          document.getElementById("functionpanel").style.display="none";
+        }else{
+          document.getElementById("sharepanel").style.display="none";
+        }
+      }
     </script>
   </head>
   <body onload=init()>
@@ -217,7 +249,14 @@
     </div>
     <div id="overlay">
       <div id="functionpanel">
-        
+        Modify Mandelbrot/Julia set functions
+        <div id="closebtn" onclick="closePopups(0)">[close]</div>
+        <input id="functionin" value="z^2+c" spellcheck="false">
+      </div>
+      <div id="sharepanel">
+        Share you Mandelbrot/Julia set!
+        <div id="closebtn" onclick="closePopups(1)">[close]</div>
+        <input id="urlout" value="z^2+c" spellcheck="false">
       </div>
     </div>
   </body>
