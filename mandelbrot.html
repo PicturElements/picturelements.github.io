@@ -40,15 +40,25 @@
       button{
         display: block;
         position: fixed;
-        width: 5vw;
-        height: 2.3vw;
+        width: 9vw;
+        height: 2.5vw;
         bottom: 1vw;
-        left: 28vw;
+        left: 37vw;
         cursor: pointer;
+        font-size: 1.5vw;
+        font-weight: bold;
+        border: none;
+        background-color: #999;
+        color: #eee;
+      }
+      
+      button:hover{
+        background-color:#888;
+        color:#ddd;
       }
     </style>
     <script>
-      var xOff=200,yOff=0,zoom=4;
+      var xOff=200,yOff=0,zoom=3;
       var xOrig,yOrig,xRes,yRes,pressed=0;
       var width=window.innerWidth,height=window.innerHeight;
       var iterations=50;
@@ -121,9 +131,11 @@
         iterations=parseInt(document.getElementById("iterations").value);
         xOff=parseFloat(document.getElementById("xOff").value);
         yOff=parseFloat(document.getElementById("yOff").value);
+        zoom=parseFloat(document.getElementById("zoom").value);
         if (iterations==null||iterations==undefined){iterations=0;}
         else if (xOff==null||xOff==undefined){xOff=0;}
         else if (yOff==null||yOff==undefined){yOff=0;}
+        else if (zoom==null||zoom==undefined){yOff=0;}
         scan=0;
         mainGenerate();
       }
@@ -166,6 +178,7 @@
     <input id="iterations" value="50"></input>
     <input id="xOff" style="left:10vw" value="200"></input>
     <input id="yOff" style="left:19vw"value="0"></input>
+    <input id="zoom" style="left:28vw"value="3"></input>
     <button id="generate" onclick=setStuff()>Generate</button>
   </body>
 </html>
