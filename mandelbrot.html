@@ -130,7 +130,7 @@
       var a,b,a2,b2;
       var pixels=[];
       var scan=0,thread=null;
-      var power=2,julA,julB,tmpPow,tmpJA,tmpJB,isMandel=1,tmpIsMandel;
+      var power=2,julA,julB,tmpPow,tmpJA,tmpJB,isMandel=1,tmpIsMandel=1;
       
       function init(){
         var canvas=document.getElementById("mandelcanvas");
@@ -276,7 +276,7 @@
         if (tmpIsMandel==1||tmpJA==0&&tmpJB==0){
           document.getElementById("funcout").innerHTML="Function: z^"+tmpPow+"+c (Mandelbrot set)";
         }else{
-          document.getElementById("funcout").innerHTML="Function: z^"+tmpPow+""+tA+""+tB+"i (Mandelbrot set)";
+          document.getElementById("funcout").innerHTML="Function: z^"+tmpPow+""+tA+""+tB+"i (Julia set)";
         }
       }
       
