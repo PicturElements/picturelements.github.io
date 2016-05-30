@@ -170,6 +170,7 @@
           }
         }
         paint();
+        paint2();
         scan+=10;
       }
       
@@ -330,6 +331,12 @@
         if (pressed==1){
           ctx2.beginPath();
           ctx2.rect(xOrig,yOrig,xRes-xOrig,yRes-yOrig);
+          ctx2.stroke();
+        }
+        if (thread!=null){
+          ctx2.beginPath();
+          ctx2.moveTo(0,scan);
+          ctx2.lineTo(window.innerWidth,scan);
           ctx2.stroke();
         }
       }
