@@ -29,12 +29,14 @@
       function init(){
         document.getElementById("mandelcanvas").width=width;
         document.getElementById("mandelcanvas").height=height;
+        document.getElementById("mandelcanvas").style.width=width;
+        document.getElementById("mandelcanvas").style.height=height;
         mainGenerate();
       }
       
       function mainGenerate(){
         pixels=[];
-        setInterval(generate,10);   //set a low refresh time, let computer calculate as fast as it can.
+        setInterval(generate,10);   //set a low refresh time, let computer calculate as fast as it can. You go, little man!
       }
       
       function generate(){
