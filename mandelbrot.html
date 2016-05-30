@@ -88,8 +88,8 @@
       function generate(){
         for (var h=scan;h<scan+10;h++){
           for (var w=0;w<width;w++){
-            a=(w-width/2-xOff)/(height/zoom);
-            b=(h-height/2-yOff)/(height/zoom);
+            a=(w-width/2-xOff/zoom)/(height/zoom);
+            b=(h-height/2-yOff/zoom)/(height/zoom);
             a2=a;
             b2=b;
             pixels.push(generateIndividual());
