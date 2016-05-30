@@ -11,7 +11,7 @@
         margin:0;
       }
       
-      #mandelcanvas{
+      #mandelcanvas,#overlaycanvas{
         display:block;
         position:absolute;
         width:100%;
@@ -20,6 +20,7 @@
     </style>
     <script>
       var xOff=200,yOff=0,zoom=3;
+      var xOrig,yOrig,xRes,yRes,pressed=0;
       var width=window.innerWidth,height=window.innerHeight;
       var iterations=50;
       var a,b,a2,b2;
@@ -32,6 +33,11 @@
         canvas.height=height;
         canvas.style.width=""+width+"px";
         canvas.style.height=""+height+"px";
+        var canvas2=document.getElementById("overlaycanvas");
+        canvas2.width=width;
+        canvas2.height=height;
+        canvas2.style.width=""+width+"px";
+        canvas2.style.height=""+height+"px";
         mainGenerate();
       }
       
@@ -67,6 +73,21 @@
         return -1;
       }
       
+      function press(inId){
+        pressed=inId;
+        if (pressed==1){
+          xOrig=event.clientX;
+          yOrig=event.clientY;
+        }
+        paint2();
+      }
+      
+      function drawRect(){
+        xRes=event.clientX;
+        yRes=event.clientY;
+        paint2();
+      }
+      
       function paint(){
         var shade;
         var ctx=document.getElementById("mandelcanvas").getContext("2d");
@@ -83,9 +104,20 @@
           }
         }
       }
+      
+      function paint2(){
+        var ctx2=document.getElementById("overlaycanvas").getContext("2d");
+        ctx2.clearRect(0,0,10000,10000);
+        ctx2.strokeStyle="red";
+        if (pressed==1){
+          ctx2.rect(xOrig,yOrig,xRes,yRes);
+          ctx2.stroke();
+        }
+      }
     </script>
   </head>
   <body onload=init()>
     <canvas id="mandelcanvas"></canvas>
+    <canvas id="overlaycanvas" onmousedown=press(1) onmousemove=drawRect() onmouseup=press(0)></canvas>
   </body>
 </html>
