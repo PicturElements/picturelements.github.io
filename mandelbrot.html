@@ -120,7 +120,10 @@
       function setStuff(){
         iterations=parseInt(document.getElementById("iterations").value);
         xOff=parseFloat(document.getElementById("xOff").value);
-        yoff=parseFloat(document.getElementById("yOff").value);
+        yOff=parseFloat(document.getElementById("yOff").value);
+        if (iterations==null||iterations==undefined){iterations=0;}
+        else if (xOff==null||xOff==undefined){xOff=0;}
+        else if (yOff==null||yOff==undefined){yOff=0;}
         scan=0;
         mainGenerate();
       }
