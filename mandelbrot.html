@@ -38,12 +38,13 @@
       }
       
       button{
-        display:block;
-        position:fixed;
-        width:5vw;
-        height:2vw;
-        bottom:1vw;
-        left:29vw;
+        display: block;
+        position: fixed;
+        width: 5vw;
+        height: 2.3vw;
+        bottom: 1vw;
+        left: 28vw;
+        cursor: pointer;
       }
     </style>
     <script>
@@ -159,9 +160,9 @@
   <body onload=init()>
     <canvas id="mandelcanvas"></canvas>
     <canvas id="overlaycanvas" onmousedown=press(1) onmousemove=drawRect() onmouseup=press(0)></canvas>
-    <input id="iterations">50</input>
-    <input id="xOff" style="left:10vw">200</input>
-    <input id="yOff" style="left:19vw">0</input>
+    <input id="iterations" value="50"></input>
+    <input id="xOff" style="left:10vw" value="200"></input>
+    <input id="yOff" style="left:19vw"value="0"></input>
     <button id="generate" onclick=setStuff()>Generate</button>
   </body>
 </html>
