@@ -24,6 +24,7 @@
       var iterations=50;
       var a,b,a2,b2;
       var pixels=[];
+      var scan=0;
       
       function init(){
         document.getElementById("mandelcanvas").width=width;
@@ -31,21 +32,23 @@
         generate();
       }
       
-      function generate(){
+      function mainGenerate(){
         pixels=[];
-        for (var h=0;h<height;h+=10){
-          for (var h2=0;h2<10;h2++){
-            for (var w=0;w<width;w++){
-              a=(w-width/2-xOff)/(height/zoom);
-              b=(h-height/2-yOff)/(height/zoom);
-              a2=a;
-              b2=b;
-              pixels.push(generateIndividual());
-            }
+        setInterval(generate,100);
+      }
+      
+      function generate(){
+        for (var h=scan;h<scan+10;h++){
+          for (var w=0;w<width;w++){
+            a=(w-width/2-xOff)/(height/zoom);
+            b=(h-height/2-yOff)/(height/zoom);
+            a2=a;
+            b2=b;
+            pixels.push(generateIndividual());
           }
-          paint(h);
         }
-        //paint();
+        paint();
+        scan+=10;
       }
       
       function generateIndividual(){
@@ -61,10 +64,10 @@
         return -1;
       }
       
-      function paint(no){
+      function paint(){
         var shade;
         var ctx=document.getElementById("mandelcanvas").getContext("2d");
-        for (var h=no;h<no+10;h++){
+        for (var h=scan;h<scan+10;h++){
           for (var w=0;w<width;w++){
             if (pixels[h*width+w]==-1){
               ctx.fillStyle="black";
