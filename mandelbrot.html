@@ -27,10 +27,11 @@
       var scan=0;
       
       function init(){
-        document.getElementById("mandelcanvas").width=width;
-        document.getElementById("mandelcanvas").height=height;
-        document.getElementById("mandelcanvas").style.width=width;
-        document.getElementById("mandelcanvas").style.height=height;
+        var canvas=document.getElementById("mandelcanvas");
+        canvas.width=width;
+        canvas.height=height;
+        canvas.style.width=""+width+"px";
+        canvas.style.height=""+height+"px";
         mainGenerate();
       }
       
