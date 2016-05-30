@@ -184,14 +184,23 @@
       }
       
       function setFunction(){
-        document.getElementById("overlay").display="block";
-        document.getElementById("functionpanel").display="block";
+        document.getElementById("overlay").style.display="block";
+        document.getElementById("functionpanel").style.display="block";
       }
       
       function getUrl(){
-        document.getElementById("overlay").display="block";
-        document.getElementById("sharepanel").display="block";
+        document.getElementById("overlay").style.display="block";
+        document.getElementById("sharepanel").style.display="block";
         document.getElementById("urlout").select;
+      }
+      
+      function closePopups(inId){
+        document.getElementById("overlay").style.display="none";
+        if (inId==0){
+          document.getElementById("functionpanel").style.display="none";
+        }else{
+          document.getElementById("sharepanel").style.display="none";
+        }
       }
       
       function paint(){
@@ -222,15 +231,6 @@
           ctx2.beginPath();
           ctx2.rect(xOrig,yOrig,xRes-xOrig,yRes-yOrig);
           ctx2.stroke();
-        }
-      }
-      
-      function closePopups(inId){
-        document.getElementById("overlay").style.display="none";
-        if (inId==0){
-          document.getElementById("functionpanel").style.display="none";
-        }else{
-          document.getElementById("sharepanel").style.display="none";
         }
       }
     </script>
