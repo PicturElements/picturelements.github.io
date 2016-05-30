@@ -164,7 +164,7 @@
               b=b2;
             }else{
               a=julA;
-              b=julB;
+              b=-julB;
             }
             pixels.push(generateIndividual());
           }
@@ -176,13 +176,22 @@
       
       function generateIndividual(){
         var aTmp;
+        var v,magnitude;
         for (var i=0;i<iterations;i++){
           if (a2*a2+b2*b2>=4){
             return i;
           }
-          aTmp=a2;
-          a2=a2*a2-b2*b2+a;
-          b2=aTmp*b2+b2*aTmp+b;
+          if (power==2){
+            aTmp=a2;
+            a2=a2*a2-b2*b2+a;
+            b2=aTmp*b2+b2*aTmp+b;
+          }else{
+            v=Math.atan(b2/a2);
+            if (a2<0){v+=Math.PI;}
+            magnitude=Math.pow(Math.hypot(a2,b2),power)
+            a2=magnitude*Math.cos(v);
+            b2=magnitude*Math.sin(v);
+          }
         }
         return -1;
       }
