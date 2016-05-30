@@ -96,6 +96,30 @@
         text-align: center;
         line-height: 5.5vw;
       }
+      
+      #functionin #urlout{
+        display: block;
+        position: absolute;
+        width: 90%;
+        height: 2vw;
+        font-family: Roboto,Arial,sans-serif;
+        font-size: 1.2vw;
+        font-weight: 700;
+        left: 5%;
+        top: 55%;
+      }
+      
+      #closebtn{
+        display: block;
+        position: absolute;
+        font-size: 1.3vw;
+        color: #555;
+        font-weight: 300;
+        right: 0.7vw;
+        top: 0.7vw;
+        line-height: 1.5vw;
+        cursor: pointer;
+      }
     </style>
     <script>
       var xOff=200,yOff=0,zoom=3;
@@ -249,14 +273,14 @@
     </div>
     <div id="overlay">
       <div id="functionpanel">
-        Modify Mandelbrot/Julia set functions
+        Modify Mandelbrot/Julia set function
         <div id="closebtn" onclick="closePopups(0)">[close]</div>
         <input id="functionin" value="z^2+c" spellcheck="false">
       </div>
       <div id="sharepanel">
         Share you Mandelbrot/Julia set!
         <div id="closebtn" onclick="closePopups(1)">[close]</div>
-        <input id="urlout" value="z^2+c" spellcheck="false">
+        <input id="urlout" spellcheck="false">
       </div>
     </div>
   </body>
