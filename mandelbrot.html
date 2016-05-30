@@ -107,10 +107,10 @@
       
       function paint2(){
         var ctx2=document.getElementById("overlaycanvas").getContext("2d");
-        ctx2.clearRect(0,0,10000,10000);
+        ctx2.clearRect(0,0,window.innerWidth,window.innerHeight);
         ctx2.strokeStyle="red";
         if (pressed==1){
-          ctx2.rect(xOrig,yOrig,xRes,yRes);
+          ctx2.rect(xOrig,yOrig,xRes-xOrig,yRes-yOrig);
           ctx2.stroke();
         }
       }
