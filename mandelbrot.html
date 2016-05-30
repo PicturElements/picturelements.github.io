@@ -190,8 +190,8 @@
             if (a2<0){v+=Math.PI;}
             v*=power;
             magnitude=Math.pow(Math.hypot(a2,b2),power)
-            a2=magnitude*Math.cos(v);
-            b2=magnitude*Math.sin(v);
+            a2=magnitude*Math.cos(v)+a;
+            b2=magnitude*Math.sin(v)+b;
           }
         }
         return -1;
