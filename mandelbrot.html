@@ -17,6 +17,31 @@
         width:100%;
         height:100%;
       }
+      
+      input{
+        display:block;
+        position:relative;
+        float:left;
+        left:1vw;
+        bottom:1vw;
+        width:8vw;
+        height:2vw;
+        font-family:Roboto,Arial,sans-serif;
+        font-size:1.5vw;
+        font-weight:700;
+        margin-right:1vw;
+        border:0.1vw solid #aaa;
+        background-color:white;
+      }
+      
+      button{
+        display:block;
+        position:fixed;
+        width:5vw;
+        height:2vw;
+        bottom:1vw;
+        left:28vw;
+      }
     </style>
     <script>
       var xOff=200,yOff=0,zoom=3;
@@ -25,7 +50,7 @@
       var iterations=50;
       var a,b,a2,b2;
       var pixels=[];
-      var scan=0;
+      var scan=0,thread;
       
       function init(){
         var canvas=document.getElementById("mandelcanvas");
@@ -43,7 +68,7 @@
       
       function mainGenerate(){
         pixels=[];
-        setInterval(generate,10);   //set a low refresh time, let computer calculate as fast as it can. You go, little man!
+        thread=setInterval(generate,10);   //set a low refresh time, let computer calculate as fast as it can. You go, little man!
       }
       
       function generate(){
@@ -88,6 +113,14 @@
         paint2();
       }
       
+      function setStuff(){
+        iterations=parseInt(document.getElementById("iterations").value);
+        xOff=parseFloat(document.getElementById("xOff").value);
+        yoff=parseFloat(document.getElementById("yOff").value);
+        scan=0;
+        mainGenerate();
+      }
+      
       function paint(){
         var shade;
         var ctx=document.getElementById("mandelcanvas").getContext("2d");
@@ -102,6 +135,9 @@
               ctx.fillRect(w,h,1,1);
             }
           }
+        }
+        if (scan>=window.innerHeight){
+          clearInterval(thread);
         }
       }
       
@@ -120,5 +156,9 @@
   <body onload=init()>
     <canvas id="mandelcanvas"></canvas>
     <canvas id="overlaycanvas" onmousedown=press(1) onmousemove=drawRect() onmouseup=press(0)></canvas>
+    <input id="iterations"></input>
+    <input id="xOff"></input>
+    <input id="yOff"></input>
+    <button id="generate" onclick=setStuff()>Generate</button>
   </body>
 </html>
