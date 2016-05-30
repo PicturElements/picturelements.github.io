@@ -110,6 +110,7 @@
         ctx2.clearRect(0,0,window.innerWidth,window.innerHeight);
         ctx2.strokeStyle="red";
         if (pressed==1){
+          ctx2.beginPath();
           ctx2.rect(xOrig,yOrig,xRes-xOrig,yRes-yOrig);
           ctx2.stroke();
         }
