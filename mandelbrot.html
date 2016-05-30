@@ -130,6 +130,7 @@
       var a,b,a2,b2;
       var pixels=[];
       var scan=0,thread=null;
+      var power=2,julA,julB,tmpPow,tmpJA,tmpJB,isMandel=1,tmpIsMandel;
       
       function init(){
         var canvas=document.getElementById("mandelcanvas");
@@ -229,11 +230,40 @@
       }
       
       function displayFunction(){
-        
+        tmpPow=2;
+        tmpJA=0;
+        tmpJB=0;
+        var input=document.getElementById("functionin").value;
+        var values=[],foundNumber=0,prevWasNo=0,tmpString="";
+        for (var i=0;i<input.length;i++){
+          if (isNumber(input.charAt(i))){
+            if (foundNumber==0&&input.charAt(i-1)=='-'){tmpString="-";}
+            tmpString+=input.charAt(i);
+            foundNumber=1;
+            prevWasNo=1;
+          }else{
+            if (prevWasNo==1){
+              prevWasNo=0;
+              foundNumber=0;
+              values.push(parseFloat(tmpString));
+              tmpString="";
+            }
+          }
+        }
+        console.log(values[0]+","+values[1]+","+values[2]);
+      }
+      
+      function isNumber(inChar){
+        for (var a=0;a<10;a++){
+          if (inChar==a){return true;}
+        }
+        if (inChar=="."){return true;}
+        return false;
       }
       
       function pushFunction(){
         closePopups(1);
+        
       }
       
       function paint(){
