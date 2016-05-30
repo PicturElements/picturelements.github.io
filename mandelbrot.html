@@ -36,6 +36,8 @@
       input{
         display:block;
         position:relative;
+        padding-left:0.25vw;
+        padding-right:0.25vw;
         float:left;
         left:1vw;
         margin-top:1vw;
@@ -54,8 +56,8 @@
         position: relative;
         float:left;
         width: 9vw;
-        height: 2.5vw;
-        margin-bottom: 1vw;
+        height: 2.3vw;
+        margin-top: 1vw;
         cursor: pointer;
         font-size: 1.5vw;
         font-weight: bold;
@@ -85,7 +87,7 @@
       var iterations=50;
       var a,b,a2,b2;
       var pixels=[];
-      var scan=0,thread;
+      var scan=0,thread=null;
       
       function init(){
         var canvas=document.getElementById("mandelcanvas");
@@ -102,6 +104,9 @@
       }
       
       function mainGenerate(){
+        if (thread!=null){
+          clearInterval(thread);
+        }
         pixels=[];
         thread=setInterval(generate,10);   //set a low refresh time, let computer calculate as fast as it can. You go, little man!
       }
@@ -161,6 +166,11 @@
         mainGenerate();
       }
       
+      function setFunction(){
+        document.getElementById("overlay").display="block";
+        document.getElementById("functionpanel").display="block";
+      }
+      
       function paint(){
         var shade;
         var ctx=document.getElementById("mandelcanvas").getContext("2d");
@@ -202,9 +212,11 @@
       <input id="yOff" value="0"></input>
       <input id="zoom" value="3"></input>
       <button id="generate" onclick=setStuff()>Generate</button>
+      <button id="function" onclick=setFunction()>Function</button>
+      <button id="geturl" onclick=getUrl()>Get URL</button>
     </div>
     <div id="overlay">
-      <div>
+      <div id="functionpanel">
         
       </div>
     </div>
