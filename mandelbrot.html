@@ -202,6 +202,16 @@
         }
       }
       
+      function gradient(inID){
+        var parts=(startAt[inID+1]-startAt[inID])/3;
+        var colors="";
+        for (var b=0;b<parts-1;b++){
+          colors+="rgb("+(gradientCols[startAt[inID]+3*b])+","+(gradientCols[startAt[inID]+3*b+1])+","+(gradientCols[startAt[inID]+3*b+2])+") "+(b*(100/parts))+"%, ";
+        }
+        colors+="rgb("+(gradientCols[startAt[inID]+3*(parts-1)])+","+(gradientCols[startAt[inID]+3*(parts-1)+1])+","+(gradientCols[startAt[inID]+3*(parts-1)+2])+") 100%";
+        document.getElementById("gradientdisplay").style.background="linear-gradient(to right, "+colors+")";
+      } 
+      
       function mainGenerate(){
         if (thread!=null){
           clearInterval(thread);
