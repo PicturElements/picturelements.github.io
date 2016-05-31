@@ -431,8 +431,8 @@
         var percentage=pixels[inID]/cycleLength;
         var steps=(startAt[selectedCol+1]-startAt[selectedCol])/3-1;
         for (var i=steps;i>=0;i--){
-          if (percentage>=i*cycleLength/steps){
-            percentage=(percentage-i*cycleLength/steps)*steps;
+          if (percentage>=i*iterations/steps){
+            percentage=(percentage-i*iterations/steps)*steps;
             if (i==steps){
               rd=gradientCols[startAt[selectedCol]+3*steps]+(gradientCols[startAt[selectedCol]]-gradientCols[startAt[selectedCol]+3*steps])*percentage;
               gr=gradientCols[startAt[selectedCol]+3*steps+1]+(gradientCols[startAt[selectedCol]+1]-gradientCols[startAt[selectedCol]+3*steps+1])*percentage;
