@@ -170,7 +170,7 @@
       var pixels=[];
       var scan=0,thread=null;
       var power=2,julA,julB,tmpPow,tmpJA,tmpJB,isMandel=true,tmpIsMandel=true,isAdvanced,containsXY;
-      var gradientCols=[255,255,255,0,0,0,255,0,0,0,0,0,0,0,255,0,0,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,255];
+      var gradientCols=[255,255,255,0,0,0,255,0,0,0,0,0,0,255,0,0,0,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,255];
       //               |                 |             |             |             |                       |
       var startAt=[0,6,12,18,24,33];
       
@@ -194,7 +194,7 @@
           var parts=(startAt[a+1]-startAt[a])/3;
           var colors="";
           for (var b=0;b<parts-1;b++){
-            colors+="rgb("+(gradientCols[startAt[a]+3*b])+","+(gradientCols[startAt[a]+3*b+1])+","+(gradientCols[startAt[a]+3*b+2])+") "+(b*(100/parts-1))+"%, ";
+            colors+="rgb("+(gradientCols[startAt[a]+3*b])+","+(gradientCols[startAt[a]+3*b+1])+","+(gradientCols[startAt[a]+3*b+2])+") "+(b*(100/(parts-1)))+"%, ";
           }
           colors+="rgb("+(gradientCols[startAt[a]+3*(parts-1)])+","+(gradientCols[startAt[a]+3*(parts-1)+1])+","+(gradientCols[startAt[a]+3*(parts-1)+2])+") 100%";
           document.getElementsByClassName("gradientselector")[a].style.background="linear-gradient(to bottom right, "+colors+")";
