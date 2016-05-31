@@ -322,8 +322,9 @@
       
       function pushFunction2(){
         var rePart="0.125",imPart="0.8";
-        document.getElementById("customscript").innerHTML="\nfunction createFunction(x,y){\n  a="+rePart+";\n  b="+imPart+";\n}\n";
-        createFunction();
+        document.getElementById("customscript").innerHTML="\nfunction createFunction(x,y){\n  julA="+rePart+";\n  julB="+imPart+";\n}\n";
+        createFunction(0,0);
+        isMandel=0;
         mainGenerate();
       }
       
