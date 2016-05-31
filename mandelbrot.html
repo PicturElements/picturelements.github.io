@@ -172,7 +172,7 @@
       var gradientCols=[255,255,255,0,0,0,255,0,0,0,0,0,0,255,0,0,0,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,255,0,0,50,179,216,253,255,255,255,255,194,0,140,46,0];
       //               |                 |             |             |             |                       |
       var startAt=[0,6,12,18,24,33,48];
-      var selectedCol=5,rd,gr,bl;
+      var selectedCol=5,rd,gr,bl,cycleLength=50;
       
       function init(){
         var canvas=document.getElementById("mandelcanvas");
@@ -427,11 +427,12 @@
       }
       
       function color(inID){
-        var percentage=pixels[inID]/iterations;
+        inID%=cycleLength;
+        var percentage=pixels[inID]/cycleLength;
         var steps=(startAt[selectedCol+1]-startAt[selectedCol])/3-1;
         for (var i=steps;i>=0;i--){
-          if (percentage>=i*iterations/steps){
-            percentage=(percentage-i*iterations/steps)*steps;
+          if (percentage>=i*cycleLength/steps){
+            percentage=(percentage-i*cycleLength/steps)*steps;
             if (i==steps){
               rd=gradientCols[startAt[selectedCol]+3*steps]+(gradientCols[startAt[selectedCol]]-gradientCols[startAt[selectedCol]+3*steps])*percentage;
               gr=gradientCols[startAt[selectedCol]+3*steps+1]+(gradientCols[startAt[selectedCol]+1]-gradientCols[startAt[selectedCol]+3*steps+1])*percentage;
