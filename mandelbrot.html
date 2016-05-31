@@ -149,6 +149,17 @@
         margin-bottom: 0.833vw;
         cursor: pointer;
       }
+      
+      #gradientdisplay{
+        display: block;
+        position: absolute;
+        width: 37.333vw;
+        height: 5vw;
+        background-color: #ddd;
+        border: 0.5vw solid #888;
+        left: 0.833vw;
+        margin-top: 16.3vw;
+      }
     </style>
     <script>
       var xOff=200,yOff=0,zoom=3;
@@ -159,6 +170,9 @@
       var pixels=[];
       var scan=0,thread=null;
       var power=2,julA,julB,tmpPow,tmpJA,tmpJB,isMandel=true,tmpIsMandel=true,isAdvanced,containsXY;
+      var gradientCols=[255,255,255,0,0,0,255,0,0,0,0,0,0,0,255,0,0,0];
+      //               |                 |             |             |
+      var startAt=[0,6,12,18];
       
       function init(){
         var canvas=document.getElementById("mandelcanvas");
@@ -171,7 +185,20 @@
         canvas2.height=height;
         canvas2.style.width=""+width+"px";
         canvas2.style.height=""+height+"px";
+        gradientSetup();
         mainGenerate();
+      }
+      
+      function gradientSetup(){
+        for (var a=0;a<startAt.length-1;a++){
+          var parts=(startAt[a+1]-startAt[a])/3;
+          var colors="";
+          for (var b=0;b<parts-1;b++){
+            colors+="rgb("+(gradientCols[startAt[a]+3*b])+""+(gradientCols[startAt[a]+3*b]+1)+""+(gradientCols[startAt[a]+3*b+2])+") "+(b*(100/parts))+"%, ";
+          }
+          colors+="rgb("+(gradientCols[startAt[a]+3*(length-1)])+""+(gradientCols[startAt[a]+3*(length-1)]+1)+""+(gradientCols[startAt[a]+3*(length-1)+2])+") 100%";
+          document.getElementsByClassName("gradientselector")[a].style.background="linear-gradient:(to right, "+colors+")";
+        }
       }
       
       function mainGenerate(){
@@ -448,6 +475,7 @@
         <div class="gradientselector" onclick=gradient(7)></div>
         <div class="gradientselector" onclick=gradient(8)></div>
         <div class="gradientselector" onclick=gradient(9)></div>
+        <div id="gradientdisplay"></div>
       </div>
     </div>
   </body>
