@@ -170,9 +170,9 @@
       var pixels=[];
       var scan=0,thread=null;
       var power=2,julA,julB,tmpPow,tmpJA,tmpJB,isMandel=true,tmpIsMandel=true,isAdvanced,containsXY;
-      var gradientCols=[255,255,255,0,0,0,255,0,0,0,0,0,0,0,255,0,0,0];
-      //               |                 |             |             |
-      var startAt=[0,6,12,18];
+      var gradientCols=[255,255,255,0,0,0,255,0,0,0,0,0,0,0,255,0,0,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,255];
+      //               |                 |             |             |             |                       |
+      var startAt=[0,6,12,18,24,30,39];
       
       function init(){
         var canvas=document.getElementById("mandelcanvas");
@@ -476,16 +476,16 @@
         <input id="urlout" spellcheck="false" value="SLUTA GLO MATTIAS! Jag har inte hunnit med allt än!"></input>
       </div>
       <div id="colorpanel" class="popup">
-        <div class="gradientselector" onclick=gradient(0)></div>
-        <div class="gradientselector" onclick=gradient(1)></div>
-        <div class="gradientselector" onclick=gradient(2)></div>
-        <div class="gradientselector" onclick=gradient(3)></div>
-        <div class="gradientselector" onclick=gradient(4)></div>
-        <div class="gradientselector" onclick=gradient(5)></div>
-        <div class="gradientselector" onclick=gradient(6)></div>
-        <div class="gradientselector" onclick=gradient(7)></div>
-        <div class="gradientselector" onclick=gradient(8)></div>
-        <div class="gradientselector" onclick=gradient(9)></div>
+        <div class="gradientselector" onmousedown=gradient(0)></div>
+        <div class="gradientselector" onmousedown=gradient(1)></div>
+        <div class="gradientselector" onmousedown=gradient(2)></div>
+        <div class="gradientselector" onmousedown=gradient(3)></div>
+        <div class="gradientselector" onmousedown=gradient(4)></div>
+        <div class="gradientselector" onmousedown=gradient(5)></div>
+        <div class="gradientselector" onmousedown=gradient(6)></div>
+        <div class="gradientselector" onmousedown=gradient(7)></div>
+        <div class="gradientselector" onmousedown=gradient(8)></div>
+        <div class="gradientselector" onmousedown=gradient(9)></div>
         <div id="gradientdisplay"></div>
       </div>
     </div>
