@@ -244,7 +244,8 @@
         var v,magnitude;
         for (var i=0;i<iterations;i++){
           if (a2*a2+b2*b2>=4){
-            return i;
+            //return i;
+            return i+1-Math.log(Math.log(Math.hypot(a2,b2)))/Math.log(2);
           }
           if (power==2){
             aTmp=a2;
