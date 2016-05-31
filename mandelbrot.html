@@ -321,7 +321,8 @@
       }
       
       function pushFunction2(){
-        document.getElementById("customscript").innerHTML="function createFunction(){\n  alert(\"It works!\")\n}";
+        var rePart="0.125",imPart="0.8";
+        document.getElementById("customscript").innerHTML="\nfunction createFunction(x,y){\n  a="+rePart+"\n  b="+imPart+"\n}\n";
         createFunction();
       }
       
@@ -386,7 +387,7 @@
         <div id="funcout" style="display: block; position: absolute; font-size: 1.3vw; color: #555; width: 90%; margin-left: 5%; height: 3vw; line-height: 3vw; background-color: #ddd; margin-top: 4vw;">Function: z^2+c (Mandelbrot set)</div>
       </div>
       <div id="functionpanel2" class="popup" style="height:14vw; margin-top:-7vw">
-        Advanced Mandelbrot/Julia set function definition
+        Advanced Julia set function definition
         <div id="closebtn" onclick="closePopups(1)">[close]</div>
         <input id="functionin" value="z^2+c" spellcheck="false" style="width:41%; top:5.5vw" onkeyup=displayFunction()>
         <button style="margin-top:0;position:absolute;width:12vw;margin-left:27vw;height: 2.4vw;" onclick="goBack()">Back</button>
