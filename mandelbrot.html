@@ -124,13 +124,13 @@
     </style>
     <script>
       var xOff=200,yOff=0,zoom=3;
-      var xOrig,yOrig,xRes,yRes,pressed=0;
+      var xOrig,yOrig,xRes,yRes,pressed=false;
       var width=window.innerWidth,height=window.innerHeight;
       var iterations=50;
       var a,b,a2,b2;
       var pixels=[];
       var scan=0,thread=null;
-      var power=2,julA,julB,tmpPow,tmpJA,tmpJB,isMandel=1,tmpIsMandel=1;
+      var power=2,julA,julB,tmpPow,tmpJA,tmpJB,isMandel=false,tmpIsMandel=true,isAdvanced,containsXY;
       
       function init(){
         var canvas=document.getElementById("mandelcanvas");
@@ -159,7 +159,7 @@
           for (var w=0;w<width;w++){
             a2=(w-width/2-xOff/zoom)/(height/zoom);
             b2=(h-height/2-yOff/zoom)/(height/zoom);
-            if (isMandel==1){
+            if (isMandel){
               a=a2;
               b=b2;
             }else{
@@ -199,7 +199,7 @@
       
       function press(inId){
         pressed=inId;
-        if (pressed==1){
+        if (pressed){
           xOrig=event.clientX;
           yOrig=event.clientY;
         }
@@ -256,26 +256,26 @@
         tmpJA=0;
         tmpJB=0;
         var input=document.getElementById("functionin").value;
-        var values=[],foundNumber=0,prevWasNo=0,tmpString="";
+        var values=[],foundNumber=false,prevWasNo=false,tmpString="";
         for (var i=0;i<input.length;i++){
           if (isNumber(input.charAt(i))){
-            if (foundNumber==0&&input.charAt(i-1)=='-'){tmpString="-";}
+            if (!foundNumber&&input.charAt(i-1)=='-'){tmpString="-";}
             tmpString+=input.charAt(i);
-            foundNumber=1;
-            prevWasNo=1;
+            foundNumber=true;
+            prevWasNo=true;
           }else{
-            if (prevWasNo==1){
-              prevWasNo=0;
-              foundNumber=0;
+            if (prevWasNo==true){
+              prevWasNo=false;
+              foundNumber=false;
               values.push(parseFloat(tmpString));
               tmpString="";
             }
           }
         }
-        if (prevWasNo==1){values.push(parseFloat(tmpString));}
+        if (prevWasNo){values.push(parseFloat(tmpString));}
         tmpIsMandel=0;
         if (values.length==1){
-          tmpIsMandel=1;
+          tmpIsMandel=true;
           tmpPow=Math.abs(Math.floor(values[0]));
         }else if(values.length==2){
           tmpPow=Math.abs(Math.floor(values[0]));
@@ -295,7 +295,7 @@
         if (tmpJA<0){tA=tmpJA;}
         if (tmpJB<0){tB=tmpJB;}
         console.log("Function: z^"+tmpPow+""+tA+""+tB+"i");
-        if (tmpIsMandel==1||tmpJA==0&&tmpJB==0){
+        if (tmpIsMandel||tmpJA==0&&tmpJB==0){
           document.getElementById("funcout").innerHTML="Function: z^"+tmpPow+"+c (Mandelbrot set)";
         }else{
           document.getElementById("funcout").innerHTML="Function: z^"+tmpPow+""+tA+""+tB+"i (Julia set)";
@@ -324,7 +324,7 @@
         var rePart="0.125",imPart="0.8";
         document.getElementById("customscript").innerHTML="\nfunction createFunction(x,y){\n  julA="+rePart+";\n  julB="+imPart+";\n}\n";
         createFunction(0,0);
-        isMandel=0;
+        isMandel=false;
         closePopups(1);
         scan=0;
         mainGenerate();
@@ -354,7 +354,7 @@
         var ctx2=document.getElementById("overlaycanvas").getContext("2d");
         ctx2.clearRect(0,0,window.innerWidth,window.innerHeight);
         ctx2.strokeStyle="red";
-        if (pressed==1){
+        if (pressed){
           ctx2.beginPath();
           ctx2.rect(xOrig,yOrig,xRes-xOrig,yRes-yOrig);
           ctx2.stroke();
