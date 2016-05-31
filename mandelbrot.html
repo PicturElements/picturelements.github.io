@@ -4,7 +4,6 @@
     <title>Mandelbrot Generator - PicturElements</title>
     <link rel="icon" href="pelement.png">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,700" rel="stylesheet" type="text/css">
-    
     <style>
       body{
         display: block;
@@ -170,9 +169,9 @@
       var pixels=[];
       var scan=0,thread=null;
       var power=2,julA,julB,tmpPow,tmpJA,tmpJB,isMandel=true,tmpIsMandel=true,isAdvanced,containsXY;
-      var gradientCols=[255,255,255,0,0,0,255,0,0,0,0,0,0,255,0,0,0,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,255];
+      var gradientCols=[255,255,255,0,0,0,255,0,0,0,0,0,0,255,0,0,0,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,255,0,0,50,179,216,253,255,255,255,255,194,0,140,46,0];
       //               |                 |             |             |             |                       |
-      var startAt=[0,6,12,18,24,33];
+      var startAt=[0,6,12,18,24,33,48];
       
       function init(){
         var canvas=document.getElementById("mandelcanvas");
