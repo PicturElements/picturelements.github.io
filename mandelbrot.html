@@ -172,6 +172,7 @@
       var gradientCols=[255,255,255,0,0,0,255,0,0,0,0,0,0,255,0,0,0,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,255,0,0,50,179,216,253,255,255,255,255,194,0,140,46,0];
       //               |                 |             |             |             |                       |
       var startAt=[0,6,12,18,24,33,48];
+      var selectedCol=5,rd,gr,bl;
       
       function init(){
         var canvas=document.getElementById("mandelcanvas");
@@ -410,14 +411,35 @@
               ctx.fillStyle="black";
               ctx.fillRect(w,h,1,1);
             }else{
-              shade=Math.floor((iterations-pixels[h*width+w])/iterations*255);
-              ctx.fillStyle="rgb("+shade+","+shade+","+shade+")";
+              /*shade=Math.floor((iterations-pixels[h*width+w])/iterations*255);
+              ctx.fillStyle="rgb("+shade+","+shade+","+shade+")";*/
+              setColor([h*width+w);
+              ctx.fillStyle="rgb("+rd+","+gr+","+bl+")";
               ctx.fillRect(w,h,1,1);
             }
           }
         }
         if (scan>=window.innerHeight){
           clearInterval(thread);
+        }
+      }
+      
+      function setColor(inID){
+        var percentage=pixels[inID]/iterations;
+        var steps=(startAt[selectedCol+1]-startAt[selectedCol])/3-1;
+        for (var i=steps;i>=0;i--){
+          if (percentage>=i*iterations/steps){
+            percentage=(percentage-i*iterations/steps)*steps;
+            if (i==steps){
+              rd=gradientCols[startAt[selectedCol]+3*steps]+(gradientCols[startAt[selectedCol]]-gradientCols[startAt[selectedCol]+3*steps])*percentage;
+              gr=gradientCols[startAt[selectedCol]+3*steps+1]+(gradientCols[startAt[selectedCol]+1]-gradientCols[startAt[selectedCol]+3*steps+1])*percentage;
+              bl=gradientCols[startAt[selectedCol]+3*steps+2]+(gradientCols[startAt[selectedCol]+2]-gradientCols[startAt[selectedCol]+3*steps+2])*percentage;
+            }else{
+              rd=gradientCols[startAt[selectedCol]+3*steps]+(gradientCols[startAt[selectedCol]+3*(steps+1)]-gradientCols[startAt[selectedCol]+3*steps])*percentage;
+              gr=gradientCols[startAt[selectedCol]+3*steps+1]+(gradientCols[startAt[selectedCol]+3*(steps+1)+1]-gradientCols[startAt[selectedCol]+3*steps+1])*percentage;
+              bl=gradientCols[startAt[selectedCol]+3*steps+2]+(gradientCols[startAt[selectedCol]+3*(steps+1)+2]-gradientCols[startAt[selectedCol]+3*steps+2])*percentage;
+            }
+          }
         }
       }
       
