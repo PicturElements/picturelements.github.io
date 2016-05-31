@@ -425,6 +425,9 @@
       }
       
       function color(inID){
+        rd=100;
+        gr=100;
+        bl=100;
         var percentage=pixels[inID]/iterations;
         var steps=(startAt[selectedCol+1]-startAt[selectedCol])/3-1;
         for (var i=steps;i>=0;i--){
