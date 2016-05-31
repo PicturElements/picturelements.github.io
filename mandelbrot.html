@@ -413,7 +413,7 @@
             }else{
               /*shade=Math.floor((iterations-pixels[h*width+w])/iterations*255);
               ctx.fillStyle="rgb("+shade+","+shade+","+shade+")";*/
-              setColor(h*width+w);
+              color(h*width+w);
               ctx.fillStyle="rgb("+rd+","+gr+","+bl+")";
               ctx.fillRect(w,h,1,1);
             }
@@ -424,7 +424,7 @@
         }
       }
       
-      function setColor(inID){
+      function color(inID){
         var percentage=pixels[inID]/iterations;
         var steps=(startAt[selectedCol+1]-startAt[selectedCol])/3-1;
         for (var i=steps;i>=0;i--){
