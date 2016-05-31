@@ -414,7 +414,7 @@
               /*shade=Math.floor((iterations-pixels[h*width+w])/iterations*255);
               ctx.fillStyle="rgb("+shade+","+shade+","+shade+")";*/
               color(h*width+w);
-              ctx.fillStyle="rgb("+rd+","+gr+","+bl+")";
+              ctx.fillStyle="rgb("+Math.floor(rd)+","+Math.floor(gr)+","+Math.floor(bl)+")";
               ctx.fillRect(w,h,1,1);
             }
           }
@@ -442,7 +442,7 @@
               gr=gradientCols[startAt[selectedCol]+3*i+1]+(gradientCols[startAt[selectedCol]+3*(i+1)+1]-gradientCols[startAt[selectedCol]+3*i+1])*percentage;
               bl=gradientCols[startAt[selectedCol]+3*i+2]+(gradientCols[startAt[selectedCol]+3*(i+1)+2]-gradientCols[startAt[selectedCol]+3*i+2])*percentage;
             }
-            if (inID%1000==0){console.log(rd);}
+            //if (inID%1000==0){console.log(rd);}
             break;
           }
         }
