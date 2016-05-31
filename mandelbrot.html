@@ -241,6 +241,11 @@
         document.getElementById("functionpanel2").style.display="block";
       }
       
+      function goBack(){
+        document.getElementsByClassName("popup")[1].style.display="none";
+        document.getElementById("functionpanel").style.display="block";
+      }
+      
       function closePopups(inId){
         document.getElementById("overlay").style.display="none";
         document.getElementsByClassName("popup")[inId].style.display="none";
@@ -315,6 +320,11 @@
         mainGenerate();
       }
       
+      function pushFunction2(){
+        document.getElementById("customscript").innerHTML="function createFunction(){alert(\"It works!\")}";
+        createFunction();
+      }
+      
       function paint(){
         var shade;
         var ctx=document.getElementById("mandelcanvas").getContext("2d");
@@ -371,14 +381,15 @@
         Modify Mandelbrot/Julia set function
         <div id="closebtn" onclick="closePopups(0)">[close]</div>
         <input id="functionin" value="z^2+c" spellcheck="false" style="width:41%; top:5.5vw" onkeyup=displayFunction()>
-        <button style="margin-top:0;position:absolute;width:12vw;margin-left:40vw;height: 2.4vw;" onclick="pushFunction()">Set function</button>
         <button style="margin-top:0;position:absolute;width:12vw;margin-left:27vw;height: 2.4vw;" onclick="setAdvanced()">Advanced</button>
+        <button style="margin-top:0;position:absolute;width:12vw;margin-left:40vw;height: 2.4vw;" onclick="pushFunction()">Set function</button>
         <div id="funcout" style="display: block; position: absolute; font-size: 1.3vw; color: #555; width: 90%; margin-left: 5%; height: 3vw; line-height: 3vw; background-color: #ddd; margin-top: 4vw;">Function: z^2+c (Mandelbrot set)</div>
       </div>
       <div id="functionpanel2" class="popup" style="height:14vw; margin-top:-7vw">
         Advanced Mandelbrot/Julia set function definition
         <div id="closebtn" onclick="closePopups(1)">[close]</div>
-        <input id="functionin" value="z^2+c" spellcheck="false" style="width:62.5%; top:5.5vw" onkeyup=displayFunction()>
+        <input id="functionin" value="z^2+c" spellcheck="false" style="width:41%; top:5.5vw" onkeyup=displayFunction()>
+        <button style="margin-top:0;position:absolute;width:12vw;margin-left:27vw;height: 2.4vw;" onclick="goBack()">Back</button>
         <button style="margin-top:0;position:absolute;width:12vw;margin-left:40vw;height: 2.4vw;" onclick="pushFunction2()">Set function</button>
         <div id="funcout" style="display: block; position: absolute; font-size: 1.3vw; color: #555; width: 90%; margin-left: 5%; height: 3vw; line-height: 3vw; background-color: #ddd; margin-top: 4vw;">Function: z^2+c (Mandelbrot set)</div>
       </div>
