@@ -428,7 +428,7 @@
       
       function color(inID){
         inID=inID%cycleLength;
-        var percentage=pixels[inID]/cycleLength;
+        var percentage=pixels[inID]/iterations;
         var steps=(startAt[selectedCol+1]-startAt[selectedCol])/3-1;
         for (var i=steps;i>=0;i--){
           if (percentage>=i*iterations/steps){
