@@ -194,9 +194,9 @@
           var parts=(startAt[a+1]-startAt[a])/3;
           var colors="";
           for (var b=0;b<parts-1;b++){
-            colors+="rgb("+(gradientCols[startAt[a]+3*b])+""+(gradientCols[startAt[a]+3*b]+1)+""+(gradientCols[startAt[a]+3*b+2])+") "+(b*(100/parts))+"%, ";
+            colors+="rgb("+(gradientCols[startAt[a]+3*b])+","+(gradientCols[startAt[a]+3*b]+1)+","+(gradientCols[startAt[a]+3*b+2])+") "+(b*(100/parts))+"%, ";
           }
-          colors+="rgb("+(gradientCols[startAt[a]+3*(length-1)])+""+(gradientCols[startAt[a]+3*(length-1)]+1)+""+(gradientCols[startAt[a]+3*(length-1)+2])+") 100%";
+          colors+="rgb("+(gradientCols[startAt[a]+3*(length-1)])+","+(gradientCols[startAt[a]+3*(length-1)]+1)+","+(gradientCols[startAt[a]+3*(length-1)+2])+") 100%";
           document.getElementsByClassName("gradientselector")[a].style.background="linear-gradient:(to right, "+colors+")";
         }
       }
