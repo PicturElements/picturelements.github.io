@@ -384,11 +384,22 @@
         }else if(mode==2){
           document.getElementById("hoverinfo").style.marginLeft=""+(event.clientX+10)+"px";
           document.getElementById("hoverinfo").style.marginTop=""+(event.clientY+10)+"px";
-          color((event.clientY-cmy)*width+(event.clientX-cmx));
-          document.getElementById("colorsample").style.backgroundColor="rgb("+Math.floor(rd)+","+Math.floor(gr)+","+Math.floor(bl)+")";
-          var iters=Math.floor(pixels[(event.clientY-cmy)*width+(event.clientX-cmx)]);
-          if (iters==-1){iters=iterations;}
-          document.getElementById("iterationinfo").innerHTML="Iterations: "+iters;
+          var pos=(event.clientY-cmy)*width+(event.clientX-cmx);
+          if (event.clientX-cmx<0||event.clientY-cmy<0||event.clientX-cmx>width||event.clientY-cmy>height){
+            var hi=document.getElementById("hoverinfo").style;
+            hi.marginLeft="-1000px";
+            hi.marginTop="-1000px";
+          }else{
+            color(pos);
+            var iters=Math.floor(pixels[pos]);
+            if (iters==-1){
+              iters=iterations;
+              document.getElementById("colorsample").style.backgroundColor="black";
+            }else{
+              document.getElementById("colorsample").style.backgroundColor="rgb("+Math.floor(rd)+","+Math.floor(gr)+","+Math.floor(bl)+")";
+            }
+            document.getElementById("iterationinfo").innerHTML="Iterations: "+iters;
+          }
         }
         paint2();
       }
