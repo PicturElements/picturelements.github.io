@@ -340,6 +340,7 @@
           document.getElementById("mandelcanvas").style.marginTop=""+(cmy+event.clientY-curY)+"px";
           document.getElementById("xOff").value=tmpXOff+(cmx+event.clientX-curX)*zoom;
           document.getElementById("yOff").value=tmpYOff+(cmy+event.clientY-curY)*zoom;
+          paint2();
         }
       }
       
@@ -521,9 +522,18 @@
         var ctx2=document.getElementById("overlaycanvas").getContext("2d");
         ctx2.clearRect(0,0,window.innerWidth,window.innerHeight);
         ctx2.strokeStyle="red";
-        if (pressed){
+        if (pressed&&mode==0){
           ctx2.beginPath();
           ctx2.rect(xOrig,yOrig,xRes-xOrig,yRes-yOrig);
+          ctx2.stroke();
+        }else if (pressed&&mode==0){
+          ctx2.beginPath();
+          ctx2.moveTo(0,Math.floor(window.innerHeight/2));
+          ctx2.lineTo(window.innerWidth,Math.floor(window.innerHeight/2));
+          ctx2.stroke();
+          ctx2.beginPath();
+          ctx2.moveTo(Math.floor(window.innerWidth/2),0);
+          ctx2.moveTo(Math.floor(window.innerWidth/2),window.innerHeight);
           ctx2.stroke();
         }
         if (thread!=null){
