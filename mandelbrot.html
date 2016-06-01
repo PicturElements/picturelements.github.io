@@ -537,6 +537,7 @@
           ctx2.stroke();
           var perc=parseFloat(document.getElementById("zoom"))/zoom;
           var inW=Math.floor(window.innerWidth*perc),inH=Math.floor(window.innerHeight*perc);
+          console.log(inW+" - "+inH);
           ctx2.beginPath();
           ctx2.rect(Math.floor(window.innerWidth/2-inW/2),Math.floor(window.innerHeight/2-inH/2),inW,inH);
           ctx2.stroke();
