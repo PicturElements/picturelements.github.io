@@ -321,7 +321,8 @@
           if (a2*a2+b2*b2>=4){
             //return i;
             //return i+1-Math.log(Math.log(Math.hypot(a2,b2)))/Math.log(power);
-            return i+1-(Math.log(Math.log(Math.hypot(a2,b2))/Math.log(10))/Math.log(10))/(Math.log(power)/Math.log(10));
+            return i+1-Math.log(Math.log(Math.sqrt(a2*a2+b2*b2)))/Math.log(power);
+            //return i+1-(Math.log(Math.log(Math.hypot(a2,b2))/Math.log(10))/Math.log(10))/(Math.log(power)/Math.log(10));
           }
           if (power==2){
             aTmp=a2;
@@ -386,10 +387,10 @@
           document.getElementById("hoverinfo").style.marginLeft=""+(event.clientX+20)+"px";
           document.getElementById("hoverinfo").style.marginTop=""+(event.clientY+20)+"px";
           var pos=(event.clientY-cmy)*width+(event.clientX-cmx);
+          var hi=document.getElementById("hoverinfo");
           if (event.clientX-cmx<0||event.clientY-cmy<0||event.clientX-cmx>width||event.clientY-cmy>height){
-            var hi=document.getElementById("hoverinfo").style;
-            hi.marginLeft="-1000px";
-            hi.marginTop="-1000px";
+            hi.style.marginLeft="-1000px";
+            hi.style.marginTop="-1000px";
           }else{
             color(pos);
             var iters=Math.floor(pixels[pos]);
@@ -400,6 +401,11 @@
               document.getElementById("colorsample").style.backgroundColor="rgb("+Math.floor(rd)+","+Math.floor(gr)+","+Math.floor(bl)+")";
             }
             document.getElementById("iterationinfo").innerHTML="Iterations: "+iters;
+            if (event.clientX+hi.offsetWidth+40>width){
+              hi.style.marginLeft=""+(event.clientX-20-hi.offsetWidth)+"px";
+            }else if (event.clientY+hi.offsetHeight+40>height){
+              hi.style.marginTop=""+(event.clientY-20-hi.offsetHeight)+"px";
+            }
           }
         }
         paint2();
