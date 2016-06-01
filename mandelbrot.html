@@ -535,6 +535,11 @@
           ctx2.moveTo(Math.floor(window.innerWidth/2),0);
           ctx2.lineTo(Math.floor(window.innerWidth/2),window.innerHeight);
           ctx2.stroke();
+          var perc=parseFloat(document.getElementById("zoom"))/zoom;
+          var inW=window.innerWidth*perc,inH=window.innerHeight*perc;
+          ctx2.beginPath();
+          ctx2.rect(Math.floor(window.innerWidth/2-inW/2),Math.floor(window.innerHeight/2-inH/2),inW,inH);
+          ctx2.stroke();
         }
         if (thread!=null){
           ctx2.beginPath();
