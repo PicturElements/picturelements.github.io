@@ -184,7 +184,7 @@
       var xOff=200,yOff=0,zoom=3,iterations=50,mode=0;
       var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true;
       var width=window.innerWidth,height=window.innerHeight;
-      var cmx=0,cmy=0,curX,curY;
+      var cmx=0,cmy=0,curX,curY,tmpXOff,tmpYOff;
       var a,b,a2,b2;
       var pixels=[];
       var scan=0,thread=null;
@@ -318,6 +318,8 @@
         }else if (pressed&&mode==1){
           curX=event.clientX;
           curY=event.clientY;
+          tmpXOff=document.getElementById("xOff").value;
+          tmpYOff=document.getElementById("yOff").value;
         }else if (inId==0&&mode==1){
           cmx=cmx+event.clientX-curX;
           cmy=cmy+event.clientY-curY;
@@ -332,6 +334,8 @@
         }else if (mode==1&&pressed){
           document.getElementById("mandelcanvas").style.marginLeft=""+(cmx+event.clientX-curX)+"px";
           document.getElementById("mandelcanvas").style.marginTop=""+(cmy+event.clientY-curY)+"px";
+          document.getElementById("xOff").value=tmpXOff+(cmx+event.clientX-curX)*zoom;
+          document.getElementById("yOff").value=tmpYOff+(cmy+event.clientY-curY)*zoom;
         }
       }
       
