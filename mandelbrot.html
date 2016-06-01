@@ -304,7 +304,6 @@
         }else if (event.keyCode==77){
           document.getElementById("overlaycanvas").style.cursor="move";
         }
-        alert(event.keyCode);
       }
       
       function press(inId){
@@ -518,10 +517,10 @@
       }
     </script>
   </head>
-  <body onload=init()>
+  <body onload=init() onkeydown=setMode()>
     <script id="customscript"></script>
     <canvas id="mandelcanvas"></canvas>
-    <canvas id="overlaycanvas" onkeydown=setMode() onmousedown=press(1) onmousemove=canvasInteract() onmouseup=press(0)></canvas>
+    <canvas id="overlaycanvas" onmousedown=press(1) onmousemove=canvasInteract() onmouseup=press(0)></canvas>
     <div id="buttonpanel">
       <input id="iterations" value="50"></input>
       <input id="xOff" value="200"></input>
