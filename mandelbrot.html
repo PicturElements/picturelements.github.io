@@ -434,9 +434,9 @@
           if (percentage>=i/steps){
             percentage=(percentage-i/steps)*steps;
             if (i==steps){
-              rd=gradientCols[startAt[selectedCol]+3*steps]+(gradientCols[startAt[selectedCol]]-gradientCols[startAt[selectedCol]+3*steps])*percentage;
-              gr=gradientCols[startAt[selectedCol]+3*steps+1]+(gradientCols[startAt[selectedCol]+1]-gradientCols[startAt[selectedCol]+3*steps+1])*percentage;
-              bl=gradientCols[startAt[selectedCol]+3*steps+2]+(gradientCols[startAt[selectedCol]+2]-gradientCols[startAt[selectedCol]+3*steps+2])*percentage;
+              rd=gradientCols[startAt[selectedCol]+3*(steps-1)]+(gradientCols[startAt[selectedCol]]-gradientCols[startAt[selectedCol]+3*(steps-1)])*percentage;
+              gr=gradientCols[startAt[selectedCol]+3*(steps-1)+1]+(gradientCols[startAt[selectedCol]+1]-gradientCols[startAt[selectedCol]+3*(steps-1)+1])*percentage;
+              bl=gradientCols[startAt[selectedCol]+3*(steps-1)+2]+(gradientCols[startAt[selectedCol]+2]-gradientCols[startAt[selectedCol]+3*(steps-1)+2])*percentage;
             }else{
               rd=gradientCols[startAt[selectedCol]+3*i]+(gradientCols[startAt[selectedCol]+3*(i+1)]-gradientCols[startAt[selectedCol]+3*i])*percentage;
               gr=gradientCols[startAt[selectedCol]+3*i+1]+(gradientCols[startAt[selectedCol]+3*(i+1)+1]-gradientCols[startAt[selectedCol]+3*i+1])*percentage;
