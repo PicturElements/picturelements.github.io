@@ -165,10 +165,9 @@
       }
     </style>
     <script>
-      var xOff=200,yOff=0,zoom=3;
-      var xOrig,yOrig,xRes,yRes,pressed=false;
+      var xOff=200,yOff=0,zoom=3,iterations=50;
+      var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true;
       var width=window.innerWidth,height=window.innerHeight;
-      var iterations=50;
       var a,b,a2,b2;
       var pixels=[];
       var scan=0,thread=null;
@@ -190,7 +189,7 @@
         canvas2.style.width=""+width+"px";
         canvas2.style.height=""+height+"px";
         gradientSetup();
-        var parts=(startAt[inID+1]-startAt[inID])/3+1;
+        var parts=(startAt[selectedCol+1]-startAt[selectedCol])/3+1;
         var colors="";
         for (var b=0;b<parts-1;b++){
           colors+="rgb("+(gradientCols[startAt[selectedCol]+3*b])+","+(gradientCols[startAt[selectedCol]+3*b+1])+","+(gradientCols[startAt[selectedCol]+3*b+2])+") "+(b*(100/(parts-1)))+"%, ";
@@ -494,6 +493,7 @@
       <button id="function" onclick=setFunction()>Function</button>
       <button id="colors" onclick=setColor()>Gradients</button>
       <button id="geturl" onclick=getUrl()>Get URL</button>
+      <div id="expando" onclick=expando()></div>
     </div>
     <div id="overlay">
       <div id="functionpanel" class="popup" style="height:14vw; margin-top:-7vw">
