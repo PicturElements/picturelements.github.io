@@ -311,17 +311,16 @@
       
       function press(inId){
         pressed=inId;
-        if (pressed){
+        if (presse&&mode==0){
           xOrig=event.clientX;
           yOrig=event.clientY;
-        }
-        paint2();
-        if (inId==1&&mode==1){
+          paint2();
+        }else if (inId==1&&mode==1){
           curX=event.clientX;
           curY=event.clientY;
         }else if (inId==0&&mode==1){
-          cmx=event.clientX-curX;
-          cmy=event.clientY-curY;
+          cmx=cmx+event.clientX-curX;
+          cmy=cmy+event.clientY-curY;
         }
       }
       
