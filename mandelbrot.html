@@ -356,6 +356,18 @@
           document.getElementById("overlaycanvas").style.cursor="default";
           document.getElementById("hoverinfo").style.display="block";
           mode=2;
+        }else if(event.keyCode==71){   //G - generate
+          closePopups(-1);
+          setStuff()
+        }else if(event.keyCode==70){   //F - function
+          closePopups(-1);
+          setFunction();
+        }else if(event.keyCode==67){   //C - colors
+          closePopups(-1);
+          setColor();
+        }else if(event.keyCode==85){   //U - URL
+          closePopups(-1);
+          getUrl();
         }
       }
       
@@ -458,7 +470,14 @@
       
       function closePopups(inId){
         document.getElementById("overlay").style.display="none";
-        document.getElementsByClassName("popup")[inId].style.display="none";
+        if (inId==-1){    //closes EVERYTHING
+          var popups=document.getElementsByClassName("popup");
+          for (var i=0;i<popups.length;i++){
+            popups[inId].style.display="none";
+          }
+        }else{
+          document.getElementsByClassName("popup")[inId].style.display="none";
+        }
       }
       
       function expando(){
@@ -647,7 +666,7 @@
       <input id="zoom" value="3"></input>
       <button id="generate" onclick=setStuff()>Generate</button>
       <button id="function" onclick=setFunction()>Function</button>
-      <button id="colors" onclick=setColor()>Gradients</button>
+      <button id="colors" onclick=setColor()>Colors</button>
       <button id="geturl" onclick=getUrl()>Get URL</button>
       <div id="expando" onclick=expando()>||</div>
     </div>
