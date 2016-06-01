@@ -31,6 +31,7 @@
         left:0;
         background-color:#ddd;
         padding-right:1vw;
+        transition:margin-left 500ms;
       }
       
       #buttonpanel input{
@@ -70,6 +71,21 @@
       button:hover{
         background-color:#888;
         color:#ddd;
+      }
+      
+      #expando{
+        display: block;
+        position: absolute;
+        width: 3vw;
+        height: 4vw;
+        background-color: #444;
+        margin-left: 100%;
+        cursor: pointer;
+        font-family: Roboto;
+        color: white;
+        font-size: 2vw;
+        text-align: center;
+        line-height: 4vw;
       }
       
       #overlay{
@@ -341,6 +357,15 @@
         document.getElementsByClassName("popup")[inId].style.display="none";
       }
       
+      function expando(){
+        if (expanded){
+          document.getElementById("buttonpanel").style.marginLeft="-"+(document.getElementById("buttonpanel").innerWidth)+"px";
+        }else{
+          document.getElementById("buttonpanel").style.marginLeft="0";
+        }
+        expanded=!expanded;
+      }
+      
       function displayFunction(){
         tmpPow=2;
         tmpJA=0;
@@ -493,7 +518,7 @@
       <button id="function" onclick=setFunction()>Function</button>
       <button id="colors" onclick=setColor()>Gradients</button>
       <button id="geturl" onclick=getUrl()>Get URL</button>
-      <div id="expando" onclick=expando()></div>
+      <div id="expando" onclick=expando()>||</div>
     </div>
     <div id="overlay">
       <div id="functionpanel" class="popup" style="height:14vw; margin-top:-7vw">
