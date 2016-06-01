@@ -318,8 +318,8 @@
         }else if (pressed&&mode==1){
           curX=event.clientX;
           curY=event.clientY;
-          tmpXOff=document.getElementById("xOff").value;
-          tmpYOff=document.getElementById("yOff").value;
+          tmpXOff=parseFloat(document.getElementById("xOff").value);
+          tmpYOff=parseFloat(document.getElementById("yOff").value);
         }else if (inId==0&&mode==1){
           cmx=cmx+event.clientX-curX;
           cmy=cmy+event.clientY-curY;
