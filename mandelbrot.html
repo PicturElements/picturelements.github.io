@@ -184,6 +184,7 @@
       var xOff=200,yOff=0,zoom=3,iterations=50,mode=0;
       var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true;
       var width=window.innerWidth,height=window.innerHeight;
+      var cmx=0,cmy=0,curX,curY;
       var a,b,a2,b2;
       var pixels=[];
       var scan=0,thread=null;
@@ -301,8 +302,10 @@
       function setMode(){
         if (event.keyCode==83){
           document.getElementById("overlaycanvas").style.cursor="default";
+          mode=0;
         }else if (event.keyCode==77){
           document.getElementById("overlaycanvas").style.cursor="move";
+          mode=1
         }
       }
       
@@ -313,6 +316,13 @@
           yOrig=event.clientY;
         }
         paint2();
+        if (inId==1&&mode==1){
+          curX=event.clientX;
+          curY=event.clientY;
+        }else if (inId==0&&mode==1){
+          cmx=event.clientX-curX;
+          cmy=event.clientY-curY;
+        }
       }
       
       function canvasInteract(){
@@ -320,8 +330,9 @@
           xRes=event.clientX;
           yRes=event.clientY;
           paint2();
-        }else if (mode==1){
-          
+        }else if (mode==1&&pressed){
+          document.getElementById("mandelcanvas").style.marginLeft=""+(cmx+event.clientX-curX)+"px";
+          document.getElementById("mandelcanvas").style.marginTop=""+(cmy+event.clientY-curY)+"px";
         }
       }
       
