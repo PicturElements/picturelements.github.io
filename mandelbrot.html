@@ -433,16 +433,9 @@
         for (var i=steps;i>=0;i--){
           if (percentage>=i/steps){
             percentage=(percentage-i/steps)*steps;
-            if (i==steps){
-              rd=gradientCols[startAt[selectedCol]+3*(steps-1)]+(gradientCols[startAt[selectedCol]]-gradientCols[startAt[selectedCol]+3*(steps-1)])*percentage;
-              gr=gradientCols[startAt[selectedCol]+3*(steps-1)+1]+(gradientCols[startAt[selectedCol]+1]-gradientCols[startAt[selectedCol]+3*(steps-1)+1])*percentage;
-              bl=gradientCols[startAt[selectedCol]+3*(steps-1)+2]+(gradientCols[startAt[selectedCol]+2]-gradientCols[startAt[selectedCol]+3*(steps-1)+2])*percentage;
-            }else{
-              rd=gradientCols[startAt[selectedCol]+3*i]+(gradientCols[startAt[selectedCol]+3*(i+1)]-gradientCols[startAt[selectedCol]+3*i])*percentage;
-              gr=gradientCols[startAt[selectedCol]+3*i+1]+(gradientCols[startAt[selectedCol]+3*(i+1)+1]-gradientCols[startAt[selectedCol]+3*i+1])*percentage;
-              bl=gradientCols[startAt[selectedCol]+3*i+2]+(gradientCols[startAt[selectedCol]+3*(i+1)+2]-gradientCols[startAt[selectedCol]+3*i+2])*percentage;
-            }
-            //if (inID%1000==0){console.log(rd);}
+            rd=gradientCols[startAt[selectedCol]+3*(i%steps)]+(gradientCols[startAt[selectedCol]+3*((i+1)%steps)]-gradientCols[startAt[selectedCol]+3*(i%steps)])*percentage;
+            gr=gradientCols[startAt[selectedCol]+3*(i%steps)+1]+(gradientCols[startAt[selectedCol]+3*((i+1)%steps)+1]-gradientCols[startAt[selectedCol]+3*(i%steps)+1])*percentage;
+            bl=gradientCols[startAt[selectedCol]+3*(i%steps)+2]+(gradientCols[startAt[selectedCol]+3*((i+1)%steps)+2]-gradientCols[startAt[selectedCol]+3*(i%steps)+2])*percentage;
             break;
           }
         }
