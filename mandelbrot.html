@@ -457,6 +457,7 @@
       }
       
       function pushFunction(){
+        resetStuff();
         closePopups(0);
         isMandel=tmpIsMandel;
         power=tmpPow;
@@ -467,6 +468,7 @@
       }
       
       function pushFunction2(){
+        resetStuff();
         var rePart="0.125",imPart="0.8";
         document.getElementById("customscript").innerHTML="\nfunction createFunction(x,y){\n  julA="+rePart+";\n  julB="+imPart+";\n}\n";
         createFunction(0,0);
@@ -474,6 +476,16 @@
         closePopups(1);
         scan=0;
         setStuff();
+      }
+      
+      function resetStuff(){
+        if (isMandel&&power==2){
+          document.getElementById("xOff").value="400";
+        }else{
+          document.getElementById("xOff").value="0";
+        }
+        document.getElementById("yOff").value="0";
+        document.getElementById("zoom").value="3";
       }
       
       function recolor(){
@@ -557,7 +569,7 @@
     <canvas id="overlaycanvas" onmousedown=press(1) onmousemove=canvasInteract() onmouseup=press(0)></canvas>
     <div id="buttonpanel">
       <input id="iterations" value="50"></input>
-      <input id="xOff" value="200"></input>
+      <input id="xOff" value="400"></input>
       <input id="yOff" value="0"></input>
       <input id="zoom" value="3"></input>
       <button id="generate" onclick=setStuff()>Generate</button>
