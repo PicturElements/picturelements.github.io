@@ -249,6 +249,8 @@
       function mainGenerate(){
         document.getElementById("mandelcanvas").style.marginLeft="0";
         document.getElementById("mandelcanvas").style.marginTop="0";
+        tmpXOff=parseFloat(document.getElementById("xOff").value);
+        tmpYOff=parseFloat(document.getElementById("yOff").value);
         cmx=0;
         cmy=0;
         if (thread!=null){
@@ -321,8 +323,6 @@
         }else if (pressed&&mode==1){
           curX=event.clientX;
           curY=event.clientY;
-          tmpXOff=parseFloat(document.getElementById("xOff").value);
-          tmpYOff=parseFloat(document.getElementById("yOff").value);
         }
         paint2();
       }
