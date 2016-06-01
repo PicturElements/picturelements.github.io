@@ -361,12 +361,6 @@
         }else if (pressed&&mode==1){
           curX=event.clientX;
           curY=event.clientY;
-        }else if(mode==2){
-          document.getElementById("hoverinfo").style.marginLeft=""+(event.clientX+10)+"px";
-          document.getElementById("hoverinfo").style.marginTop=""+(event.clientY+10)+"px";
-          color((event.clientY-cmy)*width+(event.clientX-cmx);
-          document.getElementById("colorsample").style.backgroundColor="rgb("+rd+","+gr+","+bl+")";
-          document.getElementById("iterationinfo").innerHTML="Iter: "+(Math.floor(pixels[(event.clientY-cmy)*width+(event.clientX-cmx]));
         }
         paint2();
       }
@@ -384,6 +378,12 @@
           document.getElementById("mandelcanvas").style.marginTop=""+cmy+"px";
           document.getElementById("xOff").value=tmpXOff+cmx*zoom;
           document.getElementById("yOff").value=tmpYOff+cmy*zoom;
+        }else if(mode==2){
+          document.getElementById("hoverinfo").style.marginLeft=""+(event.clientX+10)+"px";
+          document.getElementById("hoverinfo").style.marginTop=""+(event.clientY+10)+"px";
+          color((event.clientY-cmy)*width+(event.clientX-cmx));
+          document.getElementById("colorsample").style.backgroundColor="rgb("+rd+","+gr+","+bl+")";
+          document.getElementById("iterationinfo").innerHTML="Iter: "+(Math.floor(pixels[(event.clientY-cmy)*width+(event.clientX-cmx])));
         }
         paint2();
       }
