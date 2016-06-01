@@ -323,9 +323,6 @@
           curY=event.clientY;
           tmpXOff=parseFloat(document.getElementById("xOff").value);
           tmpYOff=parseFloat(document.getElementById("yOff").value);
-        }else if (inId==0&&mode==1){
-          cmx=cmx+event.clientX-curX;
-          cmy=cmy+event.clientY-curY;
         }
         paint2();
       }
@@ -335,10 +332,14 @@
           xRes=event.clientX;
           yRes=event.clientY;
         }else if (mode==1&&pressed){
-          document.getElementById("mandelcanvas").style.marginLeft=""+(cmx+event.clientX-curX)+"px";
-          document.getElementById("mandelcanvas").style.marginTop=""+(cmy+event.clientY-curY)+"px";
-          document.getElementById("xOff").value=tmpXOff+(cmx+event.clientX-curX)*zoom;
-          document.getElementById("yOff").value=tmpYOff+(cmy+event.clientY-curY)*zoom;
+          cmx+=(event.clientX-curX);
+          cmy+=(event.clientY-curY);
+          curX=event.clientX;
+          curY=event.clientY;
+          document.getElementById("mandelcanvas").style.marginLeft=""+cmx+"px";
+          document.getElementById("mandelcanvas").style.marginTop=""+cmy+"px";
+          document.getElementById("xOff").value=tmpXOff+cmx*zoom;
+          document.getElementById("yOff").value=tmpYOff+cmy*zoom;
         }
         paint2();
       }
