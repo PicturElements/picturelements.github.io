@@ -181,7 +181,7 @@
       }
     </style>
     <script>
-      var xOff=200,yOff=0,zoom=3,iterations=50;
+      var xOff=200,yOff=0,zoom=3,iterations=50,mode=0;
       var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true;
       var width=window.innerWidth,height=window.innerHeight;
       var a,b,a2,b2;
@@ -298,6 +298,14 @@
         return -1;
       }
       
+      function setMode(){
+        if (event.keyCode==83){
+          document.getElementById("overlaycanvas").style.cursor="default";
+        }else if (event.keyCode==77){
+          document.getElementById("overlaycanvas").style.cursor="move";
+        }
+      }
+      
       function press(inId){
         pressed=inId;
         if (pressed){
@@ -307,10 +315,14 @@
         paint2();
       }
       
-      function drawRect(){
-        xRes=event.clientX;
-        yRes=event.clientY;
-        paint2();
+      function canvasInteract(){
+        if (mode==0){
+          xRes=event.clientX;
+          yRes=event.clientY;
+          paint2();
+        }else if (mode==1){
+          
+        }
       }
       
       function setStuff(){
@@ -508,7 +520,7 @@
   <body onload=init()>
     <script id="customscript"></script>
     <canvas id="mandelcanvas"></canvas>
-    <canvas id="overlaycanvas" onmousedown=press(1) onmousemove=drawRect() onmouseup=press(0)></canvas>
+    <canvas id="overlaycanvas" onkeydown=setMode() onmousedown=press(1) onmousemove=canvasInteract() onmouseup=press(0)></canvas>
     <div id="buttonpanel">
       <input id="iterations" value="50"></input>
       <input id="xOff" value="200"></input>
