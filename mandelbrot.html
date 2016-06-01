@@ -346,26 +346,30 @@
         hi.left="-1000px";
         hi.top="-1000px";
         hi.display="none";
-        if (event.keyCode==83){
+        var kc=event.keyCode;
+        if (document.getElementById("hoverinfo").style.display=="block"){
+          kc=-1;
+        }
+        if (kc==83){
           document.getElementById("overlaycanvas").style.cursor="default";
           mode=0;
-        }else if (event.keyCode==77){
+        }else if (kc==77){
           document.getElementById("overlaycanvas").style.cursor="move";
           mode=1;
-        }else if (event.keyCode==73){
+        }else if (kc==73){
           document.getElementById("overlaycanvas").style.cursor="default";
           document.getElementById("hoverinfo").style.display="block";
           mode=2;
-        }else if(event.keyCode==71){   //G - generate
+        }else if(kc==71){   //G - generate
           closePopups(-1);
           setStuff()
-        }else if(event.keyCode==70){   //F - function
+        }else if(kc==70){   //F - function
           closePopups(-1);
           setFunction();
-        }else if(event.keyCode==67){   //C - colors
+        }else if(kc==67){   //C - colors
           closePopups(-1);
           setColor();
-        }else if(event.keyCode==85){   //U - URL
+        }else if(kc==85){   //U - URL
           closePopups(-1);
           setTimeout(getUrl,100);
         }
