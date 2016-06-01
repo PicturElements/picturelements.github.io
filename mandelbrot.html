@@ -402,8 +402,9 @@
             }
             document.getElementById("iterationinfo").innerHTML="Iterations: "+iters;
             if (event.clientX+hi.offsetWidth+40>width){
-              hi.style.marginLeft=""+(event.clientX-20-hi.offsetWidth)+"px";
-            }else if (event.clientY+hi.offsetHeight+40>height){
+              hi.style.marginLeft=""+(event.clientX-40-hi.offsetWidth)+"px";
+            }
+            if (event.clientY+hi.offsetHeight+40>height){
               hi.style.marginTop=""+(event.clientY-20-hi.offsetHeight)+"px";
             }
           }
