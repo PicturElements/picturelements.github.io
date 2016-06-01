@@ -339,7 +339,10 @@
       }
       
       function setMode(){
-        document.getElementById("hoverinfo").style.display="none";
+        var hi=document.getElementById("hoverinfo").style;
+        hi.marginLeft="-1000px";
+        hi.marginTop="-1000px";
+        hi.display="none";
         if (event.keyCode==83){
           document.getElementById("overlaycanvas").style.cursor="default";
           mode=0;
@@ -382,8 +385,10 @@
           document.getElementById("hoverinfo").style.marginLeft=""+(event.clientX+10)+"px";
           document.getElementById("hoverinfo").style.marginTop=""+(event.clientY+10)+"px";
           color((event.clientY-cmy)*width+(event.clientX-cmx));
-          document.getElementById("colorsample").style.backgroundColor="rgb("+rd+","+gr+","+bl+")";
-          document.getElementById("iterationinfo").innerHTML="Iter: "+(Math.floor(pixels[(event.clientY-cmy)*width+(event.clientX-cmx)]));
+          document.getElementById("colorsample").style.backgroundColor="rgb("+Math.floor(rd)+","+Math.floor(gr)+","+Math.floor(bl)+")";
+          var iters=Math.floor(pixels[(event.clientY-cmy)*width+(event.clientX-cmx)]);
+          if (iters==-1){iters=iterations;}
+          document.getElementById("iterationinfo").innerHTML="Iterations: "+iters;
         }
         paint2();
       }
