@@ -318,7 +318,6 @@
         if (pressed&&mode==0){
           xOrig=event.clientX;
           yOrig=event.clientY;
-          paint2();
         }else if (pressed&&mode==1){
           curX=event.clientX;
           curY=event.clientY;
@@ -328,20 +327,20 @@
           cmx=cmx+event.clientX-curX;
           cmy=cmy+event.clientY-curY;
         }
+        paint2();
       }
       
       function canvasInteract(){
         if (mode==0){
           xRes=event.clientX;
           yRes=event.clientY;
-          paint2();
         }else if (mode==1&&pressed){
           document.getElementById("mandelcanvas").style.marginLeft=""+(cmx+event.clientX-curX)+"px";
           document.getElementById("mandelcanvas").style.marginTop=""+(cmy+event.clientY-curY)+"px";
           document.getElementById("xOff").value=tmpXOff+(cmx+event.clientX-curX)*zoom;
           document.getElementById("yOff").value=tmpYOff+(cmy+event.clientY-curY)*zoom;
-          paint2();
         }
+        paint2();
       }
       
       function setStuff(){
@@ -533,7 +532,7 @@
           ctx2.stroke();
           ctx2.beginPath();
           ctx2.moveTo(Math.floor(window.innerWidth/2),0);
-          ctx2.moveTo(Math.floor(window.innerWidth/2),window.innerHeight);
+          ctx2.lineTo(Math.floor(window.innerWidth/2),window.innerHeight);
           ctx2.stroke();
         }
         if (thread!=null){
