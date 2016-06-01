@@ -402,7 +402,7 @@
             }
             document.getElementById("iterationinfo").innerHTML="Iterations: "+iters;
             if (event.clientX+hi.offsetWidth+40>width){
-              hi.style.marginLeft=""+(event.clientX-40-hi.offsetWidth)+"px";
+              hi.style.marginLeft=""+(event.clientX-20-Math.ceil(Math.log(iters-1)/Math.log(10))*20-hi.offsetWidth)+"px";
             }
             if (event.clientY+hi.offsetHeight+40>height){
               hi.style.marginTop=""+(event.clientY-20-hi.offsetHeight)+"px";
