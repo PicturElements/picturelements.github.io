@@ -212,6 +212,11 @@
         document.getElementById("gradientdisplay").style.background="linear-gradient(to right, "+colors+")";
         selectedCol=inID;
         closePopups(3);
+        if (thread!=null){
+          clearInterval(thread);
+        }
+        scan=0;
+        thread=setInterval(recolor,1);
       } 
       
       function mainGenerate(){
@@ -219,7 +224,7 @@
           clearInterval(thread);
         }
         pixels=[];
-        thread=setInterval(generate,10);   //set a low refresh time, let computer calculate as fast as it can. You go, little man!
+        thread=setInterval(generate,1);   //set a low refresh time, let computer calculate as fast as it can. You go, little man!
       }
       
       function generate(){
@@ -404,8 +409,13 @@
         setStuff();
       }
       
+      function recolor(){
+        paint();
+        paint2();
+        scan+=10;
+      }
+      
       function paint(){
-        var shade;
         var ctx=document.getElementById("mandelcanvas").getContext("2d");
         for (var h=scan;h<scan+10;h++){
           for (var w=0;w<width;w++){
