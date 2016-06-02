@@ -349,7 +349,6 @@
         hi.top="-1000px";
         hi.display="none";
         var kc=event.keyCode;
-        move=false;
         if (!closeU){  //if the geturl popup is open, don't execute anything on keydown
           kc=-1;
         }
@@ -378,13 +377,13 @@
           setTimeout(getUrl,100);
         }else if(kc==27){   //ESC
           closePopups(-1);
-        }else if(kc==13&&mode==0&&xRes>0&&yRes>0){   //Enter-generate
+        }else if(kc==13&&mode==0&&move){   //Enter-generate
           xRes=0;
           yRes=0;
           paint2();
           setStuff();
           document.getElementById("overlaycanvas").style.cursor="default";
-        }else if(kc==27&&mode==0&&xRes>0&&yRes>0){   //Esc
+        }else if(kc==27&&mode==0&&xRes>0&&yRes>0&&move){   //Esc
           xRes=0;
           yRes=0;
           paint2();
@@ -393,6 +392,7 @@
           document.getElementById("yOff").value=tmpYOff;
           document.getElementById("overlaycanvas").style.cursor="default";
         }
+        move=false;
       }
       
       function press(inId){
@@ -428,8 +428,8 @@
             document.getElementById("yOff").value=tmpYOff;
           }
         }else if(move&&pressed){
-          //document.getElementById("xOff").value=parseFloat(document.getElementById("xOff").value)-(event.clientX-curX)*zoom;
-          //document.getElementById("yOff").value=parseFloat(document.getElementById("yOff").value)-(event.clientY-curY)*zoom;
+          document.getElementById("xOff").value=(parseFloat(document.getElementById("xOff").value)-(event.clientX-curX)*zoom);
+          document.getElementById("yOff").value=(parseFloat(document.getElementById("yOff").value)-(event.clientY-curY)*zoom);
           xOrig+=(event.clientX-curX);
           yOrig+=(event.clientY-curY);
           paint2();
