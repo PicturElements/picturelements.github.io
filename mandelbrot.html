@@ -374,7 +374,7 @@
       }
       
       function setMode(x){
-        if (isHotkey(event.keyCode)){
+        if (isHotkey(event.keyCode)&&document.getElementById("colorpanel").style.display=="none"){
           document.getElementById("generate").focus();
         }
         document.getElementById("upperinfo").style.display="none";
@@ -383,7 +383,7 @@
         hi.top="-1000px";
         hi.display="none";
         var kc=event.keyCode;
-        if (!closeU){  //if the geturl popup is open, don't execute anything on keydown
+        if (!closeU||document.getElementById("colorpanel").style.display=="block"){  //if the geturl popup is open, don't execute anything on keydown
           kc=-1;
         }
         if (kc==83){
