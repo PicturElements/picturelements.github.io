@@ -367,7 +367,7 @@
       }
       
       function setMode(x){
-        if (x==1){
+        if (!isNumber(String.fromCharCode(event.keyCode))){
           document.getElementById("generate").focus();
         }
         document.getElementById("upperinfo").style.display="none";
