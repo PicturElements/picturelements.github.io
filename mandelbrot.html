@@ -236,7 +236,7 @@
     </style>
     <script>
       var xOff=400,yOff=0,zoom=3,iterations=50,mode=0;
-      var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true,closeU=true,move=false;
+      var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true,closeU=true,move=false,fDisplay=false;
       var width=window.innerWidth,height=window.innerHeight;
       var cmx=0,cmy=0,curX,curY,tmpXOff,tmpYOff,tmpZoom;
       var a,b,a2,b2;
@@ -374,7 +374,7 @@
       }
       
       function setMode(x){
-        if (isHotkey(event.keyCode)&&document.getElementById("colorpanel").style.display=="none"){
+        if (isHotkey(event.keyCode)&&!fDisplay){
           document.getElementById("generate").focus();
         }
         document.getElementById("upperinfo").style.display="none";
@@ -383,7 +383,7 @@
         hi.top="-1000px";
         hi.display="none";
         var kc=event.keyCode;
-        if (!closeU||document.getElementById("colorpanel").style.display=="block"){  //if the geturl popup is open, don't execute anything on keydown
+        if (!closeU||fDisplay){  //if the geturl popup is open, don't execute anything on keydown
           kc=-1;
         }
         if (kc==83){
@@ -560,6 +560,7 @@
       }
       
       function closePopups(inId){
+        fDisplay=false;
         closeU=true;
         document.getElementById("overlay").style.display="none";
         if (inId==-1){    //closes EVERYTHING
