@@ -409,7 +409,7 @@
           closePopups(-1);
           closeU=false;
           setTimeout(getUrl,100);
-        }else if(kc==27){   //ESC
+        }else if(kc==27||kc==-1){   //ESC
           closePopups(-1);
         }else if(kc==13&&mode==0&&move){   //Enter-generate
           setStuff();
