@@ -285,10 +285,10 @@
               if (i==url.length-1){tmpStr+=url.charAt(i);}
               toScan=false;
               if (count==0){document.getElementById("functionin").value=tmpStr;}
-              else if (count==1){document.getElementById("iterations").value=tmpStr; iterations=Math.floor(parseFloat(tmpStr));}
-              else if (count==2){document.getElementById("xOff").value=tmpStr; xOff=parseFloat(tmpStr);}
-              else if (count==3){document.getElementById("yOff").value=tmpStr; yOff=parseFloat(tmpStr);}
-              else if (count==4){document.getElementById("zoom").value=tmpStr; zoom=parseFloat(tmpStr);}
+              else if (count==1){document.getElementById("iterations").value=tmpStr;}
+              else if (count==2){document.getElementById("xOff").value=tmpStr;}
+              else if (count==3){document.getElementById("yOff").value=tmpStr;}
+              else if (count==4){document.getElementById("zoom").value=tmpStr;}
               count++;
               tmpStr="";
             }else if(toScan){
@@ -677,7 +677,7 @@
       }
       
       function pushFunction(inId){
-        resetStuff();
+        if (inId==1){resetStuff();}
         closePopups(0);
         isMandel=tmpIsMandel;
         power=tmpPow;
