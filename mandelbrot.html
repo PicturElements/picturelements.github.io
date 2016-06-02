@@ -219,7 +219,7 @@
       var xOff=200,yOff=0,zoom=3,iterations=50,mode=0;
       var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true,closeU=false;
       var width=window.innerWidth,height=window.innerHeight;
-      var cmx=0,cmy=0,curX,curY,tmpXOff,tmpYOff;
+      var cmx=0,cmy=0,curX,curY,tmpXOff,tmpYOff,tmpZoom;
       var a,b,a2,b2;
       var pixels=[];
       var scan=0,thread=null;
@@ -286,6 +286,7 @@
         document.getElementById("mandelcanvas").style.marginTop="0";
         tmpXOff=parseFloat(document.getElementById("xOff").value);
         tmpYOff=parseFloat(document.getElementById("yOff").value);
+        tmpZoom=parseFloat(document.getElementById("zoom").value);
         cmx=0;
         cmy=0;
         if (thread!=null){
@@ -393,8 +394,9 @@
       
       function canvasInteract(){
         if (mode==0){
-          xRes=xOrig-event.clientX;
-          yRes=(xOrig-event.clientX)*(height/width);
+          xRes=event.clientX-xOrig;
+          yRes=(xRes)*(height/width);
+          document.getElementById("zoom").value=tmpZoom*(xRes/window.innerWidth);
         }else if (mode==1&&pressed){
           cmx+=(event.clientX-curX);
           cmy+=(event.clientY-curY);
