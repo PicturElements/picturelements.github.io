@@ -683,8 +683,8 @@
       }
       
       function save(){
-        if (scan<height||scan>0){
-          alert("Hold your horses!\nWait until the fractal has finished rendering!");
+        if (scan<height&&scan>0){
+          alert("Hold your horses!\n\nWait until the fractal has finished rendering!\n");
         }else{
           var c=document.getElementById("mandelcanvas");
           var d=c.toDataURL("image/png");
