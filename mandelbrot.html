@@ -235,7 +235,7 @@
       }
     </style>
     <script>
-      var xOff=200,yOff=0,zoom=3,iterations=50,mode=0;
+      var xOff=400,yOff=0,zoom=3,iterations=50,mode=0;
       var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true,closeU=true,move=false;
       var width=window.innerWidth,height=window.innerHeight;
       var cmx=0,cmy=0,curX,curY,tmpXOff,tmpYOff,tmpZoom;
@@ -247,7 +247,7 @@
       //               |                 |             |             |             |                       |
       var startAt=[0,6,12,18,24,33,48];
       var selectedCol=5,rd,gr,bl,cycleLength=50;
-      var date=new Date(),time;
+      var date=new Date(),time=date.getTime();
       
       function init(){
         var canvas=document.getElementById("mandelcanvas");
