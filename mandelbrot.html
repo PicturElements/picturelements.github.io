@@ -236,7 +236,7 @@
     </style>
     <script>
       var xOff=400,yOff=0,zoom=3,iterations=50,mode=0;
-      var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true,closeU=true,move=false,fDisplay=false;
+      var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true,display=false,move=false;
       var width=window.innerWidth,height=window.innerHeight;
       var cmx=0,cmy=0,curX,curY,tmpXOff,tmpYOff,tmpZoom;
       var a,b,a2,b2;
@@ -374,7 +374,7 @@
       }
       
       function setMode(x){
-        if (isHotkey(event.keyCode)&&!fDisplay){
+        if (isHotkey(event.keyCode)&&!display){
           document.getElementById("generate").focus();
         }
         document.getElementById("upperinfo").style.display="none";
@@ -383,7 +383,7 @@
         hi.top="-1000px";
         hi.display="none";
         var kc=event.keyCode;
-        if (!closeU||fDisplay){  //if the geturl popup is open, don't execute anything on keydown
+        if (display){  //if the geturl popup is open, don't execute anything on keydown
           kc=-1;
         }
         if (kc==83){
@@ -402,12 +402,13 @@
         }else if(kc==70){   //F - function
           closePopups(-1);
           setFunction();
+          display=true;
         }else if(kc==67){   //C - colors
           closePopups(-1);
           setColor();
         }else if(kc==85){   //U - URL
           closePopups(-1);
-          closeU=false;
+          display=true;
           setTimeout(getUrl,100);
         }else if(kc==27||kc==-1){   //ESC
           closePopups(-1);
@@ -534,7 +535,7 @@
       }
       
       function setFunction(){
-        fDisplay=true;
+        display=true;
         document.getElementById("overlay").style.display="block";
         document.getElementById("functionpanel").style.display="block";
       }
@@ -545,6 +546,7 @@
       }
       
       function getUrl(){
+        display=true;
         document.getElementById("overlay").style.display="block";
         document.getElementById("sharepanel").style.display="block";
         document.getElementById("urlout").select();
@@ -561,8 +563,7 @@
       }
       
       function closePopups(inId){
-        fDisplay=false;
-        closeU=true;
+        display=false;
         document.getElementById("overlay").style.display="none";
         if (inId==-1){    //closes EVERYTHING
           var popups=document.getElementsByClassName("popup");
