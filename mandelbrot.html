@@ -312,7 +312,6 @@
         tmpZoom=parseFloat(document.getElementById("zoom").value);
         cmx=0;
         cmy=0;
-        time=date.getTime();
         if (thread!=null){
           clearInterval(thread);
         }
@@ -529,6 +528,8 @@
         else if (yOff==null||yOff==undefined){yOff=0;}
         else if (zoom==null||zoom==undefined){yOff=0;}
         scan=0;
+        date=new Date();
+        time=date.getTime();
         mainGenerate();
       }
       
