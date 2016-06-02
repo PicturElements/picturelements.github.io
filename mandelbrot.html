@@ -311,7 +311,6 @@
         cmx=0;
         cmy=0;
         time=date.getTime();
-        console.log(time);
         if (thread!=null){
           clearInterval(thread);
         }
@@ -685,8 +684,8 @@
           }
         }
         if (scan>=window.innerHeight){
+          date=new Date();
           time=date.getTime()-time;
-          console.log(time);
           var time_out="Set generated in: ";
           if (time/60000>=1){
             time_out+=""+Math.floor(time/60000)+"m ";
@@ -699,7 +698,7 @@
           time_out+=""+time+"ms ";
           document.getElementById("upperinfo").style.display="block";
           document.getElementById("upperinfo").innerHTML=time_out;
-          setTimeout(function(){document.getElementById("upperinfo").style.display="block";}, 2000);
+          setTimeout(function(){document.getElementById("upperinfo").style.display="none";}, 2000);
           clearInterval(thread);
         }
       }
