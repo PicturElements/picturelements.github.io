@@ -297,6 +297,8 @@
         if (thread!=null){
           clearInterval(thread);
         }
+        date=new Date();
+        time=-date.getTime();
         scan=0;
         thread=setInterval(recolor,1);
       } 
@@ -684,9 +686,16 @@
           }
         }
         if (scan>=window.innerHeight){
-          date=new Date();
-          time=date.getTime()-time;
-          var time_out="Set generated in: ";
+          var time_out;
+          if (time<0){
+            date=new Date();
+            time=date.getTime()+time;
+            time_out="Color set in: ";
+          }else{
+            date=new Date();
+            time=date.getTime()-time;
+            time_out="Set rendered in: ";
+          }
           if (time/60000>=1){
             time_out+=""+Math.floor(time/60000)+"m ";
             time-=(Math.floor(time/60000)*60000);
