@@ -217,7 +217,7 @@
     </style>
     <script>
       var xOff=200,yOff=0,zoom=3,iterations=50,mode=0;
-      var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true,closeU=false;
+      var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true,closeU=true;
       var width=window.innerWidth,height=window.innerHeight;
       var cmx=0,cmy=0,curX,curY,tmpXOff,tmpYOff,tmpZoom;
       var a,b,a2,b2;
@@ -372,9 +372,15 @@
           setColor();
         }else if(kc==85){   //U - URL
           closePopups(-1);
+          closeU=false;
           setTimeout(getUrl,100);
         }else if(kc==27){   //ESC
           closePopups(-1);
+        }else if(kc==13&&mode==0&&xRes>0&&yRes>0){   //ESC
+          xRes=0;
+          yRes=0;
+          paint2();
+          mainGenerate();
         }
       }
       
