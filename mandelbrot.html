@@ -347,7 +347,7 @@
         hi.top="-1000px";
         hi.display="none";
         var kc=event.keyCode;
-        if (document.getElementById("geturl").style.display=="block"){  //if the geturl popup is open, don't execute anything on keydown
+        if (mode==5){  //if the geturl popup is open, don't execute anything on keydown
           kc=-1;
         }
         if (kc==83){
@@ -363,15 +363,19 @@
         }else if(kc==71){   //G - generate
           closePopups(-1);
           setStuff()
+          mode=3;
         }else if(kc==70){   //F - function
           closePopups(-1);
           setFunction();
+          mode=4;
         }else if(kc==67){   //C - colors
           closePopups(-1);
           setColor();
+          mode=4;
         }else if(kc==85){   //U - URL
           closePopups(-1);
           setTimeout(getUrl,100);
+          mode=5;
         }
       }
       
