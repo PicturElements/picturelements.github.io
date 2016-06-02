@@ -349,6 +349,7 @@
         hi.top="-1000px";
         hi.display="none";
         var kc=event.keyCode;
+        move=false;
         if (!closeU){  //if the geturl popup is open, don't execute anything on keydown
           kc=-1;
         }
@@ -383,7 +384,6 @@
           paint2();
           setStuff();
           document.getElementById("overlaycanvas").style.cursor="default";
-          move=false;
         }else if(kc==27&&mode==0&&xRes>0&&yRes>0){   //Esc
           xRes=0;
           yRes=0;
@@ -392,7 +392,6 @@
           document.getElementById("xOff").value=tmpXOff;
           document.getElementById("yOff").value=tmpYOff;
           document.getElementById("overlaycanvas").style.cursor="default";
-          move=false;
         }
       }
       
@@ -402,7 +401,7 @@
           xOrig=event.clientX;
           yOrig=event.clientY;
           xRes=0;
-          yres=0;
+          yRes=0;
           document.getElementById("zoom").value=tmpZoom;
         }else if (pressed&&mode==1||pressed&&mode==0&&xRes>0&&yRes>0){
           curX=event.clientX;
