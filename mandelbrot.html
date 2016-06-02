@@ -217,7 +217,7 @@
     </style>
     <script>
       var xOff=200,yOff=0,zoom=3,iterations=50,mode=0;
-      var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true,closeU=true;
+      var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true,closeU=true,move=false;
       var width=window.innerWidth,height=window.innerHeight;
       var cmx=0,cmy=0,curX,curY,tmpXOff,tmpYOff,tmpZoom;
       var a,b,a2,b2;
@@ -382,6 +382,17 @@
           yRes=0;
           paint2();
           setStuff();
+          document.getElementById("overlaycanvas").style.cursor="default";
+          move=false;
+        }else if(kc==27&&mode==0&&xRes>0&&yRes>0){   //Esc
+          xRes=0;
+          yRes=0;
+          paint2();
+          document.getElementById("zoom").value=tmpZoom;
+          document.getElementById("xOff").value=tmpXOff;
+          document.getElementById("yOff").value=tmpYOff;
+          document.getElementById("overlaycanvas").style.cursor="default";
+          move=false;
         }
       }
       
@@ -393,15 +404,19 @@
           xRes=0;
           yres=0;
           document.getElementById("zoom").value=tmpZoom;
-        }else if (pressed&&mode==1){
+        }else if (pressed&&mode==1||pressed&&mode==0&&xRes>0&&yRes>0){
           curX=event.clientX;
           curY=event.clientY;
+        }
+        if (!pressed&&mode==0&&xRes>0&&yRes>0){
+          document.getElementById("overlaycanvas").style.cursor="move";
+          move=true;
         }
         paint2();
       }
       
       function canvasInteract(){
-        if (mode==0&&pressed){
+        if (mode==0&&pressed&&!move){
           xRes=event.clientX-xOrig;
           yRes=(xRes)*(height/width);
           if (xRes>0&&yRes>0){
@@ -413,6 +428,14 @@
             document.getElementById("xOff").value=tmpXOff;
             document.getElementById("yOff").value=tmpYOff;
           }
+        }else if(move){
+          document.getElementById("xOff").value=parseFloat(document.getElementById("xOff").value)-(event.clientX-curX)*zoom;
+          document.getElementById("yOff").value=parseFloat(document.getElementById("yOff").value)-(event.clientY-curY)*zoom;
+          xOrig+=(event.clientX-curX);
+          yOrig+=(event.clientY-curY);
+          paint2();
+          curX=event.clientX;
+          curY=event.clientY;
         }else if (mode==1&&pressed){
           cmx+=(event.clientX-curX);
           cmy+=(event.clientY-curY);
