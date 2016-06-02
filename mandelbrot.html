@@ -387,16 +387,18 @@
           curX=event.clientX;
           curY=event.clientY;
         }
-        if (inId!=0||mode!=0){
-          paint2();
-        }
+        paint2();
       }
       
       function canvasInteract(){
-        if (mode==0){
+        if (mode==0&&pressed){
           xRes=event.clientX-xOrig;
           yRes=(xRes)*(height/width);
-          document.getElementById("zoom").value=tmpZoom*(xRes/window.innerWidth);
+          if (xRes>0&&yRes>0){
+            document.getElementById("zoom").value=tmpZoom*(xRes/window.innerWidth);
+          }else{
+            document.getElementById("zoom").value=tmpZoom;
+          }
         }else if (mode==1&&pressed){
           cmx+=(event.clientX-curX);
           cmy+=(event.clientY-curY);
@@ -637,7 +639,7 @@
         var ctx2=document.getElementById("overlaycanvas").getContext("2d");
         ctx2.clearRect(0,0,window.innerWidth,window.innerHeight);
         ctx2.strokeStyle="red";
-        if (pressed&&mode==0){
+        if (xRes>0&&yRes>0&&mode==0){
           ctx2.beginPath();
           ctx2.rect(xOrig,yOrig,xRes,yRes);
           ctx2.stroke();
