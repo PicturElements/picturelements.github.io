@@ -217,7 +217,7 @@
     </style>
     <script>
       var xOff=200,yOff=0,zoom=3,iterations=50,mode=0;
-      var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true;
+      var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true,closeU=false;
       var width=window.innerWidth,height=window.innerHeight;
       var cmx=0,cmy=0,curX,curY,tmpXOff,tmpYOff;
       var a,b,a2,b2;
@@ -347,7 +347,7 @@
         hi.top="-1000px";
         hi.display="none";
         var kc=event.keyCode;
-        if (mode==5){  //if the geturl popup is open, don't execute anything on keydown
+        if (!closeU){  //if the geturl popup is open, don't execute anything on keydown
           kc=-1;
         }
         if (kc==83){
@@ -363,19 +363,17 @@
         }else if(kc==71){   //G - generate
           closePopups(-1);
           setStuff()
-          mode=3;
         }else if(kc==70){   //F - function
           closePopups(-1);
           setFunction();
-          mode=4;
         }else if(kc==67){   //C - colors
           closePopups(-1);
           setColor();
-          mode=4;
         }else if(kc==85){   //U - URL
           closePopups(-1);
           setTimeout(getUrl,100);
-          mode=5;
+        }else if(kc==27){   //ESC
+          closePopups(-1);
         }
       }
       
@@ -388,13 +386,15 @@
           curX=event.clientX;
           curY=event.clientY;
         }
-        paint2();
+        if (inId!=0||mode!=0){
+          paint2();
+        }
       }
       
       function canvasInteract(){
         if (mode==0){
-          xRes=event.clientX;
-          yRes=event.clientY;
+          xRes=xOrig-event.clientX;
+          yRes=(xOrig-event.clientX)*(height/width);
         }else if (mode==1&&pressed){
           cmx+=(event.clientX-curX);
           cmy+=(event.clientY-curY);
@@ -477,6 +477,7 @@
       }
       
       function closePopups(inId){
+        closeU=true;
         document.getElementById("overlay").style.display="none";
         if (inId==-1){    //closes EVERYTHING
           var popups=document.getElementsByClassName("popup");
@@ -636,7 +637,7 @@
         ctx2.strokeStyle="red";
         if (pressed&&mode==0){
           ctx2.beginPath();
-          ctx2.rect(xOrig,yOrig,xRes-xOrig,yRes-yOrig);
+          ctx2.rect(xOrig,yOrig,xRes,yRes);
           ctx2.stroke();
         }else if (pressed&&mode==1){
           ctx2.beginPath();
