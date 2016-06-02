@@ -397,13 +397,13 @@
       
       function press(inId){
         pressed=inId;
-        if (pressed&&mode==0){
+        if (pressed&&mode==0&&!move){
           xOrig=event.clientX;
           yOrig=event.clientY;
           xRes=0;
           yRes=0;
           document.getElementById("zoom").value=tmpZoom;
-        }else if (pressed&&mode==1||pressed&&mode==0&&xRes>0&&yRes>0){
+        }else if (pressed&&mode==1||pressed&&move){
           curX=event.clientX;
           curY=event.clientY;
         }
