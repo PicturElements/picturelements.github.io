@@ -682,6 +682,17 @@
         scan+=10;
       }
       
+      function save(){
+        if (scan>=height||scan==0){
+          alert("Hold your horses! Wait until the fractal is done rendering!");
+        }else{
+          var c=document.getElementById("mandelcanvas");
+          var d=c.toDataURL("image/png");
+          var w=window.open('about:blank','image from canvas');
+          w.document.write("<img src='"+d+"' alt='from canvas'/>");
+        }
+      }
+      
       function paint(){
         var ctx=document.getElementById("mandelcanvas").getContext("2d");
         for (var h=scan;h<scan+10;h++){
@@ -786,6 +797,7 @@
       <button id="function" onclick=setFunction()>Function</button>
       <button id="colors" onclick=setColor()>Colors</button>
       <button id="geturl" onclick=getUrl()>Get URL</button>
+      <button id="save" onclick=save()>Save</button>
       <div id="expando" onclick=expando()>||</div>
     </div>
     <div id="overlay">
