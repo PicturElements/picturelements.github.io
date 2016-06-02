@@ -374,7 +374,7 @@
       }
       
       function setMode(x){
-        id (!display){
+        if (!display){
           if (isHotkey(event.keyCode)){
             document.getElementById("generate").focus();
           }
