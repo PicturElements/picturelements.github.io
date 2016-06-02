@@ -497,6 +497,7 @@
       }
       
       function setStuff(){
+        document.getElementById("upperinfo").style.display="none";
         xRes=0;
         yRes=0;
         if (move){
@@ -735,10 +736,10 @@
     <canvas id="mandelcanvas"></canvas>
     <canvas id="overlaycanvas" onmousedown=press(1) onmousemove=canvasInteract() onmouseup=press(0)></canvas>
     <div id="buttonpanel">
-      <input id="iterations" value="50"></input>
-      <input id="xOff" value="400"></input>
-      <input id="yOff" value="0"></input>
-      <input id="zoom" value="3"></input>
+      <input id="iterations" value="50" onkeydown=setMode()></input>
+      <input id="xOff" value="400" onkeydown=setMode()></input>
+      <input id="yOff" value="0" onkeydown=setMode()></input>
+      <input id="zoom" value="3" onkeydown=setMode()></input>
       <button id="generate" onclick=setStuff()>Generate</button>
       <button id="function" onclick=setFunction()>Function</button>
       <button id="colors" onclick=setColor()>Colors</button>
