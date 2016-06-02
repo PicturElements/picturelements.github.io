@@ -247,6 +247,7 @@
       //               |                 |             |             |             |                       |
       var startAt=[0,6,12,18,24,33,48];
       var selectedCol=5,rd,gr,bl,cycleLength=50;
+      var date=new Date(),time;
       
       function init(){
         var canvas=document.getElementById("mandelcanvas");
@@ -309,6 +310,7 @@
         tmpZoom=parseFloat(document.getElementById("zoom").value);
         cmx=0;
         cmy=0;
+        time=date.getTime();
         if (thread!=null){
           clearInterval(thread);
         }
@@ -682,7 +684,21 @@
           }
         }
         if (scan>=window.innerHeight){
+          time=date.getTime()-time;
+          var time_out="Set generated in: ";
+          if (time/60000>=1){
+            time_out+=""+Math.floor(time/60000)+"m ";
+            time-=(Math.floor(time/60000)*60000);
+          }
+          if (time/1000>=1){
+            time_out+=""+Math.floor(time/1000)+"s ";
+            time-=(Math.floor(time/1000)*1000);
+          }
+          time_out+=""+time+"ms ";
+          document.getElementById("upperinfo").style.display="block";
+          document.getElementById("upperinfo").innerHTML=time_out;
           clearInterval(thread);
+          setTimeout(function(){document.getElementById("upperinfo").style.display="block";},2000);
         }
       }
       
