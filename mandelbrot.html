@@ -214,6 +214,25 @@
         color: #333;
         margin-left: 70px;
       }
+      
+      #upperinfo{
+        display: none;
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        font-family: Roboto,Arial,sans-serif;
+        color: white;
+        top: 0.5vw;
+        padding-top: 0.5vw;
+        padding-bottom: 0.5vw;
+        font-size: 1.3vw;
+        background-color: rgba(0,0,0,0.4);
+        text-shadow: 0 0 2px black, 0 0 2px black,0 0 2px black, 0 0 2px black;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ie-user-select: none;
+        pointer-events: none;
+      }
     </style>
     <script>
       var xOff=200,yOff=0,zoom=3,iterations=50,mode=0;
@@ -344,6 +363,7 @@
       }
       
       function setMode(){
+        document.getElementById("upperinfo").style.display="none";
         var hi=document.getElementById("hoverinfo").style;
         hi.left="-1000px";
         hi.top="-1000px";
@@ -406,6 +426,8 @@
         }
         if (!pressed&&mode==0&&xRes>0&&yRes>0){
           document.getElementById("overlaycanvas").style.cursor="move";
+          document.getElementById("upperinfo").style.display="block";
+          document.getElementById("upperinfo").innerHTML="Esc - Cancel | Enter - generate";
           move=true;
         }
         paint2();
@@ -763,5 +785,6 @@
       <div id="colorsample"></div>
       <div id="iterationinfo"></div>
     </div>
+    <div id="upperinfo"></div>
   </body>
 </html>
