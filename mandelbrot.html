@@ -428,7 +428,7 @@
             document.getElementById("xOff").value=tmpXOff;
             document.getElementById("yOff").value=tmpYOff;
           }
-        }else if(move%%pressed){
+        }else if(move&&pressed){
           document.getElementById("xOff").value=parseFloat(document.getElementById("xOff").value)-(event.clientX-curX)*zoom;
           document.getElementById("yOff").value=parseFloat(document.getElementById("yOff").value)-(event.clientY-curY)*zoom;
           xOrig+=(event.clientX-curX);
