@@ -268,7 +268,35 @@
         }
         colors+="rgb("+(gradientCols[startAt[selectedCol]])+","+(gradientCols[startAt[selectedCol]+1])+","+(gradientCols[startAt[selectedCol]+2])+") 100%";
         document.getElementById("gradientdisplay").style.background="linear-gradient(to right, "+colors+")";
-        mainGenerate();
+        if (parseUrl()){
+          mainGenerate();
+        }
+      }
+      
+      function parseUrl(){
+        var tmpStr="";
+        var count=0,url=window.location.href;
+        var foundQuest=false,toScan=false;
+        for (var i=0;i<url.length;i++){
+          if (url.charAt(i)=='?'){foundQuest=true;}
+          if (foundQuest){
+            if (url.charAt(i)=='='){toScan=true;}
+            else if (url.charAt(i)=='&'||i==url.length-1){
+              if (i==url.length-1){tmpStr+=url.charAt(i);}
+              toScan=false;
+              if (count==1){document.getElementById("functionin").value=tmpStr;}
+              else if (count==1){document.getElementById("iterations").value=tmpStr;}
+              else if (count==2){document.getElementById("xOff").value=tmpStr;}
+              else if (count==3){document.getElementById("yOff").value=tmpStr;}
+              else if (count==4){document.getElementById("zoom").value=tmpStr;}
+              count++;
+              tmpStr="";
+            }else{
+              tmpStr+=url.charAt(i);
+            }
+          }
+        }
+        return foundQuest;
       }
       
       function gradientSetup(){
@@ -304,6 +332,8 @@
       } 
       
       function mainGenerate(){
+        displayFunction();
+        pushFunction();
         scan=0;
         document.getElementById("mandelcanvas").style.marginLeft="0";
         document.getElementById("mandelcanvas").style.marginTop="0";
