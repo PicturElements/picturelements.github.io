@@ -291,7 +291,7 @@
               else if (count==4){document.getElementById("zoom").value=tmpStr;}
               count++;
               tmpStr="";
-            }else{
+            }else if(toScan){
               tmpStr+=url.charAt(i);
             }
           }
