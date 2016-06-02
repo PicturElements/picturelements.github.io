@@ -362,7 +362,10 @@
         return -1;
       }
       
-      function setMode(){
+      function setMode(x){
+        if (x==1){
+          document.getElementById("generate").focus();
+        }
         document.getElementById("upperinfo").style.display="none";
         var hi=document.getElementById("hoverinfo").style;
         hi.left="-1000px";
@@ -731,15 +734,15 @@
       }
     </script>
   </head>
-  <body onload=init() onkeydown=setMode()>
+  <body onload=init() onkeydown=setMode(0)>
     <script id="customscript"></script>
     <canvas id="mandelcanvas"></canvas>
     <canvas id="overlaycanvas" onmousedown=press(1) onmousemove=canvasInteract() onmouseup=press(0)></canvas>
     <div id="buttonpanel">
-      <input id="iterations" value="50" onkeydown=setMode()></input>
-      <input id="xOff" value="400" onkeydown=setMode()></input>
-      <input id="yOff" value="0" onkeydown=setMode()></input>
-      <input id="zoom" value="3" onkeydown=setMode()></input>
+      <input id="iterations" value="50" onkeydown=setMode(1)></input>
+      <input id="xOff" value="400" onkeydown=setMode(1)></input>
+      <input id="yOff" value="0" onkeydown=setMode(1)></input>
+      <input id="zoom" value="3" onkeydown=setMode(1)></input>
       <button id="generate" onclick=setStuff()>Generate</button>
       <button id="function" onclick=setFunction()>Function</button>
       <button id="colors" onclick=setColor()>Colors</button>
