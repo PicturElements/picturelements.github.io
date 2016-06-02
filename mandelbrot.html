@@ -475,11 +475,12 @@
       }
       
       function setStuff(){
-        if (mode==0){
+        if (move){
           xRes=0;
           yRes=0;
           paint2();
           document.getElementById("overlaycanvas").style.cursor="default";
+          move=false;
         }
         iterations=parseInt(document.getElementById("iterations").value);
         xOff=parseFloat(document.getElementById("xOff").value);
