@@ -373,7 +373,7 @@
         return false;
       }
       
-      function setMode(x){
+      function setMode(){
         if (!display){
           if (isHotkey(event.keyCode)){
             document.getElementById("generate").focus();
@@ -422,7 +422,7 @@
             document.getElementById("yOff").value=tmpYOff;
             document.getElementById("overlaycanvas").style.cursor="default";
           }
-        }else if(kc==27){   //ESC
+        }else if(event.keyCode==27){   //ESC
           closePopups(-1);
         }
         move=false;
@@ -550,6 +550,8 @@
         display=true;
         document.getElementById("overlay").style.display="block";
         document.getElementById("sharepanel").style.display="block";
+        var url="http://picturelements.github.io/mandelbrot?func="+document.getElementById("functionin").value+"&iters="+document.getElementById("iterations").value+"&xOff="+document.getElementById("xOff").value+"&yOff="+document.getElementById("yOff").value+"&zoom="+document.getElementById("zoom").value;
+        document.getElementById("urlout").value=url;
         document.getElementById("urlout").select();
       }
       
@@ -784,15 +786,15 @@
       }
     </script>
   </head>
-  <body onload=init() onkeydown=setMode(0)>
+  <body onload=init() onkeydown=setMode()>
     <script id="customscript"></script>
     <canvas id="mandelcanvas"></canvas>
     <canvas id="overlaycanvas" onmousedown=press(1) onmousemove=canvasInteract() onmouseup=press(0)></canvas>
     <div id="buttonpanel">
-      <input id="iterations" value="50" onkeydown=setMode(1)></input>
-      <input id="xOff" value="400" onkeydown=setMode(1)></input>
-      <input id="yOff" value="0" onkeydown=setMode(1)></input>
-      <input id="zoom" value="3" onkeydown=setMode(1)></input>
+      <input id="iterations" spellcheck="false" value="50" onkeydown=setMode()></input>
+      <input id="xOff" spellcheck="false" value="400" onkeydown=setMode()></input>
+      <input id="yOff" spellcheck="false" value="0" onkeydown=setMode()></input>
+      <input id="zoom" spellcheck="false" value="3" onkeydown=setMode()></input>
       <button id="generate" onclick=setStuff()>Generate</button>
       <button id="function" onclick=setFunction()>Function</button>
       <button id="colors" onclick=setColor()>Colors</button>
