@@ -285,6 +285,60 @@
         -ie-user-select: none;
         pointer-events: none;
       }
+      
+      #infocontainer{
+        display: none;
+        position: fixed;
+        width:70%;
+        left:15%;
+        height:80%;
+        top:10%;
+        margin-top:0;
+        background-color: white;
+        border-radius: 0.3vw;
+        font-family: Roboto,Arial,sans-serif;
+        font-weight: 700;
+        font-size: 2vw;
+        text-align: center;
+        line-height: 5.5vw;
+      }
+      
+      #inner{
+        display:block;
+        position:absolute;
+        font-family:inherit;
+        width:calc(100% - 6vw);
+        height:calc(100% - 6vw);
+        top:3vw;
+        left:3vw;
+        background-color:#eee;
+        overflow-x:hidden;
+        overflow-y:scroll;
+      }
+      
+      #inner h,#inner h2{
+        font-family:inherit;
+        font-size:2vw;
+        font-weight:700;
+      }
+      
+      #inner h2{
+        border-top: 1px solid #ddd;
+        width: 90%;
+        margin-left: 5%;
+        margin-top:3vw;
+      }
+      
+      #inner p{
+        display: block;
+        position: relative;
+        width: 97%;
+        left: 1.5%;
+        font-size: 1.2vw;
+        font-weight: 300;
+        line-height: 1.3vw;
+        text-align: left;
+      }
     </style>
     <script>
       var xOff=400,yOff=0,zoom=3,iterations=50,mode=0;
