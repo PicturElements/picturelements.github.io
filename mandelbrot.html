@@ -392,11 +392,11 @@
       }
       
       function paintRaster(){
-        var ctx=document.getElementById("mandelcanvas").getContext("2d");
-        ctx.fillStyle="#999";
+        var ctx3=document.getElementById("mandelcanvas").getContext("2d");
+        ctx3.fillStyle="#999";
         for (var h=0;h<window.innerHeight+5;h+=5){
           for (var w=0;w<window.innerWidth+5;w+=10){
-            ctx.fillRect((h%2)*5+w,h,5,5);
+            ctx3.fillRect((h%2)*5+w,h,5,5);
           }
         }
       }
