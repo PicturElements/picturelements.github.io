@@ -394,9 +394,9 @@
       function paintRaster(){
         var ctx=document.getElementById("mandelcanvas").getContext("2d");
         ctx.fillStyle="#999";
-        for (var h=0;h<window.innerHeight+10;h+=10){
-          for (var w=0;w<window.innerWidth+10;w+=20){
-            ctx.fillRect((h%2)*10+w,h,10,10);
+        for (var h=0;h<window.innerHeight+5;h+=5){
+          for (var w=0;w<window.innerWidth+5;w+=10){
+            ctx.fillRect((h%2)*5+w,h,5,5);
           }
         }
       }
