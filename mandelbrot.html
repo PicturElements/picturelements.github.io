@@ -14,12 +14,16 @@
         width: 100%;
       }
       
-      #mandelcanvas,#overlaycanvas{
+      #rastercanvas,#mandelcanvas,#overlaycanvas{
         display:block;
         position:absolute;
         width:100%;
         height:100%;
         cursor:default;
+      }
+      
+      #rastercanvas{
+        background-color:#ddd;
       }
       
       #buttonpanel{
@@ -368,6 +372,12 @@
         canvas2.height=height;
         canvas2.style.width=""+width+"px";
         canvas2.style.height=""+height+"px";
+        var canvas2=document.getElementById("rastercanvas");
+        canvas2.width=width;
+        canvas2.height=height;
+        canvas2.style.width=""+width+"px";
+        canvas2.style.height=""+height+"px";
+        paintRaster();
         gradientSetup();
         var parts=(startAt[selectedCol+1]-startAt[selectedCol])/3+1;
         var colors="";
@@ -378,6 +388,16 @@
         document.getElementById("gradientdisplay").style.background="linear-gradient(to right, "+colors+")";
         if (!parseUrl()){
           setStuff();
+        }
+      }
+      
+      function paintRaster(){
+        var ctx=document.getElementById("mandelcanvas").getContext("2d");
+        ctx.fillStyle="#999";
+        for (var h=0;h<window.innerHeight+10;h+=10){
+          for (var w=0;w<window.innerWidth+10;w+=2){
+            ctx.fillRect((h%2)*10+w,h,10,10);
+          }
         }
       }
       
@@ -953,6 +973,7 @@
   </head>
   <body onload=init() onkeydown=setMode()>
     <script id="customscript"></script>
+    <canvas id="rastercanvas"></canvas>
     <canvas id="mandelcanvas"></canvas>
     <canvas id="overlaycanvas" onmousedown=press(1) onmousemove=canvasInteract() onmouseup=press(0)></canvas>
     <div id="buttonpanel">
