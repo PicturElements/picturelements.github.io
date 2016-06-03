@@ -34,6 +34,15 @@
         transition:margin-left 500ms;
       }
       
+      #titlebox{
+        display:block;
+        position:absolute;
+        left:0;
+        top:0;
+        width:100%;
+        height:2vw;
+      }
+      
       #title{
         display: block;
         position: relative;
@@ -862,10 +871,12 @@
     <canvas id="mandelcanvas"></canvas>
     <canvas id="overlaycanvas" onmousedown=press(1) onmousemove=canvasInteract() onmouseup=press(0)></canvas>
     <div id="buttonpanel">
-      <div id="title">Max. iterations</div>
-      <div id="title">X offset</div>
-      <div id="title">Yoffset</div>
-      <div id="title">Zoom</div>
+      <div id="titlebox">
+        <div id="title">Max. iterations</div>
+        <div id="title">X offset</div>
+        <div id="title">Yoffset</div>
+        <div id="title">Zoom</div>
+      </div>
       <input id="iterations" spellcheck="false" value="50" onkeydown=setMode()></input>
       <input id="xOff" spellcheck="false" value="400" onkeydown=setMode()></input>
       <input id="yOff" spellcheck="false" value="0" onkeydown=setMode()></input>
