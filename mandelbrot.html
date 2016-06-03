@@ -820,7 +820,7 @@
           ctx2.rect(Math.floor(window.innerWidth/2-inW/2),Math.floor(window.innerHeight/2-inH/2),inW,inH);
           ctx2.stroke();
         }else if(mode==3){
-          var tX=event.clientX+cmx,tY=event.clientY+cmy;
+          var tX=event.clientX-cmx,tY=event.clientY-cmy;
           a2=(tX-width/2-xOff/zoom)/(height/zoom);
           b2=(tY-height/2-yOff/zoom)/(height/zoom);
           if (isMandel){
