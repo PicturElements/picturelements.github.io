@@ -253,8 +253,10 @@
       var startAt=[0,6,12,18,24,33,48];
       var selectedCol=5,rd,gr,bl,cycleLength=50;
       var date=new Date(),time=date.getTime();
+      var ctx2;
       
       function init(){
+        ctx2=document.getElementById("overlaycanvas").getContext("2d");
         var canvas=document.getElementById("mandelcanvas");
         canvas.width=width;
         canvas.height=height;
@@ -366,7 +368,7 @@
               a=julA;
               b=-julB;
             }
-            pixels.push(generateIndividual());
+            pixels.push(generateIndividual(0));
           }
         }
         paint();
@@ -374,7 +376,7 @@
         scan+=10;
       }
       
-      function generateIndividual(){
+      function generateIndividual(type){
         var aTmp;
         var v,magnitude;
         for (var i=0;i<iterations;i++){
@@ -396,12 +398,15 @@
             a2=magnitude*Math.cos(v)+a;
             b2=magnitude*Math.sin(v)+b;
           }
+          if (type==1){
+            ctx2.lineTo(a2*(height/zoom)+xOff/zoom+width/2,b2*(height/zoom)+yOff/zoom+height/2);
+          }
         }
         return -1;
       }
       
       function isHotkey(keycode){
-        var hotkeys=[83,77,73,71,70,67,85,27,13];
+        var hotkeys=[83,77,73,71,70,69,67,85,27,13];
         for (var i=0;i<hotkeys.length;i++){
           if (keycode==hotkeys[i]){return true;}
         }
@@ -429,6 +434,9 @@
             document.getElementById("overlaycanvas").style.cursor="default";
             document.getElementById("hoverinfo").style.display="block";
             mode=2;
+          }else if (kc==69){
+            document.getElementById("overlaycanvas").style.cursor="default";
+            mode=3;
           }else if(kc==71){   //G - generate
             closePopups(-1);
             setStuff();
@@ -790,7 +798,6 @@
       }
       
       function paint2(){
-        var ctx2=document.getElementById("overlaycanvas").getContext("2d");
         ctx2.clearRect(0,0,window.innerWidth,window.innerHeight);
         ctx2.strokeStyle="red";
         if (xRes>0&&yRes>0&&mode==0||move){
@@ -811,6 +818,20 @@
           //console.log(inW+" - "+inH);
           ctx2.beginPath();
           ctx2.rect(Math.floor(window.innerWidth/2-inW/2),Math.floor(window.innerHeight/2-inH/2),inW,inH);
+          ctx2.stroke();
+        }else if(mode==3){
+          var tX=event.clientX+cmx,tY=event.clientY+cmy;
+          a2=(tX-width/2-xOff/zoom)/(height/zoom);
+          b2=(tY-height/2-yOff/zoom)/(height/zoom);
+          if (isMandel){
+            a=a2;
+            b=b2;
+          }else{
+            a=julA;
+            b=-julB;
+          }
+          ctx2.moveTo(tX,tY);
+          generateIndividual(1);
           ctx2.stroke();
         }
         if (thread!=null){
