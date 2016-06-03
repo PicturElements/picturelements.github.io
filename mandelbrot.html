@@ -339,6 +339,10 @@
         line-height: 1.3vw;
         text-align: left;
       }
+      
+      #inner b{
+        font-size:2vw;
+      }
     </style>
     <script>
       var xOff=400,yOff=0,zoom=3,iterations=50,mode=0;
@@ -1018,9 +1022,19 @@
         <div id="inner">
           <h>Tools/hotkeys</h>
           <p>
-            <b>S</b> - Scale mode. Click and drag to select a part of a fractal. You can move the selection around if needed.
-            <br>
-            <b>M</b> - Move mode. Drag the entire rendered image and re-render. If a different zoom value is input, a rectangular selection box will appear in the center.
+            <b>S - Scale mode</b> Click and drag to select a part of a fractal. You can move the selection around if needed.
+            <br><br>
+            <b>M - Move mode</b> Drag the entire rendered image and re-render. If a different zoom value is input, a rectangular selection box will appear in the center.
+            <br><br>
+            <b>E - Escape mode</b> Move your cursor over the set. The script will display the positions of complex numbers for each cycle of the rendering algorithm.
+            <br><br>
+            <b>I - Info mode</b> Move your cursor over the set. It will display the amount of iterations and position for that point.
+            <br><br>
+            <b>G - Generate</b> Generate a new set. Edit the function in the function panel.
+            <br><br>
+            <b>F - Function (ordinary)</b> Edit the function used to render a fractal. It's not picky with the input, but requires one constant for a Mandelbrot set (power, default is 2), and two or more constant for Julia sets. Note that the script automatically selects which settings are input if only two constants are present. z^2-0.5 will be parsed as z^2-0.5+0i and z^2-0.5i as z^2+0-0.5i.
+            <br><br>
+            <b>F- Function (advanced)</b> Edit the function, but with more advanced input. This mode supports more advanced mathematical operations to describe constants in Julia sets, such as trigonometry, roots, and variables (x and y).
           </p>
         </div>
       </div>
