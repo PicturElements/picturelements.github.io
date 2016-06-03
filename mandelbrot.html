@@ -53,6 +53,7 @@
         line-height: 3vw;
         left: 1vw;
         margin-right: 1vw;
+        font-size:1vw;
       }
       
       #title2{
@@ -525,8 +526,8 @@
           yRes=(xRes)*(height/width);
           if (xRes>0&&yRes>0){
             document.getElementById("zoom").value=tmpZoom*(xRes/window.innerWidth);
-            document.getElementById("xOff").value=tmpXOff+(window.innerWidth/2-(xOrig+xRes/2))*zoom;
-            document.getElementById("yOff").value=tmpYOff+(window.innerHeight/2-(yOrig+yRes/2))*zoom;
+            document.getElementById("xOff").value=tmpXOff-cmx+(window.innerWidth/2-(xOrig+xRes/2))*zoom;
+            document.getElementById("yOff").value=tmpYOff-cmy+(window.innerHeight/2-(yOrig+yRes/2))*zoom;
           }else{
             document.getElementById("zoom").value=tmpZoom;
             document.getElementById("xOff").value=tmpXOff;
