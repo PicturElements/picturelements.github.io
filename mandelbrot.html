@@ -534,7 +534,7 @@
               document.getElementById("colorsample").style.backgroundColor="rgb("+Math.floor(rd)+","+Math.floor(gr)+","+Math.floor(bl)+")";
             }
             document.getElementById("iterationinfo").innerHTML="Iterations: "+iters;
-            document.getElementById("iterationinfo2").innerHTML="Re: "+(event.clientX-cmx-width/2-xOff/zoom)/(height/zoom)+"<br>Im: "+(event.clientY-cmy-height/2-yOff/zoom)/(height/zoom);
+            document.getElementById("iterationinfo2").innerHTML="Re: "+(event.clientX-cmx-width/2-xOff/zoom)/(height/zoom)+"<br>Im: "+(-(event.clientY-cmy-height/2-yOff/zoom)/(height/zoom));
             if (event.clientX+hi.offsetWidth+40>window.innerWidth){
               hi.style.left="initial";
               hi.style.right=""+(window.innerWidth-event.clientX+20)+"px";
