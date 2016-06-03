@@ -628,6 +628,11 @@
         mainGenerate();
       }
       
+      function openToolbox(){
+        document.getElementById("overlay").style.display="block";
+        document.getElementById("infocontainer").style.display="block";
+      }
+      
       function setFunction(){
         display=true;
         document.getElementById("overlay").style.display="block";
@@ -897,7 +902,7 @@
     <canvas id="mandelcanvas"></canvas>
     <canvas id="overlaycanvas" onmousedown=press(1) onmousemove=canvasInteract() onmouseup=press(0)></canvas>
     <div id="buttonpanel">
-      <div id="toolbox">Tools/hotkeys</div>
+      <div id="toolbox" onmousedown=openToolbox()>Tools/hotkeys</div>
       <div id="titlebox">
         <div id="title">Max. iterations</div>
         <div id="title">X offset</div>
@@ -953,6 +958,17 @@
         <div class="gradientselector" onmousedown=gradient(8)></div>
         <div class="gradientselector" onmousedown=gradient(9)></div>
         <div id="gradientdisplay"></div>
+      </div>
+      <div id="infocontainer" class="popup">
+        <div id="closebtn" onclick="closePopups(3)">[close]</div>
+        <div id="inner">
+          <h>Tools/hotkeys</h>
+          <p>
+            <b>S</b> - Scale mode. Click and drag to select a part of a fractal. You can move the selection around if needed.
+            <br>
+            <b>M</b> - Move mode. Drag the entire rendered image and re-render. If a different zoom value is input, a rectangular selection box will appear in the center.
+          </p>
+        </div>
       </div>
     </div>
     <div id="hoverinfo">
