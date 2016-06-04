@@ -882,22 +882,33 @@
       
       function paint(){
         var ctx=document.getElementById("mandelcanvas").getContext("2d");
-        ctx.mozImageSmoothingEnabled = false;
-        ctx.webkitImageSmoothingEnabled = false;
+        var imgData=ctx.createImageData(width,10);
+        var counter=0;
         for (var h=scan;h<scan+10;h++){
           for (var w=0;w<width;w++){
             if (pixels[h*width+w]==-1){
-              ctx.fillStyle="black";
-              ctx.fillRect(w,h,1,1);
+              /*ctx.fillStyle="black";
+              ctx.fillRect(w,h,1,1);*/
+              imgData[counter]=0;
+              imgData[counter+1]=0;
+              imgData[counter+2]=0;
+              imgData[counter+3]=255;
             }else{
               /*shade=Math.floor((iterations-pixels[h*width+w])/iterations*255);
               ctx.fillStyle="rgb("+shade+","+shade+","+shade+")";*/
-              color(h*width+w);
+              /*color(h*width+w);
               ctx.fillStyle="rgb("+Math.floor(rd)+","+Math.floor(gr)+","+Math.floor(bl)+")";
-              ctx.fillRect(w,h,1,1);
+              ctx.fillRect(w,h,1,1);*/
+              color(counter);
+              imgData[counter]=rd;
+              imgData[counter+1]=gr;
+              imgData[counter+2]=bl;
+              imgData[counter+3]=255;
             }
+            counter++;
           }
         }
+        ctx.put(imgdata,0,scan);
         if (scan>=window.innerHeight){
           var time_out;
           if (time<0){
