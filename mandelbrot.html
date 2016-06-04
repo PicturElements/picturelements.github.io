@@ -990,7 +990,7 @@
     <canvas id="mandelcanvas"></canvas>
     <canvas id="overlaycanvas" onmousedown=press(1) onmousemove=canvasInteract() onmouseup=press(0)></canvas>
     <div id="buttonpanel">
-      <div id="toolbox" onmousedown=openToolbox()>Tools/hotkeys</div>
+      <div id="toolbox" onmousedown=openToolbox()>Tools/hotkeys/about</div>
       <div id="titlebox">
         <div id="title">Max. iterations</div>
         <div id="title">X offset</div>
@@ -1070,8 +1070,22 @@
             <br><br>
             <b>U - get URL</b> Get the shareable URL for your set!
             <br><br>
-            <b>Esc</b> Pretty basic stuff. Close popups.
+            <b>Esc</b> Pretty basic stuff. Closes popups.
+            <br><br>
+            <b>Enter</b> Generate new set.
           </p>
+          <h2>About - Mandelbrot and Julia sets</h2>
+            <p>
+              <b>Complex numbers</b> Mandelbrot/Julia sets are fractals based on the properies of complex numbers, written as a+bi, where a and b are real numbers and i is an imaginary unit, equal to the square root of -1. For the record, bi=b*i, which makes bi an imaginary number, with b as a "real number coefficient". All complex numbers can be plotted in a two-dimensional coordinate system, the complex plane, where a represents values on the real axis (x-axis), and bi represents the imaginary axis, thus taking on the role of the y-axis in the normal coordinate system. Every complex number in the system is represented by a point. 2+3i is a point two steps away from the origin along the x-axis, and three steps away from the origin along the y-axis, for instance.
+              <br><br>
+              <b>How fractals are generated</b> The mandelbrot set follows this formula: z^2+c, where z is the complex number from the previous iteration (I'll explain what that means in a second), and c is the complex number described by the point that is generated. Okay, this sounds confusing, so let's begin with c. A generated set is an image, and so contains a lot of pixels. Imagine each of those pixels is a point in the complex plane, and so c changes for every pixel in the image. Now, I said z was the result of the previous iteration, so here's how this works: We start by saying z=0, and so z^2+c=c. Now, take the result (=c) and put it into the formula, c^2+c=d. And again, d^2+c=e, and again, e^2+c=f, etc. c,d,e, and f are all complex numbers. The next part is to investigate the characteristics of these numbers.
+            </p>
+          <h2>About - creator</h2>
+            <p>
+              This web app was written by reddit user /u/PicturElements in June 2016. 
+              <br>
+              License: <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a> - You are allowed to edit, share and improve my work, given that appropriate credit is given.
+            </p>
         </div>
       </div>
     </div>
