@@ -347,7 +347,7 @@
       }
     </style>
     <script>
-      var xOff=400,yOff=0,zoom=3,iterations=50,mode=0,prevH=0;
+      var xOff=300,yOff=0,zoom=3,iterations=50,mode=0,prevH=0;
       var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true,display=false,move=false;
       var width=window.innerWidth,height=window.innerHeight;
       var cmx=0,cmy=0,curX,curY,tmpXOff,tmpYOff,tmpZoom;
@@ -861,7 +861,7 @@
       
       function resetStuff(){
         if (isMandel&&power==2){
-          document.getElementById("xOff").value="400";
+          document.getElementById("xOff").value="300";
         }else{
           document.getElementById("xOff").value="0";
         }
@@ -1019,7 +1019,7 @@
         <div id="title2">Hotkey: U</div>
       </div>
       <input id="iterations" spellcheck="false" value="50" onkeydown=setMode()></input>
-      <input id="xOff" spellcheck="false" value="400" onkeydown=setMode()></input>
+      <input id="xOff" spellcheck="false" value="300" onkeydown=setMode()></input>
       <input id="yOff" spellcheck="false" value="0" onkeydown=setMode()></input>
       <input id="zoom" spellcheck="false" value="3" onkeydown=setMode()></input>
       <button id="generate" onclick=setStuff()>Generate</button>
