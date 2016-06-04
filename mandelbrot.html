@@ -393,10 +393,11 @@
       
       function paintRaster(){
         var ctx=document.getElementById("rastercanvas").getContext("2d");
-        ctx.fillStyle="#999";
-        for (var h=0;h<window.innerHeight+5;h+=5){
-          for (var w=0;w<window.innerWidth+5;w+=10){
-            ctx.fillRect((h%2)*5+w,h,5,5);
+        ctx.fillStyle="#777";
+        var sqS=7;
+        for (var h=0;h<window.innerHeight+sqS;h+=sqS){
+          for (var w=0;w<window.innerWidth+sqS;w+=2*sqS){
+            ctx.fillRect(((h/sqS)%2)*sqS+w,h,sqS,sqS);
           }
         }
       }
@@ -981,7 +982,7 @@
       <div id="titlebox">
         <div id="title">Max. iterations</div>
         <div id="title">X offset</div>
-        <div id="title">Yoffset</div>
+        <div id="title">Y offset</div>
         <div id="title">Zoom</div>
         <div id="title2">Hotkey: G</div>
         <div id="title2">Hotkey: F</div>
