@@ -890,10 +890,10 @@
             if (pixels[h*width+w]==-1){
               /*ctx.fillStyle="black";
               ctx.fillRect(w,h,1,1);*/
-              imgData[counter]=0;
-              imgData[counter+1]=0;
-              imgData[counter+2]=0;
-              imgData[counter+3]=255;
+              imgData.data[counter]=0;
+              imgData.data[counter+1]=0;
+              imgData.data[counter+2]=0;
+              imgData.data[counter+3]=255;
             }else{
               /*shade=Math.floor((iterations-pixels[h*width+w])/iterations*255);
               ctx.fillStyle="rgb("+shade+","+shade+","+shade+")";*/
@@ -901,15 +901,15 @@
               ctx.fillStyle="rgb("+Math.floor(rd)+","+Math.floor(gr)+","+Math.floor(bl)+")";
               ctx.fillRect(w,h,1,1);*/
               color(h*width+w);
-              imgData[counter]=Math.floor(rd);
-              imgData[counter+1]=Math.floor(gr);
-              imgData[counter+2]=Math.floor(bl);
-              imgData[counter+3]=255;
+              imgData.data[counter]=Math.floor(rd);
+              imgData.data[counter+1]=Math.floor(gr);
+              imgData.data[counter+2]=Math.floor(bl);
+              imgData.data[counter+3]=255;
             }
             counter+=4;
           }
         }
-        ctx.putImageData(imgData,0,scan,0,0,width,10);
+        ctx.putImageData(imgData,0,scan);
         if (scan>=window.innerHeight){
           var time_out;
           if (time<0){
