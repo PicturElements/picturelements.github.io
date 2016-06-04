@@ -428,7 +428,7 @@
             }
           }
         }
-        //document.getElementById("zoom").value=parseFloat(document.getElementById("zoom").value)*(prevH/height);
+        document.getElementById("zoom").value=parseFloat(document.getElementById("zoom").value)*(prevH/height);
         return foundQuest;
       }
       
@@ -828,8 +828,7 @@
       }
       
       function pushFunction(inId){
-        prevH=0;
-        if (inId==1){resetStuff();}
+        if (inId==1){resetStuff(); prevH=0;}
         closePopups(0);
         isMandel=tmpIsMandel;
         power=tmpPow;
@@ -840,7 +839,6 @@
       }
       
       function pushFunction2(){
-        prevH=0;
         resetStuff();
         var rePart="0.125",imPart="0.8";
         document.getElementById("customscript").innerHTML="\nfunction createFunction(x,y){\n  julA="+rePart+";\n  julB="+imPart+";\n}\n";
