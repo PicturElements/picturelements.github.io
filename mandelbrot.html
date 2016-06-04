@@ -345,7 +345,7 @@
       }
     </style>
     <script>
-      var xOff=400,yOff=0,zoom=3,iterations=50,mode=0;
+      var xOff=400,yOff=0,zoom=3,iterations=50,mode=0,prevH=0;
       var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true,display=false,move=false;
       var width=window.innerWidth,height=window.innerHeight;
       var cmx=0,cmy=0,curX,curY,tmpXOff,tmpYOff,tmpZoom;
@@ -418,6 +418,7 @@
               else if (count==2){document.getElementById("xOff").value=tmpStr;}
               else if (count==3){document.getElementById("yOff").value=tmpStr;}
               else if (count==4){document.getElementById("zoom").value=tmpStr;}
+              else if (count==5){prevH=parseInt(tmpStr);}
               count++;
               tmpStr="";
             }else if(toScan){
@@ -481,10 +482,12 @@
       }
       
       function generate(){
+        var rescale=1;
+        if (prevH>0){rescale=prevH/height;}
         for (var h=scan;h<scan+10;h++){
           for (var w=0;w<width;w++){
-            a2=(w-width/2-xOff/zoom)/(1000/zoom);
-            b2=(h-height/2-yOff/zoom)/(1000/zoom);
+            a2=(w-width/2-(xOff*rescale)/zoom)/((height*rescale)/zoom);
+            b2=(h-height/2-(yOff*rescale)/zoom)/((height*rescale)/zoom);
             if (isMandel){
               a=a2;
               b=b2;
@@ -723,7 +726,7 @@
         display=true;
         document.getElementById("overlay").style.display="block";
         document.getElementById("sharepanel").style.display="block";
-        var url="http://picturelements.github.io/mandelbrot?func="+document.getElementById("functionin").value+"&iters="+document.getElementById("iterations").value+"&xOff="+document.getElementById("xOff").value+"&yOff="+document.getElementById("yOff").value+"&zoom="+document.getElementById("zoom").value;
+        var url="http://picturelements.github.io/mandelbrot?func="+document.getElementById("functionin").value+"&iters="+document.getElementById("iterations").value+"&xOff="+document.getElementById("xOff").value+"&yOff="+document.getElementById("yOff").value+"&zoom="+document.getElementById("zoom").value+"&prevH="+height;
         document.getElementById("urlout").value=url;
         document.getElementById("urlout").select();
       }
