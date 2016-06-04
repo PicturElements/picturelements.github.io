@@ -472,6 +472,7 @@
       function mainGenerate(){
         ctx=document.getElementById("mandelcanvas").getContext("2d");
         imgData=ctx.createImageData(width,10);
+        console.log(imgData.data.length);
         displayFunction();
         pushFunction(0);
         scan=0;
