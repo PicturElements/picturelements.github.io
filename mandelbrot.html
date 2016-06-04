@@ -731,7 +731,7 @@
         display=true;
         document.getElementById("overlay").style.display="block";
         document.getElementById("sharepanel").style.display="block";
-        var url="http://picturelements.github.io/mandelbrot?func="+document.getElementById("functionin").value+"&iters="+document.getElementById("iterations").value+"&xOff="+document.getElementById("xOff").value+"&yOff="+document.getElementById("yOff").value+"&zoom="+document.getElementById("zoom").value+"&prevH="+height;
+        var url="http://picturelements.github.io/mandelbrot?func="+document.getElementById("functionin").value+"&iters="+document.getElementById("iterations").value+"&xOff="+document.getElementById("xOff").value+"&yOff="+document.getElementById("yOff").value+"&zoom="+parseFloat(document.getElementById("zoom").value)/(prevH/height)+"&prevH="+height;
         document.getElementById("urlout").value=url;
         document.getElementById("urlout").select();
       }
