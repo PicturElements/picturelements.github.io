@@ -522,7 +522,7 @@
           if (a2*a2+b2*b2>=4){
             //return i;
             //return i+1-Math.log(Math.log(Math.hypot(a2,b2)))/Math.log(power);
-            return i+1-Math.log(Math.log(Math.sqrt(a2*a2+b2*b2)))/Math.log(power);
+            return i+1-Math.log(Math.log(Math.sqrt(a2*a2-b2*b2)))/Math.log(power);
             //return i+1-(Math.log(Math.log(Math.hypot(a2,b2))/Math.log(10))/Math.log(10))/(Math.log(power)/Math.log(10));
           }
           if (power==2){
