@@ -899,10 +899,10 @@
               /*color(h*width+w);
               ctx.fillStyle="rgb("+Math.floor(rd)+","+Math.floor(gr)+","+Math.floor(bl)+")";
               ctx.fillRect(w,h,1,1);*/
-              color(counter);
-              imgData[counter]=rd;
-              imgData[counter+1]=gr;
-              imgData[counter+2]=bl;
+              color(h*width+w);
+              imgData[counter]=Math.floor(rd);
+              imgData[counter+1]=Math.floor(gr);
+              imgData[counter+2]=Math.floor(bl);
               imgData[counter+3]=255;
             }
             counter++;
