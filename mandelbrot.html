@@ -882,6 +882,8 @@
       
       function paint(){
         var ctx=document.getElementById("mandelcanvas").getContext("2d");
+        ctx.mozImageSmoothingEnabled = false;
+        ctx.webkitImageSmoothingEnabled = false;
         for (var h=scan;h<scan+10;h++){
           for (var w=0;w<width;w++){
             if (pixels[h*width+w]==-1){
@@ -891,8 +893,8 @@
               /*shade=Math.floor((iterations-pixels[h*width+w])/iterations*255);
               ctx.fillStyle="rgb("+shade+","+shade+","+shade+")";*/
               color(h*width+w);
-              /*ctx.fillStyle="rgb("+Math.floor(rd)+","+Math.floor(gr)+","+Math.floor(bl)+")";
-              ctx.fillRect(w,h,1,1);*/
+              ctx.fillStyle="rgb("+Math.floor(rd)+","+Math.floor(gr)+","+Math.floor(bl)+")";
+              ctx.fillRect(w,h,1,1);
             }
           }
         }
