@@ -483,7 +483,7 @@
       
       function generate(){
         var rescale=1;
-        if (prevH>0){rescale=prevH/height;}
+        if (prevH>0){rescale=height/prevH;}
         for (var h=scan;h<scan+10;h++){
           for (var w=0;w<width;w++){
             a2=(w-width/2-(xOff*rescale)/zoom)/((height*rescale)/zoom);
