@@ -426,6 +426,7 @@
             }
           }
         }
+        document.getElementById("zoom").value=parseFloat(document.getElementById("zoom").value)*(prevH/height);
         return foundQuest;
       }
       
@@ -482,15 +483,14 @@
       }
       
       function generate(){
-        var rescale=1,tmpZoom=zoom;
+        var rescale=1;
         if (prevH>0){
           rescale=prevH/height;
-          tmpZoom*=rescale;
         }
         for (var h=scan;h<scan+10;h++){
           for (var w=0;w<width;w++){
-            a2=(w-width/2-xOff/tmpZoom)/((height*rescale)/tmpZoom);
-            b2=(h-height/2-yOff/tmpZoom)/((height*rescale)/tmpZoom);
+            a2=(w-width/2-xOff/zoom)/((height*rescale)/zoom);
+            b2=(h-height/2-yOff/zoom)/((height*rescale)/zoom);
             if (isMandel){
               a=a2;
               b=b2;
@@ -826,6 +826,7 @@
       }
       
       function pushFunction(inId){
+        prevH=0;
         if (inId==1){resetStuff();}
         closePopups(0);
         isMandel=tmpIsMandel;
@@ -837,6 +838,7 @@
       }
       
       function pushFunction2(){
+        prevH=0;
         resetStuff();
         var rePart="0.125",imPart="0.8";
         document.getElementById("customscript").innerHTML="\nfunction createFunction(x,y){\n  julA="+rePart+";\n  julB="+imPart+";\n}\n";
@@ -1042,7 +1044,7 @@
         <div id="gradientdisplay"></div>
       </div>
       <div id="infocontainer" class="popup">
-        <div id="closebtn" onclick="closePopups(3)">[close]</div>
+        <div id="closebtn" onclick="closePopups(-1)">[close]</div>
         <div id="inner">
           <h>Tools/hotkeys</h>
           <p>
