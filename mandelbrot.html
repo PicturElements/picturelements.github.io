@@ -519,15 +519,6 @@
         var aTmp;
         var v,magnitude;
         for (var i=0;i<iterations;i++){
-          if (a2*a2+b2*b2>=4){
-            //return i;
-            //return i+1-Math.log(Math.log(Math.hypot(a2,b2)))/Math.log(power);
-            //return i+(i+1-Math.log(Math.log(Math.sqrt(a2*a2+b2*b2)))/Math.log(2))/iterations;
-            //return i+1-Math.log(Math.log(Math.sqrt(a2*a2+b2*b2))/Math.log(2))/Math.log(2);
-            return i+1-Math.log(Math.log(Math.sqrt(a2*a2+b2*b2)))/Math.log(power);
-            //return i+1-Math.log((Math.log(a2*a2+b2*b2)/2)/Math.log(2))/Math.log(2);
-            //return i+1-(Math.log(Math.log(Math.sqrt(a2*a2+b2*b2))/Math.log(10)/Math.log(10)))/(Math.log(power)/Math.log(10));
-          }
           if (power==2){
             aTmp=a2;
             a2=a2*a2-b2*b2+a;
@@ -542,6 +533,15 @@
           }
           if (type==1){
             ctx2.lineTo(a2*(height/zoom)+xOff/zoom+width/2,b2*(height/zoom)+yOff/zoom+height/2);
+          }
+          if (a2*a2+b2*b2>=4){
+            //return i;
+            //return i+1-Math.log(Math.log(Math.hypot(a2,b2)))/Math.log(power);
+            //return i+(i+1-Math.log(Math.log(Math.sqrt(a2*a2+b2*b2)))/Math.log(2))/iterations;
+            //return i+1-Math.log(Math.log(Math.sqrt(a2*a2+b2*b2))/Math.log(2))/Math.log(2);
+            return i+1-Math.log(Math.log(Math.sqrt(a2*a2+b2*b2)))/Math.log(power);
+            //return i+1-Math.log((Math.log(a2*a2+b2*b2)/2)/Math.log(2))/Math.log(2);
+            //return i+1-(Math.log(Math.log(Math.sqrt(a2*a2+b2*b2))/Math.log(10)/Math.log(10)))/(Math.log(power)/Math.log(10));
           }
         }
         return -1;
