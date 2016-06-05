@@ -890,8 +890,8 @@
         }
         imPart=tmpStr;
         for (var a=0;a<expressions.length;a++){
-          rePart.replace(/expressions[a]/g,"Math."+expressions[a]);
-          imPart.replace(/expressions[a]/g,"Math."+expressions[a]);
+          rePart.replace(/"+expressions[a]+"/g,"Math."+expressions[a]);
+          imPart.replace(/"+expressions[a]+"/g,"Math."+expressions[a]);
         }
         console.log(power+", "+rePart+", "+imPart);
         /*document.getElementById("customscript").innerHTML="\nfunction createFunction(x,y){\n  julA="+rePart+";\n  julB="+imPart+";\n}\n";
