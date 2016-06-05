@@ -854,7 +854,7 @@
         advancedGen=true;
         resetStuff();
         var rePart="0.125",imPart="0.8";
-        var input=document.getElementById("functionin2").value;
+        /*var input=document.getElementById("functionin2").value;
         var startpos=1,startpos2;
         if (input.endsWith("i")){startpos=2;}
         var endP=0,startP=0;
@@ -900,7 +900,7 @@
           regex=new RegExp(expressions[a],"gi");
           rePart=rePart.replace(regex,"Math."+expressions[a]);
           imPart=imPart.replace(regex,"Math."+expressions[a]);
-        }
+        }*/
         console.log(power+", "+rePart+", "+imPart);
         document.getElementById("customscript").innerHTML="\nfunction getJulia(x,y){\n  julA="+rePart+";\n  julB="+imPart+";\n}\n";
         isMandel=false;
