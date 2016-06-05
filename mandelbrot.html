@@ -473,7 +473,6 @@
       function mainGenerate(){
         ctx=document.getElementById("mandelcanvas").getContext("2d");
         imgData=ctx.createImageData(width,10);
-        console.log(imgData.data.length);
         displayFunction();
         pushFunction(0);
         scan=0;
@@ -505,7 +504,7 @@
               a=a2;
               b=b2;
             }else{
-              if (advancedGen){createFunction(a2,b2);}
+              if (advancedGen){getJulia(a2,b2);}
               a=julA;
               b=-julB;
             }
@@ -903,7 +902,7 @@
           imPart=imPart.replace(regex,"Math."+expressions[a]);
         }
         console.log(power+", "+rePart+", "+imPart);
-        document.getElementById("customscript").innerHTML="\nfunction createFunction(x,y){\n  julA="+rePart+";\n  julB="+imPart+";\nconsole.log(\"Got here!\")\n}\n";
+        document.getElementById("customscript").innerHTML="\nfunction getJulia(x,y){\n  julA="+rePart+";\n  julB="+imPart+";\n}\n";
         isMandel=false;
         closePopups(1);
         scan=0;
