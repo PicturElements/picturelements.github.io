@@ -877,21 +877,21 @@
               progress++;
             }
             if (progress==2&&a<startpos2){
-              tmpStr+=input.charAt(a);
+              if (tmpStr!=""||tmpStr==""&&input.charAt(a)=='-'){tmpStr+=input.charAt(a);}
             }else if(progress==2){
               rePart=tmpStr;
               tmpStr="";
               progress++;
             }
             if (progress==3&&a>=startpos2){
-              tmpStr+=input.charAt(a);
+              if (tmpStr!=""||tmpStr==""&&input.charAt(a)=='-'){tmpStr+=input.charAt(a);}
             }
           }
         }
         imPart=tmpStr;
         var regex;
         for (var a=0;a<expressions.length;a++){
-          regex=new RegExp(expressions[a],"g");
+          regex=new RegExp(expressions[a],"gi");
           rePart=rePart.replace(regex,"Math."+expressions[a]);
           imPart=imPart.replace(regex,"Math."+expressions[a]);
         }
