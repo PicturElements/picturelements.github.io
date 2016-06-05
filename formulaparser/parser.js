@@ -33,6 +33,9 @@ function parse(input){
       }
     }
     splitFormula.push(tmp);   //tmp=number, cAt=operator
+    for (var n=0;n<splitFormula.length;n++){  //remove empty strings
+      if (splitFormula[n]==""){splitFormula.splice(n,1); n--;}
+    }
     console.log(splitFormula.length);
     for (var i=0;i<splitFormula.length;i++){
       console.log(splitFormula[i]);
