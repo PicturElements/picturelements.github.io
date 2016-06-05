@@ -1,5 +1,5 @@
 var xOff=300,yOff=0,zoom=3,iterations=50,mode=0,prevH=0;
-var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true,display=false,move=false,advancedGen=false,functionNo=0;
+var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true,display=false,move=false,advancedGen=false;
 var width=window.innerWidth,height=window.innerHeight;
 var cmx=0,cmy=0,curX,curY,tmpXOff,tmpYOff,tmpZoom;
 var a,b,a2,b2;
@@ -155,7 +155,7 @@ function generate(){
         a=a2;
         b=b2;
       }else{
-        if (advancedGen){redirect(a2,b2);}
+        if (advancedGen){getJulia(a2,b2);}
         a=julA;
         b=-julB;
       }
@@ -558,11 +558,7 @@ function pushFunction2(){
     imPart=imPart.replace(regex,"Math."+expressions[a]);
   }
   console.log(power+", "+rePart+", "+imPart);
-  var funcName;
-  if (functionNo==0){funcName="getJulia(x,y)"}
-  else {funcName="getJulia"+functionNo+"(x,y)"}
-  functionNo++;
-  document.getElementById("customscript").innerHTML="\nfunction redirect(x,y){\n  "+funcName+";\n}\nfunction "+funcName+"{\n  julA="+rePart+";\n  julB="+imPart+";\n}\n";
+  document.getElementById("customscript").innerHTML="\nfunction getJulia(x,y){\n  julA="+rePart+";\n  julB="+imPart+";\n}\n";
   isMandel=false;
   closePopups(1);
   scan=0;
