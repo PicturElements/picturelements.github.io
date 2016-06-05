@@ -641,8 +641,8 @@ function paint(){
     document.getElementById("upperinfo").innerHTML=time_out;
     setTimeout(function(){document.getElementById("upperinfo").style.display="none";}, 5000);
     clearInterval(thread);
-    $('#body').find('script').first().remove();
-    $("#body").prepend("<script id=\"customscript\"></script>");
+    /*$('#body').find('script').first().remove();
+    $("#body").prepend("<script id=\"customscript\"></script>");*/
   }
 }
 
