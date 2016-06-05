@@ -506,7 +506,7 @@ function pushFunction(inId){
 
 function pushFunction2(){
   $('#body').find('script').first().remove();
-  $("#body").prepend("<script id="customscript"></script>");
+  $("#body").prepend("<script id=\"customscript\"></script>");
   advancedGen=true;
   resetStuff();
   var rePart="0.125",imPart="0.8";
