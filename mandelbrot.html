@@ -891,7 +891,7 @@
         imPart=tmpStr;
         var regex;
         for (var a=0;a<expressions.length;a++){
-          regex=new RegExp(expressions[a],"gi");
+          regex=new RegExp(expressions[a],"g");
           rePart.replace(regex,"Math."+expressions[a]);
           imPart.replace(regex,"Math."+expressions[a]);
         }
