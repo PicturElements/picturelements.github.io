@@ -903,7 +903,7 @@
           imPart=imPart.replace(regex,"Math."+expressions[a]);
         }
         console.log(power+", "+rePart+", "+imPart);
-        document.getElementById("customscript").innerHTML="\nfunction createFunction(x,y){\n  julA="+rePart+";\n  julB="+imPart+";\n}\nconsole.log(\"Got here!\")";
+        document.getElementById("customscript").innerHTML="\nfunction createFunction(x,y){\n  julA="+rePart+";\n  julB="+imPart+";\nconsole.log(\"Got here!\")\n}\n";
         isMandel=false;
         closePopups(1);
         scan=0;
