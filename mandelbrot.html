@@ -864,7 +864,7 @@
             break;
           }
         }
-        var progress=0;
+        var progress=0,skip=false;
         var tmpStr="";
         for (var a=0;a<input.length-startpos+1;a++){
           if (input.charAt(a)=="^"){progress=1;}
@@ -874,17 +874,21 @@
             }else if (progress==1){
               power=Math.floor(parseFloat(tmpStr));
               tmpStr="";
+              skip=true;
               progress++;
             }
             if (progress==2&&a<startpos2){
-              if (tmpStr!=""||tmpStr==""&&input.charAt(a)=='-'){tmpStr+=input.charAt(a);}
+              if (tmpStr==""&&input.charAt(a)=='-'&&skip||!skip){tmpStr+=input.charAt(a);}
+              skip=false;
             }else if(progress==2){
               rePart=tmpStr;
               tmpStr="";
               progress++;
+              skip=true;
             }
             if (progress==3&&a>=startpos2){
-              if (tmpStr!=""||tmpStr==""&&input.charAt(a)=='-'){tmpStr+=input.charAt(a);}
+              if (tmpStr==""&&input.charAt(a)=='-'&&skip||!skip){tmpStr+=input.charAt(a);}
+              skip=false;
             }
           }
         }
