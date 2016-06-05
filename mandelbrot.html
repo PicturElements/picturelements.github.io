@@ -864,23 +864,23 @@
           }
         }
         var progress=0;
-        var tmpStr;
+        var tmpStr="";
         for (var a=0;a<input.length;a++){
           if (input.charAt(a)=="^"){progress=1;}
           else if (progress>0){
-            if (progress==0&&isNumber(input.charAt(a))){
+            if (progress==1&&isNumber(input.charAt(a))){
               tmpStr+=input.charAt(a);
-            }else if (progress==0){
+            }else if (progress==1){
               power=Math.floor(parseFloat(tmpStr));
               tmpStr="";
               progress++;
-            }else if (progress==1&&a<startpos){
+            }else if (progress==2&&a<startpos){
               tmpStr+=input.charAt(a);
-            }else if(progress==1){
+            }else if(progress==2){
               rePart=tmpStr;
               tmpStr="";
               progress++;
-            }else if (progress==2&&a>=startpos){
+            }else if (progress==3&&a>=startpos){
               tmpStr+=input.charAt(a);
             }
           }
