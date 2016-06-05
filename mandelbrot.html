@@ -361,6 +361,7 @@
       var selectedCol=5,rd,gr,bl,cycleLength=50;
       var date=new Date(),time=date.getTime();
       var ctx,imgData,ctx2;
+      var expressions=["PI","E","pow","sqrt","cbrt","sin","cos","tan","floor","abs","ceil","random","log","log10","exp"];
       
       function init(){
         ctx2=document.getElementById("overlaycanvas").getContext("2d");
@@ -888,6 +889,10 @@
           }
         }
         imPart=tmpStr;
+        for (var a=0;a<expressions.length;a++){
+          rePart.replace(/expressions[a]/g,"Math."+expressions[a]);
+          imPart.replace(/expressions[a]/g,"Math."+expressions[a]);
+        }
         console.log(power+", "+rePart+", "+imPart);
         /*document.getElementById("customscript").innerHTML="\nfunction createFunction(x,y){\n  julA="+rePart+";\n  julB="+imPart+";\n}\n";
         createFunction(0,0);
