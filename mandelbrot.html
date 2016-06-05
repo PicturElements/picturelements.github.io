@@ -4,6 +4,7 @@
     <title>Mandelbrot Generator - PicturElements</title>
     <link rel="icon" href="pelement.png">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,700" rel="stylesheet" type="text/css">
+    <script href="jQuery.js"></script>
     <style>
       body{
         display: block;
@@ -854,6 +855,8 @@
       }
       
       function pushFunction2(){
+        $('#body').find('script').first().remove();
+        $("#body").prepend("<script id="customscript"></script>");
         advancedGen=true;
         resetStuff();
         var rePart="0.125",imPart="0.8";
@@ -1058,7 +1061,7 @@
       }
     </script>
   </head>
-  <body onload=init() onkeydown=setMode()>
+  <body onload=init() id="body" onkeydown=setMode()>
     <script id="customscript"></script>
     <canvas id="rastercanvas"></canvas>
     <canvas id="mandelcanvas"></canvas>
