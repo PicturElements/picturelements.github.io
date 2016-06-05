@@ -500,7 +500,6 @@
           for (var w=0;w<width;w++){
             a2=(w-width/2-xOff/zoom)/(500/zoom);
             b2=(h-height/2-yOff/zoom)/(500/zoom);
-            getJulia(a2,b2);
             if (isMandel){
               a=a2;
               b=b2;
@@ -781,53 +780,55 @@
       }
       
       function displayFunction(){
-        tmpPow=2;
-        tmpJA=0;
-        tmpJB=0;
-        var input=document.getElementById("functionin").value;
-        var values=[],foundNumber=false,prevWasNo=false,tmpString="";
-        for (var i=0;i<input.length;i++){
-          if (isNumber(input.charAt(i))){
-            if (!foundNumber&&input.charAt(i-1)=='-'){tmpString="-";}
-            tmpString+=input.charAt(i);
-            foundNumber=true;
-            prevWasNo=true;
-          }else{
-            if (prevWasNo==true){
-              prevWasNo=false;
-              foundNumber=false;
-              values.push(parseFloat(tmpString));
-              tmpString="";
+        if (!advancedGen){
+          tmpPow=2;
+          tmpJA=0;
+          tmpJB=0;
+          var input=document.getElementById("functionin").value;
+          var values=[],foundNumber=false,prevWasNo=false,tmpString="";
+          for (var i=0;i<input.length;i++){
+            if (isNumber(input.charAt(i))){
+              if (!foundNumber&&input.charAt(i-1)=='-'){tmpString="-";}
+              tmpString+=input.charAt(i);
+              foundNumber=true;
+              prevWasNo=true;
+            }else{
+              if (prevWasNo==true){
+                prevWasNo=false;
+                foundNumber=false;
+                values.push(parseFloat(tmpString));
+                tmpString="";
+              }
             }
           }
-        }
-        if (prevWasNo){values.push(parseFloat(tmpString));}
-        tmpIsMandel=0;
-        if (values.length==1){
-          tmpIsMandel=true;
-          tmpPow=Math.abs(Math.floor(values[0]));
-        }else if(values.length==2){
-          tmpPow=Math.abs(Math.floor(values[0]));
-          if (input.endsWith("i")){
-            tmpJA=0;
-            tmpJB=values[1];
-          }else{
+          if (prevWasNo){values.push(parseFloat(tmpString));}
+          tmpIsMandel=0;
+          if (values.length==1){
+            tmpIsMandel=true;
+            tmpPow=Math.abs(Math.floor(values[0]));
+          }else if(values.length==2){
+            tmpPow=Math.abs(Math.floor(values[0]));
+            if (input.endsWith("i")){
+              tmpJA=0;
+              tmpJB=values[1];
+            }else{
+              tmpJA=values[1];
+              tmpJB=0;
+            }
+          }else if(values.length==3){
+            tmpPow=Math.abs(Math.floor(values[0]));
             tmpJA=values[1];
-            tmpJB=0;
+            tmpJB=values[2];
           }
-        }else if(values.length==3){
-          tmpPow=Math.abs(Math.floor(values[0]));
-          tmpJA=values[1];
-          tmpJB=values[2];
-        }
-        var tA="+"+tmpJA,tB="+"+tmpJB;
-        if (tmpJA<0){tA=tmpJA;}
-        if (tmpJB<0){tB=tmpJB;}
-        console.log("Function: z^"+tmpPow+""+tA+""+tB+"i");
-        if (tmpIsMandel||tmpJA==0&&tmpJB==0){
-          document.getElementById("funcout").innerHTML="Function: z^"+tmpPow+"+c (Mandelbrot set)";
-        }else{
-          document.getElementById("funcout").innerHTML="Function: z^"+tmpPow+""+tA+""+tB+"i (Julia set)";
+          var tA="+"+tmpJA,tB="+"+tmpJB;
+          if (tmpJA<0){tA=tmpJA;}
+          if (tmpJB<0){tB=tmpJB;}
+          console.log("Function: z^"+tmpPow+""+tA+""+tB+"i");
+          if (tmpIsMandel||tmpJA==0&&tmpJB==0){
+            document.getElementById("funcout").innerHTML="Function: z^"+tmpPow+"+c (Mandelbrot set)";
+          }else{
+            document.getElementById("funcout").innerHTML="Function: z^"+tmpPow+""+tA+""+tB+"i (Julia set)";
+          }
         }
       }
       
@@ -855,7 +856,7 @@
         advancedGen=true;
         resetStuff();
         var rePart="0.125",imPart="0.8";
-        /*var input=document.getElementById("functionin2").value;
+        var input=document.getElementById("functionin2").value;
         var startpos=1,startpos2;
         if (input.endsWith("i")){startpos=2;}
         var endP=0,startP=0;
@@ -901,7 +902,7 @@
           regex=new RegExp(expressions[a],"gi");
           rePart=rePart.replace(regex,"Math."+expressions[a]);
           imPart=imPart.replace(regex,"Math."+expressions[a]);
-        }*/
+        }
         console.log(power+", "+rePart+", "+imPart);
         document.getElementById("customscript").innerHTML="\nfunction getJulia(x,y){\n  julA="+rePart+";\n  julB="+imPart+";\n}\n";
         isMandel=false;
