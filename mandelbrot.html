@@ -348,7 +348,7 @@
     </style>
     <script>
       var xOff=300,yOff=0,zoom=3,iterations=50,mode=0,prevH=0;
-      var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true,display=false,move=false;
+      var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true,display=false,move=false,advancedGen=false;
       var width=window.innerWidth,height=window.innerHeight;
       var cmx=0,cmy=0,curX,curY,tmpXOff,tmpYOff,tmpZoom;
       var a,b,a2,b2;
@@ -501,6 +501,7 @@
           for (var w=0;w<width;w++){
             a2=(w-width/2-xOff/zoom)/(500/zoom);
             b2=(h-height/2-yOff/zoom)/(500/zoom);
+            if (advancedGen){createFunction(a2,b2);}
             if (isMandel){
               a=a2;
               b=b2;
@@ -839,6 +840,7 @@
       }
       
       function pushFunction(inId){
+        advancedGen=false;
         closePopups(0);
         isMandel=tmpIsMandel;
         power=tmpPow;
@@ -850,6 +852,7 @@
       }
       
       function pushFunction2(){
+        advancedGen=true;
         resetStuff();
         var rePart="0.125",imPart="0.8";
         var input=document.getElementById("functionin2").value;
@@ -900,12 +903,11 @@
           imPart=imPart.replace(regex,"Math."+expressions[a]);
         }
         console.log(power+", "+rePart+", "+imPart);
-        /*document.getElementById("customscript").innerHTML="\nfunction createFunction(x,y){\n  julA="+rePart+";\n  julB="+imPart+";\n}\n";
-        createFunction(0,0);
+        document.getElementById("customscript").innerHTML="\nfunction createFunction(x,y){\n  julA="+rePart+";\n  julB="+imPart+";\n}\n";
         isMandel=false;
         closePopups(1);
         scan=0;
-        setStuff();*/
+        setStuff();
       }
       
       function resetStuff(){
