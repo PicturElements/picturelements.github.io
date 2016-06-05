@@ -392,6 +392,8 @@
         if (!parseUrl()){
           setStuff();
         }
+        displayFunction();
+        pushFunction(0);
       }
       
       function paintRaster(){
@@ -473,8 +475,6 @@
       function mainGenerate(){
         ctx=document.getElementById("mandelcanvas").getContext("2d");
         imgData=ctx.createImageData(width,10);
-        displayFunction();
-        if (isMandel){pushFunction(0);}
         scan=0;
         if (mode==3){mode=0;}
         document.getElementById("mandelcanvas").style.marginLeft="0";
@@ -841,6 +841,7 @@
       }
       
       function pushFunction(inId){
+        displayFunction();
         advancedGen=false;
         closePopups(0);
         isMandel=tmpIsMandel;
@@ -1097,7 +1098,7 @@
         <button style="margin-top:0;position:absolute;width:12vw;margin-left:27vw;height: 2.4vw;" onclick="goBack()">Back</button>
         <button style="margin-top:0;position:absolute;width:12vw;margin-left:40vw;height: 2.4vw;" onclick="pushFunction2()">Set function</button>
         <div id="limitations" style="display: block;position: absolute;font-size: 1vw;color: #555;width: 90%;margin-left: 5%;height: 8vw;line-height: 1.3vw;background-color: #ddd;margin-top: 4vw;">Requirements: integer power (e.g. z^4), imaginary part in complex number must be distincted with parentheses, proceeded by i (e.g. z^2+0.5-(1-sin(x))i).<br><br>Allowed functions/expressions:<br>x, y, PI, E, +, -, *, /, %, pow(x,power), sqrt(x), cbrt(x), sin(x), cos(x), tan(x), floor(x), abs(x), ceil(x), random(max value), log(x), log10(x), exp(x)</div>
-        <div id="funcout2" style="display: block;position: absolute;font-size: 1.3vw;color: #555;width: 90%;margin-left: 5%;height: 3vw;line-height: 3vw;background-color: #ddd;margin-top: 13vw;">Function: z^2+c (Mandelbrot set)</div>      </div>
+        <div id="funcout2" style="display: block;position: absolute;font-size: 1.3vw;color: #555;width: 90%;margin-left: 5%;height: 3vw;line-height: 3vw;background-color: #ddd;margin-top: 13vw;">Function: z^2+c (Mandelbrot set)</div>
       </div>
       <div id="sharepanel" class="popup">
         Share you Mandelbrot/Julia set!
