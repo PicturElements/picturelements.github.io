@@ -852,20 +852,20 @@
         resetStuff();
         var rePart="0.125",imPart="0.8";
         var input=document.getElementById("functionin2").value;
-        var startpos=1;
+        var startpos=1,startpos2;
         if (input.endsWith("i")){startpos=2;}
         var endP=0,startP=0;
         for (var a=input.length-startpos;a>0;a--){
           if (input.charAt(a)=="("){startP++;}
           else if (input.charAt(a)==")"){endP++;}
           if (startP==endP&&startP>0){
-            startpos=a-1;
+            startpos2=a-2;
             break;
           }
         }
         var progress=0;
         var tmpStr="";
-        for (var a=0;a<input.length;a++){
+        for (var a=0;a<input.length-startpos+1;a++){
           if (input.charAt(a)=="^"){progress=1;}
           else if (progress>0){
             if (progress==1&&isNumber(input.charAt(a))){
@@ -874,13 +874,15 @@
               power=Math.floor(parseFloat(tmpStr));
               tmpStr="";
               progress++;
-            }else if (progress==2&&a<startpos){
+            }
+            if (progress==2&&a<startpos2){
               tmpStr+=input.charAt(a);
             }else if(progress==2){
               rePart=tmpStr;
               tmpStr="";
               progress++;
-            }else if (progress==3&&a>=startpos){
+            }
+            if (progress==3&&a>=startpos2){
               tmpStr+=input.charAt(a);
             }
           }
