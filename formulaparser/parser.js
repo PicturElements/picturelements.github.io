@@ -9,7 +9,7 @@ function parse(input){
     var tmp="",charAt='';
     var extFormula="%"+formula+"%";  //make the string a little longer
     console.log(extFormula);
-    for (i=1;i<extFormula.length-1;i++){
+    for (var i=1;i<extFormula.length-1;i++){
       cAt=extFormula.charAt(i);
       if (isOperator(cAt)){
         if (cAt=='-'){
@@ -34,7 +34,7 @@ function parse(input){
     }
     splitFormula.push(tmp);
     console.log(splitFormula.length);
-    for (i=0;i<splitFormula.length;i++){
+    for (var i=0;i<splitFormula.length;i++){
       console.log(splitFormula[i]);
     }
     break; //improve later
@@ -43,7 +43,7 @@ function parse(input){
 }
 
 function isNumber(charIn){
-  for (i=0;i<numbers.length;i++){
+  for (var i=0;i<numbers.length;i++){
     if (charIn==numbers[i]){
       return true;
     }
@@ -52,7 +52,7 @@ function isNumber(charIn){
 }
 
 function isOperator(charIn){
-  for (i=0;i<operators.length;i++){
+  for (var i=0;i<operators.length;i++){
     if (charIn==operators[i]){
       return true;
     }
