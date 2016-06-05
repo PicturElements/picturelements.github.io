@@ -17,22 +17,22 @@ function parse(input){
             if (isNumber(extFormula.charAt(i+1))){
               tmp+=cAt;
             }else if(isOperator(extFormula.charAt(i+1))){
-              splitFormula.push(tmp,cAt);   //tmp=number, cAt=operator
+              if (tmp!=""){splitFormula.push(tmp,cAt);}   //tmp=number, cAt=operator
               tmp="";
             }
           }else if(isNumber(extFormula.charAt(i-1))){
-            splitFormula.push(tmp,cAt);   //tmp=number, cAt=operator
+            if (tmp!=""){splitFormula.push(tmp,cAt);}   //tmp=number, cAt=operator
             tmp="";
           }
         }else{
-          splitFormula.push(tmp,cAt);   //tmp=number, cAt=operator
+          if (tmp!=""){splitFormula.push(tmp,cAt);}   //tmp=number, cAt=operator
           tmp="";
         }
       }else{
         tmp+=cAt;
       }
     }
-    splitFormula.push(tmp);
+    if (tmp!=""){splitFormula.push(tmp);}   //tmp=number, cAt=operator
     console.log(splitFormula.length);
     for (var i=0;i<splitFormula.length;i++){
       console.log(splitFormula[i]);
