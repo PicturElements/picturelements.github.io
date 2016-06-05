@@ -501,11 +501,11 @@
           for (var w=0;w<width;w++){
             a2=(w-width/2-xOff/zoom)/(500/zoom);
             b2=(h-height/2-yOff/zoom)/(500/zoom);
-            if (advancedGen){createFunction(a2,b2);}
             if (isMandel){
               a=a2;
               b=b2;
             }else{
+              if (advancedGen){createFunction(a2,b2);}
               a=julA;
               b=-julB;
             }
@@ -903,7 +903,7 @@
           imPart=imPart.replace(regex,"Math."+expressions[a]);
         }
         console.log(power+", "+rePart+", "+imPart);
-        document.getElementById("customscript").innerHTML="\nfunction createFunction(x,y){\n  julA="+rePart+";\n  julB="+imPart+";\n}\n";
+        document.getElementById("customscript").innerHTML="\nfunction createFunction(x,y){\n  julA="+rePart+";\n  julB="+imPart+";\n}\nconsole.log(\"Got here!\")";
         isMandel=false;
         closePopups(1);
         scan=0;
