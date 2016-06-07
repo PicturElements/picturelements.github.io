@@ -201,7 +201,7 @@ function generateIndividual(type){
     }
     if (type==1){
       ctx2.lineTo(a2*(height/zoom)+xOff/zoom+width/2,b2*(height/zoom)+yOff/zoom+height/2);
-      ctx3.lineTo(((i+1)/iterations)*c3W,Math.sqrt(a2*a2+b2*b2)*c3H);
+      ctx3.lineTo(((i+1)/iterations)*c3W,c3H-(Math.sqrt(a2*a2+b2*b2)/2)*c3H);
     }
   }
   return -1;
@@ -718,8 +718,8 @@ function paint2(){
       b=-julB;
     }
     ctx2.moveTo(tX,tY);
-    ctx3.learRect(0,0,1000,1000);
-    ctx3.moveTo(0,Math.sqrt(a2*a2+b2*b2)*c3H);
+    ctx3.clearRect(0,0,1000,1000);
+    ctx3.moveTo(0,c3H-(Math.sqrt(a2*a2+b2*b2)/2)*c3H);
     generateIndividual(1);
     ctx2.stroke();
     ctx3.stroke();
