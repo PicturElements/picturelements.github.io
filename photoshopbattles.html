@@ -69,6 +69,7 @@
           margins.push(100+Math.random()*movespaceY);
           pieces[i].style.marginTop=""+margins[i*2+1]+"px";
           pieces[i].style.backgroundPosition=""+(-15*(i%4))+"vw "+(-8.4375*Math.floor(i/4))+"vw";
+          pieces[i].style.transitionDelay=""+100*i+"ms";
         }
         var canvas=document.getElementById("gridcanvas");
         canvas.width=window.innerWidth*0.6;
