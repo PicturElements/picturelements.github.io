@@ -110,7 +110,7 @@ function gradientSetup(){
 }
 
 function gradient(inID){
-  document.getElementById("upperinfo").style.display="none";
+  document.getElementById("escapepanel").style.display="none";
   var parts=(startAt[inID+1]-startAt[inID])/3+1;
   var colors="";
   for (var b=0;b<parts-1;b++){
