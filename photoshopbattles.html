@@ -61,7 +61,7 @@
       function movePieces(){
         if (pressNo>-1){
           margins[pressNo*2]+=(event.clientX-xPos);
-          margins[pressNo*2]+=(event.clientY-yPos);
+          margins[pressNo*2+1]+=(event.clientY-yPos);
           pieces[pressNo].style.marginLeft=""+margins[pressNo*2]+"px";
           pieces[pressNo].style.marginTop=""+margins[pressNo*2+1]+"px";
           xPos=event.clientX;
