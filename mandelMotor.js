@@ -17,7 +17,6 @@ var expressions=["PI","E","pow","sqrt","cbrt","sin","cos","tan","floor","abs","c
 function init(){
   ctx2=document.getElementById("overlaycanvas").getContext("2d");
   ctx3=document.getElementById("escapecanvas").getContext("2d");
-  ctx3.strokeStyle="red";
   var canvas=document.getElementById("mandelcanvas");
   canvas.width=width;
   canvas.height=height;
@@ -720,6 +719,8 @@ function paint2(){
     }
     ctx2.moveTo(tX,tY);
     ctx3.clearRect(0,0,1000,1000);
+    ctx3.strokeStyle="red";
+    ctx.lineWidth=2;
     ctx3.beginPath();
     ctx3.moveTo(0,c3H-(Math.sqrt(a2*a2+b2*b2)/2)*c3H);
     generateIndividual(1);
