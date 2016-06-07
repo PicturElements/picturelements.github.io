@@ -11,7 +11,7 @@ var gradientCols=[255,255,255,0,0,0,255,0,0,0,0,0,0,255,0,0,0,0,0,0,255,0,0,0,25
 var startAt=[0,6,12,18,24,33,48];
 var selectedCol=5,rd,gr,bl,cycleLength=50;
 var date=new Date(),time=date.getTime();
-var ctx,imgData,ctx2,ctx3;
+var ctx,imgData,ctx2,ctx3,c3W,c3H;
 var expressions=["PI","E","pow","sqrt","cbrt","sin","cos","tan","floor","abs","ceil","random","log","log10","exp"];
 
 function init(){
@@ -35,6 +35,8 @@ function init(){
   canvas2=document.getElementById("escapecanvas");
   canvas2.width=window.innerWidth*0.29;
   canvas2.height=window.innerWidth*0.08;
+  c3W=window.innerWidth*0.29;
+  c3H=window.innerWidth*0.08;
   paintRaster();
   gradientSetup();
   var parts=(startAt[selectedCol+1]-startAt[selectedCol])/3+1;
@@ -199,6 +201,7 @@ function generateIndividual(type){
     }
     if (type==1){
       ctx2.lineTo(a2*(height/zoom)+xOff/zoom+width/2,b2*(height/zoom)+yOff/zoom+height/2);
+      ctx3.lineTo(((i+1)/iterations)*c3W,Math.sqrt(a2*a2+b2*b2)*c3H);
     }
   }
   return -1;
@@ -715,8 +718,11 @@ function paint2(){
       b=-julB;
     }
     ctx2.moveTo(tX,tY);
+    ctx3.learRect(0,0,1000,1000);
+    ctx3.moveTo(0,Math.sqrt(a2*a2+b2*b2)*c3H);
     generateIndividual(1);
     ctx2.stroke();
+    ctx3.stroke();
   }
   if (thread!=null){
     ctx2.beginPath();
