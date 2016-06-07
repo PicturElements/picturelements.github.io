@@ -22,6 +22,8 @@
         left:20vw;
         top:50%;
         margin-top:-16.875vw;
+        box-sizing:border-box;
+        border:1px solid black;
       }
       
       .piece{
@@ -32,6 +34,8 @@
         background-color:#ccc;
         background-image:url(images/psb3small.png);
         background-size:60vw 33.75vw;
+        margin-left:calc(50% - 7.5vw);
+        margin-top:calc(50% - 4.21875vw);
         cursor:move;
       }
       
@@ -71,7 +75,7 @@
       
       function paint(){
         var ctx=document.getElementById("gridcanvas").getContext("2d");
-        for (var a=0;a<5;a++){
+        for (var a=1;a<4;a++){
           ctx.beginPath();
           ctx.moveTo(0,window.innerWidth*0.3375*(a/4));
           ctx.lineTo(window.innerWidth*0.6,window.innerWidth*0.3375*(a/4));
