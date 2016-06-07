@@ -159,7 +159,8 @@ function generate(){
         a=julA;
         b=-julB;
       }
-      pixels.push(generateIndividual(0));
+      //pixels.push(generateIndividual(0));
+      pixels.push(generateExp());
     }
   }
   paint();
@@ -195,6 +196,19 @@ function generateIndividual(type){
     if (type==1){
       ctx2.lineTo(a2*(height/zoom)+xOff/zoom+width/2,b2*(height/zoom)+yOff/zoom+height/2);
     }
+  }
+  return -1;
+}
+
+function generateExp(){
+  for (var i=0;i<iterations;i++){
+     if (a2*a2+b2*b2>=4){
+       return i; 
+     }
+     var e=Math.E;
+     var tmA=a2;
+     a2=e^tmA*Math.cos(b2)-0.65;
+     b2=e^tmA*Math.sin(b2);
   }
   return -1;
 }
