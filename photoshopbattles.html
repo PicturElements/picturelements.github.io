@@ -13,6 +13,17 @@
         -ie-user-select:none;
       }
       
+      #gridcanvas{
+        display:block;
+        position:fixed;
+        background-color:#ddd;
+        width:60vw;
+        height:33.75vw;
+        left:20vw;
+        top:50%;
+        margin-top:-16.875vw;
+      }
+      
       .piece{
         display:block;
         position:fixed;
@@ -53,7 +64,24 @@
           pieces[i].style.marginTop=""+margins[i*2+1]+"px";
           pieces[i].style.backgroundPosition=""+(-15*(i%4))+"vw "+(-8.4375*Math.floor(i/4))+"vw";
         }
+        document.getElementById("gridcanvas").width=window.innerWidth*0.6;
+        document.getElementById("gridcanvas").height=window.innerWidth*0.3375;
+        paint();
       }
+      
+      function paint(){
+        var ctx=document.getElementById("gridcanvas").getContext(2d);
+        for (var a=0;a<5;a++){
+          ctx.beginPath();
+          ctx.moveTo(0,window.innerWidth*0.3375*(a/4));
+          ctx.moveTo(window.innerWidth*0.6,window.innerWidth*0.3375*(a/4));
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(window.innerWidth*0.6*(a/4),0);
+          ctx.moveTo(window.innerWidth*0.6*(a/4),window.innerHeight*0.3375);
+          ctx.stroke();
+        }
+      } 
       
       function press(inID){
         pressNo=inID;
@@ -79,6 +107,7 @@
   </head>
   <body onload=init() onmouseup=press(-1) onmousemove=movePieces()>
     <div id="desc"><b>I thought I'd let you put my application together for yourselves.</b><br>I've done everything on this page, just so you know.</div>
+    <canvas id="gridcanvas"></canvas>
     <div class="piece" onmousedown=press(0)></div>
     <div class="piece" onmousedown=press(1)></div>
     <div class="piece" onmousedown=press(2)></div>
