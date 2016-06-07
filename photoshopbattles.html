@@ -22,16 +22,16 @@
     <script>
       function init(){
         var pieces=document.getElementsByClassName("piece");
-        var movespaceX=window.innerWidth*0.8,movespaceY=window.innerHeight-window.innerWidth*0.1125;
+        var movespaceX=window.innerWidth*0.8,movespaceY=window.innerHeight-window.innerWidth*0.1125-200;
         for (var i=0;i<pieces.length;i++){
           pieces[i].style.marginLeft=""+(Math.random()*movespaceX)+"px";
-          pieces[i].style.marginTop=""+(Math.random()*moveSpaceY)+"px";
+          pieces[i].style.marginTop=""+(200+Math.random()*movespaceY)+"px";
         }
       }
     </script>
   </head>
   <body onload=init()>
-    <div id="desc"><b>I thought I'd let you put my appkication together for yourselves.</b><br>I've done everything on this page, just so you know.</div>
+    <div id="desc"><b>I thought I'd let you put my application together for yourselves.</b><br>I've done everything on this page, just so you know.</div>
     <div class="piece"></div>
     <div class="piece"></div>
     <div class="piece"></div>
