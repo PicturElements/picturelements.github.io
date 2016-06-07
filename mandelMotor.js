@@ -110,6 +110,7 @@ function gradientSetup(){
 }
 
 function gradient(inID){
+  document.getElementById("upperinfo").style.display="none";
   var parts=(startAt[inID+1]-startAt[inID])/3+1;
   var colors="";
   for (var b=0;b<parts-1;b++){
@@ -720,11 +721,6 @@ function paint2(){
     }
     ctx2.moveTo(tX,tY);
     ctx3.clearRect(0,0,1000,1000);
-    for (var x=0;x<c3W;x++){
-      color((x/c3W)*iterations);
-      ctx3.fillStyle="rgb("+rd+","+gr+","+bl+")";
-      ctx3.fillRect(x,0,1,10);
-    }
     ctx3.strokeStyle="#444";
     ctx3.lineWidth=2;
     ctx3.beginPath();
@@ -732,6 +728,11 @@ function paint2(){
     generateIndividual(1);
     ctx2.stroke();
     ctx3.stroke();
+    for (var x=0;x<c3W;x++){
+      color((x/c3W)*iterations);
+      ctx3.fillStyle="rgb("+Math.floor(rd)+","+Math.floor(gr)+","+Math.floor(bl)+")";
+      ctx3.fillRect(x,0,1,10);
+    }
   }
   if (thread!=null){
     ctx2.beginPath();
