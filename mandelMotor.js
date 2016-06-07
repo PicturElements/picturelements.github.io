@@ -159,8 +159,8 @@ function generate(){
         a=julA;
         b=-julB;
       }
-      //pixels.push(generateIndividual(0));
-      pixels.push(generateExp());
+      pixels.push(generateIndividual(0));
+      //pixels.push(generateExp());
     }
   }
   paint();
@@ -202,7 +202,7 @@ function generateIndividual(type){
 
 function generateExp(){
   for (var i=0;i<iterations;i++){
-     if (a2*a2+b2*b2>=400){
+     if (a2*a2+b2*b2>=4){
        return i; 
      }
      var e=Math.E;
