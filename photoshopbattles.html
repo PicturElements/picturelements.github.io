@@ -66,6 +66,10 @@
           pieces[pressNo].style.marginTop=""+margins[pressNo*2+1]+"px";
           xPos=event.clientX;
           yPos=event.clientY;
+          for (var a=0;a<pieces.length;a++){
+            pieces[a].style.zIndex=1;
+          }
+          pieces[pressNo].style.zIndex=10;
         }
       }
     </script>
