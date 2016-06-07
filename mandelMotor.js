@@ -202,7 +202,7 @@ function generateIndividual(type){
 
 function generateExp(){
   for (var i=0;i<iterations;i++){
-     if (a2*a2+b2*b2>=4){
+     if (a2*a2+b2*b2>=400){
        return i; 
      }
      var e=Math.E;
