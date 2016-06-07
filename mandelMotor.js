@@ -11,11 +11,12 @@ var gradientCols=[255,255,255,0,0,0,255,0,0,0,0,0,0,255,0,0,0,0,0,0,255,0,0,0,25
 var startAt=[0,6,12,18,24,33,48];
 var selectedCol=5,rd,gr,bl,cycleLength=50;
 var date=new Date(),time=date.getTime();
-var ctx,imgData,ctx2;
+var ctx,imgData,ctx2,ctx3;
 var expressions=["PI","E","pow","sqrt","cbrt","sin","cos","tan","floor","abs","ceil","random","log","log10","exp"];
 
 function init(){
   ctx2=document.getElementById("overlaycanvas").getContext("2d");
+  ctx3=document.getElementById("escapecanvas").getContext("2d");
   var canvas=document.getElementById("mandelcanvas");
   canvas.width=width;
   canvas.height=height;
@@ -26,11 +27,16 @@ function init(){
   canvas2.height=height;
   canvas2.style.width=""+width+"px";
   canvas2.style.height=""+height+"px";
-  var canvas2=document.getElementById("rastercanvas");
+  canvas2=document.getElementById("rastercanvas");
   canvas2.width=width;
   canvas2.height=height;
   canvas2.style.width=""+width+"px";
   canvas2.style.height=""+height+"px";
+  canvas2=document.getElementById("escapecanvas");
+  canvas2.width=window.innerWidth*0.29;
+  canvas2.height=window.innerWidth*0.08;
+  canvas2.style.width=""+window.innerWidth*0.29+"px";
+  canvas2.style.height=""+window.innerWidth*0.08+"px";
   paintRaster();
   gradientSetup();
   var parts=(startAt[selectedCol+1]-startAt[selectedCol])/3+1;
@@ -223,6 +229,7 @@ function isHotkey(keycode){
 
 function setMode(){
   if (!display){
+    document.getElementById("escapepanel").style.display="none";
     if (isHotkey(event.keyCode)){
       document.getElementById("generate").focus();
     }
@@ -244,6 +251,7 @@ function setMode(){
       mode=2;
     }else if (kc==69){
       document.getElementById("overlaycanvas").style.cursor="default";
+      document.getElementById("escapepanel").style.display="block";
       mode=3;
     }else if(kc==71){   //G - generate
       closePopups(-1);
