@@ -35,8 +35,6 @@ function init(){
   canvas2=document.getElementById("escapecanvas");
   canvas2.width=window.innerWidth*0.29;
   canvas2.height=window.innerWidth*0.08;
-  canvas2.style.width=""+window.innerWidth*0.29+"px";
-  canvas2.style.height=""+window.innerWidth*0.08+"px";
   paintRaster();
   gradientSetup();
   var parts=(startAt[selectedCol+1]-startAt[selectedCol])/3+1;
