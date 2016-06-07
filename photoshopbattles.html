@@ -8,6 +8,9 @@
       body{
         background-color:white;
         margin:0;
+        -webkit-user-select:none;
+        -moz-user-select:none;
+        -ie-user-select:none;
       }
       
       .piece{
@@ -35,23 +38,34 @@
     </style>
     <script>
       var pressNo=-1;
+      var xPos,yPos;
+      var margins=[];
       
       function init(){
         var pieces=document.getElementsByClassName("piece");
         var movespaceX=window.innerWidth*0.8,movespaceY=window.innerHeight-window.innerWidth*0.1125-200;
         for (var i=0;i<pieces.length;i++){
-          pieces[i].style.marginLeft=""+(Math.random()*movespaceX)+"px";
-          pieces[i].style.marginTop=""+(100+Math.random()*movespaceY)+"px";
+          margins.push(Math.random()*movespaceX);
+          pieces[i].style.marginLeft=""+margins[i*2]+"px";
+          margins.push(100+Math.random()*movespaceY);
+          pieces[i].style.marginTop=""+margins[i*2+1]+"px";
         }
       }
       
       function press(inID){
         pressNo=inID;
+        xPos=event.clientX;
+        yPos=event.clientY;
       }
       
       function movePieces(){
         if (pressNo>-1){
-          console.log("STUFF HAPPENED!");
+          margins[pressNo*2]+=(event.clientX-xPos);
+          margins[pressNo*2]+=(event.clientY-yPos);
+          pieces[pressNo].style.marginLeft=""+margins[pressNo*2]+"px";
+          pieces[pressNo].style.marginTop=""+margins[pressNo*2+1]+"px";
+          xPos=event.clientX;
+          yPos=event.clientY;
         }
       }
     </script>
