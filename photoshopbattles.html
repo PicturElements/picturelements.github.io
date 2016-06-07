@@ -60,27 +60,35 @@
       var margins=[];
       var thread;
       var pieces=document.getElementsByClassName("piece");
+      var movespaceX=window.innerWidth*0.85,movespaceY=window.innerHeight-window.innerWidth*0.084375-200;
       
       function init(){
-        var movespaceX=window.innerWidth*0.85,movespaceY=window.innerHeight-window.innerWidth*0.084375-200;
+        ucx=window.innerWidth*0.2;
+        ucy=(window.innerHeight-window.innerWidth*0.084375*4)/2;
+        pW=window.innerWidth*0.15;
+        pH=window.innerWidth*0.084375;
         for (var i=0;i<pieces.length;i++){
-          margins.push(Math.random()*movespaceX);
-          pieces[i].style.marginLeft=""+margins[i*2]+"px";
-          margins.push(100+Math.random()*movespaceY);
-          pieces[i].style.marginTop=""+margins[i*2+1]+"px";
+          pieces[i].style.marginLeft=""+(ucx+(i%4)*pW)+"px";
+          pieces[i].style.marginTop=""+(ucy+Math.floor(i/4)*pH)+"px";
           pieces[i].style.backgroundPosition=""+(-15*(i%4))+"vw "+(-8.4375*Math.floor(i/4))+"vw";
-          pieces[i].style.transitionDelay=""+100*i+"ms";
+          pieces[i].style.transitionDelay=""+200*i+"ms";
         }
         var canvas=document.getElementById("gridcanvas");
         canvas.width=window.innerWidth*0.6;
         canvas.height=window.innerWidth*0.3375;
         //canvas.style.top="0";
-        ucx=window.innerWidth*0.2;
-        ucy=(window.innerHeight-window.innerWidth*0.084375*4)/2;
-        pW=window.innerWidth*0.15;
-        pH=window.innerWidth*0.084375;
         //canvas.style.marginTop=""+ucy+"px";
+        setTimeout(randomize,3500);
         paint();
+      }
+      
+      function randomize(){
+        for (var i=0;i<pieces.length;i++){
+          margins.push(Math.random()*movespaceX);
+          pieces[i].style.marginLeft=""+margins[i*2]+"px";
+          margins.push(100+Math.random()*movespaceY);
+          pieces[i].style.marginTop=""+margins[i*2+1]+"px";
+        }
       }
       
       function paint(){
