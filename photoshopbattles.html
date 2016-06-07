@@ -55,8 +55,9 @@
     </style>
     <script>
       var pressNo=-1;
-      var xPos,yPos;
+      var xPos,yPos,ucx,ucy,pW,pH;
       var margins=[];
+      var thread;
       var pieces=document.getElementsByClassName("piece");
       
       function init(){
@@ -70,6 +71,10 @@
         }
         document.getElementById("gridcanvas").width=window.innerWidth*0.6;
         document.getElementById("gridcanvas").height=window.innerWidth*0.3375;
+        ucx=window.innerWidth*0.2;
+        ucy=window.innerWidth*0.1687;
+        pW=window.innerWidth*0.15;
+        pH=window.innerWidth*0.084375;
         paint();
       }
       
@@ -99,6 +104,11 @@
           margins[pressNo*2+1]+=(event.clientY-yPos);
           pieces[pressNo].style.marginLeft=""+margins[pressNo*2]+"px";
           pieces[pressNo].style.marginTop=""+margins[pressNo*2+1]+"px";
+          var modX=(margins[pressNo*2]-ucx)%pW,modY=(margins[pressNo*2+1]-ucy)%pH;
+          if (Math.min(modX,pW-modX)<10&&Math.min(modY,pH-modY)<10){
+            pieces[pressNo].style.marginLeft=""+(Math.floor((margins[pressNo*2]-ucx)/pW)*pW+ucx)+"px";
+            pieces[pressNo].style.marginTop=""+(Math.floor((margins[pressNo*2+1]-ucy)/pH)*pH+ucy)+"px";
+          }
           xPos=event.clientX;
           yPos=event.clientY;
           for (var a=0;a<pieces.length;a++){
