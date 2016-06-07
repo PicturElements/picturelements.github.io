@@ -89,6 +89,14 @@
           margins.push(100+Math.random()*movespaceY);
           pieces[i].style.marginTop=""+margins[i*2+1]+"px";
         }
+        setTimeout(resetStuff,3500);
+      }
+      
+      function resetStuff(){
+        for (var i=0;i<pieces.length;i++){
+          pieces[i].style.transition="initial"
+          pieces[i].style.transitionDelay="initial;
+        }
       }
       
       function paint(){
