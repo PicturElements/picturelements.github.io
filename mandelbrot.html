@@ -349,14 +349,25 @@
       }
       
       #escapepanel{
-        display: block;
+        display: none;
         position: fixed;
-        width: 30vw;
+        width: 33vw;
         height: 10vw;
         background-color: white;
         border-radius: 0.4vw;
         top: 1vw;
         left: 1vw;
+        font-family:Roboto,Arial,sans-serif;
+      }
+      
+      #escapecanvas{
+        display: block;
+        position: absolute;
+        width: 29vw;
+        height: 8vw;
+        margin-left: 1vw;
+        margin-top: 1vw;
+        background-color: #ddd;
       }
     </style>
   </head>
@@ -481,9 +492,7 @@
     </div>
     <div id="escapepanel" class="popup">
       <div id="closebtn" onclick="closePopups(-1)">[X]</div>
-      <canvas id="escapecanvas">
-        
-      </canvas>
+      <canvas id="escapecanvas"></canvas>
     </div>
     <div id="upperinfo"></div>
   </body>
