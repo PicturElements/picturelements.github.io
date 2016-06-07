@@ -104,10 +104,20 @@
           margins[pressNo*2+1]+=(event.clientY-yPos);
           pieces[pressNo].style.marginLeft=""+margins[pressNo*2]+"px";
           pieces[pressNo].style.marginTop=""+margins[pressNo*2+1]+"px";
-          var modX=(margins[pressNo*2]-ucx)%pW,modY=(margins[pressNo*2+1]-ucy)%pH;
+          /*var modX=(margins[pressNo*2]-ucx)%pW,modY=(margins[pressNo*2+1]-ucy)%pH;
           if (modX<10&&modY<10){
             pieces[pressNo].style.marginLeft=""+(Math.floor((margins[pressNo*2]-ucx)/pW)*pW+ucx)+"px";
             pieces[pressNo].style.marginTop=""+(Math.floor((margins[pressNo*2+1]-ucy)/pH)*pH+ucy)+"px";
+          }*/
+          for (var a=0;a<4;a++){
+            if (Math.abs(margins[pressNo*2]-ucx-pW*a)<10){
+              for (var b=0;b<4;b++){
+                if (Math.abs(margins[pressNo*2+1]-ucy-pH*b)<10){
+                  pieces[pressNo].style.marginLeft=""+(ucx+a*pW)+"px";
+                  pieces[pressNo].style.marginTop=""+(ucy+b*pH)+"px";
+                }
+              }
+            }
           }
           xPos=event.clientX;
           yPos=event.clientY;
