@@ -19,6 +19,10 @@
         cursor:move;
       }
       
+      .piece:hover{
+        background-color:#aaa;
+      }
+      
       #desc{
         display: block;
         position: fixed;
@@ -30,6 +34,8 @@
       }
     </style>
     <script>
+      var pressNo=-1;
+      
       function init(){
         var pieces=document.getElementsByClassName("piece");
         var movespaceX=window.innerWidth*0.8,movespaceY=window.innerHeight-window.innerWidth*0.1125-200;
@@ -38,25 +44,35 @@
           pieces[i].style.marginTop=""+(100+Math.random()*movespaceY)+"px";
         }
       }
+      
+      function press(inID){
+        pressNo=inID;
+      }
+      
+      function movePieces(){
+        if (pressNo>-1){
+          console.log("STUFF HAPPENED!");
+        }
+      }
     </script>
   </head>
-  <body onload=init()>
+  <body onload=init() onmouseup=press(-1) onmousemove=movePieces()>
     <div id="desc"><b>I thought I'd let you put my application together for yourselves.</b><br>I've done everything on this page, just so you know.</div>
-    <div class="piece"></div>
-    <div class="piece"></div>
-    <div class="piece"></div>
-    <div class="piece"></div>
-    <div class="piece"></div>
-    <div class="piece"></div>
-    <div class="piece"></div>
-    <div class="piece"></div>
-    <div class="piece"></div>
-    <div class="piece"></div>
-    <div class="piece"></div>
-    <div class="piece"></div>
-    <div class="piece"></div>
-    <div class="piece"></div>
-    <div class="piece"></div>
-    <div class="piece"></div>
+    <div class="piece" onmousedown=press(0)></div>
+    <div class="piece" onmousedown=press(1)></div>
+    <div class="piece" onmousedown=press(2)></div>
+    <div class="piece" onmousedown=press(3)></div>
+    <div class="piece" onmousedown=press(4)></div>
+    <div class="piece" onmousedown=press(5)></div>
+    <div class="piece" onmousedown=press(6)></div>
+    <div class="piece" onmousedown=press(7)></div>
+    <div class="piece" onmousedown=press(8)></div>
+    <div class="piece" onmousedown=press(9)></div>
+    <div class="piece" onmousedown=press(10)></div>
+    <div class="piece" onmousedown=press(11)></div>
+    <div class="piece" onmousedown=press(12)></div>
+    <div class="piece" onmousedown=press(13)></div>
+    <div class="piece" onmousedown=press(14)></div>
+    <div class="piece" onmousedown=press(15)></div>
   </body>
 </html>
