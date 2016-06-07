@@ -40,9 +40,9 @@
       var pressNo=-1;
       var xPos,yPos;
       var margins=[];
+      var pieces=document.getElementsByClassName("piece");
       
       function init(){
-        var pieces=document.getElementsByClassName("piece");
         var movespaceX=window.innerWidth*0.8,movespaceY=window.innerHeight-window.innerWidth*0.1125-200;
         for (var i=0;i<pieces.length;i++){
           margins.push(Math.random()*movespaceX);
