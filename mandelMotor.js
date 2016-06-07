@@ -256,6 +256,7 @@ function setMode(){
       document.getElementById("overlaycanvas").style.cursor="default";
       document.getElementById("escapepanel").style.display="block";
       mode=3;
+      paint2();
     }else if(kc==71){   //G - generate
       closePopups(-1);
       setStuff();
