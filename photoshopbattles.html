@@ -105,7 +105,7 @@
           pieces[pressNo].style.marginLeft=""+margins[pressNo*2]+"px";
           pieces[pressNo].style.marginTop=""+margins[pressNo*2+1]+"px";
           var modX=(margins[pressNo*2]-ucx)%pW,modY=(margins[pressNo*2+1]-ucy)%pH;
-          if (Math.min(modX,pW-modX)<10&&Math.min(modY,pH-modY)<10){
+          if (modX<10&&modY<10){
             pieces[pressNo].style.marginLeft=""+(Math.floor((margins[pressNo*2]-ucx)/pW)*pW+ucx)+"px";
             pieces[pressNo].style.marginTop=""+(Math.floor((margins[pressNo*2+1]-ucy)/pH)*pH+ucy)+"px";
           }
