@@ -347,6 +347,17 @@
         line-height: 1.3vw;
         text-align: left;
       }
+      
+      #escapepanel{
+        display: block;
+        position: fixed;
+        width: 30vw;
+        height: 10vw;
+        background-color: white;
+        border-radius: 0.4vw;
+        top: 1vw;
+        left: 1vw;
+      }
     </style>
   </head>
   <body onload=init() id="body" onkeydown=setMode()>
@@ -467,6 +478,12 @@
       <div id="colorsample"></div>
       <div id="iterationinfo"></div>
       <div id="iterationinfo2"></div>
+    </div>
+    <div id="escapepanel" class="popup">
+      <div id="closebtn" onclick="closePopups(-1)">[X]</div>
+      <canvas id="escapecanvas">
+        
+      </canvas>
     </div>
     <div id="upperinfo"></div>
   </body>
