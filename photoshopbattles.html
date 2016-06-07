@@ -18,6 +18,16 @@
         background-color:#ccc;
         cursor:move;
       }
+      
+      #desc{
+        display: block;
+        position: fixed;
+        width: 100%;
+        text-align: center;
+        font-family: Roboto,Arial,sans-serif;
+        margin-top: 2vw;
+        font-size: 1.5vw;
+      }
     </style>
     <script>
       function init(){
@@ -25,7 +35,7 @@
         var movespaceX=window.innerWidth*0.8,movespaceY=window.innerHeight-window.innerWidth*0.1125-200;
         for (var i=0;i<pieces.length;i++){
           pieces[i].style.marginLeft=""+(Math.random()*movespaceX)+"px";
-          pieces[i].style.marginTop=""+(200+Math.random()*movespaceY)+"px";
+          pieces[i].style.marginTop=""+(100+Math.random()*movespaceY)+"px";
         }
       }
     </script>
