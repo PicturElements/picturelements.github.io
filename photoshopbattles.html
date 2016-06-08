@@ -164,6 +164,15 @@
         yPos=event.clientY;
       }
       
+      function isFull(){
+        for (var i=0;i<16;i++){
+          if (Math.abs(margins[i*2]-ucx-(i%4)*pW)>=10||Math.abs(margins[i*2+1]-ucy-Math.floor(i/4)*pH)>=10){
+            return false;
+          }
+        }
+        return true;
+      }
+      
       function movePieces(){
         if (pressNo>-1&&movable){
           margins[pressNo*2]+=(event.clientX-xPos);
@@ -191,6 +200,9 @@
             pieces[a].style.zIndex=1;
           }
           pieces[pressNo].style.zIndex=10;
+          if (isFull()){
+            alert("DONE!");
+          }
         }
       }
     </script>
