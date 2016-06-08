@@ -59,6 +59,7 @@
       var xPos,yPos,ucx,ucy,pW,pH;
       var margins=[];
       var thread;
+      var movable=false;
       var pieces=document.getElementsByClassName("piece");
       var movespaceX=window.innerWidth*0.85,movespaceY=window.innerHeight-window.innerWidth*0.084375-200;
       
@@ -98,6 +99,16 @@
           pieces[i].style.transition="initial"
           pieces[i].style.transitionDelay="initial";
         }
+        movable=true;
+      }
+      
+      function placePieces(){
+        for (var i=0;i<pieces.length;i++){
+          pieces[i].style.marginLeft=""+(ucx+(i%4)*pW)+"px";
+          pieces[i].style.marginTop=""+(ucy+Math.floor(i/4)*pH)+"px";
+          pieces[i].style.transition="500ms";
+          pieces[i].style.transitionDelay=""+200*i+"ms";
+        }
       }
       
       function paint(){
@@ -121,7 +132,7 @@
       }
       
       function movePieces(){
-        if (pressNo>-1){
+        if (pressNo>-1&&movable){
           margins[pressNo*2]+=(event.clientX-xPos);
           margins[pressNo*2+1]+=(event.clientY-yPos);
           pieces[pressNo].style.marginLeft=""+margins[pressNo*2]+"px";
@@ -170,5 +181,6 @@
     <div class="piece" onmousedown=press(13)></div>
     <div class="piece" onmousedown=press(14)></div>
     <div class="piece" onmousedown=press(15)></div>
+    <button id="apBtn" onclick=placePieces()>Auto-place</button>
   </body>
 </html>
