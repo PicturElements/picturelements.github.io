@@ -105,7 +105,7 @@
       var movable=false;
       var pieces=document.getElementsByClassName("piece");
       var movespaceX=window.innerWidth*0.85,movespaceY=window.innerHeight-window.innerWidth*0.084375-200;
-      var xPos2=[],yPos2=[],stps=[],fireCols=[],checks=[0,0,0,0],points=10,sinusoid=0.1,dissipate=0.3;
+      var xPos2=[],yPos2=[],stps=[],fireCols=[],checks=[0,0,0,0],points=15,sinusoid=0.1,dissipate=0.3;
       var pointFld=[],sine=[],stepNo=[],fade=0.15,size=25,counter=0;
       
       function init(){
@@ -229,12 +229,16 @@
         }
       }
       
-      
-      
       function setPos(){
         xPos2.push(Math.random()*window.innerWidth);
         yPos2.push(Math.random()*window.innerHeight);
         fireCols.push(Math.floor(Math.random()*155+100),Math.floor(Math.random()*155+100),Math.floor(Math.random()*155+100));
+        
+          var tmp=Math.random()*size*0.5+0.5*size;
+          stepNo.push(tmp);
+          stps.push(tmp);
+          pointFld.push(Math.floor(Math.random()*(points+1)+1));
+          sine.push(sinusoid);
       }
       
       function paint2(){
