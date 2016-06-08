@@ -72,6 +72,7 @@
           pieces[i].style.marginTop=""+(ucy+Math.floor(i/4)*pH)+"px";
           pieces[i].style.backgroundPosition=""+(-15*(i%4))+"vw "+(-8.4375*Math.floor(i/4))+"vw";
           pieces[i].style.transitionDelay=""+200*i+"ms";
+          pieces[i].style.zIndex=100-i;
         }
         var canvas=document.getElementById("gridcanvas");
         canvas.width=window.innerWidth*0.6;
@@ -151,7 +152,7 @@
     </script>
   </head>
   <body onload=init() onmouseup=press(-1) onmousemove=movePieces()>
-    <div id="desc"><b>I thought I'd let you put my application together for yourselves.</b><br>I've done everything on this page, just so you know.</div>
+    <div id="desc"><b>I thought I'd let you put my application together for yourselves.</b><br>Yup, I used BIRTH OF A HERO. Could've almost used Comic Sans instead.</div>
     <canvas id="gridcanvas"></canvas>
     <div class="piece" onmousedown=press(0)></div>
     <div class="piece" onmousedown=press(1)></div>
