@@ -11,6 +11,7 @@
         -webkit-user-select:none;
         -moz-user-select:none;
         -ie-user-select:none;
+        transition:background-color 1s;
       }
       
       #gridcanvas{
@@ -52,6 +53,7 @@
         font-family: Roboto,Arial,sans-serif;
         margin-top: 2vw;
         font-size: 1.5vw;
+        transition:color 1s;
       }
       
       #apBtn{
@@ -173,6 +175,12 @@
         return true;
       }
       
+      function partay(){
+        document.getElementById("body").style.backgroundColor="black";
+        document.getElementById("desc").style.color="white";
+        document.getElementById("apBtn").style.display="none";
+      }
+      
       function movePieces(){
         if (pressNo>-1&&movable){
           margins[pressNo*2]+=(event.clientX-xPos);
@@ -201,7 +209,7 @@
           }
           pieces[pressNo].style.zIndex=10;
           if (isFull()){
-            alert("DONE!");
+            partay();
           }
         }
       }
