@@ -105,7 +105,7 @@
       var movable=false;
       var pieces=document.getElementsByClassName("piece");
       var movespaceX=window.innerWidth*0.85,movespaceY=window.innerHeight-window.innerWidth*0.084375-200;
-      var xPos=[],yPos=[],stps=[],fireCols=[],checks=[0,0,0,0],points=10,sinusoid=0.1,dissipate=0.3;
+      var xPos2=[],yPos2=[],stps=[],fireCols=[],checks=[0,0,0,0],points=10,sinusoid=0.1,dissipate=0.3;
       var pointFld=[],sine=[],stepNo=[],fade=0.15,size=25,counter=0;
       
       function init(){
@@ -232,21 +232,21 @@
       
       
       function setPos(){
-        xPos.push(Math.random()*window.innerWidth);
-        yPos.push(Math.random()*window.innerHeight);
+        xPos2.push(Math.random()*window.innerWidth);
+        yPos2.push(Math.random()*window.innerHeight);
       }
       
       function paint2(){
         var ctx=document.getElementById("celebrate").getContext("2d");
         ctx.fillStyle="rgba(0,0,0,"+fade+")";
         ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
-        for (i=0;i<xPos.length;i++){
+        for (i=0;i<xPos2.length;i++){
           var rot=i%(360/points)*Math.PI/18;
           if (stps[i]>0){
             ctx.fillStyle="rgb("+fireCols[i*3]+","+fireCols[i*3+1]+","+fireCols[i*3+2]+")";
             for (n=0;n<pointFld[i];n++){
               ctx.beginPath();
-              ctx.arc(xPos[i]+Math.cos(n*2*Math.PI/pointFld[i]+rot+sine[i]*Math.sin(Math.pow((stepNo[i]-stps[i])+1.45,3)/100)*(-1/stepNo[i]*(stepNo[i]-stps[i])+1))*(stepNo[i]-stps[i])*5,yPos[i]+Math.sin(n*2*Math.PI/pointFld[i]+rot+sine[i]*Math.sin(Math.pow((stepNo[i]-stps[i])+1.45,3)/100)*(-1/stepNo[i]*(stepNo[i]-stps[i])+1))*(stepNo[i]-stps[i])*5,stps[i],0,2*Math.PI);
+              ctx.arc(xPos2[i]+Math.cos(n*2*Math.PI/pointFld[i]+rot+sine[i]*Math.sin(Math.pow((stepNo[i]-stps[i])+1.45,3)/100)*(-1/stepNo[i]*(stepNo[i]-stps[i])+1))*(stepNo[i]-stps[i])*5,yPos2[i]+Math.sin(n*2*Math.PI/pointFld[i]+rot+sine[i]*Math.sin(Math.pow((stepNo[i]-stps[i])+1.45,3)/100)*(-1/stepNo[i]*(stepNo[i]-stps[i])+1))*(stepNo[i]-stps[i])*5,stps[i],0,2*Math.PI);
               ctx.fill();
             }
             stps[i]--;
