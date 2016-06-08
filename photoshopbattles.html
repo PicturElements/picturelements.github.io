@@ -53,6 +53,20 @@
         margin-top: 2vw;
         font-size: 1.5vw;
       }
+      
+      #apBtn{
+        display: none;
+        position: fixed;
+        width: 10vw;
+        height: 3vw;
+        font-family: Roboto,Arial,sans-serif;
+        font-weight: bold;
+        background-color: #ddd;
+        border: none;
+        bottom: 1vw;
+        left: 45vw;
+        cursor:pointer;
+      }
     </style>
     <script>
       var pressNo=-1;
@@ -99,6 +113,7 @@
           pieces[i].style.transition="initial"
           pieces[i].style.transitionDelay="initial";
         }
+        document.getElementById("apBtn").style.display="block";
         movable=true;
       }
       
