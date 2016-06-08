@@ -159,8 +159,10 @@
       
       function placePieces(){
         for (var i=0;i<pieces.length;i++){
-          pieces[i].style.marginLeft=""+(ucx+(i%4)*pW)+"px";
-          pieces[i].style.marginTop=""+(ucy+Math.floor(i/4)*pH)+"px";
+          margins[i*2]=ucx+(i%4)*pW;
+          margins[i*2+1]=ucy+Math.floor(i/4)*pH;
+          pieces[i].style.marginLeft=""+margins[i*2]+"px";
+          pieces[i].style.marginTop=""+margins[i*2+1]+"px";
           pieces[i].style.transition="500ms";
           pieces[i].style.transitionDelay=""+200*i+"ms";
         }
@@ -201,7 +203,7 @@
           pieces[i].style.transition="initial"
           pieces[i].style.transitionDelay="initial";
         }
-        document.getElementById("desc").innerHTML="<b>CONGRATULATIONS! You either know how to lay a puzzle or how to press a button!<br>Here's my application in all its glory: <a href=\"http://i.imgur.com/KQ02PqR.jpg\">CLICK HERE<\/a><\/b>";
+        document.getElementById("desc").innerHTML="<b>CONGRATULATIONS! You either know how to lay a puzzle or how to press a button!<\/b><br>Here's my application in all its glory: <a href=\"http://i.imgur.com/KQ02PqR.jpg\">CLICK HERE<\/a>";
         document.getElementsByTagName("body")[0].style.backgroundColor="black";
         document.getElementById("desc").style.color="white";
         document.getElementById("apBtn").style.display="none";
