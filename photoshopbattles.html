@@ -158,6 +158,7 @@
           pieces[i].style.transition="500ms";
           pieces[i].style.transitionDelay=""+200*i+"ms";
         }
+        setTimeout(partay,2500);
       }
       
       function paint(){
@@ -193,7 +194,7 @@
         document.getElementsByTagName("body")[0].style.backgroundColor="black";
         document.getElementById("desc").style.color="white";
         document.getElementById("apBtn").style.display="none";
-        setInterval(paint2,20);
+        setInterval(paint2,50);
       }
       
       function movePieces(){
