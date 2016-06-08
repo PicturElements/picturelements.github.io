@@ -240,11 +240,11 @@
         var ctx=document.getElementById("celebrate").getContext("2d");
         ctx.fillStyle="rgba(0,0,0,"+fade+")";
         ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
-        for (i=0;i<xPos2.length;i++){
+        for (var i=0;i<xPos2.length;i++){
           var rot=i%(360/points)*Math.PI/18;
           if (stps[i]>0){
             ctx.fillStyle="rgb("+fireCols[i*3]+","+fireCols[i*3+1]+","+fireCols[i*3+2]+")";
-            for (n=0;n<pointFld[i];n++){
+            for (var n=0;n<pointFld[i];n++){
               ctx.beginPath();
               ctx.arc(xPos2[i]+Math.cos(n*2*Math.PI/pointFld[i]+rot+sine[i]*Math.sin(Math.pow((stepNo[i]-stps[i])+1.45,3)/100)*(-1/stepNo[i]*(stepNo[i]-stps[i])+1))*(stepNo[i]-stps[i])*5,yPos2[i]+Math.sin(n*2*Math.PI/pointFld[i]+rot+sine[i]*Math.sin(Math.pow((stepNo[i]-stps[i])+1.45,3)/100)*(-1/stepNo[i]*(stepNo[i]-stps[i])+1))*(stepNo[i]-stps[i])*5,stps[i],0,2*Math.PI);
               ctx.fill();
