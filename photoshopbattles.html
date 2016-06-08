@@ -27,6 +27,16 @@
         border:1px solid black;
       }
       
+      #celebrate{
+        display:block;
+        position:fixed;
+        width:100%;
+        height:100%;
+        left:0;
+        top:0;
+        z-index:-1;
+      }
+      
       .piece{
         display:block;
         position:fixed;
@@ -92,10 +102,11 @@
       var pressNo=-1;
       var xPos,yPos,ucx,ucy,pW,pH;
       var margins=[];
-      var thread;
       var movable=false;
       var pieces=document.getElementsByClassName("piece");
       var movespaceX=window.innerWidth*0.85,movespaceY=window.innerHeight-window.innerWidth*0.084375-200;
+      var xPos=[],yPos=[],stps=[],fireCols=[],checks=[0,0,0,0],points=10,sinusoid=0.1,dissipate=0.3;
+      var pointFld=[],sine=[],stepNo=[],fade=0.15,size=25,counter=0;
       
       function init(){
         ucx=window.innerWidth*0.2;
@@ -112,6 +123,9 @@
         var canvas=document.getElementById("gridcanvas");
         canvas.width=window.innerWidth*0.6;
         canvas.height=window.innerWidth*0.3375;
+        canvas=document.getElementById("celebrate");
+        canvas.width=window.innerWidth;
+        canvas.height=window.innerHeight;
         //canvas.style.top="0";
         //canvas.style.marginTop=""+ucy+"px";
         setTimeout(randomize,4500);
@@ -179,6 +193,7 @@
         document.getElementsByTagName("body")[0].style.backgroundColor="black";
         document.getElementById("desc").style.color="white";
         document.getElementById("apBtn").style.display="none";
+        setInterval(paint2,20);
       }
       
       function movePieces(){
@@ -213,10 +228,40 @@
           }
         }
       }
+      
+      
+      
+      function setPos(){
+        xPos.push(Math.random()*window.innerWidth);
+        yPos.push(Math.random()*window.innerHeight);
+      }
+      
+      function paint2(){
+        var ctx=document.getElementById("celebrate").getContext("2d");
+        ctx.fillStyle="rgba(0,0,0,"+fade+")";
+        ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
+        for (i=0;i<xPos.length;i++){
+          var rot=i%(360/points)*Math.PI/18;
+          if (stps[i]>0){
+            ctx.fillStyle="rgb("+fireCols[i*3]+","+fireCols[i*3+1]+","+fireCols[i*3+2]+")";
+            for (n=0;n<pointFld[i];n++){
+              ctx.beginPath();
+              ctx.arc(xPos[i]+Math.cos(n*2*Math.PI/pointFld[i]+rot+sine[i]*Math.sin(Math.pow((stepNo[i]-stps[i])+1.45,3)/100)*(-1/stepNo[i]*(stepNo[i]-stps[i])+1))*(stepNo[i]-stps[i])*5,yPos[i]+Math.sin(n*2*Math.PI/pointFld[i]+rot+sine[i]*Math.sin(Math.pow((stepNo[i]-stps[i])+1.45,3)/100)*(-1/stepNo[i]*(stepNo[i]-stps[i])+1))*(stepNo[i]-stps[i])*5,stps[i],0,2*Math.PI);
+              ctx.fill();
+            }
+            stps[i]--;
+          }
+        }
+        counter++;
+        if (counter%20==0){
+          setPos();
+        }
+      }
     </script>
   </head>
   <body onload=init() onmouseup=press(-1) onmousemove=movePieces()>
     <div id="desc"><b>I thought I'd let you put my application together for yourselves.</b><br>Yup, I used BIRTH OF A HERO. Could've almost used Comic Sans instead.</div>
+    <canvas id="celebrate"></canvas>
     <canvas id="gridcanvas"></canvas>
     <div class="piece" onmousedown=press(0)></div>
     <div class="piece" onmousedown=press(1)></div>
