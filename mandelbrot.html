@@ -520,16 +520,16 @@
             <p>
               This is roughly how the script iterates input values for sets with power 2:
               <code>
-                <cmt>//Set complex number</cmt>
+                <cmt>//Set complex numbers and generate for each pixel</cmt>
                 <br>for (var h=scan;h&lt;scan+10;h++){  <cmt>//Scan each row</cmt>
                 <br>&nbsp;&nbsp;for (var w=0;w&lt;width;w++){  <cmt>//Scan each pixel in that row</cmt>
-                <br>&nbsp;&nbsp;&nbsp;&nbsp;<cmt>//set coordinate value based on pixel position and zoom</cmt>
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;<cmt>//Below: set coordinate value based on pixel position and zoom</cmt>
                 <br>&nbsp;&nbsp;&nbsp;&nbsp;a2=(w-width/2-xOff/zoom)/(500/zoom);
                 <br>&nbsp;&nbsp;&nbsp;&nbsp;b2=(h-height/2-yOff/zoom)/(500/zoom);
-                <br>&nbsp;&nbsp;&nbsp;&nbsp;if (isMandel){  //if Mandelbrot set, assume orbit 0
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;if (isMandel){  <cmt>//if Mandelbrot set, assume orbit 0</cmt>
                 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a=a2;
                 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b=b2;
-                <br>&nbsp;&nbsp;&nbsp;&nbsp;}else{  //if Julia set, assume orbit a2+b2i, set c to constant
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;}else{  <cmt>//if Julia set, assume orbit a2+b2i, set c to constant</cmt>
                 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a=julA;
                 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b=-julB;
                 <br>&nbsp;&nbsp;&nbsp;&nbsp;}
@@ -538,14 +538,16 @@
                 <br>}
               </code>
               <code>
-                <cmt>//Iterate</cmt>
+                <cmt>//Iterate (power 2)</cmt>
                 <br>for (var i=0;i&lt;max_iterations;i++){
                 <br>&nbsp;&nbsp;if (a2*a2+b2*b2>=4){
                 <br>&nbsp;&nbsp;&nbsp;&nbsp;return i;  <cmt>//return escape time</cmt>
                 <br>&nbsp;&nbsp;}
+                <br>&nbsp;&nbsp;<cmt>/*Below: follow rule (a+b)^2=a^2+2ab+b^2 -&gt; (a+bi)^2=a^2+2abi-b^2
+                <br>&nbsp;&nbsp;Since c is a complex number d+ei, (a+bi)^2+c=a^2+2abi-b^2+d+ei, thus a^2-b^2+d(real, a2) + 2*(a+bi)+ei(imaginary, b2)*/</cmt>
                 <br>&nbsp;&nbsp;aTmp=a2;
                 <br>&nbsp;&nbsp;a2=a2*a2-b2*b2+a;
-                <br>&nbsp;&nbsp;b2=aTmp*b2+b2*aTmp+b;
+                <br>&nbsp;&nbsp;b2=2*(aTmp*b2)+b;
                 <br>}
                 <br>return -1;  <cmt>//signifies a number belonging to the set</cmt>
               </code>
