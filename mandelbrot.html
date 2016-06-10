@@ -386,6 +386,13 @@
         margin-top: 1vw;
         background-color: #ddd;
       }
+      
+      code{
+        font-family:monospace;
+        font-size:80%;
+        color:#222;
+        background-color:#ccc;
+      }
     </style>
   </head>
   <body onload=init() id="body" onkeydown=setMode() onmousemove=setEP()>
@@ -501,6 +508,19 @@
               <br><br>
               <b>Searching for a higher power?</b> The Mandelbrot set was first defined as z^2+c, but any other power will work, such as z^4+c. This web app accepts any integer power value larger or equal to 2. For power 2, the code uses a simple formula to generate the next number. For higher powers, this becomes inefficient, as you need to loop through the algorithm. Fortunately, there exists a formula, de Moivre's formula, which lets you put in any integer power and outputs the complex number in polar form, which is a different way to describe complex numbers than a+bi (<a href=\"https://en.wikipedia.org/wiki/Polar_coordinate_system\">read more about polar form here</a>). This way, Mandelbrot/Julia sets with powers exceeding 100 are fully possible to generate in reasonable time.
             </p>
+          <h2>About - code</h2>
+            This is roughly how the script iterates input values for sets with power 2:
+            <code>
+              for (var i=0;i<max_iterations;i++){
+                if (a2*a2+b2*b2>=4){
+                  return i;
+                }
+                aTmp=a2;
+                a2=a2*a2-b2*b2+a;
+                b2=aTmp*b2+b2*aTmp+b;
+              }
+              return -1;  //signifies a number belonging to the set
+            </code>
           <h2>About - creator</h2>
             <p>
               This web app was written by reddit user /u/PicturElements in June 2016. 
