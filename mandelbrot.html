@@ -388,7 +388,7 @@
       }
       
       code{
-        font-family:monospace;
+        display:inline-block;
         font-size:80%;
         color:#222;
         background-color:#ccc;
@@ -512,15 +512,15 @@
             <p>
               This is roughly how the script iterates input values for sets with power 2:
               <code>
-                for (var i=0;i<max_iterations;i++){
-                  if (a2*a2+b2*b2>=4){
-                    return i;
-                  }
-                  aTmp=a2;
-                  a2=a2*a2-b2*b2+a;
-                  b2=aTmp*b2+b2*aTmp+b;
-                }
-                return -1;  //signifies a number belonging to the set
+                for (var i=0;i\<max_iterations;i++){
+                <br> if (a2*a2+b2*b2>=4){
+                <br>    return i;
+                <br>  }
+                <br>  aTmp=a2;
+                <br>  a2=a2*a2-b2*b2+a;
+                <br>  b2=aTmp*b2+b2*aTmp+b;
+                <br>}
+                <br>return -1;  //signifies a number belonging to the set
               </code>
             </p>
           <h2>About - creator</h2>
