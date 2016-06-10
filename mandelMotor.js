@@ -13,6 +13,9 @@ var selectedCol=5,rd,gr,bl,cycleLength=50;
 var date=new Date(),time=date.getTime();
 var ctx,imgData,ctx2,ctx3,c3W,c3H;
 var expressions=["PI","E","pow","sqrt","cbrt","sin","cos","tan","floor","abs","ceil","random","log","log10","exp"];
+//escape panel
+var moveescape=false;
+var eX,eY,eOffX=1,eOffY=1;
 
 function init(){
   ctx2=document.getElementById("overlaycanvas").getContext("2d");
@@ -613,6 +616,23 @@ function save(){
     var d=c.toDataURL("image/png");
     var w=window.open('about:blank','image from canvas');
     w.document.write("<img src='"+d+"' alt='from canvas'/>");
+  }
+}
+
+function setEM(inID){
+  moveescape=Boolean(inID);
+  ex=event.clientX;
+  ey=event.clientY;
+}
+
+function setEP(){
+  if (moveescape){
+    eOffX+=((event.clientX-ex)/window.innerWidth)*100;
+    eOffY+=((event.clientY-ey)/window.innerWidth)*100;
+    document.getElementById("escapepanel").style.left=""+eOffX+"vw";
+    document.getElementById("escapepanel").style.top=""+eOffY+"vw";
+    ex=event.clientX;
+    ey=event.clientY;
   }
 }
 
