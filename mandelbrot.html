@@ -440,17 +440,25 @@
         <div id="inner">
           <h>Tools/hotkeys</h>
           <p>
-            <b>S - Scale mode</b> Click and drag to select a part of a fractal. You can move the selection around if needed.
+            <b>Max. iterations</b> This value describes how many times the script is allowed to iterate each pixel. The higher the value, the better the resolution, but more time is required to generate.
             <br><br>
-            <b>M - Move mode</b> Drag the entire rendered image and re-render. If a different zoom value is input, a rectangular selection box will appear in the center.
+            <b>X offset</b> This value sets the offset for the generated set along the x axis. Higher numbers push the set to the right, and lower numbers push it to the left.
             <br><br>
-            <b>E - Escape mode</b> Move your cursor over the set. The script will display the positions of complex numbers for each cycle of the rendering algorithm until it escapes.
+            <b>Y offset</b> This value sets the offset for the generated set along the y axis. Higher numbers push the set to the bottom, and lower numbers push it to the top.
             <br><br>
-            <b>I - Info mode</b> Move your cursor over the set. It will display the amount of iterations and position for that point.
+            <b>Zoom</b> This value sets the zoom for the set. The lower the number, i.e. closer to zero, the further into the set, and the higher the number, further out from the set.
+            <br><br>
+            <b>S - Scale mode</b> Click and drag to select a part of the fractal. You can move the selection around if needed. Click enter to generate, escape to cancel.
+            <br><br>
+            <b>M - Move mode</b> Drag the entire rendered image. If a different zoom value is input, a rectangular selection box will appear in the center to ease framing.
+            <br><br>
+            <b>E - Escape mode</b> Move your cursor over the set. The script will display the positions of complex numbers for each cycle of the rendering algorithm until it escapes. A popup will also appear that displays the absolute value of each complex number in a plot to show how the input escapes.
+            <br><br>
+            <b>I - Info mode</b> Move your cursor over the set. The script will display the amount of iterations and position for that point.
             <br><br>
             <b>G - Generate</b> Generate a new set. Edit the function in the function panel.
             <br><br>
-            <b>F - Function (ordinary)</b> Edit the function used to render a fractal. It's not picky with the input, but requires one constant for a Mandelbrot set (power, default is 2), and two or more constant for Julia sets. Note that the script automatically selects which settings are input if only two constants are present. z^2-0.5 will be parsed as z^2-0.5+0i and z^2-0.5i as z^2+0-0.5i.
+            <b>F - Function (ordinary)</b> Edit the function used to render a fractal. It's not picky with the input, but requires one constant for a Mandelbrot set (power, default is 2), and two or more constants for Julia sets. Note that the script automatically selects which settings are input if only two constants are present. z^2-0.5 will be parsed as z^2-0.5+0i and z^2-0.5i as z^2+0-0.5i, for instance.
             <br><br>
             <b>F- Function (advanced)</b> Edit the function, but with more advanced input. This mode supports more advanced mathematical operations to describe constants in Julia sets, such as trigonometry, roots, and variables (x and y).
             <br><br>
