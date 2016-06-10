@@ -369,7 +369,7 @@
         background-color: #eee;
         right: 0;
         bottom: 0;
-        border-radius: 0.5vw 0 0 0;
+        border-radius: 0.5vw 0 0.5vw 0;
         cursor: move;
       }
       
@@ -388,7 +388,7 @@
       }
     </style>
   </head>
-  <body onload=init() id="body" onkeydown=setMode()>
+  <body onload=init() id="body" onkeydown=setMode() onmousemove=setEP()>
     <script id="customscript"></script>
     <canvas id="rastercanvas"></canvas>
     <canvas id="mandelcanvas"></canvas>
@@ -516,7 +516,7 @@
       <div id="iterationinfo2"></div>
     </div>
     <div id="escapepanel" class="popup">
-      <div id="movebar"></div>
+      <div id="movebar" onmousedown=setEM(1) onmouseup=setEM(0) title="move"></div>
       <div id="closebtn" onclick="closePopups(-1)">[X]</div>
       <canvas id="escapecanvas"></canvas>
     </div>
