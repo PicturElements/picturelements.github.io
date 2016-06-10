@@ -520,7 +520,26 @@
             <p>
               This is roughly how the script iterates input values for sets with power 2:
               <code>
-                for (var i=0;i&lt;max_iterations;i++){
+                <cmt>//Set complex number</cmt>
+                <br>for (var h=scan;h&lt;scan+10;h++){  <cmt>//Scan each row</cmt>
+                <br>&nbsp;&nbsp;for (var w=0;w&lt;width;w++){  <cmt>//Scan each pixel in that row</cmt>
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;<cmt>//set coordinate value based on pixel position and zoom</cmt>
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;a2=(w-width/2-xOff/zoom)/(500/zoom);
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;b2=(h-height/2-yOff/zoom)/(500/zoom);
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;if (isMandel){  //if Mandelbrot set, assume orbit 0
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a=a2;
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b=b2;
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;}else{  //if Julia set, assume orbit a2+b2i, set c to constant
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a=julA;
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b=-julB;
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;}
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;pixels.push(generateIndividual(0));
+                <br>&nbsp;&nbsp;}
+                <br>}
+              </code>
+              <code>
+                <cmt>//Iterate</cmt>
+                <br>for (var i=0;i&lt;max_iterations;i++){
                 <br>&nbsp;&nbsp;if (a2*a2+b2*b2>=4){
                 <br>&nbsp;&nbsp;&nbsp;&nbsp;return i;  <cmt>//return escape time</cmt>
                 <br>&nbsp;&nbsp;}
