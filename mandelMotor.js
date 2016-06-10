@@ -16,8 +16,6 @@ var expressions=["PI","E","pow","sqrt","cbrt","sin","cos","tan","floor","abs","c
 //escape panel
 var moveescape=false;
 var eX,eY,eOffX=1,eOffY=1;
-//improved de Moivre formula
-var angle,lilAngle,magnitude;
 
 function init(){
   ctx2=document.getElementById("overlaycanvas").getContext("2d");
@@ -172,13 +170,13 @@ function generate(){
         a=julA;
         b=-julB;
       }
-      if (power>2){
+      /*if (power>2){
         angle=Math.atan(b2/a2);
         if (a2<0){angle+=Math.PI;}
         lilAngle=lilAngle=Math.atan(b/a);
         if (a<0){lilAngle+=Math.PI;}
         magnitude=Math.sqrt(a2*a2+b2*b2);
-      }
+      }*/
       pixels.push(generateIndividual(0));
       //pixels.push(generateExp());
     }
@@ -190,21 +188,22 @@ function generate(){
 
 function generateIndividual(type){
   var aTmp;
+  var v,magnitude;
   for (var i=0;i<iterations;i++){
+    if (a2*a2+b2*b2>=4){
+      return i+1-Math.log(Math.log(Math.sqrt(a2*a2+b2*b2)))/Math.log(power);
+    }
     if (power==2){
-      if (a2*a2+b2*b2>=4){
-        return i+1-Math.log(Math.log(Math.sqrt(a2*a2+b2*b2)))/Math.log(power);
-      }
       aTmp=a2;
       a2=a2*a2-b2*b2+a;
       b2=aTmp*b2+b2*aTmp+b;
     }else{
-      if (magnitude>=2){
-        return i;
-      }
-      angle*=power;
-      angle%=(Math.PI*2)
-      magnitude=Math.pow(magnitude,power);
+      v=Math.atan(b2/a2);
+      if (a2<0){v+=Math.PI;}
+      v*=power;
+      magnitude=Math.pow(Math.hypot(a2,b2),power)
+      a2=magnitude*Math.cos(v)+a;
+      b2=magnitude*Math.sin(v)+b;
     }
     if (type==1){
       ctx2.lineTo(a2*(height/zoom)+xOff/zoom+width/2,b2*(height/zoom)+yOff/zoom+height/2);
