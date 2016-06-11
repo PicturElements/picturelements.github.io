@@ -302,6 +302,7 @@ function setMode(){
   }else if(event.keyCode==27){   //ESC
     closePopups(-1);
   }
+  paint2();
   move=false;
 }
 
