@@ -465,7 +465,7 @@
       
       function setSlide(){
         var pos=cycleLength/(iterations*2);
-        else if (pos>1){pos=1; cycleLength=iterations*2;}
+        if (pos>1){pos=1; cycleLength=iterations*2;}
         document.getElementsByClassName("innerslider")[0].innerHTML=cycleLength;
         document.getElementsByClassName("innerslider")[0].style.marginLeft=""+pos*33+"vw";
       }
@@ -522,7 +522,7 @@
         <div id="closebtn" onclick="closePopups(2)">[close]</div>
         <input id="urlout" spellcheck="false" value="SLUTA GLO MATTIAS! Jag har inte hunnit med allt än!"></input>
       </div>
-      <div id="colorpanel" class="popup">
+      <div id="colorpanel" class="popup" onmousemove=slide() onmouseup=sPress(0)>
         <div class="gradientselector" onmousedown=gradient(0)></div>
         <div class="gradientselector" onmousedown=gradient(1)></div>
         <div class="gradientselector" onmousedown=gradient(2)></div>
@@ -535,7 +535,7 @@
         <div class="gradientselector" onmousedown=gradient(9)></div>
         <div id="gradientdisplay"></div>
         <div id="sliderinfo">Mod</div>
-        <div class="slider" onmousedown=sPress(1) onmousemove=slide() onmouseup=sPress(0)>
+        <div class="slider" onmousedown=sPress(1)>
           <div class="innerslider">50</div>
         </div>
       </div>
