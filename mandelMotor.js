@@ -196,7 +196,7 @@ function generateIndividual(type){
     if (power==2){
       aTmp=a2;
       a2=a2*a2-b2*b2+a;
-      b2=aTmp*b2+b2*aTmp+b;
+      b2=2*(aTmp*b2)+b;
     }else{
       v=Math.atan(b2/a2);
       if (a2<0){v+=Math.PI;}
