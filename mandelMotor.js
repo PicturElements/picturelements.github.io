@@ -270,7 +270,6 @@ function setMode(){
       document.getElementById("overlaycanvas").style.cursor="default";
       document.getElementById("escapepanel").style.display="block";
       mode=3;
-      paint2();
     }else if(kc==71){   //G - generate
       closePopups(-1);
       setStuff();
@@ -293,7 +292,6 @@ function setMode(){
     if(kc==27&&mode==0&&xRes>0&&yRes>0&&move){   //Esc
       xRes=0;
       yRes=0;
-      paint2();
       document.getElementById("zoom").value=tmpZoom;
       document.getElementById("xOff").value=tmpXOff;
       document.getElementById("yOff").value=tmpYOff;
