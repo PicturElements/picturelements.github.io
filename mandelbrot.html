@@ -538,10 +538,12 @@
         <div class="gradientselector" onmousedown=gradient(8)></div>
         <div class="gradientselector" onmousedown=gradient(9)></div>
         <div id="gradientdisplay"></div>
-        <div id="sliderinfo">Mod</div>
+        <div id="sliderinfo">Mod value (color cycle period)</div>
         <div class="slider" onmousedown=sPress(1)>
           <div class="innerslider">50</div>
         </div>
+        <button style="top:9.5vw; width:18.5vw" onclick=confirmGradient()>Set color</button>
+        <button style="top:9.5vw; width:18.5vw" onclick=closePopups(-1)>Cancel</button>
       </div>
       <div id="infocontainer" class="popup">
         <div id="closebtn" onclick="closePopups(-1)">[close]</div>
