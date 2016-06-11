@@ -553,7 +553,20 @@
                 <br>}
                 <br>return -1;  <cmt>//signifies a number belonging to the set</cmt>
               </code>
-              function generateIndividual() for powers &gt;2 with polar coordinates:
+              function generateIndividual() for powers &gt;2 with polar coordinates using de Moivre's formula:
+              <code>
+                <cmt>//Iterate (power 2+)</cmt>
+                <br>for (var i=0;i&lt;max_iterations;i++){
+                <br>&nbsp;&nbsp;if (a2*a2+b2*b2>=4){
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;return i;  <cmt>//return escape time</cmt>
+                <br>&nbsp;&nbsp;}
+                <br>&nbsp;&nbsp;v*=power;
+                <br>&nbsp;&nbsp;magnitude=Math.pow(Math.sqrt(a2*a2+b2*b2),power)  <cmt>//fuckin' IE doesn't support Math.hypot...</cmt>
+                <br>&nbsp;&nbsp;a2=magnitude*Math.cos(v)+a;
+                <br>&nbsp;&nbsp;b2=magnitude*Math.sin(v)+b;
+                <br>}
+                <br>return -1;  <cmt>//signifies a number belonging to the set</cmt>
+              </code>
             </p>
           <h2>About - creator</h2>
             <p>
