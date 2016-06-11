@@ -266,6 +266,7 @@ function setMode(){
       document.getElementById("overlaycanvas").style.cursor="default";
       document.getElementById("hoverinfo").style.display="block";
       mode=2;
+      canvasInteract();
     }else if (kc==69){
       document.getElementById("overlaycanvas").style.cursor="default";
       document.getElementById("escapepanel").style.display="block";
