@@ -453,7 +453,7 @@
       
       function slide(){
         if (sPressed){
-          var pos=(event.clientX-window.innerWidth*0.335);
+          var pos=(event.clientX-window.innerWidth*0.335)/33;
           if (pos<0){pos=0;}
           else if (pos>1){pos=1;}
           document.getElementsByClassName("innerslider")[0].innerHTML=Math.floor(pos*iterations*2);
