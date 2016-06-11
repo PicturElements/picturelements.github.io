@@ -456,9 +456,17 @@
           var pos=(event.clientX-window.innerWidth*0.335)/(window.innerWidth*0.33);
           if (pos<0){pos=0;}
           else if (pos>1){pos=1;}
-          document.getElementsByClassName("innerslider")[0].innerHTML=Math.floor(pos*iterations*2);
+          cycleLength=Math.floor(pos*(iterations*2-1)+1);
+          document.getElementsByClassName("innerslider")[0].innerHTML=cycleLength;
           document.getElementsByClassName("innerslider")[0].style.marginLeft=""+pos*33+"vw";
         }
+      }
+      
+      function setSlide(){
+        var pos=cycleLength/(iterations*2);
+        else if (pos>1){pos=1; cycleLength=iterations*2;}
+        document.getElementsByClassName("innerslider")[0].innerHTML=cycleLength;
+        document.getElementsByClassName("innerslider")[0].style.marginLeft=""+pos*33+"vw";
       }
     </script>
   </head>
