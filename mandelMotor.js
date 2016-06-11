@@ -201,7 +201,7 @@ function generateIndividual(type){
       v=Math.atan(b2/a2);
       if (a2<0){v+=Math.PI;}
       v*=power;
-      magnitude=Math.pow(Math.hypot(a2,b2),power)
+      magnitude=Math.pow(Math.sqrt(a2*a2+b2*b2),power)
       a2=magnitude*Math.cos(v)+a;
       b2=magnitude*Math.sin(v)+b;
     }
