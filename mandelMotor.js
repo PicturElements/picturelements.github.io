@@ -122,6 +122,9 @@ function gradient(inID){
   colors+="rgb("+(gradientCols[startAt[inID]])+","+(gradientCols[startAt[inID]+1])+","+(gradientCols[startAt[inID]+2])+") 100%";
   document.getElementById("gradientdisplay").style.background="linear-gradient(to right, "+colors+")";
   selectedCol=inID;
+} 
+
+function confirmGradient(){
   closePopups(3);
   if (thread!=null){
     clearInterval(thread);
@@ -131,7 +134,7 @@ function gradient(inID){
   time=-date.getTime();
   scan=0;
   thread=setInterval(recolor,1);
-} 
+}
 
 function mainGenerate(){
   ctx=document.getElementById("mandelcanvas").getContext("2d");
