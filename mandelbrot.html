@@ -401,7 +401,66 @@
       code cmt{
         color:#999;
       }
+      
+      
+      #sliderinfo{
+        position: absolute;
+        margin-left: 1vw;
+        margin-top: 23vw;
+        font-family: Roboto,Arial,sans-serif;
+        font-weight: bold;  
+      }
+      
+      .slider{
+        display: block;
+        position: absolute;
+        width: 38vw;
+        height: 2vw;
+        margin-left: 1vw;
+        margin-top: 24.5vw;
+        background-color: #ccc;
+        cursor:pointer;
+      }
+      
+      .innerslider{
+        display: block;
+        position: absolute;
+        width: 5vw;
+        height: 2vw;
+        background-color: #555;
+        font-family: monospace;
+        font-size: 1.5vw;
+        color: white;
+        line-height: 2vw;
+        text-align: center;
+        margin-left:16.5vw;
+        pointer-events:none;
+      }
+      
+      .innerslider:selection{
+        background-color:transparent;
+      }
     </style>
+    <script id="sliderscript">
+      var sPressed=false; 
+      
+      function sPress(inID){
+        sPressed=Boolean(inID);
+        if (sPressed){
+          slide();
+        }
+      }
+      
+      function slide(){
+        if (sPressed){
+          var pos=((event.clientX-window.innerWidth*0.335)/(window.innerWidth)*0.33);
+          if (pos<0){pos=0;}
+          else if (pos<1){pos=1;}
+          document.getElementsByClassName("innerslider")[0].innerHTML=Math.floor(pos*iterations*2);
+          document.getElementsByClassName("innerslider")[0].style.marginLeft=""+pos*33+"vw";
+        }
+      }
+    </script>
   </head>
   <body onload=init() id="body" onkeydown=setMode() onmousemove=setEP()>
     <script id="customscript"></script>
@@ -466,6 +525,10 @@
         <div class="gradientselector" onmousedown=gradient(8)></div>
         <div class="gradientselector" onmousedown=gradient(9)></div>
         <div id="gradientdisplay"></div>
+        <div id="sliderinfo">Mod</div>
+        <div class="slider" onmousedown=sPress(1) onmousemove=slide() onmouseup=sPress(0)>
+          <div class="innerslider">50</div>
+        </div>
       </div>
       <div id="infocontainer" class="popup">
         <div id="closebtn" onclick="closePopups(-1)">[close]</div>
