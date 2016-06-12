@@ -18,9 +18,10 @@ var moveescape=false;
 var eX,eY,eOffX=1,eOffY=1;
 
 function init(){
-  for (var i=0;i<100;i++){
+  //This was supposed to be an automatic script generator, but due to caching issues, this didn't work out.
+  /*for (var i=0;i<100;i++){
     $('customscripts').append("<script id=\"customscript\"></script>");
-  }
+  }*/
   ctx2=document.getElementById("overlaycanvas").getContext("2d");
   ctx3=document.getElementById("escapecanvas").getContext("2d");
   var canvas=document.getElementById("mandelcanvas");
