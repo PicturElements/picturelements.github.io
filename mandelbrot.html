@@ -83,6 +83,11 @@
         left: 1vw;
         margin-right: 1vw;
         font-size:1vw;
+        pointer-events:none;
+      }
+      
+      #title::selection,#title2::selection{
+        background-color:none;
       }
       
       #title2{
@@ -126,6 +131,10 @@
       button:hover{
         background-color:#888;
         color:#ddd;
+      }¨
+      
+      button::selection,#toolbox::selection{
+        background-color:transparent;
       }
       
       #expando{
