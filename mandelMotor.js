@@ -553,8 +553,8 @@ function pushFunction(inId){
 }
 
 function pushFunction2(){
-  $('#body').find('script').first().remove();
-  $('#inserthere').before("<script id=\"customscript\"></script>");
+  $('customscripts').find('script').first().remove();
+  //$('#inserthere').before("<script id=\"customscript\"></script>");
   //$("#body").prepend("<script id=\"customscript\"></script>");
   advancedGen=true;
   resetStuff();
