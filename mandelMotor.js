@@ -6,9 +6,9 @@ var a,b,a2,b2;
 var pixels=[];
 var scan=0,thread=null;
 var power=2,julA,julB,tmpPow,tmpJA,tmpJB,isMandel=true,tmpIsMandel=true,isAdvanced,containsXY;
-var gradientCols=[255,255,255,0,0,0,255,0,0,0,0,0,0,255,0,0,0,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,255,0,0,50,179,216,253,255,255,255,255,194,0,140,46,0,255,0,0,255,255,0,0,255,0,0,255,255,0,0,255];
+var gradientCols=[255,255,255,0,0,0,255,0,0,0,0,0,0,255,0,0,0,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,255,0,0,50,179,216,253,255,255,255,255,194,0,140,46,0,255,0,0,255,255,0,0,255,0,0,255,255,0,0,255,255,0,255];
 //               |                 |             |             |             |                       |                                                 |
-var startAt=[0,6,12,18,24,33,48,63];
+var startAt=[0,6,12,18,24,33,48,66];
 var selectedCol=5,rd,gr,bl,cycleLength=50;
 var date=new Date(),time=date.getTime();
 var ctx,imgData,ctx2,ctx3,c3W,c3H;
