@@ -52,12 +52,12 @@ function init(){
   if (!parseUrl()){
     setStuff();
   }else{
+    pushFunction(0);
     document.getElementById("overlay").style.display="block";
     document.getElementById("alertpanel").style.display="block";
   }
   setSlide();
   displayFunction();
-  pushFunction(0);
 }
 
 function paintRaster(){
