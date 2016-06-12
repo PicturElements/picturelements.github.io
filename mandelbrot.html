@@ -667,8 +667,13 @@
             </p>
         </div>
       </div>
-      <div id="alertpanel" class="popup">
-        <h>Check function</h>
+      <div id="alertpanel" class="popup" style="font-family: Roboto,Arial,sans-serif; height:15vw; margin-top:-7.5vw">
+        <h style="position: absolute; width: 100%; text-align: center; font-weight: bold; font-size: 2vw; top: 0.5vw; color: #800; ">Check function</h>
+        <p style="display: block; position: absolute; width: 90%; left: 5%; top: 2.5vw; font-size: 1.2vw;">
+          You have been linked to a user-created set. Please make sure that the generating function looks good and doesn't contain any suspicious code:
+          <br>
+          <b id="checkinput" style="text-align:center"></b>
+        </p>
         <button style="top:9.5vw; width:18.5vw" onclick="closePopups(-1); setStuff();">Generate</button>
         <button style="top:9.5vw; width:18.5vw" onclick=newPage()>Safe page</button>
       </div>
