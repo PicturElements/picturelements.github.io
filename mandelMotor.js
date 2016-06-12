@@ -520,9 +520,9 @@ function displayFunction(){
     if (tmpJB<0){tB=tmpJB;}
     console.log("Function: z^"+tmpPow+""+tA+""+tB+"i");
     if (tmpIsMandel||tmpJA==0&&tmpJB==0){
-      document.getElementById("funcout").innerHTML="Function: z^"+tmpPow+"+c (Mandelbrot set)";
+      document.getElementById("funcout").innerHTML="Function: z<sup>"+tmpPow+"</sup>+c (Mandelbrot set)";
     }else{
-      document.getElementById("funcout").innerHTML="Function: z^"+tmpPow+""+tA+""+tB+"i (Julia set)";
+      document.getElementById("funcout").innerHTML="Function: z<sup>"+tmpPow+"</sup>"+tA+""+tB+"i (Julia set)";
     }
   }
 }
