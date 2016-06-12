@@ -430,6 +430,7 @@ function setFunction(){
 function setColor(){
   document.getElementById("overlay").style.display="block";
   document.getElementById("colorpanel").style.display="block";
+  setSlide();
 }
 
 function getUrl(){
