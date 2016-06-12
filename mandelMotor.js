@@ -51,6 +51,9 @@ function init(){
   document.getElementById("gradientdisplay").style.background="linear-gradient(to right, "+colors+")";
   if (!parseUrl()){
     setStuff();
+  }else{
+    document.getElementById("overlay").style.display="block";
+    document.getElementById("alertpanel").style.display="block";
   }
   setSlide();
   displayFunction();
