@@ -49,10 +49,10 @@ function init(){
   }
   colors+="rgb("+(gradientCols[startAt[selectedCol]])+","+(gradientCols[startAt[selectedCol]+1])+","+(gradientCols[startAt[selectedCol]+2])+") 100%";
   document.getElementById("gradientdisplay").style.background="linear-gradient(to right, "+colors+")";
-  setSlide();
   if (!parseUrl()){
     setStuff();
   }
+  setSlide();
   displayFunction();
   pushFunction(0);
 }
