@@ -55,6 +55,7 @@ function init(){
     pushFunction(0);
     document.getElementById("overlay").style.display="block";
     document.getElementById("alertpanel").style.display="block";
+    document.getElementById("checkinput").innerHTML=document.getElementById("functionin").value;
   }
   setSlide();
   displayFunction();
