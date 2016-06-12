@@ -85,7 +85,7 @@ function parseUrl(){
         else if (count==3){document.getElementById("yOff").value=tmpStr;}
         else if (count==4){document.getElementById("zoom").value=tmpStr;}
         else if (count==5){selectedCol=parseInt(tmpStr);}
-        else if (count==6){cycleLength==parseInt(tmpStr);}
+        else if (count==6){cycleLength=parseInt(tmpStr);}
         else if (count==7){prevH=parseInt(tmpStr);}
         count++;
         tmpStr="";
