@@ -83,7 +83,9 @@ function parseUrl(){
         else if (count==2){document.getElementById("xOff").value=tmpStr;}
         else if (count==3){document.getElementById("yOff").value=tmpStr;}
         else if (count==4){document.getElementById("zoom").value=tmpStr;}
-        else if (count==5){prevH=parseInt(tmpStr);}
+        else if (count==5){selectedCol=parseInt(tmpStr);}
+        else if (count==6){cycleLength==parseInt(tmpStr);}
+        else if (count==7){prevH=parseInt(tmpStr);}
         count++;
         tmpStr="";
       }else if(toScan){
@@ -433,7 +435,7 @@ function getUrl(){
   display=true;
   document.getElementById("overlay").style.display="block";
   document.getElementById("sharepanel").style.display="block";
-  var url="http://picturelements.github.io/mandelbrot?func="+document.getElementById("functionin").value+"&iters="+document.getElementById("iterations").value+"&xOff="+document.getElementById("xOff").value+"&yOff="+document.getElementById("yOff").value+"&zoom="+document.getElementById("zoom").value+"&prevH="+height;
+  var url="http://picturelements.github.io/mandelbrot?func="+document.getElementById("functionin").value+"&iters="+document.getElementById("iterations").value+"&xOff="+document.getElementById("xOff").value+"&yOff="+document.getElementById("yOff").value+"&zoom="+document.getElementById("zoom").value+"&color="+selectedCol+"&mod="+cycleLength+"&prevH="+height;
   document.getElementById("urlout").value=url;
   document.getElementById("urlout").select();
 }
