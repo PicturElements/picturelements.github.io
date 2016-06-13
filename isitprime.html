@@ -14,7 +14,7 @@
       }
       
       #primegen{
-        display: none;
+        display: block;
         position: fixed;
         width: 100%;
         height: 100%;
@@ -109,7 +109,11 @@
       function isitprime(){
         factors="";
         if (prime(parseFloat(document.getElementById("input").value))){
-          document.getElementById("output").innerHTML=""+document.getElementById("input").value+" is prime!";
+          if (parseFloat(document.getElementById("input").value)>2.5e13){
+            document.getElementById("output").innerHTML=""+document.getElementById("input").value+" is likely prime!<br><br>WARNING: input is very large. There may be prime factors that the script missed.";
+          }else{
+            document.getElementById("output").innerHTML=""+document.getElementById("input").value+" is prime!";
+          }
         }else{
           document.getElementById("output").innerHTML=""+document.getElementById("input").value+" is not prime.<br><br>"+document.getElementById("input").value+"'s prime factors are:<br>"+factors;
         }
