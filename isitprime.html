@@ -119,6 +119,7 @@
         var foundprime=true;
         var allfactors=[];
         var input2=input;
+        var alertUser=false;
         
         for (var i=0;primes[i]<Math.sqrt(input);i++){
           if (input2%primes[i]==0){
@@ -131,14 +132,17 @@
         }
         if (!foundprime&&input2>1){
           input=input2;
+          var isPrime=true;
           for (var i=0;primes[i]<Math.sqrt(input);i++){
             if (input2%primes[i]==0){
-              input2/=primes[i];
-              foundprime=false;
-              allfactors.push(primes[i]);
-              i--;
+              isPrime=false;
+              break;
             }
-            if (input2==1){break;}
+          }
+          if (isPrime){
+            allfactors.push(input2);
+          }else{
+            alertUser=true;
           }
         }
         if (!foundprime){
@@ -146,6 +150,7 @@
             factors+=""+allfactors[a]+", ";
           }
           factors+="and "+allfactors[allfactors.length-1]+".";
+          if (alertUser){factors+="<br><br>WARNING: input is very large and all prime factors were not found.";}
         }
         return foundprime;
       }
