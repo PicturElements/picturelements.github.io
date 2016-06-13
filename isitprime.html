@@ -88,7 +88,7 @@
         generatePrimes();
       }
       
-      function {
+      function generatePrimes(){
         var isPrime=true;
         for (var i=3;i<5000000;i++){
           isPrime=true;
@@ -102,7 +102,6 @@
            primes.push(i);
           }
         }
-        document.getElementById("primegen").style.display="none";
         document.getElementById("primepanel").style.display="block";
       }
       
