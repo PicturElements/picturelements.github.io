@@ -127,6 +127,19 @@
             allfactors.push(primes[i]);
             i--;
           }
+          if (input2==1){break;}
+        }
+        if (!foundprime&&input2>1){
+          input=input2;
+          for (var i=0;primes[i]<Math.sqrt(input);i++){
+            if (input2%primes[i]==0){
+              input2/=primes[i];
+              foundprime=false;
+              allfactors.push(primes[i]);
+              i--;
+            }
+            if (input2==1){break;}
+          }
         }
         if (!foundprime){
           for (var a=0;a<allfactors.length-1;a++){
