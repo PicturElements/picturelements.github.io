@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+
+<!--This is a simple but fast prime number checker/factorizator. It's based on a simple "self-building" algorithm and is able to find all prime numbers from 1-1M in about 100ms on a regular machine. It was inspired by this prime number calculator: http://www.math.com/students/calculators/source/prime-number.htm. Unfortunately, that site is horribly slow at checking large primes, whereas my algorithm is lightning fast.-->
+
 <html>
   <head>
     <title>Is it prime?</title>
@@ -87,7 +90,7 @@
       var factors;
       
       function init(){
-        setTimeout(generatePrimes,100);
+        setTimeout(generatePrimes,100);  //load the background
       }
       
       function generatePrimes(){
