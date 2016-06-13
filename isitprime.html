@@ -90,7 +90,7 @@
       
       function generatePrimes(){
         var isPrime=true;
-        for (var i=3;i<5000000;i++){
+        for (var i=3;i<1000000;i++){
           isPrime=true;
           for (var a=0;primes[a]*primes[a]<=i;a++){
             if (i%primes[a]==0){
@@ -112,7 +112,7 @@
         }else if (parseFloat(document.getElementById("input").value)<1){
           document.getElementById("output").innerHTML=""+document.getElementById("input").value+" is not included in prime definition.";
         }else if (prime(parseFloat(document.getElementById("input").value))){
-          if (parseFloat(document.getElementById("input").value)>2.5e13){
+          if (parseFloat(document.getElementById("input").value)>1e12){
             document.getElementById("output").innerHTML=""+document.getElementById("input").value+" is likely prime!<br><br>WARNING: input is very large. There may be prime factors that the script missed.";
           }else{
             document.getElementById("output").innerHTML=""+document.getElementById("input").value+" is prime!";
@@ -147,7 +147,7 @@
             }
           }
           if (isPrime){
-            if (input2<2.5e13){
+            if (input2<1e12){
               allfactors.push(input2);
             }else{
               alertBig=true;
