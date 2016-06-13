@@ -36,6 +36,7 @@
         background-color: white;
         border-radius: 1vw;
         box-shadow: 0.3vw 0.3vw 1vw rgba(0,0,50,0.3);
+        overflow:hidden;
       }
       
       input{
@@ -106,6 +107,10 @@
         document.getElementById("primepanel").style.display="block";
       }
       
+      function press(){
+        if (event.keyCode==13){isitprime();}
+      }
+      
       function isitprime(){
         factors="";
         if (document.getElementById("input").value=="1"){
@@ -174,7 +179,7 @@
   <body onload=init()>
     <div id="primegen">Generating prime database...</div>
     <div id="primepanel">
-      <input id="input" placeholder="input number"></input>
+      <input id="input" placeholder="input number" onkeydown=press()></input>
       <button onclick=isitprime()>is it prime?</button>
       <div id="output">info will appear here.<br><br><br><br><br>Written by reddit user /u/PicturElements.</div>
     </div>
