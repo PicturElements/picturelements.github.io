@@ -123,7 +123,7 @@
         var foundprime=true;
         var allfactors=[];
         var input2=input;
-        var alertUser=false;
+        var alertUser=false,alertBig=false;
         
         for (var i=0;primes[i]<Math.sqrt(input);i++){
           if (input2%primes[i]==0){
@@ -144,7 +144,11 @@
             }
           }
           if (isPrime){
-            allfactors.push(input2);
+            if (input2<2.5e13){
+              allfactors.push(input2);
+            }else{
+              alertBig=true;
+            }
           }else{
             alertUser=true;
           }
@@ -155,6 +159,9 @@
           }
           factors+="and "+allfactors[allfactors.length-1]+".";
           if (alertUser){factors+="<br><br>WARNING: input is very large and all prime factors were not found.";}
+          else if (alertBig){
+            factors+="<br><br>WARNING: remainder ("+input2+") is very large and the script could not establish if it's prime.";
+          }
         }
         return foundprime;
       }
