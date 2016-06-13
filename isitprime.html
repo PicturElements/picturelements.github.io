@@ -26,7 +26,7 @@
       }
       
       #primepanel{
-        display: block;
+        display: none;
         position: fixed;
         width: 60%;
         height: 30vw;
@@ -111,16 +111,18 @@
         if (prime(parseFloat(document.getElementById("input").value))){
           document.getElementById("output").innerHTML=""+document.getElementById("input").value+" is prime!";
         }else{
-          document.getElementById("output").innerHTML=""+document.getElementById("input").value+" is not prime.<br>"+document.getElementById("input").value+"'s prime factors are:"+factors;
+          document.getElementById("output").innerHTML=""+document.getElementById("input").value+" is not prime.<br><br>"+document.getElementById("input").value+"'s prime factors are:<br>"+factors;
         }
       }
       
       function prime(input){
         var foundprime=true;
         var allfactors=[];
+        var input2=input;
+        
         for (var i=0;primes[i]<Math.sqrt(input);i++){
-          if (input%primes[i]==0){
-            input/=primes[i];
+          if (input2%primes[i]==0){
+            input2/=primes[i];
             foundprime=false;
             allfactors.push(primes[i]);
             i--;
@@ -130,7 +132,7 @@
           for (var a=0;a<allfactors.length-1;a++){
             factors+=""+allfactors[a]+", ";
           }
-          factors+="and "+allfactors[allfactors.length-1]+"";
+          factors+="and "+allfactors[allfactors.length-1]+".";
         }
         return foundprime;
       }
@@ -140,8 +142,8 @@
     <div id="primegen">Generating prime database...</div>
     <div id="primepanel">
       <input id="input" placeholder="input number"></input>
-      <button onclick=isitprime()></button>
-      <div id="output">info will appear here.</div>
+      <button onclick=isitprime()>is it prime?</button>
+      <div id="output">info will appear here.<br><br><br><br><br>Written by reddit user /u/PicturElements.</div>
     </div>
   </body>
 </html>
