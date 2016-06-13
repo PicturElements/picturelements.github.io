@@ -22,7 +22,20 @@
         color: #069;
         text-align: center;
         line-height: 100vh;
-        text-shadow: 0.3vw 0.3vw 0.5vw rgba(0,0,0,0.3);
+        text-shadow: 0.3vw 0.3vw 0.5vw rgba(0,0,0,0.1);
+      }
+      
+      #primepanel{
+        display: block;
+        position: fixed;
+        width: 60%;
+        height: 30vw;
+        left: 20%;
+        top: 50%;
+        margin-top: -15vw;
+        background-color: white;
+        border-radius: 1vw;
+        box-shadow: 0.3vw 0.3vw 1vw rgba(0,0,50,0.3);
       }
     </style>
     <script>
@@ -52,5 +65,6 @@
   </head>
   <body onload=init()>
     <div id="primegen">Generating prime database...</div>
+    <div id="primepanel"></div>
   </body>
 </html>
