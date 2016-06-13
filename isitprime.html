@@ -14,7 +14,7 @@
       }
       
       #primegen{
-        display: block;
+        display: none;
         position: fixed;
         width: 100%;
         height: 100%;
@@ -37,9 +37,52 @@
         border-radius: 1vw;
         box-shadow: 0.3vw 0.3vw 1vw rgba(0,0,50,0.3);
       }
+      
+      input{
+        position: absolute;
+        width: 90%;
+        left: 5%;
+        height: 5vw;
+        border: none;
+        text-align: center;
+        font-size: 4vw;
+        font-family: Trebuchet MS;
+        top: 4vw;
+        border-bottom: 0.2vw solid #999;
+        outline: none;
+      }
+      
+      button{
+        position: absolute;
+        width: 20vw;
+        height: 3vw;
+        left: 20vw;
+        font-size: 1.7vw;
+        font-family: inherit;
+        top: 11.5vw;
+        border: none;
+        outline: none;
+        cursor: pointer;
+      }
+      
+      button:hover{
+        background-color:#ccc;
+      }
+      
+      #output{
+        position: absolute;
+        width: 54vw;
+        height: 9vw;
+        left: 2vw;
+        top: 17vw;
+        padding: 1vw;
+        background-color: #eee;
+        text-align: center;
+      }
     </style>
     <script>
       var primes=[2];
+      var factors;
       
       function init(){
         setTimeout(generatePrimes,250);
@@ -60,11 +103,45 @@
           }
         }
         document.getElementById("primegen").style.display="none";
+        document.getElementById("primepanel").style.display="block";
+      }
+      
+      function isitprime(){
+        factors="";
+        if (prime(parseFloat(document.getElementById("input").value))){
+          document.getElementById("output").innerHTML=""+document.getElementById("input").value+" is prime!";
+        }else{
+          document.getElementById("output").innerHTML=""+document.getElementById("input").value+" is not prime.<br>"+document.getElementById("input").value+"'s prime factors are:"+factors;
+        }
+      }
+      
+      function prime(input){
+        var foundprime=true;
+        var allfactors=[];
+        for (var i=0;primes[i]<Math.sqrt(input);i++){
+          if (input%primes[i]==0){
+            input/=primes[i];
+            i--;
+            foundprime=false;
+            allfactors.push(primes[i]);
+          }
+        }
+        if (!foundprime){
+          for (var a=0;a<allfactors.length-1;a++){
+            factors+=""+allfactors[a]+", ";
+          }
+          factors+="and "+allfactors[allfactors.length-1]+"";
+        }
+        return foundprime;
       }
     </script>
   </head>
   <body onload=init()>
     <div id="primegen">Generating prime database...</div>
-    <div id="primepanel"></div>
+    <div id="primepanel">
+      <input id="input" placeholder="input number"></input>
+      <button onclick=isitprime()></button>
+      <div id="output">info will appear here.</div>
+    </div>
   </body>
 </html>
