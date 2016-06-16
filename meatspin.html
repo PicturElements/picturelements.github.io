@@ -55,14 +55,22 @@
       }
     </style>
     <script>
-      var count=0;
+      var count=0,counting=true;
       
       function init(){
         setInterval(increment,2000);
       }
       
+      window.onfocus = function () { 
+        counting=true;
+      }; 
+      
+      window.onblur = function () { 
+        counting=false;
+      }; 
+      
       function increment(){
-        count++;
+        if (counting){count++;}
         document.getElementsByTagName("count")[0].innerHTML=""+count+" spins!";
         if (count==1){document.getElementsByTagName("count")[0].innerHTML="1 spin!";}
       }
