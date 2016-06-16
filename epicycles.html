@@ -18,7 +18,7 @@
       }
     </style>
     <script>
-      var epiR=[100,50],epiP=[0,0];
+      var epiR=[200,150,100,50],epiP=[0,0,0,0];
       var ctx,ctx2;
       var thread=null;
       
@@ -42,7 +42,7 @@
         var originX=window.innerWidth/2,originY=window.innerHeight/2;
         for (var i=0;i<epiR.length;i++){
           ctx2.beginPath();
-          ctx2.arc(originX,originY,10,0,2*Math.PI);
+          ctx2.arc(originX,originY,5,0,2*Math.PI);
           ctx2.fill();
           ctx2.beginPath();
           ctx2.arc(originX,originY,epiR[i],0,2*Math.PI);
@@ -51,6 +51,9 @@
           originY=originY+Math.sin(epiP[i]*2*Math.PI)*epiR[i];
           epiP[i]+=0.01;
         }
+        ctx2.beginPath();
+        ctx2.arc(originX,originY,5,0,2*Math.PI);
+        ctx2.fill();
       }
     </script>
   </head>
