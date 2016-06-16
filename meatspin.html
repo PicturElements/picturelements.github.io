@@ -3,7 +3,7 @@
   <head>
     <title></title>
     <link rel="icon" href="pelement.png">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:700,900" rel="stylesheet" type="text/css">
     <style>
       body{
         background-color:#3597ff;
@@ -31,7 +31,7 @@
         top: 50%;
         margin-top: -15.5vw;
         font-family: Roboto,Arial,sans-serif;
-        font-weight: bold;
+        font-weight: 700;
         text-align: center;
         font-size: 2vw;
         line-height: 58vw;
@@ -80,6 +80,10 @@
         counting=false;
       }; 
       
+      function roll(){
+        window.location.href="https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+      }
+      
       function increment(){
         if (counting){count++;}
         document.getElementsByTagName("count")[0].innerHTML=""+count+" spins";
@@ -88,7 +92,7 @@
     </script>
   </head>
   <body onload=init()>
-    <div id="headertext">If you're under the age of 18 or find this immature please <lnk style="color:#009; cursor:pointer" onclick=roll()>LEAVE NOW</lnk></div>
+    <div id="headertext">If you're under the age of 18 or find this immature please <lnk style="color:#009; font-weight:900; cursor:pointer" onclick=roll()>LEAVE NOW</lnk></div>
     <div id="container">
       <div id="gboob"></div>
       <div id="pizza"></div>
