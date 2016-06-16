@@ -22,6 +22,7 @@
       var ctx,ctx2;
       var thread=null;
       var started=false;
+      var originX,originY;
       
       function init(){
         var canvas=document.getElementById("paintcanvas");
@@ -42,11 +43,11 @@
       
       function paint(){
         ctx2.clearRect(0,0,10000,10000);
-        var originX=window.innerWidth/2,originY=window.innerHeight/2;
         if (started){
           ctx.lineTo(originX,originY);
           ctx.stroke();
         }
+        originX=window.innerWidth/2,originY=window.innerHeight/2;
         for (var i=0;i<epiR.length;i++){
           ctx2.beginPath();
           ctx2.arc(originX,originY,5,0,2*Math.PI);
