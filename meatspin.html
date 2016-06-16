@@ -10,6 +10,17 @@
         margin:0;
       }
       
+      #headertext{
+        position: fixed;
+        width: 100%;
+        text-align: center;
+        font-family: Roboto,Arial,sans-serif;
+        font-weight: bold;
+        color: white;
+        font-size: 1.2vw;
+        top: calc(50vh - 18vw); 
+      }
+      
       #container{
         display: block;
         position: fixed;
@@ -71,12 +82,13 @@
       
       function increment(){
         if (counting){count++;}
-        document.getElementsByTagName("count")[0].innerHTML=""+count+" spins!";
-        if (count==1){document.getElementsByTagName("count")[0].innerHTML="1 spin!";}
+        document.getElementsByTagName("count")[0].innerHTML=""+count+" spins";
+        if (count==1){document.getElementsByTagName("count")[0].innerHTML="1 spin";}
       }
     </script>
   </head>
   <body onload=init()>
+    <div id="headertext">If you're under the age of 18 or find this immature please <lnk style="color:#009; cursor:pointer" onclick=roll()>LEAVE NOW</lnk></div>
     <div id="container">
       <div id="gboob"></div>
       <div id="pizza"></div>
