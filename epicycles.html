@@ -44,7 +44,7 @@
         ctx2.clearRect(0,0,10000,10000);
         var originX=window.innerWidth/2,originY=window.innerHeight/2;
         if (started){
-          ctx.lineTo(originX,origninY);
+          ctx.lineTo(originX,originY);
           ctx.stroke();
         }
         for (var i=0;i<epiR.length;i++){
@@ -59,7 +59,7 @@
           epiP[i]+=(0.005*(epiR[0]/epiR[i]));
         }
         ctx.beginPath();
-        ctx.moveTo(originX,origninY);
+        ctx.moveTo(originX,originY);
         ctx2.beginPath();
         ctx2.arc(originX,originY,5,0,2*Math.PI);
         ctx2.fill();
