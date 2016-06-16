@@ -81,7 +81,8 @@
       }; 
       
       function roll(){
-        window.location.href="https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+        //window.location.href="https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+        document.getElementById("roll").play();
       }
       
       function increment(){
@@ -90,6 +91,7 @@
         if (count==1){document.getElementsByTagName("count")[0].innerHTML="1 spin";}
       }
     </script>
+    <audio loop preload=auto id="roll" src="images/nggyu.mp3" type="audio/mp3"></audio>
   </head>
   <body onload=init()>
     <div id="headertext">If you're under the age of 18 or find this too arousing please <lnk style="color:#009; font-weight:900; cursor:pointer" onclick=roll()>LEAVE NOW</lnk></div>
