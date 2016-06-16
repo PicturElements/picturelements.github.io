@@ -9,10 +9,52 @@
         background-color:white;
         margin:0;
       }
+      
+      #paintcanvas,#epicyclecanvas{
+        display:block;
+        position:fixed;
+        width:100%;
+        height:100%;
+      }
     </style>
-    <script></script>
+    <script>
+      var epiR=[100,50],epiP=[0,0];
+      var ctx,ctx2;
+      var thread=null;
+      
+      function init(){
+        var canvas=document.getElementById("paintcanvas");
+        canvas.width=window.innerWidth;
+        canvas.height=window.innerHeight;
+        ctx=canvas.getContext("2d");
+        canvas=document.getElementById("epicyclecanvas");
+        canvas.width=window.innerWidth;
+        canvas.height=window.innerHeight;
+        ctx2=canvas.getContext("2d");
+        thread=setInterval(paint,50);
+        ctx2.lineWidth=2;
+        ctx2.strokeStyle="#707";
+        ctx2.fillStyle="#707";
+      }
+      
+      function paint(){
+        ctx2.clearRect(0,0,10000,10000);
+        var originX=window.innerWidth/2,originY=window.innerHeight/2;
+        for (var i=0;i<epiR.length;i++){
+          ctx2.beginPath();
+          ctx2.arc(originX,originY,10,2*Math.PI);
+          ctx2.fill();
+          ctx2.beginPath();
+          ctx2.arc(originX,originY,epiR[i],2*Math.PI);
+          ctx2.stroke();
+          originX=originX+Math.cos(epiP[i]*2*Math.PI)*epiR[i];
+          originY=originY+Math.sin(epiP[i]*2*Math.PI)*epiR[i];
+          epiP[i]+=0.01;
+        }
+      }
+    </script>
   </head>
-  <body>
+  <body onload=init()>
     <canvas id="paintcanvas"></canvas>
     <canvas id="epicyclecanvas"></canvas>
   </body>
