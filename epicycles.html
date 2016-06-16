@@ -42,10 +42,10 @@
         var originX=window.innerWidth/2,originY=window.innerHeight/2;
         for (var i=0;i<epiR.length;i++){
           ctx2.beginPath();
-          ctx2.arc(originX,originY,10,2*Math.PI);
+          ctx2.arc(originX,originY,10,0,2*Math.PI);
           ctx2.fill();
           ctx2.beginPath();
-          ctx2.arc(originX,originY,epiR[i],2*Math.PI);
+          ctx2.arc(originX,originY,epiR[i],0,2*Math.PI);
           ctx2.stroke();
           originX=originX+Math.cos(epiP[i]*2*Math.PI)*epiR[i];
           originY=originY+Math.sin(epiP[i]*2*Math.PI)*epiR[i];
