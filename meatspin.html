@@ -23,14 +23,18 @@
       
       #gboob{
         display: block;
-        position: absolute;
-        width: 40vw;
-        height: 25vw;
-        background-color: red;
-        background-image:url("images/GBback.png");
-        background-size:contain;
-        top: 2vw;
-        left: 2vw;
+        position: fixed;
+        width: 44vw;
+        height: 31vw;
+        background-color: white;
+        left: 28vw;
+        top: 50%;
+        margin-top: -15.5vw;
+        font-family: Roboto,Arial,sans-serif;
+        font-weight: bold;
+        text-align: center;
+        font-size: 2vw;
+        line-height: 58vw;
       }
       
       #pizza{
@@ -38,23 +42,36 @@
         position: absolute;
         width: 7.5vw;
         height: 7.5vw;
-        background-image:url("images/pizza.png");
-        background-size:contain;
-        top: 2vw;
-        left: 2vw;
-        animation:spin 2s forwards infinite;
+        background-image: url("images/pizza.png");
+        background-size: contain;
+        top: 18vw;
+        left: 18vw;
+        animation: spin 2s linear infinite;
       }
       
       @keyframes spin{
         to{transform:rotate(360deg);}
       }
     </style>
-    <script></script>
+    <script>
+      var count=0;
+      
+      function init(){
+        setInterval(increment,2000);
+      }
+      
+      function increment(){
+        count++;
+        document.getElementById("container").innerHTML="You have sat through "+count+" spins!";
+        if (count==1){document.getElementById("container").innerHTML="You have sat through 1 spin!";}
+      }
+    </script>
   </head>
-  <body>
+  <body onload=init()>
     <div id="container">
       <div id="gboob"></div>
       <div id="pizza"></div>
+      You have sat through 0 spins!
     </div>
   </body>
 </html>
