@@ -27,10 +27,26 @@
         width: 40vw;
         height: 25vw;
         background-color: red;
-        background-image:url("GBback.png");
+        background-image:url("images/GBback.png");
         background-size:contain;
         top: 2vw;
         left: 2vw;
+      }
+      
+      #pizza{
+        display: block;
+        position: absolute;
+        width: 7.5vw;
+        height: 7.5vw;
+        background-image:url("images/pizza.png");
+        background-size:contain;
+        top: 2vw;
+        left: 2vw;
+        animation:spin 2s forwards infinite;
+      }
+      
+      @keyframes spin{
+        to{transform:rotate(360deg);}
       }
     </style>
     <script></script>
