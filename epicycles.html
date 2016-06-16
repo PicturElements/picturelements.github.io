@@ -31,10 +31,10 @@
         canvas.width=window.innerWidth;
         canvas.height=window.innerHeight;
         ctx2=canvas.getContext("2d");
-        thread=setInterval(paint,50);
         ctx2.lineWidth=2;
         ctx2.strokeStyle="#707";
         ctx2.fillStyle="#707";
+        thread=setInterval(paint,25);
       }
       
       function paint(){
@@ -49,7 +49,7 @@
           ctx2.stroke();
           originX=originX+Math.cos(epiP[i]*2*Math.PI)*epiR[i];
           originY=originY+Math.sin(epiP[i]*2*Math.PI)*epiR[i];
-          epiP[i]+=0.01;
+          epiP[i]+=(0.005*(epiR[0]/epiR[i]));
         }
         ctx2.beginPath();
         ctx2.arc(originX,originY,5,0,2*Math.PI);
