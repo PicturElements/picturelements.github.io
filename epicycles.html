@@ -57,7 +57,7 @@
           ctx2.stroke();
           originX=originX+Math.cos(epiP[i]*2*Math.PI)*epiR[i];
           originY=originY+Math.sin(epiP[i]*2*Math.PI)*epiR[i];
-          epiP[i]+=(0.005*(epiR[0]/epiR[i]));
+          epiP[i]+=(0.005*(epiR[i]/epiR[0]));
         }
         if (started){
           ctx.lineTo(originX,originY);
