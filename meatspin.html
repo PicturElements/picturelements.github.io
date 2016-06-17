@@ -73,6 +73,7 @@
         top: 18vw;
         left: 18vw;
         animation: spin 2s linear infinite;
+        cursor:pointer;
       }
       
       @keyframes spin{
@@ -105,7 +106,7 @@
       }
       
       function scream(){
-        document.getElementById("scream").setTime(0);
+        document.getElementById("scream").currentTime=0;
         document.getElementById("scream").play();
       }
       
