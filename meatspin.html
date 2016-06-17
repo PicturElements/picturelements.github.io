@@ -79,6 +79,11 @@
       @keyframes spin{
         to{transform:rotate(360deg);}
       }
+      
+      @keyframes scare{
+        50%{margin-left:1vw;}
+        100%{margin-left:-1vw;}
+      }
     </style>
     <script>
       var count=0,counting=true;
@@ -108,6 +113,12 @@
       function scream(){
         document.getElementById("scream").currentTime=0;
         document.getElementById("scream").play();
+        document.getElementById("pizza").style.animation="scare 20ms alternate 100";
+        setTimeout(removeAni,1000);
+      }
+      
+      function removeAni(){
+        document.getElementById("pizza").style.animation="initial";
       }
       
       function increment(){
