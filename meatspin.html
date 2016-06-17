@@ -114,11 +114,11 @@
         document.getElementById("scream").currentTime=0;
         document.getElementById("scream").play();
         document.getElementById("pizza").style.animation="scare 20ms alternate 100";
-        setTimeout(removeAni,1000);
+        setTimeout(resetAni,1000);
       }
       
-      function removeAni(){
-        document.getElementById("pizza").style.animation="initial";
+      function resetAni(){
+        document.getElementById("pizza").style.animation="spin 2s linear infinite";
       }
       
       function increment(){
