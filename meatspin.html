@@ -104,21 +104,27 @@
         rolls[1].style.left="-18vw";
       }
       
+      function scream(){
+        document.getElementById("scream").setTime(0);
+        document.getElementById("scream").play();
+      }
+      
       function increment(){
         if (counting){count++;}
         document.getElementsByTagName("count")[0].innerHTML=""+count+" spins";
         if (count==1){document.getElementsByTagName("count")[0].innerHTML="1 spin";}
       }
     </script>
-    <audio loop preload=auto id="roll" src="images/nggyu.mp3" type="audio/mp3"></audio>
   </head>
   <body onload=init()>
+    <audio loop preload=auto id="roll" src="images/nggyu.mp3" type="audio/mp3"></audio>
+    <audio preload=auto id="scream" src="images/scream.wav" type="audio/wav"></audio>
     <div id="headertext">If you're under the age of 18 or find this too arousing please <lnk style="color:#009; font-weight:900; cursor:pointer" onclick=roll()>LEAVE NOW</lnk></div>
     <div id="container">
       <div id="rollin"></div>
       <div class="gboob" style="width:20vw; left:22vw; background-position:-20vw 0;"></div>
       <div class="gboob"></div>
-      <div id="pizza"></div>
+      <div id="pizza" onclick=scream()></div>
       You have sat through <count>0 spins</count>!
     </div>
   </body>
