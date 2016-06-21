@@ -10,10 +10,41 @@
         background-color:white;
         margin:0;
       }
+      
+      input{
+        display:block;
+        position:fixed;
+      }
+      
+      #background{
+        display:block;
+        position:fixed;
+        width:100%;
+        height:100%;
+        background-size:contain;
+      }
     </style>
-    <script></script>
+    <script>
+      function getImage(){
+        var file=evt.target.files;
+        if (!file[0].type.match('image.*')){
+          return 0;   //end function
+        }
+        var reader=new FileReader();
+        /*reader.onload=function(){
+          document.getElementById("background").src=reader.
+        }*/
+        reader.onload = (function() {
+          return function(e) {
+            document.getElementById("background").src=e.target.result;
+          };
+        })(file);
+        reader.readAsDataURL(f);
+      }
+    </script>
   </head>
   <body>
+    <div id="background"></div>
     <input type="file">Upload image</input>
   </body>
 </html>
