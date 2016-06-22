@@ -43,13 +43,14 @@
         image.src=document.getElementById("input").value;
         var width=image.offsetWidth;
         var height=image.offsetHeight;
-        if (height>inner.offsetHeight){
-          image.style.width=""+(100*(height/inner.offsetHeight))+"%";
+        var inHeight=inner.offsetHeight;
+        if (height>inHeight){
+          image.style.width=""+(100*(height/inHeight))+"%";
           image.style.top="0";
-          image.style.left=""+((100-(100*(height/inner.offsetHeight)))/2)+"%";
+          image.style.left=""+((100-(100*(height/inHeight)))/2)+"%";
         }else{
           image.style.left="0";
-          image.style.top=""+(50*(inner.offsetHeight-height)/inner.offsetHeight)+"%";
+          image.style.top=""+(50*(inHeight-height)/inHeight)+"%";
         }
       }
     </script>
