@@ -20,6 +20,15 @@
         background-color:#ccc;
       }
       
+      #inner{
+        display:block;
+        position:absolute;
+        width:90%;
+        left:5%;
+        height:90%;
+        top:5%;
+      }
+      
       img{
         display:block;
         position:absolute;
@@ -29,7 +38,19 @@
     </style>
     <script>
       function getImage(){
-        document.getElementById("image").src=document.getElementById("input").value;
+        var image=document.getElementById("image");
+        var inner=document.getElementById("inner");
+        image.src=document.getElementById("input").value;
+        var width=image.offsetWidth;
+        var height=image.offsetHeight;
+        if (height>inner.offsetHeight){
+          image.style.width=""+(100*(height/inner.offsetHeight))+"%";
+          image.style.top="0";
+          image.style.left=""+((100-(100*(height/inner.offsetHeight)))/2)+"%";
+        }else{
+          image.style.left="0";
+          image.style.top=""+(50*(inner.offsetHeight-height))+"%";
+        }
       }
     </script>
   </head>
@@ -37,7 +58,9 @@
     <input id="input"></input>
     <button onclick=getImage()>Upload</button>
     <div id="imgcontainer">
-      <img id="image"></img>
+      <div id="inner">
+        <img id="image"></img>
+      </div>
     </div>
   </body>
 </html>
