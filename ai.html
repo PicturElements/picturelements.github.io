@@ -9,11 +9,33 @@
         background-color:white;
         margin:0;
       }
+      
+      #imgcontainer{
+        display:block;
+        position:fixed;
+        width:70%;
+        height:100%;
+        background-color:;
+      }
+      
+      img{
+        display:block;
+        position:absolute;
+        width:100%;
+        background-size:contain;
+      }
     </style>
-    <script></script>
+    <script>
+      function getImage(){
+        document.getElementById("image").src=document.getElementById("input").value;
+      }
+    </script>
   </head>
   <body>
-    <input></input>
-    <button>Upload</button>
+    <input id="input"></input>
+    <button onclick=getImage()>Upload</button>
+    <div id="imgcontainer">
+      <img id="image"></img>
+    </div>
   </body>
 </html>
