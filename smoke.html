@@ -20,7 +20,7 @@
     <script>
       var coords=[-1,1,-1,1,1,-1,1,1,1,-1,1,1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,1],angles=[];
       var xC=window.innerWidth/2,yC=window.innerHeight/2;
-      var side=window.innerWidth/4;
+      var side=window.innerWidth/6;
       var increment=0.01,thread;
       var ctx;
       
@@ -46,12 +46,13 @@
       }
       
       function paint(){
+        ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
         for (var i=0;i<8;i++){
           var tmpZ=1+(Math.sin(angles[i]))*0.2;
           var tmpX=Math.cos(angles[i])*side*tmpZ,tmpY=side*coords[i*3+1]*tmpZ;
           ctx.beginPath();
           ctx.arc(xC+tmpX,yC+tmpY,10,0,2*Math.PI);
-          ctx.stroke();
+          ctx.fill();
         }
       }
     </script>
