@@ -44,7 +44,7 @@
       var increment=0.005,thread,perspective=0.2;
       var dX,prevX;   //cursor stuff
       var ctx;
-      var dragging=false,simulate=true;
+      var dragging=false,simulation=true;
       var particles=1000,particleCoords=[],totRot=0;
       
       function init(){
@@ -91,7 +91,7 @@
       }
       
       function simulate(){
-        if (simulate){
+        if (simulation){
           for (var i=0;i<particles;i++){
             particleCoords[i*3]+=((Math.random()*10-5));
             particleCoords[i*3+1]+=((Math.random()*10-5)/500);
@@ -125,7 +125,7 @@
       
       function playpause(){
         if (event.keyCode=="13"){
-          simulate=!simulate;
+          simulation=!simulation;
         }
       }
       
