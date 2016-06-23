@@ -100,9 +100,11 @@
       }
       
       function drag(){
-        dX=prevX-event.clientX;
-        prevX=event.clientX;
-        rotateStep(dX*Math.PI/180);
+        if (dragging){
+          dX=prevX-event.clientX;
+          prevX=event.clientX;
+          rotateStep(dX*Math.PI/180);
+        }
       }
       
       function paint(){
