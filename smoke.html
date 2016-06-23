@@ -45,6 +45,7 @@
       var dX,prevX;   //cursor stuff
       var ctx;
       var dragging=false;
+      var particles=1000,particleCoords=[],totRot=0;
       
       function init(){
         var canvas=document.getElementById("3dcanvas")
@@ -59,6 +60,9 @@
           angles[i]*=(Math.PI/180);
           tmpCoords.push(0,0);
         }
+        for (var a=0;a<particles;a++){
+          particleCoords.push(0,0,0);
+        }
         thread=setInterval(rotate,25);
       }
       
@@ -66,20 +70,31 @@
         if (!dragging){
           for (var i=0;i<8;i++){
             angles[i]+=increment;
+            totRot+=increment;
             var tmpZ=1+(Math.sin(angles[i]))*perspective;
             tmpCoords[i*2]=Math.cos(angles[i])*Math.sqrt(2*side*side)*tmpZ;
             tmpCoords[i*2+1]=side*coords[i*3+1]*tmpZ;
           }
-          paint();
         }
+        simulate();
       }
       
       function rotateStep(step){
         for (var i=0;i<8;i++){
           angles[i]+=step;
+          totRot+=step;
           var tmpZ=1+(Math.sin(angles[i]))*perspective;
           tmpCoords[i*2]=Math.cos(angles[i])*Math.sqrt(2*side*side)*tmpZ;
           tmpCoords[i*2+1]=side*coords[i*3+1]*tmpZ;
+        }
+        paint();
+      }
+      
+      function simulate(){
+        for (var i=0;i<particles;i++){
+          particleCoords[i*3]+=(Math.random()*10-5)/1000;
+          particleCoords[i*3+1]+=(Math.random()*10-5)/1000;
+          particleCoords[i*3+2]+=(Math.random()*10-5)/1000;
         }
         paint();
       }
@@ -125,6 +140,16 @@
           ctx.beginPath();
           ctx.arc(tmpCoords[i*2]+xC,tmpCoords[i*2+1]+yC,6*tmpZ,0,2*Math.PI);
           ctx.fill();
+          var ang,r,tX,tY;
+          for (var i=0;i<points;i++){
+            ang=Math.atan(particleCoords[i*3+2]/particleCoords[i*3]);
+            if (particleCoords[i*3]<0){ang+=Math.PI;}
+            ang+=totRot;
+            r=Math.hypot(particleCoords[i*3+2],particleCoords[i*3]);
+            tX=Math.cos(ang)*r*tmpZ;
+            tY=side*particleCoords[i*3+1]*tmpZ;
+            ctx.fillRect(tX,tY,1,1);
+          }
         }
       }
     </script>
