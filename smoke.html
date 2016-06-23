@@ -32,7 +32,7 @@
         canvas.height=window.innerHeight;
         for (var i=0;i<8;i++){
           var tmpAng=Math.atan(coords[i*3+2]/coords[i*3+1]);
-          if (coords[i*3+1]<0){tmpAng+=Math.PI;}
+          //if (coords[i*3+1]<0){tmpAng+=Math.PI;}
           angles.push(tmpAng);
           console.log((tmpAng/Math.PI)*180);
         }
