@@ -41,8 +41,10 @@
       //          |      |      |     |      |        |       |      |       |
       var xC=window.innerWidth/2,yC=window.innerHeight/2;
       var side=window.innerWidth/6;
-      var increment=0.01,thread;
+      var increment=0.005,thread,perspective=0.2;
+      var dX,prevX;   //cursor stuff
       var ctx;
+      var dragging=false;
       
       function init(){
         var canvas=document.getElementById("3dcanvas")
@@ -61,9 +63,21 @@
       }
       
       function rotate(){
+        if (!dragging){
+          for (var i=0;i<8;i++){
+            angles[i]+=increment;
+            var tmpZ=1+(Math.sin(angles[i]))*perspective;
+            tmpCoords[i*2]=Math.cos(angles[i])*Math.sqrt(2*side*side)*tmpZ;
+            tmpCoords[i*2+1]=side*coords[i*3+1]*tmpZ;
+          }
+          paint();
+        }
+      }
+      
+      function rotateStep(step){
         for (var i=0;i<8;i++){
-          angles[i]+=increment;
-          var tmpZ=1+(Math.sin(angles[i]))*0.2;
+          angles[i]+=step;
+          var tmpZ=1+(Math.sin(angles[i]))*perspective;
           tmpCoords[i*2]=Math.cos(angles[i])*Math.sqrt(2*side*side)*tmpZ;
           tmpCoords[i*2+1]=side*coords[i*3+1]*tmpZ;
         }
@@ -73,17 +87,29 @@
       function setCursor(inID){
         var cnv=document.getElementById("3dcanvas").style;
         if (inID==1){
+          prevX=event.clientX;
+          dX=0;
           document.getElementById("overDrag").id="overDragging";
+          dragging=true;
         }else{
+          dX=prevX-event.clientX;
+          increment=dX*Math.PI/180;
           document.getElementById("overDragging").id="overDrag";
+          dragging=false;
         }
+      }
+      
+      function drag(){
+        dX=prevX-event.clientX;
+        prevX=event.clientX;
+        rotateStep(dX*Math.PI/180);
       }
       
       function paint(){
         ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
         ctx.lineWidth=3;
         for (var i=0;i<8;i++){
-          var tmpZ=1+(Math.sin(angles[i]))*0.2;
+          var tmpZ=1+(Math.sin(angles[i]))*perspective;
           ctx.beginPath();
           ctx.moveTo(tmpCoords[i*2]+xC,tmpCoords[i*2+1]+yC);
           ctx.lineTo(tmpCoords[Math.floor(i/4)*8+((i+1)%4)*2]+xC,tmpCoords[Math.floor(i/4)*8+((i+1)%4)*2+1]+yC);
@@ -104,6 +130,6 @@
   </head>
   <body onload=init()>
     <canvas id="3dcanvas"></canvas>
-    <div id="overDrag" onmousedown=setCursor(1) onmouseup=setCursor(0)></div>
+    <div id="overDrag" onmousedown=setCursor(1) onmousemove=drag() onmouseup=setCursor(0)></div>
   </body>
 </html>
