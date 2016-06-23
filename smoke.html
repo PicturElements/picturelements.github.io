@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Smoke - PicturElements</title>
+    <link rel="icon" href="pelement.png">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,700" rel="stylesheet" type="text/css">
+    <style>
+      body{
+        background-color:white;
+        margin:0;
+      }
+      
+      canvas{
+        display:block;
+        position:fixed;
+        width:100%;
+        height:100%;
+      }
+    </style>
+    <script>
+      var coords=[-1,1,-1,1,1,-1,1,1,1,-1,1,1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,1],angles=[];
+      var xC=window.innerWidth/2,yC=window.innerHeight/2;
+      var side=window.innerWidth/4;
+      var increment=0.01,thread;
+      var ctx;
+      
+      function init(){
+        var canvas=document.getElementById("3dcanvas")
+        ctx=canvas.getContext("2d");
+        canvas.width=window.innerWidth;
+        canvas.height=window.innerHeight;
+        for (var i=0;i<8;i++){
+          var tmpAng=Math.atan(coords[i*3+2]/coords[i*3+1]);
+          if (coords[i*3+1]<0){tmpAng+=Math.PI;}
+          angles.push(tmpAng);
+          console.log((tmpAng/Math.PI)*180);
+        }
+      }
+      
+      function rotate(){
+        //rotation+=increment;
+        paint();
+      }
+      
+      function paint(){
+        for (var i=0;i<8;i++){
+          var tmpX,tmpY; 
+          ctx.beginPath();
+          ctx.arc(tmpX,tmpY,10,0,2*Math.PI);
+          ctx.stroke();
+        }
+      }
+    </script>
+  </head>
+  <body onload=init()>
+    <canvas id="3dcanvas"></canvas>
+  </body>
+</html>
