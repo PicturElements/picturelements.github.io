@@ -57,11 +57,11 @@
         for (var i=0;i<8;i++){
           var tmpZ=1+(Math.sin(angles[i]))*0.2;
           ctx.beginPath();
-          ctx.moveTo(tmpCoords[i*2]+tmpX,tmpCoords[i*2+1]+tmpY);
-          ctx.lineTo(tmpCoords[Math.floor(i/4)+(i*2+1)%4]+tmpX,tmpCoords[Math.floor(i/4)+(i*2+2)%4]+tmpY);
+          ctx.moveTo(tmpCoords[i*2]+xC,tmpCoords[i*2+1]+yC);
+          ctx.lineTo(tmpCoords[Math.floor(i/4)+(i*2+1)%4]+xC,tmpCoords[Math.floor(i/4)+(i*2+2)%4]+yC);
           ctx.stroke();
           ctx.beginPath();
-          ctx.arc(tmpCoords[i*2]+tmpX,tmpCoords[i*2+1]+tmpY,6*tmpZ,0,2*Math.PI);
+          ctx.arc(tmpCoords[i*2]+yC,tmpCoords[i*2+1]+yC,6*tmpZ,0,2*Math.PI);
           ctx.fill();
         }
       }
