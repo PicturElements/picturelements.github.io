@@ -50,13 +50,8 @@
         ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
         for (var i=0;i<8;i++){
           var tmpZ=1+(Math.sin(angles[i]))*0.2;
-          if (i%4>=2){
-            tmpX=Math.cos(angles[i])*Math.sqrt(2*side*side)*tmpZ;
-            tmpY=side*coords[i*3+1]*tmpZ;
-          }else{
-            tmpX=Math.cos(angles[i]+Math.PI)*Math.sqrt(2*side*side)*tmpZ;
-            tmpY=side*coords[i*3+1]*tmpZ;
-          }
+          tmpX=Math.cos(angles[i])*Math.sqrt(2*side*side)*tmpZ;
+          tmpY=side*coords[i*3+1]*tmpZ;
           ctx.beginPath();
           ctx.arc(xC+tmpX,yC+tmpY,6*tmpZ,0,2*Math.PI);
           ctx.fill();
