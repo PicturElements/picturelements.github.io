@@ -44,7 +44,7 @@
       var increment=0.005,thread,perspective=0.2;
       var dX,prevX;   //cursor stuff
       var ctx;
-      var dragging=false;
+      var dragging=false,simulate=true;
       var particles=1000,particleCoords=[],totRot=0;
       
       function init(){
@@ -91,10 +91,12 @@
       }
       
       function simulate(){
-        for (var i=0;i<particles;i++){
-          particleCoords[i*3]+=((Math.random()*10-5));
-          particleCoords[i*3+1]+=((Math.random()*10-5)/500);
-          particleCoords[i*3+2]+=((Math.random()*10-5));
+        if (simulate){
+          for (var i=0;i<particles;i++){
+            particleCoords[i*3]+=((Math.random()*10-5));
+            particleCoords[i*3+1]+=((Math.random()*10-5)/500);
+            particleCoords[i*3+2]+=((Math.random()*10-5));
+          }
         }
         paint();
       }
@@ -118,6 +120,12 @@
           dX=prevX-event.clientX;
           prevX=event.clientX;
           rotateStep(dX*Math.PI/180);
+        }
+      }
+      
+      function playpause(){
+        if (event.keyCode=="13"){
+          simulate=!simulate;
         }
       }
       
@@ -154,7 +162,7 @@
       }
     </script>
   </head>
-  <body onload=init()>
+  <body onload=init() onkeydown=playpause()>
     <canvas id="3dcanvas"></canvas>
     <div id="overDrag" onmousedown=setCursor(1) onmousemove=drag() onmouseup=setCursor(0)></div>
   </body>
