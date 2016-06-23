@@ -55,11 +55,11 @@
       }
       
       function setCursor(inID){
-        var cnv=document.getElementById("3dcanvas").style.cursor;
+        var cnv=document.getElementById("3dcanvas").style;
         if (inID==1){
-          cnv="-webkit-dragging";
+          cnv.cursor="-webkit-dragging";
         }else{
-          cnv="-webkit-drag";
+          cnv.cursor="-webkit-drag";
         }
       }
       
