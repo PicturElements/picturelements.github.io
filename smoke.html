@@ -50,7 +50,7 @@
         ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
         for (var i=0;i<8;i++){
           var tmpZ=1+(Math.sin(angles[i]))*0.2;
-          var tmpX=Math.cos(angles[i])*side*tmpZ*coords[i*3],tmpY=side*coords[i*3+1]*tmpZ;
+          var tmpX=Math.cos(angles[i])*side*tmpZ,tmpY=side*coords[i*3+1]*tmpZ;
           ctx.beginPath();
           ctx.arc(xC+tmpX,yC+tmpY,6*tmpZ,0,2*Math.PI);
           ctx.fill();
