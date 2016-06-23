@@ -18,7 +18,7 @@
       }
     </style>
     <script>
-      var coords=[-1,1,-1,1,1,-1,1,1,1,-1,1,1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,1],angles=[-45,45,135,225,-45,45,135,225];
+      var coords=[-1,1,-1,1,1,-1,1,1,1,-1,1,1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,1],angles=[-45,45,135,225,-45,45,135,225],tmpCoords=[];
       //          |      |      |     |      |        |       |      |       |
       var xC=window.innerWidth/2,yC=window.innerHeight/2;
       var side=window.innerWidth/6;
@@ -28,6 +28,7 @@
       function init(){
         var canvas=document.getElementById("3dcanvas")
         ctx=canvas.getContext("2d");
+        ctx.lineWidth=2;
         canvas.width=window.innerWidth;
         canvas.height=window.innerHeight;
         for (var i=0;i<8;i++){
@@ -36,13 +37,17 @@
           angles.push(tmpAng);
           console.log(i+": "+(tmpAng/Math.PI)*180);*/
           angles[i]*=(Math.PI/180);
+          tmpCoords.push(0,0);
         }
         thread=setInterval(rotate,25);
       }
       
       function rotate(){
         for (var i=0;i<8;i++){
-          angles[i]+=increment; 
+          angles[i]+=increment;
+          var tmpZ=1+(Math.sin(angles[i]))*0.2;
+          tmpCoords[i*2]=Math.cos(angles[i])*Math.sqrt(2*side*side)*tmpZ;
+          tmpCoords[i*2+1]=side*coords[i*3+1]*tmpZ;
         }
         paint();
       }
@@ -51,10 +56,12 @@
         ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
         for (var i=0;i<8;i++){
           var tmpZ=1+(Math.sin(angles[i]))*0.2;
-          tmpX=Math.cos(angles[i])*Math.sqrt(2*side*side)*tmpZ;
-          tmpY=side*coords[i*3+1]*tmpZ;
           ctx.beginPath();
-          ctx.arc(xC+tmpX,yC+tmpY,6*tmpZ,0,2*Math.PI);
+          ctx.moveTo(tmpCoords[i*2]+tmpX,tmpCoords[i*2+1]+tmpY);
+          ctx.lineTo(tmpCoords[Math.floor(i/4)+(i*2+1)%4]+tmpX,tmpCoords[Math.floor(i/4)+(i*2+2)%4]+tmpY);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(tmpCoords[i*2]+tmpX,tmpCoords[i*2+1]+tmpY,6*tmpZ,0,2*Math.PI);
           ctx.fill();
         }
       }
