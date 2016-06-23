@@ -58,7 +58,7 @@
           var tmpZ=1+(Math.sin(angles[i]))*0.2;
           ctx.beginPath();
           ctx.moveTo(tmpCoords[i*2]+xC,tmpCoords[i*2+1]+yC);
-          //ctx.lineTo(tmpCoords[Math.floor(i/4)*8*+((i+1)%4)*2]+xC,tmpCoords[Math.floor(i/4)*8+((i+1)%4)*2+1]+yC);
+          ctx.lineTo(tmpCoords[Math.floor(i/4)*8+((i+1)%4)*2]+xC,tmpCoords[Math.floor(i/4)*8+((i+1)%4)*2+1]+yC);
           //ctx.lineTo();
           ctx.stroke();
           if (i<4){
