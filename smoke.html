@@ -141,13 +141,13 @@
           ctx.arc(tmpCoords[i*2]+xC,tmpCoords[i*2+1]+yC,6*tmpZ,0,2*Math.PI);
           ctx.fill();
           var ang,r,tX,tY;
-          for (var i=0;i<particles;i++){
-            ang=Math.atan(particleCoords[i*3+2]/particleCoords[i*3]);
-            if (particleCoords[i*3]<0){ang+=Math.PI;}
+          for (var n=0;n<particles;n++){
+            ang=Math.atan(particleCoords[n*3+2]/particleCoords[n*3]);
+            if (particleCoords[n*3]<0){ang+=Math.PI;}
             ang+=totRot;
-            r=Math.hypot(particleCoords[i*3+2],particleCoords[i*3]);
+            r=Math.hypot(particleCoords[n*3+2],particleCoords[n*3]);
             tX=Math.cos(ang)*r*tmpZ;
-            tY=side*particleCoords[i*3+1]*tmpZ;
+            tY=side*particleCoords[n*3+1]*tmpZ;
             ctx.fillRect(tX,tY,1,1);
           }
         }
