@@ -30,12 +30,13 @@
         ctx=canvas.getContext("2d");
         canvas.width=window.innerWidth;
         canvas.height=window.innerHeight;
-        /*for (var i=0;i<8;i++){
-          var tmpAng=Math.atan(coords[i*3+2]/coords[i*3]);
+        for (var i=0;i<8;i++){
+          /*var tmpAng=Math.atan(coords[i*3+2]/coords[i*3]);
           if (coords[i*3+1]<0){tmpAng+=Math.PI;}
           angles.push(tmpAng);
-          console.log(i+": "+(tmpAng/Math.PI)*180);
-        }*/
+          console.log(i+": "+(tmpAng/Math.PI)*180);*/
+          angles[i]*=(Math.PI/180);
+        }
         thread=setInterval(rotate,25);
       }
       
