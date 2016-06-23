@@ -44,8 +44,8 @@
         var r1=image.offsetWidth/image.offsetHeight;
         var r2=inner.offsetWidth/inner.offsetHeight;
         
-        if (r1<r2){
-          image.style.width=""+(100*(r1/r2))+"%";
+        if (r1>r2){
+          image.style.width=""+(100*(r2/r1))+"%";
           image.style.top="0";
           //image.style.left=""+((100-(100*(height/inHeight)))/2)+"%";
         }else{
