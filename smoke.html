@@ -144,7 +144,7 @@
           for (var n=0;n<particles;n++){
             ang=Math.atan(particleCoords[n*3+2]/particleCoords[n*3]);
             if (particleCoords[n*3]<0){ang+=Math.PI;}
-            ang+=totRot;
+            ang-=totRot;
             r=Math.hypot(particleCoords[n*3+2],particleCoords[n*3]);
             tX=Math.cos(ang)*r*tmpZ;
             tY=side*particleCoords[n*3+1]*tmpZ;
