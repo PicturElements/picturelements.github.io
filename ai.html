@@ -41,16 +41,16 @@
         var image=document.getElementById("image");
         var inner=document.getElementById("inner");
         image.src=document.getElementById("input").value;
-        var width=image.offsetWidth;
-        var height=image.offsetHeight;
-        var inHeight=inner.offsetHeight;
-        if (height>inHeight){
-          image.style.width=""+(100*(height/inHeight))+"%";
+        var r1=image.offsetWidth/image.offsetHeight;
+        var r2=inner.offsetWidth/inner.offsetHeight;
+        
+        if (r1<r2){
+          image.style.width=""+(100*(r1/r2))+"%";
           image.style.top="0";
-          image.style.left=""+((100-(100*(height/inHeight)))/2)+"%";
+          //image.style.left=""+((100-(100*(height/inHeight)))/2)+"%";
         }else{
           image.style.left="0";
-          image.style.top=""+(50*(inHeight-height)/inHeight)+"%";
+          //image.style.top=""+(50*(inHeight-height)/inHeight)+"%";
         }
       }
     </script>
