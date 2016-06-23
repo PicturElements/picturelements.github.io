@@ -93,15 +93,15 @@
       function simulate(){
         if (simulation){
           for (var i=0;i<particles;i++){
-            particleCoords[i*3]+=((Math.random()*10-5)/500);
+            particleCoords[i*3]+=((Math.random()*10-5)/50);
             if (Math.abs(particleCoords[i*3])>1){particleCoords[i*3]=Math.sign(particleCoords[i*3]);}
-            particleCoords[i*3+1]+=((Math.random()*10-5)/500);
+            particleCoords[i*3+1]+=((Math.random()*10-5)/50);
             if (Math.abs(particleCoords[i*3+1])>1){particleCoords[i*3+1]=Math.sign(particleCoords[i*3+1]);}
-            particleCoords[i*3+2]+=((Math.random()*10-5)/500);
+            particleCoords[i*3+2]+=((Math.random()*10-5)/50);
             if (Math.abs(particleCoords[i*3+2])>1){particleCoords[i*3+2]=Math.sign(particleCoords[i*3+2]);}
           }
         }
-        paint();
+        if (simulation&&increment!=0){paint();}
       }
       
       function setCursor(inID){
