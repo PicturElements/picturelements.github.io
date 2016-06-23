@@ -28,7 +28,6 @@
       function init(){
         var canvas=document.getElementById("3dcanvas")
         ctx=canvas.getContext("2d");
-        ctx.lineWidth=5;
         canvas.width=window.innerWidth;
         canvas.height=window.innerHeight;
         for (var i=0;i<8;i++){
@@ -54,6 +53,7 @@
       
       function paint(){
         ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
+        ctx.lineWidth=5;
         for (var i=0;i<8;i++){
           var tmpZ=1+(Math.sin(angles[i]))*0.2;
           ctx.beginPath();
