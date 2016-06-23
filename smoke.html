@@ -124,7 +124,7 @@
       }
       
       function playpause(){
-        if (event.keyCode==13){
+        if (event.keyCode==32){
           simulation=!simulation;
         }
       }
@@ -162,8 +162,8 @@
       }
     </script>
   </head>
-  <body onload=init()>
+  <body onload=init() onkeydown=playpause()>
     <canvas id="3dcanvas"></canvas>
-    <div id="overDrag" onmousedown=setCursor(1) onmousemove=drag() onmouseup=setCursor(0) onkeydown=playpause()></div>
+    <div id="overDrag" onmousedown=setCursor(1) onmousemove=drag() onmouseup=setCursor(0)></div>
   </body>
 </html>
