@@ -61,7 +61,7 @@
           ctx.lineTo(tmpCoords[Math.floor(i/4)+(i*2+1)%4]+xC,tmpCoords[Math.floor(i/4)+(i*2+2)%4]+yC);
           ctx.stroke();
           ctx.beginPath();
-          ctx.arc(tmpCoords[i*2]+yC,tmpCoords[i*2+1]+yC,6*tmpZ,0,2*Math.PI);
+          ctx.arc(tmpCoords[i*2]+xC,tmpCoords[i*2+1]+yC,6*tmpZ,0,2*Math.PI);
           ctx.fill();
         }
       }
