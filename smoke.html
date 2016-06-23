@@ -35,18 +35,22 @@
           angles.push(tmpAng);
           console.log((tmpAng/Math.PI)*180);
         }
+        thread=setInterval(rotate,50);
       }
       
       function rotate(){
-        //rotation+=increment;
+        for (var i=0;i<8;i++){
+          angles[i]+=increment; 
+        }
         paint();
       }
       
       function paint(){
         for (var i=0;i<8;i++){
-          var tmpX,tmpY; 
+          var tmpZ=1+(Math.sin(angles[i]))*0.2;
+          var tmpX=Math.cos(angles[i])*side*tmpZ,tmpY=side*coords[i*3+1]*tmpZ;
           ctx.beginPath();
-          ctx.arc(tmpX,tmpY,10,0,2*Math.PI);
+          ctx.arc(xC+tmpX,yC+tmpY,10,0,2*Math.PI);
           ctx.stroke();
         }
       }
