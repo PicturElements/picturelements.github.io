@@ -15,9 +15,25 @@
         position:fixed;
         width:100%;
         height:100%;
+      }
+
+      #overDrag,#overDragging{
+        display:block;
+        position:fixed;
+        width:100%;
+        height:100%;
+      }
+
+      #overDrag{
         cursor:-webkit-grab;
         cursor:-moz-grab;
         cursor:-ie-grab;
+      }
+      
+      #overDragging{
+        cursor:-webkit-grabbing;
+        cursor:-moz-grabbing;
+        cursor:-ie-grabbing;
       }
     </style>
     <script>
@@ -57,10 +73,9 @@
       function setCursor(inID){
         var cnv=document.getElementById("3dcanvas").style;
         if (inID==1){
-          //cnv.cursor="-webkit-dragging";
-          cnv.cursor="pointer";
+          document.getElementById("overDrag").id="overDragging";
         }else{
-          cnv.cursor="-webkit-drag";
+          document.getElementById("overDragging").id="overDrag";
         }
       }
       
@@ -88,6 +103,7 @@
     </script>
   </head>
   <body onload=init()>
-    <canvas id="3dcanvas" onmousedown=setCursor(1) onmouseup=setCursor(0)></canvas>
+    <canvas id="3dcanvas"></canvas>
+    <div id="overDrag" onmousedown=setCursor(1) onmouseup=setCursor(0)></div>
   </body>
 </html>
