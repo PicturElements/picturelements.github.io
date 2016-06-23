@@ -43,7 +43,7 @@
         image.src=document.getElementById("input").value;
         var r1=image.offsetWidth/image.offsetHeight;
         var r2=inner.offsetWidth/inner.offsetHeight;
-        
+        console.log("Image ratio: "+r1+", Container ratio: "+r2);
         if (r1>r2){
           image.style.width=""+(100*(r2/r1))+"%";
           image.style.top="0";
