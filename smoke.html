@@ -18,7 +18,7 @@
       }
     </style>
     <script>
-      var coords=[-1,1,-1,1,1,-1,1,1,1,-1,1,1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,1],angles=[];
+      var coords=[-1,1,-1,1,1,-1,1,1,1,-1,1,1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,1],angles=[-45,45,135,225,-45,45,135,225];
       //          |      |      |     |      |        |       |      |       |
       var xC=window.innerWidth/2,yC=window.innerHeight/2;
       var side=window.innerWidth/6;
@@ -30,12 +30,12 @@
         ctx=canvas.getContext("2d");
         canvas.width=window.innerWidth;
         canvas.height=window.innerHeight;
-        for (var i=0;i<8;i++){
+        /*for (var i=0;i<8;i++){
           var tmpAng=Math.atan(coords[i*3+2]/coords[i*3]);
           if (coords[i*3+1]<0){tmpAng+=Math.PI;}
           angles.push(tmpAng);
           console.log(i+": "+(tmpAng/Math.PI)*180);
-        }
+        }*/
         thread=setInterval(rotate,25);
       }
       
