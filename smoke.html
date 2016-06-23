@@ -59,7 +59,7 @@
           angles[i]*=(Math.PI/180);
           tmpCoords.push(0,0);
         }
-        thread=setInterval(rotate,25);
+        thread=setInterval(rotate,40);
       }
       
       function rotate(){
@@ -93,6 +93,7 @@
           dragging=true;
         }else{
           increment=dX*Math.PI/180;
+          if (prevX==event.clientX){increment=0;}
           document.getElementById("overDragging").id="overDrag";
           dragging=false;
         }
