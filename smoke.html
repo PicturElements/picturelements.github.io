@@ -162,8 +162,8 @@
       }
     </script>
   </head>
-  <body onload=init() onkeydown=playpause()>
+  <body onload=init()>
     <canvas id="3dcanvas"></canvas>
-    <div id="overDrag" onmousedown=setCursor(1) onmousemove=drag() onmouseup=setCursor(0)></div>
+    <div id="overDrag" onmousedown=setCursor(1) onmousemove=drag() onmouseup=setCursor(0) onkeydown=playpause()></div>
   </body>
 </html>
