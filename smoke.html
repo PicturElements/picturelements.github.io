@@ -101,7 +101,7 @@
             if (Math.abs(particleCoords[i*3+2])>1){particleCoords[i*3+2]=Math.sign(particleCoords[i*3+2]);}
           }
         }
-        if (simulation&&increment!=0){paint();}
+        if (simulation||increment!=0){paint();}
       }
       
       function setCursor(inID){
