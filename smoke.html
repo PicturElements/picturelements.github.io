@@ -32,7 +32,7 @@
         canvas.height=window.innerHeight;
         for (var i=0;i<8;i++){
           var tmpAng=Math.atan(coords[i*3+2]/coords[i*3+1]);
-          //if (coords[i*3+1]<0){tmpAng+=Math.PI;}
+          if (coords[i*3+1]<0){tmpAng+=Math.PI;}
           angles.push(tmpAng);
           console.log((tmpAng/Math.PI)*180);
         }
@@ -52,7 +52,7 @@
           var tmpZ=1+(Math.sin(angles[i]))*0.2;
           var tmpX=Math.cos(angles[i])*side*tmpZ,tmpY=side*coords[i*3+1]*tmpZ;
           ctx.beginPath();
-          ctx.arc(xC+tmpX,yC+tmpY,6,0,2*Math.PI);
+          ctx.arc(xC+tmpX,yC+tmpY,6*tmpZ,0,2*Math.PI);
           ctx.fill();
         }
       }
