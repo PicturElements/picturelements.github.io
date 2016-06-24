@@ -41,7 +41,7 @@
       //          |      |      |     |      |        |       |      |       |
       var xC=window.innerWidth/2,yC=window.innerHeight/2;
       var side=window.innerWidth/6;
-      var increment=0.005,thread,perspective=0.2;
+      var increment=0.0025,thread,perspective=0.2;
       var dX,prevX;   //cursor stuff
       var ctx;
       var dragging=false,simulation=true;
@@ -113,7 +113,7 @@
           document.getElementById("overDrag").id="overDragging";
           dragging=true;
         }else{
-          increment=dX*Math.PI/180;
+          increment=dX*Math.PI/360;   //2x slower...
           document.getElementById("overDragging").id="overDrag";
           dragging=false;
         }
