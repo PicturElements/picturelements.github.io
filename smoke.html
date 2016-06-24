@@ -71,11 +71,11 @@
         if (!dragging){
           for (var i=0;i<8;i++){
             angles[i]+=increment;
-            totRot+=increment;
             var tmpZ=1+(Math.sin(angles[i]))*perspective;
             tmpCoords[i*2]=Math.cos(angles[i])*Math.sqrt(2*side*side)*tmpZ;
             tmpCoords[i*2+1]=side*coords[i*3+1]*tmpZ;
           }
+          totRot+=increment;
         }
         simulate();
       }
@@ -83,11 +83,11 @@
       function rotateStep(step){
         for (var i=0;i<8;i++){
           angles[i]+=step;
-          totRot+=step;
           var tmpZ=1+(Math.sin(angles[i]))*perspective;
           tmpCoords[i*2]=Math.cos(angles[i])*Math.sqrt(2*side*side)*tmpZ;
           tmpCoords[i*2+1]=side*coords[i*3+1]*tmpZ;
         }
+        totRot+=step;
         paint();
       }
       
@@ -159,9 +159,8 @@
         for (var n=0;n<particles;n++){
           ang=Math.atan(particleCoords[n*3+2]/particleCoords[n*3]);
           if (particleCoords[n*3]<0){ang+=Math.PI;}
-          tmpZ=1+(Math.sin(ang))*perspective;
           ang+=totRot;
-          //r=Math.hypot(particleCoords[n*3+2],particleCoords[n*3]);
+          tmpZ=1+(Math.sin(ang))*perspective;
           r=Math.sqrt(particleCoords[n*3+2]*particleCoords[n*3+2]+particleCoords[n*3]*particleCoords[n*3]);
           tX=side*Math.cos(ang)*r*tmpZ;
           tY=side*particleCoords[n*2+1]*tmpZ;
