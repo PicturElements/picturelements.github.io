@@ -45,7 +45,7 @@
       var dX,prevX;   //cursor stuff
       var ctx;
       var dragging=false,simulation=true;
-      var particles=1000,particleCoords=[],totRot=0;
+      var particles=5000,particleCoords=[],totRot=0;
       var bounds=1,speed=500;
       
       function init(){
@@ -165,7 +165,7 @@
           r=Math.sqrt(particleCoords[n*3+2]*particleCoords[n*3+2]+particleCoords[n*3]*particleCoords[n*3]);
           tX=side*Math.cos(ang)*r*tmpZ;
           tY=side*particleCoords[n*2+1]*tmpZ;
-          ctx.fillRect(tX+xC,tY+yC,4*tmpZ,4*tmpZ);
+          ctx.fillRect(tX+xC,tY+yC,3*tmpZ,3*tmpZ);
           /*if (n>0){
             ctx.lineTo(tX+xC,tY+yC);
             ctx.stroke();
