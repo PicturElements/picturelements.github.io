@@ -160,7 +160,7 @@
           ang=Math.atan(particleCoords[n*3+2]/particleCoords[n*3]);
           if (particleCoords[n*3]<0){ang+=Math.PI;}
           tmpZ=1+(Math.sin(ang))*perspective;
-          ang+=totRot/8;
+          ang+=totRot;
           //r=Math.hypot(particleCoords[n*3+2],particleCoords[n*3]);
           r=Math.sqrt(particleCoords[n*3+2]*particleCoords[n*3+2]+particleCoords[n*3]*particleCoords[n*3]);
           tX=side*Math.cos(ang)*r*tmpZ;
