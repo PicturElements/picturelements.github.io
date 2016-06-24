@@ -98,8 +98,8 @@
             if (Math.abs(particleCoords[i*3])>bounds){particleCoords[i*3]=Math.sign(particleCoords[i*3])*bounds;}
             particleCoords[i*3+1]+=((Math.random()*10-5)/speed);
             if (Math.abs(particleCoords[i*3+1])>bounds){particleCoords[i*3+1]=Math.sign(particleCoords[i*3+1])*bounds;}
-            /*particleCoords[i*3+2]+=((Math.random()*10-5)/speed);
-            if (Math.abs(particleCoords[i*3+2])>bounds){particleCoords[i*3+2]=Math.sign(particleCoords[i*3+2])*bounds;}*/
+            particleCoords[i*3+2]+=((Math.random()*10-5)/speed);
+            if (Math.abs(particleCoords[i*3+2])>bounds){particleCoords[i*3+2]=Math.sign(particleCoords[i*3+2])*bounds;}
           }
         }
         if (simulation||increment!=0){paint();}
@@ -161,7 +161,7 @@
           if (particleCoords[n*3]<0){ang+=Math.PI;}
           ang+=totRot;
           r=Math.sqrt(particleCoords[n*3+2]*particleCoords[n*3+2]+particleCoords[n*3]*particleCoords[n*3]);
-          tmpZ=1+(Math.sin(ang)*r)/side*perspective;
+          tmpZ=1+Math.sin(ang)*perspective;
           tX=side*Math.cos(ang)*r;
           tY=side*particleCoords[n*2+1]*tmpZ;
           ctx.fillRect(tX+xC,tY+yC,3*tmpZ,3*tmpZ);
