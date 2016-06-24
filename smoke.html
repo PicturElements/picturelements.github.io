@@ -162,7 +162,7 @@
             r=Math.sqrt(particleCoords[n*3+2]*particleCoords[n*3+2]+particleCoords[n*3]*particleCoords[n*3]);
             tX=side*Math.cos(ang)*r*tmpZ;
             tY=side*particleCoords[n*3+1]*tmpZ;
-            ctx.fillRect(tX+xC,tY+yC,2,2);
+            ctx.fillRect(tX+xC,tY+yC,3*tmpZ,3*tmpZ);
           }
         }
       }
