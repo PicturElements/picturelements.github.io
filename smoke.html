@@ -98,8 +98,8 @@
             if (Math.abs(particleCoords[i*3])>bounds){particleCoords[i*3]=Math.sign(particleCoords[i*3])*bounds;}
             particleCoords[i*3+1]+=((Math.random()*10-5)/speed);
             if (Math.abs(particleCoords[i*3+1])>bounds){particleCoords[i*3+1]=Math.sign(particleCoords[i*3+1])*bounds;}
-            /*particleCoords[i*3+2]+=((Math.random()*10-5)/speed);
-            if (Math.abs(particleCoords[i*3+2])>bounds){particleCoords[i*3+2]=Math.sign(particleCoords[i*3+2])*bounds;}*/
+            particleCoords[i*3+2]+=((Math.random()*10-5)/speed);
+            if (Math.abs(particleCoords[i*3+2])>bounds){particleCoords[i*3+2]=Math.sign(particleCoords[i*3+2])*bounds;}
           }
         }
         if (simulation||increment!=0){paint();}
