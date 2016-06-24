@@ -45,7 +45,7 @@
       var dX,prevX;   //cursor stuff
       var ctx;
       var dragging=false,simulation=true;
-      var particles=300,particleCoords=[],totRot=0;
+      var particles=1000,particleCoords=[],totRot=0;
       var bounds=1,speed=500;
       
       function init(){
@@ -136,8 +136,9 @@
       function paint(){
         ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
         ctx.lineWidth=3;
+        var tmpZ;
         for (var i=0;i<8;i++){
-          var tmpZ=1+(Math.sin(angles[i]))*perspective;
+          tmpZ=1+(Math.sin(angles[i]))*perspective;
           ctx.beginPath();
           ctx.moveTo(tmpCoords[i*2]+xC,tmpCoords[i*2+1]+yC);
           ctx.lineTo(tmpCoords[Math.floor(i/4)*8+((i+1)%4)*2]+xC,tmpCoords[Math.floor(i/4)*8+((i+1)%4)*2+1]+yC);
@@ -152,28 +153,28 @@
           ctx.beginPath();
           ctx.arc(tmpCoords[i*2]+xC,tmpCoords[i*2+1]+yC,6*tmpZ,0,2*Math.PI);
           ctx.fill();
-          var ang,r,tX,tY;
-          ctx.lineWidth=1;
-          for (var n=0;n<particles;n++){
-            ang=Math.atan(particleCoords[n*3+2]/particleCoords[n*3]);
-            if (particleCoords[n*3]<0){ang+=Math.PI;}
-            ang+=totRot/8;
-            tmpZ=1+(Math.sin(ang))*perspective;
-            //r=Math.hypot(particleCoords[n*3+2],particleCoords[n*3]);
-            r=Math.sqrt(particleCoords[n*3+2]*particleCoords[n*3+2]+particleCoords[n*3]*particleCoords[n*3]);
-            tX=side*Math.cos(ang)*r*tmpZ;
-            tY=side*particleCoords[n*2+1]*tmpZ;
-            ctx.fillRect(tX+xC,tY+yC,2*tmpZ,2*tmpZ);
-            /*if (n>0){
-              ctx.lineTo(tX+xC,tY+yC);
-              ctx.stroke();
-              ctx.beginPath();
-              ctx.moveTo(tX+xC,tY+yC);
-            }else{
-              ctx.beginPath();
-              ctx.moveTo(tX+xC,tY+yC);
-            }*/
-          }
+          //ctx.lineWidth=1;
+        }
+        var ang,r,tX,tY;
+        for (var n=0;n<particles;n++){
+          ang=Math.atan(particleCoords[n*3+2]/particleCoords[n*3]);
+          if (particleCoords[n*3]<0){ang+=Math.PI;}
+          ang+=totRot/8;
+          tmpZ=1+(Math.sin(ang))*perspective;
+          //r=Math.hypot(particleCoords[n*3+2],particleCoords[n*3]);
+          r=Math.sqrt(particleCoords[n*3+2]*particleCoords[n*3+2]+particleCoords[n*3]*particleCoords[n*3]);
+          tX=side*Math.cos(ang)*r*tmpZ;
+          tY=side*particleCoords[n*2+1]*tmpZ;
+          ctx.fillRect(tX+xC,tY+yC,2*tmpZ,2*tmpZ);
+          /*if (n>0){
+            ctx.lineTo(tX+xC,tY+yC);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(tX+xC,tY+yC);
+          }else{
+            ctx.beginPath();
+            ctx.moveTo(tX+xC,tY+yC);
+          }*/
         }
       }
     </script>
