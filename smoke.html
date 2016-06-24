@@ -113,7 +113,7 @@
           document.getElementById("overDrag").id="overDragging";
           dragging=true;
         }else{
-          increment=dX*Math.PI/360;   //2x slower...
+          increment=Math.floor(dX/2)*Math.PI/180;   //2x slower...
           document.getElementById("overDragging").id="overDrag";
           dragging=false;
         }
