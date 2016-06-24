@@ -45,7 +45,7 @@
       var dX,prevX;   //cursor stuff
       var ctx;
       var dragging=false,simulation=true;
-      var particles=1000,particleCoords=[],totRot=0;
+      var particles=300,particleCoords=[],totRot=0;
       var bounds=1,speed=500;
       
       function init(){
@@ -153,6 +153,7 @@
           ctx.arc(tmpCoords[i*2]+xC,tmpCoords[i*2+1]+yC,6*tmpZ,0,2*Math.PI);
           ctx.fill();
           var ang,r,tX,tY;
+          ctx.lineWidth=1;
           for (var n=0;n<particles;n++){
             ang=Math.atan(particleCoords[n*3+2]/particleCoords[n*3]);
             if (particleCoords[n*3]<0){ang+=Math.PI;}
@@ -163,6 +164,15 @@
             tX=side*Math.cos(ang)*r*tmpZ;
             tY=side*particleCoords[n*2+1]*tmpZ;
             ctx.fillRect(tX+xC,tY+yC,2*tmpZ,2*tmpZ);
+            if (n>0){
+              ctx.lineTo(tX+xC,tY+yC);
+              ctx.stroke();
+              ctx.beginPath();
+              ctx.moveTo(tX+xC,tY+yC);
+            }else{
+              ctx.beginPath();
+              ctx.moveTo(tX+xC,tY+yC);
+            }
           }
         }
       }
