@@ -164,7 +164,7 @@
             tX=side*Math.cos(ang)*r*tmpZ;
             tY=side*particleCoords[n*2+1]*tmpZ;
             ctx.fillRect(tX+xC,tY+yC,2*tmpZ,2*tmpZ);
-            if (n>0){
+            /*if (n>0){
               ctx.lineTo(tX+xC,tY+yC);
               ctx.stroke();
               ctx.beginPath();
@@ -172,7 +172,7 @@
             }else{
               ctx.beginPath();
               ctx.moveTo(tX+xC,tY+yC);
-            }
+            }*/
           }
         }
       }
