@@ -46,7 +46,7 @@
       var ctx;
       var dragging=false,simulation=true;
       var particles=1000,particleCoords=[],totRot=0;
-      var bounds=1;
+      var bounds=1,speed=200;
       
       function init(){
         var canvas=document.getElementById("3dcanvas")
@@ -94,11 +94,11 @@
       function simulate(){
         if (simulation){
           for (var i=0;i<particles;i++){
-            particleCoords[i*3]+=((Math.random()*10-5)/500);
+            particleCoords[i*3]+=((Math.random()*10-5)/speed);
             if (Math.abs(particleCoords[i*3])>bounds){particleCoords[i*3]=Math.sign(particleCoords[i*3])*bounds;}
-            particleCoords[i*3+1]+=((Math.random()*10-5)/500);
+            particleCoords[i*3+1]+=((Math.random()*10-5)/speed);
             if (Math.abs(particleCoords[i*3+1])>bounds){particleCoords[i*3+1]=Math.sign(particleCoords[i*3+1])*bounds;}
-            particleCoords[i*3+2]+=((Math.random()*10-5)/500);
+            particleCoords[i*3+2]+=((Math.random()*10-5)/speed);
             if (Math.abs(particleCoords[i*3+2])>bounds){particleCoords[i*3+2]=Math.sign(particleCoords[i*3+2])*bounds;}
           }
         }
