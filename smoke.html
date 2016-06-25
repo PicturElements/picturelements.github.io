@@ -65,6 +65,14 @@
         width:1.2vw;
         height:3vw
       }
+      
+      .stepsq{
+        position:absolute;
+        background-color:#ccc;
+        width:1.2vw;
+        height:1.2vw;
+        cursor:pointer;
+      }
     </style>
     <script>
       var coords=[-1,1,-1,1,1,-1,1,1,1,-1,1,1,-1,-1,-1,1,-1,-1,1,-1,1,-1,-1,1],angles=[-45,45,135,225,-45,45,135,225],tmpCoords=[];
@@ -170,9 +178,11 @@
       
       function paint(){
         var btns=document.getElementsByClassName("rotbtn");
+        var btns2=document.getElementsByClassName("stepsq");
         var modAng=totRot%(Math.PI*2);
         for (var i=0;i<4;i++){
           btns[i].style.backgroundColor="#ccc";
+          btns2[i].style.backgroundColor="#ccc";
         }
         if (modAng>7/4*Math.PI||modAng<1/4*Math.PI){
           btns[1].style.backgroundColor="#66f";
@@ -237,6 +247,10 @@
       <div id="stepsW" class="rotbtn" style="top:3.2vw; background-color: #66f;"></div>
       <div id="stepsH" class="rotbtn" style="left:-1.4vw"></div>
       <div id="stepsW" class="rotbtn" style="top:-1.4vw"></div>
+      <div class="stepsq" style="top:3.2vw; left:3.2vw"></div>
+      <div class="stepsq" style="top:3.2vw; left:-1.4vw"></div>
+      <div class="stepsq" style="top:-1.4vw; left:3.2vw"></div>
+      <div class="stepsq" style="top:-1.4vw; left:-1.4vw"></div>
     </div>
   </body>
 </html>
