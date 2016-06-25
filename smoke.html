@@ -179,7 +179,7 @@
       function paint(){
         var btns=document.getElementsByClassName("rotbtn");
         var btns2=document.getElementsByClassName("stepsq");
-        var modAng=totRot%(Math.PI*2);
+        var modAng=(totRot%(Math.PI*2)+Math.PI*2)%(Math.PI*2);
         for (var i=0;i<4;i++){
           btns[i].style.backgroundColor="#ccc";
           btns2[i].style.backgroundColor="#ccc";
