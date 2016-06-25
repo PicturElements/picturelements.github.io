@@ -163,7 +163,7 @@
           r=Math.sqrt(particleCoords[n*3+2]*particleCoords[n*3+2]+particleCoords[n*3]*particleCoords[n*3]);
           tmpZ=1+Math.sin(ang)*perspective;
           tX=side*Math.cos(ang)*r*tmpZ;
-          tY=side*particleCoords[n*2+1]*(r/side)*perspective;
+          tY=side*particleCoords[n*2+1]*(1+(r/side)*perspective);
           ctx.fillRect(tX+xC,tY+yC,3*tmpZ,3*tmpZ);
           /*if (n>0){
             ctx.lineTo(tX+xC,tY+yC);
