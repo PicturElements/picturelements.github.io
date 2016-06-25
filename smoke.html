@@ -177,7 +177,7 @@
         if (modAng>7/4*Math.PI||modAng<1/4*Math.PI){
           btns[1].style.backgroundColor="#66f";
         }else{
-          for (var i=1;i<4;i++){
+          for (var i=3;i>=1;i--){
             if (modAng>(-Math.PI/4+(i*Math.PI/2))){
               btns[(i+1)%4].style.backgroundColor="#66f";
               break;
