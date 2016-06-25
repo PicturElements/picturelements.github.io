@@ -207,7 +207,7 @@
             if (modAng>(-Math.PI/4+(i*Math.PI/2))){
               btns[(i+1)%4].style.backgroundColor="#66f";
               break;
-            }else if(modAng==(-Math.PI/4+(i*Math.PI/2))){
+            }else if(Math.abs(modAng-(-Math.PI/4+(i*Math.PI/2)))<0.01){   //0.01=some tolerance
               btns2[(i+1)%4].style.backgroundColor="#66f";
               break;
             }
