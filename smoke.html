@@ -48,8 +48,8 @@
         position: fixed;
         width: 3vw;
         height: 3vw;
-        top: 2vw;
-        right: 2vw;
+        top: 3vw;
+        right: 3vw;
         background-color:#ddd;
       }
       
@@ -169,6 +169,21 @@
       }
       
       function paint(){
+        var btns=document.getElementsByClassName("rotbtn");
+        var modAng=totRot%(Math.PI*2);
+        for (var i=0;i<4;i++){
+          btns[i].style.backgroundColor="#ccc";
+        }
+        if (modAng>7/4*Math.PI||modAng<1/4*Math.PI){
+          btns[0].style.backgroundColor="#66f";
+        }else{
+          for (var i=1;i<4;i++){
+            if (modAng>7/4*Math.PI+(i*Math.PI/2)){
+              btns[i].style.backgroundColor="#66f";
+              break;
+            }
+          }
+        }
         ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
         ctx.lineWidth=3;
         var tmpZ;
@@ -218,10 +233,10 @@
     <div id="overDrag" onmousedown=setCursor(1) onmousemove=drag() onmouseup=setCursor(0)></div>
     <input id="perspective" type="range" min="0" max="100" oninput=setPerspective()></input>
     <div id="rotatestep">
-      <div id="stepsH" style="left:3.3vw"></div>
-      <div id="stepsW" style="top:3.2vw"></div>
-      <div id="stepsH" style="left:-1.4vw"></div>
-      <div id="stepsW" style="left:-1.4vw"></div>
+      <div id="stepsH" class="rotbtn" style="left:3.2vw"></div>
+      <div id="stepsW" class="rotbtn" style="top:3.2vw; background-color: #66f;"></div>
+      <div id="stepsH" class="rotbtn" style="left:-1.4vw"></div>
+      <div id="stepsW" class="rotbtn" style="top:-1.4vw"></div>
     </div>
   </body>
 </html>
