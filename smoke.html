@@ -84,7 +84,7 @@
         for (var i=0;i<8;i++){
           angles[i]+=step;
           var tmpZ=1+(Math.sin(angles[i]))*perspective;
-          tmpCoords[i*2]=Math.cos(angles[i])*Math.sqrt(2*side*side);
+          tmpCoords[i*2]=Math.cos(angles[i])*Math.sqrt(2*side*side)*tmpZ;
           tmpCoords[i*2+1]=side*coords[i*3+1]*tmpZ;
         }
         totRot+=step;
@@ -98,8 +98,8 @@
             if (Math.abs(particleCoords[i*3])>bounds){particleCoords[i*3]=Math.sign(particleCoords[i*3])*bounds;}
             particleCoords[i*3+1]+=((Math.random()*10-5)/speed);
             if (Math.abs(particleCoords[i*3+1])>bounds){particleCoords[i*3+1]=Math.sign(particleCoords[i*3+1])*bounds;}
-            particleCoords[i*3+2]+=((Math.random()*10-5)/speed);
-            if (Math.abs(particleCoords[i*3+2])>bounds){particleCoords[i*3+2]=Math.sign(particleCoords[i*3+2])*bounds;}
+            /*particleCoords[i*3+2]+=((Math.random()*10-5)/speed);
+            if (Math.abs(particleCoords[i*3+2])>bounds){particleCoords[i*3+2]=Math.sign(particleCoords[i*3+2])*bounds;}*/
           }
         }
         if (simulation||increment!=0){paint();}
@@ -162,8 +162,8 @@
           ang+=totRot;
           r=Math.sqrt(particleCoords[n*3+2]*particleCoords[n*3+2]+particleCoords[n*3]*particleCoords[n*3]);
           tmpZ=1+Math.sin(ang)*perspective;
-          tX=side*Math.cos(ang)*r;
-          tY=side*particleCoords[n*2+1]*tmpZ;
+          tX=side*Math.cos(ang)*r*tmpZ;
+          tY=side*particleCoords[n*2+1]*(r/side)*perspective;
           ctx.fillRect(tX+xC,tY+yC,3*tmpZ,3*tmpZ);
           /*if (n>0){
             ctx.lineTo(tX+xC,tY+yC);
