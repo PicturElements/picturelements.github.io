@@ -184,7 +184,7 @@
         var modAng=(totRot%(Math.PI*2)+Math.PI*2)%(Math.PI*2);
         var dir=0;
         var path=inAng-modAng;
-        if (Math.abs(path)>Math.PI){else{
+        if (Math.abs(path)>Math.PI){
           path=2*Math.PI-Math.abs(path);
           if (modAng>Math.PI){path*=-1;}
         }
