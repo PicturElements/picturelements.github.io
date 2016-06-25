@@ -54,10 +54,10 @@
       }
       
       #stepsW,#stepsH{
-        position:relative;
+        position:absolute;
         background-color:#ccc;
         width:3vw;
-        height:1.2vw
+        height:1.2vw;
         cursor:pointer;
       }
       
@@ -218,7 +218,7 @@
     <div id="overDrag" onmousedown=setCursor(1) onmousemove=drag() onmouseup=setCursor(0)></div>
     <input id="perspective" type="range" min="0" max="100" oninput=setPerspective()></input>
     <div id="rotatestep">
-      <div id="stepsH" style="left:3.2vw"></div>
+      <div id="stepsH" style="left:3.3vw"></div>
       <div id="stepsW" style="top:3.2vw"></div>
       <div id="stepsH" style="left:-1.4vw"></div>
       <div id="stepsW" style="left:-1.4vw"></div>
