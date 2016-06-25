@@ -178,8 +178,8 @@
           btns[1].style.backgroundColor="#66f";
         }else{
           for (var i=1;i<4;i++){
-            if (modAng>-(1/4)*Math.PI+(i*Math.PI/2)){
-              btns[i].style.backgroundColor="#66f";
+            if (modAng>(-Math.PI/4+(i*Math.PI/2))){
+              btns[(i+1)%4].style.backgroundColor="#66f";
               break;
             }
           }
