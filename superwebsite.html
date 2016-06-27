@@ -6,17 +6,23 @@
   <style>
     body{
       background-image:url("images/420.png");
+      animation:slide 1s linear infinite;
     }
     
     p{
-      color:#ff0;
+      color:#f0f;
       font-family:Comic Sans MS,Impact,cursive;
+      font-weight:bolder;
       font-size:5vw;
       animation:woop 0.25s alternate linear infinite;
     }
     
     @keyframes woop{
-      to{font-size:20vw;}
+      to{font-size:10vw;}
+    }
+    
+    @keyframes slide{
+      to{background-position:0 -100px;}
     }
   </style
   <body>
