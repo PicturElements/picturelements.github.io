@@ -13,24 +13,41 @@
       #colorpnl{
         display:block;
         position:fixed;
-        width:50vw;
+        width:55vw;
         height:30vw;
         background-color:#ddd;
         top:50%;
         left:50%;
         margin-top:-15vw;
-        margin-left:-25vw;
+        margin-left:-27.5vw;
+        box-shadow: .5vw .5vw 0 rgba(0,0,0,0.4);
       }
       
       #outputcol{
         display:block;
         position:absolute;
+        background-color:black;
         width:28vw;
         height:28vw;
         left:1vw;
         top:1vw;
         box-sizing:border-box;
-        border:0.5vw solid #666;
+        border:1vw solid #666;
+      }
+      
+      .slider{
+        display:block;
+        position:relative;
+        float:left;
+        width:6.667vw;
+        height:28vw;
+        top:1vw;
+        left:32vw;
+        margin-right:1vw;
+        background: #ff0000;
+        background: -moz-linear-gradient(top, #ff0000 0%, #000000 100%);
+        background: -webkit-linear-gradient(top, #ff0000 0%,#000000 100%);
+        background: linear-gradient(to bottom, #ff0000 0%,#000000 100%);
       }
     </style>
     <script></script>
@@ -38,6 +55,15 @@
   <body>
     <div id="colorpnl">
       <div id="outputcol"></div>
+      <div class="slider">
+        <div class="slidermarker"></div>
+      </div>
+      <div class="slider">
+        <div class="slidermarker"></div>
+      </div>
+      <div class="slider">
+        <div class="slidermarker"></div>
+      </div>
     </div>
   </body>
 </html>
