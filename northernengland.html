@@ -105,6 +105,7 @@
         if (yPos>slH*cutoff){yPos=slH*cutoff}
         colors[inID]=Math.floor(yPos/slH*255);
         document.getElementById("outputcol").style.backgroundColor="rgb("+colors[0]+","+colors[1]+","+colors[2]+")";
+        document.getElementsByClassName("slidermarker")[inID].style.bottom=""+(yPos/slH*100)+"%";
       }
     </script>
   </head>
