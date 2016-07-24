@@ -44,10 +44,7 @@
         top:1vw;
         left:30vw;
         margin-right:1vw;
-        background: red;
-        background: -moz-linear-gradient(top, red 0%, black 100%);
-        background: -webkit-linear-gradient(top, red 0%, black 100%);
-        background: linear-gradient(to bottom, red 0%, black 100%);
+        cursor:pointer;
       }
       
       .slidermarker{
@@ -65,6 +62,13 @@
         pointer-events:none;
       }
       
+      #red{
+        background: red;
+        background: -moz-linear-gradient(top, red 0%, black 100%);
+        background: -webkit-linear-gradient(top, red 0%, black 100%);
+        background: linear-gradient(to bottom, red 0%, black 100%);
+      }
+      
       #green{
         background: lime;
         background: -moz-linear-gradient(top, lime 0%, black 100%);
@@ -78,6 +82,17 @@
         background: -webkit-linear-gradient(top, blue 0%, black 100%);
         background: linear-gradient(to bottom, blue 0%, black 100%);
       }
+      
+      #forbidden{
+        display:block;
+        position:absolute;
+        width:100%;
+        height:50%;
+        top:0;
+        left:0;
+        background-color:rgba(0,0,0,0.5);
+        cursor:not-allowed;
+      }
     </style>
     <script></script>
   </head>
@@ -85,12 +100,15 @@
     <div id="colorpnl">
       <div id="outputcol"></div>
       <div class="slider">
+        <div id="forbidden"></div>
         <div class="slidermarker"></div>
       </div>
       <div class="slider" id="green">
+        <div id="forbidden"></div>
         <div class="slidermarker"></div>
       </div>
       <div class="slider" id="blue">
+        <div id="forbidden"></div>
         <div class="slidermarker"></div>
       </div>
     </div>
