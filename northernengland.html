@@ -97,12 +97,14 @@
     <script>
       var colors=[0,0,0];
       var cutoff=0.5;
+      var pressed=false;
       
       function setColor(inID){
         var slH=window.innerWidth*0.28;
         var yPos=slH-(event.clientY-(window.innerHeight-slH)/2);
         if (yPos>slH*cutoff){yPos=slH*cutoff}
-        console.log(yPos);
+        colors[inID]=Math.floor(yPos/slH*255);
+        document.getElementById("outputcol").style.backgroundColor="rgb("+colors[0]+","+colors[1]+","+colors[2]+")";
       }
     </script>
   </head>
