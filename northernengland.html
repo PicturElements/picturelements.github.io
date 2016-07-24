@@ -90,24 +90,32 @@
         height:50%;
         top:0;
         left:0;
-        background-color:rgba(0,0,0,0.3);
+        background-color:rgba(0,0,0,0.9);
         cursor:not-allowed;
       }
     </style>
-    <script></script>
+    <script>
+      var colors=[0,0,0];
+      
+      function setColor(inID){
+        var slH=window.innerWidth*0.28;
+        var yPos=slH-(window.innerHeight-window.innerWidth*0.3)/2;
+        console.log(yPos);
+      }
+    </script>
   </head>
   <body>
     <div id="colorpnl">
       <div id="outputcol"></div>
-      <div class="slider" id="red">
+      <div class="slider" id="red" onmousedown=setColor(0)>
         <div id="forbidden" title="no! no more red!"></div>
         <div class="slidermarker"></div>
       </div>
-      <div class="slider" id="green">
+      <div class="slider" id="green" onmousedown=setColor(1)>
         <div id="forbidden" title="no! no more green!"></div>
         <div class="slidermarker"></div>
       </div>
-      <div class="slider" id="blue">
+      <div class="slider" id="blue" onmousedown=setColor(2)>
         <div id="forbidden" title="no! no more blue!"></div>
         <div class="slidermarker"></div>
       </div>
