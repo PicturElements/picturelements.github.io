@@ -142,13 +142,17 @@
         }
         paint();
       }
+      
+      function start(){
+        document.getElementById("startbutton").style.backgroundPosition="-2.69vh -20.46vh";
+      }
     </script>
   </head>
   <body onload=init()>
     <canvas id="gameboard"></canvas>
     <div id="overlay"></div>
     <div id="logo">
-      <div id="startbutton"></div>
+      <div id="startbutton" onclick=start()></div>
     </div>
   </body>
 </html>
