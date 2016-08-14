@@ -27,7 +27,7 @@
       function init(){
         for (var n=0;n<7;n++){
           addBalloon(Math.random()*window.innerWidth,Math.random()*window.innerHeight);
-          dY.push(Math.random()*2+1);
+          dY.push(Math.random()+0.25);
         }
         var canvas=document.getElementById("gameboard");
         canvas.width=window.innerWidth;
