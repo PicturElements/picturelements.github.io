@@ -27,7 +27,7 @@
       function init(){
         for (var n=0;n<7;n++){
           addBalloon(Math.random()*window.innerWidth,Math.random()*window.innerHeight);
-          dY.push(Math.random()+0.25);
+          dY.push(Math.random()*2+1);
         }
         var canvas=document.getElementById("gameboard");
         canvas.width=window.innerWidth;
@@ -88,7 +88,7 @@
       function paintStartup(){
         if (Math.random()*30<1){
           addBalloon(Math.random()*window.innerWidth,window.innerHeight+100);
-          dY.push(Math.random()*4+1);
+          dY.push(Math.random()*2+1);
         }
         for (var i=0;i<balloons.length;i++){
           balloons[i].y-=dY[i];
