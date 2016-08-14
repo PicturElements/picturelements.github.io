@@ -40,6 +40,13 @@
         background-size:contain;
         background-repeat:no-repeat;
       }
+      
+      #startbutton{
+        display:block;
+        position:absolute;
+        background-image:url("media/buttonsprite.png");
+        cursor:pointer;
+      }
     </style>
     
     <!--General stuff-->
@@ -128,6 +135,8 @@
   <body onload=init()>
     <canvas id="gameboard"></canvas>
     <div id="overlay"></div>
-    <div id="logo"></div>
+    <div id="logo">
+      <div id="startbutton"></div>
+    </div>
   </body>
 </html>
