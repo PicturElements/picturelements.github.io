@@ -27,13 +27,13 @@
       function init(){
         for (var n=0;n<7;n++){
           addBalloon(Math.random()*window.innerWidth,Math.random()*window.innerHeight);
-          dY.push(Math.random()*4+1);
+          dY.push(Math.random()*2+1);
         }
         var canvas=document.getElementById("gameboard");
         canvas.width=window.innerWidth;
         canvas.height=window.innerHeight;
         ctx=canvas.getContext("2d");
-        thread=setInterval(paintStartup,50);
+        thread=setInterval(paintStartup,20);
       }
       
       window.onresize = function(event) {
