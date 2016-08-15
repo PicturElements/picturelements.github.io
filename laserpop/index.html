@@ -61,6 +61,36 @@
       #startbutton:hover{
         background-position:-2.69vh -11.69vh;
       }
+      
+      #startupcontainer{
+        display:block;
+        position:fixed;
+        width:100%;
+        haight:100%;
+        background-color:#222;
+      }
+      
+      #logocontainer{
+        display:block;
+        position:fixed;
+        top:50%;
+        left:50%;
+        width:34vh;
+        height:34vh;
+        margin-top:-17vh;
+        margin-top:-17vh;
+        background-color:red;
+      }
+      
+      #pelogo{
+        display:block;
+        position:absolute;
+        left:2vh;
+        top:2vh;
+        width:30vh;
+        height:30vh;
+        background-image:url("media/pelogo");
+      }
     </style>
     
     <!--General stuff-->
@@ -79,6 +109,7 @@
         canvas.height=window.innerHeight;
         ctx=canvas.getContext("2d");
         thread=setInterval(paintStartup,20);
+        setTimeout(function(){document.getElementById("startupoverlay").style.display="none";},5000);
       }
       
       window.onresize = function(event) {
@@ -156,6 +187,11 @@
     <div id="overlay"></div>
     <div id="logo">
       <div id="startbutton" onmousedown=start()></div>
+    </div>
+    <div id="startupoverlay">
+      <div id="logocontainer">
+        
+      </div>
     </div>
   </body>
 </html>
