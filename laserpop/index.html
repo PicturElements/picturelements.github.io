@@ -279,7 +279,7 @@
         ctx2.lineTo(window.innerWidth,window.innerHeight);
         ctx2.fill();
         
-        var opacity=200+Math.floor(Math.cos(transPos*(Math.PI/180))*55);
+        var opacity=(200+Math.cos(transPos*(Math.PI/180))*55)/255;
         ctx2.shadowBlur=20;
         for (var i=0;i<3;i++){
           ctx2.shadowColor="#77f";
