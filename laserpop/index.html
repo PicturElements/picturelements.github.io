@@ -278,16 +278,17 @@
         ctx2.lineTo(window.innerWidth,window.innerHeight);
         ctx2.fill();
         
+        var opacity=200+Math.cos(transPos/(Math.PI/180))*55;
         ctx2.shadowBlur=20;
         for (var i=0;i<3;i++){
           ctx2.shadowColor="#77f";
-          ctx2.strokeStyle="#eef";
+          ctx2.strokeStyle="rgba(240,240,255,"+opacity+")";
           ctx2.beginPath();
           ctx2.moveTo(0,window.innerHeight);
           ctx2.lineTo(transPos,0);
           ctx2.stroke();
           ctx2.shadowColor="#f77";
-          ctx2.strokeStyle="#fee";
+          ctx2.strokeStyle="rgba(255,240,240,"+opacity+")";
           ctx2.beginPath();
           ctx2.moveTo(window.innerWidth,0);
           ctx2.lineTo(window.innerWidth-transPos,window.innerHeight);
