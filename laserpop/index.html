@@ -82,7 +82,7 @@
         height:34vh;
         margin-left:-17vh;
         margin-top:-17vh;
-        background-color:red;
+        overflow:hidden;
       }
       
       #pelogo{
@@ -93,6 +93,32 @@
         width:30vh;
         height:30vh;
         background-image:url("media/pelogo.png");
+      }
+      
+      .loader{
+        display:block;
+        position:absolute;
+        background-color:#3ebffa;
+      }
+      
+      @keyframes slide1{
+        25%{width:32vh;}
+        50%{margin-left:32vh;}
+      }
+      
+      @keyframes slide2{
+        25%{height:32vh;}
+        50%{margin-top:32vh;}
+      }
+      
+      @keyframes slide3{
+        25%{width:32vh;}
+        50%{margin-right:32vh;}
+      }
+      
+      @keyframes slide4{
+        25%{height:32vh;}
+        50%{margin-bottom:32vh;}
       }
     </style>
     
@@ -194,6 +220,10 @@
     <div id="startupcontainer">
       <div id="logocontainer">
         <div id="pelogo"></div>
+        <div class="loader" style="left:2vh; top:0; height:2vh; animation:slide1 2s linear forwards infinite"></div>
+        <div class="loader" style="right:0; top:2vh; width:2vh; animation:slide2 2s linear forwards infinite; animation-delay:0.5s"></div>
+        <div class="loader" style="right:2vh; bottom:0; height:2vh; animation:slide3 2s linear forwards infinite; animation-delay:1s"></div>
+        <div class="loader" style="left:0; bottom:2vh; width:2vh; animation:slide4 2s linear forwards infinite; animation-delay:1.5s"></div>
       </div>
     </div>
   </body>
