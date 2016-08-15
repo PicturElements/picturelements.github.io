@@ -260,18 +260,18 @@
     <script>
       function paintTransition(){
         ctx2.clearRect(0,0,window.innerWidth,window.innerHeight);
-        ctx,fillStyle="#222";
+        ctx2.fillStyle="#222";
         if (transPos>window.innerWidth){transPos=window.innerWidth;}
-        ctx2.becinPath();
-        ctx.moveTo(0,0);
-        ctx.lineTo(transPos,0);
-        ctx.lineTo(0,window.innerHeight);
-        ctx.fill();
-        ctx2.becinPath();
-        ctx.moveTo(window.innerWidth,0);
-        ctx.lineTo(window.innerWidth-transPos,window.innerHeight);
-        ctx.lineTo(window.innerHeight,window.innerHeight);
-        ctx.fill();
+        ctx2.beginPath();
+        ctx2.moveTo(0,0);
+        ctx2.lineTo(transPos,0);
+        ctx2.lineTo(0,window.innerHeight);
+        ctx2.fill();
+        ctx2.beginPath();
+        ctx2.moveTo(window.innerWidth,0);
+        ctx2.lineTo(window.innerWidth-transPos,window.innerHeight);
+        ctx2.lineTo(window.innerHeight,window.innerHeight);
+        ctx2.fill();
         transPos++;
       }
     </script>
