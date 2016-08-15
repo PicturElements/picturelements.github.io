@@ -122,7 +122,7 @@
       function addBalloon(xin,yin){
         balloons.push({
           //default values
-          radius:40,
+          radius:30+Math.random()*20,
           bottom:65,
           angle:Math.random()-0.5,
           x:xin,
@@ -150,11 +150,12 @@
       }
     </script>
   </head>
+  <!--Brushed steel texture courtesy of http://www.myfreetextures.com/brushed-metal-texture-35-great-free-images-from-aluminum-and-steel-through-to-gold/-->
   <body onload=init()>
     <canvas id="gameboard"></canvas>
     <div id="overlay"></div>
     <div id="logo">
-      <div id="startbutton" onclick=start()></div>
+      <div id="startbutton" onmousedown=start()></div>
     </div>
   </body>
 </html>
