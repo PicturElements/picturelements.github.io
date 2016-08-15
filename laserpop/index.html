@@ -109,7 +109,7 @@
         canvas.height=window.innerHeight;
         ctx=canvas.getContext("2d");
         thread=setInterval(paintStartup,20);
-        setTimeout(function(){document.getElementById("startupoverlay").style.display="none";},5000);
+        setTimeout(function(){document.getElementById("startupcontainer").style.display="none";},5000);
       }
       
       window.onresize = function(event) {
