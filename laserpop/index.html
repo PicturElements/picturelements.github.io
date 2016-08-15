@@ -275,17 +275,19 @@
         
         ctx2.shadowBlur=20;
         ctx2.shadowColor="#77f";
+        ctz2.strokeStyle="ccf";
         ctx2.beginPath();
         ctx2.moveTo(0,0);
         ctx2.lineTo(transPos,0);
         ctx2.stroke();
         ctx2.shadowColor="#f77";
+        ctz2.strokeStyle="fcc";
         ctx2.beginPath();
         ctx2.moveTo(window.innerWidth,0);
         ctx2.lineTo(window.innerWidth-transPos,window.innerHeight);
         ctx2.stroke();
         ctx2.shadowBlur=0;
-        transPos++;
+        transPos+=3;
       }
     </script>
   </head>
