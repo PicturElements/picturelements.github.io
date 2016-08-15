@@ -86,14 +86,23 @@
       }
       
       #pelogo{
-        display:block;
-        position:absolute;
-        left:2vh;
-        top:2vh;
-        width:30vh;
-        height:30vh;
-        background-image:url("media/pelogo.png");
-        background-size:contain;
+        display: block;
+        position: absolute;
+        left: 2vh;
+        top: 2vh;
+        width: 30vh;
+        height: 30vh;
+        background: #34324b;
+        background: -moz-linear-gradient(-45deg, #34324b 0%, #161222 100%);
+        background: -webkit-linear-gradient(-45deg, #34324b 0%,#161222 100%);
+        background: linear-gradient(135deg, #34324b 0%,#161222 100%);
+        background-size: contain;
+        font-family: Trebuchet MS, sans-serif;
+        font-size: 20vh;
+        font-weight: bold;
+        color: #3ebffa;
+        text-align: center;
+        line-height: 30vh;
       }
       
       .loader{
@@ -244,7 +253,7 @@
     </div>
     <div id="startupcontainer">
       <div id="logocontainer">
-        <div id="pelogo"></div>
+        <div id="pelogo">Pe</div>
         <!--<div class="loader" style="left:2vh; top:0; height:2vh; width:0; animation:slide1 2s linear forwards infinite"></div>
         <div class="loader" style="right:0; top:2vh; width:2vh; height:0; animation:slide2 2s linear forwards infinite; animation-delay:0.5s"></div>
         <div class="loader" style="right:2vh; bottom:0; height:2vh; width:0; animation:slide3 2s linear forwards infinite; animation-delay:1s"></div>
