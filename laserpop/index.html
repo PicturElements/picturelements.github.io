@@ -263,6 +263,7 @@
     <!--Transition stuff-->
     <script>
       function paintTransition(){
+        ctx2.lineWidth=3;
         ctx2.clearRect(0,0,window.innerWidth,window.innerHeight);
         ctx2.fillStyle="#222";
         if (transPos>window.innerWidth){transPos=window.innerWidth;}
@@ -278,18 +279,20 @@
         ctx2.fill();
         
         ctx2.shadowBlur=20;
-        ctx2.shadowColor="#77f";
-        ctx2.strokeStyle="#ccf";
-        ctx2.beginPath();
-        ctx2.moveTo(0,0);
-        ctx2.lineTo(transPos,0);
-        ctx2.stroke();
-        ctx2.shadowColor="#f77";
-        ctx2.strokeStyle="#fcc";
-        ctx2.beginPath();
-        ctx2.moveTo(window.innerWidth,0);
-        ctx2.lineTo(window.innerWidth-transPos,window.innerHeight);
-        ctx2.stroke();
+        for (var i=0;i<3;i++){
+          ctx2.shadowColor="#77f";
+          ctx2.strokeStyle="#eef";
+          ctx2.beginPath();
+          ctx2.moveTo(0,0);
+          ctx2.lineTo(transPos,0);
+          ctx2.stroke();
+          ctx2.shadowColor="#f77";
+          ctx2.strokeStyle="#fee";
+          ctx2.beginPath();
+          ctx2.moveTo(window.innerWidth,0);
+          ctx2.lineTo(window.innerWidth-transPos,window.innerHeight);
+          ctx2.stroke();
+        }
         ctx2.shadowBlur=0;
         transPos+=20;
       }
