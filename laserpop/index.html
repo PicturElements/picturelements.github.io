@@ -270,8 +270,21 @@
         ctx2.beginPath();
         ctx2.moveTo(window.innerWidth,0);
         ctx2.lineTo(window.innerWidth-transPos,window.innerHeight);
-        ctx2.lineTo(window.innerHeight,window.innerHeight);
+        ctx2.lineTo(window.innerWidth,window.innerHeight);
         ctx2.fill();
+        
+        ctx2.shadowBlur=20;
+        ctx2.shadowColor="#77f";
+        ctx2.beginPath();
+        ctx2.moveTo(0,0);
+        ctx2.lineTo(transPos,0);
+        ctx2.stroke();
+        ctx2.shadowColor="#f77";
+        ctx2.beginPath();
+        ctx2.moveTo(window.innerWidth,0);
+        ctx2.lineTo(window.innerWidth-transPos,window.innerHeight);
+        ctx2.stroke();
+        ctx2.shadowBlur=0;
         transPos++;
       }
     </script>
