@@ -208,7 +208,7 @@
         var vw=window.innerWidth/100;
         var xPos=(event.clientX-23*vw)/(54*vw),yPos=(event.clientY-(window.innerHeight/2-14.5*vw))/(27*vw);
         var index=Math.floor(xPos*times.length);
-        if (1-yPos>(times[index]/maxVal)*0.8){
+        if (yPos>(times[index]/maxVal)*0.8){
           paintStats(index);
         }
       } 
