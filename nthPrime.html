@@ -113,6 +113,16 @@
         top: 0.5vw;
         color: #666;
       }
+      
+      #subtitle{
+        display: block;
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        font-size: 1vw;
+        top: 2.4vw;
+        color: #aaa;
+      }
     </style>
     <script>
       var primes=[2],times=[];
@@ -208,10 +218,13 @@
         var vw=window.innerWidth/100;
         var xPos=(event.clientX-23*vw)/(54*vw),yPos=(event.clientY-(window.innerHeight/2-13.5*vw))/(27*vw);
         var index=Math.floor(xPos*times.length);
+        var st=document.getElementById("subtitle");
         if (1-yPos<=(times[index]/maxVal)*0.8){
           paintStats(index);
+          st.innerHTML="Interval: "+index*10000+"-"+(index+1)*10000+" | Time: "+times[index]+"ms";
         }else{
           paintStats(-1);
+          st.innerHTML="Hover over graph for details";
         }
       } 
     </script>
@@ -226,6 +239,7 @@
       <div id="closebtn" onclick=closeStats()>[X]</div>
       <canvas id="canvas" width=2000 height=1000 onmousemove=getInfo()></canvas>
       <div id="title">Time taken to render 10000 primes</div>
+      <div id="subtitle">Hover over graph for details</div>
     </div>
   </body>
 </html>
