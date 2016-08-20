@@ -93,27 +93,7 @@
         var isPrime=true;
         if (checkNo>primeNo){
           startPos=primeNo;
-          thread=setInterval(loopWrapper,1);
-          /*for (var i=primes[primeNo-1]+1;i>0;i++){
-            isPrime=true;
-            for (var a=0;primes[a]*primes[a]<=i;a++){
-              if (i%primes[a]==0){
-                isPrime=false;
-                break;
-              }
-            }
-            if (isPrime){
-             primes.push(i);
-             primeNo++;
-             if (primeNo%100==0){
-                document.getElementById("output").innerHTML="Finished generating "+primeNo+" primes";
-             }
-             if (primeNo==checkNo){
-                document.getElementById("output").innerHTML="Finished generating "+checkNo+" primes<br><br>Prime "+checkNo+" is "+primes[checkNo-1]+".";
-                break;
-             }
-            }
-          }*/
+          thread=setInterval(loopWrapper,0);
         }else{
           document.getElementById("output").innerHTML="Prime "+checkNo+" is "+primes[checkNo-1];
         }
@@ -122,10 +102,11 @@
       function loopWrapper(){
         genPrimes();
         startPos+=10000;
-        document.getElementById("output").innerHTML="Finished generating "+primeNo+" primes";
+        document.getElementById("output").innerHTML="Finished generating "+Math.floor(primeNo/10000)*10000+" primes";
         if (primeNo==checkNo){
           clearInterval(thread);
-          document.getElementById("output").innerHTML="Finished generating "+Math.floor(checkNo/10000)*10000+" primes<br><br>Prime "+checkNo+" is "+primes[checkNo-1]+".";
+          document.getElementById("output").innerHTML="Finished generating "+checkNo+" primes<br><br>Prime "+checkNo+" is "+primes[checkNo-1]+".";
+          console.log("done!");
         }
       }
       
@@ -142,7 +123,7 @@
           if (isPrime){
             primes.push(i);
             primeNo++;
-            if (primeNo==startPos+10000||primeNo==checkNo){return 1;}
+            if (primeNo==startPos+10000||primeNo==checkNo){return 0;}   //return meaningless value just to quit function
           }
         }
       }
