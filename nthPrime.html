@@ -113,9 +113,9 @@
       }
       
       function loopWrapper(){
-        timeNow=new Date().getTime;
+        timeNow=new Date().getTime();
         genPrimes();
-        var newTime=new Date().getTime;
+        var newTime=new Date().getTime();
         times.push(newTime-timeNow);
         console.log(newTime-timeNow);
         timeNow=newTime;
