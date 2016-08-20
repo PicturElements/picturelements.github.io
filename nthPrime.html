@@ -91,7 +91,7 @@
         var checkNo=parseInt(document.getElementById("input").value);
         var isPrime=true;
         if (checkNo>primeNo){
-          for (var i=primes[primeNo-1]+1;i>0;i+=2){
+          for (var i=primes[primeNo-1]+1;i>0;i++){
             isPrime=true;
             for (var a=0;primes[a]*primes[a]<=i;a++){
               if (i%primes[a]==0){
