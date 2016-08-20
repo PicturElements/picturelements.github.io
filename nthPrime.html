@@ -91,6 +91,16 @@
         left:3vw;
         top:1.5vw;
       }
+      
+      #closebtn{
+        display:block;
+        position:absolute;
+        font-size:1.5vw;
+        right:0.5vw;
+        top:0.5vw;
+        color:#ccc;
+        cursor:pointer;
+      }
     </style>
     <script>
       var primes=[2],times=[];
@@ -117,7 +127,6 @@
         genPrimes();
         var newTime=new Date().getTime();
         times.push(newTime-timeNow);
-        console.log(newTime-timeNow);
         timeNow=newTime;
         startPos+=10000;
         document.getElementById("output").innerHTML="Finished generating "+Math.floor(primeNo/10000)*10000+" primes.";
@@ -158,8 +167,8 @@
       }
       
       function paintStats(){
-        console.log("called!");
         var ctx=document.getElementById("canvas").getContext("2d");
+        ctx.clearRect(0,0,2000,1000);
         ctx.fillStyle="#6F00FF";
         var maxVal=0,offset=2000/times.length;
         for (var i=0;i<times.length;i++){
@@ -171,6 +180,10 @@
           ctx.fillRect(offset*i,1000-h,offset,h);
         }
       }
+      
+      function closeStats(){
+        document.getElementById("stats").style.display="none";
+      }
     </script>
   </head>
   <body>
@@ -180,7 +193,7 @@
       <div id="output">Info will appear here.</div>
     </div>
     <div id="stats" style="display: none;">
-      <!--<div id="closebtn">[x]</div>-->
+      <div id="closebtn" onclick=closeStats()>[x]</div>
       <canvas id="canvas" width=2000 height=1000></canvas>
     </div>
   </body>
