@@ -88,6 +88,10 @@
       var primeNo=1,startPos=1,checkNo;
       var thread=null;
     
+      function gen(){
+        if (event.keyCode==13){check();}
+      }
+      
       function check(){
         checkNo=parseInt(document.getElementById("input").value);
         var isPrime=true;
@@ -95,14 +99,14 @@
           startPos=primeNo;
           thread=setInterval(loopWrapper,0);
         }else{
-          document.getElementById("output").innerHTML="Prime "+checkNo+" is "+primes[checkNo-1];
+          document.getElementById("output").innerHTML="Prime "+checkNo+" is "+primes[checkNo-1]+".";
         }
       }
       
       function loopWrapper(){
         genPrimes();
         startPos+=10000;
-        document.getElementById("output").innerHTML="Finished generating "+Math.floor(primeNo/10000)*10000+" primes";
+        document.getElementById("output").innerHTML="Finished generating "+Math.floor(primeNo/10000)*10000+" primes.";
         if (primeNo==checkNo){
           clearInterval(thread);
           document.getElementById("output").innerHTML="Finished generating "+checkNo+" primes<br><br>Prime "+checkNo+" is "+primes[checkNo-1]+".";
@@ -141,7 +145,7 @@
   </head>
   <body>
     <div id="primepanel" style="display: block;">
-      <input id="input" placeholder="input number" onkeyup="setText()">
+      <input id="input" placeholder="input number" onkeydown=gen() onkeyup="setText()">
       <button id="button" onclick="check()">n:th prime?</button>
       <div id="output">Info will appear will appear here.</div>
     </div>
