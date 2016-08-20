@@ -125,7 +125,7 @@
         document.getElementById("output").innerHTML="Finished generating "+primeNo+" primes";
         if (primeNo==checkNo){
           clearInterval(thread);
-          document.getElementById("output").innerHTML="Finished generating "+checkNo+" primes<br><br>Prime "+checkNo+" is "+primes[checkNo-1]+".";
+          document.getElementById("output").innerHTML="Finished generating "+Math.floor(checkNo/10000)*10000+" primes<br><br>Prime "+checkNo+" is "+primes[checkNo-1]+".";
         }
       }
       
@@ -142,7 +142,7 @@
           if (isPrime){
             primes.push(i);
             primeNo++;
-            if (primeNo==startPos+10000){return 1;}
+            if (primeNo==startPos+10000||primeNo==checkNo){return 1;}
           }
         }
       }
