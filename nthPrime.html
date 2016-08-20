@@ -25,7 +25,7 @@
         text-shadow: 0.3vw 0.3vw 0.5vw rgba(0,0,0,0.1);
       }
       
-      #primepanel{
+      #primepanel,#stats{
         display: none;
         position: fixed;
         width: 60%;
@@ -82,10 +82,19 @@
         text-align: center;
         font-size: 1.15vw;
       }
+      
+      canvas{
+        display:block;
+        position:absolute;
+        width:54vw;
+        height:27vw;
+        left:3vw;
+        top:1.5vw;
+      }
     </style>
     <script>
-      var primes=[2];
-      var primeNo=1,startPos=1,checkNo;
+      var primes=[2],times=[];
+      var primeNo=1,startPos=1,checkNo,timeNow;
       var thread=null;
     
       function gen(){
@@ -104,7 +113,11 @@
       }
       
       function loopWrapper(){
+        timeNow=new Date().getTime;
         genPrimes();
+        var newTime=new Date().getTime;
+        times.push(newTime-timeNow);
+        timeNow=newTime;
         startPos+=10000;
         document.getElementById("output").innerHTML="Finished generating "+Math.floor(primeNo/10000)*10000+" primes.";
         if (primeNo==checkNo){
@@ -141,13 +154,29 @@
         else if(checkNo%10==3){suffix="rd";}
         document.getElementById("button").innerHTML=""+checkNo+""+suffix+" prime?";
       }
+      
+      function paintStats(){
+        var ctx=document.getElementById("canvas").getContext("2d");
+        ctx.fillStyle="#6F00FF";
+        var maxVal=0,offset=2000/times.length;
+        for (var i=0;i<times.length;i++){
+          if (times[i]>maxVal){maxVal=times[i];}
+        }
+        for (var i=0;i<times.length;i++){
+          ctx.fillRect(offset*i,1000-(times[i]/maxVal*0.8),offset,times[i]/maxVal*0.8);
+        }
+      }
     </script>
   </head>
   <body>
-    <div id="primepanel" style="display: block;">
+    <div id="primepanel">
       <input id="input" placeholder="input number" onkeydown=gen() onkeyup="setText()">
       <button id="button" onclick="check()">n:th prime?</button>
       <div id="output">Info will appear here.</div>
+    </div>
+    <div id="stats" style="display: none;">
+      <!--<div id="closebtn">[x]</div>-->
+      <canvas id="canvas" width=2000 height=1000></canvas>
     </div>
   </body>
 </html>
