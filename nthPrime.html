@@ -111,12 +111,22 @@
           }
         }
       }
+      
+      function setText(){
+        var suffix="th";
+        var checkNo=parseInt(document.getElementById("input").value);
+        if (checkNo>10&&checkNo<20){//do nothing}
+        else if (checkNo%10==1){suffix="st";}
+        else if(checkNo%10==2){suffix="nd";}
+        else if(checkNo%10==3){suffix="rd";}
+        document.getElementById("button").innerHTML=""+checkNo+""+suffix+" prime?";
+      }
     </script>
   </head>
   <body>
     <div id="primepanel" style="display: block;">
-      <input id="input" placeholder="input number" onkeydown="check()">
-      <button onclick="isitprime()">n:th prime?</button>
+      <input id="input" placeholder="input number" onkeydown="setText()">
+      <button id="button" onclick="check()">n:th prime?</button>
       <div id="output">Info will appear will appear here.</div>
     </div>
   </body>
