@@ -85,13 +85,16 @@
     </style>
     <script>
       var primes=[2];
-      var primeNo=1;
+      var primeNo=1,startPos=1,checkNo;
+      var thread=null;
     
       function check(){
-        var checkNo=parseInt(document.getElementById("input").value);
+        checkNo=parseInt(document.getElementById("input").value);
         var isPrime=true;
         if (checkNo>primeNo){
-          for (var i=primes[primeNo-1]+1;i>0;i++){
+          startPos=primeNo;
+          thread=setInterval(loopWrapper,1);
+          /*for (var i=primes[primeNo-1]+1;i>0;i++){
             isPrime=true;
             for (var a=0;primes[a]*primes[a]<=i;a++){
               if (i%primes[a]==0){
@@ -103,16 +106,44 @@
              primes.push(i);
              primeNo++;
              if (primeNo%100==0){
-               document.getElementById("output").innerHTML="Finished generating "+primeNo+" primes";
+                document.getElementById("output").innerHTML="Finished generating "+primeNo+" primes";
              }
              if (primeNo==checkNo){
-               document.getElementById("output").innerHTML="Finished generating "+checkNo+" primes<br><br>Prime "+checkNo+" is "+primes[checkNo-1]+".";
-               break;
+                document.getElementById("output").innerHTML="Finished generating "+checkNo+" primes<br><br>Prime "+checkNo+" is "+primes[checkNo-1]+".";
+                break;
              }
             }
-          }
+          }*/
         }else{
           document.getElementById("output").innerHTML="Prime "+checkNo+" is "+primes[checkNo-1];
+        }
+      }
+      
+      function loopWrapper(){
+        genPrimes();
+        startPos+=10000;
+        document.getElementById("output").innerHTML="Finished generating "+primeNo+" primes";
+        if (primeNo==checkNo){
+          clearInterval(thread);
+          document.getElementById("output").innerHTML="Finished generating "+checkNo+" primes<br><br>Prime "+checkNo+" is "+primes[checkNo-1]+".";
+        }
+      }
+      
+      function genPrimes(){
+        var isPrime;
+        for (var i=primes[startPos-1]+1;i>0;i++){
+          isPrime=true;
+          for (var a=0;primes[a]*primes[a]<=i;a++){
+            if (i%primes[a]==0){
+              isPrime=false;
+              break;
+            }
+          }
+          if (isPrime){
+            primes.push(i);
+            primeNo++;
+            if (primeNo==startPos+10000){return 1;}
+          }
         }
       }
       
