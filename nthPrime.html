@@ -80,15 +80,44 @@
         padding: 1vw;
         background-color: #eee;
         text-align: center;
+        font-size: 1.15vw;
       }
     </style>
-    <script></script>
+    <script>
+      var primes=[2];
+      var primeNo=1;
+    
+      function check(){
+        var checkNo=parseInt(document.getElementById("input").value);
+        var isPrime=true;
+        for (var i=3;i<checkNo*10;i+=2){
+          isPrime=true;
+          for (var a=0;primes[a]*primes[a]<=i;a++){
+            if (i%primes[a]==0){
+              isPrime=false;
+              break;
+            }
+          }
+          if (isPrime){
+           primes.push(i);
+           primeNo++;
+           if (primeNo%100==0){
+             document.getElementById("output").innerHTML="Finished generating "+primeNo+" primes";
+           }
+           if (primeNo==checkNo){
+             document.getElementById("output").innerHTML="Finished generating "+checkNo+" primes<br><br>Prime "+checkNo+" is "+primes[checkNo-1]+".";
+             break;
+           }
+          }
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="primepanel" style="display: block;">
-      <input id="input" placeholder="input number" onkeydown="press()">
+      <input id="input" placeholder="input number" onkeydown="check()">
       <button onclick="isitprime()">n:th prime?</button>
-      <div id="output">Info will appear will app+ear here.</div>
+      <div id="output">Info will appear will appear here.</div>
     </div>
   </body>
 </html>
