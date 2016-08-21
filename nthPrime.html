@@ -92,6 +92,23 @@
         top:1.5vw;
       }
       
+      #statsbtn{
+        display: block;
+        position: relative;
+        padding: 1vw;
+        background-color: #6F00FF;
+        color: white;
+        width: 10vw;
+        left: 50%;
+        margin-left: -6vw;
+        top: 1vw;
+        cursor: pointer;
+      }
+      
+      #statsbtn:hover{
+        background-color:#4900A8;
+      }
+      
       #closebtn{
         display:block;
         position:absolute;
@@ -154,6 +171,7 @@
         document.getElementById("output").innerHTML="Finished generating "+Math.floor(primeNo/10000)*10000+" primes.";
         if (primeNo==checkNo){
           clearInterval(thread);
+          var addbtn=checkNo>=50000?"<div id=\"statsbtn\" onclick=openStats()>Statistics</div>":"";
           document.getElementById("output").innerHTML="Finished generating "+checkNo+" primes<br><br>Prime "+checkNo+" is "+primes[checkNo-1]+".";
           console.log("done!");
           maxVal=0;
@@ -208,6 +226,10 @@
           ctx.fillRect(offset*index,1000-h,offset,h);
           ctx.fillStyle="#6F00FF";
         }
+      }
+      
+      function openStats(){
+        document.getElementById("stats").style.display="block";
       }
       
       function closeStats(){
