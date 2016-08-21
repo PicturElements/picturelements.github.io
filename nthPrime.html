@@ -127,7 +127,7 @@
         width: 100%;
         text-align: center;
         font-size: 1.5vw;
-        top: 0.5vw;
+        top: 1.5vw;
         color: #666;
       }
       
@@ -137,7 +137,7 @@
         width: 100%;
         text-align: center;
         font-size: 1vw;
-        top: 2.4vw;
+        top: 3.4vw;
         color: #aaa;
       }
     </style>
@@ -157,7 +157,8 @@
           startPos=primeNo;
           thread=setInterval(loopWrapper,0);
         }else{
-          document.getElementById("output").innerHTML="Prime "+checkNo+" is "+primes[checkNo-1]+".";
+          var addbtn=checkNo>=50000?"<div id=\"statsbtn\" onclick=openStats()>Statistics</div>":"";
+          document.getElementById("output").innerHTML="Prime "+checkNo+" is "+primes[checkNo-1]+"."+addbtn;
         }
       }
       
