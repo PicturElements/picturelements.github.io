@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>reddit live</title>
+    <link rel="icon" href="pelement.png">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,700" rel="stylesheet" type="text/css">
+    
+    <style>
+      body{
+        background-color:white;
+        background-image:url("images/updown.png");
+        margin:0;
+      }
+    </style>
+    <script></script>
+  </head>
+  <body>
+    
+  </body>
+</html>
