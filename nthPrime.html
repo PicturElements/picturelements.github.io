@@ -172,7 +172,7 @@
         if (primeNo==checkNo){
           clearInterval(thread);
           var addbtn=checkNo>=50000?"<div id=\"statsbtn\" onclick=openStats()>Statistics</div>":"";
-          document.getElementById("output").innerHTML="Finished generating "+checkNo+" primes<br><br>Prime "+checkNo+" is "+primes[checkNo-1]+".";
+          document.getElementById("output").innerHTML="Finished generating "+checkNo+" primes<br><br>Prime "+checkNo+" is "+primes[checkNo-1]+"."+addbtn;
           console.log("done!");
           maxVal=0;
           for (var i=0;i<times.length;i++){
