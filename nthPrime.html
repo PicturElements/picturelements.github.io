@@ -157,7 +157,7 @@
           startPos=primeNo;
           thread=setInterval(loopWrapper,0);
         }else{
-          var addbtn=checkNo>=50000?"<div id=\"statsbtn\" onclick=openStats()>Statistics</div>":"";
+          var addbtn=primeNo>=50000?"<div id=\"statsbtn\" onclick=openStats()>Statistics</div>":"";
           document.getElementById("output").innerHTML="Prime "+checkNo+" is "+primes[checkNo-1]+"."+addbtn;
         }
       }
