@@ -9,7 +9,14 @@
       body{
         background-color:white;
         background-image:url("images/updown.png");
+        background-size:40px 50px;
+        background-position:-20px 0;
         margin:0;
+        animation:slide 5s infinite;
+      }
+      
+      @keyframes slide{
+        to{background-position:-20px -50px;}
       }
     </style>
     <script></script>
