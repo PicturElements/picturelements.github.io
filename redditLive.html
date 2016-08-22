@@ -5,6 +5,7 @@
     <link rel="icon" href="pelement.png">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <script type="text/javascript" src="jQuery.js"></script>
     
     <style>
       body{
@@ -100,6 +101,17 @@
       function onloadCheck(){
         if (!window.location.href.endsWith("picturelements.github.io/redditLive")){
           document.getElementById("startupcontainer").style.display="none";
+          
+          var url=window.location.href,newUrl="";
+          for (var i=0;i<6;i++){
+            newUrl+=url.charAt(url.length-6+i);
+          }
+          var url="https://redd.it/"+newUrl+".json";
+          $(function(){
+      	    $.getJSON(url,function(data){
+        			var score=data[0].data.children[0].data;
+        		});
+        	});
         }
       }
       
