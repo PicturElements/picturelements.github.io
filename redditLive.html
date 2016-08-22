@@ -94,9 +94,17 @@
       }
     </style>
     <script>
+      function checkUrlWrapper(element){
+        var el=document.getElementById("gobutton");
+        if (checkURL(element)){
+          el.class="gobutton_active";
+        }else{
+          el.class="gobutton_inactive";
+        }
+      }
+      
       function checkURL(element){
         var url=element.value;
-        console.log(url);
         var checkfor=["comments","redd.it"]
         var checkChar=[0,0];
         for (var i=0;i<url.length;i++){
@@ -109,21 +117,21 @@
                   id+=url.charAt(i+2+m);
                 }
                 console.log(id);
-                return;
+                return true;
               }
             }else{
               checkChar[n]=0;
             }
           }
-          console.log(checkChar[0]+" - "+checkChar[1]);
         }
+        return false
       }
     </script>
   </head>
   <body>
     <div id="startupcontainer">
       <div id="title">live score counter</div>
-      <input id="maininput" onkeyup=checkURL(this) placeholder="insert URL">
+      <input id="maininput" onkeyup=checkUrlWrapper(this) placeholder="insert URL">
       <div id="gobutton" class="gobutton_inactive" onclick=createUrl()>Let's go!</div>
     </div>
   </body>
