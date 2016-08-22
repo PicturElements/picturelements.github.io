@@ -49,12 +49,12 @@
         text-align: center;
         font-size: 1.5vw;
         font-family: Roboto;
-        color: #aaa;
+        color: #666;
         border: 0.2vw solid #aaa;
         outline: none;
       }
       
-      #gobutton_active,#gobutton_inactive{
+      .gobutton_active,.gobutton_inactive{
         display: block;
         position: absolute;
         padding: 1vw;
@@ -71,18 +71,19 @@
         cursor: pointer;
       }
       
-      #gobutton_active:hover{
+      .gobutton_active:hover{
         background-color: #107cff;
         border: 0.25vw solid #4a9cff;
       }
       
-      #gobutton_inactive{
+      .gobutton_inactive{
         background-color: #ccc;
         border: 0.25vw solid #aaa;
         color:#aaa;
+        cursor:default;
       }
       
-      #gobutton_inactive:hover{
+      .gobutton_inactive:hover{
         background-color: #aaa;
         border: 0.25vw solid #ccc;
         color:#ccc;
@@ -92,13 +93,33 @@
         to{background-position:-20px -50px;}
       }
     </style>
-    <script></script>
+    <script>
+      function checkURL(element){
+        var url=element.value;
+        var checkfor=["comments","redd.it"],checkChar=[0,0];
+        for (var i=0;i<url.length;i++){
+          for (var n=0;n<2;n++){
+            if (url.charAt[i]==checkfor[n].charAt(checkChar[n])){
+              checkChar[n]++;
+              if (checkChar[n]==checkfor[n].length){
+                var id="";
+                for (var m=0;m<6;m++){
+                  id+=url.charAt(i+2+m);
+                }
+                console.log(id);
+                return;
+              }
+            }
+          }
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="startupcontainer">
       <div id="title">live score counter</div>
-      <input id="maininput" placeholder="insert URL">
-      <div id="gobutton_inactive" onclick=createUrl()>Let's go!</div>
+      <input id="maininput" onkeyup=checkURL(this) placeholder="insert URL">
+      <div id="gobutton" class="gobutton_inactive" onclick=createUrl()>Let's go!</div>
     </div>
   </body>
 </html>
