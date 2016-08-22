@@ -54,7 +54,7 @@
         outline: none;
       }
       
-      #gobutton{
+      #gobutton_active,#gobutton_inactive{
         display: block;
         position: absolute;
         padding: 1vw;
@@ -71,9 +71,21 @@
         cursor: pointer;
       }
       
-      #gobutton:hover{
+      #gobutton_active:hover{
         background-color: #107cff;
         border: 0.25vw solid #4a9cff;
+      }
+      
+      #gobutton_inactive{
+        background-color: #ccc;
+        border: 0.25vw solid #aaa;
+        color:#aaa;
+      }
+      
+      #gobutton_inactive:hover{
+        background-color: #aaa;
+        border: 0.25vw solid #ccc;
+        color:#ccc;
       }
       
       @keyframes slide{
@@ -86,7 +98,7 @@
     <div id="startupcontainer">
       <div id="title">live score counter</div>
       <input id="maininput" placeholder="insert URL">
-      <div id="gobutton" onclick=createUrl()>Go!</div>
+      <div id="gobutton_inactive" onclick=createUrl()>Let's go!</div>
     </div>
   </body>
 </html>
