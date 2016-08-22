@@ -4,6 +4,7 @@
     <title>reddit live</title>
     <link rel="icon" href="pelement.png">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
     
     <style>
       body{
@@ -11,9 +12,9 @@
         /*background-image:url("images/updown.png");
         background-size:40px 50px;
         background-position:-20px 0;
-        margin:0;
         animation:slide 5s linear infinite;*/
-        font-family:Roboto;
+        margin:0;
+        font-family:Varela Round;
       }
       
       #startupcontainer{
@@ -53,6 +54,28 @@
         outline: none;
       }
       
+      #gobutton{
+        display: block;
+        position: absolute;
+        padding: 1vw;
+        width: 7vw;
+        text-align: center;
+        background-color: #4a9cff;
+        border: 0.25vw solid #107cff;
+        color: white;
+        left: 50%;
+        margin-left: -4.75vw;
+        top: 50%;
+        font-size: 1.5vw;
+        margin-top: 4vw;
+        cursor: pointer;
+      }
+      
+      #gobutton:hover{
+        background-color: #107cff;
+        border: 0.25vw solid #4a9cff;
+      }
+      
       @keyframes slide{
         to{background-position:-20px -50px;}
       }
@@ -61,8 +84,9 @@
   </head>
   <body>
     <div id="startupcontainer">
-      <div id="title">score live counter</div>
+      <div id="title">live score counter</div>
       <input id="maininput" placeholder="insert URL">
+      <div id="gobutton" onclick=createUrl()>Go!</div>
     </div>
   </body>
 </html>
