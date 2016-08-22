@@ -106,7 +106,7 @@
           for (var i=0;i<6;i++){
             newUrl+=url.charAt(url.length-6+i);
           }
-          var url="https://www.reddit.com/r/tifu/"+newUrl+".json";
+          var url="https://www.reddit.com/comments/"+newUrl+".json";
           $(function(){
       	    $.getJSON(url,function(data){
         			var score=data[0].data.children[0].data;
