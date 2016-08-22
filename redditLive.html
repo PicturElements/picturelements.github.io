@@ -97,6 +97,12 @@
       var clickable=false;
       var glob_id="";
       
+      function checkUrl(){
+        if (!window.location.href.endsWith("picturelements.github.io/redditLive")){
+          document.getElementById("startupcontainer").style.display="none";
+        }
+      }
+      
       function checkUrlWrapper(element){
         var el=document.getElementById("gobutton");
         clickable=checkUrl(element);
@@ -137,7 +143,7 @@
       }
     </script>
   </head>
-  <body>
+  <body onload=checkUrl()>
     <div id="startupcontainer">
       <div id="title">live score counter</div>
       <input id="maininput" onkeyup=checkUrlWrapper(this) placeholder="insert URL">
