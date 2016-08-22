@@ -94,16 +94,20 @@
       }
     </style>
     <script>
+      var clickable=false;
+      var glob_id="";
+      
       function checkUrlWrapper(element){
         var el=document.getElementById("gobutton");
-        if (checkURL(element)){
-          el.class="gobutton_active";
+        clickable=checkUrl(element);
+        if (clickable){
+          el.className="gobutton_active";
         }else{
-          el.class="gobutton_inactive";
+          el.className="gobutton_inactive";
         }
       }
       
-      function checkURL(element){
+      function checkUrl(element){
         var url=element.value;
         var checkfor=["comments","redd.it"]
         var checkChar=[0,0];
@@ -117,6 +121,7 @@
                   id+=url.charAt(i+2+m);
                 }
                 console.log(id);
+                glob_id=id;
                 return true;
               }
             }else{
@@ -125,6 +130,10 @@
           }
         }
         return false
+      }
+      
+      function createUrl(){
+        if (clickable){window.location.href=(window.location.href+"?id="+glob_id);}
       }
     </script>
   </head>
