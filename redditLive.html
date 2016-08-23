@@ -265,7 +265,8 @@
         	        document.getElementById("selftext").innerHTML=branch.selftext_html;
       	        }
       	        document.getElementById("thumbnail").style="background-image:url(\"images/placeholders.png\"); background-size:14vw 5vw";
-      	      }else if (branch.thumbnail==""){
+      	      }
+      	      if (branch.thumbnail=="default"){
       	        document.getElementById("thumbnail").style="background-image:url(\"images/placeholders.png\"); background-size:14vw 5vw; background-position:-7vw 0";
       	      }
               document.getElementById("redditcontainer").style.display="block";
