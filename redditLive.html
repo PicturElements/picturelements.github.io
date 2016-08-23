@@ -128,7 +128,6 @@
         height: 5vw;
         background-color: #eaeaea;
         background-size: cover;
-        margin-bottom:1vw;
       }
       
       #posttitle{
@@ -198,7 +197,8 @@
         			var time=Math.floor((new Date().getTime()/1000-branch.created_utc)/60);
         			var timeAgo="";
         			if (time<60){timeAgo=time+" minute"+(time==1?"":"s")+" ago"}
-        			else{time=Math.floor(time/60); timeAgo=time+" hour"+(time==1?"":"s")+" ago"}
+        			else if (time>60){time=Math.floor(time/60); timeAgo=time+" hour"+(time==1?"":"s")+" ago"}
+        			else{time=Math.floor(time/1440); timeAgo=time+" day"+(time==1?"":"s")+" ago"}
         			document.getElementById("postinfo").innerHTML="submitted "+timeAgo+" by <a href=\"https://www.reddit.com/user/"+branch.author+"/\">"+branch.author+"</a> to <a href=\"https://www.reddit.com/r/"+branch.subreddit+"\">"+branch.subreddit+"</a>";
         		  var direct="https://www.reddit.com"+branch.permalink;
       	      var buttons=document.getElementsByClassName("abtn");
@@ -289,6 +289,7 @@
             </div>
           </div>
         </div>
+        <div id="empty" style="display:block; position:relative; float:left; bottom:0; width:100%; height:0.5vw"></div>
       </div>
     </div>
   </body>
