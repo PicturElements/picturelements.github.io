@@ -27,6 +27,10 @@
         left:0;
       }
       
+      #redditcontainer{
+        overflow:auto;
+      }
+      
       #title{
         display: block;
         position: absolute;
@@ -100,6 +104,7 @@
         overflow:hidden;
         background-color: white;
         border-radius: 1vw;
+        margin-bottom: 10vw;
       }
       
       #score_thumbnail{
@@ -262,6 +267,7 @@
       	        html=html.replace(/&gt;/g,">");
       	        html=html.replace(/&#39;/g,"'");
       	        document.getElementById("selftext").innerHTML=html;
+      	        document.getElementById("thumbnail").style="background-image:url(\"images/placeholders.png\"); background-size:14vw 5vw";
       	      }
               document.getElementById("redditcontainer").style.display="block";
       	    });
