@@ -102,32 +102,32 @@
         border-radius: 1vw;
       }
       
-      #score{
+      #score_thumbnail{
         display:block;
         position:relative;
         float:left;
-        width:6vw;
+        width:13vw;
         min-height:10vw;
       }
       
       #maincontent{
-        display:block;
-        position:relative;
-        float:left;
-        width:64vw;
-        min-height:10vw;
+        display: block;
+        position: relative;
+        float: left;
+        width: 56vw;
+        min-height: 10vw;
       }
       
       #thumbnail{
         display: block;
         position: relative;
-        float:left;
-        left: 0.5vw;
+        float: right;
+        right: 0.5vw;
         top: 0.5vw;
         width: 7vw;
         height: 5vw;
         background-color: #eaeaea;
-        background-size:cover;
+        background-size: cover;
       }
       
       #posttitle{
@@ -137,7 +137,6 @@
         width: 55vw;
         min-height: 1vw;
         margin-top: 0.5vw;
-        margin-left: 1vw;
         font-family: Roboto,verdana,sans-serif;
         font-weight:500;
         font-size: 1.5vw;
@@ -146,6 +145,11 @@
       #posttitle a{
         text-decoration:none;
         color:#5d5dfd;
+      }
+      
+      #postinfo{
+        font-size: 1vw;
+        color: #999;
       }
       
       @keyframes slide{
@@ -168,11 +172,15 @@
           var url="https://www.reddit.com/comments/"+newUrl+".json";
           $(function(){
       	    $.getJSON(url,function(data){
-        			var score=data[0].data.children[0].data;
-        			document.getElementById("thumbnail").style.backgroundImage="url("+data[0].data.children[0].data.thumbnail+")"
-        			document.getElementById("posturl").innerHTML=data[0].data.children[0].data.title;
-        			document.getElementById("posturl").href=data[0].data.children[0].data.url;
-        			console.log(score);
+        			var branch=data[0].data.children[0].data;
+        			document.getElementById("thumbnail").style.backgroundImage="url("+branch.thumbnail+")"
+        			document.getElementById("posturl").innerHTML=branch.title;
+        			document.getElementById("posturl").href=branch.url;
+        			var time=(new Date().getTime()-branch.created_utc)/(60000);
+        			var timeAgo="";
+        			if (time<60){timeAgo=time+" minute"+(time==1?"":"s")+" ago"}
+        			else{time=Math.floor(time/60); timeAgo=time+" hour"+(time==1?"":"s")+" ago"}
+        			document.getElementById("postinfo").innerHTML="submitted "+timeAgo+" by <a href=\"https://www.reddit.com/user/"+branch.author+"/\">"+branch.author+"</a>";
         		});
         	});
         }
