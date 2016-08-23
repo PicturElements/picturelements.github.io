@@ -152,6 +152,15 @@
         color: #999;
       }
       
+      .button{
+        display:block;
+        position:relative;
+        float:left;
+        font-size:1vw;
+        color:#666;
+        margin-right:1vw;
+      }
+      
       @keyframes slide{
         to{background-position:-20px -50px;}
       }
@@ -182,8 +191,7 @@
         			if (time<60){timeAgo=time+" minute"+(time==1?"":"s")+" ago"}
         			else{time=Math.floor(time/60); timeAgo=time+" hour"+(time==1?"":"s")+" ago"}
         			document.getElementById("postinfo").innerHTML="submitted "+timeAgo+" by <a href=\"https://www.reddit.com/user/"+branch.author+"/\">"+branch.author+"</a>";
-        		  
-      	    });
+        		});
         	});
         }
       }
@@ -243,10 +251,25 @@
           <div id="posttitle">
             <a id="posturl" target="_blank"></a>
           </div>
-          <div id="postinfo"></div>
-          <div id="links">
-            <div class="buttons">
-              <a class="button"></a>
+          <div id="postinfo">submitted 8 hours ago</div>
+          <div id="buttons">
+            <div class="button">
+              <a class="abtn">comment</a>
+            </div>
+            <div class="button">
+              <a class="abtn">share</a>
+            </div>
+            <div class="button">
+              <a class="abtn">save</a>
+            </div>
+            <div class="button">
+              <a class="abtn">hide</a>
+            </div>
+            <div class="button">
+              <a class="abtn" style="background-color:#988143">give gold</a>
+            </div>
+            <div class="button">
+              <a class="abtn">report</a>
             </div>
           </div>
         </div>
