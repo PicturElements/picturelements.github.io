@@ -181,7 +181,6 @@
       function onloadCheck(){
         if (!window.location.href.endsWith("picturelements.github.io/redditLive")){
           document.getElementById("startupcontainer").style.display="none";
-          document.getElementById("redditcontainer").style.display="block";
           
           var url=window.location.href,newUrl="";
           for (var i=0;i<6;i++){
@@ -199,13 +198,14 @@
         			var timeAgo="";
         			if (time<60){timeAgo=time+" minute"+(time==1?"":"s")+" ago"}
         			else{time=Math.floor(time/60); timeAgo=time+" hour"+(time==1?"":"s")+" ago"}
-        			document.getElementById("postinfo").innerHTML="submitted "+timeAgo+" by <a href=\"https://www.reddit.com/user/"+branch.author+"/\">"+branch.author+"</a>";
+        			document.getElementById("postinfo").innerHTML="submitted "+timeAgo+" by <a href=\"https://www.reddit.com/user/"+branch.author+"/\">"+branch.author+"</a> to <a href=\"https://www.reddit.com/r/"+branch.subreddit+"\">"+branch.subreddit+"</a>";
         		  var direct="https://www.reddit.com"+branch.permalink;
       	      var buttons=document.getElementsByClassName("abtn");
       	      buttons[0].innerHTML=(branch.num_comments>0?branch.num_comments:"")+" comment"+(branch.num_comments==1?"":"s");
       	      for (var i=0;i<buttons.length;i++){
       	        buttons[i].href=direct;
       	      }
+              document.getElementById("redditcontainer").style.display="block";
       	    });
         	});
         }
