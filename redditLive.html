@@ -256,7 +256,8 @@
       	      }
       	      if (branch.selftext!=""){
       	        document.getElementById("selfbody").style.display="block";
-      	        document.getElementById("selftext").innerHTML=branch.selftext_html;
+      	        var html=branch.selftext_html;
+      	        document.getElementById("selftext").innerHTML=html;
       	      }
               document.getElementById("redditcontainer").style.display="block";
       	    });
