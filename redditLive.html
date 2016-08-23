@@ -168,6 +168,9 @@
           $(function(){
       	    $.getJSON(url,function(data){
         			var score=data[0].data.children[0].data;
+        			document.getElementById("thumbnail").style.backgroundImage="url("+data[0].data.children[0].data.thumbnail+")"
+        			document.getElementById("posturl").innerHTML=data[0].data.children[0].data.title;
+        			document.getElementById("posturl").href=data[0].data.children[0].data.url;
         			console.log(score);
         		});
         	});
@@ -228,7 +231,7 @@
         <div id="maincontent">
           <div id="thumbnail"></div>
           <div id="posttitle">
-            <a target="_blank"></a>
+            <a id="posturl" target="_blank"></a>
           </div>
         </div>
       </div>
