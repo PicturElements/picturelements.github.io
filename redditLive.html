@@ -191,6 +191,29 @@
         margin-bottom: 0;
       }
       
+      #selfbody{
+        display: none;
+        position: relative;
+        float: left;
+        width: 56vw;
+        min-height: 1vw;
+        margin-top: 0.5vw;
+        margin-bottom: 0.5vw;
+        background-color: #f1f1f1;
+        border-radius: 0.5vw;
+        box-sizing: border-box;
+        border: 0.1vw solid #b1b2b3;
+      }
+      
+      #selftext{
+        display: block;
+        position: relative;
+        width: 55vw;
+        margin: 0.5vw;
+        font-size: 1vw;
+        color: #555;
+      }
+      
       @keyframes slide{
         to{background-position:-20px -50px;}
       }
@@ -230,6 +253,10 @@
       	      buttons[0].innerHTML=(branch.num_comments>0?branch.num_comments:"")+" comment"+(branch.num_comments==1?"":"s");
       	      for (var i=0;i<buttons.length;i++){
       	        buttons[i].href=direct;
+      	      }
+      	      if (branch.selftext!=""){
+      	        document.getElementById("selfbody").style.display="block";
+      	        document.getElementById("selftext").innerHTML=branch.selftext_html;
       	      }
               document.getElementById("redditcontainer").style.display="block";
       	    });
@@ -312,6 +339,9 @@
             <div class="button">
               <a class="abtn" target="_blank">report</a>
             </div>
+          </div>
+          <div id="selfbody">
+            <div id="selftext"></div>
           </div>
         </div>
         <div id="empty" style="display:block; position:relative; float:left; bottom:0; width:100%; height:0.5vw"></div>
