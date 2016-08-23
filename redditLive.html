@@ -257,6 +257,8 @@
       	      if (branch.selftext!=""){
       	        document.getElementById("selfbody").style.display="block";
       	        var html=branch.selftext_html;
+      	        html=html.replace(/&lt;/g,"<");
+      	        html=html.replace(/&gt;/g,">");
       	        document.getElementById("selftext").innerHTML=html;
       	      }
               document.getElementById("redditcontainer").style.display="block";
