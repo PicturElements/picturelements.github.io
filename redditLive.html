@@ -97,8 +97,25 @@
         left: 15vw;
         top: 5vw;
         min-height: 10vw;
+        overflow:hidden;
         background-color: white;
         border-radius: 1vw;
+      }
+      
+      #score{
+        display:block;
+        position:relative;
+        float:left;
+        width:4vw;
+        height:100%;
+      }
+      
+      #maincontent{
+        display:block;
+        position:relative;
+        float:left;
+        width:66vw;
+        min-height:10vw;
       }
       
       @keyframes slide{
@@ -176,8 +193,13 @@
     </div>
     <div id="redditcontainer" style="display:none">
       <div id="main">
-        <div id="thumbnail"></div>
-        <div id="title"></div>
+        <div id="score">
+          
+        </div>
+        <div id="maincontent">
+          <div id="thumbnail"></div>
+          <div id="title"></div>
+        </div>
       </div>
     </div>
   </body>
