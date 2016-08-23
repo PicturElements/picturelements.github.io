@@ -202,7 +202,7 @@
         			document.getElementById("postinfo").innerHTML="submitted "+timeAgo+" by <a href=\"https://www.reddit.com/user/"+branch.author+"/\">"+branch.author+"</a>";
         		  var direct="https://www.reddit.com"+branch.permalink;
       	      var buttons=document.getElementsByClassName("abtn");
-      	      buttons[0].innerHTML=(branch.num_comments>0?"":branch.num_comments)+" comment"+(branch.num_comments>1?"s":"");
+      	      buttons[0].innerHTML=(branch.num_comments>0?branch.num_comments:"")+" comment"+(branch.num_comments==1?"":"s");
       	      for (var i=0;i<buttons.length;i++){
       	        buttons[i].href=direct;
       	      }
@@ -266,7 +266,7 @@
           <div id="posttitle">
             <a id="posturl" target="_blank"></a>
           </div>
-          <div id="postinfo">submitted 8 hours ago</div>
+          <div id="postinfo"></div>
           <div id="buttons">
             <div class="button">
               <a class="abtn" target="_blank">comment</a>
