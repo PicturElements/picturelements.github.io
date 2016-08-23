@@ -284,6 +284,7 @@
     <script>
       var clickable=false;
       var glob_id="";
+      var thread=null;
       
       function onloadCheck(){
         if (!window.location.href.endsWith("picturelements.github.io/redditLive")){
@@ -297,9 +298,9 @@
           var url="https://www.reddit.com/comments/"+newUrl+".json?raw_json=1";
           $(function(){
       	    $.getJSON(url,function(data){
-        			var branch=data[0].data.children[0].data;
-        			console.log(branch);
-        			setStuff(branch);
+		var branch=data[0].data.children[0].data;
+		console.log(branch);
+		setStuff(branch);
               document.getElementById("redditcontainer").style.display="block";
               document.getElementById("logocontainer").style.display="none";
       	    });
