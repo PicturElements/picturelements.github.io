@@ -202,7 +202,7 @@
         			document.getElementById("postinfo").innerHTML="submitted "+timeAgo+" by <a href=\"https://www.reddit.com/user/"+branch.author+"/\">"+branch.author+"</a>";
         		  var direct="https://www.reddit.com"+branch.permalink;
       	      var buttons=document.getElementsByClassName("abtn");
-      	      buttons[0].innerHTML=(branch.num_comments>0?"":branch.num_comments)+" comment"+(branch.num_comments>1)?"s":"";
+      	      buttons[0].innerHTML=(branch.num_comments>0?"":branch.num_comments)+" comment"+(branch.num_comments>1?"s":"");
       	      for (var i=0;i<buttons.length;i++){
       	        buttons[i].href=direct;
       	      }
@@ -269,22 +269,22 @@
           <div id="postinfo">submitted 8 hours ago</div>
           <div id="buttons">
             <div class="button">
-              <a class="abtn">comment</a>
+              <a class="abtn" target="_blank">comment</a>
             </div>
             <div class="button">
-              <a class="abtn">share</a>
+              <a class="abtn" target="_blank">share</a>
             </div>
             <div class="button">
-              <a class="abtn">save</a>
+              <a class="abtn" target="_blank">save</a>
             </div>
             <div class="button">
-              <a class="abtn">hide</a>
+              <a class="abtn" target="_blank">hide</a>
             </div>
             <div class="button">
-              <a class="abtn" style="color:#988143">give gold</a>
+              <a class="abtn" target="_blank" style="color:#988143">give gold</a>
             </div>
             <div class="button">
-              <a class="abtn">report</a>
+              <a class="abtn" target="_blank">report</a>
             </div>
           </div>
         </div>
