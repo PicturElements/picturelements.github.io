@@ -142,7 +142,7 @@
         font-size: 1.5vw;
       }
       
-      #posttitle a{
+      #posttitle a,#postinfo a{
         text-decoration:none;
         color:#5d5dfd;
       }
@@ -173,10 +173,11 @@
           $(function(){
       	    $.getJSON(url,function(data){
         			var branch=data[0].data.children[0].data;
+        			console.log(branch);
         			document.getElementById("thumbnail").style.backgroundImage="url("+branch.thumbnail+")"
         			document.getElementById("posturl").innerHTML=branch.title;
         			document.getElementById("posturl").href=branch.url;
-        			var time=(new Date().getTime()-branch.created_utc)/(60000);
+        			var time=Math.floor((new Date().getTime()-branch.created_utc)/(60000));
         			var timeAgo="";
         			if (time<60){timeAgo=time+" minute"+(time==1?"":"s")+" ago"}
         			else{time=Math.floor(time/60); timeAgo=time+" hour"+(time==1?"":"s")+" ago"}
