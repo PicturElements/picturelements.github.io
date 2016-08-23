@@ -235,7 +235,7 @@
           for (var i=0;i<6;i++){
             newUrl+=url.charAt(url.length-6+i);
           }
-          var url="https://www.reddit.com/comments/"+newUrl+".json";
+          var url="https://www.reddit.com/comments/"+newUrl+".json?raw_json=1";
           $(function(){
       	    $.getJSON(url,function(data){
         			var branch=data[0].data.children[0].data;
@@ -262,11 +262,11 @@
       	      if (branch.selftext!=""){
       	        document.getElementById("selfbody").style.display="block";
       	        //really crappy semi-manual regex 
-      	        var html=branch.selftext_html;
+      	        /*var html=branch.selftext_html;
       	        html=html.replace(/&lt;/g,"<");
       	        html=html.replace(/&gt;/g,">");
-      	        html=html.replace(/&#39;/g,"'");
-      	        document.getElementById("selftext").innerHTML=html;
+      	        html=html.replace(/&#39;/g,"'");*/
+      	        document.getElementById("selftext").innerHTML=branch.selftext_html;
       	        document.getElementById("thumbnail").style="background-image:url(\"images/placeholders.png\"); background-size:14vw 5vw";
       	      }
               document.getElementById("redditcontainer").style.display="block";
