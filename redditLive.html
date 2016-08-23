@@ -123,6 +123,17 @@
         min-height: 5vw;
       }
       
+      #score{
+  	    display: block;
+		    position: absolute;
+		    font-family: Roboto,sans-serif;
+		    font-weight: bold;
+		    color: #aaa;
+		    width: 5.5vw;
+		    text-align: center;
+		    line-height: 6vw;
+      }
+      
       #thumbnail{
         display: block;
         position: relative;
@@ -313,9 +324,7 @@
       function refresh(){
       	$(function(){
     	    $.getJSON(glob_url,function(data){
-						var branch=data[0].data.children[0].data;
-						console.log(branch);
-						setStuff(branch);
+						setStuff(data[0].data.children[0].data);
             document.getElementById("redditcontainer").style.display="block";
             document.getElementById("logocontainer").style.display="none";
     	    });
@@ -323,9 +332,10 @@
       }
       
       function setStuff(branch){
-        document.getElementById("thumbnail").style.backgroundImage="url("+branch.thumbnail+")"
+        document.getElementById("thumbnail").style.backgroundImage="url("+branch.thumbnail+")";
   			document.getElementById("posturl").innerHTML=branch.title;
   			document.getElementById("posturl").href=branch.url;
+  			document.getElementById("score").innerHTML=branch.score;
   			var time=Math.floor((new Date().getTime()/1000-branch.created_utc)/60);
   			var timeAgo="";
   			if (time<60){timeAgo=time+" minute"+(time==1?"":"s")+" ago"}
@@ -406,6 +416,7 @@
       </div>
       <div id="main">
         <div id="score_thumbnail">
+        	<div id="score"></div>
           <div id="thumbnail"></div>
         </div>
         <div id="maincontent">
