@@ -202,7 +202,7 @@
         			document.getElementById("postinfo").innerHTML="submitted "+timeAgo+" by <a href=\"https://www.reddit.com/user/"+branch.author+"/\">"+branch.author+"</a>";
         		  var direct="https://www.reddit.com"+branch.permalink;
       	      var buttons=document.getElementsByClassName("abtn");
-      	      buttons[0].innerHTML=(branch.num_comments>0)?"":branch.num_comments+" comment"+(branch.num_comments>1)?"s":"";
+      	      buttons[0].innerHTML=(branch.num_comments>0?"":branch.num_comments)+" comment"+(branch.num_comments>1)?"s":"";
       	      for (var i=0;i<buttons.length;i++){
       	        buttons[i].href=direct;
       	      }
