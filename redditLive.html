@@ -283,7 +283,7 @@
     </style>
     <script>
       var clickable=false;
-      var glob_id="";
+      var glob_id="",glob_url;
       var thread=null;
       
       function onloadCheck(){
@@ -296,16 +296,30 @@
             newUrl+=url.charAt(url.length-6+i);
           }
           var url="https://www.reddit.com/comments/"+newUrl+".json?raw_json=1";
+          glob_url=url;
           $(function(){
       	    $.getJSON(url,function(data){
-		var branch=data[0].data.children[0].data;
-		console.log(branch);
-		setStuff(branch);
+							var branch=data[0].data.children[0].data;
+							console.log(branch);
+							setStuff(branch);
               document.getElementById("redditcontainer").style.display="block";
               document.getElementById("logocontainer").style.display="none";
+              thread=setInterval(refresh,3000);
       	    });
         	});
         }
+      }
+      
+      function refresh(){
+      	$(function(){
+    	    $.getJSON(glob_url,function(data){
+						var branch=data[0].data.children[0].data;
+						console.log(branch);
+						setStuff(branch);
+            document.getElementById("redditcontainer").style.display="block";
+            document.getElementById("logocontainer").style.display="none";
+    	    });
+      	});
       }
       
       function setStuff(branch){
