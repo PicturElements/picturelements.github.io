@@ -174,12 +174,21 @@
       gold{
         display: inline-table;
         position: relative;
-        width: 1vw;
-        height: 1vw;
+        width: 1.2vw;
+        height: 1.2vw;
         margin-left: 0.5vw;
-        top: 0.15vw;
-        background-image:url("images/gold.png");
-        background-size:contain;
+        top: 0.2vw;
+        background-image: url("images/gold.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+      
+      gold p{
+        position: relative;
+        left: 1.3vw;
+        font-size: 1vw;
+        margin-top: 0;
+        margin-bottom: 0;
       }
       
       @keyframes slide{
@@ -212,7 +221,8 @@
         			else if (Math.floor(time/60)<24){time=Math.floor(time/60); timeAgo=time+" hour"+(time==1?"":"s")+" ago"}
         			else{time=Math.floor(time/1440); timeAgo=time+" day"+(time==1?"":"s")+" ago"}
         			var gold="";
-        			if (branch.gilded>0){gold="<gold></gold>"}
+        			if (branch.gilded==1){gold="<gold></gold>"}
+        			else if (branch.gilded>0){gold="<gold style=\"top:0\"><p>x"+branch.gilded+"</p></gold>"}
         			//document.getElementById("postinfo").innerHTML="submitted "+timeAgo+" by <a href=\"https://www.reddit.com/user/"+branch.author+"/\">"+branch.author+"</a> to <a href=\"https://www.reddit.com/r/"+branch.subreddit+"\">"+branch.subreddit+"</a>";
         			document.getElementById("postinfo").innerHTML="submitted "+timeAgo+" by <a href=\"https://www.reddit.com/user/"+branch.author+"/\">"+branch.author+"</a>"+gold;
         		  var direct="https://www.reddit.com"+branch.permalink;
