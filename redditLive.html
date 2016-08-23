@@ -177,7 +177,7 @@
         			document.getElementById("thumbnail").style.backgroundImage="url("+branch.thumbnail+")"
         			document.getElementById("posturl").innerHTML=branch.title;
         			document.getElementById("posturl").href=branch.url;
-        			var time=Math.floor((new Date().getTime()-branch.created_utc)/(60000));
+        			var time=Math.floor((new Date().getTime()/1000-branch.created_utc)/60);
         			var timeAgo="";
         			if (time<60){timeAgo=time+" minute"+(time==1?"":"s")+" ago"}
         			else{time=Math.floor(time/60); timeAgo=time+" hour"+(time==1?"":"s")+" ago"}
