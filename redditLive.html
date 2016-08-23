@@ -182,7 +182,8 @@
         			if (time<60){timeAgo=time+" minute"+(time==1?"":"s")+" ago"}
         			else{time=Math.floor(time/60); timeAgo=time+" hour"+(time==1?"":"s")+" ago"}
         			document.getElementById("postinfo").innerHTML="submitted "+timeAgo+" by <a href=\"https://www.reddit.com/user/"+branch.author+"/\">"+branch.author+"</a>";
-        		});
+        		  
+      	    });
         	});
         }
       }
@@ -242,7 +243,12 @@
           <div id="posttitle">
             <a id="posturl" target="_blank"></a>
           </div>
-          <div id="postinfo">submitted 8 hours ago</div>
+          <div id="postinfo"></div>
+          <div id="links">
+            <div class="buttons">
+              <a class="button"></a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
