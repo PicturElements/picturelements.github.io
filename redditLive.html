@@ -18,9 +18,9 @@
         font-family:Varela Round;
       }
       
-      #startupcontainer{
+      #startupcontainer,#redditcontainer{
         display:block;
-        position
+        position:fixed;
         width:100%;
         height:100%;
         top:0;
@@ -90,6 +90,17 @@
         color:#ccc;
       }
       
+      #main{
+        display: block;
+        position: absolute;
+        width: 70vw;
+        left: 15vw;
+        top: 5vw;
+        min-height: 10vw;
+        background-color: white;
+        border-radius: 1vw;
+      }
+      
       @keyframes slide{
         to{background-position:-20px -50px;}
       }
@@ -101,6 +112,7 @@
       function onloadCheck(){
         if (!window.location.href.endsWith("picturelements.github.io/redditLive")){
           document.getElementById("startupcontainer").style.display="none";
+          document.getElementById("redditcontainer").style.display="block";
           
           var url=window.location.href,newUrl="";
           for (var i=0;i<6;i++){
@@ -161,6 +173,12 @@
       <div id="title">live score counter</div>
       <input id="maininput" onkeyup=checkUrlWrapper(this) placeholder="insert URL">
       <div id="gobutton" class="gobutton_inactive" onclick=createUrl()>Let's go!</div>
+    </div>
+    <div id="redditcontainer" style="display:none">
+      <div id="main">
+        <div id="thumbnail"></div>
+        <div id="title"></div>
+      </div>
     </div>
   </body>
 </html>
