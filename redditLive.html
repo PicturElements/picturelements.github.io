@@ -128,6 +128,7 @@
         height: 5vw;
         background-color: #eaeaea;
         background-size: cover;
+        margin-bottom: 0.5vw;
       }
       
       #posttitle{
@@ -170,6 +171,17 @@
         text-decoration:underline;
       }
       
+      gold{
+        display: inline-table;
+        position: relative;
+        width: 1vw;
+        height: 1vw;
+        margin-left: 0.5vw;
+        top: 0.15vw;
+        background-image:url("images/gold.png");
+        background-size:contain;
+      }
+      
       @keyframes slide{
         to{background-position:-20px -50px;}
       }
@@ -199,8 +211,10 @@
         			if (time<60){timeAgo=time+" minute"+(time==1?"":"s")+" ago"}
         			else if (Math.floor(time/60)<24){time=Math.floor(time/60); timeAgo=time+" hour"+(time==1?"":"s")+" ago"}
         			else{time=Math.floor(time/1440); timeAgo=time+" day"+(time==1?"":"s")+" ago"}
+        			var gold="";
+        			if (branch.gilded>0){gold="<gold></gold>"}
         			//document.getElementById("postinfo").innerHTML="submitted "+timeAgo+" by <a href=\"https://www.reddit.com/user/"+branch.author+"/\">"+branch.author+"</a> to <a href=\"https://www.reddit.com/r/"+branch.subreddit+"\">"+branch.subreddit+"</a>";
-        			document.getElementById("postinfo").innerHTML="submitted "+timeAgo+" by <a href=\"https://www.reddit.com/user/"+branch.author+"/\">"+branch.author+"</a>";
+        			document.getElementById("postinfo").innerHTML="submitted "+timeAgo+" by <a href=\"https://www.reddit.com/user/"+branch.author+"/\">"+branch.author+"</a>"+gold;
         		  var direct="https://www.reddit.com"+branch.permalink;
       	      var buttons=document.getElementsByClassName("abtn");
       	      buttons[0].innerHTML=(branch.num_comments>0?branch.num_comments:"")+" comment"+(branch.num_comments==1?"":"s");
