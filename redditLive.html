@@ -99,7 +99,7 @@
         position: absolute;
         width: 70vw;
         left: 15vw;
-        top: 5vw;
+        top: 15vw;
         min-height: 5vw;
         overflow:hidden;
         background-color: white;
@@ -317,11 +317,14 @@
   </head>
   <body onload=onloadCheck()>
     <div id="startupcontainer">
-      <div id="title">live score counter</div>
+      <div id="title">reddit live 2.0</div>
       <input id="maininput" onkeyup=checkUrlWrapper(this) placeholder="insert URL">
       <div id="gobutton" class="gobutton_inactive" onclick=createUrl()>Let's go!</div>
     </div>
     <div id="redditcontainer" style="display:none">
+      <div id="title" style="top:10vw;">
+        <a href="http://picturelements.github.io/redditLive" style="text-decoration:none; color:#555">reddit live 2.0</a>
+      </div>
       <div id="main">
         <div id="score_thumbnail">
           <div id="thumbnail"></div>
