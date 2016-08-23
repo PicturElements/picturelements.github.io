@@ -259,15 +259,14 @@
       	      for (var i=0;i<buttons.length;i++){
       	        buttons[i].href=direct;
       	      }
-      	      if (branch.selftext!=""){
-      	        document.getElementById("selfbody").style.display="block";
-      	        //really crappy semi-manual regex 
-      	        /*var html=branch.selftext_html;
-      	        html=html.replace(/&lt;/g,"<");
-      	        html=html.replace(/&gt;/g,">");
-      	        html=html.replace(/&#39;/g,"'");*/
-      	        document.getElementById("selftext").innerHTML=branch.selftext_html;
+      	      if (branch.domain.startsWith("self.")){
+      	        if (branch.selftext!=""){
+        	        document.getElementById("selfbody").style.display="block";
+        	        document.getElementById("selftext").innerHTML=branch.selftext_html;
+      	        }
       	        document.getElementById("thumbnail").style="background-image:url(\"images/placeholders.png\"); background-size:14vw 5vw";
+      	      }else if (branch.thumbnail==""){
+      	        document.getElementById("thumbnail").style="background-image:url(\"images/placeholders.png\"); background-size:14vw 5vw; background-position:-7vw 0";
       	      }
               document.getElementById("redditcontainer").style.display="block";
       	    });
