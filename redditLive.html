@@ -256,9 +256,11 @@
       	      }
       	      if (branch.selftext!=""){
       	        document.getElementById("selfbody").style.display="block";
+      	        //really crappy semi-manual regex 
       	        var html=branch.selftext_html;
       	        html=html.replace(/&lt;/g,"<");
       	        html=html.replace(/&gt;/g,">");
+      	        html=html.replace(/&#39;/g,"'");
       	        document.getElementById("selftext").innerHTML=html;
       	      }
               document.getElementById("redditcontainer").style.display="block";
