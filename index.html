@@ -199,9 +199,9 @@
       var itemCount
       var sincePress=0,movable=1;
       
+      //Create mobile events
       $(document).on("pagecreate",function(){
         $("#showcasearea").on("swipeleft",function(){
-          alert("swiped!");
           move(-1);
         });
         
