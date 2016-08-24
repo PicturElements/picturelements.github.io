@@ -135,6 +135,17 @@
         transition-delay:250ms;
         text-decoration:none;
       }
+      #portfolio_back{
+        display: block;
+        position: absolute;
+        width: 10vw;
+        height: 10vw;
+        background-color: #3d317d;
+        transform-origin: 0 50%;
+        transform: perspective(400px) rotate3d(0, 1, 0, 20deg);
+        transition:1s;
+        transition-delay:250ms;
+      }
       #textContainer,#name{
         display:block;
         width:100%;
@@ -149,6 +160,7 @@
         overflow:hidden;
       }
       #name{
+        position:relative;
         right:0;
         margin-left:-11vw;
         transition:1s;
@@ -237,11 +249,13 @@
           document.getElementById("name").style.marginLeft="0";
           document.getElementById("logolink").style.width="32vw";
           document.getElementById("logolink").style.left="33vw";
+          document.getElementById("portfolio_back").style.marginLeft="3.5vw";
         }else{
           document.getElementById("logo").style.transform="perspective(400px) rotate3d(0,1,0,0deg)";
           document.getElementById("name").style.marginLeft="-11vw";
           document.getElementById("logolink").style.width="10vw";
           document.getElementById("logolink").style.left="45vw";
+          document.getElementById("portfolio_back").style.marginLeft="0";
         }
       }
       
@@ -262,6 +276,7 @@
   <body onload=init()>
     <div id="header">
       <a href="https://github.com/PicturElements" id="logolink" onmouseOver=display(1) onmouseleave=display(0)>
+        <div id="portfolio_back"></div>
         <div id="textcontainer">
           <div id="name"><b>Pictur</b>Elements</div>
         </div>
