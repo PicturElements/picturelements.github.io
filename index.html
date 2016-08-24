@@ -201,6 +201,7 @@
       
       //Create mobile events
       $(document).on("pagecreate",function(){
+        $.mobile.autoInitializePage = false;
         $("#showcasearea").on("swipeleft",function(){
           move(-1);
         });
