@@ -340,7 +340,7 @@
   			var gold="",edited="";
   			if (branch.gilded==1){gold="<gold></gold>"}
   			else if (branch.gilded>0){gold="<gold style=\"top:0\"><p>x"+branch.gilded+"</p></gold>"}
-  			if (!branch.edited){
+  			if (branch.edited!=false){
   				edited="* "+timeSince(Math.floor((new Date().getTime()/1000-branch.edited)/60));
   			}
   			//document.getElementById("postinfo").innerHTML="submitted "+timeSince(time)+" by <a href=\"https://www.reddit.com/user/"+branch.author+"/\">"+branch.author+"</a> to <a href=\"https://www.reddit.com/r/"+branch.subreddit+"\">"+branch.subreddit+"</a>";
