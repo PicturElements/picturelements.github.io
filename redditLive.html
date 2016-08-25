@@ -308,6 +308,7 @@
       var clickable=false;
       var glob_id="",glob_url;
       var thread=null;
+      var hasFlair=false;
       
       function onloadCheck(){
         if (!window.location.href.endsWith("picturelements.github.io/redditLive")){
@@ -348,12 +349,17 @@
   			document.getElementById("posturl").innerHTML=branch.title;
   			document.getElementById("posturl").href=branch.url;
   			document.getElementById("score").innerHTML=branch.score;
-  			if (branch.link_flair_text!=null){
-  				var flair=document.createElement("div");
-  				flair.setAttribute("id","flair");
-  				var text=document.createTextNode(branch.link_flair_text);
-  				flair.appendChild(text);
-  				document.getElementById("posttitle").appendChild(flair);
+  			if (!hasFlair){
+	  			if (branch.link_flair_text!=null){
+	  				var flair=document.createElement("div");
+	  				flair.setAttribute("id","flair");
+	  				var text=document.createTextNode(branch.link_flair_text);
+	  				flair.appendChild(text);
+	  				document.getElementById("posttitle").appendChild(flair);
+	  				hasFlair=true;
+	  			}
+  			}else if(branch.link_flair_text!=null){
+  				document.getElementById("flair").innerHTML=branch.link_flair_text;
   			}
   			var time=Math.floor((new Date().getTime()/1000-branch.created_utc)/60);
   			var gold="",edited="";
