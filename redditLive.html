@@ -341,10 +341,10 @@
   			if (branch.gilded==1){gold="<gold></gold>"}
   			else if (branch.gilded>0){gold="<gold style=\"top:0\"><p>x"+branch.gilded+"</p></gold>"}
   			if (branch.edited!=false){
-  				edited="* "+timeSince(Math.floor((new Date().getTime()/1000-branch.edited)/60));
+  				edited="* (last edited "+timeSince(Math.floor((new Date().getTime()/1000-branch.edited)/60))+" ago)";
   			}
   			//document.getElementById("postinfo").innerHTML="submitted "+timeSince(time)+" by <a href=\"https://www.reddit.com/user/"+branch.author+"/\">"+branch.author+"</a> to <a href=\"https://www.reddit.com/r/"+branch.subreddit+"\">"+branch.subreddit+"</a>";
-  			document.getElementById("postinfo").innerHTML="submitted "+timeSince(time)+""+edited+" by <a href=\"https://www.reddit.com/user/"+branch.author+"/\">"+branch.author+"</a>"+gold;
+  			document.getElementById("postinfo").innerHTML="submitted "+timeSince(time)+" ago"+edited+" by <a href=\"https://www.reddit.com/user/"+branch.author+"/\">"+branch.author+"</a>"+gold;
   		  var direct="https://www.reddit.com"+branch.permalink;
 	      var buttons=document.getElementsByClassName("abtn");
 	      buttons[0].innerHTML=(branch.num_comments>0?branch.num_comments:"")+" comment"+(branch.num_comments==1?"":"s");
@@ -365,9 +365,10 @@
       
       function timeSince(time){
       	var timeAgo="";
-  			if (time<60){timeAgo=time+" minute"+(time==1?"":"s")+" ago"}
-  			else if (Math.floor(time/60)<24){time=Math.floor(time/60); timeAgo=time+" hour"+(time==1?"":"s")+" ago"}
-  			else{time=Math.floor(time/1440); timeAgo=time+" day"+(time==1?"":"s")+" ago"}
+  			if (time<60){timeAgo=time+" minute"+(time==1?"":"s");}
+  			else if (Math.floor(time/60)<24){time=Math.floor(time/60); timeAgo=time+" hour"+(time==1?"":"s");}
+  			else if (Math.floor(time/1440)<30){time=Math.floor(time/1440); timeAgo=time+" day"+(time==1?"":"s");}
+  			else{time=Math.floor(time/43200); timeAgo=time+" month"+(time==1?"":"s");}
   			return timeAgo;
       }
       
