@@ -283,7 +283,7 @@
         background-color:#3ebffa;
       }
       
-      /*Pretty complex animation, so easch side needs its own @keyframes.*/
+      /*Pretty complex animation, so each side needs its own @keyframes.*/
       
       @keyframes slide1{
         50%{width:32vh; margin-left:0;}
@@ -350,7 +350,10 @@
   			document.getElementById("posturl").href=branch.url;
   			document.getElementById("score").innerHTML=branch.score;
   			if (branch.link_flair_text!=null){
-  				var flair=document.createElement("<div id=\"flair\">"+branch.link_flair_text+"</div>");
+  				var flair=document.createElement("div");
+  				flair.serAttribute("id","flair");
+  				var text=document.createTextNode(link_flair_text);
+  				flair.appendChild(text);
   				document.getElementById("posttitle").appendChild(flair);
   			}
   			var time=Math.floor((new Date().getTime()/1000-branch.created_utc)/60);
