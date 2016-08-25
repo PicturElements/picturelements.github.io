@@ -159,6 +159,19 @@
         font-size: 1.5vw;
       }
       
+      #flair{
+      	display: inline-table;
+		    position: absolute;
+		    padding: 0.2vw;
+		    padding-top: 0.15vw;
+		    margin-left: 0.25vw;
+		    background-color: #eee;
+		    border-radius: 0.4vw;
+		    border: 0.1vw solid #ccc;
+		    font-size: 1vw;
+		    color: #666;
+      }
+      
       #posttitle a,#postinfo a{
         text-decoration:none;
         color:#5d5dfd;
@@ -336,6 +349,10 @@
   			document.getElementById("posturl").innerHTML=branch.title;
   			document.getElementById("posturl").href=branch.url;
   			document.getElementById("score").innerHTML=branch.score;
+  			if (branch.link_flair_text!=null){
+  				var flair=document.createElement("<div id=\"flair\">"+branch.link_flair_text+"</div>");
+  				document.getElementById("posttitle").appendChild(flair);
+  			}
   			var time=Math.floor((new Date().getTime()/1000-branch.created_utc)/60);
   			var gold="",edited="";
   			if (branch.gilded==1){gold="<gold></gold>"}
