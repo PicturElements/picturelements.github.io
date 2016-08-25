@@ -10,7 +10,6 @@
   <link href='https://fonts.googleapis.com/css?family=Roboto:300,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="PEhome.css" media="screen">
   <script type="text/javascript" src="jQuery.js"></script>
-  <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
   <head>
     <style>
@@ -200,7 +199,7 @@
       var sincePress=0,movable=1;
       
       //Create mobile events
-      $(document).on("pagecreate","#body",function(){
+      /*$(document).on("pagecreate","#body",function(){
         $("#showcasearea").on("swipeleft",function(){
           move(-1);
         });
@@ -208,7 +207,10 @@
         $("#showcasearea").on("swiperight",function(){
           move(1);
         });
-      });
+      });*/
+      
+      $('#showcasearea').bind('swipeleft',move(-1));
+      $('#showcasearea').bind('swiperight',move(1));
       
       function init(){
         var items=document.getElementsByClassName("linkoverlay");
