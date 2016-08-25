@@ -351,7 +351,7 @@
   			document.getElementById("score").innerHTML=branch.score;
   			if (branch.link_flair_text!=null){
   				var flair=document.createElement("div");
-  				flair.serAttribute("id","flair");
+  				flair.setAttribute("id","flair");
   				var text=document.createTextNode(link_flair_text);
   				flair.appendChild(text);
   				document.getElementById("posttitle").appendChild(flair);
