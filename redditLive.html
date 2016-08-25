@@ -163,7 +163,6 @@
       	display: inline-table;
 		    position: absolute;
 		    padding: 0.2vw;
-		    padding-top: 0.15vw;
 		    margin-left: 0.25vw;
 		    background-color: #eee;
 		    border-radius: 0.4vw;
@@ -202,14 +201,14 @@
       
       gold{
         display: inline-table;
-        position: relative;
-        width: 1.2vw;
-        height: 1.2vw;
-        margin-left: 0.5vw;
-        top: 0.2vw;
-        background-image: url("images/gold.png");
-        background-size: contain;
-        background-repeat: no-repeat;
+		    position: absolute;
+		    width: 1.2vw;
+		    height: 1.2vw;
+		    margin-left: 0.5vw;
+		    margin-top: 0.1vw;
+		    background-image: url("images/gold.png");
+		    background-size: contain;
+		    background-repeat: no-repeat;
       }
       
       gold p{
@@ -359,7 +358,7 @@
   			var time=Math.floor((new Date().getTime()/1000-branch.created_utc)/60);
   			var gold="",edited="";
   			if (branch.gilded==1){gold="<gold></gold>"}
-  			else if (branch.gilded>0){gold="<gold style=\"top:0\"><p>x"+branch.gilded+"</p></gold>"}
+  			else if (branch.gilded>0){gold="<gold><p>x"+branch.gilded+"</p></gold>"}
   			if (branch.edited!=false){
   				edited="* (last edited "+timeSince(Math.floor((new Date().getTime()/1000-branch.edited)/60))+" ago)";
   			}
