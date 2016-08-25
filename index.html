@@ -199,10 +199,11 @@
       var itemCount
       var sincePress=0,movable=1;
       
-      $.mobile.loader.prototype.options.disabled = true;
+      $.mobile.ajaxEnabled=false;
       
       //Create mobile events
       $(document).on("pagecreate",function(){
+        $.mobile.ajaxEnabled=false;
         $("#showcasearea").on("swipeleft",function(){
           move(-1);
         });
@@ -211,8 +212,6 @@
           move(1);
         });
       });
-      
-      document.getElementsByClassName("ui-loader")[0].style.display="none";
       
       function init(){
         var items=document.getElementsByClassName("linkoverlay");
