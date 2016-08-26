@@ -20,9 +20,9 @@ var eX,eY,eOffX=1,eOffY=1;
 function init(){
   //SET EVENT LISTENERS
   var element=document.getElementById("overlaycanvas");
-  element.addEventListener("mousedown",function(event){press(event,1);});
+  element.addEventListener("mousedown",function(event){press(event,true);});
   element.addEventListener("mousemove",function(event){canvasInteract(event);});
-  element.addEventListener("mouseup",function(event){press(event,0);});
+  element.addEventListener("mouseup",function(event){press(event,false);});
   element=document.getElementsByTagName("body")[0];
   element.addEventListener("mousedown",function(event){setMode(event);});
   element.addEventListener("mousemove",function(event){setEP(event);});
