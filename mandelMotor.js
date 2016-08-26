@@ -21,13 +21,13 @@ function init(){
   //SET EVENT LISTENERS
   var element=document.getElementById("overlaycanvas");
   element.addEventListener("mousedown",function(){press(1);});
-  element.addEventListener("mousemove",function(){canvasInteract(event);});
+  element.addEventListener("mousemove",function(event){canvasInteract(event);});
   element.addEventListener("mouseup",function(){press(0);});
   element=document.getElementsByTagName("body")[0];
-  element.addEventListener("mousedown",function(){setMode(event);});
-  element.addEventListener("mousemove",function(){setEP(event);});
+  element.addEventListener("mousedown",function(event){setMode(event);});
+  element.addEventListener("mousemove",function(event){setEP(event);});
   element=document.getElementById("colorpanel");
-  element.addEventListener("mousemove",function(){canvasInteract(event);});
+  element.addEventListener("mousemove",function(event){canvasInteract(event);});
   element.addEventListener("mouseup", function(){sPress(0);});
   document.getElementsByClassName("slider")[0].addEventListener("mousedown",function(){sPress(1);});
   
