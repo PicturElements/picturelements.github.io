@@ -27,7 +27,7 @@ function init(){
   element.addEventListener("mousedown",function(event){setMode(event);});
   element.addEventListener("mousemove",function(event){setEP(event);});
   element=document.getElementById("colorpanel");
-  element.addEventListener("mousemove",function(event){canvasInteract(event);});
+  element.addEventListener("mousemove",function(event){slide(event);});
   element.addEventListener("mouseup", function(){sPress(0);});
   document.getElementsByClassName("slider")[0].addEventListener("mousedown",function(){sPress(1);});
   
