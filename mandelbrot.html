@@ -458,10 +458,10 @@
     <script id="sliderscript">
       var sPressed=false; 
       
-      function sPress(inID){
+      function sPress(event,inID){
         sPressed=Boolean(inID);
         if (sPressed){
-          slide();
+          slide(event);
         }
       }
       
