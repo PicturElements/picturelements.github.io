@@ -28,8 +28,8 @@ function init(){
   element.addEventListener("mousemove",function(event){setEP(event);});
   element=document.getElementById("colorpanel");
   element.addEventListener("mousemove",function(event){slide(event);});
-  element.addEventListener("mouseup", function(){sPress(0);});
-  document.getElementsByClassName("slider")[0].addEventListener("mousedown",function(){sPress(1);});
+  element.addEventListener("mouseup", function(event){sPress(event,0);});
+  document.getElementsByClassName("slider")[0].addEventListener("mousedown",function(event){sPress(event,1);});
   
   
   //This was supposed to be an automatic script generator, but due to caching issues, this didn't work out.
