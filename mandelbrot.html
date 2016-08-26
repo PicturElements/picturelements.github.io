@@ -488,7 +488,8 @@
       }
     </script>
   </head>
-  <body onload=init() id="body" onkeydown=setMode() onmousemove=setEP()>
+  <!-- onkeydown=setMode() onmousemove=setEP()-->
+  <body onload=init() id="body">
     <customscripts>
       <!--Due to caching issues which I am yet to resolve, I cannot just change the JS in a script tag and edit sets, so this has to be done by deleting script tags and filling new ones. Even worse, adding new ones via jQuery doesn't work, so these had to be manually added...-->
       <script id="customscript"></script>
@@ -643,7 +644,8 @@
         <div id="closebtn" onclick="closePopups(2)">[close]</div>
         <input id="urlout" spellcheck="false" value="SLUTA GLO MATTIAS! Jag har inte hunnit med allt än!"></input>
       </div>
-      <div id="colorpanel" class="popup" onmousemove=slide() onmouseup=sPress(0)>
+      <!--onmousemove=slide() onmouseup=sPress(0)-->
+      <div id="colorpanel" class="popup">
         <div class="gradientselector" onmousedown=gradient(0)></div>
         <div class="gradientselector" onmousedown=gradient(1)></div>
         <div class="gradientselector" onmousedown=gradient(2)></div>
@@ -656,7 +658,8 @@
         <div class="gradientselector" onmousedown=gradient(9)></div>
         <div id="gradientdisplay"></div>
         <div id="sliderinfo">Mod value (color cycle period)</div>
-        <div class="slider" onmousedown=sPress(1)>
+        <!--onmousedown=sPress(1)-->
+        <div class="slider">
           <div class="innerslider">50</div>
         </div>
         <button style="top:9.5vw; width:18.5vw" onclick=confirmGradient()>Set color</button>
