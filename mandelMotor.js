@@ -29,7 +29,7 @@ function init(){
   element=document.getElementById("colorpanel");
   element.addEventListener("mousemove",canvasInteract);
   element.addEventListener("mouseup", function(){sPress(0);});
-  document.getElementsByClassName("slider")[0].addKeyListener("mousedown",function(){sPress(1);});
+  document.getElementsByClassName("slider")[0].addEventListener("mousedown",function(){sPress(1);});
   
   
   //This was supposed to be an automatic script generator, but due to caching issues, this didn't work out.
