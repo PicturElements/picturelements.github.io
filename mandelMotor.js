@@ -20,9 +20,9 @@ var eX,eY,eOffX=1,eOffY=1;
 function init(){
   //SET EVENT LISTENERS
   var element=document.getElementById("overlaycanvas");
-  element.addEventListener("mousedown",function(){press(1);});
+  element.addEventListener("mousedown",function(event){press(event,1);});
   element.addEventListener("mousemove",function(event){canvasInteract(event);});
-  element.addEventListener("mouseup",function(){press(0);});
+  element.addEventListener("mouseup",function(event){press(event,0);});
   element=document.getElementsByTagName("body")[0];
   element.addEventListener("mousedown",function(event){setMode(event);});
   element.addEventListener("mousemove",function(event){setEP(event);});
@@ -331,7 +331,7 @@ function setMode(event){
   move=false;
 }
 
-function press(inId){
+function press(event,inId){
   pressed=inId;
   if (pressed&&mode==0&&!move){
     xOrig=event.clientX;
@@ -660,7 +660,7 @@ function save(){
   }
 }
 
-function setEM(inID){
+function setEM(event,inID){
   moveescape=Boolean(inID);
   ex=event.clientX;
   ey=event.clientY;
