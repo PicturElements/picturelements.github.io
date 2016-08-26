@@ -34,6 +34,11 @@ function init(){
   canvas2.height=height;
   canvas2.style.width=""+width+"px";
   canvas2.style.height=""+height+"px";
+  //listeners
+  canvas2.addEventListener("mousedown",function(){press(1);});
+  canvas2.addEventListener("mousemove",canvasInteract);
+  canvas2.addEventListener("mouseup", function(){press(0);});
+  
   canvas2=document.getElementById("rastercanvas");
   canvas2.width=width;
   canvas2.height=height;
@@ -44,10 +49,6 @@ function init(){
   canvas2.height=window.innerWidth*0.08;
   c3W=window.innerWidth*0.29;
   c3H=window.innerWidth*0.08;
-  
-  canvas2.addEventListener("mousedown",function(){press(1);});
-  canvas2.addEventListener("mousemove",canvasInteract);
-  canvas2.addEventListener("mouseup", function(){press(0);});
   
   paintRaster();
   gradientSetup();
