@@ -21,13 +21,13 @@ function init(){
   //SET EVENT LISTENERS
   var element=document.getElementById("overlaycanvas");
   element.addEventListener("mousedown",function(){press(1);});
-  element.addEventListener("mousemove",canvasInteract);
-  element.addEventListener("mouseup", function(){press(0);});
+  element.addEventListener("mousemove",function(){canvasInteract(event);});
+  element.addEventListener("mouseup",function(){press(0);});
   element=document.getElementsByTagName("body")[0];
-  element.addEventListener("mousedown",setMode);
-  element.addEventListener("mousemove",setEP);
+  element.addEventListener("mousedown",function(){setMode(event);});
+  element.addEventListener("mousemove",function(){setEP(event);});
   element=document.getElementById("colorpanel");
-  element.addEventListener("mousemove",canvasInteract);
+  element.addEventListener("mousemove",function(){canvasInteract(event);});
   element.addEventListener("mouseup", function(){sPress(0);});
   document.getElementsByClassName("slider")[0].addEventListener("mousedown",function(){sPress(1);});
   
@@ -270,7 +270,7 @@ function isHotkey(keycode){
   return false;
 }
 
-function setMode(){
+function setMode(event){
   if (!display){
     document.getElementById("escapepanel").style.display="none";
     if (isHotkey(event.keyCode)){
@@ -352,7 +352,7 @@ function press(inId){
   paint2();
 }
 
-function canvasInteract(){
+function canvasInteract(event){
   if (mode==0&&pressed&&!move){
     xRes=event.clientX-xOrig;
     yRes=(xRes)*(height/width);
@@ -666,7 +666,7 @@ function setEM(inID){
   ey=event.clientY;
 }
 
-function setEP(){
+function setEP(event){
   if (moveescape){
     eOffX+=((event.clientX-ex)/window.innerWidth)*100;
     eOffY+=((event.clientY-ey)/window.innerWidth)*100;
