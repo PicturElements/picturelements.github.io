@@ -29,7 +29,6 @@ function init(){
   element=document.getElementById("colorpanel");
   element.addEventListener("mousemove",canvasInteract);
   element.addEventListener("mouseup", function(){sPress(0);});
-  document.getElementById("overlaycanvas");
   document.getElementsByClassName("slider")[0].addKeyListener("mousedown",function(){sPress(1);});
   
   
