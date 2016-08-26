@@ -18,6 +18,21 @@ var moveescape=false;
 var eX,eY,eOffX=1,eOffY=1;
 
 function init(){
+  //SET EVENT LISTENERS
+  var element=document.getElementById("overlaycanvas");
+  element.addEventListener("mousedown",function(){press(1);});
+  element.addEventListener("mousemove",canvasInteract);
+  element.addEventListener("mouseup", function(){press(0);});
+  element=document.getElementsByTagName("body")[0];
+  element.addKeyListener("mousedown",setMode);
+  element.addEventListener("mousemove",setEP);
+  element=document.getElementById("colorpanel");
+  element.addEventListener("mousemove",canvasInteract);
+  element.addEventListener("mouseup", function(){sPress(0);});
+  document.getElementById("overlaycanvas");
+  document.getElementsByClassName("slider")[0].addKeyListener("mousedown",function(){sPress(1);});
+  
+  
   //This was supposed to be an automatic script generator, but due to caching issues, this didn't work out.
   /*for (var i=0;i<100;i++){
     $('customscripts').append("<script id=\"customscript\"></script>");
@@ -34,11 +49,6 @@ function init(){
   canvas2.height=height;
   canvas2.style.width=""+width+"px";
   canvas2.style.height=""+height+"px";
-  //listeners
-  canvas2.addEventListener("mousedown",function(){press(1);});
-  canvas2.addEventListener("mousemove",canvasInteract);
-  canvas2.addEventListener("mouseup", function(){press(0);});
-  
   canvas2=document.getElementById("rastercanvas");
   canvas2.width=width;
   canvas2.height=height;
