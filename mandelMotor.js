@@ -44,6 +44,11 @@ function init(){
   canvas2.height=window.innerWidth*0.08;
   c3W=window.innerWidth*0.29;
   c3H=window.innerWidth*0.08;
+  
+  canvas2.addEventListener("mousedown",function(){press(1);});
+  canvas2.addEventListener("mousemove",canvasInteract);
+  canvas2.addEventListener("mouseup", function(){press(0);});
+  
   paintRaster();
   gradientSetup();
   var parts=(startAt[selectedCol+1]-startAt[selectedCol])/3+1;
