@@ -327,7 +327,7 @@ function setMode(event){
   }else if(event.keyCode==27){   //ESC
     closePopups(-1);
   }
-  paint2();
+  paint2(event);
   move=false;
 }
 
@@ -349,7 +349,7 @@ function press(event,inId){
     document.getElementById("upperinfo").innerHTML="Esc - Cancel | Enter - Generate | Drag to reposition";
     move=true;
   }
-  paint2();
+  paint2(event);
 }
 
 function canvasInteract(event){
@@ -370,7 +370,7 @@ function canvasInteract(event){
     document.getElementById("yOff").value=(parseFloat(document.getElementById("yOff").value)-(event.clientY-curY)*zoom);
     xOrig+=(event.clientX-curX);
     yOrig+=(event.clientY-curY);
-    paint2();
+    paint2(event);
     curX=event.clientX;
     curY=event.clientY;
   }else if (mode==1&&pressed){
@@ -413,7 +413,7 @@ function canvasInteract(event){
       }
     }
   }
-  paint2();
+  paint2(event);
 }
 
 function setStuff(){
@@ -748,7 +748,7 @@ function color(inID){
   }
 }
 
-function paint2(){
+function paint2(event){
   ctx2.clearRect(0,0,window.innerWidth,window.innerHeight);
   ctx2.strokeStyle="red";
   if (xRes>0&&yRes>0&&mode==0||move){
