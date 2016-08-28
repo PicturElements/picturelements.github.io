@@ -11,7 +11,7 @@ var gradientCols=[255,255,255,0,0,0,255,0,0,0,0,0,0,255,0,0,0,0,0,0,255,0,0,0,25
 var startAt=[0,6,12,18,24,33,48,66,75];
 var selectedCol=5,rd,gr,bl,cycleLength=50;
 var date=new Date(),time=date.getTime();
-var ctx,imgData=null,imgDataFull,ctx2,ctx3,c3W,c3H;
+var ctx,imgData=null,imgDataFull=null,ctx2,ctx3,c3W,c3H;
 var expressions=["PI","E","pow","sqrt","cbrt","sin","cos","tan","floor","abs","ceil","random","log","log10","exp"];
 //escape panel
 var moveescape=false;
@@ -167,9 +167,10 @@ function mainGenerate(){
   document.getElementById("upperinfo").style.display="none";
   if (imgData!=null){
     ctx.clearRect(0,0,width,height);
-    document.getElementById("rastercanvas").getContext("2d").putImageData(imgData,cmx,cmy);
+    document.getElementById("rastercanvas").getContext("2d").putImageData(imgDataFull,cmx,cmy);
   }
   imgData=ctx2.createImageData(width,10);
+  imgDataFull=ctx2.createImageData(width,height);
   scan=0;
   if (mode==3){mode=0;}
   document.getElementById("mandelcanvas").style.marginLeft="0";
@@ -710,6 +711,10 @@ function paint(){
         imgData.data[counter+1]=0;
         imgData.data[counter+2]=0;
         imgData.data[counter+3]=255;
+        imgDataFull.data[scan*width*4+counter]=0;
+        imgDataFull.data[scan*width*4+counter+1]=0;
+        imgDataFull.data[scan*width*4+counter+2]=0;
+        imgDataFull.data[scan*width*4+counter+3]=255;
       }else{
         /*shade=Math.floor((iterations-pixels[h*width+w])/iterations*255);
         ctx.fillStyle="rgb("+shade+","+shade+","+shade+")";*/
@@ -721,6 +726,10 @@ function paint(){
         imgData.data[counter+1]=Math.floor(gr);
         imgData.data[counter+2]=Math.floor(bl);
         imgData.data[counter+3]=255;
+        imgDataFull.data[scan*width*4+counter]=Math.floor(rd);
+        imgDataFull.data[scan*width*4+counter+1]=Math.floor(gr);
+        imgDataFull.data[scan*width*4+counter+2]=Math.floor(bl);
+        imgDataFull.data[scan*width*4+counter+3]=255;
       }
       counter+=4;
     }
@@ -750,7 +759,6 @@ function paint(){
     document.getElementById("upperinfo").innerHTML=time_out;
     setTimeout(function(){document.getElementById("upperinfo").style.display="none";}, 3500);
     clearInterval(thread);
-    imgData2=imgData;
     /*$('#body').find('script').first().remove();
     $("#body").prepend("<script id=\"customscript\"></script>");*/
   }
