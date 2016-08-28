@@ -165,7 +165,7 @@ function confirmGradient(){
 function mainGenerate(){
   ctx=document.getElementById("mandelcanvas").getContext("2d");
   document.getElementById("upperinfo").style.display="none";
-  if (imgData!=null){ctx.putImageData(imgData,cmx,cmy);}
+  if (imgData!=null){document.getElementById("rastercanvas").getContext("2d").putImageData(imgData,cmx,cmy);}
   imgData=ctx2.createImageData(width,10);
   scan=0;
   if (mode==3){mode=0;}
