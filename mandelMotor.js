@@ -823,6 +823,6 @@ function paint2(event){
     ctx2.moveTo(0,scan+10);
     ctx2.lineTo(window.innerWidth,scan+10);
     ctx2.stroke();
-    ctx.putImageData(imgData,cmx2,cmy2);
+    document.getElementById("rastercanvas").getContext("2d").putImageData(imgData2,cmx2,cmy2);
   }
 }
