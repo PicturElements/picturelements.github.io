@@ -559,9 +559,7 @@ function isNumber(inChar){
 }
 
 function checkFunction(){
-  try{
-    getJulia(0,0);
-  }catch(e){
+  if (!getJulia(0,0)){
     document.getElementById("funcout2").innerHTML="ERROR: Malformed syntax";
     return false;
   }
@@ -642,7 +640,7 @@ function pushFunction2(){
     imPart=imPart.replace(regex,"Math."+expressions[a]);
   }
   console.log(power+", "+rePart+", "+imPart);
-  document.getElementById("customscript").innerHTML="\nfunction getJulia(x,y){\n  julA="+rePart+";\n  julB="+imPart+";\n}\n";
+  document.getElementById("customscript").innerHTML="\nfunction getJulia(x,y){\n  try{\n    julA="+rePart+";\n    julB="+imPart+";\n  }catch(e){return}\n}\n";
   if (checkFunction){
     isMandel=false;
     closePopups(1);
