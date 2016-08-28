@@ -77,7 +77,7 @@ function init(){
     pushFunction(0);
     document.getElementById("overlay").style.display="block";
     document.getElementById("alertpanel").style.display="block";
-    document.getElementById("checkinput").innerHTML=document.getElementById("functionin").value;
+    document.getElementById("checkinput").innerHTML=advancedGen?document.getElementById("functionin2").value:document.getElementById("functionin").value;
   }
   setSlide();
   displayFunction();
@@ -515,7 +515,7 @@ function displayFunction(){
     tmpPow=2;
     tmpJA=0;
     tmpJB=0;
-    var input=document.getElementById("functionin").value;
+    var input=advancedGen?document.getElementById("functionin2").value:document.getElementById("functionin").value;
     var values=[],foundNumber=false,prevWasNo=false,tmpString="";
     for (var i=0;i<input.length;i++){
       if (isNumber(input.charAt(i))){
@@ -589,8 +589,7 @@ function pushFunction(inId){
   julA=tmpJA;
   julB=tmpJB;
   scan=0;
-  if (inId==1){resetStuff(); prevH=0;}
-  if (inId==1){setStuff();}   //includes mainGenerate()
+  if (inId==1){resetStuff(); prevH=0; setStuff();}   //includes mainGenerate()
 }
 
 function pushFunction2(){
