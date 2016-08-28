@@ -759,6 +759,7 @@ function paint(){
     document.getElementById("upperinfo").innerHTML=time_out;
     setTimeout(function(){document.getElementById("upperinfo").style.display="none";}, 3500);
     clearInterval(thread);
+    paintRaster();
     /*$('#body').find('script').first().remove();
     $("#body").prepend("<script id=\"customscript\"></script>");*/
   }
