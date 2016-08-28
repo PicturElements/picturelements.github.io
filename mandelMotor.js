@@ -460,7 +460,8 @@ function openToolbox(){
 function setFunction(){
   display=true;
   document.getElementById("overlay").style.display="block";
-  document.getElementById((advancedGen?"functionpanel2":"functionpanel")).style.display="block";
+  var name=advancedGen?"functionpanel2":"functionpanel";
+  document.getElementById(name).style.display="block";
 }
 
 function setColor(){
