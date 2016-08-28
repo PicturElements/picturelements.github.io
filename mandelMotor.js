@@ -77,7 +77,6 @@ function init(){
     pushFunction(0);
     document.getElementById("overlay").style.display="block";
     document.getElementById("alertpanel").style.display="block";
-    document.getElementById("checkinput").innerHTML=advancedGen?document.getElementById("functionin2").value:document.getElementById("functionin").value;
   }
   setSlide();
   displayFunction();
@@ -125,6 +124,7 @@ function parseUrl(){
   }
   if (foundQuest){
     document.getElementById("zoom").value=parseFloat(document.getElementById("zoom").value)*(prevH/height);
+    document.getElementById("checkinput").innerHTML=advancedGen?document.getElementById("functionin2").value:document.getElementById("functionin").value;
     /*document.getElementById("xOff").value=parseFloat(document.getElementById("xOff").value)*(prevH/height);
     document.getElementById("yOff").value=parseFloat(document.getElementById("yOff").value)*(prevH/height);*/
   }
