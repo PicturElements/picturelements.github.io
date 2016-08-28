@@ -24,7 +24,7 @@ function init(){
   element.addEventListener("mousemove",function(event){canvasInteract(event);});
   element.addEventListener("mouseup",function(event){press(event,false);});
   element=document.getElementsByTagName("body")[0];
-  element.addEventListener("mousedown",function(event){setMode(event);});
+  element.addEventListener("keydown",function(event){setMode(event);});
   element.addEventListener("mousemove",function(event){setEP(event);});
   element=document.getElementById("colorpanel");
   element.addEventListener("mousemove",function(event){slide(event);});
