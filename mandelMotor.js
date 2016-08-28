@@ -82,6 +82,8 @@ function init(){
 
 function paintRaster(){
   var ctx=document.getElementById("rastercanvas").getContext("2d");
+  ctx.fillStyle="#222";
+  ctx.fillRect(0,0,width,height);
   ctx.fillStyle="#777";
   var sqS=7;
   for (var h=0;h<window.innerHeight+sqS;h+=sqS){
