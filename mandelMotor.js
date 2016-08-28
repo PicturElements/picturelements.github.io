@@ -98,7 +98,7 @@ function paintRaster(){
 
 function parseUrl(){
   var tmpStr="";
-  var count=0,url=window.location.href;
+  var count=-1,url=window.location.href;
   var foundQuest=false,toScan=false;
   for (var i=0;i<url.length;i++){
     if (url.charAt(i)=='?'){foundQuest=true;}
@@ -107,7 +107,8 @@ function parseUrl(){
       else if (url.charAt(i)=='&'||i==url.length-1){
         if (i==url.length-1){tmpStr+=url.charAt(i);}
         toScan=false;
-        if (count==0){document.getElementById("functionin").value=tmpStr;}
+        if (count==-1){advancedGen=Boolean(tmpStr);}
+        else if (count==0){advancedGen?document.getElementById("functionin2").value=tmpStr:document.getElementById("functionin").value=tmpStr;}
         else if (count==1){document.getElementById("iterations").value=tmpStr;}
         else if (count==2){document.getElementById("xOff").value=tmpStr;}
         else if (count==3){document.getElementById("yOff").value=tmpStr;}
@@ -472,7 +473,7 @@ function getUrl(){
   display=true;
   document.getElementById("overlay").style.display="block";
   document.getElementById("sharepanel").style.display="block";
-  var url="http://picturelements.github.io/mandelbrot?func="+document.getElementById("functionin").value+"&iters="+document.getElementById("iterations").value+"&xOff="+document.getElementById("xOff").value+"&yOff="+document.getElementById("yOff").value+"&zoom="+document.getElementById("zoom").value+"&color="+selectedCol+"&mod="+cycleLength+"&prevH="+height;
+  var url="http://picturelements.github.io/mandelbrot?adv="+advancedGen+"&func="+(advancedGen?document.getElementById("functionin2"):document.getElementById("functionin")).value+"&iters="+document.getElementById("iterations").value+"&xOff="+document.getElementById("xOff").value+"&yOff="+document.getElementById("yOff").value+"&zoom="+document.getElementById("zoom").value+"&color="+selectedCol+"&mod="+cycleLength+"&prevH="+height;
   document.getElementById("urlout").value=url;
   document.getElementById("urlout").select();
 }
