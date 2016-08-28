@@ -74,11 +74,11 @@ function init(){
   if (!parseUrl()){
     setStuff();
   }else{
-    pushFunction(0);
     document.getElementById("overlay").style.display="block";
     document.getElementById("alertpanel").style.display="block";
   }
   parseUrl();  //Don't ask why.
+  if (advancedGen){pushFunction(0);}
   setSlide();
   displayFunction();
 }
