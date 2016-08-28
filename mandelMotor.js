@@ -30,6 +30,9 @@ function init(){
   element.addEventListener("mousemove",function(event){slide(event);});
   element.addEventListener("mouseup", function(event){sPress(event,0);});
   document.getElementsByClassName("slider")[0].addEventListener("mousedown",function(event){sPress(event,1);});
+  element=document.getElementById("movebar");
+  element.addEventListener("mousedown",function(event){setEM(event,true);});
+  element.addEventListener("mouseup", function(event){setEM(event,false);});
   
   
   //This was supposed to be an automatic script generator, but due to caching issues, this didn't work out.
@@ -686,7 +689,7 @@ function save(){
 }
 
 function setEM(event,inID){
-  moveescape=Boolean(inID);
+  moveescape=inID;
   ex=event.clientX;
   ey=event.clientY;
 }
