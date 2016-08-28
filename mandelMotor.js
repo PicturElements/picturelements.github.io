@@ -163,10 +163,11 @@ function confirmGradient(){
 }
 
 function mainGenerate(){
+  ctx=document.getElementById("mandelcanvas").getContext("2d");
   document.getElementById("upperinfo").style.display="none";
   if (imgData!=null){
-    ctx2.clearRect(0,0,width,height);
-    ctx.putImageData(imgData,cmx,cmy);
+    ctx.clearRect(0,0,width,height);
+    document.getElementById("rastercanvas").getContext("2d").putImageData(imgData,cmx,cmy);
   }
   imgData=ctx2.createImageData(width,10);
   scan=0;
