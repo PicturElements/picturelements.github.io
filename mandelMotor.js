@@ -640,7 +640,7 @@ function pushFunction2(){
     imPart=imPart.replace(regex,"Math."+expressions[a]);
   }
   console.log(power+", "+rePart+", "+imPart);
-  document.getElementById("customscript").innerHTML="\nfunction getJulia(x,y){\n  try{\n    julA="+rePart+";\n    julB="+imPart+";\n  }catch(e){return}\n}\n";
+  document.getElementById("customscript").innerHTML="\nfunction getJulia(x,y){\n  try{\n    julA="+rePart+";\n    julB="+imPart+";\n  }catch(e){return false;}\n}\n";
   if (checkFunction){
     isMandel=false;
     closePopups(1);
