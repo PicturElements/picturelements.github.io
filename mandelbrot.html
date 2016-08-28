@@ -633,11 +633,11 @@
       <div id="functionpanel2" class="popup" style="height:23vw; margin-top:-11.5vw">
         Advanced Julia set function definition
         <div id="closebtn" onclick="closePopups(1)">[close]</div>
-        <input id="functionin2" value="z^2+cos(x)+(sqrt(23)+0.125)i" spellcheck="false" style="width:41%; top:5.5vw" onkeyup=displayFunction()>
+        <input id="functionin2" value="z^2+cos(x)+(sqrt(23)+0.125)i" spellcheck="false" style="width:41%; top:5.5vw" onkeyup=checkFunction()>
         <button style="margin-top:0;position:absolute;width:12vw;margin-left:27vw;height: 2.4vw;" onclick="goBack()">Back</button>
         <button style="margin-top:0;position:absolute;width:12vw;margin-left:40vw;height: 2.4vw;" onclick="pushFunction2()">Set function</button>
-        <div id="limitations" style="display: block;position: absolute;font-size: 1vw;color: #555;width: 90%;margin-left: 5%;height: 8vw;line-height: 1.3vw;background-color: #ddd;margin-top: 4vw;">Requirements: integer power (e.g. z^4), imaginary part in complex number must be distincted with parentheses, proceeded by i (e.g. z^2+0.5-(1-sin(x))i).<br><br>Allowed functions/expressions:<br>x, y, PI, E, +, -, *, /, %, pow(x,power), sqrt(x), cbrt(x), sin(x), cos(x), tan(x), floor(x), abs(x), ceil(x), random(max value), log(x), log10(x), exp(x)</div>
-        <div id="funcout2" style="display: block;position: absolute;font-size: 1.3vw;color: #555;width: 90%;margin-left: 5%;height: 3vw;line-height: 3vw;background-color: #ddd;margin-top: 13vw;">Function: z^2+c (Mandelbrot set)</div>
+        <div id="limitations" style="display: block;position: absolute;font-size: 1vw;color: #555;width: 90%;margin-left: 5%;height: 8vw;line-height: 1.3vw;background-color: #ddd;margin-top: 4vw;">Requirements: integer power (e.g. z^4), imaginary part in complex number must be distincted with parentheses, e.g. z^2+0.5-(3*y).<br><br>Allowed functions/expressions:<br>x, y, PI, E, +, -, *, /, %, pow(x,power), sqrt(x), cbrt(x), sin(x), cos(x), tan(x), floor(x), abs(x), ceil(x), random(max value), log(x), log10(x), exp(x)</div>
+        <div id="funcout2" style="display: block;position: absolute;font-size: 1.3vw;color: #555;width: 90%;margin-left: 5%;height: 3vw;line-height: 3vw;background-color: #ddd;margin-top: 13vw;">Info will appear here.</div>
       </div>
       <div id="sharepanel" class="popup">
         Share you Mandelbrot/Julia set!
