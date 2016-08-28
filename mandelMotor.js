@@ -91,6 +91,7 @@ function paintRaster(){
 }
 
 function parseUrl(){
+  var tmpBoolean;
   var tmpStr="";
   var count=-1,url=window.location.href;
   var foundQuest=false,toScan=false;
@@ -101,8 +102,8 @@ function parseUrl(){
       else if (url.charAt(i)=='&'||i==url.length-1){
         if (i==url.length-1){tmpStr+=url.charAt(i);}
         toScan=false;
-        if (count==-1){advancedGen=Boolean(tmpStr);}
-        else if (count==0){advancedGen?document.getElementById("functionin2").value=tmpStr:document.getElementById("functionin").value=tmpStr;}
+        if (count==-1){tmpBoolean=Boolean(tmpStr);}
+        else if (count==0){tmpBoolean?document.getElementById("functionin2").value=tmpStr:document.getElementById("functionin").value=tmpStr;}
         else if (count==1){document.getElementById("iterations").value=tmpStr;}
         else if (count==2){document.getElementById("xOff").value=tmpStr;}
         else if (count==3){document.getElementById("yOff").value=tmpStr;}
@@ -119,10 +120,11 @@ function parseUrl(){
   }
   if (foundQuest){
     document.getElementById("zoom").value=parseFloat(document.getElementById("zoom").value)*(prevH/height);
-    document.getElementById("checkinput").innerHTML=advancedGen?document.getElementById("functionin2").value:document.getElementById("functionin").value;
+    document.getElementById("checkinput").innerHTML=tmpBoolean?document.getElementById("functionin2").value:document.getElementById("functionin").value;
     pushFunction(0);
     document.getElementById("overlay").style.display="block";
     document.getElementById("alertpanel").style.display="block";
+    advancedGen=tmpBoolean;
     /*document.getElementById("xOff").value=parseFloat(document.getElementById("xOff").value)*(prevH/height);
     document.getElementById("yOff").value=parseFloat(document.getElementById("yOff").value)*(prevH/height);*/
   }else{
