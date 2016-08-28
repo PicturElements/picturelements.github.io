@@ -1,7 +1,7 @@
 var xOff=300,yOff=0,zoom=3,iterations=50,mode=0,prevH=0;
 var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true,display=false,move=false,advancedGen=false;
 var width=window.innerWidth,height=window.innerHeight;
-var cmx=0,cmy=0,curX,curY,tmpXOff,tmpYOff,tmpZoom;
+var cmx=0,cmy=0,cmx2=0,cmy2=0,curX,curY,tmpXOff,tmpYOff,tmpZoom;
 var a,b,a2,b2;
 var pixels=[];
 var scan=0,thread=null;
@@ -11,7 +11,7 @@ var gradientCols=[255,255,255,0,0,0,255,0,0,0,0,0,0,255,0,0,0,0,0,0,255,0,0,0,25
 var startAt=[0,6,12,18,24,33,48,66,75];
 var selectedCol=5,rd,gr,bl,cycleLength=50;
 var date=new Date(),time=date.getTime();
-var ctx,imgData,ctx2,ctx3,c3W,c3H;
+var ctx,imgData,imgData2=null,ctx2,ctx3,c3W,c3H;
 var expressions=["PI","E","pow","sqrt","cbrt","sin","cos","tan","floor","abs","ceil","random","log","log10","exp"];
 //escape panel
 var moveescape=false;
@@ -165,6 +165,7 @@ function confirmGradient(){
 function mainGenerate(){
   ctx=document.getElementById("mandelcanvas").getContext("2d");
   document.getElementById("upperinfo").style.display="none";
+  imgdata=null;
   imgData=ctx.createImageData(width,10);
   scan=0;
   if (mode==3){mode=0;}
@@ -173,6 +174,8 @@ function mainGenerate(){
   tmpXOff=parseFloat(document.getElementById("xOff").value);
   tmpYOff=parseFloat(document.getElementById("yOff").value);
   tmpZoom=parseFloat(document.getElementById("zoom").value);
+  cmx2=cmx;
+  cmy2=cmy;
   cmx=0;
   cmy=0;
   if (thread!=null){
@@ -383,35 +386,37 @@ function canvasInteract(event){
     document.getElementById("xOff").value=tmpXOff+cmx*zoom;
     document.getElementById("yOff").value=tmpYOff+cmy*zoom;
   }else if(mode==2){
-    document.getElementById("hoverinfo").style.left=""+(event.clientX+20)+"px";
-    document.getElementById("hoverinfo").style.top=""+(event.clientY+20)+"px";
-    var pos=(event.clientY-cmy)*width+(event.clientX-cmx);
-    var hi=document.getElementById("hoverinfo");
-    hi.style.right="initial";
-    hi.style.bottom="initial";
-    if (event.clientX-cmx<0||event.clientY-cmy<0||event.clientX-cmx>width||event.clientY-cmy>height){
-      hi.style.left="-1000px";
-      hi.style.top="-1000px";
-    }else{
-      color(pixels[pos]);
-      var iters=Math.floor(pixels[pos]);
-      if (iters==-1){
-        iters=iterations;
-        document.getElementById("colorsample").style.backgroundColor="black";
+    try{    //if you click I, the script throws an error for event. Simple fix.
+      document.getElementById("hoverinfo").style.left=""+(event.clientX+20)+"px";
+      document.getElementById("hoverinfo").style.top=""+(event.clientY+20)+"px";
+      var pos=(event.clientY-cmy)*width+(event.clientX-cmx);
+      var hi=document.getElementById("hoverinfo");
+      hi.style.right="initial";
+      hi.style.bottom="initial";
+      if (event.clientX-cmx<0||event.clientY-cmy<0||event.clientX-cmx>width||event.clientY-cmy>height){
+        hi.style.left="-1000px";
+        hi.style.top="-1000px";
       }else{
-        document.getElementById("colorsample").style.backgroundColor="rgb("+Math.floor(rd)+","+Math.floor(gr)+","+Math.floor(bl)+")";
+        color(pixels[pos]);
+        var iters=Math.floor(pixels[pos]);
+        if (iters==-1){
+          iters=iterations;
+          document.getElementById("colorsample").style.backgroundColor="black";
+        }else{
+          document.getElementById("colorsample").style.backgroundColor="rgb("+Math.floor(rd)+","+Math.floor(gr)+","+Math.floor(bl)+")";
+        }
+        document.getElementById("iterationinfo").innerHTML="Iterations: "+iters;
+        document.getElementById("iterationinfo2").innerHTML="Re: "+(event.clientX-cmx-width/2-xOff/zoom)/(height/zoom)+"<br>Im: "+(-(event.clientY-cmy-height/2-yOff/zoom)/(height/zoom));
+        if (event.clientX+hi.offsetWidth+40>window.innerWidth){
+          hi.style.left="initial";
+          hi.style.right=""+(window.innerWidth-event.clientX+20)+"px";
+        }
+        if (event.clientY+hi.offsetHeight+40>window.innerHeight){
+          hi.style.top="initial";
+          hi.style.bottom=""+(window.innerHeight-event.clientY+20)+"px";
+        }
       }
-      document.getElementById("iterationinfo").innerHTML="Iterations: "+iters;
-      document.getElementById("iterationinfo2").innerHTML="Re: "+(event.clientX-cmx-width/2-xOff/zoom)/(height/zoom)+"<br>Im: "+(-(event.clientY-cmy-height/2-yOff/zoom)/(height/zoom));
-      if (event.clientX+hi.offsetWidth+40>window.innerWidth){
-        hi.style.left="initial";
-        hi.style.right=""+(window.innerWidth-event.clientX+20)+"px";
-      }
-      if (event.clientY+hi.offsetHeight+40>window.innerHeight){
-        hi.style.top="initial";
-        hi.style.bottom=""+(window.innerHeight-event.clientY+20)+"px";
-      }
-    }
+    }catch(e){}
   }
   paint2(event);
 }
@@ -744,6 +749,7 @@ function paint(){
     document.getElementById("upperinfo").innerHTML=time_out;
     setTimeout(function(){document.getElementById("upperinfo").style.display="none";}, 3500);
     clearInterval(thread);
+    imgData2=imgData;
     /*$('#body').find('script').first().remove();
     $("#body").prepend("<script id=\"customscript\"></script>");*/
   }
@@ -817,5 +823,6 @@ function paint2(event){
     ctx2.moveTo(0,scan+10);
     ctx2.lineTo(window.innerWidth,scan+10);
     ctx2.stroke();
+    ctx.putImageData(imgData,cmx2,cmy2);
   }
 }
