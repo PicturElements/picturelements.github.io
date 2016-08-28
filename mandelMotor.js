@@ -11,7 +11,7 @@ var gradientCols=[255,255,255,0,0,0,255,0,0,0,0,0,0,255,0,0,0,0,0,0,255,0,0,0,25
 var startAt=[0,6,12,18,24,33,48,66,75];
 var selectedCol=5,rd,gr,bl,cycleLength=50;
 var date=new Date(),time=date.getTime();
-var ctx,imgData=null,ctx2,ctx3,c3W,c3H;
+var ctx,imgData=null,imgDataFull,ctx2,ctx3,c3W,c3H;
 var expressions=["PI","E","pow","sqrt","cbrt","sin","cos","tan","floor","abs","ceil","random","log","log10","exp"];
 //escape panel
 var moveescape=false;
@@ -163,9 +163,11 @@ function confirmGradient(){
 }
 
 function mainGenerate(){
-  ctx=document.getElementById("mandelcanvas").getContext("2d");
   document.getElementById("upperinfo").style.display="none";
-  if (imgData!=null){document.getElementById("rastercanvas").getContext("2d").putImageData(imgData,cmx,cmy);}
+  if (imgData!=null){
+    ctx2.clearRect(0,0,width,height);
+    ctx.putImageData(imgData,cmx,cmy);
+  }
   imgData=ctx2.createImageData(width,10);
   scan=0;
   if (mode==3){mode=0;}
