@@ -559,6 +559,7 @@ function isNumber(inChar){
 }
 
 function pushFunction(inId){
+  document.getElementById("escapepanel").style.display="none";
   displayFunction();
   advancedGen=false;
   closePopups(0);
@@ -572,6 +573,7 @@ function pushFunction(inId){
 }
 
 function pushFunction2(){
+  document.getElementById("escapepanel").style.display="none";
   $('customscripts').find('script').first().remove();
   //$('#inserthere').before("<script id=\"customscript\"></script>");
   //$("#body").prepend("<script id=\"customscript\"></script>");
@@ -621,7 +623,11 @@ function pushFunction2(){
   imPart=tmpStr;
   var regex;
   for (var a=0;a<expressions.length;a++){
-    regex=new RegExp(expressions[a],"gi");
+    if (expressions[a]!="PI"&&expressions[a]!="E"){
+      regex=new RegExp(expressions[a],"gi");
+    }else{
+      regex=new RegExp(expressions[a],"g");
+    }
     rePart=rePart.replace(regex,"Math."+expressions[a]);
     imPart=imPart.replace(regex,"Math."+expressions[a]);
   }
