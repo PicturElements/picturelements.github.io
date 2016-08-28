@@ -80,6 +80,7 @@ function init(){
   }
   setSlide();
   displayFunction();
+  console.log(advancedGen);
 }
 
 function paintRaster(){
