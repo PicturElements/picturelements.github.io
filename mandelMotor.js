@@ -1,7 +1,7 @@
 var xOff=300,yOff=0,zoom=3,iterations=50,mode=0,prevH=0;
 var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true,display=false,move=false,advancedGen=false;
 var width=window.innerWidth,height=window.innerHeight;
-var cmx=0,cmy=0,cmx2=0,cmy2=0,curX,curY,tmpXOff,tmpYOff,tmpZoom;
+var cmx=0,cmy=0,curX,curY,tmpXOff,tmpYOff,tmpZoom;
 var a,b,a2,b2;
 var pixels=[];
 var scan=0,thread=null;
@@ -11,7 +11,7 @@ var gradientCols=[255,255,255,0,0,0,255,0,0,0,0,0,0,255,0,0,0,0,0,0,255,0,0,0,25
 var startAt=[0,6,12,18,24,33,48,66,75];
 var selectedCol=5,rd,gr,bl,cycleLength=50;
 var date=new Date(),time=date.getTime();
-var ctx,imgData,imgData2=null,ctx2,ctx3,c3W,c3H;
+var ctx,imgData=null,ctx2,ctx3,c3W,c3H;
 var expressions=["PI","E","pow","sqrt","cbrt","sin","cos","tan","floor","abs","ceil","random","log","log10","exp"];
 //escape panel
 var moveescape=false;
@@ -165,8 +165,8 @@ function confirmGradient(){
 function mainGenerate(){
   ctx=document.getElementById("mandelcanvas").getContext("2d");
   document.getElementById("upperinfo").style.display="none";
+  if (imgData!=null){ctx.putImageData(imageData,cmx,cmy);}
   imgData=ctx2.createImageData(width,10);
-  imgdata2=ctx.createImageData(width,height);
   scan=0;
   if (mode==3){mode=0;}
   document.getElementById("mandelcanvas").style.marginLeft="0";
@@ -174,8 +174,6 @@ function mainGenerate(){
   tmpXOff=parseFloat(document.getElementById("xOff").value);
   tmpYOff=parseFloat(document.getElementById("yOff").value);
   tmpZoom=parseFloat(document.getElementById("zoom").value);
-  cmx2=cmx;
-  cmy2=cmy;
   cmx=0;
   cmy=0;
   if (thread!=null){
@@ -823,6 +821,5 @@ function paint2(event){
     ctx2.moveTo(0,scan+10);
     ctx2.lineTo(window.innerWidth,scan+10);
     ctx2.stroke();
-    document.getElementById("rastercanvas").getContext("2d").putImageData(imgData2,cmx2,cmy2);
   }
 }
