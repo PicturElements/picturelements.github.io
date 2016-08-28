@@ -165,8 +165,8 @@ function confirmGradient(){
 function mainGenerate(){
   ctx=document.getElementById("mandelcanvas").getContext("2d");
   document.getElementById("upperinfo").style.display="none";
-  imgdata=null;
-  imgData=ctx.createImageData(width,10);
+  imgData=ctx2.createImageData(width,10);
+  imgdata2=ctx.createImageData(width,height);
   scan=0;
   if (mode==3){mode=0;}
   document.getElementById("mandelcanvas").style.marginLeft="0";
