@@ -71,14 +71,7 @@ function init(){
   }
   colors+="rgb("+(gradientCols[startAt[selectedCol]])+","+(gradientCols[startAt[selectedCol]+1])+","+(gradientCols[startAt[selectedCol]+2])+") 100%";
   document.getElementById("gradientdisplay").style.background="linear-gradient(to right, "+colors+")";
-  if (!parseUrl()){
-    setStuff();
-  }else{
-    document.getElementById("overlay").style.display="block";
-    document.getElementById("alertpanel").style.display="block";
-  }
-  parseUrl();  //Don't ask why.
-  if (advancedGen){pushFunction(0);}
+  parseUrl();
   setSlide();
   displayFunction();
 }
@@ -126,8 +119,13 @@ function parseUrl(){
   if (foundQuest){
     document.getElementById("zoom").value=parseFloat(document.getElementById("zoom").value)*(prevH/height);
     document.getElementById("checkinput").innerHTML=advancedGen?document.getElementById("functionin2").value:document.getElementById("functionin").value;
+    pushFunction(0);
+    document.getElementById("overlay").style.display="block";
+    document.getElementById("alertpanel").style.display="block";
     /*document.getElementById("xOff").value=parseFloat(document.getElementById("xOff").value)*(prevH/height);
     document.getElementById("yOff").value=parseFloat(document.getElementById("yOff").value)*(prevH/height);*/
+  }else{
+    setStuff();
   }
   return foundQuest;
 }
