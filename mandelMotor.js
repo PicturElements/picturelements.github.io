@@ -558,6 +558,16 @@ function isNumber(inChar){
   return false;
 }
 
+function checkFunction(){
+  try{
+    getJulia(0,0);
+  }catch(e){
+    document.getElementById("funcout2").innerHTML="ERROR: Malformed syntax";
+    return false;
+  }
+  return true;
+}
+
 function pushFunction(inId){
   document.getElementById("escapepanel").style.display="none";
   displayFunction();
@@ -633,10 +643,12 @@ function pushFunction2(){
   }
   console.log(power+", "+rePart+", "+imPart);
   document.getElementById("customscript").innerHTML="\nfunction getJulia(x,y){\n  julA="+rePart+";\n  julB="+imPart+";\n}\n";
-  isMandel=false;
-  closePopups(1);
-  scan=0;
-  setStuff();
+  if (checkFunction){
+    isMandel=false;
+    closePopups(1);
+    scan=0;
+    setStuff();
+  }
 }
 
 function resetStuff(){
