@@ -71,6 +71,7 @@ function init(){
   }
   colors+="rgb("+(gradientCols[startAt[selectedCol]])+","+(gradientCols[startAt[selectedCol]+1])+","+(gradientCols[startAt[selectedCol]+2])+") 100%";
   document.getElementById("gradientdisplay").style.background="linear-gradient(to right, "+colors+")";
+  parseUrl(); //Don't ask why. (See below)
   if (!parseUrl()){
     setStuff();
   }else{
@@ -80,7 +81,6 @@ function init(){
   }
   setSlide();
   displayFunction();
-  console.log(advancedGen);
 }
 
 function paintRaster(){
@@ -107,7 +107,7 @@ function parseUrl(){
       else if (url.charAt(i)=='&'||i==url.length-1){
         if (i==url.length-1){tmpStr+=url.charAt(i);}
         toScan=false;
-        if (count==-1){advancedGen=Boolean(tmpStr); console.log(advancedGen);}
+        if (count==-1){advancedGen=Boolean(tmpStr);}
         else if (count==0){advancedGen?document.getElementById("functionin2").value=tmpStr:document.getElementById("functionin").value=tmpStr;}
         else if (count==1){document.getElementById("iterations").value=tmpStr;}
         else if (count==2){document.getElementById("xOff").value=tmpStr;}
