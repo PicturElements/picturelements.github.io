@@ -116,10 +116,13 @@ function parseUrl(){
       }
     }
   }
+  console.log(tmpBool);
   if (foundQuest){
     document.getElementById("zoom").value=parseFloat(document.getElementById("zoom").value)*(prevH/height);
     document.getElementById("checkinput").innerHTML=advancedGen?document.getElementById("functionin2").value:document.getElementById("functionin").value;
+    console.log(tmpBool);
     tmpBool?pushFunction2(0):pushFunction(0);
+    console.log(tmpBool);
     document.getElementById("overlay").style.display="block";
     document.getElementById("alertpanel").style.display="block";
     /*document.getElementById("xOff").value=parseFloat(document.getElementById("xOff").value)*(prevH/height);
