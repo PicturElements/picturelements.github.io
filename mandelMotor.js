@@ -72,7 +72,7 @@ function init(){
   colors+="rgb("+(gradientCols[startAt[selectedCol]])+","+(gradientCols[startAt[selectedCol]+1])+","+(gradientCols[startAt[selectedCol]+2])+") 100%";
   document.getElementById("gradientdisplay").style.background="linear-gradient(to right, "+colors+")";
   advancedGen=parseUrl(); //It's a hack.
-  console.log(advancedGen);
+  console.log("1: "+advancedGen);
   setSlide();
 }
 
@@ -116,13 +116,13 @@ function parseUrl(){
       }
     }
   }
-  console.log(tmpBool);
+  console.log("1: "+tmpBool);
   if (foundQuest){
     document.getElementById("zoom").value=parseFloat(document.getElementById("zoom").value)*(prevH/height);
     document.getElementById("checkinput").innerHTML=advancedGen?document.getElementById("functionin2").value:document.getElementById("functionin").value;
-    console.log(tmpBool);
+    console.log("2: "+tmpBool);
     tmpBool?pushFunction2(0):pushFunction(0);
-    console.log(tmpBool);
+    console.log("3: "+tmpBool);
     document.getElementById("overlay").style.display="block";
     document.getElementById("alertpanel").style.display="block";
     /*document.getElementById("xOff").value=parseFloat(document.getElementById("xOff").value)*(prevH/height);
