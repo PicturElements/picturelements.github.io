@@ -1,11 +1,11 @@
 var xOff=300,yOff=0,zoom=3,iterations=50,mode=0,prevH=0;
-var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true,display=false,move=false,advancedGen=false;
+var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true,display=false,move=false,advancedGen=false,tmpBool;
 var width=window.innerWidth,height=window.innerHeight;
 var cmx=0,cmy=0,curX,curY,tmpXOff,tmpYOff,tmpZoom;
 var a,b,a2,b2;
 var pixels=[];
 var scan=0,thread=null;
-var power=2,julA,julB,tmpPow,tmpJA,tmpJB,isMandel=true,tmpIsMandel=true,isAdvanced,containsXY;
+var power=2,julA,julB,tmpPow,tmpJA,tmpJB,isMandel=true,tmpIsMandel=true,containsXY;
 var gradientCols=[255,255,255,0,0,0,255,0,0,0,0,0,0,255,0,0,0,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,255,0,0,50,179,216,253,255,255,255,255,194,0,140,46,0,255,0,0,255,255,0,0,255,0,0,255,255,0,0,255,255,0,255,0,0,0,100,0,0,200,0,0];
 //               |                 |             |             |             |                       |                                                 |                                                     |
 var startAt=[0,6,12,18,24,33,48,66,75];
@@ -72,6 +72,7 @@ function init(){
   colors+="rgb("+(gradientCols[startAt[selectedCol]])+","+(gradientCols[startAt[selectedCol]+1])+","+(gradientCols[startAt[selectedCol]+2])+") 100%";
   document.getElementById("gradientdisplay").style.background="linear-gradient(to right, "+colors+")";
   parseUrl();
+  advancedGen=Boolean(tmpBool);
   console.log(advancedGen);
   setSlide();
   displayFunction();
@@ -91,7 +92,6 @@ function paintRaster(){
 }
 
 function parseUrl(){
-  var tmpBoolean;
   var tmpStr="";
   var count=-1,url=window.location.href;
   var foundQuest=false,toScan=false;
@@ -102,8 +102,8 @@ function parseUrl(){
       else if (url.charAt(i)=='&'||i==url.length-1){
         if (i==url.length-1){tmpStr+=url.charAt(i);}
         toScan=false;
-        if (count==-1){tmpBoolean=Boolean(tmpStr);}
-        else if (count==0){tmpBoolean?document.getElementById("functionin2").value=tmpStr:document.getElementById("functionin").value=tmpStr;}
+        if (count==-1){tmpBool=tmpStr;}
+        else if (count==0){tmpBool==1?document.getElementById("functionin2").value=tmpStr:document.getElementById("functionin").value=tmpStr;}
         else if (count==1){document.getElementById("iterations").value=tmpStr;}
         else if (count==2){document.getElementById("xOff").value=tmpStr;}
         else if (count==3){document.getElementById("yOff").value=tmpStr;}
@@ -120,17 +120,15 @@ function parseUrl(){
   }
   if (foundQuest){
     document.getElementById("zoom").value=parseFloat(document.getElementById("zoom").value)*(prevH/height);
-    document.getElementById("checkinput").innerHTML=tmpBoolean?document.getElementById("functionin2").value:document.getElementById("functionin").value;
+    document.getElementById("checkinput").innerHTML=tmpBool==1?document.getElementById("functionin2").value:document.getElementById("functionin").value;
     pushFunction(0);
     document.getElementById("overlay").style.display="block";
     document.getElementById("alertpanel").style.display="block";
-    advancedGen=tmpBoolean;
     /*document.getElementById("xOff").value=parseFloat(document.getElementById("xOff").value)*(prevH/height);
     document.getElementById("yOff").value=parseFloat(document.getElementById("yOff").value)*(prevH/height);*/
   }else{
     setStuff();
   }
-  return foundQuest;
 }
 
 function gradientSetup(){
@@ -476,7 +474,7 @@ function getUrl(){
   display=true;
   document.getElementById("overlay").style.display="block";
   document.getElementById("sharepanel").style.display="block";
-  var url="http://picturelements.github.io/mandelbrot?adv="+advancedGen+"&func="+(advancedGen?document.getElementById("functionin2"):document.getElementById("functionin")).value+"&iters="+document.getElementById("iterations").value+"&xOff="+document.getElementById("xOff").value+"&yOff="+document.getElementById("yOff").value+"&zoom="+document.getElementById("zoom").value+"&color="+selectedCol+"&mod="+cycleLength+"&prevH="+height;
+  var url="http://picturelements.github.io/mandelbrot?adv="+(advancedGen?1:0)+"&func="+(advancedGen?document.getElementById("functionin2"):document.getElementById("functionin")).value+"&iters="+document.getElementById("iterations").value+"&xOff="+document.getElementById("xOff").value+"&yOff="+document.getElementById("yOff").value+"&zoom="+document.getElementById("zoom").value+"&color="+selectedCol+"&mod="+cycleLength+"&prevH="+height;
   document.getElementById("urlout").value=url;
   document.getElementById("urlout").select();
 }
