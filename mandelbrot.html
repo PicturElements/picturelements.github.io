@@ -208,7 +208,7 @@
         cursor: pointer;
       }
       
-      #colorpanel,#alertpanel{
+      #colorpanel,#alertpanel,#colorchooser{
         display:none;
         position: fixed;
         width: 40%;
@@ -822,6 +822,9 @@
         <button style="top:9.5vw; width:18.5vw" onclick="closePopups(-1); setStuff();">Generate</button>
         <button style="top:9.5vw; width:18.5vw" onclick=newPage()>Safe page</button>
       </div>
+      <div id="colorchooser" class="popup">
+        <div id="closebtn" onclick="closePopups2(this)">[close]</div>
+      </div>
     </div>
     <div id="hoverinfo">
       <div id="colorsample"></div>
@@ -833,9 +836,6 @@
       <div id="movebar" title="move"></div>
       <div id="closebtn" onclick="closePopups(-1)">[X]</div>
       <canvas id="escapecanvas"></canvas>
-    </div>
-    <div id="colorchooser" class="popup">
-      <div id="closebtn" onclick="closePopups2(this)">[close]</div>
     </div>
     <div id="upperinfo"></div>
   </body>
