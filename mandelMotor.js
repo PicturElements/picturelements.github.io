@@ -500,6 +500,10 @@ function closePopups(inId){
   }
 }
 
+function closePopups2(inElement){
+  inElement.parentElement.style.display="none";
+}
+
 function expando(){
   if (expanded){
     document.getElementById("buttonpanel").style.marginLeft="-"+(document.getElementById("buttonpanel").offsetWidth)+"px";
