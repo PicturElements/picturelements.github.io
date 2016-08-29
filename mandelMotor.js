@@ -71,7 +71,7 @@ function init(){
   }
   colors+="rgb("+(gradientCols[startAt[selectedCol]])+","+(gradientCols[startAt[selectedCol]+1])+","+(gradientCols[startAt[selectedCol]+2])+") 100%";
   document.getElementById("gradientdisplay").style.background="linear-gradient(to right, "+colors+")";
-  advancedGen=parseUrl(); //It's a hack.
+  parseUrl();
   console.log("1: "+advancedGen);
   setSlide();
 }
@@ -90,7 +90,7 @@ function paintRaster(){
 }
 
 function parseUrl(){
-  var tmpStr="",tmpBool;
+  var tmpStr="";
   var count=-1,url=window.location.href;
   var foundQuest=false,toScan=false;
   for (var i=0;i<url.length;i++){
@@ -100,8 +100,8 @@ function parseUrl(){
       else if (url.charAt(i)=='&'||i==url.length-1){
         if (i==url.length-1){tmpStr+=url.charAt(i);}
         toScan=false;
-        if (count==-1){tmpBool=Boolean(tmpStr); console.log("tmp: "+tmpStr+" | bool:"+tmpBool);}
-        else if (count==0){tmpBool?document.getElementById("functionin2").value=tmpStr:document.getElementById("functionin").value=tmpStr;}
+        if (count==-1){advancedGen=tmpStr; console.log("tmp: "+tmpStr+" | bool:"+tmpBool);}
+        else if (count==0){advancedGen?document.getElementById("functionin2").value=tmpStr:document.getElementById("functionin").value=tmpStr;}
         else if (count==1){document.getElementById("iterations").value=tmpStr;}
         else if (count==2){document.getElementById("xOff").value=tmpStr;}
         else if (count==3){document.getElementById("yOff").value=tmpStr;}
@@ -116,13 +116,13 @@ function parseUrl(){
       }
     }
   }
-  console.log("1: "+tmpBool);
+  console.log("1: "+advancedGen);
   if (foundQuest){
     document.getElementById("zoom").value=parseFloat(document.getElementById("zoom").value)*(prevH/height);
     document.getElementById("checkinput").innerHTML=advancedGen?document.getElementById("functionin2").value:document.getElementById("functionin").value;
-    console.log("2: "+tmpBool);
-    tmpBool?pushFunction2(0):pushFunction(0);
-    console.log("3: "+tmpBool);
+    console.log("2: "+advancedGen);
+    advancedGen?pushFunction2(0):pushFunction(0);
+    console.log("3: "+advancedGen);
     document.getElementById("overlay").style.display="block";
     document.getElementById("alertpanel").style.display="block";
     /*document.getElementById("xOff").value=parseFloat(document.getElementById("xOff").value)*(prevH/height);
@@ -130,7 +130,6 @@ function parseUrl(){
   }else{
     setStuff();
   }
-  return tmpBool
 }
 
 function gradientSetup(){
