@@ -72,7 +72,6 @@ function init(){
   colors+="rgb("+(gradientCols[startAt[selectedCol]])+","+(gradientCols[startAt[selectedCol]+1])+","+(gradientCols[startAt[selectedCol]+2])+") 100%";
   document.getElementById("gradientdisplay").style.background="linear-gradient(to right, "+colors+")";
   parseUrl();
-  console.log("1: "+advancedGen);
   setSlide();
 }
 
@@ -100,7 +99,7 @@ function parseUrl(){
       else if (url.charAt(i)=='&'||i==url.length-1){
         if (i==url.length-1){tmpStr+=url.charAt(i);}
         toScan=false;
-        if (count==-1){advancedGen=tmpStr; console.log("tmp: "+tmpStr+" | bool:"+advancedGen);}
+        if (count==-1){advancedGen=(tmpStr=="true"?true:false);}
         else if (count==0){advancedGen?document.getElementById("functionin2").value=tmpStr:document.getElementById("functionin").value=tmpStr;}
         else if (count==1){document.getElementById("iterations").value=tmpStr;}
         else if (count==2){document.getElementById("xOff").value=tmpStr;}
@@ -120,9 +119,7 @@ function parseUrl(){
   if (foundQuest){
     document.getElementById("zoom").value=parseFloat(document.getElementById("zoom").value)*(prevH/height);
     document.getElementById("checkinput").innerHTML=advancedGen?document.getElementById("functionin2").value:document.getElementById("functionin").value;
-    console.log("2: "+advancedGen);
     advancedGen?pushFunction2(0):pushFunction(0);
-    console.log("3: "+advancedGen);
     document.getElementById("overlay").style.display="block";
     document.getElementById("alertpanel").style.display="block";
     /*document.getElementById("xOff").value=parseFloat(document.getElementById("xOff").value)*(prevH/height);
