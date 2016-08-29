@@ -6,9 +6,9 @@ var a,b,a2,b2;
 var pixels=[];
 var scan=0,thread=null;
 var power=2,julA,julB,tmpPow,tmpJA,tmpJB,isMandel=true,tmpIsMandel=true,containsXY;
-var gradientCols=[255,255,255,0,0,0,255,0,0,0,0,0,0,255,0,0,0,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,255,0,0,50,179,216,253,255,255,255,255,194,0,140,46,0,255,0,0,255,255,0,0,255,0,0,255,255,0,0,255,255,0,255,0,0,0,100,0,0,200,0,0];
+var gradientCols=[255,255,255,0,0,0,255,0,0,0,0,0,0,255,0,0,0,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,255,0,0,50,179,216,253,255,255,255,255,194,0,140,46,0,255,0,0,255,255,0,0,255,0,0,255,255,0,0,255,255,0,255];
 //               |                 |             |             |             |                       |                                                 |                                                     |
-var startAt=[0,6,12,18,24,33,48,66,75];
+var startAt=[0,6,12,18,24,33,48,66],lengths=[0,0,0];
 var selectedCol=5,rd,gr,bl,cycleLength=50;
 var date=new Date(),time=date.getTime();
 var ctx,imgData=null,imgDataFull=null,ctx2,ctx3,c3W,c3H;
@@ -251,12 +251,12 @@ function generateIndividual(type){
   return -1;
 }
 
-        //return i;
-        //return i+1-Math.log(Math.log(Math.hypot(a2,b2)))/Math.log(power);
-        //return i+(i+1-Math.log(Math.log(Math.sqrt(a2*a2+b2*b2)))/Math.log(2))/iterations;
-        //return i+1-Math.log(Math.log(Math.sqrt(a2*a2+b2*b2))/Math.log(2))/Math.log(2);
-        //return i+1-Math.log((Math.log(a2*a2+b2*b2)/2)/Math.log(2))/Math.log(2);
-        //return i+1-(Math.log(Math.log(Math.sqrt(a2*a2+b2*b2))/Math.log(10)/Math.log(10)))/(Math.log(power)/Math.log(10));
+  //return i;
+  //return i+1-Math.log(Math.log(Math.hypot(a2,b2)))/Math.log(power);
+  //return i+(i+1-Math.log(Math.log(Math.sqrt(a2*a2+b2*b2)))/Math.log(2))/iterations;
+  //return i+1-Math.log(Math.log(Math.sqrt(a2*a2+b2*b2))/Math.log(2))/Math.log(2);
+  //return i+1-Math.log((Math.log(a2*a2+b2*b2)/2)/Math.log(2))/Math.log(2);
+  //return i+1-(Math.log(Math.log(Math.sqrt(a2*a2+b2*b2))/Math.log(10)/Math.log(10)))/(Math.log(power)/Math.log(10));
 
 function generateExp(){
   for (var i=0;i<iterations;i++){
@@ -703,6 +703,15 @@ function setEP(event){
     ex=event.clientX;
     ey=event.clientY;
   }
+}
+
+function editCol(element){
+  var elements=document.getElementsByClassName("coloredit");
+  var id;
+  for (var i=0;i<elements.length;i++){
+    if (elements[i]==element){id=i; break;}
+  }
+  alert("Selected: "+id);
 }
 
 function paint(){
