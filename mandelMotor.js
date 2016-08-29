@@ -514,7 +514,7 @@ function expando(){
 }
 
 function displayFunction(){
-  //if (!advancedGen){
+  if (!advancedGen){
     tmpPow=2;
     tmpJA=0;
     tmpJB=0;
@@ -563,7 +563,9 @@ function displayFunction(){
     }else{
       document.getElementById("funcout").innerHTML="Function: z<sup>"+tmpPow+"</sup>"+tA+""+tB+"i (Julia set)";
     }
-  //}
+  }else{
+    pushFunction2(0);
+  }
 }
 
 function isNumber(inChar){
