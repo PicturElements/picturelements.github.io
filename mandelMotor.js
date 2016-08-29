@@ -518,7 +518,7 @@ function displayFunction(){
     tmpPow=2;
     tmpJA=0;
     tmpJB=0;
-    var input=advancedGen?document.getElementById("functionin2").value:document.getElementById("functionin").value;
+    var input=document.getElementById("functionin").value;
     var values=[],foundNumber=false,prevWasNo=false,tmpString="";
     for (var i=0;i<input.length;i++){
       if (isNumber(input.charAt(i))){
