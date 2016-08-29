@@ -597,7 +597,6 @@ function pushFunction2(inID){
   //$('#inserthere').before("<script id=\"customscript\"></script>");
   //$("#body").prepend("<script id=\"customscript\"></script>");
   advancedGen=true;
-  resetStuff();
   var rePart="0.125",imPart="0.8";
   var input=document.getElementById("functionin2").value;
   var startpos=1,startpos2;
@@ -657,6 +656,7 @@ function pushFunction2(inID){
   if (checkFunction&&inID==1){
     closePopups(1);
     scan=0;
+    resetStuff();
     setStuff();
   }
 }
