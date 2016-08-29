@@ -119,7 +119,7 @@ function parseUrl(){
   if (foundQuest){
     document.getElementById("zoom").value=parseFloat(document.getElementById("zoom").value)*(prevH/height);
     document.getElementById("checkinput").innerHTML=advancedGen?document.getElementById("functionin2").value:document.getElementById("functionin").value;
-    advancedGen?function(){(pushFunction2(0)isMandel=false; scan=0;)}:pushFunction(0);
+    advancedGen?pushFunction2(0):pushFunction(0);
     document.getElementById("overlay").style.display="block";
     document.getElementById("alertpanel").style.display="block";
     /*document.getElementById("xOff").value=parseFloat(document.getElementById("xOff").value)*(prevH/height);
@@ -652,8 +652,9 @@ function pushFunction2(inID){
   }
   console.log(power+", "+rePart+", "+imPart);
   document.getElementById("customscript").innerHTML="\nfunction getJulia(x,y){\n  try{\n    julA="+rePart+";\n    julB="+imPart+";\n  }catch(e){return false;}\n}\n";
+  isMandel=false;
+  scan=0;
   if (checkFunction&&inID==1){
-    isMandel=false;
     closePopups(1);
     scan=0;
     setStuff();
