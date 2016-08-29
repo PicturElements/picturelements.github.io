@@ -256,6 +256,7 @@
         font-weight: 700;
         text-align: center;
         line-height: 2.5vw;
+        transition:background-color:200ms;
       }
       
       .coloredit:hover{
@@ -684,13 +685,13 @@
         <div class="gradientselector" onmousedown=gradient(5)></div>
         <div class="gradientselector" onmousedown=gradient(6)></div>
         <div class="gradientselector" onmousedown=gradient(7)>
-          <div class="coloredit" onclick=editCol(this) title="Add gradient"></div>
+          <div class="coloredit" onclick=editCol(this) title="Add gradient">+</div>
         </div>
         <div class="gradientselector" onmousedown=gradient(8)>
-          <div class="coloredit" onclick=editCol(this) title="Add gradient"></div>
+          <div class="coloredit" onclick=editCol(this) title="Add gradient">+</div>
         </div>
         <div class="gradientselector" onmousedown=gradient(9)>
-          <div class="coloredit" onclick=editCol(this) title="Add gradient"></div>
+          <div class="coloredit" onclick=editCol(this) title="Add gradient">+</div>
         </div>
         <div id="gradientdisplay"></div>
         <div id="sliderinfo">Mod value (color cycle period)</div>
