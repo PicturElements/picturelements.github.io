@@ -120,7 +120,7 @@ function parseUrl(){
   if (foundQuest){
     document.getElementById("zoom").value=parseFloat(document.getElementById("zoom").value)*(prevH/height);
     document.getElementById("checkinput").innerHTML=advancedGen?document.getElementById("functionin2").value:document.getElementById("functionin").value;
-    advancedGen?pushFunction2(0):pushFunction(0);
+    advancedGen?(pushFunction2(0)isMandel=false; scan=0;):pushFunction(0);
     document.getElementById("overlay").style.display="block";
     document.getElementById("alertpanel").style.display="block";
     /*document.getElementById("xOff").value=parseFloat(document.getElementById("xOff").value)*(prevH/height);
@@ -560,8 +560,6 @@ function displayFunction(){
     }else{
       document.getElementById("funcout").innerHTML="Function: z<sup>"+tmpPow+"</sup>"+tA+""+tB+"i (Julia set)";
     }
-  }else{
-    pushFunction2(0);
   }
 }
 
