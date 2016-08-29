@@ -1,5 +1,5 @@
 var xOff=300,yOff=0,zoom=3,iterations=50,mode=0,prevH=0;
-var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true,display=false,move=false,advancedGen=false,tmpBool;
+var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true,display=false,move=false,advancedGen=false;
 var width=window.innerWidth,height=window.innerHeight;
 var cmx=0,cmy=0,curX,curY,tmpXOff,tmpYOff,tmpZoom;
 var a,b,a2,b2;
@@ -75,7 +75,7 @@ function init(){
   advancedGen=Boolean(tmpBool);
   console.log(advancedGen);
   setSlide();
-  displayFunction();
+  //displayFunction();
 }
 
 function paintRaster(){
