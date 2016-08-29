@@ -449,6 +449,7 @@
         font-family: Roboto,Arial,sans-serif;
         font-weight: bold;  
         pointer-events:none;
+        font-size: 1vw;
       }
       
       #sliderinfo::selection{
@@ -832,6 +833,9 @@
       <div id="movebar" title="move"></div>
       <div id="closebtn" onclick="closePopups(-1)">[X]</div>
       <canvas id="escapecanvas"></canvas>
+    </div>
+    <div id="colorchooser" class="popup">
+      <div id="closebtn" onclick="closePopups2(this)">[close]</div>
     </div>
     <div id="upperinfo"></div>
   </body>
