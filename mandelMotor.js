@@ -100,7 +100,7 @@ function parseUrl(){
       else if (url.charAt(i)=='&'||i==url.length-1){
         if (i==url.length-1){tmpStr+=url.charAt(i);}
         toScan=false;
-        if (count==-1){tmpBool=Boolean(tmpStr); console.log("tmp: "+tmpStr);}
+        if (count==-1){tmpBool=Boolean(tmpStr); console.log("tmp: "+tmpStr+" | bool:"+tmpBool);}
         else if (count==0){tmpBool?document.getElementById("functionin2").value=tmpStr:document.getElementById("functionin").value=tmpStr;}
         else if (count==1){document.getElementById("iterations").value=tmpStr;}
         else if (count==2){document.getElementById("xOff").value=tmpStr;}
