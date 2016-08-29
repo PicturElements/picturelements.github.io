@@ -476,7 +476,7 @@ function getUrl(){
   display=true;
   document.getElementById("overlay").style.display="block";
   document.getElementById("sharepanel").style.display="block";
-  var url="http://picturelements.github.io/mandelbrot?adv="+(advancedGen?1:0)+"&func="+(advancedGen?document.getElementById("functionin2"):document.getElementById("functionin")).value+"&iters="+document.getElementById("iterations").value+"&xOff="+document.getElementById("xOff").value+"&yOff="+document.getElementById("yOff").value+"&zoom="+document.getElementById("zoom").value+"&color="+selectedCol+"&mod="+cycleLength+"&prevH="+height;
+  var url="http://picturelements.github.io/mandelbrot?adv="+advancedGen+"&func="+(advancedGen?document.getElementById("functionin2"):document.getElementById("functionin")).value+"&iters="+document.getElementById("iterations").value+"&xOff="+document.getElementById("xOff").value+"&yOff="+document.getElementById("yOff").value+"&zoom="+document.getElementById("zoom").value+"&color="+selectedCol+"&mod="+cycleLength+"&prevH="+height;
   document.getElementById("urlout").value=url;
   document.getElementById("urlout").select();
 }
