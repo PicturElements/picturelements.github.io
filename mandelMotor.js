@@ -755,8 +755,8 @@ function colorMove(event){
     }
     ctx.fillStyle="rgba(255,255,255,0.6)";
     for (var i=0;i<8;i++){
-      ctx.fillRect(i*30-1+(0.5-xOff)*30,0,2,100);
-      ctx.fillRect(0,i*30-1+(0.5-yOff)*30,100,2);
+      ctx.fillRect(i*30-11+(0.5-xOff)*30,0,2,100);
+      ctx.fillRect(0,i*30-11+(0.5-yOff)*30,100,2);
     }
     //console.log(id+":"+xOff+":"+yOff);
   }else{
