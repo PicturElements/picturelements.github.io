@@ -188,6 +188,11 @@ function mainGenerate(){
     clearInterval(thread);
   }
   pixels=[];
+
+  rd = Math.floor(rd);
+  gr = Math.floor(gr);
+  bl = Math.floor(bl);
+
   thread=setInterval(generate,1);   //set a low refresh time, let computer calculate as fast as it can. You go, little man!
 }
 
@@ -406,7 +411,7 @@ function canvasInteract(event){
           iters=iterations;
           document.getElementById("colorsample").style.backgroundColor="black";
         }else{
-          document.getElementById("colorsample").style.backgroundColor="rgb("+Math.floor(rd)+","+Math.floor(gr)+","+Math.floor(bl)+")";
+          document.getElementById("colorsample").style.backgroundColor="rgb("+rd+","+gr+","+bl+")";
         }
         document.getElementById("iterationinfo").innerHTML="Iterations: "+iters;
         document.getElementById("iterationinfo2").innerHTML="Re: "+(event.clientX-cmx-width/2-xOff/zoom)/(height/zoom)+"<br>Im: "+(-(event.clientY-cmy-height/2-yOff/zoom)/(height/zoom));
@@ -844,7 +849,7 @@ function paint2(event){
     ctx3.stroke();
     for (var x=0;x<c3W;x++){
       color((x/c3W)*iterations);
-      ctx3.fillStyle="rgb("+Math.floor(rd)+","+Math.floor(gr)+","+Math.floor(bl)+")";
+      ctx3.fillStyle="rgb("+rd+","+gr+","+bl+")";
       ctx3.fillRect(x,0,1,10);
     }
   }
