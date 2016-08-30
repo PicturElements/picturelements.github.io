@@ -8,7 +8,7 @@ var scan=0,thread=null;
 var power=2,julA,julB,tmpPow,tmpJA,tmpJB,isMandel=true,tmpIsMandel=true,containsXY;
 var gradientCols=[255,255,255,0,0,0,255,0,0,0,0,0,0,255,0,0,0,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,255,0,0,50,179,216,253,255,255,255,255,194,0,140,46,0,255,0,0,255,255,0,0,255,0,0,255,255,0,0,255,255,0,255];
 //               |                 |             |             |             |                       |                                                 |                                                     |
-var startAt=[0,6,12,18,24,33,48,66,84,84,84],lengths=[0,0,0],id=0;
+var startAt=[0,6,12,18,24,33,48,66,84,84,84],lengths=[0,0,0],id=0,selected=0;
 var selectedCol=5,rd,gr,bl,cycleLength=50;
 var date=new Date(),time=date.getTime();
 var ctx,imgData=null,imgDataFull=null,ctx2,ctx3,c3W,c3H;
@@ -747,10 +747,8 @@ function colorMove(event){
         //&&Math.floor(id/64)+h>=0&&Math,floor(id/64)+h<64
         if (id%64+w>=0&&id%64+w<64&&id>=0&&id<4096){
           var r=Math.floor(tmpI/256)*17, g=Math.floor(tmpI%256/16)*17, b=Math.floor(tmpI%256%16)*17;
-          var fStyle="rgb("+r+","+g+","+b+")";
           if (h==0&&w==0){ctx.strokeStyle="rgb("+(255-r)+","+(255-g)+","+(255-b)+")";}
-          ctx.fillStyle=fStyle;
-          document.getElementById("hoverpicker").style.borderColor=fStyle;
+          ctx.fillStyle="rgb("+r+","+g+","+b+")";
           ctx.fillRect(35+w*30+xOff,35+h*30+yOff,30,30);
         }
       }
@@ -777,6 +775,14 @@ function colorMove(event){
 
 function pickColor(event){
   var r=Math.floor(id/256)*17, g=Math.floor(id%256/16)*17, b=Math.floor(id%256%16)*17;
+}
+
+function moveHere(element){
+  var elements=document.getElementsByClassName("gradientelement");
+  for (var i=0;i<elements.length;i++){
+    if (elements[i]==element){selected=i; break;}
+  }
+  document.getElementById("pointer").style.marginLeft=""+(1.5*selected*4.5)+"vw"
 }
 
 function paint(){
