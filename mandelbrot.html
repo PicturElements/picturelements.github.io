@@ -265,6 +265,18 @@
         background-color: #eee;
       }
       
+      #pointer{
+        display: block;
+        position: absolute;
+        border: 1vw solid #444;
+        border-left-color: transparent;
+        border-bottom-color: transparent;
+        border-right-color: transparent;
+        z-index: 1;
+        margin-left: 1.5vw;
+        pointer-events: none;
+      }
+      
       .gradientelement{
         display: block;
         position: relative;
@@ -917,6 +929,7 @@
       <div id="colorchooser" class="popup">
         <div id="closebtn" onclick="closePopups2(this)">[close]</div>
         <div id="gradientbox">
+          <div id="pointer"></div>
           <div class="gradientelement" onclick=moveHere(this)>
             <div class="colorsample" red="255" green="0" blue="0"></div>
             <div class="actionbutton" id="ml" onclick=moveLeft(this)>&lt;</div>
