@@ -730,7 +730,7 @@ function editCol(element){
 
 function colorMove(event){
   var vw=window.innerWidth/100;
-  var xPos=event.clientX-(30*vw), yPos=event.getY-(window.innerHeight/2-15.25*vw);
+  var xPos=event.clientX-(30*vw), yPos=event.clientY-(window.innerHeight/2-15.25*vw);
   console.log(xPos+":"+yPos);
   if (xPos>=vw&&xPos<=24*vw&&yPos>=6.5*vw&&yPos<=29.5*vw){
     console.log("IT WORKS!");
