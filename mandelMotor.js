@@ -8,7 +8,7 @@ var scan=0,thread=null;
 var power=2,julA,julB,tmpPow,tmpJA,tmpJB,isMandel=true,tmpIsMandel=true,containsXY;
 var gradientCols=[255,255,255,0,0,0,255,0,0,0,0,0,0,255,0,0,0,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,255,0,0,50,179,216,253,255,255,255,255,194,0,140,46,0,255,0,0,255,255,0,0,255,0,0,255,255,0,0,255,255,0,255];
 //               |                 |             |             |             |                       |                                                 |                                                     |
-var startAt=[0,6,12,18,24,33,48,66,84,84,84],lengths=[0,0,0];
+var startAt=[0,6,12,18,24,33,48,66,84,84,84],lengths=[0,0,0],id=0;
 var selectedCol=5,rd,gr,bl,cycleLength=50;
 var date=new Date(),time=date.getTime();
 var ctx,imgData=null,imgDataFull=null,ctx2,ctx3,c3W,c3H;
@@ -739,19 +739,25 @@ function colorMove(event){
     var ctx=document.getElementById("pickercanvas").getContext("2d");
     ctx.fillStyle="#444"
     ctx.fillRect(0,0,100,100);
-    var id=Math.floor(((yPos-6.5*vw)/(23*vw))*64)*64+Math.floor(((xPos-vw)/(23*vw))*64);
+    id=Math.floor(((yPos-6.5*vw)/(23*vw))*64)*64+Math.floor(((xPos-vw)/(23*vw))*64);
     var xOff=(((xPos-vw)/(23*vw))%(1/64))*64,yOff=(((yPos-6.5*vw)/(23*vw))%(1/64))*64;
     for (var h=-3;h<4;h++){
       for (var w=-3;w<4;w++){
         var tmpI=id+h*64+w;
         //&&Math.floor(id/64)+h>=0&&Math,floor(id/64)+h<64
-        if (id%64+w>=0&&id%64+w<64){
-          ctx.fillStyle="rgb("+Math.floor(tmpI/256)*17+","+Math.floor(tmpI%256/16)*17+","+Math.floor(tmpI%256%16)*17+")";
+        if (id%64+w>=0&&id%64+w<64&&id>=0&&id<4096){
+          var fStyle="rgb("+Math.floor(tmpI/256)*17+","+Math.floor(tmpI%256/16)*17+","+Math.floor(tmpI%256%16)*17+")";
+          ctx.fillStyle=fStyle;
+          document.getElementById("colorpicker").style.borderColor=fStyle;
           ctx.fillRect(50+w*30+(0.5-xOff)*30,50+h*30+(0.5-yOff)*30,30,30);
         }
       }
     }
-    console.log(id+":"+xOff+":"+yOff);
+    ctx.fillStyle="rgba(255,255,255,0.6)";
+    for (var i=0;i<8;i++){
+      
+    }
+    //console.log(id+":"+xOff+":"+yOff);
   }else{
     div.style.display="none";
   }
