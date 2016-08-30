@@ -749,23 +749,23 @@ function colorMove(event){
           var fStyle="rgb("+Math.floor(tmpI/256)*17+","+Math.floor(tmpI%256/16)*17+","+Math.floor(tmpI%256%16)*17+")";
           ctx.fillStyle=fStyle;
           document.getElementById("hoverpicker").style.borderColor=fStyle;
-          ctx.fillRect(50+w*30+xOff,50+h*30+yOff,30,30);
+          ctx.fillRect(35+w*30+xOff,35+h*30+yOff,30,30);
         }
       }
     }
     ctx.fillStyle="rgba(255,255,255,0.6)";
     ctx.strokeStyle="rgba(255,255,255,0.6)";
     for (var i=0;i<8;i++){
-      ctx.fillRect(i*30-11+xOff,0,2,100);
-      ctx.fillRect(0,i*30-11+yOff,100,2);
+      ctx.fillRect(i*30-4+xOff,0,2,100);
+      ctx.fillRect(0,i*30-4+yOff,100,2);
     }
     ctx.beginPath();
-    ctx.moveTo(60+xOff,60+yOff);
-    ctx.lineTo(70+xOff,70+yOff);
+    ctx.moveTo(45+xOff,45+yOff);
+    ctx.lineTo(5+xOff,55+yOff);
     ctx.stroke();
     ctx.beginPath();
-    ctx.moveTo(70+xOff,60+yOff);
-    ctx.lineTo(60+xOff,70+yOff);
+    ctx.moveTo(55+xOff,45+yOff);
+    ctx.lineTo(45+xOff,55+yOff);
     ctx.stroke();
     //console.log(id+":"+xOff+":"+yOff);
   }else{
