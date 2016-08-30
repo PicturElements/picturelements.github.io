@@ -739,6 +739,13 @@ function colorMove(event){
     var ctx=document.getElementById("pickercanvas").getContext("2d");
     var id=Math.floor(((yPos-6.5*vw)/(23*vw))*64)*64+Math.floor(((xPos-vw)/(23*vw))*64);
     var xOff=(((xPos-vw)/(23*vw))%(1/64))*64,yOff=(((yPos-6.5*vw)/(23*vw))%(1/64))*64;
+    for (var h=-3;h<4;h++){
+      for (var w=-3;w<4;w++){
+        var tmpI=id+h*64+w;
+        ctx.fillStyle="rgb("+Math.floor(tmpI/256)*17+","+Math.floor(tmpI%256/16)*17+","+Math.floor(tmpI%256%16)*17+")";
+        ctx.fillRect(50+w*30,50+h*30,30,30);
+      }
+    }
     console.log(id+":"+xOff+":"+yOff);
   }else{
     div.style.display="none";
