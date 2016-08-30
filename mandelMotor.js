@@ -33,7 +33,10 @@ function init(){
   element=document.getElementById("movebar");
   element.addEventListener("mousedown",function(event){setEM(event,true);});
   element.addEventListener("mouseup", function(event){setEM(event,false);});
-  
+  element=document.getElementById("colorchooser");
+  element.addEventListener("mousemove",function(event){colorMove(event);});
+  element.addEventListener("mousedown",function(event){pickColor(event);});
+
   
   //This was supposed to be an automatic script generator, but due to caching issues, this didn't work out.
   /*for (var i=0;i<100;i++){
@@ -722,6 +725,14 @@ function editCol(element){
     if (elements[i]==element){id=i; break;}
   }
   alert("Selected: "+id);
+}
+
+function colorMove(event){
+  var vw=window.innerWidth/100;
+  var xPos=event.clientX-(0.3*window.innerWidth), yPos=event.getY-(window.innerHeight/2-15.25*vw);
+  if (xPos>=vw&&xPos<=24*vw&&yPos>=6.5*vw&&yPos<=29.5*vw){
+    console.log("IT WORKS!");
+  }
 }
 
 function paint(){
