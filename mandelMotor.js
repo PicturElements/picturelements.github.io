@@ -86,6 +86,12 @@ function paintRaster(){
       ctx.fillRect(((h/sqS)%2)*sqS+w,h,sqS,sqS);
     }
   }
+  
+  ctx=document.getElementById("choosercanvas").getContext("2d");
+  for (var i=0;i<4096;i++){
+      ctx.fillStyle="rgb("+(i/256)*17+","+(i%256/16)*17+","+(i%256%16)*17)+")";
+      ctx.fillRect((i%64)*10,(i/64)*10,10,10);
+  }
 }
 
 function parseUrl(){
