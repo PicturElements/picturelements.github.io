@@ -271,7 +271,7 @@
         float: left;
         width: 4vw;
         height: 4.5vw;
-        top: 0.25vw;
+        top: 0.5vw;
         margin-left: 0.25vw;
       }
       
@@ -280,16 +280,22 @@
         position: absolute;
         width: 100%;
         height: 3vw;
+        cursor:pointer;
       }
       
       .actionbutton{
-        display:block;
-        position:relative;
-        float:left;
-        width:1vw;
-        height:1vw;
-        bottom:0;
-        cursor:pointer;
+        display: block;
+        position: relative;
+        float: left;
+        width: 1vw;
+        height: 1vw;
+        margin-top: 3.25vw;
+        margin-bottom: 0;
+        cursor: pointer;
+        line-height: 1vw;
+        text-align: center;
+        font-weight: 700;
+        color:#444;
       }
       
       .gradientselector{
@@ -897,7 +903,7 @@
       <div id="colorchooser" class="popup">
         <div id="closebtn" onclick="closePopups2(this)">[close]</div>
         <div id="gradientbox">
-          <div class="gradientelement">
+          <div class="gradientelement" onclick=moveHere(this)>
             <div class="colorsample" red="0" green="0" blue="0"></div>
             <div class="actionbutton" onclick=moveLeft(this)>&lt;</div>
             <div class="actionbutton" onclick=moveRight(this)>&gt;</div>
