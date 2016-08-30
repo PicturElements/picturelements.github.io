@@ -221,6 +221,17 @@
         border-radius: 0.25vw;
       }
       
+      #choosercanvas{
+        display: block;
+        position: absolute;
+        left: 1vw;
+        bottom: 1vw;
+        width: 23vw;
+        height: 23vw;
+        background-color: #ddd;
+        cursor:none;
+      }
+      
       .gradientselector{
         display: block;
         position: relative;
@@ -825,6 +836,7 @@
       </div>
       <div id="colorchooser" class="popup">
         <div id="closebtn" onclick="closePopups2(this)">[close]</div>
+        <canvas id="choosercanvas" width="640" height="640"></canvas>
       </div>
     </div>
     <div id="hoverinfo">
