@@ -737,7 +737,7 @@ function colorMove(event){
     div.style.left=""+(xPos/vw-1)+"vw";
     div.style.top=""+(yPos/vw-1)+"vw";
   }else{
-    div.style.display="block";
+    div.style.display="none";
   }
 }
 
