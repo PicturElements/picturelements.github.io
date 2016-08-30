@@ -740,7 +740,7 @@ function colorMove(event){
     ctx.fillStyle="#444"
     ctx.fillRect(0,0,100,100);
     id=Math.floor(((yPos-6.5*vw)/(23*vw))*64)*64+Math.floor(((xPos-vw)/(23*vw))*64);
-    var xOff=(((xPos-vw)/(23*vw))%(1/64))*64,yOff=(((yPos-6.5*vw)/(23*vw))%(1/64))*64;
+    var xOff=(0.5-(((xPos-vw)/(23*vw))%(1/64))*64)*30,yOff=(0.5-(((yPos-6.5*vw)/(23*vw))%(1/64))*64)*30;
     for (var h=-3;h<4;h++){
       for (var w=-3;w<4;w++){
         var tmpI=id+h*64+w;
@@ -749,15 +749,24 @@ function colorMove(event){
           var fStyle="rgb("+Math.floor(tmpI/256)*17+","+Math.floor(tmpI%256/16)*17+","+Math.floor(tmpI%256%16)*17+")";
           ctx.fillStyle=fStyle;
           document.getElementById("hoverpicker").style.borderColor=fStyle;
-          ctx.fillRect(50+w*30+(0.5-xOff)*30,50+h*30+(0.5-yOff)*30,30,30);
+          ctx.fillRect(50+w*30+xOff,50+h*30+yOff,30,30);
         }
       }
     }
     ctx.fillStyle="rgba(255,255,255,0.6)";
+    ctx.strokeStyle="rgba(255,255,255,0.6)";
     for (var i=0;i<8;i++){
-      ctx.fillRect(i*30-11+(0.5-xOff)*30,0,2,100);
-      ctx.fillRect(0,i*30-11+(0.5-yOff)*30,100,2);
+      ctx.fillRect(i*30-11+xOff,0,2,100);
+      ctx.fillRect(0,i*30-11+yOff,100,2);
     }
+    ctx.beginPath();
+    ctx.moveTo(60+xOff,60+yOff);
+    ctx.lineTo(70+xOff,70+yOff);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(70+xOff,60+yOff);
+    ctx.lineTo(60+xOff,70+yOff);
+    ctx.stroke();
     //console.log(id+":"+xOff+":"+yOff);
   }else{
     div.style.display="none";
