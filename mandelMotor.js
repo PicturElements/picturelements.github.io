@@ -746,7 +746,9 @@ function colorMove(event){
         var tmpI=id+h*64+w;
         //&&Math.floor(id/64)+h>=0&&Math,floor(id/64)+h<64
         if (id%64+w>=0&&id%64+w<64&&id>=0&&id<4096){
-          var fStyle="rgb("+Math.floor(tmpI/256)*17+","+Math.floor(tmpI%256/16)*17+","+Math.floor(tmpI%256%16)*17+")";
+          var r=Math.floor(tmpI/256)*17, g=Math.floor(tmpI%256/16)*17, b=Math.floor(tmpI%256%16)*17;
+          var fStyle="rgb("+r+","+g+","+b+")";
+          ctx.strokeStyle="rgb("+(255-r)+","+(255-g)+","+(255-b)+")";
           ctx.fillStyle=fStyle;
           document.getElementById("hoverpicker").style.borderColor=fStyle;
           ctx.fillRect(35+w*30+xOff,35+h*30+yOff,30,30);
@@ -754,7 +756,6 @@ function colorMove(event){
       }
     }
     ctx.fillStyle="rgba(255,255,255,0.6)";
-    ctx.strokeStyle="#888";
     ctx.lieWidth=2;
     for (var i=0;i<8;i++){
       ctx.fillRect(i*30+4+xOff,0,2,100);
@@ -775,7 +776,7 @@ function colorMove(event){
 }
 
 function pickColor(event){
-  var r=Math.floor(tmpI/256)*17, g=Math.floor(tmpI%256/16)*17, b=Math.floor(tmpI%256%16)*17;
+  var r=Math.floor(id/256)*17, g=Math.floor(id%256/16)*17, b=Math.floor(id%256%16)*17;
 }
 
 function paint(){
