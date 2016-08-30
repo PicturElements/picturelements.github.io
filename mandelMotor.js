@@ -745,7 +745,7 @@ function colorMove(event){
       for (var w=-3;w<4;w++){
         var tmpI=sid+h*64+w;
         //&&Math.floor(id/64)+h>=0&&Math,floor(id/64)+h<64
-        if (id%64+w>=0&&id%64+w<64&&id>=0&&id<4096){
+        if (sid%64+w>=0&&sid%64+w<64&&sid>=0&&sid<4096){
           var r=Math.floor(tmpI/256)*17, g=Math.floor(tmpI%256/16)*17, b=Math.floor(tmpI%256%16)*17;
           if (h==0&&w==0){ctx.strokeStyle="rgb("+(255-r)+","+(255-g)+","+(255-b)+")";}
           ctx.fillStyle="rgb("+r+","+g+","+b+")";
