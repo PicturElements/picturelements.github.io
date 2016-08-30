@@ -743,7 +743,7 @@ function colorMove(event){
       for (var w=-3;w<4;w++){
         var tmpI=id+h*64+w;
         ctx.fillStyle="rgb("+Math.floor(tmpI/256)*17+","+Math.floor(tmpI%256/16)*17+","+Math.floor(tmpI%256%16)*17+")";
-        ctx.fillRect(50+w*30+(xOff-0.5)*30,50+h*30+(yOff-0.5)*30,30,30);
+        ctx.fillRect(50+w*30+(0.5-xOff)*30,50+h*30+(0.5-yOff)*30,30,30);
       }
     }
     console.log(id+":"+xOff+":"+yOff);
