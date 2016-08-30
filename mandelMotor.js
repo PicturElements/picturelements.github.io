@@ -271,12 +271,9 @@ function generateExp(){
   return -1;
 }
 
-function isHotkey(keycode){
-  var hotkeys=[83,77,73,71,70,69,67,85,27,13];
-  for (var i=0;i<hotkeys.length;i++){
-    if (keycode==hotkeys[i]){return true;}
-  }
-  return false;
+var hotkeys=[83,77,73,71,70,69,67,85,27,13];
+function isHotkey(keyCode) {
+  return hotkeys.indexOf(keyCode) !== -1;
 }
 
 function setMode(event){
