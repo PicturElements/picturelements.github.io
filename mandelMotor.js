@@ -756,12 +756,12 @@ function colorMove(event){
     ctx.fillStyle="rgba(255,255,255,0.6)";
     ctx.strokeStyle="rgba(255,255,255,0.6)";
     for (var i=0;i<8;i++){
-      ctx.fillRect(i*30-4+xOff,0,2,100);
-      ctx.fillRect(0,i*30-4+yOff,100,2);
+      ctx.fillRect(i*30+4+xOff,0,2,100);
+      ctx.fillRect(0,i*30+4+yOff,100,2);
     }
     ctx.beginPath();
     ctx.moveTo(45+xOff,45+yOff);
-    ctx.lineTo(5+xOff,55+yOff);
+    ctx.lineTo(55+xOff,55+yOff);
     ctx.stroke();
     ctx.beginPath();
     ctx.moveTo(55+xOff,45+yOff);
