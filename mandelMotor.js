@@ -755,12 +755,17 @@ function colorMove(event){
     }
     ctx.fillStyle="rgba(255,255,255,0.6)";
     for (var i=0;i<8;i++){
-      
+      ctx.fillRect(i*30-1+(0.5-xOff),0,2,100);
+      ctx.fillRect(0,i*30-1+(0.5-yOff),100,2);
     }
     //console.log(id+":"+xOff+":"+yOff);
   }else{
     div.style.display="none";
   }
+}
+
+function pickColor(event){
+  var r=Math.floor(tmpI/256)*17, g=Math.floor(tmpI%256/16)*17, b=Math.floor(tmpI%256%16)*17;
 }
 
 function paint(){
