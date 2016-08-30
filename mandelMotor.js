@@ -748,7 +748,7 @@ function colorMove(event){
         if (id%64+w>=0&&id%64+w<64&&id>=0&&id<4096){
           var r=Math.floor(tmpI/256)*17, g=Math.floor(tmpI%256/16)*17, b=Math.floor(tmpI%256%16)*17;
           var fStyle="rgb("+r+","+g+","+b+")";
-          ctx.strokeStyle="rgb("+(255-r)+","+(255-g)+","+(255-b)+")";
+          if (h==0&&w==0){ctx.strokeStyle="rgb("+(255-r)+","+(255-g)+","+(255-b)+")";}
           ctx.fillStyle=fStyle;
           document.getElementById("hoverpicker").style.borderColor=fStyle;
           ctx.fillRect(35+w*30+xOff,35+h*30+yOff,30,30);
