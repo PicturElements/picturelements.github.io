@@ -729,11 +729,15 @@ function editCol(element){
 }
 
 function colorMove(event){
-  var vw=window.innerWidth/100;
+  var vw=window.innerWidth/100,div=document.getElementById("hoverpicker");
   var xPos=event.clientX-(30*vw), yPos=event.clientY-(window.innerHeight/2-15.25*vw);
   console.log(xPos+":"+yPos);
   if (xPos>=vw&&xPos<=24*vw&&yPos>=6.5*vw&&yPos<=29.5*vw){
-    console.log("IT WORKS!");
+    div.style.display="block";
+    div.style.left=""+(xPos/vw-1)+"vw";
+    div.style.top=""+(yPos/vw-1)+"vw";
+  }else{
+    div.style.display="block";
   }
 }
 
