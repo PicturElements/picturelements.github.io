@@ -734,8 +734,8 @@ function colorMove(event){
   //console.log(xPos+":"+yPos);
   if (xPos>=vw&&xPos<=24*vw&&yPos>=6.5*vw&&yPos<=29.5*vw){
     div.style.display="block";
-    div.style.left=""+(xPos/vw-1.2)+"vw";
-    div.style.top=""+(yPos/vw-1.2)+"vw";
+    div.style.left=""+(xPos/vw-1.7)+"vw";
+    div.style.top=""+(yPos/vw-1.7)+"vw";
     var ctx=document.getElementById("pickercanvas").getContext("2d");
     var id=Math.floor(((yPos-6.5*vw)/(23*vw))*64)*64+Math.floor(((xPos-vw)/(23*vw))*64);
     var xOff=(((xPos-vw)/(23*vw))%(1/64))*64,yOff=(((yPos-6.5*vw)/(23*vw))%(1/64))*64;
