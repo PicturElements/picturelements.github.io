@@ -756,7 +756,7 @@ function colorMove(event){
       }
     }
     ctx.fillStyle="rgba(255,255,255,0.6)";
-    ctx.lieWidth=2;
+    ctx.lineWidth=3;
     for (var i=0;i<8;i++){
       ctx.fillRect(i*30+4+xOff,0,2,100);
       ctx.fillRect(0,i*30+4+yOff,100,2);
