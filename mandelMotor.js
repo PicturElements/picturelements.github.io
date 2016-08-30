@@ -720,9 +720,9 @@ function setEP(event){
 
 function editCol(element){
   var elements=document.getElementsByClassName("coloredit");
-  var id;
+  var tid;
   for (var i=0;i<elements.length;i++){
-    if (elements[i]==element){id=i; break;}
+    if (elements[i]==element){tid=i; break;}
   }
   document.getElementById("colorchooser").style.display="block";
   //alert("Selected: "+id);
@@ -776,9 +776,9 @@ function colorMove(event){
 function pickColor(event){
   var r=Math.floor(id/256)*17, g=Math.floor(id%256/16)*17, b=Math.floor(id%256%16)*17;
   var element=document.getElementsByClassName("colorsample")[selected];
-  element.red=""+r;
-  element.green=""+g;
-  element.blue=""+b;
+  element.r=r;
+  element.g=g;
+  element.b=b;
   element.style.backgroundColor="rgb("+r+","+g+","+b+")";
 }
 
