@@ -224,12 +224,12 @@
       #choosercanvas{
         display: block;
         position: absolute;
-        left: 1vw;
-        bottom: 1vw;
+        left: 0.6vw;
+        bottom: 0.6vw;
         width: 23vw;
         height: 23vw;
         background-color: #ddd;
-        cursor:none;
+        border: 0.4vw solid #444;
       }
       
       #hoverpicker{
@@ -237,8 +237,20 @@
         position:absolute;
         width:2vw;
         height:2vw;
-        background-color:rgba(0,0,0,0.5);
         border-radius:1vw;
+        background-color: black;
+        border: 0.2vw solid #555;
+        border-radius: 50%;
+        overflow:hidden;
+        cursor:none;
+      }
+      
+      #pickercanvas{
+        display:block;
+        position:absolute;
+        width:2vw;
+        height:2vw;
+        background-color:white;
         cursor:none;
       }
       
@@ -847,7 +859,9 @@
       <div id="colorchooser" class="popup">
         <div id="closebtn" onclick="closePopups2(this)">[close]</div>
         <canvas id="choosercanvas" width="640" height="640"></canvas>
-        <div id="hoverpicker"></div>
+        <div id="hoverpicker"><
+          <canvas id="pickercanvas"> width="100" height="100"</canvas>
+        </div>
       </div>
     </div>
     <div id="hoverinfo">
