@@ -281,6 +281,7 @@
         width: 100%;
         height: 3vw;
         cursor:pointer;
+        background-color:red;
       }
       
       .actionbutton{
@@ -296,6 +297,19 @@
         text-align: center;
         font-weight: 700;
         color:#444;
+      }
+      
+      .actionbutton:hover{
+        color:#888;
+      }
+      
+      #ml:first-of-type{
+        pointer-events:none;
+      }
+      
+      #mr:last-of-type{
+        color:#ccc;
+        pointer-events:none;
       }
       
       .gradientselector{
@@ -904,9 +918,9 @@
         <div id="closebtn" onclick="closePopups2(this)">[close]</div>
         <div id="gradientbox">
           <div class="gradientelement" onclick=moveHere(this)>
-            <div class="colorsample" red="0" green="0" blue="0"></div>
-            <div class="actionbutton" onclick=moveLeft(this)>&lt;</div>
-            <div class="actionbutton" onclick=moveRight(this)>&gt;</div>
+            <div class="colorsample" red="255" green="0" blue="0"></div>
+            <div class="actionbutton" id="ml" onclick=moveLeft(this)>&lt;</div>
+            <div class="actionbutton" id="mr" onclick=moveRight(this)>&gt;</div>
             <div class="actionbutton" onclick=closeColor(this)>x</div>
             <div class="actionbutton" onclick=addColor()>+</div>
           </div>
