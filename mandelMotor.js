@@ -782,7 +782,7 @@ function moveHere(element){
   for (var i=0;i<elements.length;i++){
     if (elements[i]==element){selected=i; break;}
   }
-  document.getElementById("pointer").style.marginLeft=""+(1.5*selected*4.5)+"vw"
+  document.getElementById("pointer").style.marginLeft=""+(1.5+selected*4.5)+"vw"
 }
 
 function paint(){
