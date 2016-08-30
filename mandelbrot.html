@@ -255,6 +255,43 @@
         cursor:none;
       }
       
+      #gradientbox{
+        display: block;
+        position: absolute;
+        top: 0.6vw;
+        left: 0.6vw;
+        width: 34.5vw;
+        height: 5vw;
+        background-color: #eee;
+      }
+      
+      .gradientelement{
+        display: block;
+        position: relative;
+        float: left;
+        width: 4vw;
+        height: 4.5vw;
+        top: 0.25vw;
+        margin-left: 0.25vw;
+      }
+      
+      .colorsample{
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 3vw;
+      }
+      
+      .actionbutton{
+        display:block;
+        position:relative;
+        float:left;
+        width:1vw;
+        height:1vw;
+        bottom:0;
+        cursor:pointer;
+      }
+      
       .gradientselector{
         display: block;
         position: relative;
@@ -859,6 +896,15 @@
       </div>
       <div id="colorchooser" class="popup">
         <div id="closebtn" onclick="closePopups2(this)">[close]</div>
+        <div id="gradientbox">
+          <div class="gradientelement">
+            <div class="colorsample" red="0" green="0" blue="0"></div>
+            <div class="actionbutton" onclick=moveLeft(this)>&lt;</div>
+            <div class="actionbutton" onclick=moveRight(this)>&gt;</div>
+            <div class="actionbutton" onclick=closeColor(this)>x</div>
+            <div class="actionbutton" onclick=addColor()>+</div>
+          </div>
+        </div>
         <canvas id="choosercanvas" width="640" height="640"></canvas>
         <div id="hoverpicker">
           <canvas id="pickercanvas" width="100" height="100"></canvas>
