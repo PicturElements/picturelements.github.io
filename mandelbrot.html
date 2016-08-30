@@ -232,6 +232,15 @@
         cursor:none;
       }
       
+      #hoverpicker{
+        display:none;
+        position:absolute;
+        width:2vw;
+        height:2vw;
+        background-color:rgba(0,0,0,0.5);
+        border-radius:1vw;
+      }
+      
       .gradientselector{
         display: block;
         position: relative;
@@ -837,6 +846,7 @@
       <div id="colorchooser" class="popup">
         <div id="closebtn" onclick="closePopups2(this)">[close]</div>
         <canvas id="choosercanvas" width="640" height="640"></canvas>
+        <div id="hoverpicker"></div>
       </div>
     </div>
     <div id="hoverinfo">
