@@ -722,11 +722,7 @@ function editCol(element){
 
 function paint(){
   var counter=0;
-  
-  rd = Math.floor(rd);
-  gr = Math.floor(gr);
-  bl = Math.floor(bl);
-  
+
   for (var h=scan;h<scan+10;h++){
     for (var w=0;w<width;w++){
       if (pixels[h*width+w]==-1){
