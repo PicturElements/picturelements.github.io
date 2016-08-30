@@ -717,6 +717,11 @@ function editCol(element){
 
 function paint(){
   var counter=0;
+  
+  rd = Math.floor(rd);
+  gr = Math.floor(gr);
+  bl = Math.floor(bl);
+  
   for (var h=scan;h<scan+10;h++){
     for (var w=0;w<width;w++){
       if (pixels[h*width+w]==-1){
@@ -737,13 +742,13 @@ function paint(){
         ctx.fillStyle="rgb("+Math.floor(rd)+","+Math.floor(gr)+","+Math.floor(bl)+")";
         ctx.fillRect(w,h,1,1);*/
         color(pixels[h*width+w]);
-        imgData.data[counter]=Math.floor(rd);
-        imgData.data[counter+1]=Math.floor(gr);
-        imgData.data[counter+2]=Math.floor(bl);
+        imgData.data[counter]=rd;
+        imgData.data[counter+1]=gr;
+        imgData.data[counter+2]=bl;
         imgData.data[counter+3]=255;
-        imgDataFull.data[scan*width*4+counter]=Math.floor(rd);
-        imgDataFull.data[scan*width*4+counter+1]=Math.floor(gr);
-        imgDataFull.data[scan*width*4+counter+2]=Math.floor(bl);
+        imgDataFull.data[scan*width*4+counter]=rd;
+        imgDataFull.data[scan*width*4+counter+1]=gr;
+        imgDataFull.data[scan*width*4+counter+2]=bl;
         imgDataFull.data[scan*width*4+counter+3]=255;
       }
       counter+=4;
