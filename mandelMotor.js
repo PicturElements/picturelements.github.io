@@ -775,6 +775,11 @@ function colorMove(event){
 
 function pickColor(event){
   var r=Math.floor(id/256)*17, g=Math.floor(id%256/16)*17, b=Math.floor(id%256%16)*17;
+  var element=document.getElementsByClassName("colorsample")[selected];
+  element.red=r;
+  element.green=g;
+  element.blue=b;
+  element.style.backgroundColor="rgb("+r+","+g+","+b+")";
 }
 
 function moveHere(element){
