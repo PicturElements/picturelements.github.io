@@ -737,7 +737,7 @@ function colorMove(event){
     div.style.left=""+(xPos/vw-1.2)+"vw";
     div.style.top=""+(yPos/vw-1.2)+"vw";
     var ctx=document.getElementById("pickercanvas").getContext("2d");
-    var id=Math.floor(((yPos-6.5*vw)/23*vw)*64)*64+Math.floor(((xPos-vw)/23*vw)*64);
+    var id=Math.floor(((yPos-6.5*vw)/23*vw)*64)*Math.floor(((xPos-vw)/23*vw)*64);
     console.log(id);
   }else{
     div.style.display="none";
