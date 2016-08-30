@@ -748,7 +748,7 @@ function colorMove(event){
         if (id%64+w>=0&&id%64+w<64&&id>=0&&id<4096){
           var fStyle="rgb("+Math.floor(tmpI/256)*17+","+Math.floor(tmpI%256/16)*17+","+Math.floor(tmpI%256%16)*17+")";
           ctx.fillStyle=fStyle;
-          document.getElementById("colorpicker").style.borderColor=fStyle;
+          document.getElementById("hoverpicker").style.borderColor=fStyle;
           ctx.fillRect(50+w*30+(0.5-xOff)*30,50+h*30+(0.5-yOff)*30,30,30);
         }
       }
