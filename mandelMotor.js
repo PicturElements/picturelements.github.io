@@ -724,7 +724,8 @@ function editCol(element){
   for (var i=0;i<elements.length;i++){
     if (elements[i]==element){id=i; break;}
   }
-  alert("Selected: "+id);
+  document.getElementById("colorchooser").style.display="block";
+  //alert("Selected: "+id);
 }
 
 function colorMove(event){
