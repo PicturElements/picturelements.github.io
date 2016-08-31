@@ -813,7 +813,7 @@ function closeColor(element){
   var parents=document.getElementsByClassName("gradientelement");
   element.parentElement.style.display="none";
   var tmpId=parseInt(element.parentElement.getAttribute("index"));
-  for (var i=tmpId;i<elements.length;i++){
+  for (var i=tmpId;i<elements.length-1;i++){
     elements[i].style.backgroundColor=elements[i+1].style.backgroundColor;
     elements[i].setAttribute("r",elements[i+1].getAttribute("r"));
     elements[i].setAttribute("g",elements[i+1].getAttribute("g"));
@@ -822,6 +822,41 @@ function closeColor(element){
   }
   document.getElementById("pointer").style.marginLeft=""+(1.5+tmpId*4.5)+"vw"
   selected=tmpId;
+  if (parents[tmpId].style.display=="none"){
+    document.getElementById("pointer").style.marginLeft=""+(1.5+(tmpId-1)*4.5)+"vw"
+    selected=tmpId-1;
+  }
+}
+
+function moveLeft(element){
+  var tmpId=parseInt(element.parentElement.getAttribute("index"));
+  if (tmpId>0){
+    swap(tmpId-1);
+    selected=tmpId-1;
+    document.getElementById("pointer").style.marginLeft=""+(1.5+selected*4.5)+"vw"
+  }
+}
+
+function moveLeft(element){
+  var tmpId=parseInt(element.parentElement.getAttribute("index"));
+  if (tmpId<7){
+    swap(tmpId);
+    selected=tmpId+1;
+    document.getElementById("pointer").style.marginLeft=""+(1.5+selected*4.5)+"vw"
+  }
+}
+
+function swap(index){
+  var elements=document.getElementsByClassName("colorsample");
+  var tmpCol=elements[index].style.backgroundColor,tmpR=elements[index].getAttribute("r"),tmpG=elements[index].getAttribute("g"),tmpB=elements[index].getAttribute("b");
+  elements[index].style.backgroundColor=elements[index+1].style.backgroundColor;
+  elements[index+1].style.backgroundColor=tmpCol;
+  elements[index].setAttribute("r",elements[index+1].getAttribute("r"));
+  elements[index+1].setAttribute("r",tmpR);
+  elements[index].setAttribute("g",elements[index+1].getAttribute("g"));
+  elements[index+1].setAttribute("g",tmpG);
+  elements[index].setAttribute("b",elements[index+1].getAttribute("b"));
+  elements[index+1].setAttribute("b",tmpB);
 }
 
 function moveHere(element){
