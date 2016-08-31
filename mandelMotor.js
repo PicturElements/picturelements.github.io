@@ -804,10 +804,22 @@ function addColor(element){
     }
     nElement.style.display="block";
   }
+  document.getElementById("pointer").style.marginLeft=""+(1.5+(tmpId+1))*4.5)+"vw"
 }
 
 function closeColor(element){
+  var elements=document.getElementsByClassName("colorsample");
+  var parents=document.getElementsByClassName("gradientelement");
   element.parentElement.style.display="none";
+  var tmpId=parseInt(element.parentElement.getAttribute("index"));
+  for (var i=tmpId;i<elements.length;i++){
+    elements[i].style.backgroundColor=elements[i+1].style.backgroundColor;
+    elements[i].setAttribute("r",elements[i+1].getAttribute("r"));
+    elements[i].setAttribute("g",elements[i+1].getAttribute("g"));
+    elements[i].setAttribute("b",elements[i+1].getAttribute("b"));
+    parents[i].style.display=parents[i+1].style.display;
+  }
+  document.getElementById("pointer").style.marginLeft=""+(1.5+(tmpId+1))*4.5)+"vw"
 }
 
 function moveHere(element){
