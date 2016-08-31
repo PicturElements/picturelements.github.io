@@ -792,12 +792,13 @@ function addColor(element){
   for (var i=0;i<elements.length;i++){
     if (elements[i]==element){tmpId=i; break;}
   }
+  alert(tmpId);
   nElement=document.getElementsByClassName("gradientelement")[tmpId+1];
   if (nElement.style.display=="none"){
     nElement.style.display="block";
   }else{
     for (var i=elements.length-1;i>tmpId;i--){
-      elements[i]=elements[i-1];
+      elements[i].style=elements[i-1].style;
     }
     nElement.style.display="block";
   }
