@@ -804,7 +804,8 @@ function addColor(element){
     }
     nElement.style.display="block";
   }
-  document.getElementById("pointer").style.marginLeft=""+(1.5+(tmpId+1))*4.5)+"vw"
+  document.getElementById("pointer").style.marginLeft=""+(1.5+(tmpId+1)*4.5)+"vw"
+  selected=tmpId+1;
 }
 
 function closeColor(element){
@@ -819,7 +820,8 @@ function closeColor(element){
     elements[i].setAttribute("b",elements[i+1].getAttribute("b"));
     parents[i].style.display=parents[i+1].style.display;
   }
-  document.getElementById("pointer").style.marginLeft=""+(1.5+(tmpId+1)*4.5)+"vw"
+  document.getElementById("pointer").style.marginLeft=""+(1.5+tmpId*4.5)+"vw"
+  selected=tmpId;
 }
 
 function moveHere(element){
