@@ -776,14 +776,14 @@ function colorMove(event){
 function pickColor(event){
   var r=Math.floor(sid/256)*17, g=Math.floor(sid%256/16)*17, b=Math.floor(sid%256%16)*17;
   var element=document.getElementsByClassName("colorsample")[selected];
-  /*element.r=r;
-  element.g=g;
-  element.b=b;*/
+  element.setAttribute("r",r);
+  element.setAttribute("g",g);
+  element.setAttribute("b",b);
   element.style.backgroundColor="rgb("+r+","+g+","+b+")";
 }
 
 function moveHere(element){
-  var elements=document.getElementsByClassName("gradientelement");
+  var elements=document.getElementsByClassName("colorsample");
   for (var i=0;i<elements.length;i++){
     if (elements[i]==element){selected=i; break;}
   }
