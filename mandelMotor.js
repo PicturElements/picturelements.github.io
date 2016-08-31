@@ -8,7 +8,7 @@ var scan=0,thread=null;
 var power=2,julA,julB,tmpPow,tmpJA,tmpJB,isMandel=true,tmpIsMandel=true,containsXY;
 var gradientCols=[255,255,255,0,0,0,255,0,0,0,0,0,0,255,0,0,0,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,255,0,0,50,179,216,253,255,255,255,255,194,0,140,46,0,255,0,0,255,255,0,0,255,0,0,255,255,0,0,255,255,0,255];
 //               |                 |             |             |             |                       |                                                 |                                                     |
-var startAt=[0,6,12,18,24,33,48,66,84,84,84],lengths=[0,0,0],sid=0,selected=0;
+var startAt=[0,6,12,18,24,33,48,66,84,84,84],lengths=[0,0,0],sid=0,selected=0,curEdit=false;
 var selectedCol=5,rd,gr,bl,cycleLength=50;
 var date=new Date(),time=date.getTime();
 var ctx,imgData=null,imgDataFull=null,ctx2,ctx3,c3W,c3H;
@@ -729,10 +729,12 @@ function editCol(element){
 }
 
 function colorMove(event){
+  curEdit=false;
   var vw=window.innerWidth/100,div=document.getElementById("hoverpicker");
   var xPos=event.clientX-(30*vw), yPos=event.clientY-(window.innerHeight/2-15.25*vw);
   //console.log(xPos+":"+yPos);
   if (xPos>=vw&&xPos<=24*vw&&yPos>=6.5*vw&&yPos<=29.5*vw){
+    curEdit=true;
     div.style.display="block";
     div.style.left=""+(xPos/vw-2.7)+"vw";
     div.style.top=""+(yPos/vw-2.7)+"vw";
@@ -774,12 +776,14 @@ function colorMove(event){
 }
 
 function pickColor(event){
-  var r=Math.floor(sid/256)*17, g=Math.floor(sid%256/16)*17, b=Math.floor(sid%256%16)*17;
-  var element=document.getElementsByClassName("colorsample")[selected];
-  element.setAttribute("r",r);
-  element.setAttribute("g",g);
-  element.setAttribute("b",b);
-  element.style.backgroundColor="rgb("+r+","+g+","+b+")";
+  if (curEdit){
+    var r=Math.floor(sid/256)*17, g=Math.floor(sid%256/16)*17, b=Math.floor(sid%256%16)*17;
+    var element=document.getElementsByClassName("colorsample")[selected];
+    element.setAttribute("r",r);
+    element.setAttribute("g",g);
+    element.setAttribute("b",b);
+    element.style.backgroundColor="rgb("+r+","+g+","+b+")";
+  }
 }
 
 function moveHere(element){
