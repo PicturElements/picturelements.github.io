@@ -787,9 +787,9 @@ function pickColor(event){
 }
 
 function addColor(element){
-  nextElement=element.parentElement.nextSibling;
-  if (nextElement.style=="none"){
-    nextElement.style="block";
+  var nElement=element.parentElement.nextSibling;
+  if (nElement.style.display=="none"){
+    nElement.style.display="block";
   }else{
     var elements=document.getElementsByClassName("gradientelement")
     var tmpId=0;
@@ -799,12 +799,12 @@ function addColor(element){
     for (var i=elements.length-1;i>tmpId;i--){
       elements[i]=elements[i-1];
     }
-    nextElement.style.display="block";
+    nElement.style.display="block";
   }
 }
 
 function closeColor(element){
-  element.parentElement.style="none";
+  element.parentElement.style.display="none";
 }
 
 function moveHere(element){
