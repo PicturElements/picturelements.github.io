@@ -819,7 +819,7 @@ function closeColor(element){
     elements[i].setAttribute("b",elements[i+1].getAttribute("b"));
     parents[i].style.display=parents[i+1].style.display;
   }
-  document.getElementById("pointer").style.marginLeft=""+(1.5+(tmpId+1))*4.5)+"vw"
+  document.getElementById("pointer").style.marginLeft=""+(1.5+(tmpId+1)*4.5)+"vw"
 }
 
 function moveHere(element){
