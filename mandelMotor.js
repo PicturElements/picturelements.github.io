@@ -786,6 +786,27 @@ function pickColor(event){
   }
 }
 
+function addColor(element){
+  nextElement=element.parentElement.nextSibling;
+  if (nextElement.style=="none"){
+    nextElement.style="block";
+  }else{
+    var elements=document.getElementsByClassName("gradientelement")
+    var tmpId=0;
+    for (var i=0;i<elements.length;i++){
+      if (elements[i]==element){tmpId=i; break;}
+    }
+    for (var i=elements.length-1;i>tmpId;i--){
+      elements[i]=elements[i-1];
+    }
+    nextElement.style.display="block";
+  }
+}
+
+function closeColor(element){
+  element.parentElement.style="none";
+}
+
 function moveHere(element){
   var elements=document.getElementsByClassName("colorsample");
   for (var i=0;i<elements.length;i++){
