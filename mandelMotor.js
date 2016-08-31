@@ -793,8 +793,14 @@ function addColor(element){
   if (nElement.style.display=="none"){
     nElement.style.display="block";
   }else{
+    var elements=document.getElementsByClassName("colorsample");
+    var parents=document.getElementsByClassName("gradientelement");
     for (var i=elements.length-1;i>tmpId;i--){
-      elements[i].style=elements[i-1].style;
+      elements[i].style.backgroundColor=elements[i-1].style.backgroundColor;
+      elements[i].setAttribute("r",elements[i-1].getAttribute("r"));
+      elements[i].setAttribute("g",elements[i-1].getAttribute("g"));
+      elements[i].setAttribute("b",elements[i-1].getAttribute("b"));
+      parents[i].style.display=parents[i-1].style.display;
     }
     nElement.style.display="block";
   }
