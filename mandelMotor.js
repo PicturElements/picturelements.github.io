@@ -787,11 +787,7 @@ function pickColor(event){
 }
 
 function addColor(element){
-  var elements=document.getElementsByClassName("colorsample");
-  var tmpId=0;
-  for (var i=0;i<elements.length;i++){
-    if (elements[i]==element){tmpId=i; break;}
-  }
+  var tmpId=parseInt(element.parentElement.index);
   alert(tmpId);
   nElement=document.getElementsByClassName("gradientelement")[tmpId+1];
   if (nElement.style.display=="none"){
