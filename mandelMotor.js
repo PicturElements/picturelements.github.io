@@ -809,22 +809,24 @@ function addColor(element){
 }
 
 function closeColor(element){
-  var elements=document.getElementsByClassName("colorsample");
   var parents=document.getElementsByClassName("gradientelement");
-  element.parentElement.style.display="none";
-  var tmpId=parseInt(element.parentElement.getAttribute("index"));
-  for (var i=tmpId;i<elements.length-1;i++){
-    elements[i].style.backgroundColor=elements[i+1].style.backgroundColor;
-    elements[i].setAttribute("r",elements[i+1].getAttribute("r"));
-    elements[i].setAttribute("g",elements[i+1].getAttribute("g"));
-    elements[i].setAttribute("b",elements[i+1].getAttribute("b"));
-    parents[i].style.display=parents[i+1].style.display;
-  }
-  document.getElementById("pointer").style.marginLeft=""+(1.5+tmpId*4.5)+"vw"
-  selected=tmpId;
-  if (parents[tmpId].style.display=="none"){
-    document.getElementById("pointer").style.marginLeft=""+(1.5+(tmpId-1)*4.5)+"vw"
-    selected=tmpId-1;
+  if (parents[1].style.display=="block"){
+    var elements=document.getElementsByClassName("colorsample");
+    element.parentElement.style.display="none";
+    var tmpId=parseInt(element.parentElement.getAttribute("index"));
+    for (var i=tmpId;i<elements.length-1;i++){
+      elements[i].style.backgroundColor=elements[i+1].style.backgroundColor;
+      elements[i].setAttribute("r",elements[i+1].getAttribute("r"));
+      elements[i].setAttribute("g",elements[i+1].getAttribute("g"));
+      elements[i].setAttribute("b",elements[i+1].getAttribute("b"));
+      parents[i].style.display=parents[i+1].style.display;
+    }
+    document.getElementById("pointer").style.marginLeft=""+(1.5+tmpId*4.5)+"vw"
+    selected=tmpId;
+    if (parents[tmpId].style.display=="none"){
+      document.getElementById("pointer").style.marginLeft=""+(1.5+(tmpId-1)*4.5)+"vw"
+      selected=tmpId-1;
+    }
   }
 }
 
