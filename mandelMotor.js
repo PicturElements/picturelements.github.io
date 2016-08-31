@@ -787,8 +787,8 @@ function pickColor(event){
 }
 
 function addColor(element){
-  var tmpId=parseInt(element.parentElement.index);
-  alert(tmpId);
+  var tmpId=parseInt(element.parentElement.getAttribute("index"));
+  console.log(tmpId);
   nElement=document.getElementsByClassName("gradientelement")[tmpId+1];
   if (nElement.style.display=="none"){
     nElement.style.display="block";
