@@ -837,7 +837,7 @@ function moveLeft(element){
   }
 }
 
-function moveLeft(element){
+function moveRight(element){
   var tmpId=parseInt(element.parentElement.getAttribute("index"));
   if (tmpId<7){
     swap(tmpId);
