@@ -787,15 +787,15 @@ function pickColor(event){
 }
 
 function addColor(element){
-  var nElement=element.parentElement.nextSibling;
+  var elements=document.getElementsByClassName("colorsample");
+  var tmpId=0;
+  for (var i=0;i<elements.length;i++){
+    if (elements[i]==element){tmpId=i; break;}
+  }
+  nElement=document.getElementsByClassName("gradientelement")[tmpId+1];
   if (nElement.style.display=="none"){
     nElement.style.display="block";
   }else{
-    var elements=document.getElementsByClassName("gradientelement")
-    var tmpId=0;
-    for (var i=0;i<elements.length;i++){
-      if (elements[i]==element){tmpId=i; break;}
-    }
     for (var i=elements.length-1;i>tmpId;i--){
       elements[i]=elements[i-1];
     }
