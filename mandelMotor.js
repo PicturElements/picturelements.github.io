@@ -882,7 +882,7 @@ function paintSliders(rInd,gInd,bInd){
   var comps=[rInd,gInd,bInd];
   console.log(comps);
   var ctx=document.getElementById("slidercanvas").getContext("2d");
-  for (var cols=0;i<3;i++){
+  for (var cols=0;cols<3;cols++){
     for (var i=0;i<16;i++){
       if (cols==0){ctx.fillStyle="rgba("+(15-i)*17+",0,0)"}
       else if (cols==1){ctx.fillStyle="rgba(0,"+(15-i)*17+",0)"}
