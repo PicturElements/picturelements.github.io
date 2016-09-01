@@ -726,6 +726,7 @@ function editCol(element){
   }
   document.getElementById("colorchooser").style.display="block";
   //alert("Selected: "+id);
+  prepareSliders();
 }
 
 function colorMove(event){
@@ -884,10 +885,10 @@ function paintSliders(rInd,gInd,bInd){
   var ctx=document.getElementById("slidercanvas").getContext("2d");
   for (var cols=0;cols<3;cols++){
     for (var i=0;i<16;i++){
-      if (cols==0){ctx.fillStyle="rgba("+(15-i)*17+",0,0)"}
-      else if (cols==1){ctx.fillStyle="rgba(0,"+(15-i)*17+",0)"}
-      else {ctx.fillStyle="rgba(0,0,"+(15-i)*17+")"}
-      ctx.fillRect(cols*58.8,i*29.75,58.8,29.75);
+      if (cols==0){ctx.fillStyle="rgb("+(15-i)*17+",0,0)"}
+      else if (cols==1){ctx.fillStyle="rgb(0,"+(15-i)*17+",0)"}
+      else {ctx.fillStyle="rgb(0,0,"+(15-i)*17+")"}
+      ctx.fillRect(cols*72.2,i*29.75,58.8,29.75);
     }
   }
 }
