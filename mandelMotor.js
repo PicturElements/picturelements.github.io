@@ -36,6 +36,10 @@ function init(){
   element=document.getElementById("colorchooser");
   element.addEventListener("mousemove",function(event){colorMove(event);});
   element.addEventListener("mousedown",function(event){pickColor(event);});
+  element=document.getElementById("slidercanvas");
+  element.addEventListener("mousedown",function(){slide=true;});
+  element.addEventListener("mouseup",function(){slide=false;});
+  element.addEventListener("mousemove",function(event){slideColor(event);});
 
   
   //This was supposed to be an automatic script generator, but due to caching issues, this didn't work out.
@@ -771,15 +775,14 @@ function colorMove(event){
     ctx.lineTo(45+xOff,55+yOff);
     ctx.stroke();
     //console.log(id+":"+xOff+":"+yOff);
-  }else if (xPos>=25.6*vw&&xPos<=38.6*vw&&yPos>=6.1*w&&yPos<=29.9*vw){
-    slideColor(xPos-25.6*vw,yPos-6.1*vw);
   }else{
     div.style.display="none";
   }
 }
 
-function slideColor(xPos,yPos){
+function slideColor(event){
   var vw=window.innerWidth/100;
+  var xPos=event.clientX-(30*vw)+25.6*vw, yPos=event.clientY-(window.innerHeight/2-15.25*vw)+6.1*vw;
   var element=document.getElementById("slidercanvas");
   var hover=false;
   for (var i=0;i<13;i+=4.5){
