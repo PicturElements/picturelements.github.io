@@ -885,10 +885,12 @@ function paintSliders(rInd,gInd,bInd){
   var ctx=document.getElementById("slidercanvas").getContext("2d");
   for (var cols=0;cols<3;cols++){
     for (var i=0;i<16;i++){
+      if (comps[cols]==i){ctx.fillStyle="white"; ctx.fillRect(cols*92.9,i*29.75,74.3,31);}
       if (cols==0){ctx.fillStyle="rgb("+(15-i)*17+",0,0)"}
       else if (cols==1){ctx.fillStyle="rgb(0,"+(15-i)*17+",0)"}
       else {ctx.fillStyle="rgb(0,0,"+(15-i)*17+")"}
-      ctx.fillRect(cols*92.9,i*29.75,74.3,31);
+      if (comps[cols]==i){tx.fillRect(cols*92.9+4,i*29.75+4,66.3,23);}
+      else {ctx.fillRect(cols*92.9,i*29.75,74.3,31);}
     }
   }
 }
