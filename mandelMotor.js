@@ -8,7 +8,7 @@ var scan=0,thread=null;
 var power=2,julA,julB,tmpPow,tmpJA,tmpJB,isMandel=true,tmpIsMandel=true,containsXY;
 var gradientCols=[255,255,255,0,0,0,255,0,0,0,0,0,0,255,0,0,0,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,255,0,0,50,179,216,253,255,255,255,255,194,0,140,46,0,255,0,0,255,255,0,0,255,0,0,255,255,0,0,255,255,0,255];
 //               |                 |             |             |             |                       |                                                 |                                                     |
-var startAt=[0,6,12,18,24,33,48,66,84,84,84],lengths=[0,0,0],sid=0,selected=0,curEdit=false;
+var startAt=[0,6,12,18,24,33,48,66,84,84,84],lengths=[0,0,0],sid=0,selected=0,curEdit=false,slide=false;
 var selectedCol=5,rd,gr,bl,cycleLength=50;
 var date=new Date(),time=date.getTime();
 var ctx,imgData=null,imgDataFull=null,ctx2,ctx3,c3W,c3H;
@@ -771,11 +771,22 @@ function colorMove(event){
     ctx.lineTo(45+xOff,55+yOff);
     ctx.stroke();
     //console.log(id+":"+xOff+":"+yOff);
-  }else if (xPos>=vw&&xPos<=24*vw&&yPos>=6.5*vw&&yPos<=29.5*vw){
-    
+  }else if (xPos>=25.6*vw&&xPos<=38.6*vw&&yPos>=6.1*w&&yPos<=29.9*vw){
+    slideColor(xPos-25.6*vw,yPos-6.1*vw);
   }else{
     div.style.display="none";
   }
+}
+
+function slideColor(xPos,yPos){
+  var vw=window.innerWidth/100;
+  var element=document.getElementById("slidercanvas");
+  var hover=false;
+  for (var i=0;i<13;i+=4.5){
+    if (xPos>=vw*i&&xPos<=vw*(i+4)){hover=true; break;}
+  }
+  if (hover){element.style.cursor="pointer";}
+  else {element.style.cursor="default";}
 }
 
 function pickColor(event){
