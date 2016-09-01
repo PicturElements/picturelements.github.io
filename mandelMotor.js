@@ -37,7 +37,7 @@ function init(){
   element.addEventListener("mousemove",function(event){colorMove(event);});
   element.addEventListener("mousedown",function(event){pickColor(event);});
   element=document.getElementById("slidercanvas");
-  element.addEventListener("mousedown",function(){slide=true; slideColor(event);});
+  element.addEventListener("mousedown",function(event){slide=true; slideColor(event);});
   element.addEventListener("mouseup",function(){slide=false;});
   element.addEventListener("mousemove",function(event){slideColor(event);});
 
@@ -790,7 +790,9 @@ function slideColor(event){
   if (index>=0){element.style.cursor="pointer";}
   else {element.style.cursor="default";}
   if (slide&&index>=0){
-    document.getElementsByClassName("colorsample")[selected].setAttribute(attributes[index],(15-Math.floor((xPos/(23.8*vw))/16))*17);
+    element=document.getElementsByClassName("colorsample")[selected];
+    element.setAttribute(attributes[index],(15-Math.floor((yPos/(23.8*vw))/16))*17);
+    element.style.backgroundColor="rgb("+element.getAttribute("r")+","+element.getAttribute("g")+","+element.getAttribute("b")+")";
     prepareSliders();
   }
 }
