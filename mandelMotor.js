@@ -880,7 +880,7 @@ function prepareSliders(){
 
 function paintSliders(rInd,gInd,bInd){
   var comps=[rInd,gInd,bInd];
-  conole.log(comps);
+  console.log(comps);
   var ctx=document.getElementById("slidercanvas").getContext("2d");
   for (var cols=0;i<3;i++){
     for (var i=0;i<16;i++){
