@@ -295,7 +295,6 @@
         height: 3vw;
         cursor:pointer;
         background-color:red;
-        transition:background-color 200ms;
       }
       
       .actionbutton{
@@ -311,7 +310,6 @@
         text-align: center;
         font-weight: 700;
         color:#444;
-        font-size:1vw;
       }
       
       .actionbutton:hover{
@@ -372,6 +370,15 @@
         background-color:#666;
       }
       
+      #slidercanvas{
+        display: block;
+        position: absolute;
+        width: 13vw;
+        height: 23.8vw;
+        bottom: 0.6vw;
+        right: 1.4vw;
+      }
+      
       #gradientdisplay{
         display: block;
         position: absolute;
@@ -403,6 +410,7 @@
         margin-left: 7px;
         background-color: red;
         border: 3px solid #444;
+        transition:background-color 200ms;
       }
       
       #iterationinfo,#iterationinfo2{
@@ -988,6 +996,7 @@
         <div id="hoverpicker">
           <canvas id="pickercanvas" width="100" height="100"></canvas>
         </div>
+        <canvas id="slidercanvas" width="260" height="476"></canvas>
       </div>
     </div>
     <div id="hoverinfo">
