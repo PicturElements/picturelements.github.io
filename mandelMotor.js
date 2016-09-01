@@ -784,6 +784,7 @@ function pickColor(event){
     element.setAttribute("b",b);
     element.style.backgroundColor="rgb("+r+","+g+","+b+")";
   }
+  prepareSliders();
 }
 
 function addColor(element){
@@ -806,28 +807,28 @@ function addColor(element){
   }
   document.getElementById("pointer").style.marginLeft=""+(1.5+(tmpId+1)*4.5)+"vw"
   selected=tmpId+1;
+  prepareSliders();
 }
 
 function closeColor(element){
+  var elements=document.getElementsByClassName("colorsample");
   var parents=document.getElementsByClassName("gradientelement");
-  if (parents[1].style.display=="block"){
-    var elements=document.getElementsByClassName("colorsample");
-    element.parentElement.style.display="none";
-    var tmpId=parseInt(element.parentElement.getAttribute("index"));
-    for (var i=tmpId;i<elements.length-1;i++){
-      elements[i].style.backgroundColor=elements[i+1].style.backgroundColor;
-      elements[i].setAttribute("r",elements[i+1].getAttribute("r"));
-      elements[i].setAttribute("g",elements[i+1].getAttribute("g"));
-      elements[i].setAttribute("b",elements[i+1].getAttribute("b"));
-      parents[i].style.display=parents[i+1].style.display;
-    }
-    document.getElementById("pointer").style.marginLeft=""+(1.5+tmpId*4.5)+"vw"
-    selected=tmpId;
-    if (parents[tmpId].style.display=="none"){
-      document.getElementById("pointer").style.marginLeft=""+(1.5+(tmpId-1)*4.5)+"vw"
-      selected=tmpId-1;
-    }
+  element.parentElement.style.display="none";
+  var tmpId=parseInt(element.parentElement.getAttribute("index"));
+  for (var i=tmpId;i<elements.length-1;i++){
+    elements[i].style.backgroundColor=elements[i+1].style.backgroundColor;
+    elements[i].setAttribute("r",elements[i+1].getAttribute("r"));
+    elements[i].setAttribute("g",elements[i+1].getAttribute("g"));
+    elements[i].setAttribute("b",elements[i+1].getAttribute("b"));
+    parents[i].style.display=parents[i+1].style.display;
   }
+  document.getElementById("pointer").style.marginLeft=""+(1.5+tmpId*4.5)+"vw"
+  selected=tmpId;
+  if (parents[tmpId].style.display=="none"){
+    document.getElementById("pointer").style.marginLeft=""+(1.5+(tmpId-1)*4.5)+"vw"
+    selected=tmpId-1;
+  }
+  prepareSliders();
 }
 
 function moveLeft(element){
@@ -837,6 +838,7 @@ function moveLeft(element){
     selected=tmpId-1;
     document.getElementById("pointer").style.marginLeft=""+(1.5+selected*4.5)+"vw"
   }
+  prepareSliders();
 }
 
 function moveRight(element){
@@ -846,6 +848,7 @@ function moveRight(element){
     selected=tmpId+1;
     document.getElementById("pointer").style.marginLeft=""+(1.5+selected*4.5)+"vw"
   }
+  prepareSliders();
 }
 
 function swap(index){
@@ -866,7 +869,27 @@ function moveHere(element){
   for (var i=0;i<elements.length;i++){
     if (elements[i]==element){selected=i; break;}
   }
-  document.getElementById("pointer").style.marginLeft=""+(1.5+selected*4.5)+"vw"
+  document.getElementById("pointer").style.marginLeft=""+(1.5+selected*4.5)+"vw";
+  prepareSliders();
+}
+
+function prepareSliders(){
+  var element=document.getElementsByClassName("colorsample")[selected];
+  paintSliders(parseInt(element.getAttribute("r"))/17,parseInt(element.getAttribute("g"))/17,parseInt(element.getAttribute("b"))/17);
+}
+
+function paintSliders(rInd,gInd,bInd){
+  var comps=[rInd,gInd,bInt];
+  conole.log(comps);
+  var ctx=document.getElementById("slidercanvas").getContext("2d");
+  for (var cols=0;i<3;i++){
+    for (var i=0;i<16;i++){
+      if (cols==0){ctx.fillStyle="rgba("+(15-i)*17+",0,0)"}
+      else if (cols==1){ctx.fillStyle="rgba(0,"+(15-i)*17+",0)"}
+      else {ctx.fillStyle="rgba(0,0,"+(15-i)*17+")"}
+      ctx.fillRect(cols*58.8,i*29.75,58.8,29.75);
+    }
+  }
 }
 
 function paint(){
