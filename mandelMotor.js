@@ -771,6 +771,8 @@ function colorMove(event){
     ctx.lineTo(45+xOff,55+yOff);
     ctx.stroke();
     //console.log(id+":"+xOff+":"+yOff);
+  }else if (xPos>=vw&&xPos<=24*vw&&yPos>=6.5*vw&&yPos<=29.5*vw){
+    
   }else{
     div.style.display="none";
   }
@@ -883,13 +885,14 @@ function paintSliders(rInd,gInd,bInd){
   var comps=[rInd,gInd,bInd];
   console.log(comps);
   var ctx=document.getElementById("slidercanvas").getContext("2d");
+  ctx.clearRect(0,0,500,500);
   for (var cols=0;cols<3;cols++){
     for (var i=0;i<16;i++){
-      if (comps[cols]==i){ctx.fillStyle="white"; ctx.fillRect(cols*92.9,i*29.75,74.3,31);}
+      if (15-comps[cols]==i){ctx.fillStyle="#ccc"; ctx.fillRect(cols*92.9,i*29.75,74.3,31);}
       if (cols==0){ctx.fillStyle="rgb("+(15-i)*17+",0,0)"}
       else if (cols==1){ctx.fillStyle="rgb(0,"+(15-i)*17+",0)"}
       else {ctx.fillStyle="rgb(0,0,"+(15-i)*17+")"}
-      if (comps[cols]==i){ctx.fillRect(cols*92.9+4,i*29.75+4,66.3,23);}
+      if (15-comps[cols]==i){ctx.fillRect(cols*92.9+4,i*29.75+4,66.3,23);}
       else {ctx.fillRect(cols*92.9,i*29.75,74.3,31);}
     }
   }
