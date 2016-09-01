@@ -201,6 +201,11 @@ function mainGenerate(){
     clearInterval(thread);
   }
   pixels=[];
+
+  rd = Math.floor(rd);
+  gr = Math.floor(gr);
+  bl = Math.floor(bl);
+
   thread=setInterval(generate,1);   //set a low refresh time, let computer calculate as fast as it can. You go, little man!
 }
 
@@ -284,12 +289,9 @@ function generateExp(){
   return -1;
 }
 
-function isHotkey(keycode){
-  var hotkeys=[83,77,73,71,70,69,67,85,27,13];
-  for (var i=0;i<hotkeys.length;i++){
-    if (keycode==hotkeys[i]){return true;}
-  }
-  return false;
+var hotkeys=[83,77,73,71,70,69,67,85,27,13];
+function isHotkey(keyCode) {
+  return hotkeys.indexOf(keyCode) !== -1;
 }
 
 function setMode(event){
@@ -422,7 +424,7 @@ function canvasInteract(event){
           iters=iterations;
           document.getElementById("colorsample").style.backgroundColor="black";
         }else{
-          document.getElementById("colorsample").style.backgroundColor="rgb("+Math.floor(rd)+","+Math.floor(gr)+","+Math.floor(bl)+")";
+          document.getElementById("colorsample").style.backgroundColor="rgb("+rd+","+gr+","+bl+")";
         }
         document.getElementById("iterationinfo").innerHTML="Iterations: "+iters;
         document.getElementById("iterationinfo2").innerHTML="Re: "+(event.clientX-cmx-width/2-xOff/zoom)/(height/zoom)+"<br>Im: "+(-(event.clientY-cmy-height/2-yOff/zoom)/(height/zoom));
@@ -919,6 +921,7 @@ function paintSliders(rInd,gInd,bInd){
 
 function paint(){
   var counter=0;
+
   for (var h=scan;h<scan+10;h++){
     for (var w=0;w<width;w++){
       if (pixels[h*width+w]==-1){
@@ -939,13 +942,13 @@ function paint(){
         ctx.fillStyle="rgb("+Math.floor(rd)+","+Math.floor(gr)+","+Math.floor(bl)+")";
         ctx.fillRect(w,h,1,1);*/
         color(pixels[h*width+w]);
-        imgData.data[counter]=Math.floor(rd);
-        imgData.data[counter+1]=Math.floor(gr);
-        imgData.data[counter+2]=Math.floor(bl);
+        imgData.data[counter]=rd;
+        imgData.data[counter+1]=gr;
+        imgData.data[counter+2]=bl;
         imgData.data[counter+3]=255;
-        imgDataFull.data[scan*width*4+counter]=Math.floor(rd);
-        imgDataFull.data[scan*width*4+counter+1]=Math.floor(gr);
-        imgDataFull.data[scan*width*4+counter+2]=Math.floor(bl);
+        imgDataFull.data[scan*width*4+counter]=rd;
+        imgDataFull.data[scan*width*4+counter+1]=gr;
+        imgDataFull.data[scan*width*4+counter+2]=bl;
         imgDataFull.data[scan*width*4+counter+3]=255;
       }
       counter+=4;
@@ -1041,7 +1044,7 @@ function paint2(event){
     ctx3.stroke();
     for (var x=0;x<c3W;x++){
       color((x/c3W)*iterations);
-      ctx3.fillStyle="rgb("+Math.floor(rd)+","+Math.floor(gr)+","+Math.floor(bl)+")";
+      ctx3.fillStyle="rgb("+rd+","+gr+","+bl+")";
       ctx3.fillRect(x,0,1,10);
     }
   }
