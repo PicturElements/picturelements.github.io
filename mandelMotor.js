@@ -889,7 +889,7 @@ function paintSliders(rInd,gInd,bInd){
       if (cols==0){ctx.fillStyle="rgb("+(15-i)*17+",0,0)"}
       else if (cols==1){ctx.fillStyle="rgb(0,"+(15-i)*17+",0)"}
       else {ctx.fillStyle="rgb(0,0,"+(15-i)*17+")"}
-      if (comps[cols]==i){tx.fillRect(cols*92.9+4,i*29.75+4,66.3,23);}
+      if (comps[cols]==i){ctx.fillRect(cols*92.9+4,i*29.75+4,66.3,23);}
       else {ctx.fillRect(cols*92.9,i*29.75,74.3,31);}
     }
   }
