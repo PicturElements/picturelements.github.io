@@ -782,7 +782,7 @@ function colorMove(event){
 
 function slideColor(event){
   var vw=window.innerWidth/100;
-  var xPos=event.clientX-(30*vw)+25.6*vw, yPos=event.clientY-(window.innerHeight/2-15.25*vw)+6.1*vw;
+  var xPos=event.clientX-(30*vw)-25.6*vw, yPos=event.clientY-(window.innerHeight/2-15.25*vw)-6.1*vw;
   var element=document.getElementById("slidercanvas");
   var hover=false;
   for (var i=0;i<13;i+=4.5){
