@@ -127,7 +127,7 @@ function parseUrl(){
       }
     }
   }
-  console.log("1: "+advancedGen);
+  //console.log("1: "+advancedGen);
   if (foundQuest){
     document.getElementById("zoom").value=parseFloat(document.getElementById("zoom").value)*(prevH/height);
     document.getElementById("checkinput").innerHTML=advancedGen?document.getElementById("functionin2").value:document.getElementById("functionin").value;
@@ -788,7 +788,7 @@ function slideColor(event){
   if (index>=0){element.style.cursor="pointer";}
   else {element.style.cursor="default";}
   if (slideIt&&index>=0){
-    console.log("Clicked: "+index);
+    //console.log("Clicked: "+index);
     element=document.getElementsByClassName("colorsample")[selected];
     element.setAttribute(attributes[index],(15-Math.floor((yPos/(23.8*vw))*16))*17);
     element.style.backgroundColor="rgb("+element.getAttribute("r")+","+element.getAttribute("g")+","+element.getAttribute("b")+")";
@@ -810,7 +810,7 @@ function pickColor(event){
 
 function addColor(element){
   var tmpId=parseInt(element.parentElement.getAttribute("index"));
-  console.log(tmpId);
+  //console.log(tmpId);
   nElement=document.getElementsByClassName("gradientelement")[tmpId+1];
   if (nElement.style.display=="none"){
     nElement.style.display="block";
@@ -906,7 +906,7 @@ function prepareSliders(){
 
 function paintSliders(rInd,gInd,bInd){
   var comps=[rInd,gInd,bInd];
-  console.log(comps);
+  //console.log(comps);
   var ctx=document.getElementById("slidercanvas").getContext("2d");
   ctx.clearRect(0,0,500,500);
   for (var cols=0;cols<3;cols++){
@@ -930,7 +930,7 @@ function setGradient(){
       colors.push(parseInt(elements[i].getAttribute("r")),parseInt(elements[i].getAttribute("g")),parseInt(elements[i].getAttribute("b")));
     }
   }
-  console.log(colors);
+  //console.log(colors);
   var diff=colors.length-lengths[editing];
   //gradientCols.splice(startAt[startAt.length-(3-editing)],lengths[editing],colors);
   gradientCols.splice(startAt[startAt.length-(3-editing)],lengths[editing]);
@@ -944,8 +944,8 @@ function setGradient(){
   //console.log(gradientCols);
   //console.log(startAt);
   gradientSetup();
-  gradient(6+editing);
-  document.getElementById("colorchooser").style.display="block";
+  gradient(7+editing);
+  document.getElementById("colorchooser").style.display="none";
 }
 
 function paint(){
