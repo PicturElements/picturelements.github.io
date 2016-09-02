@@ -143,6 +143,7 @@ function parseUrl(){
 
 function fromHex(inStr){
   selectedCol=7;
+  lengths[0]=inStr.length;
   for (var i=0;i<inStr.length;i++){
     var parsed=inStr.charCodeAt(i);
     var tmp=(parsed>=48&&parsed<58)?(parsed-48)*17:(parsed-55)*17;
@@ -986,6 +987,9 @@ function setGradient(){
   gradientSetup();
   gradient(7+editing);
   document.getElementById("colorchooser").style.display="none";
+  var element=document.getElementsByClassName("coloredit")[editing];
+  if (lengths[editing]>3){element.style.backgroundImage="url(images/pen.png)"}
+  else {element.style.backgroundImage="none";}
 }
 
 function paint(){
