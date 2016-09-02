@@ -8,7 +8,7 @@ var scan=0,thread=null;
 var power=2,julA,julB,tmpPow,tmpJA,tmpJB,isMandel=true,tmpIsMandel=true,containsXY;
 var gradientCols=[255,255,255,0,0,0,255,0,0,0,0,0,0,255,0,0,0,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,255,0,0,50,179,216,253,255,255,255,255,194,0,140,46,0,255,0,0,255,255,0,0,255,0,0,255,255,0,0,255,255,0,255];
 //               |                 |             |             |             |                       |                                                 |                                                     |
-var startAt=[0,6,12,18,24,33,48,66,84,84,84],lengths=[0,0,0],sid=0,selected=0,curEdit=false,slideIt=false;
+var startAt=[0,6,12,18,24,33,48,66,84,84,84],lengths=[0,0,0],sid=0,selected=0,curEdit=false,editing=0,slideIt=false;
 var selectedCol=5,rd,gr,bl,cycleLength=50;
 var date=new Date(),time=date.getTime();
 var ctx,imgData=null,imgDataFull=null,ctx2,ctx3,c3W,c3H;
@@ -93,7 +93,6 @@ function paintRaster(){
       ctx.fillRect(((h/sqS)%2)*sqS+w,h,sqS,sqS);
     }
   }
-  
   ctx=document.getElementById("choosercanvas").getContext("2d");
   for (var i=0;i<4096;i++){
       ctx.fillStyle="rgb("+Math.floor(i/256)*17+","+Math.floor(i%256/16)*17+","+Math.floor(i%256%16)*17+")";
@@ -724,9 +723,8 @@ function setEP(event){
 
 function editCol(element){
   var elements=document.getElementsByClassName("coloredit");
-  var tid;
   for (var i=0;i<elements.length;i++){
-    if (elements[i]==element){tid=i; break;}
+    if (elements[i]==element){editing=i; break;}
   }
   document.getElementById("colorchooser").style.display="block";
   //alert("Selected: "+id);
@@ -921,6 +919,20 @@ function paintSliders(rInd,gInd,bInd){
       else {ctx.fillRect(cols*92.9,i*29.75,74.3,31);}
     }
   }
+}
+
+function setGradient(){
+  var elements=document.getElementsByClassName("colorsample");
+  var parents=document.getElementsByClassName("gradientelement");
+  var colors=[];
+  for (var i=0;i<parents.length;i++){
+    if (parents[i].style.display=="block"){
+      colors.push(parseInt(element.getAttribute("r")),parseInt(element.getAttribute("g")),parseInt(element.getAttribute("b")));
+    }
+  }
+  var diff=colors.length-lengths[editing];
+  gradientCols.splice(startAt[startAt.length-(3-editing)],lengths[editing],colors);
+  //for (var i=startAt.length-(3-editing))
 }
 
 function paint(){
