@@ -142,7 +142,7 @@ function parseUrl(){
 }
 
 function gradientSetup(){
-  for (var a=0;a<startAt.length;a++){
+  for (var a=0;a<startAt.length-1;a++){
     var parts=(startAt[a+1]-startAt[a])/3;
     var colors="";
     for (var b=0;b<parts-1;b++){
