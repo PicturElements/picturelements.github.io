@@ -548,7 +548,7 @@ function displayFunction(){
       }
     }
     if (prevWasNo){values.push(parseFloat(tmpString));}
-    tmpIsMandel=0;
+    tmpIsMandel=false;
     if (values.length==1){
       tmpIsMandel=true;
       tmpPow=Math.abs(Math.floor(values[0]));
