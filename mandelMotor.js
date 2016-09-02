@@ -933,7 +933,7 @@ function setGradient(){
   var diff=colors.length-lengths[editing];
   gradientCols.splice(startAt[startAt.length-(3-editing)],lengths[editing],colors);
   if (editing!=0){
-    for (var i=startAt.length-(3-editing),i<startAt.length;i++){
+    for (var i=startAt.length-(3-editing);i<startAt.length;i++){
       startAt[i]+=diff;
     }
   }
