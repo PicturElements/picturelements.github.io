@@ -117,7 +117,7 @@ function parseUrl(){
         else if (count==2){document.getElementById("xOff").value=tmpStr;}
         else if (count==3){document.getElementById("yOff").value=tmpStr;}
         else if (count==4){document.getElementById("zoom").value=tmpStr;}
-        else if (count==5){selectedCol=parseInt(tmpStr);}
+        else if (count==5){if (tmpString.length==1){selectedCol=parseInt(tmpStr);}else{fromHex(tmpString);}}
         else if (count==6){cycleLength=parseInt(tmpStr);}
         else if (count==7){prevH=parseInt(tmpStr);}
         count++;
@@ -138,6 +138,17 @@ function parseUrl(){
     document.getElementById("yOff").value=parseFloat(document.getElementById("yOff").value)*(prevH/height);*/
   }else{
     setStuff();
+  }
+}
+
+function fromHex(inStr){
+  selectedCol=7;
+  for (var i=0;i<inStr.length;i++){
+    var parsed=inStr.charCodeAt(i);
+    gradientCols.push((parsed>=48&&parsed<58)?parsed-48:parsed-55);
+  }
+  for (var i=startAt.length-4;i<startAt.length-1;i++){
+    startAt+=inStr.length;
   }
 }
 
