@@ -146,6 +146,7 @@ function fromHex(inStr){
   for (var i=0;i<inStr.length;i++){
     var parsed=inStr.charCodeAt(i);
     var tmp=(parsed>=48&&parsed<58)?(parsed-48)*17:(parsed-55)*17;
+    console.log(tmp);
     gradientCols.push(tmp);
   }
   for (var n=startAt.length-4;n<startAt.length-1;n++){
