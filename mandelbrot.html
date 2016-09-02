@@ -355,20 +355,21 @@
       .coloredit{
         display: block;
         position: absolute;
-        width: 2.5vw;
-        height: 2.5vw;
+        width: 2vw;
+        height: 2vw;
         background-color: #444;
-        border-top: 0.3vw solid #787878;
-        border-left: 0.3vw solid #787878;
+        border-top: 0.2vw solid #787878;
+        border-left: 0.2vw solid #787878;
         right: 0;
         bottom: 0;
         cursor: pointer;
         color: #eee;
-        font-size: 2.4vw;
+        font-size: 2vw;
         font-weight: 300;
         text-align: center;
-        line-height: 2.5vw;
-        transition:background 200ms;
+        line-height: 2vw;
+        transition: background 200ms;
+        background-size: contain;
       }
       
       .coloredit:hover{
@@ -946,7 +947,7 @@
       </div>
       <div id="colorchooser" class="popup">
         <div id="closebtn" style="color:#a00" onclick="closePopups2(this)">[close]</div>
-        <div id="closebtn" style="top:2.5vw; color:green" onclick="setGradient()">[set]</div>
+        <div id="closebtn" style="top:3vw; color:green; font-size:2vw" onclick="setGradient()">[set]</div>
         <div id="gradientbox">
           <div id="pointer"></div>
           <div class="gradientelement" index="0">
