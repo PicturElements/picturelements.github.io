@@ -727,6 +727,24 @@ function editCol(element){
     if (elements[i]==element){editing=i; break;}
   }
   document.getElementById("colorchooser").style.display="block";
+  
+  var elements=document.getElementsByClassName("colorsample");
+  var parents=document.getElementsByClassName("gradientelement");
+  if (lengths[editing]!=0){
+    var len=(startAt[8+editing]-startAt[7+editing])/3;
+    var sA=startAt[7+editing];
+    for (var i=0;i<elements.length;i++){
+      if (i<len){
+        parents[i].style.display="none";
+        elements[i].setAttribute("r",gradientCols[sA+3*i]);
+        elements[i].setAttribute("g",gradientCols[sA+3*i+1]);
+        elements[i].setAttribute("b",gradientCols[sA+3*i+2]);
+        elements[i].style.backgroundColor="rgb("+gradientCols[sA+3*i]+","+gradientCols[sA+3*i+1]+","+gradientCols[sA+3*i+2]+")";
+      }else{
+        parents[i].style.display="none";
+      }
+    }
+  }
   //alert("Selected: "+id);
   prepareSliders();
 }
