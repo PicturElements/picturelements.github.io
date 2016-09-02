@@ -8,7 +8,7 @@ var scan=0,thread=null;
 var power=2,julA,julB,tmpPow,tmpJA,tmpJB,isMandel=true,tmpIsMandel=true,containsXY;
 var gradientCols=[255,255,255,0,0,0,255,0,0,0,0,0,0,255,0,0,0,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,255,0,0,50,179,216,253,255,255,255,255,194,0,140,46,0,255,0,0,255,255,0,0,255,0,0,255,255,0,0,255,255,0,255];
 //               |                 |             |             |             |                       |                                                 |                                                     |
-var startAt=[0,6,12,18,24,33,48,66,66,66],lengths=[0,0,0],sid=0,selected=0,curEdit=false,editing=0,slideIt=false;
+var startAt=[0,6,12,18,24,33,48,66,66,66,66],lengths=[0,0,0],sid=0,selected=0,curEdit=false,editing=0,slideIt=false;
 var selectedCol=5,rd,gr,bl,cycleLength=50;
 var date=new Date(),time=date.getTime();
 var ctx,imgData=null,imgDataFull=null,ctx2,ctx3,c3W,c3H;
@@ -142,7 +142,7 @@ function parseUrl(){
 }
 
 function gradientSetup(){
-  for (var a=0;a<startAt.length-1;a++){
+  for (var a=0;a<startAt.length;a++){
     var parts=(startAt[a+1]-startAt[a])/3;
     var colors="";
     for (var b=0;b<parts-1;b++){
@@ -937,13 +937,15 @@ function setGradient(){
   for (var i=0;i<colors.length;i++){
     gradientCols.splice(startAt[startAt.length-(3-editing)]+i,0,colors[i]);
   }
-  for (var i=startAt.length-(2-editing);i<startAt.length;i++){
+  for (var i=startAt.length-(3-editing);i<startAt.length;i++){
     startAt[i]+=diff;
   }
   lengths[editing]=colors.length;
-  console.log(gradientCols);
-  console.log(startAt);
+  //console.log(gradientCols);
+  //console.log(startAt);
   gradientSetup();
+  gradient(6+editing);
+  document.getElementById("colorchooser").style.display="block";
 }
 
 function paint(){
