@@ -37,7 +37,6 @@
         -webkit-user-select: none;
         -moz-user-select: none;
         -ie-user-select: none;
-        user-select: none;
       }
       
       #toolbox{
@@ -225,7 +224,6 @@
         -webkit-user-select: none;
         -moz-user-select: none;
         -ie-user-select: none;
-        user-select: none;
       }
       
       #choosercanvas{
@@ -316,6 +314,7 @@
         line-height: 1vw;
         text-align: center;
         font-weight: 700;
+        font-size: 1vw;
         color:#444;
       }
       
@@ -946,7 +945,8 @@
         <button style="top:9.5vw; width:18.5vw" onclick=newPage()>Safe page</button>
       </div>
       <div id="colorchooser" class="popup">
-        <div id="closebtn" onclick="closePopups2(this)">[close]</div>
+        <div id="closebtn" style="color:#a00" onclick="closePopups2(this)">[close]</div>
+        <div id="closebtn" style="top:2.5vw; color:green" onclick="setGradient()">[set]</div>
         <div id="gradientbox">
           <div id="pointer"></div>
           <div class="gradientelement" index="0">
