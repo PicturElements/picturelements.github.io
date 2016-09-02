@@ -866,10 +866,13 @@ function moveLeft(element){
 
 function moveRight(element){
   var tmpId=parseInt(element.parentElement.getAttribute("index"));
-  if (tmpId<7){
-    swap(tmpId);
-    selected=tmpId+1;
-    document.getElementById("pointer").style.marginLeft=""+(1.5+selected*4.5)+"vw"
+  var elements=document.getElementsByClassName("gradientelement");
+  if (tmpId<6){
+    if (elements[tmpId+1].style.display=="block"){
+      swap(tmpId);
+      selected=tmpId+1;
+      document.getElementById("pointer").style.marginLeft=""+(1.5+selected*4.5)+"vw"
+    }
   }
   prepareSliders();
 }
