@@ -145,9 +145,10 @@ function fromHex(inStr){
   selectedCol=7;
   for (var i=0;i<inStr.length;i++){
     var parsed=inStr.charCodeAt(i);
-    gradientCols.push((parsed>=48&&parsed<58)?parsed-48:parsed-55);
+    var tmp=(parsed>=48&&parsed<58)?(parsed-48)*17:(parsed-55)*17;
+    gradientCols.push(tmp);
   }
-  for (var i=startAt.length-4;i<startAt.length-1;i++){
+  for (var n=startAt.length-4;n<startAt.length-1;n++){
     startAt+=inStr.length;
   }
 }
