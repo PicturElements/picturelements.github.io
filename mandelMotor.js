@@ -8,7 +8,7 @@ var scan=0,thread=null;
 var power=2,julA,julB,tmpPow,tmpJA,tmpJB,isMandel=true,tmpIsMandel=true,containsXY;
 var gradientCols=[255,255,255,0,0,0,255,0,0,0,0,0,0,255,0,0,0,0,0,0,255,0,0,0,255,0,0,0,255,0,0,0,255,0,0,50,179,216,253,255,255,255,255,194,0,140,46,0,255,0,0,255,255,0,0,255,0,0,255,255,0,0,255,255,0,255];
 //               |                 |             |             |             |                       |                                                 |                                                     |
-var startAt=[0,6,12,18,24,33,48,66,84,84,84],lengths=[0,0,0],sid=0,selected=0,curEdit=false,slide=false;
+var startAt=[0,6,12,18,24,33,48,66,84,84,84],lengths=[0,0,0],sid=0,selected=0,curEdit=false,slideIt=false;
 var selectedCol=5,rd,gr,bl,cycleLength=50;
 var date=new Date(),time=date.getTime();
 var ctx,imgData=null,imgDataFull=null,ctx2,ctx3,c3W,c3H;
@@ -37,8 +37,8 @@ function init(){
   element.addEventListener("mousemove",function(event){colorMove(event);});
   element.addEventListener("mousedown",function(event){pickColor(event);});
   element=document.getElementById("slidercanvas");
-  element.addEventListener("mousedown",function(event){slide=true; slideColor(event);});
-  element.addEventListener("mouseup",function(){slide=false;});
+  element.addEventListener("mousedown",function(event){slideIt=true; slideColor(event);});
+  element.addEventListener("mouseup",function(){slideIt=false;});
   element.addEventListener("mousemove",function(event){slideColor(event);});
 
   
@@ -789,7 +789,7 @@ function slideColor(event){
   }
   if (index>=0){element.style.cursor="pointer";}
   else {element.style.cursor="default";}
-  if (slide&&index>=0){
+  if (slideIt&&index>=0){
     console.log("Clicked: "+index);
     element=document.getElementsByClassName("colorsample")[selected];
     element.setAttribute(attributes[index],(15-Math.floor((yPos/(23.8*vw))*16))*17);
