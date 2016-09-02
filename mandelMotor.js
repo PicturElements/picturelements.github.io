@@ -117,7 +117,7 @@ function parseUrl(){
         else if (count==2){document.getElementById("xOff").value=tmpStr;}
         else if (count==3){document.getElementById("yOff").value=tmpStr;}
         else if (count==4){document.getElementById("zoom").value=tmpStr;}
-        else if (count==5){if (tmpString.length==1){selectedCol=parseInt(tmpStr);}else{fromHex(tmpString);}}
+        else if (count==5){if (tmpStr.length==1){selectedCol=parseInt(tmpStr);}else{fromHex(tmpStr);}}
         else if (count==6){cycleLength=parseInt(tmpStr);}
         else if (count==7){prevH=parseInt(tmpStr);}
         count++;
