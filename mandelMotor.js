@@ -938,6 +938,7 @@ function setGradient(){
     }
   }
   lengths[editing]=colors.length;
+  console.log(gradientCols);
   gradientSetup();
 }
 
