@@ -926,14 +926,14 @@ function setGradient(){
   var parents=document.getElementsByClassName("gradientelement");
   var colors=[];
   for (var i=0;i<parents.length;i++){
-    if (parents[i].style.display=="block"){
+    if (parents[i].style.display!=="none"){
       colors.push(parseInt(elements[i].getAttribute("r")),parseInt(elements[i].getAttribute("g")),parseInt(elements[i].getAttribute("b")));
     }
   }
   console.log(colors);
   var diff=colors.length-lengths[editing];
   //gradientCols.splice(startAt[startAt.length-(3-editing)],lengths[editing],colors);
-  gradientCols.splice(startAt[startAt.length-(3-editing)],lengths[editing],0);
+  gradientCols.splice(startAt[startAt.length-(3-editing)],lengths[editing]);
   for (var i=0;i<colors.length;i++){
     gradientCols.splice(startAt[startAt.length-(3-editing)]+i,0,colors[i]);
   }
