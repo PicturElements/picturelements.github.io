@@ -927,7 +927,7 @@ function setGradient(){
   var colors=[];
   for (var i=0;i<parents.length;i++){
     if (parents[i].style.display=="block"){
-      colors.push(parseInt(element.getAttribute("r")),parseInt(element.getAttribute("g")),parseInt(element.getAttribute("b")));
+      colors.push(parseInt(elements.getAttribute("r")),parseInt(elements.getAttribute("g")),parseInt(elements.getAttribute("b")));
     }
   }
   var diff=colors.length-lengths[editing];
