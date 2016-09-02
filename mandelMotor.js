@@ -784,15 +784,15 @@ function slideColor(event){
   var vw=window.innerWidth/100,xPos=event.clientX-(30*vw)-25.6*vw, yPos=event.clientY-(window.innerHeight/2-15.25*vw)-6.1*vw;
   var element=document.getElementById("slidercanvas"),index=-1;
   var attributes=["r","g","b"];
-  for (var i=0;i<13;i+=4.5){
-    if (xPos>=vw*i&&xPos<=vw*(i+3.9)){index=i; break;}
+  for (var i=0;i<3;i++){
+    if (xPos>=vw*i*4.5&&xPos<=vw*(i*4.5+3.9)){index=i; break;}
   }
   if (index>=0){element.style.cursor="pointer";}
   else {element.style.cursor="default";}
   if (slide&&index>=0){
     console.log("Clicked: "+index);
     element=document.getElementsByClassName("colorsample")[selected];
-    element.setAttribute(attributes[index],(15-Math.floor((yPos/(23.8*vw))/16))*17);
+    element.setAttribute(attributes[index],(15-Math.floor((yPos/(23.8*vw))*16))*17);
     element.style.backgroundColor="rgb("+element.getAttribute("r")+","+element.getAttribute("g")+","+element.getAttribute("b")+")";
     prepareSliders();
   }
