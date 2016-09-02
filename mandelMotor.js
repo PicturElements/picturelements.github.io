@@ -936,10 +936,8 @@ function setGradient(){
   for (var i=0;i<colors.length;i++){
     gradientCols.splice(startAt[startAt.length-(3-editing)]+i,0,colors[i]);
   }
-  if (editing!=0){
-    for (var i=startAt.length-(3-editing);i<startAt.length;i++){
-      startAt[i]+=diff;
-    }
+  for (var i=startAt.length-(2-editing);i<startAt.length;i++){
+    startAt[i]+=diff;
   }
   lengths[editing]=colors.length;
   console.log(gradientCols);
