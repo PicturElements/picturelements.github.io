@@ -70,7 +70,6 @@ function init(){
   c3H=window.innerWidth*0.08;
   
   paintRaster();
-  gradientSetup();
   var parts=(startAt[selectedCol+1]-startAt[selectedCol])/3+1;
   var colors="";
   for (var b=0;b<parts-1;b++){
@@ -79,6 +78,7 @@ function init(){
   colors+="rgb("+(gradientCols[startAt[selectedCol]])+","+(gradientCols[startAt[selectedCol]+1])+","+(gradientCols[startAt[selectedCol]+2])+") 100%";
   document.getElementById("gradientdisplay").style.background="linear-gradient(to right, "+colors+")";
   parseUrl();
+  gradientSetup();
   setSlide();
 }
 
