@@ -149,7 +149,7 @@ function fromHex(inStr){
     console.log(tmp);
     gradientCols.push(tmp);
   }
-  for (var n=startAt.length-4;n<startAt.length-1;n++){
+  for (var n=startAt.length-3;n<startAt.length-1;n++){
     startAt[n]+=inStr.length;
   }
 }
