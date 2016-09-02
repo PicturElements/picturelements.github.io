@@ -973,7 +973,7 @@ function setGradient(){
       colors.push(parseInt(elements[i].getAttribute("r")),parseInt(elements[i].getAttribute("g")),parseInt(elements[i].getAttribute("b")));
     }
   }
-  //console.log(colors);
+  console.log(colors);
   var diff=colors.length-lengths[editing];
   //gradientCols.splice(startAt[startAt.length-(3-editing)],lengths[editing],colors);
   gradientCols.splice(startAt[startAt.length-(3-editing)],lengths[editing]);
