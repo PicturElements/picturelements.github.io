@@ -742,6 +742,7 @@ function editCol(element){
       selected=0;
     }
   }
+  if (lengths[editing]==0){parents[0].style.display="block";}
   //alert("Selected: "+id);
   document.getElementById("pointer").style.marginLeft="1.5vw"
   prepareSliders();
