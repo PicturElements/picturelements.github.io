@@ -102,7 +102,7 @@ function paintRaster(){
 
 function parseUrl(){
   var tmpStr="";
-  var count=-1,url=window.location.href;
+  var count=-1,url=decodeURI(window.location.href);
   var foundQuest=false,toScan=false;
   for (var i=0;i<url.length;i++){
     if (url.charAt(i)=='?'){foundQuest=true;}
@@ -501,7 +501,7 @@ function getUrl(){
   document.getElementById("overlay").style.display="block";
   document.getElementById("sharepanel").style.display="block";
   var url="http://picturelements.github.io/mandelbrot?adv="+advancedGen+"&func="+(advancedGen?document.getElementById("functionin2"):document.getElementById("functionin")).value+"&iters="+document.getElementById("iterations").value+"&xOff="+document.getElementById("xOff").value+"&yOff="+document.getElementById("yOff").value+"&zoom="+document.getElementById("zoom").value+"&color="+(selectedCol>6?buildHex():selectedCol)+"&mod="+cycleLength+"&prevH="+height;
-  document.getElementById("urlout").value=url;
+  document.getElementById("urlout").value=encodeURI(url);
   document.getElementById("urlout").select();
 }
 
