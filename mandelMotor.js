@@ -986,7 +986,7 @@ function setGradient(){
   }
   lengths[editing]=colors.length;
   console.log("Colors: "+gradientCols);
-  //console.log(startAt);
+  console.log(startAt);
   gradientSetup();
   gradient(7+editing);
   document.getElementById("colorchooser").style.display="none";
