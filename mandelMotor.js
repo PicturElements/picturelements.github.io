@@ -975,13 +975,13 @@ function setGradient(){
   }
   console.log(colors);
   var diff=colors.length-lengths[editing];
-  //gradientCols.splice(startAt[startAt.length-(3-editing)],lengths[editing],colors);
+  //gradientCols.splice(startAt[startAt.length-(2-editing)],lengths[editing],colors);
   console.log("Lengths: "+lengths);
-  gradientCols.splice(startAt[startAt.length-(3-editing)],lengths[editing]);
+  gradientCols.splice(startAt[startAt.length-(2-editing)],lengths[editing]);
   for (var i=0;i<colors.length;i++){
-    gradientCols.splice(startAt[startAt.length-(3-editing)]+i,0,colors[i]);
+    gradientCols.splice(startAt[startAt.length-(2-editing)]+i,0,colors[i]);
   }
-  for (var i=startAt.length-(2-editing);i<startAt.length;i++){
+  for (var i=startAt.length-(3-editing);i<startAt.length;i++){
     startAt[i]+=diff;
   }
   lengths[editing]=colors.length;
