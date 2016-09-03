@@ -166,7 +166,7 @@ function gradientSetup(){
     }
     colors+="rgb("+(gradientCols[startAt[a]+3*(parts-1)])+","+(gradientCols[startAt[a]+3*(parts-1)+1])+","+(gradientCols[startAt[a]+3*(parts-1)+2])+") 100%";
     document.getElementsByClassName("gradientselector")[a].style.background="linear-gradient(to bottom right, "+colors+")";
-    console.log("linear-gradient(to bottom right, "+colors+")");
+    //console.log("linear-gradient(to bottom right, "+colors+")");
   }
 }
 
@@ -976,15 +976,15 @@ function setGradient(){
   console.log(colors);
   var diff=colors.length-lengths[editing];
   //gradientCols.splice(startAt[startAt.length-(3-editing)],lengths[editing],colors);
-  gradientCols.splice(startAt[startAt.length-(4-editing)],lengths[editing]);
+  gradientCols.splice(startAt[startAt.length-(3-editing)],lengths[editing]);
   for (var i=0;i<colors.length;i++){
-    gradientCols.splice(startAt[startAt.length-(4-editing)]+i,0,colors[i]);
+    gradientCols.splice(startAt[startAt.length-(3-editing)]+i,0,colors[i]);
   }
-  for (var i=startAt.length-(4-editing);i<startAt.length;i++){
+  for (var i=startAt.length-(3-editing);i<startAt.length;i++){
     startAt[i]+=diff;
   }
   lengths[editing]=colors.length;
-  //console.log(gradientCols);
+  console.log("Colors: "+gradientCols);
   //console.log(startAt);
   gradientSetup();
   gradient(7+editing);
