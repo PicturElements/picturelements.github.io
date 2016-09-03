@@ -70,9 +70,9 @@ function init(){
   c3H=window.innerWidth*0.08;
   
   paintRaster();
+  parseUrl();
   var parts=(startAt[selectedCol+1]-startAt[selectedCol])/3+1;
   var colors="";
-  parseUrl();
   for (var b=0;b<parts-1;b++){
     colors+="rgb("+(gradientCols[startAt[selectedCol]+3*b])+","+(gradientCols[startAt[selectedCol]+3*b+1])+","+(gradientCols[startAt[selectedCol]+3*b+2])+") "+(b*(100/(parts-1)))+"%, ";
   }
