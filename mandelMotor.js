@@ -976,6 +976,7 @@ function setGradient(){
   console.log(colors);
   var diff=colors.length-lengths[editing];
   //gradientCols.splice(startAt[startAt.length-(3-editing)],lengths[editing],colors);
+  console.log("Lengths: "+lengths);
   gradientCols.splice(startAt[startAt.length-(3-editing)],lengths[editing]);
   for (var i=0;i<colors.length;i++){
     gradientCols.splice(startAt[startAt.length-(3-editing)]+i,0,colors[i]);
