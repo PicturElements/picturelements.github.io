@@ -72,12 +72,12 @@ function init(){
   paintRaster();
   var parts=(startAt[selectedCol+1]-startAt[selectedCol])/3+1;
   var colors="";
+  parseUrl();
   for (var b=0;b<parts-1;b++){
     colors+="rgb("+(gradientCols[startAt[selectedCol]+3*b])+","+(gradientCols[startAt[selectedCol]+3*b+1])+","+(gradientCols[startAt[selectedCol]+3*b+2])+") "+(b*(100/(parts-1)))+"%, ";
   }
   colors+="rgb("+(gradientCols[startAt[selectedCol]])+","+(gradientCols[startAt[selectedCol]+1])+","+(gradientCols[startAt[selectedCol]+2])+") 100%";
   document.getElementById("gradientdisplay").style.background="linear-gradient(to right, "+colors+")";
-  parseUrl();
   gradientSetup();
   setSlide();
 }
