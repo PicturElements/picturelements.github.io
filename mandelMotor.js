@@ -631,7 +631,7 @@ function pushFunction(inId){
   julA=tmpJA;
   julB=tmpJB;
   scan=0;
-  if (inId==1){resetStuff(); prevH=0; setStuff();}   //includes mainGenerate()
+  if (inId==1){/*resetStuff();*/ prevH=0; setStuff();}   //includes mainGenerate()
 }
 
 function pushFunction2(inID){
