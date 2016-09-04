@@ -1059,7 +1059,7 @@ function paint(){
     paintRaster();
     if (time_out.startsWith("Set")){
       console.log("%c"+time_out+"","color:#00a;");
-      console.log("URL: "+getUrl);
+      console.log("URL: "+getUrl());
     }
   }
 }
