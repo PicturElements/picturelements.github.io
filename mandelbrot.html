@@ -1028,10 +1028,10 @@
       <div id="closebtn" onclick="closePopups(-1)">[X]</div>
       <canvas id="escapecanvas"></canvas>
     </div>
-    <div id="why" class="popup" style="height:20vw; margin-top:-10vw">
-      <div id="closebtn" style="color:#a00" onclick="closePopups2(this)">[close]</div>
+    <div id="why" class="popup" style="height:20vw; margin-top:-10vw; width:60%; left:20%; z-index:100">
+      <div id="closebtn" onclick="closePopups2(this)">[close]</div>
       <div id="inner">
-        <h>Script injection</h>
+        <h style="display:block; text-align:center">Script injection</h>
         <p>
           This web app uses mathematical functions to render sets. The simpler form uses a small piece od info, like "z<sup>2</sup>+0.1-0.5i", which is easy to write a script for to translate into meaningful data. However, some functions are more complex, and while it is possible to write a script that translates such input, it is very time consuming, as sometimes the script must be run for every single pixel. There is a better way! By separating the input into its meaningful components, it is possible to turn this data into actual JavaScript code.
           <br><br>
