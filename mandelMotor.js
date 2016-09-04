@@ -152,7 +152,7 @@ function fromHex(inStr){
     //console.log(tmp);
     gradientCols.push(tmp);
   }
-  for (var n=startAt.length-3;n<startAt.length-1;n++){
+  for (var n=startAt.length-3;n<startAt.length;n++){
     startAt[n]+=inStr.length;
   }
 }
@@ -1060,6 +1060,7 @@ function paint(){
     if (time_out.startsWith("Set")){
       console.log("%c"+time_out+"","color:#00a;");
       console.log("URL: "+getUrl());
+      closePopups(-1);
     }
   }
 }
