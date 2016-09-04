@@ -207,7 +207,7 @@
         cursor: pointer;
       }
       
-      #colorpanel,#alertpanel,#colorchooser{
+      #colorpanel,#alertpanel,#colorchooser,#why{
         display:none;
         position: fixed;
         width: 40%;
@@ -920,17 +920,17 @@
                 <br>&nbsp;&nbsp;&nbsp;&nbsp;return i;  <cmt>//return escape time</cmt>
                 <br>&nbsp;&nbsp;}
                 <br>&nbsp;&nbsp;v*=power;
-                <br>&nbsp;&nbsp;magnitude=Math.pow(Math.sqrt(a2*a2+b2*b2),power)  <cmt>//fuckin' IE doesn't support Math.hypot...</cmt>
+                <br>&nbsp;&nbsp;magnitude=Math.pow(Math.sqrt(a2*a2+b2*b2),power)  <cmt>//IE does not, of course, support Math.hypot.</cmt>
                 <br>&nbsp;&nbsp;a2=magnitude*Math.cos(v)+a;
                 <br>&nbsp;&nbsp;b2=magnitude*Math.sin(v)+b;
                 <br>}
                 <br>return -1;  <cmt>//signifies a number belonging to the set</cmt>
               </code>
             </p>
-          <h2>About - creator</h2>
+          <h2>About - creator / license</h2>
             <p>
               This web app was written by <a href="https://github.com/PicturElements" target="_blank">PicturElements</a>, starting in June 2016.
-              <br>
+              <br><br>
               <b>License:</b>
               <br>
               MIT License
@@ -1027,6 +1027,21 @@
       <div id="movebar" title="move"></div>
       <div id="closebtn" onclick="closePopups(-1)">[X]</div>
       <canvas id="escapecanvas"></canvas>
+    </div>
+    <div id="why" class="popup" style="height:20vw; margin-top:-10vw">
+      <div id="closebtn" style="color:#a00" onclick="closePopups2(this)">[close]</div>
+      <div id="inner">
+        <h>Script injection</h>
+        <p>
+          This web app uses mathematical functions to render sets. The simpler form uses a small piece od info, like "z<sup>2</sup>+0.1-0.5i", which is easy to write a script for to translate into meaningful data. However, some functions are more complex, and while it is possible to write a script that translates such input, it is very time consuming, as sometimes the script must be run for every single pixel. There is a better way! By separating the input into its meaningful components, it is possible to turn this data into actual JavaScript code.
+          <br><br>
+          When a set with more complicated input is generated, the script injects a small script into the page which it can call ehenever necessary. By doing this, the script can run as fast with complicated input as with simple input.
+          <br><br>
+          But injecting scripts is dangerous. This is the basis of <a href="https://en.wikipedia.org/wiki/Cross-site_scripting">Cross-site scripting</a> and is a big issue for many websites. This is why the alert pops up. It lets you inspect the input before the script is allowed to intervene with it, thus minimizing the risk of malicious code getting run.
+          <br><br>
+          It should be noted that it is very unlikely that malicious code would be let through the script-generating script, so this is just a security measure.
+        </p>
+      </div>
     </div>
     <div id="upperinfo"></div>
   </body>
