@@ -149,7 +149,7 @@ function fromHex(inStr){
   for (var i=0;i<inStr.length;i++){
     var parsed=inStr.charCodeAt(i);
     var tmp=(parsed>=48&&parsed<58)?(parsed-48)*17:(parsed-55)*17;
-    console.log(tmp);
+    //console.log(tmp);
     gradientCols.push(tmp);
   }
   for (var n=startAt.length-3;n<startAt.length-1;n++){
@@ -503,6 +503,7 @@ function getUrl(){
   var url="http://picturelements.github.io/mandelbrot?adv="+advancedGen+"&func="+(advancedGen?document.getElementById("functionin2"):document.getElementById("functionin")).value+"&iters="+document.getElementById("iterations").value+"&xOff="+document.getElementById("xOff").value+"&yOff="+document.getElementById("yOff").value+"&zoom="+document.getElementById("zoom").value+"&color="+(selectedCol>6?buildHex():selectedCol)+"&mod="+cycleLength+"&prevH="+height;
   document.getElementById("urlout").value=encodeURI(url);
   document.getElementById("urlout").select();
+  return encodeURI(url);
 }
 
 function buildHex(){
@@ -887,6 +888,7 @@ function closeColor(element){
       elements[i].setAttribute("b",elements[i+1].getAttribute("b"));
       parents[i].style.display=parents[i+1].style.display;
     }
+    if (tmpId==elements.length-1){parents[tmpId].style.display="none";}
     document.getElementById("pointer").style.marginLeft=""+(1.5+tmpId*4.5)+"vw"
     selected=tmpId;
     if (parents[tmpId].style.display=="none"){
@@ -973,10 +975,10 @@ function setGradient(){
       colors.push(parseInt(elements[i].getAttribute("r")),parseInt(elements[i].getAttribute("g")),parseInt(elements[i].getAttribute("b")));
     }
   }
-  console.log(colors);
+  //console.log(colors);
   var diff=colors.length-lengths[editing];
   //gradientCols.splice(startAt[startAt.length-(4-editing)],lengths[editing],colors);
-  console.log("Lengths: "+lengths);
+  //console.log("Lengths: "+lengths);
   gradientCols.splice(startAt[startAt.length-(4-editing)],lengths[editing]);
   for (var i=0;i<colors.length;i++){
     gradientCols.splice(startAt[startAt.length-(4-editing)]+i,0,colors[i]);
@@ -985,8 +987,8 @@ function setGradient(){
     startAt[i]+=diff;
   }
   lengths[editing]=colors.length;
-  console.log("Colors: "+gradientCols);
-  console.log(startAt);
+  //console.log("Colors: "+gradientCols);
+  //console.log(startAt);
   gradientSetup();
   gradient(7+editing);
   document.getElementById("colorchooser").style.display="none";
@@ -1055,8 +1057,10 @@ function paint(){
     setTimeout(function(){document.getElementById("upperinfo").style.display="none";}, 3500);
     clearInterval(thread);
     paintRaster();
-    /*$('#body').find('script').first().remove();
-    $("#body").prepend("<script id=\"customscript\"></script>");*/
+    if (time_out.startsWith("Set")){
+      console.log("%c"+time_out+"","color:#00a;");
+      console.log("URL: "+getUrl);
+    }
   }
 }
 
