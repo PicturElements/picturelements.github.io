@@ -596,7 +596,7 @@ function displayFunction(){
     var tA="+"+tmpJA,tB="+"+tmpJB;
     if (tmpJA<0){tA=tmpJA;}
     if (tmpJB<0){tB=tmpJB;}
-    console.log("Function: z^"+tmpPow+""+tA+""+tB+"i");
+    //console.log("Function: z^"+tmpPow+""+tA+""+tB+"i");
     if (tmpIsMandel||tmpJA==0&&tmpJB==0){
       document.getElementById("funcout").innerHTML="Function: z<sup>"+tmpPow+"</sup>+c (Mandelbrot set)";
     }else{
@@ -692,7 +692,7 @@ function pushFunction2(inID){
     rePart=rePart.replace(regex,"Math."+expressions[a]);
     imPart=imPart.replace(regex,"Math."+expressions[a]);
   }
-  console.log(power+", "+rePart+", "+imPart);
+  //console.log(power+", "+rePart+", "+imPart);
   document.getElementById("customscript").innerHTML="\nfunction getJulia(x,y){\n  try{\n    julA="+rePart+";\n    julB="+imPart+";\n  }catch(e){return false;}\n}\n";
   isMandel=false;
   scan=0;
@@ -1059,7 +1059,7 @@ function paint(){
     paintRaster();
     if (time_out.startsWith("Set")){
       console.log("%c"+time_out+"","color:#00a;");
-      console.log("URL: "+getUrl());
+      console.log("URL: "+"%c"+getUrl()+"/","color:red;");
       closePopups(-1);
     }
   }
