@@ -516,6 +516,10 @@ function buildHex(){
   return hex;
 }
 
+function openWhy(){
+  document.getElementById("why").style.display="block";
+}
+
 function setAdvanced(){
   document.getElementsByClassName("popup")[0].style.display="none";
   document.getElementById("functionpanel2").style.display="block";
