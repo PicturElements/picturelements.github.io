@@ -1,5 +1,417 @@
 <html>
   <head>
+    <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  </head>
+  <customscripts>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+    <script id="hacker"></script>
+  </customscripts>
+  <body>
+    <div id="terminal">
+      <p>
+        <span id="caret">&nbsp;</span>
+      </p>
+    </div>
+    <script>
+      document.getElementsByTagName("body")[0].addEventListener("keydown",function(event){insert(event);});
+      var currentP=document.getElementsByTagName("p")[0];
+      var currentIndex=0,currentInputIndex=-1;
+      var spacing="%-----------------------------------------------";
+      var command="Oh crap! This page doesn't exist!%^^^Error: 404%^^^Cause: PicturElements has not been productive enough, or the web is not ready for your request.%^^^Solution 0: tell him to make more pages.%^^^Solution 1: Make your own files and tell him to add them.%^^^Solution 2: Get the bloody URL right.%%Protip: The URLs on picturelements.github.io/ are written either in camelCase (e.g. nthPrime) or all lower case.%%Type 'HELP' for help.%^^^^^'HOME' to go to the home page.%^^^^^'GAME' to play a small game.%^^^^^'TTT' to play Tic-tac-toe.%^^^^^'PRIME' to generate a cool set of primes.%^^^^^'HACK' to become a hacker and hack the mainframe."+spacing, commandOut="";
+      var commandPos=0;
+      var writing=true;
+      var commands=["HELP","HOME","GAME","TTT","PRIME","HACK"];
+      var helpAscii="^_^^^_^^^^____^^^^_^^^^^^^_____^%|^|^|^|^^|^^__|^^|^|^^^^^|^^_^^\\%|^|_|^|^^|^|__^^^|^|^^^^^|^|_|^|%|^^_^^|^^|^^__|^^|^|^^^^^|^^___/%|^|^|^|^^|^|__^^^|^|___^^|^|%|_|^|_|^^|____|^^|_____|^|_|%%You're welcome."+spacing;
+      var action=0;
+      var guess,userGuess,guesses;
+      var board="",obj=['O','X'],sd,clientStarts=true;
+      
+      //HAd to resort to jQuery...
+      $(function(){
+        var rx = /INPUT|SELECT|TEXTAREA/i;
+        $(document).bind("keydown keypress", function(e){
+          if( e.which == 8 ){ // 8 == backspace
+            if(!rx.test(e.target.tagName) || e.target.disabled || e.target.readOnly ){
+              e.preventDefault();
+            }
+          }
+        });
+      });
+      
+      function insert(event){
+        var kc=event.keyCode;
+        if (!writing&&action!=2&&kc!=16&&kc!=20){
+          //alert(kc);
+          if (kc==8){
+            tmpStr="";
+            for (var i=0;i<command.length-1;i++){
+              tmpStr+=command.charAt(i);
+            }
+            command=tmpStr;
+          }else if (kc==13){
+            checkInput(command);
+            //newLine(true);
+          }else{
+            command+=String.fromCharCode(kc);
+          }
+          currentP.innerHTML=command+"<span id=\"caret\">&nbsp;</span>";
+        }else if (action==2&&kc==13){
+          checkInput(null);
+        }else if (action==2&&kc==27){
+          var elem=document.getElementsByTagName("input")[currentInputIndex];
+          elem.parentNode.removeChild(elem);
+          currentInputIndex--;
+          newLine(true);
+          writing=true;
+          command="%---HACKER MODE TERMINATED---"+spacing;
+          action=0;
+        }
+        window.scrollTo(0,document.body.scrollHeight);
+      }
+      
+      function newLine(clear){
+        if (clear){
+          currentP.innerHTML=command;
+          command="";
+        }else{
+          currentP.innerHTML=commandOut;
+          commandOut="";
+        }
+        var p=document.createElement("p");
+        var span=document.createElement("span");
+        span.setAttribute("id","caret");
+        span.innerHTML="&nbsp;";
+        p.appendChild(span);
+        document.getElementById("terminal").appendChild(p);
+        currentIndex++;
+        currentP=document.getElementsByTagName("p")[currentIndex];
+        window.scrollTo(0,document.body.scrollHeight);
+      }
+      
+      function newInput(){
+        var input=document.createElement("input");
+        input.setAttribute("spellcheck","false");
+        document.getElementById("terminal").appendChild(input);
+        if (currentInputIndex>=0){
+          document.getElementsByTagName("input")[currentInputIndex].setAttribute("readonly","true");
+          var elem = document.getElementById("hacker");
+          elem.parentNode.removeChild(elem);
+        }
+        currentInputIndex++;
+        document.getElementsByTagName("input")[currentInputIndex].focus();
+        window.scrollTo(0,document.body.scrollHeight);
+      }
+      
+      function printChar(){
+        if (writing){
+          var char=command.charAt(commandPos);
+          if (char=='%'){
+            newLine(false);
+            commandOut="";
+          }else if(char=='^'){
+            commandOut+="&nbsp;";
+          }else{
+            commandOut+=char;
+          }
+          currentP.innerHTML=commandOut+"<span id=\"caret\">&nbsp;</span>";
+          commandPos++;
+          if (commandPos==command.length){
+            commandPos=0;
+            writing=false;
+            if (action==2){
+              currentP.innerHTML=commandOut
+              newInput();
+            }else{
+              newLine(false);
+            }
+            command="";
+          }
+        }
+      } 
+      
+      function checkInput(inStr){
+        var found=false;
+        for (var i=0;i<commands.length;i++){
+          if (inStr==commands[i]){found=true; break;}
+        }
+        if (!found&&action==0){
+          newLine(true);
+          writing=true;
+          command="'"+inStr+"' is not a valid command.%";
+        }else if (inStr=="HELP"){
+          newLine(true);
+          writing=true;
+          command=helpAscii;
+        }else if (inStr=="HOME"){
+          window.location.href="http://picturelements.github.io/";
+        }else if (inStr=="PRIME"){
+          action=1;
+          newLine(true);
+          writing=true;
+          command="How many primes do you want (1-1000)?";
+        }else if (inStr=="HACK"){
+          action=2;
+          newLine(true);
+          writing=true;
+          command="---HACKER MODE INITIATED - ESC TO QUIT---%";
+          //setTimeout(function(){alert("LET'S GET HACKING!")},1000);
+        }else if (inStr=="GAME"){
+          action=3;
+          guess=Math.floor(Math.random()*1000);
+          guesses=0;
+          newLine(true);
+          writing=true;
+          command="Okay! I'm thinking of a number between 0 and 1000. Make a guess!%";
+        }else if (inStr=="TTT"){
+          action=4;
+          newLine(true);
+          writing=true;
+          sd=[1,2,3,4,5,6,7,8,9];
+          setSudoku();
+          sd=[' ',' ',' ',' ',' ',' ',' ',' ',' '];
+          /*if (!clientStarts){placeDots(); setSudoku();}
+          clientStarts!=clientStarts;*/
+          command=board+"You're X. Your turn.%";
+        }else if (action==1){
+          newLine(true);
+          writing=true;
+          var maxPrimes=parseInt(inStr);
+          var isPrime;
+          if (maxPrimes>1000){maxPrimes=1000;}
+          else if (maxPrimes<1){maxPrimes=1;}
+          var primes=[2],primeCount=1;
+          command="%1: 2";
+          for (var i=3;primeCount<maxPrimes;i+=2){
+            isPrime=true;
+            for (var n=0;primes[n]*primes[n]<=i;n++){
+              if (i%primes[n]==0){isPrime=false; break;}
+            }
+            if (isPrime){
+              primes.push(i);
+              primeCount++;
+              command+="%"+primeCount+": "+i;
+            }
+          }
+          command+=spacing;
+          action=0;
+        }else if (action==2){
+          writing=true;
+          //document.getElementById("hacker").innerHTML="function hack(){try{return ("+document.getElementsByTagName("input")[currentInputIndex].value+")}catch(e){return 'FUCK! SHITTY SYNTAX!'}}";
+          var str=document.getElementsByTagName("input")[currentInputIndex].value;
+          document.getElementById("hacker").innerHTML="function hack(){try{ "+str+"}catch(e){return 'FUCK! SHITTY SYNTAX!'}}";
+          var found = str.includes("alert")||str.includes("console.log")||str.includes(";");
+          try{
+            command=">"+hack()+"%";
+          }catch(e){}
+          
+          if (command==">undefined%"&&!found){
+            var elem = document.getElementById("hacker");
+            elem.parentNode.removeChild(elem);
+            try{
+              document.getElementById("hacker").innerHTML="function hack(){try{ return ("+document.getElementsByTagName("input")[currentInputIndex].value+")}catch(e){}}";
+              try{
+                command=">"+hack()+"%";
+              }catch(err){}
+            }catch(e){}
+          //newInput();
+          }
+          newLine(false);
+        }else if (action==3){
+          userGuess=parseInt(inStr);
+          guesses++;
+          newLine(true);
+          writing=true;
+          if (userGuess<guess){command="^^^^Nope. "+userGuess+" is too small.";}
+          else if (userGuess>guess){command="^^^^Nope. "+userGuess+" is too large.";}
+          else if (userGuess==guess){
+            command="^^^^YES! "+userGuess+" is correct! You needed "+guesses+" guesses."+spacing;
+          }else{command="^^^^"+inStr+" is not a valid input. Try again!"; guesses--;}
+        }else if (action==4){
+          var inp=parseInt(inStr);
+          newLine(true);
+          writing=true;
+          if (sd[inp-1]!=' '){
+            command="Spot already taken.";
+          }else{
+            sd[inp-1]='X';
+            var msg=placeDots();
+            setSudoku();
+            command=board+""+msg+"%";
+            if (msg!="Your turn."){
+              command+=spacing;
+              action=0;
+            }
+          }
+        }
+      }
+      
+      function setSudoku(){
+        //board="^___^___^___%|^^^|^^^|^^^|%|^"+sd[0]+"^|^"+sd[1]+"^|^"+sd[2]+"^|%|___|___|___|%|^^^|^^^|^^^|%|^"+sd[3]+"^|^"+sd[4]+"^|^"+sd[5]+"^|%|___|___|___|%|^^^|^^^|^^^|%|^"+sd[6]+"^|^"+sd[7]+"^|^"+sd[8]+"^|%|___|___|___|%";
+        board="^_____^_____^_____%|^^^^^|^^^^^|^^^^^|%|^^"+sd[0]+"^^|^^"+sd[1]+"^^|^^"+sd[2]+"^^|%|_____|_____|_____|%|^^^^^|^^^^^|^^^^^|%|^^"+sd[3]+"^^|^^"+sd[4]+"^^|^^"+sd[5]+"^^|%|_____|_____|_____|%|^^^^^|^^^^^|^^^^^|%|^^"+sd[6]+"^^|^^"+sd[7]+"^^|^^"+sd[8]+"^^|%|_____|_____|_____|%"
+      }
+      
+      function placeDots(){
+        var ofType,type,index,addIndex,chr;
+        var canAddIn=[];    //any cell that the bot can place in
+        var mustAddIn=[];   //any cell that the but must place in to prevent losing
+        var shouldAddIn=[]; //any cell that the bot should add in to win
+        for (var i=0;i<9;i++){
+          if (sd[i]==' '){canAddIn.push(i);}
+        }
+        if (canAddIn.length==0){
+          return "It's a draw!";
+        }
+        //check rows
+        for (var h=0;h<3;h++){
+          ofType=0;
+          type='';
+          for (var w=0;w<3;w++){
+            chr=sd[h*3+w];
+            if (chr!=' '&&type==''||chr!=' '&&chr==type){
+              ofType++;
+              type=chr;
+            }else{
+              index=h*3+w;
+            }
+          }
+          if (ofType==2){
+            if (type=='X'&&sd[index]==' '){mustAddIn.push(index);}
+            else if (sd[index]==' '){shouldAddIn.push(index);}
+          }else if (ofType==3&&type=='X'){return "You won!";}
+        }
+        
+        //check columns
+        for (var w=0;w<3;w++){
+          ofType=0;
+          type='';
+          for (var h=0;h<3;h++){
+            chr=sd[h*3+w];
+            if (chr!=' '&&type==''||chr!=' '&&chr==type){
+              ofType++;
+              type=chr;
+            }else{
+              index=h*3+w;
+            }
+          }
+          if (ofType==2){
+            if (type=='X'&&sd[index]==' '){mustAddIn.push(index);}
+            else if (sd[index]==' '){shouldAddIn.push(index);}
+          }else if (ofType==3&&type=='X'){return "You won!";}
+        }
+        
+        //check diagonal - to bottom right
+        ofType=0;
+        type='';
+        for (var d=0;d<3;d++){
+          chr=sd[d*3+d];
+          if (chr!=' '&&type==''||chr!=' '&&chr==type){
+            ofType++;
+            type=chr;
+          }else{
+            index=d*3+d;
+          }
+        }
+        if (ofType==2){
+          if (type=='X'&&sd[index]==' '){mustAddIn.push(index);}
+          else if (sd[index]==' '){shouldAddIn.push(index);}
+        }else if (ofType==3&&type=='X'){return "You won!";}
+        
+        //check diagonal - to upper right
+        ofType=0;
+        type='';
+        for (var d=2;d>=0;d--){
+          chr=sd[d*3+(2-d)];
+          if (chr!=' '&&type==''||chr!=' '&&chr==type){
+            ofType++;
+            type=chr;
+          }else{
+            index=d*3+(2-d);
+          }
+        }
+        if (ofType==2){
+          if (type=='X'&&sd[index]==' '){mustAddIn.push(index);}
+          else if (sd[index]==' '){shouldAddIn.push(index);}
+        }else if (ofType==3&&type=='X'){return "You won!";}
+        
+        if (shouldAddIn.length>0){
+          addIndex=shouldAddIn[Math.floor(Math.random()*shouldAddIn.length)];
+          sd[addIndex]='O';
+          return "Yay! I won!";
+        }else if (mustAddIn.length>0){
+          addIndex=mustAddIn[Math.floor(Math.random()*mustAddIn.length)];
+        }else{
+          addIndex=canAddIn[Math.floor(Math.random()*canAddIn.length)];
+        }
+        sd[addIndex]='O';
+        return "Your turn."
+      }
+      
+      setTimeout(function(){setInterval(printChar,10);},2000);
+    </script>
+  </body>
+</html>
+
+<!--<html>
+  <head>
     <link rel="icon" href="pelement.png">
     <title>Nope. Nothing here.</title>
     <style>
@@ -35,4 +447,4 @@
     <main>;-;</main>
     <sub>Oh no! There's nothing here!</sub>
   </body>
-</html>
+</html>-->
