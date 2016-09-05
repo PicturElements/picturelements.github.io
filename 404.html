@@ -2,6 +2,44 @@
   <head>
     <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <style>
+      body{
+        background-color:black;
+        overflow:auto;
+      }
+      
+      p,input{
+        color:#0c0;
+        font-family:VT323,monospace;
+        font-size:1.5vw;
+        margin-bottom:0;
+        margin-top:0;
+        min-height: 1.5vw;
+      }
+      
+      input{
+        width:100%;
+        background-color:transparent;
+        outline:none;
+        border:none;
+      }
+      
+      p::selection,input::selection{
+        background-color:#0a0;
+        color:black;
+      }
+      
+      #caret{
+        width:1vw;
+        height:1.5vw;
+        background-color:transparent;
+        animation:blink 1s steps(1,start) infinite;
+      }
+      
+      @keyframes blink{
+        50%{background-color:#0a0;}
+      }
+    </style>
   </head>
   <customscripts>
     <script id="hacker"></script>
