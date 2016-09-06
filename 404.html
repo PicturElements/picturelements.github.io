@@ -231,6 +231,7 @@
             }else{
               newLine(false);
             }
+            if (action==100){window.location.href="http://picturelements.github.io/";}
             command="";
           }
         }
@@ -259,7 +260,11 @@
           writing=true;
           command=helpAscii;
         }else if (inStr=="HOME"){
-          window.location.href="http://picturelements.github.io/";
+          action=100;
+          newLine(true);
+          writing=true;
+          command="Initializing moveHome.exe.dll.tar.gif...%^^0%...%^^10%...%^^20%...%^^30%...%^^40%...%^^50%...%^^60%...%^^70%...%^^80%...%^^90%...%^^100%...%Checking NSA database...%%%%%%%%%%%%%%Success!%Calling functions...%%%%%%%%%%%%%%DONE%%%%%%%%%%%%%%";
+          //window.location.href="http://picturelements.github.io/";
         }else if (inStr=="PRIME"){
           action=1;
           newLine(true);
@@ -381,9 +386,6 @@
         for (var i=0;i<9;i++){
           if (sd[i]==' '){canAddIn.push(i);}
         }
-        if (canAddIn.length==0){
-          return "It's a draw!";
-        }
         //check rows
         for (var h=0;h<3;h++){
           ofType=0;
@@ -456,6 +458,10 @@
           else if (sd[index]==' '){shouldAddIn.push(index);}
         }else if (ofType==3&&type=='X'){return "You won!";}
         
+        
+        if (canAddIn.length==0){
+          return "It's a draw!";
+        }
         if (shouldAddIn.length>0){
           addIndex=shouldAddIn[Math.floor(Math.random()*shouldAddIn.length)];
           sd[addIndex]='O';
