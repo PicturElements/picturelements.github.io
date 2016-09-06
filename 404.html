@@ -121,7 +121,7 @@
       var writing=true;
       var commands=["HELP","HOME","GAME","TTT","PRIME","HACK"];
       var helpAscii="^_^^^_^^^^____^^^^_^^^^^^^_____^%|^|^|^|^^|^^__|^^|^|^^^^^|^^_^^\\%|^|_|^|^^|^|__^^^|^|^^^^^|^|_|^|%|^^_^^|^^|^^__|^^|^|^^^^^|^^___/%|^|^|^|^^|^|__^^^|^|___^^|^|%|_|^|_|^^|____|^^|_____|^|_|%%You're welcome."+spacing;
-      var action=0,clock=0;
+      var action=0,clock=0,thread;
       var guess,userGuess,guesses;
       var board="",obj=['O','X'],sd,clientStarts=true;
       
@@ -477,7 +477,7 @@
         return "Your turn."
       }
       
-      setTimeout(function(){setInterval(printChar,10);},2000);
+      setTimeout(function(){thread=setInterval(printChar,10);},2000);
     </script>
   </body>
 </html>
