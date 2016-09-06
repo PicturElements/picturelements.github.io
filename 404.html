@@ -116,14 +116,14 @@
       var currentP=document.getElementsByTagName("p")[0];
       var currentIndex=0,currentInputIndex=-1;
       var spacing="%-----------------------------------------------";
-      var command="Oh crap! This page doesn't exist!%^^^Error: 404%^^^Cause: PicturElements has not been productive enough, or the web is not ready for your request.%^^^Solution 0: tell him to make more pages.%^^^Solution 1: Make your own files and tell him to add them.%^^^Solution 2: Get the bloody URL right.%%Protip: The URLs on picturelements.github.io/ are written either in camelCase (e.g. nthPrime) or all lower case.%%Type 'HELP' for help.%^^^^^'HOME' to go to the home page.%^^^^^'GAME' to play a small game.%^^^^^'TTT' to play Tic-tac-toe.%^^^^^'PRIME' to generate a cool set of primes.%^^^^^'HACK' to become a hacker and hack the mainframe."+spacing, commandOut="";
+      var command="PeTerminal 1.0.3 ErrorManager_404_Exception"+spacing+"%%Oh crap! This page doesn't exist!%^^^Error: 404%^^^Cause: PicturElements has not been productive enough, or the web is not ready for your request.%^^^Solution 0: tell him to make more pages.%^^^Solution 1: Make your own files and tell him to add them.%^^^Solution 2: Get the bloody URL right.%%Protip: The URLs on picturelements.github.io/ are written either in camelCase (e.g. nthPrime) or all lower case.%%Type 'HELP' for help.%^^^^^'HOME' to go to the home page.%^^^^^'GAME' to play a small game.%^^^^^'TTT' to play Tic-tac-toe.%^^^^^'PRIME' to generate a cool set of primes.%^^^^^'HACK' to become a hacker and hack the mainframe."+spacing, commandOut="";
       var commandPos=0;
       var writing=true;
       var commands=["HELP","HOME","GAME","TTT","PRIME","HACK"];
       var helpAscii="^_^^^_^^^^____^^^^_^^^^^^^_____^%|^|^|^|^^|^^__|^^|^|^^^^^|^^_^^\\%|^|_|^|^^|^|__^^^|^|^^^^^|^|_|^|%|^^_^^|^^|^^__|^^|^|^^^^^|^^___/%|^|^|^|^^|^|__^^^|^|___^^|^|%|_|^|_|^^|____|^^|_____|^|_|%%You're welcome."+spacing;
       var action=0,clock=0,thread;
       var guess,userGuess,guesses;
-      var board="",obj=['O','X'],sd,clientStarts=true;
+      var board="",sd,clientStarts=true;
       
       //HAd to resort to jQuery...
       $(function(){
