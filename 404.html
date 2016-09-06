@@ -116,14 +116,14 @@
       var currentP=document.getElementsByTagName("p")[0];
       var currentIndex=0,currentInputIndex=-1;
       var spacing="%-----------------------------------------------";
-      var command="PeTerminal 1.0.3 ErrorManager_404_Exception"+spacing+"%%Oh crap! This page doesn't exist!%^^^Error: 404%^^^Cause: PicturElements has not been productive enough, or the web is not ready for your request.%^^^Solution 0: tell him to make more pages.%^^^Solution 1: Make your own files and tell him to add them.%^^^Solution 2: Get the bloody URL right.%%Protip: The URLs on picturelements.github.io/ are written either in camelCase (e.g. nthPrime) or all lower case.%%Type 'HELP' for help.%^^^^^'HOME' to go to the home page.%^^^^^'GAME' to play a small game.%^^^^^'TTT' to play Tic-tac-toe.%^^^^^'PRIME' to generate a cool set of primes.%^^^^^'HACK' to become a hacker and hack the mainframe."+spacing, commandOut="";
+      var command="PeTerminal 1.0.3 ErrorManager_404_Exception"+spacing+"%%Oh crap! This page doesn't exist!%^^^Error: 404%^^^Cause: PicturElements has not been productive enough, or the web is not ready for your request.%^^^Solution 0: tell him to make more pages.%^^^Solution 1: Make your own files and tell him to add them.%^^^Solution 2: Get the bloody URL right.%%Protip: The URLs on picturelements.github.io/ are written either in camelCase (e.g. nthPrime) or all lower case.%%Type 'HELP' for help.%^^^^^'ASCII' to create Ascii art.%^^^^^'HOME' to go to the home page.%^^^^^'GAME' to play a small game.%^^^^^'TTT' to play Tic-tac-toe.%^^^^^'PRIME' to generate a cool set of primes.%^^^^^'HACK' to become a hacker and hack the mainframe."+spacing, commandOut="";
       var commandPos=0;
       var writing=true;
-      var commands=["HELP","HOME","GAME","TTT","PRIME","HACK"];
-      var helpAscii="^_^^^_^^^^____^^^^_^^^^^^^_____^%|^|^|^|^^|^^__|^^|^|^^^^^|^^_^^\\%|^|_|^|^^|^|__^^^|^|^^^^^|^|_|^|%|^^_^^|^^|^^__|^^|^|^^^^^|^^___/%|^|^|^|^^|^|__^^^|^|___^^|^|%|_|^|_|^^|____|^^|_____|^|_|%%You're welcome."+spacing;
+      var commands=["HELP","ASCII","HOME","GAME","TTT","PRIME","HACK"];
+      var ascii_letters = ["^_____^","/^^_^^\\","|^|_|^|","|^^_^^|","|^|^|^|","|_|^|_|","^____^^","|^^_^\\^","|^|_|^|","|^^_^<^","|^|_|^|","|____/^","^_____^","/^^___|","|^|^^^^","|^|^^^^","|^|___^","\\_____|","^____^^","|^^_^\\^","|^|^|^|","|^|^|^|","|^|_|^|","|____/^","^_____^","|^^___|","|^|___^","|^^___|","|^|___^","|_____|","^_____^","|^^___|","|^|___^","|^^___|","|^|^^^^","|_|^^^^","^_____^","/^^___|","|^|^^^^","|^|^^_^","|^|_|^|","\\_____|","^_^^^_^","|^|^|^|","|^|_|^|","|^^_^^|","|^|^|^|","|_|^|_|","^_____^","|_^^^_|","^^|^|^^","^^|^|^^","^_|^|_^","|_____|","^_____^","|___^^|","^^^^|^|","^_^^|^|","|^|_|^|","\\_____/","^_^^^_^","|^|^/^|","|^|/^/^","|^^^<^^","|^|\\^\\^","|_|^\\_|","^_^^^^^","|^|^^^^","|^|^^^^","|^|^^^^","|^|___^","|_____|","^_^^^_^","|^\\_/^|","|^^^^^|","|^\\_/^|","|^|^|^|","|_|^|_|","^_^^^_^","|^\\^|^|","|^^\\|^|","|^^^^^|","|^|\\^^|","|_|^\\_|","^_____^","/^^_^^\\","|^|^|^|","|^|^|^|","|^|_|^|","\\_____/","^_____^","|^^_^^\\","|^|_|^|","|^^___/","|^|^^^^","|_|^^^^","^_____^","/^^_^^\\","|^|^|^|","|^|^|^|","|^|_/\\|","\\___\\_\\","^_____^","|^^_^^\\","|^|_|^|","|^^^^_/","|^|\\^\\^","|_|^\\_\\","^_____^","/^^___|","|^|___^","|___^^|","^___|^|","|_____/","^_____^","|_^^^_|","^^|^|^^","^^|^|^^","^^|^|^^","^^|_|^^","^_^^^_^","|^|^|^|","|^|^|^|","|^|^|^|","|^|_|^|","\\_____/","^_^^^_^","|^|^|^|","|^|^|^|","|^|^|^|","\\^\\^/^/","^\\___/^","^_^^^^_^","|^|^^|^|","|^|^^|^|","|^|/\\|^|","|^^^^^^|","\\__/\\__/","^_^^^_^","\\^\\^/^/","^\\^/^/^","^^/^/^^","^/^/^\\^","/_/^\\_\\","^_^^^_^","|^|^|^|","\\^\\^/^/","^\\^\\^/^","^^|^|^^","^^|_|^^","^_____^","|___^^|","^^^/^/^","^^/^/^^","^/^/__^","|_____|"]
       var action=0,clock=0,thread;
       var guess,userGuess,guesses;
-      var board="",sd,clientStarts=true;
+      var board="",sd,compStarts=true,clientScore=0,compScore=0;
       
       //HAd to resort to jQuery...
       $(function(){
@@ -154,6 +154,12 @@
             command+=String.fromCharCode(kc);
           }
           currentP.innerHTML=command+"<span id=\"caret\">&nbsp;</span>";
+          if (action==4&&kc==27){
+            action=0;
+            writing=true;
+            newLine(true);
+            command="Final score:%^^You:"+clientScore+" Me:"+compScore+"%"+spacing;
+          }
         }else if (action==2&&kc==13){
           checkInput(null);
         }else if (action==2&&kc==27){
@@ -161,8 +167,8 @@
           var elem=document.getElementsByTagName("input")[currentInputIndex];
           elem.parentNode.removeChild(elem);
           currentInputIndex--;
-          newLine(true);
           writing=true;
+          newLine(true);
           command="%---HACKER MODE TERMINATED---"+spacing;
           action=0;
           var elem=document.getElementById("favicon");
@@ -240,7 +246,7 @@
           if (clock%100<50){
             document.title="[HACKING IN PROGRESS]";
           }else{
-            document.title="PeTerminal: 404";
+            document.title="[-------------------]";
           }
         }
         clock++;
@@ -258,14 +264,14 @@
         }else if (inStr=="HELP"){
           newLine(true);
           writing=true;
-          command=helpAscii;
+          command=generateAscii("HELP")+"%You're wlcome."+spacing;
         }else if (inStr=="HOME"){
           action=100;
           newLine(true);
           writing=true;
           clearInterval(thread);
           thread=setInterval(printChar,30);
-          command="Initializing moveHome.exe.dll.tar.gif...%^^0%...%^^10%...%^^20%...%^^30%...%^^40%...%^^50%...%^^60%...%^^70%...%^^80%...%^^90%...%^^100%...%Checking NSA database...%%%%%%%Success!%Calling functions...%%%%%%%%DONE%%%%%%%%";
+          command="Initializing moveHome.exe.dll.tar.gif...%^^0 percent...%^^10 percent...%^^20 percent...%^^30 percent...%^^40 percent...%^^50 percent...%^^60 percent...%^^70 percent...%^^80 percent...%^^90 percent...%^^100 percent...%Checking NSA database...%%%%%%%Success%Calling functions...%%%%%%%%DONE%%%%%%%%Redirecting..................................";
           //window.location.href="http://picturelements.github.io/";
         }else if (inStr=="PRIME"){
           action=1;
@@ -296,12 +302,17 @@
           action=4;
           newLine(true);
           writing=true;
+          clientScore=0;
+          compScore=0;
           sd=[1,2,3,4,5,6,7,8,9];
           setBoard();
           sd=[' ',' ',' ',' ',' ',' ',' ',' ',' '];
-          /*if (!clientStarts){placeDots(); setBoard();}
-          clientStarts!=clientStarts;*/
-          command=board+"You're X. Your turn.%";
+          command="Play against me!%Press ESC to quit.%"+board+"You're X. Your turn.%";
+        }else if (inStr=="ASCII"){
+          action=5;
+          writing=true;
+          newLine(true);
+          command="Write anything in plain text!%"
         }else if (action==1){
           newLine(true);
           writing=true;
@@ -329,7 +340,7 @@
           //document.getElementById("hacker").innerHTML="function hack(){try{return ("+document.getElementsByTagName("input")[currentInputIndex].value+")}catch(e){return 'FUCK! SHITTY SYNTAX!'}}";
           var str=document.getElementsByTagName("input")[currentInputIndex].value;
           document.getElementById("hacker").innerHTML="function hack(){try{ "+str+"}catch(e){return 'FUCK! SHITTY SYNTAX!'}}";
-          var found = str.includes("alert")||str.includes("console.log")||str.includes(";");
+          var found = str.includes("alert")||str.includes("console.")||str.includes(";");
           try{
             command=">"+hack()+"%";
           }catch(e){}
@@ -368,16 +379,31 @@
             setBoard();
             command=board+""+msg+"%";
             if (msg!="Your turn."){
-              command+=spacing;
-              action=0;
+              /*command+=spacing;
+              action=0;*/
+              if (compStarts){
+                sd=[' ',' ',' ',' ',' ',' ',' ',' ',' '];
+                placeDots();
+                setBoard();
+              }else{
+                sd=[1,2,3,4,5,6,7,8,9];
+                setBoard();
+                sd=[' ',' ',' ',' ',' ',' ',' ',' ',' '];
+              }
+          		compStarts=!compStarts;
+              command+="Score:%^^You:"+clientScore+" Me:"+compScore+"%%"+board+"You're X. Your turn.";
             }
           }
+        }else if (action==5){
+          action=0;
+          newLine(true);
+          writing=true;
+          command=generateAscii(inStr)+spacing;
         }
       }
       
       function setBoard(){
-        //board="^___^___^___%|^^^|^^^|^^^|%|^"+sd[0]+"^|^"+sd[1]+"^|^"+sd[2]+"^|%|___|___|___|%|^^^|^^^|^^^|%|^"+sd[3]+"^|^"+sd[4]+"^|^"+sd[5]+"^|%|___|___|___|%|^^^|^^^|^^^|%|^"+sd[6]+"^|^"+sd[7]+"^|^"+sd[8]+"^|%|___|___|___|%";
-        board="^_____^_____^_____%|^^^^^|^^^^^|^^^^^|%|^^"+sd[0]+"^^|^^"+sd[1]+"^^|^^"+sd[2]+"^^|%|_____|_____|_____|%|^^^^^|^^^^^|^^^^^|%|^^"+sd[3]+"^^|^^"+sd[4]+"^^|^^"+sd[5]+"^^|%|_____|_____|_____|%|^^^^^|^^^^^|^^^^^|%|^^"+sd[6]+"^^|^^"+sd[7]+"^^|^^"+sd[8]+"^^|%|_____|_____|_____|%"
+  		board="^_____^_____^_____%|^^^^^|^^^^^|^^^^^|%|^^"+sd[0]+"^^|^^"+sd[1]+"^^|^^"+sd[2]+"^^|%|_____|_____|_____|%|^^^^^|^^^^^|^^^^^|%|^^"+sd[3]+"^^|^^"+sd[4]+"^^|^^"+sd[5]+"^^|%|_____|_____|_____|%|^^^^^|^^^^^|^^^^^|%|^^"+sd[6]+"^^|^^"+sd[7]+"^^|^^"+sd[8]+"^^|%|_____|_____|_____|%"
       }
       
       function placeDots(){
@@ -404,7 +430,7 @@
           if (ofType==2){
             if (type=='X'&&sd[index]==' '){mustAddIn.push(index);}
             else if (sd[index]==' '){shouldAddIn.push(index);}
-          }else if (ofType==3&&type=='X'){return "You won!";}
+          }else if (ofType==3&&type=='X'){clientScore++; return "You won!";}
         }
         
         //check columns
@@ -423,7 +449,7 @@
           if (ofType==2){
             if (type=='X'&&sd[index]==' '){mustAddIn.push(index);}
             else if (sd[index]==' '){shouldAddIn.push(index);}
-          }else if (ofType==3&&type=='X'){return "You won!";}
+          }else if (ofType==3&&type=='X'){clientScore++; return "You won!";}
         }
         
         //check diagonal - to bottom right
@@ -441,7 +467,7 @@
         if (ofType==2){
           if (type=='X'&&sd[index]==' '){mustAddIn.push(index);}
           else if (sd[index]==' '){shouldAddIn.push(index);}
-        }else if (ofType==3&&type=='X'){return "You won!";}
+        }else if (ofType==3&&type=='X'){clientScore++; return "You won!";}
         
         //check diagonal - to upper right
         ofType=0;
@@ -458,7 +484,7 @@
         if (ofType==2){
           if (type=='X'&&sd[index]==' '){mustAddIn.push(index);}
           else if (sd[index]==' '){shouldAddIn.push(index);}
-        }else if (ofType==3&&type=='X'){return "You won!";}
+        }else if (ofType==3&&type=='X'){clientScore++; return "You won!";}
         
         
         if (canAddIn.length==0){
@@ -467,6 +493,7 @@
         if (shouldAddIn.length>0){
           addIndex=shouldAddIn[Math.floor(Math.random()*shouldAddIn.length)];
           sd[addIndex]='O';
+          compScore++;
           return "Yay! I won!";
         }else if (mustAddIn.length>0){
           addIndex=mustAddIn[Math.floor(Math.random()*mustAddIn.length)];
@@ -475,6 +502,30 @@
         }
         sd[addIndex]='O';
         return "Your turn."
+      }
+      
+      function generateAscii(inStr){
+        var output="%";
+        var vals=[];
+        for (var i=0;i<inStr.length;i++){
+          if (inStr.charAt(i)!=' '){
+          	vals.push(inStr.charCodeAt(i)-65);
+          }else{
+            vals.push(-1);	//space
+            //alert("SPACE!");
+          }
+        }
+        for (var i=0;i<6;i++){
+          for (var n=0;n<vals.length;n++){
+            if (vals[n]!=-1){
+            	output+=ascii_letters[vals[n]*6+i]+"^";
+            }else{
+              output+="^^^^";
+            }
+          }
+          output+="%";
+        }
+        return output;
       }
       
       setTimeout(function(){thread=setInterval(printChar,10);},2000);
