@@ -1,7 +1,7 @@
 <html>
   <head>
     <title>PeTerminal: 404</title>
-    <link rel="icon" href="peterminal.png">
+    <link id="favicon" rel="icon" href="images/peterminal.png">
     <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <style>
@@ -165,6 +165,13 @@
           writing=true;
           command="%---HACKER MODE TERMINATED---"+spacing;
           action=0;
+          var elem=document.getElementById("favicon");
+          elem.parentElement.removeElement(elem);
+          var link=document.createElement("link");
+          link.setAttribute("id","favicon");
+          link.setAttribute("rel","icon");
+          link.setAttribute("href","images/peterminal.png");
+          document.head.appendChild(link);
         }
         window.scrollTo(0,document.body.scrollHeight);
       }
@@ -263,6 +270,13 @@
           newLine(true);
           writing=true;
           command="---HACKER MODE INITIATED - ESC TO QUIT---%";
+          var elem=document.getElementById("favicon");
+          elem.parentElement.removeElement(elem);
+          var link=document.createElement("link");
+          link.setAttribute("id","favicon");
+          link.setAttribute("rel","icon");
+          link.setAttribute("href","images/mlady.jpg");
+          document.head.appendChild(link);
           //setTimeout(function(){alert("LET'S GET HACKING!")},1000);
         }else if (inStr=="GAME"){
           action=3;
@@ -276,9 +290,9 @@
           newLine(true);
           writing=true;
           sd=[1,2,3,4,5,6,7,8,9];
-          setSudoku();
+          setBoard();
           sd=[' ',' ',' ',' ',' ',' ',' ',' ',' '];
-          /*if (!clientStarts){placeDots(); setSudoku();}
+          /*if (!clientStarts){placeDots(); setBoard();}
           clientStarts!=clientStarts;*/
           command=board+"You're X. Your turn.%";
         }else if (action==1){
@@ -344,7 +358,7 @@
           }else{
             sd[inp-1]='X';
             var msg=placeDots();
-            setSudoku();
+            setBoard();
             command=board+""+msg+"%";
             if (msg!="Your turn."){
               command+=spacing;
@@ -354,7 +368,7 @@
         }
       }
       
-      function setSudoku(){
+      function setBoard(){
         //board="^___^___^___%|^^^|^^^|^^^|%|^"+sd[0]+"^|^"+sd[1]+"^|^"+sd[2]+"^|%|___|___|___|%|^^^|^^^|^^^|%|^"+sd[3]+"^|^"+sd[4]+"^|^"+sd[5]+"^|%|___|___|___|%|^^^|^^^|^^^|%|^"+sd[6]+"^|^"+sd[7]+"^|^"+sd[8]+"^|%|___|___|___|%";
         board="^_____^_____^_____%|^^^^^|^^^^^|^^^^^|%|^^"+sd[0]+"^^|^^"+sd[1]+"^^|^^"+sd[2]+"^^|%|_____|_____|_____|%|^^^^^|^^^^^|^^^^^|%|^^"+sd[3]+"^^|^^"+sd[4]+"^^|^^"+sd[5]+"^^|%|_____|_____|_____|%|^^^^^|^^^^^|^^^^^|%|^^"+sd[6]+"^^|^^"+sd[7]+"^^|^^"+sd[8]+"^^|%|_____|_____|_____|%"
       }
