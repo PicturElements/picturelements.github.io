@@ -1,5 +1,7 @@
 <html>
   <head>
+    <title>FUCK!</title>
+    <link rel="icon" href="peterminal.png">
     <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <style>
@@ -119,7 +121,7 @@
       var writing=true;
       var commands=["HELP","HOME","GAME","TTT","PRIME","HACK"];
       var helpAscii="^_^^^_^^^^____^^^^_^^^^^^^_____^%|^|^|^|^^|^^__|^^|^|^^^^^|^^_^^\\%|^|_|^|^^|^|__^^^|^|^^^^^|^|_|^|%|^^_^^|^^|^^__|^^|^|^^^^^|^^___/%|^|^|^|^^|^|__^^^|^|___^^|^|%|_|^|_|^^|____|^^|_____|^|_|%%You're welcome."+spacing;
-      var action=0;
+      var action=0,clock=0;
       var guess,userGuess,guesses;
       var board="",obj=['O','X'],sd,clientStarts=true;
       
@@ -155,6 +157,7 @@
         }else if (action==2&&kc==13){
           checkInput(null);
         }else if (action==2&&kc==27){
+          document.title="404";
           var elem=document.getElementsByTagName("input")[currentInputIndex];
           elem.parentNode.removeChild(elem);
           currentInputIndex--;
@@ -224,6 +227,15 @@
             command="";
           }
         }
+        
+        if (action==2){
+          if (clock%100<50){
+            document.title="[HACKING IN PROGRESS]";
+          }else{
+            document.title=" ";
+          }
+        }
+        clock++;
       } 
       
       function checkInput(inStr){
