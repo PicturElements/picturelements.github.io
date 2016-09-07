@@ -321,12 +321,19 @@
           var input=inStr.replace("COWSAY ","");
           writing=true;
           newLine(true);
-          var counted=0,skip=false,tmpStr="",lines=[];
+          var counted=0,skip=false,tmpStr="",lines=[],max=0,output="";
           for (var i=0;i<input.length;i++){
             if (!skip&&counted>=25&&input.charAt(i)==' '){skip=true;}
             else if (!skip){tmpStr+=input.charAt(i); counted++;}
-            else if (skip&&input.charAt(i)!=' '){lines.push(tmpStr); tmpStr=input.charAt(i); counted=1; skip=false;}
+            else if (skip&&input.charAt(i)!=' '){lines.push(tmpStr); tmpStr=input.charAt(i); if (counted>max){max=counted;} counted=1; skip=false;}
           }
+          output="^"
+          for (var i=0;i<max-2;i++){output+="_";}
+          output+="%";
+          for (var i=0;i<lines.length;i++){output+lines[i]"%";}
+          output+="^"
+          for (var i=0;i<max-2;i++){output+="-";}
+          output+="%";
           console.log(lines);
           command="^^^^^^^^\\^^^\\__/%^^^^^^^^^\\^^(oo)\\_______%^^^^^^^^^^^^(__)\\^^^^^^^)\\/\\%^^^^^^^^^^^^^^^^||----w^|%^^^^^^^^^^^^^^^^||^^^^^||%";
         }else if (action==1){
