@@ -318,9 +318,17 @@
           command="Write anything in plain text!%"
         }else if (inStr.startsWith("COWSAY")&&action==0){
           //alert("COW!");
+          var input=inStr.replace("COWSAY ","");
           writing=true;
           newLine(true);
-          command="^^^^^^^^\\^^/\\__/\\%^^^^^^^^^\\^^(oo)\\_______%^^^^^^^^^^^^(__)\\^^^^^^^)\\/\\%^^^^^^^^^^^^^^^^||----w^|%^^^^^^^^^^^^^^^^||^^^^^||%";
+          var counted=0,skip=false,tmpStr="",lines=[];
+          for (var i=0;i<input.length;i++){
+            if (!skip&&counted>=40&&input.charAt(i)==' '){skip=true;}
+            else if (!skip){tmpStr+=input.charAt(i); counted++;}
+            else if (skip&&input.charAt(i)!=' '){lines.push(tmpStr); tmpStr=input.charAt(i); counted=1;}
+          }
+          alert(lines);
+          command="^^^^^^^^\\^^^\\__/%^^^^^^^^^\\^^(oo)\\_______%^^^^^^^^^^^^(__)\\^^^^^^^)\\/\\%^^^^^^^^^^^^^^^^||----w^|%^^^^^^^^^^^^^^^^||^^^^^||%";
         }else if (action==1){
           newLine(true);
           writing=true;
