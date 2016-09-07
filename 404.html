@@ -496,6 +496,7 @@
           addIndex=mustAddIn[Math.floor(Math.random()*mustAddIn.length)];
         }else{
           if (canAddIn.length==0||canAddIn.length==1&&!compStarts){
+            if (canAddIn.length==1){addIndex=canAddIn[0];}
             return "It's a draw!";
           }
           addIndex=canAddIn[Math.floor(Math.random()*canAddIn.length)];
