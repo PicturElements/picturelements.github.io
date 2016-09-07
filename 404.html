@@ -262,11 +262,11 @@
           newLine(true);
           writing=true;
           command="'"+inStr+"' is not a valid command.%";
-        }else if (inStr=="HELP"){
+        }else if (inStr=="HELP"&&action==0){
           newLine(true);
           writing=true;
           command=generateAscii("HELP")+"%You're wlcome."+spacing;
-        }else if (inStr=="HOME"){
+        }else if (inStr=="HOME"&&action==0){
           action=100;
           newLine(true);
           writing=true;
@@ -274,12 +274,12 @@
           thread=setInterval(printChar,30);
           command="Initializing moveHome.exe.dll.tar.gif...%^^0 percent...%^^10 percent...%^^20 percent...%^^30 percent...%^^40 percent...%^^50 percent...%^^60 percent...%^^70 percent...%^^80 percent...%^^90 percent...%^^100 percent...%Checking NSA database...%%%%%%%Success%Calling functions...%%%%%%%%DONE%%%%%%%%Redirecting..................................";
           //window.location.href="http://picturelements.github.io/";
-        }else if (inStr=="PRIME"){
+        }else if (inStr=="PRIME"&&action==0){
           action=1;
           newLine(true);
           writing=true;
           command="How many primes do you want (1-1000)?";
-        }else if (inStr=="HACK"){
+        }else if (inStr=="HACK"&&action==0){
           action=2;
           newLine(true);
           writing=true;
@@ -292,14 +292,14 @@
           link.setAttribute("href","images/mlady.jpg");
           document.head.appendChild(link);
           //setTimeout(function(){alert("LET'S GET HACKING!")},1000);
-        }else if (inStr=="GAME"){
+        }else if (inStr=="GAME"&&action==0){
           action=3;
           guess=Math.floor(Math.random()*1000);
           guesses=0;
           newLine(true);
           writing=true;
           command="Okay! I'm thinking of a number between 0 and 1000. Make a guess!%";
-        }else if (inStr=="TTT"){
+        }else if (inStr=="TTT"&&action==0){
           action=4;
           newLine(true);
           writing=true;
@@ -309,11 +309,13 @@
           setBoard();
           sd=[' ',' ',' ',' ',' ',' ',' ',' ',' '];
           command="Play against me!%Press ESC to quit.%"+board+"You're X. Your turn.%";
-        }else if (inStr=="ASCII"){
+        }else if (inStr=="ASCII"&&action==0){
           action=5;
           writing=true;
           newLine(true);
           command="Write anything in plain text!%"
+        }else if (inStr.startsWith("COWSAY")&&action==0){
+          alert("COW!");
         }else if (action==1){
           newLine(true);
           writing=true;
