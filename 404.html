@@ -323,11 +323,11 @@
           newLine(true);
           var counted=0,skip=false,tmpStr="",lines=[];
           for (var i=0;i<input.length;i++){
-            if (!skip&&counted>=40&&input.charAt(i)==' '){skip=true;}
+            if (!skip&&counted>=25&&input.charAt(i)==' '){skip=true;}
             else if (!skip){tmpStr+=input.charAt(i); counted++;}
-            else if (skip&&input.charAt(i)!=' '){lines.push(tmpStr); tmpStr=input.charAt(i); counted=1;}
+            else if (skip&&input.charAt(i)!=' '){lines.push(tmpStr); tmpStr=input.charAt(i); counted=1; skip=false;}
           }
-          alert(lines);
+          console.log(lines);
           command="^^^^^^^^\\^^^\\__/%^^^^^^^^^\\^^(oo)\\_______%^^^^^^^^^^^^(__)\\^^^^^^^)\\/\\%^^^^^^^^^^^^^^^^||----w^|%^^^^^^^^^^^^^^^^||^^^^^||%";
         }else if (action==1){
           newLine(true);
