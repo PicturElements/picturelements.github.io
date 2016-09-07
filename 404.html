@@ -248,7 +248,7 @@
           if (clock%100<50){
             document.title="[HACKING IN PROGRESS]";
           }else{
-            document.title="[-------------------]";
+            document.title="---";
           }
         }
         clock++;
@@ -346,7 +346,7 @@
           output+="^"
           for (var i=0;i<max+2;i++){output+="-";}
           //console.log(lines);
-          command=output+"%^^^^^^^^\\^^^\\__/%^^^^^^^^^\\^^(oo)\\_______%^^^^^^^^^^^^(__)\\^^^^^^^)\\/\\%^^^^^^^^^^^^^^^^||----w^|%^^^^^^^^^^^^^^^^||^^^^^||%";
+          command=output+"%^^^^^^^^\\^^^\\__/%^^^^^^^^^\\^^(oo)\\_______%^^^^^^^^^^^^(__)\\^^^^^^^)\\/\\%^^^^^^^^^^^^^^^^||----w^|%^^^^^^^^^^^^^^^^||^^^^^||%"+spacing;
         }else if (action==1){
           newLine(true);
           writing=true;
