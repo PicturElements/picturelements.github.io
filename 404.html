@@ -403,7 +403,7 @@
       }
       
       function setBoard(){
-  		board="^_____^_____^_____%|^^^^^|^^^^^|^^^^^|%|^^"+sd[0]+"^^|^^"+sd[1]+"^^|^^"+sd[2]+"^^|%|_____|_____|_____|%|^^^^^|^^^^^|^^^^^|%|^^"+sd[3]+"^^|^^"+sd[4]+"^^|^^"+sd[5]+"^^|%|_____|_____|_____|%|^^^^^|^^^^^|^^^^^|%|^^"+sd[6]+"^^|^^"+sd[7]+"^^|^^"+sd[8]+"^^|%|_____|_____|_____|%"
+  		  board="^_____^_____^_____%|^^^^^|^^^^^|^^^^^|%|^^"+sd[0]+"^^|^^"+sd[1]+"^^|^^"+sd[2]+"^^|%|_____|_____|_____|%|^^^^^|^^^^^|^^^^^|%|^^"+sd[3]+"^^|^^"+sd[4]+"^^|^^"+sd[5]+"^^|%|_____|_____|_____|%|^^^^^|^^^^^|^^^^^|%|^^"+sd[6]+"^^|^^"+sd[7]+"^^|^^"+sd[8]+"^^|%|_____|_____|_____|%"
       }
       
       function placeDots(){
@@ -487,9 +487,6 @@
           if (sd[i]==' '){canAddIn.push(i);}
         }
         
-        if (canAddIn.length==0){
-          return "It's a draw!";
-        }
         if (shouldAddIn.length>0){
           addIndex=shouldAddIn[Math.floor(Math.random()*shouldAddIn.length)];
           sd[addIndex]='O';
@@ -498,6 +495,9 @@
         }else if (mustAddIn.length>0){
           addIndex=mustAddIn[Math.floor(Math.random()*mustAddIn.length)];
         }else{
+          if (canAddIn.length==0||canAddIn.length==1&&!compStarts){
+            return "It's a draw!";
+          }
           addIndex=canAddIn[Math.floor(Math.random()*canAddIn.length)];
         }
         sd[addIndex]='O';
