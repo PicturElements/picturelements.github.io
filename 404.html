@@ -258,6 +258,8 @@
         for (var i=0;i<commands.length;i++){
           if (inStr==commands[i]){found=true; break;}
         }
+        if (inStr.startsWith("COWSAY")){found=true;}
+        
         if (!found&&action==0){
           newLine(true);
           writing=true;
