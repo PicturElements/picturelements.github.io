@@ -411,9 +411,6 @@
         var canAddIn=[];    //any cell that the bot can place in
         var mustAddIn=[];   //any cell that the but must place in to prevent losing
         var shouldAddIn=[]; //any cell that the bot should add in to win
-        for (var i=0;i<9;i++){
-          if (sd[i]==' '){canAddIn.push(i);}
-        }
         //check rows
         for (var h=0;h<3;h++){
           ofType=0;
@@ -486,8 +483,11 @@
           else if (sd[index]==' '){shouldAddIn.push(index);}
         }else if (ofType==3&&type=='X'){clientScore++; return "You won!";}
         
+        for (var i=0;i<9;i++){
+          if (sd[i]==' '){canAddIn.push(i);}
+        }
         
-        if (canAddIn.length==0){
+        if (canAddIn.length==0||){
           return "It's a draw!";
         }
         if (shouldAddIn.length>0){
