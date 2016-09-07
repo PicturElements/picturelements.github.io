@@ -325,12 +325,14 @@
           for (var i=0;i<input.length;i++){
             if (!skip&&counted>=25&&input.charAt(i)==' '){skip=true;}
             else if (!skip){tmpStr+=input.charAt(i); counted++;}
-            else if (skip&&input.charAt(i)!=' '){lines.push(tmpStr); tmpStr=input.charAt(i); if (counted>max){max=counted;} counted=1; skip=false;}
+            else if (skip&&input.charAt(i)!=' '){lines.push(tmpStr); tmpStr=input.charAt(i); counted=1; skip=false;}
+            if (counted>max){max=counted;}
           }
+          lines.push(tmpStr);
           output="^"
-          for (var i=0;i<max-2;i++){output+="_";}
+          for (var i=0;i<max+2;i++){output+="_";}
           output+="%";
-          for (var i=0;i<lines.length;i++){output+=(lines[i]+"%");}
+          for (var i=0;i<lines.length;i++){output+=("| "+lines[i]+" |%");}
           output+="^"
           for (var i=0;i<max-2;i++){output+="-";}
           //console.log(lines);
