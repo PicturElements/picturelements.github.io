@@ -330,12 +330,11 @@
           output="^"
           for (var i=0;i<max-2;i++){output+="_";}
           output+="%";
-          for (var i=0;i<lines.length;i++){output+lines[i]"%";}
+          for (var i=0;i<lines.length;i++){output+=(lines[i]+"%");}
           output+="^"
           for (var i=0;i<max-2;i++){output+="-";}
-          output+="%";
-          console.log(lines);
-          command="^^^^^^^^\\^^^\\__/%^^^^^^^^^\\^^(oo)\\_______%^^^^^^^^^^^^(__)\\^^^^^^^)\\/\\%^^^^^^^^^^^^^^^^||----w^|%^^^^^^^^^^^^^^^^||^^^^^||%";
+          //console.log(lines);
+          command=output+"%^^^^^^^^\\^^^\\__/%^^^^^^^^^\\^^(oo)\\_______%^^^^^^^^^^^^(__)\\^^^^^^^)\\/\\%^^^^^^^^^^^^^^^^||----w^|%^^^^^^^^^^^^^^^^||^^^^^||%";
         }else if (action==1){
           newLine(true);
           writing=true;
