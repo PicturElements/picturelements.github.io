@@ -259,7 +259,7 @@
         for (var i=0;i<commands.length;i++){
           if (inStr==commands[i]){found=true; break;}
         }
-        if (inStr.startsWith("COWSAY")){found=true;}
+        if (inStr.startsWith("COWSAY")||inStr.startsWith("COWTHINK")){found=true;}
         
         if (!found&&action==0){
           newLine(true);
@@ -320,7 +320,7 @@
         }else if (inStr.startsWith("COWSAY")&&action==0||inStr.startsWith("COWTHINK")&&action==0){
           //alert("COW!");
           var thinksay;
-          if (input.includes("COWSAY")){thinksay="\\";}
+          if (inStr.includes("COWSAY")){thinksay="\\";}
           else {thinksay="o"}
           
           var input;
