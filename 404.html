@@ -163,7 +163,7 @@
             command="Final score:%^^You:"+clientScore+" Me:"+compScore+"%"+spacing;
           }
         }else if (action==2&&kc==13){
-          checkInput(null);
+          checkInput("");  //Null made things go bad.
         }else if (action==2&&kc==27){
           document.title="PeTerminal: 404";
           var elem=document.getElementsByTagName("input")[currentInputIndex];
@@ -317,13 +317,18 @@
           writing=true;
           newLine(true);
           command="Write anything in plain text!%"
-        }else if (inStr.startsWith("COWSAY")&&action==0){
+        }else if (inStr.startsWith("COWSAY")&&action==0||inStr.startsWith("COWTHINK")&&action==0){
           //alert("COW!");
+          var thinksay;
+          if (input.includes("COWSAY")){thinksay="\\";}
+          else {thinksay="o"}
+          
           var input;
-          if (inStr.startsWith("COWSAY FORTUNE")){
+          if (inStr.includes("FORTUNE")){
             input=fortunes[Math.floor(Math.random()*fortunes.length)];
           }else{
             input=inStr.replace("COWSAY ","");
+            input=inStr.replace("COWTHINK ","");
           }
           writing=true;
           newLine(true);
@@ -346,7 +351,7 @@
           output+="^"
           for (var i=0;i<max+2;i++){output+="-";}
           //console.log(lines);
-          command=output+"%^^^^^^^^\\^^^\\__/%^^^^^^^^^\\^^(oo)\\_______%^^^^^^^^^^^^(__)\\^^^^^^^)\\/\\%^^^^^^^^^^^^^^^^||----w^|%^v^^v^^^^^^^^^oo||^^^^^||%–\\-/---V------|------------vV----------V-v-----%";
+          command=output+"%^^^^^^^^"+thinksay+"^^^\\__/%^^^^^^^^^"+thinksay+"^^(oo)\\_______%^^^^^^^^^^^^(__)\\^^^^^^^)\\/\\%^^^^^^^^^^^^^^^^||----w^|%^v^^v^^^^^^^^^oo||^^^^^||%–\\-/---V------|------------vV----------V-v-----%";
         }else if (action==1){
           newLine(true);
           writing=true;
