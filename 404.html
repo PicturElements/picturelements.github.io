@@ -320,15 +320,12 @@
         }else if (inStr.startsWith("COWSAY")&&action==0||inStr.startsWith("COWTHINK")&&action==0){
           //alert("COW!");
           var thinksay;
-          if (inStr.includes("COWSAY")){thinksay="\\";}
-          else {thinksay="o"}
-          
           var input;
+          
+          if (inStr.includes("COWSAY")){thinksay="\\"; input=inStr.replace("COWSAY ","");}
+          else {thinksay="o"; input=inStr.replace("COWTHINK ","");}
           if (inStr.includes("FORTUNE")){
             input=fortunes[Math.floor(Math.random()*fortunes.length)];
-          }else{
-            input=inStr.replace("COWSAY ","");
-            input=inStr.replace("COWTHINK ","");
           }
           writing=true;
           newLine(true);
