@@ -375,7 +375,7 @@
           writing=true;
           //document.getElementById("hacker").innerHTML="function hack(){try{return ("+document.getElementsByTagName("input")[currentInputIndex].value+")}catch(e){return 'FUCK! SHITTY SYNTAX!'}}";
           var str=document.getElementsByTagName("input")[currentInputIndex].value;
-          document.getElementById("hacker").innerHTML="function hack(){try{ "+str+"}catch(e){return 'FUCK! SHITTY SYNTAX! - \"+e+\"'}}";
+          document.getElementById("hacker").innerHTML="function hack(){try{ "+str+"}catch(e){return 'FUCK! SHITTY SYNTAX! - '+e}}";
           var found = str.includes("alert")||str.includes("console.")||str.includes(";");
           try{
             command=">"+hack()+"%";
