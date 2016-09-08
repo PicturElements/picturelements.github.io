@@ -31,6 +31,11 @@
         color:black;
       }
       
+      a{
+        text-decoration:underline;
+        cursor:pointer;
+      }
+      
       #caret{
         width:1vw;
         height:1.5vw;
@@ -116,7 +121,7 @@
       var currentP=document.getElementsByTagName("p")[0];
       var currentIndex=0,currentInputIndex=-1;
       var spacing="%-----------------------------------------------";
-      var command="PeTerminal 1.0.3 ErrorManager_404_Exception"+spacing+"%%Oh crap! This page doesn't exist!%^^^Error: 404%^^^Cause: PicturElements has not been productive enough, or the web is not ready for your request.%^^^Solution 0: tell him to make more pages.%^^^Solution 1: Make your own files and tell him to add them.%^^^Solution 2: Get the bloody URL right.%%Protip: The URLs on picturelements.github.io/ are written either in camelCase (e.g. nthPrime) or all lower case.%%Type 'HELP' for help.%^^^^^'ASCII' to create Ascii art.%^^^^^'HOME' to go to the home page.%^^^^^'GAME' to play a small game.%^^^^^'TTT' to play Tic-tac-toe.%^^^^^'PRIME' to generate a cool set of primes.%^^^^^'HACK' to become a hacker and hack the mainframe."+spacing, commandOut="";
+      var command="PeTerminal 1.0.3 Error_404_Exception_Handler"+spacing+"%%Oh crap! This page doesn't exist!%^^^Error: 404%^^^Cause: PicturElements has not been productive enough, or the web is not ready for your request.%^^^Solution 0: tell him to make more pages.%^^^Solution 1: Make your own files and tell him to add them.%^^^Solution 2: Get the bloody URL right.%%Protip: The URLs on picturelements.github.io/ are written either in camelCase (e.g. ...github.io/nthPrime) or all lower case.%^^^^^^^^Type 'EASTER' to get hints for some of the easter eggs embedded on this page.%%Type 'HACK' to become a hacker and hack the mainframe.%^^^^^'HOME' to go to my home page. <a onclick=checkInput(\"HOME\")>You can also click here.</a>%^^^^^'ASCII' to create Ascii art.%^^^^^'TTT' to play Tic-tac-toe.%%^^^^^--other fun stuff--%^^^^^'HELP' for help.%^^^^^'PRIME' to generate a cool set of primes.%^^^^^'GAME' to play a small game."+spacing, commandOut="";
       var commandPos=0;
       var writing=true;
       var commands=["HELP","ASCII","HOME","GAME","TTT","PRIME","HACK"];
