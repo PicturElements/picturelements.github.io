@@ -8,6 +8,7 @@
   <title>PicturElements - home</title>
   <link rel="icon" href="pelement.png">
   <link href='https://fonts.googleapis.com/css?family=Roboto:300,700' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="PEhome.css" media="screen">
   <script type="text/javascript" src="jQuery.js"></script>
   <script type="text/javascript" src="jgestures.js"></script>
@@ -189,6 +190,17 @@
         background-color: #3c005b;
         bottom:0;
       }
+      #terminaloverlay{
+        display:none;
+        width:100%;
+        height:100%;
+        left:0;
+        top:0;
+        background-color:black;
+        color:#0c0;
+        font-size:1.5vw;
+        font-family:VT323,monospace;
+      }
       @keyframes scan{
         to{background-position:0 -15.475vw;}
       }
@@ -214,6 +226,12 @@
       jQuery('#showcasearea').bind('swiperight',move(1));
       
       function init(){
+        if (window.location.href.endsWith("fromTerminal")){
+          var term=document.getElementById("terminaloverlay");
+          term.style.display="block";
+          term.innerHTML=document.innerHTML;
+        }
+        
         var items=document.getElementsByClassName("linkoverlay");
         itemCount=items.length;
         for (i=0;i<itemCount;i++){
@@ -504,5 +522,6 @@
     </div> 
     <div id="footer">
     </div>
+    <div id="terminaloverlay"></div>
   </body>
 </html>
