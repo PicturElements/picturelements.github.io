@@ -24,7 +24,8 @@
   <body title="OMG IT BURNS"></body>
   <script>
     var outStr="";
-    for (var i=0;i<200;i++){
+    var amount=Math.floor(window.innerWidth/32)*Math.floor(window.innerHeight/25);
+    for (var i=0;i<amount;i++){
       outStr+="<div class=\"parrot\" style=\"background-image:url(images/parrots/parrot"+Math.floor(Math.random()*28)+".gif)\"></div>";
     }
     document.body.innerHTML=outStr;
