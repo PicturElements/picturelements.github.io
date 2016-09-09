@@ -201,7 +201,7 @@
         color:#0c0;
         font-size:1.5vw;
         font-family:VT323,monospace;
-        z-index.100;
+        z-index:100;
       }
       @keyframes scan{
         to{background-position:0 -15.475vw;}
@@ -231,7 +231,8 @@
         if (window.location.href.endsWith("fromTerminal")){
           var term=document.getElementById("terminaloverlay");
           term.style.display="block";
-          term.innerHTML=document.getElementsByTagName("html")[0].innerHTML;
+          //term.innerHTML=document.getElementsByTagName("html")[0].innerHTML;
+          term.innerHTML=document.documentElement.outerHTML;
         }
         
         var items=document.getElementsByClassName("linkoverlay");
