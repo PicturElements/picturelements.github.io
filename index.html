@@ -232,7 +232,8 @@
           var term=document.getElementById("terminaloverlay");
           term.style.display="block";
           //term.innerHTML=document.getElementsByTagName("html")[0].innerHTML;
-          term.innerHTML=document.documentElement.outerHTML;
+          //term.innerHTML=document.documentElement.outerHTML;
+          term.innerHTML=document.body.outerHTML;
         }
         
         var items=document.getElementsByClassName("linkoverlay");
