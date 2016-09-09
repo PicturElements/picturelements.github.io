@@ -8,8 +8,9 @@
         background-color:white;
         /*background-image:url(images/parrotsPiece.gif);
         background-size:290px 55px;*/
-        animation:psych 1s linear infinite;
+        /*animation:psych 1s linear infinite;*/
         margin:0;
+        overflow:hidden;
       }
       
       .parrot{
@@ -21,6 +22,11 @@
         background-size:cover;
       }
       
+      #container{
+        display:block;
+        position:fixed;
+      }
+      
       @keyframes psych{
         0%{background-color:red;}
         50%{background-color:green;}
@@ -28,14 +34,19 @@
       }
     </style>
   </head>
-  <body title="OMG IT BURNS"></body>
-  <script>
-    var outStr="";
-    var amount=Math.floor(window.innerWidth/32)*Math.floor(window.innerHeight/25);
-    for (var i=0;i<amount;i++){
-      outStr+="<div class=\"parrot\" style=\"background-image:url(images/parrots/parrot"+Math.floor(Math.random()*28)+".gif)\"></div>";
-    }
-    console.log(amount);
-    document.body.innerHTML=outStr;
-  </script>
+  <body>
+    <div id="container"></div>
+    <script>
+      var outStr="";
+      var container=document.getElementById("container");
+      container.style.width=""+(Math.ceil(window.innerWidth/32))+"px";
+      container.style.height=""+(Math.ceil(window.innerHeight/25))+"px";
+      var amount=Math.ceil(window.innerWidth/32)*Math.ceil(window.innerHeight/25);
+      for (var i=0;i<amount;i++){
+        outStr+="<div class=\"parrot\" style=\"background-image:url(images/parrots/parrot"+Math.floor(Math.random()*28)+".gif)\"></div>";
+      }
+      console.log(amount);
+     container.innerHTML=outStr;
+    </script>
+  </body>
 </html>
