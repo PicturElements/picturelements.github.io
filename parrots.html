@@ -42,8 +42,9 @@
       container.style.width=""+(Math.ceil(window.innerWidth/32)*32)+"px";
       container.style.height=""+(Math.ceil(window.innerHeight/25)*25)+"px";
       var amount=Math.ceil(window.innerWidth/32)*Math.ceil(window.innerHeight/25);
+      
       for (var i=0;i<amount;i++){
-        outStr+="<div class=\"parrot\" style=\"background-image:url(images/parrots/parrot"+Math.floor(Math.random()*41)+".gif)\"></div>";
+        outStr+="<div class=\"parrot\" style=\"background-image:url(images/parrots/parrot"+Math.floor(Math.random()*42)+".gif)\"></div>";
       }
       console.log(amount);
      container.innerHTML=outStr;
