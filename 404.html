@@ -194,13 +194,13 @@
         if (clear){
           currentP.innerHTML=command;
           command="";
+          var sound=document.getElementById("osd");
+          sound.currentTime=0;
+          sound.play();
         }else{
           currentP.innerHTML=commandOut;
           commandOut="";
         }
-        var sound=document.getElementById("osd");
-        sound.currentTime=0;
-        sound.play();
         
         var p=document.createElement("p");
         var span=document.createElement("span");
@@ -384,6 +384,9 @@
           action=0;
         }else if (action==2){
           writing=true;
+          var sound=document.getElementById("osd");
+          sound.currentTime=0;
+          sound.play();
           //document.getElementById("hacker").innerHTML="function hack(){try{return ("+document.getElementsByTagName("input")[currentInputIndex].value+")}catch(e){return 'FUCK! SHITTY SYNTAX!'}}";
           var str=document.getElementsByTagName("input")[currentInputIndex].value;
           document.getElementById("hacker").innerHTML="function hack(){try{ "+str+"}catch(e){return 'FUCK! SHITTY SYNTAX! - '+e}}";
