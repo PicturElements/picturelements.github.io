@@ -194,13 +194,14 @@
         if (clear){
           currentP.innerHTML=command;
           command="";
-          var sound=document.getElementById("osd");
-          sound.currentTime=0;
-          sound.play();
         }else{
           currentP.innerHTML=commandOut;
           commandOut="";
         }
+        var sound=document.getElementById("osd");
+        sound.currentTime=0;
+        sound.play();
+        
         var p=document.createElement("p");
         var span=document.createElement("span");
         span.setAttribute("id","caret");
@@ -577,7 +578,7 @@
         return output;
       }
       
-      setTimeout(function(){thread=setInterval(printChar,10); document.getElementById("osd").play();},2000);
+      setTimeout(function(){thread=setInterval(printChar,10); var sound=document.getElementById("osd"); sound.play(); sound.vloume=0.3;},2000);
     </script>
   </body>
 </html>
