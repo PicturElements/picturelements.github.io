@@ -194,6 +194,9 @@
         if (clear){
           currentP.innerHTML=command;
           command="";
+          var sound=document.getElementById("osd");
+          sound.currentTime=0;
+          sound.play();
         }else{
           currentP.innerHTML=commandOut;
           commandOut="";
