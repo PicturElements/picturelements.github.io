@@ -111,6 +111,7 @@
     <script id="hacker"></script>
   </customscripts>
   <body>
+    <audio loop preload="auto" id="ocr" src="images/ocr.wav" type="audio/wav"></audio>
     <div id="terminal">
       <p>
         <span id="caret">&nbsp;</span>
@@ -246,6 +247,7 @@
             }
             if (action==100){window.location.href="http://picturelements.github.io/#fromTerminal";}
             command="";
+            document.getElementById("ocr").pause();
           }
         }
         
@@ -572,7 +574,7 @@
         return output;
       }
       
-      setTimeout(function(){thread=setInterval(printChar,10);},2000);
+      setTimeout(function(){thread=setInterval(printChar,10); document.getElementById("ocr").play();},2000);
     </script>
   </body>
 </html>
