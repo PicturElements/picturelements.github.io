@@ -103,9 +103,9 @@
         var stringOut="";
         for (var i=0;i<url.length;i++){
           if (url.charAt(i)=='#'){foundhash=true;}
-          else if (foundhash){stringOutl+=url.charAt(i);}
+          else if (foundhash){stringOut+=url.charAt(i);}
         }
-        document.getElementById("helptext").innerHTML=foundHash;
+        document.getElementById("helptext").innerHTML=stringOut;
       }
       
       function pray(){
