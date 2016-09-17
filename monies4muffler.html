@@ -97,6 +97,17 @@
       canvas.height=window.innerHeight;
       setInterval(paint2,30);
       
+      if (window.location.href.includes("#")){
+        var foundhash=false;
+        var url=window.location.href;
+        var stringOut="";
+        for (var i=0;i<url.length;i++){
+          if (url.charAt(i)=='#'){foundhash=true;}
+          else if (foundhash){stringOutl+=url.charAt(i);}
+        }
+        document.getElementById("helptext").innerHTML=foundHash;
+      }
+      
       function pray(){
         document.getElementsByTagName("button")[0].style.display="none";
         document.getElementById("helptext").style.display="none";
