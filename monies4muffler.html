@@ -50,6 +50,7 @@
         text-align: center;
         bottom: 50%;
         margin-bottom: 2vw;
+        font-size:1.5vw;
       }
       
       #kay{
@@ -100,6 +101,14 @@
         document.getElementsByTagName("button")[0].style.display="none";
         document.getElementById("helptext").style.display="none";
         document.getElementById("kay").style.display="block";
+        setTimeout(message,5000);
+      }
+      
+      function message(){
+        var element=document.getElementById("helptext");
+        element.style.display="block";
+        element.style.fontSize="1vw";
+        element.style.marginBottom="-0.5vw";
       }
       
       function paint2(){
