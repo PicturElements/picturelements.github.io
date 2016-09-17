@@ -99,7 +99,7 @@
       
       if (window.location.href.includes("#")){
         var foundhash=false;
-        var url=window.location.href;
+        var url=decodeURI(window.location.href);
         var stringOut="";
         for (var i=0;i<url.length;i++){
           if (url.charAt(i)=='#'){foundhash=true;}
