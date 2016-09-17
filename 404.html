@@ -17,6 +17,7 @@
         right: 0;
         color: #0c0;
         font-family: VT323,monospace;
+        text-align:right;
         font-size: 1.5vw;
         background-color: #222;
         padding: 0.5vw;
@@ -274,10 +275,14 @@
         if (action==2){
           var hacking=document.getElementById("hackprog");
           var totTime=new Date().getTime()-hackTime,secTime=Math.floor(totTime/1000),minTime=Math.floor(secTime/60);
+          var randomString="";
+          for (var i=0;i<50;i++){
+            randomString+=(Math.random()*2<1?String.fromCharCode(Math.floor(Math.random()*25+65)):String.fromCharCode(Math.floor(Math.random()*25+97)));
+          }
           var tmpTot=totTime%1000,msOut=""+tmpTot;
           if (tmpTot<10){msOut="00"+tmpTot;}
           else if (tmpTot<100){msOut="0"+tmpTot;}
-          hacking.innerHTML="You have been hacking for "+(minTime<10?"0":"")+""+minTime+"m"+((secTime%60)<10?"0":"")+""+(secTime%60)+"s"+msOut+"ms t:("+totTime+") f:("+clock+")";
+          hacking.innerHTML="You have been hacking for "+(minTime<10?"0":"")+""+minTime+"m"+((secTime%60)<10?"0":"")+""+(secTime%60)+"s"+msOut+"ms t:("+totTime+") f:("+clock+")<br>"+randomString;
           if (clock%100<50){
             document.title="[HACKING IN PROGRESS]";
           }else{
