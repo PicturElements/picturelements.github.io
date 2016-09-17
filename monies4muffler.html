@@ -10,12 +10,52 @@
         background-color:black;
         margin:0;
       }
+      
+      #celebrate{
+        display:block;
+        position:fixed;
+        width:100%;
+        height:100%;
+      }
     </style>
-    <script></script>
   </head>
   <body>
+    <canvas id="celebrate"></canvas>
     <p id="helptext"></p>
     <p id="kay"></p>
-    <input></input>
+    <button></button>
+    
+    
+    <script>
+      var counter=0;
+      var xPos2=[],yPos2=[],stps=[],fireCols=[],checks=[0,0,0,0],points=15,sinusoid=0.1,dissipate=0.3;
+    
+      var canvas=document.getElementById("celebrate");
+      canvas.width=window.innerWidth;
+      canvas.height=window.innerHeight;
+      setInterval(paint2,30);
+      
+      function paint2(){
+        var ctx=document.getElementById("celebrate").getContext("2d");
+        ctx.fillStyle="rgba(0,0,0,"+fade+")";
+        ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
+        for (var i=0;i<xPos2.length;i++){
+          var rot=i%(360/points)*Math.PI/18;
+          if (stps[i]>0){
+            ctx.fillStyle="rgb("+fireCols[i*3]+","+fireCols[i*3+1]+","+fireCols[i*3+2]+")";
+            for (var n=0;n<pointFld[i];n++){
+              ctx.beginPath();
+              ctx.arc(xPos2[i]+Math.cos(n*2*Math.PI/pointFld[i]+rot+sine[i]*Math.sin(Math.pow((stepNo[i]-stps[i])+1.45,3)/100)*(-1/stepNo[i]*(stepNo[i]-stps[i])+1))*(stepNo[i]-stps[i])*5,yPos2[i]+Math.sin(n*2*Math.PI/pointFld[i]+rot+sine[i]*Math.sin(Math.pow((stepNo[i]-stps[i])+1.45,3)/100)*(-1/stepNo[i]*(stepNo[i]-stps[i])+1))*(stepNo[i]-stps[i])*5,stps[i],0,2*Math.PI);
+              ctx.fill();
+            }
+            stps[i]--;
+          }
+        }
+        counter++;
+        if (counter%20==0){
+          setPos();
+        }
+      }
+    </script>
   </body>
 </html>
