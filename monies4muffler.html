@@ -30,20 +30,47 @@
         color: white;
         top: 50%;
         left: 50%;
-        margin-top: -1.5vw;
+        margin-top: 1vw;
         margin-left: -5vw;
         outline: none;
         cursor: pointer;
       }
       
+      button:hover{
+        background-color:#3a3;
+      }
+      
       #helptext{
-        display:block;
-        position:fixed;
+        display: block;
+        position: fixed;
+        color: white;
+        font-family: Roboto,sans-serif;
+        width: 100%;
+        text-align: center;
+        bottom: 50%;
+        margin-bottom: 2vw;
       }
       
       #kay{
         display:none;
-        position:fixed;
+        position: fixed;
+        color: white;
+        font-family: Roboto,sans-serif;
+        font-weight: 700;
+        width: 100%;
+        text-align: center;
+        line-height: 100vh;
+        font-size: 5vw;
+        z-index: 1;
+        margin-top: 0;
+        opacity:0;
+        animation:zoom 1s forwards 1;
+      }
+      
+      @keyframes zoom{
+        25%{opacity:1;}
+        75%{opacity:1;}
+        100%{opacity:0; font-size:15vw;}
       }
     </style>
   </head>
@@ -54,8 +81,8 @@
       <br>
       Sadly, I can't make transaction-enabled web pages, so I urge you to send you prayers instead:
     </p>
-    <p id="kay">+1 PRAY</p>
-    <button>#PRAY</button>
+    <p id="kay">+1 PRAYER</p>
+    <button onclick=pray()>#PRAY</button>
     
     
     <script>
@@ -67,6 +94,12 @@
       canvas.width=window.innerWidth;
       canvas.height=window.innerHeight;
       setInterval(paint2,30);
+      
+      function pray(){
+        document.getElementsByTagName("button")[0].style.display="none";
+        document.getElementById("helptext").style.display="none";
+        document.getElementById("kay").style.display="block";
+      }
       
       function paint2(){
         var ctx=document.getElementById("celebrate").getContext("2d");
