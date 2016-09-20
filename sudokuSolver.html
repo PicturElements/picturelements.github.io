@@ -224,9 +224,9 @@
         outInfo();
         
         var msg=document.getElementById("successmessage");
-        msg.innerHTML="Sudoku solved in "+(new Date().getTime()-time)+"ms";
+        msg.innerHTML="Success! Sudoku solved in "+(new Date().getTime()-time)+"ms";
         msg.style.marginTop="2vw";
-        setTimeout(function(){msg.style.marginTop="-3vw";},2000);
+        setTimeout(function(){msg.style.marginTop="-3vw";},4000);
         //alert(isValid(true));
       }
       
