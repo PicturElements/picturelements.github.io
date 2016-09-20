@@ -169,13 +169,13 @@
     <div id="sudoku">
       <div id="buttonpnl">
         <button class="button" onclick=expando()>
-          RANDOM
+          SELECT
           <div id="levels">
-            <div class="button2">EASY</div>
-            <div class="button2">MEDIUM</div>
-            <div class="button2">HARD</div>
-            <div class="button2">EXTREME</div>
-            <div class="button2">RECORD</div>
+            <div class="button2" onclick=selectLevel(this)>EASY</div>
+            <div class="button2" onclick=selectLevel(this)>MEDIUM</div>
+            <div class="button2" onclick=selectLevel(this)>HARD</div>
+            <div class="button2" onclick=selectLevel(this)>EXTREME</div>
+            <div class="button2" onclick=selectLevel(this) title="World's hardest sudoku, by Arto Inkala">RECORD</div>
           </div>
         </button>
         <button class="button" onclick=coreSolve()>SOLVE</button>
@@ -221,6 +221,12 @@
         var element=document.getElementById("levels")
         if (expanded){element.style.height="12.5vw"}
         else {element.style.height="0"}
+      }
+      
+      function selectLevel(elem){
+        var elements=document.getElementsByClassName("button2"),index;
+        for (var i=0;i<elements.length;i++){if (elements[i]==elem){index=i; break;}}
+        alert(index);
       }
       
       //Real things start here
