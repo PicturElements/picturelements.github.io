@@ -426,7 +426,15 @@
       function backtrackSolve(){
         while(true){
           var tmpArr=[];
-          for (var i=0;i<81;i++){tmpArr.push(savedBoards[level][i]);}
+          try{
+            for (var i=0;i<81;i++){tmpArr.push(savedBoards[level][i]);}
+          }catch(){
+            var msg=document.getElementById("errormessage");
+            msg.innerHTML="Input error - can't solve puzzle";
+            msg.style.marginTop="2vw";
+            setTimeout(function(){msg.style.marginTop="-3vw";},4000);
+            return;
+          }
           board=tmpArr;
           board[insertAt[level]]=possibleValues[level][checked[level]];
           level++;
