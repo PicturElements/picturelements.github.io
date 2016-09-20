@@ -107,7 +107,7 @@
         background-color:transparent;
       }
       
-      #successmessage{
+      #successmessage,#errormessage{
         display: block;
         position: absolute;
         width: 20%;
@@ -123,6 +123,11 @@
         font-size: 1.2vw;
         text-shadow: 0.1vw 0.1vw 0 #160;
         transition:700ms cubic-bezier(0.68, -0.55, 0.27, 1.55)
+      }
+      
+      #errormessage{
+        background-color: #a00;
+        text-shadow: 0.1vw 0.1vw 0 #400;
       }
       
       #levels{
@@ -166,6 +171,7 @@
   </head>
   <body>
     <div id="successmessage"></div>
+    <div id="errormessage"></div>
     <div id="sudoku">
       <div id="buttonpnl">
         <button class="button" onclick=expando()>
@@ -275,6 +281,14 @@
       
       //All solving algorithms
       function coreSolve(){
+        if (!isValid(false)){
+          var msg=document.getElementById("errormessage");
+          msg.innerHTML="Input error - can't solve puzzle";
+          msg.style.marginTop="2vw";
+          setTimeout(function(){msg.style.marginTop="-3vw";},4000);
+          return;
+        }
+        
         time=new Date().getTime();
         if (logicSolve() && !isFull()){
           level=0;
