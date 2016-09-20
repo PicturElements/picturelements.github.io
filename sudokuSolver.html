@@ -522,7 +522,11 @@
       
       function isValid(aggr){
         for (var i=0;i<81;i++){
-          if (!canPut(board[i],i)||board[i]==0&&aggr==true){/*alert(i);*/ return false;}
+          if (aggr){
+            if (!canPut(board[i],i)||board[i]==0){return false;}
+          }else{
+            if (!canPut(board[i],i)&&board[i]!=0){return false;}
+          }
         }
         return true;
       }
