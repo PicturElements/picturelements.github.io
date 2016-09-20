@@ -55,7 +55,7 @@
       
       .button:hover{
         background-color:#490;
-        margin-top:0.15vw;
+        /*margin-top:0.15vw;*/
         box-shadow:0.2vw 0.2vw 0 #111;
       }
       
@@ -129,11 +129,13 @@
         display: block;
         position: absolute;
         width: 100%;
-        height: 12.5vw;
+        height: 0;
         background-color: #74ce3e;
         bottom: 2.5vw;
         left: 0;
         z-index: 10;
+        overflow:hidden;
+        transition:200ms;
       }
       
       .button2{
@@ -144,6 +146,7 @@
         width: 100%;
         float: left;
         height: 2.5vw;
+        line-height: 2.5vw;
         cursor: pointer;
         color: white;
       }
@@ -165,7 +168,7 @@
     <div id="successmessage"></div>
     <div id="sudoku">
       <div id="buttonpnl">
-        <button class="button">
+        <button class="button" onclick=expando()>
           RANDOM
           <div id="levels">
             <div class="button2">EASY</div>
@@ -189,6 +192,7 @@
       var checkGrid=[0,1,2,9,10,11,18,19,20];
       var changedStuff=true;
       var time;
+      var expanded=false;
       
       //for backtrack solving
       var savedBoards=[],insertAt=[],possibleValues=[],checked=[];
@@ -212,6 +216,12 @@
       }
       document.getElementById("sudoku").addEventListener("keydown",function(event){switchBox(event);});
       
+      function expando(){
+        expanded=!expanded;
+        var element=document.getElementById("levels")
+        if (expanded){element.style.height="12.5vw"}
+        else {element.style.height="0"}
+      }
       
       //Real things start here
       function selectBox(input){
