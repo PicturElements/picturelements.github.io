@@ -428,7 +428,7 @@
           var tmpArr=[];
           try{
             for (var i=0;i<81;i++){tmpArr.push(savedBoards[level][i]);}
-          }catch(){
+          }catch(e){
             var msg=document.getElementById("errormessage");
             msg.innerHTML="Input error - can't solve puzzle";
             msg.style.marginTop="2vw";
