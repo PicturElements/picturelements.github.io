@@ -107,6 +107,24 @@
         background-color:transparent;
       }
       
+      #successmessage{
+        display: block;
+        position: absolute;
+        width: 20%;
+        left: 40%;
+        height: 3vw;
+        line-height: 3vw;
+        text-align: center;
+        z-index: 1000;
+        border-radius: 0.3vw;
+        background-color: #490;
+        margin-top: -3vw;
+        color: white;
+        font-size: 1.2vw;
+        text-shadow: 0.1vw 0.1vw 0 #160;
+        transition:700ms cubic-bezier(0.68, -0.55, 0.27, 1.55)
+      }
+      
       .outerbox:nth-of-type(3n+1){
         margin-right:0.6vw;
       }
@@ -117,6 +135,7 @@
     </style>
   </head>
   <body>
+    <div id="successmessage"></div>
     <div id="sudoku">
       <div id="buttonpnl">
         <button class="button">RANDOM</button>
@@ -125,10 +144,11 @@
       </div>
     </div>
     <script>
-      /*var selectedIndex;
+      var selectedIndex;
       //var board=[5,3,0,0,7,0,0,0,0,6,0,0,1,9,5,0,0,0,0,9,8,0,0,0,0,6,0,8,0,0,0,6,0,0,0,3,4,0,0,8,0,3,0,0,1,7,0,0,0,2,0,0,0,6,0,6,0,0,0,0,2,8,0,0,0,0,4,1,9,0,0,5,0,0,0,0,8,0,0,7,9];
       //var board=[0,5,0,3,0,0,2,0,0,2,0,3,0,0,0,0,0,0,0,4,0,0,2,0,3,8,0,0,0,5,1,9,0,0,3,0,6,0,0,7,0,5,0,0,1,0,9,0,0,3,2,8,0,0,0,2,7,0,6,0,0,4,0,0,0,0,0,0,0,1,0,9,0,0,9,0,0,8,0,2,0];
-      var board=[0,0,3,0,2,0,0,9,0,0,0,2,0,0,5,0,0,0,9,0,4,0,8,0,0,0,1,4,0,0,0,6,0,0,8,0,0,0,0,5,0,7,0,0,0,0,3,0,0,1,0,0,0,4,1,0,0,0,5,0,3,0,9,0,0,0,1,0,0,8,0,0,0,7,0,0,9,0,2,0,0];
+      //var board=[0,0,3,0,2,0,0,9,0,0,0,2,0,0,5,0,0,0,9,0,4,0,8,0,0,0,1,4,0,0,0,6,0,0,8,0,0,0,0,5,0,7,0,0,0,0,3,0,0,1,0,0,0,4,1,0,0,0,5,0,3,0,9,0,0,0,1,0,0,8,0,0,0,7,0,0,9,0,2,0,0];
+      var board=[4,0,0,0,0,0,8,0,5,0,3,0,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,2,0,0,0,0,0,6,0,0,0,0,0,8,0,4,0,0,0,0,0,0,1,0,0,0,0,0,0,0,6,0,3,0,7,0,5,0,0,2,0,0,0,0,0,1,0,4,0,0,0,0,0,0];
       var alternatives=[];
       var checkGrid=[0,1,2,9,10,11,18,19,20];
       var changedStuff=true;
@@ -138,38 +158,6 @@
       var savedBoards=[],insertAt=[],possibleValues=[],checked=[];
       for (var i=0;i<80;i++){savedBoards.push(0); insertAt.push(0); possibleValues.push(0); checked.push(0);}
       var level=0;
-      
-      function backtrackSolve(){
-        while(true){
-          var tmpArr=[];
-          for (var i=0;i<81;i++){tmpArr.push(savedBoards[level][i]);}
-          board=tmpArr;
-          board[insertAt[level]]=possibleValues[level][checked[level]];
-          //console.log(level+" - "+checked[level]+" - "+insertAt[level]);
-          //console.log(savedBoards[level]);
-          level++;
-          if (logicSolve()){  //&&isValid(false)
-            if (isFull() && isValid(true)){alert("FINISHED - "+
-        (new Date().getTime()-time)); break;} //&&isValid(true)
-            tmpArr=[];
-            for (var i=0;i<81;i++){tmpArr.push(board[i]);}
-            savedBoards[level]=tmpArr;
-            var firstBox=getBox();
-            insertAt[level]=firstBox;
-            possibleValues[level]=alternatives[firstBox];
-            //alert("This shouldn't happen!");
-          }else{
-            while(true){
-              checked[level]=0;
-              level--;
-              checked[level]++;
-              if (level<0){break;}
-              if (checked[level]<possibleValues[level].length){break;}
-            }
-            //if (level<0){break;}
-          }
-        }
-      }
       
       for (var i=0;i<81;i++){
         var outerbox=document.createElement("div");
@@ -188,18 +176,17 @@
       }
       document.getElementById("sudoku").addEventListener("keydown",function(event){switchBox(event);});
       
+      
+      //Real things start here
       function selectBox(input){
         var boxes=document.getElementsByClassName("numberbox");
         for (var i=0;i<boxes.length;i++){
           if (boxes[i]==input){selectedIndex=i; break;}
         }
-        //alert(selectedIndex);
-        //input.style.backgroundColor="red";
       }
       
       function switchBox(evt){
         //left:37, right:39, up:38, down:40
-        //alert(evt.keyCode)
         var kc=evt.keyCode;
         if (kc==37&&selectedIndex%9!=0){
           selectedIndex--;
@@ -220,6 +207,7 @@
         else {element.value="";}
       }
       
+      //All solving algorithms
       function coreSolve(){
         time=new Date().getTime();
         if (logicSolve() && !isFull()){
@@ -234,7 +222,12 @@
           backtrackSolve();
         }
         outInfo();
-        alert(isValid(true));
+        
+        var msg=document.getElementById("successmessage");
+        msg.innerHTML="Sudoku solved in "+(new Date().getTime()-time)+"ms";
+        msg.style.marginTop="2vw";
+        setTimeout(function(){msg.style.marginTop="-3vw";},2000);
+        //alert(isValid(true));
       }
       
       function outInfo(){
@@ -279,16 +272,11 @@
           getAlternatives();
           exclusionSolve();
           alienationSolve();
-          //alert("LOOP!");
         }
-        //alert(new Date().getTime()-time);
         var success=true;
         for (var i=0;i<81;i++){
           if (alternatives[i].length<=1&&board[i]==0){success=false; break;}
         }
-        //if (!success){alert("ERROR");}
-        //outInfo();
-        //alert(isValid(true));
         return success;
       }
       
@@ -302,11 +290,8 @@
       
       function exclusionSolve(){
         for (var i=0;i<81;i++){
-          //console.log(alternatives[i][0]);
           if (alternatives[i].length==1&&canPut(alternatives[i][0],i)){
-            //elements[i].value=alternatives[i][0];
             board[i]=alternatives[i][0];
-            //document.getElementsByClassName("numberbox")[i].style.backgroundColor="red";
             changedStuff=true;
           }
         }
@@ -351,146 +336,33 @@
           }
         }
         for (var c=0;c<9;c++){
-          if (oneToNine[c]==1){ //&&canPut(c+1,foundAt[c])
-            //elements[foundAt[c]].value=c+1;
+          if (oneToNine[c]==1){
             board[foundAt[c]]=c+1;
-            //document.getElementsByClassName("numberbox")[foundAt[c]].style.backgroundColor="pink";
             changedStuff=true;
-            //getAlternatives();
           }
         }
       }
-      
-      function getAlternatives(){
-        var tme=new Date().getTime();
-        alternatives=[];
-        var alts=[];
-        
-        var counter=0;
-        var match;
-        for (var h=0;h<9;h++){
-          for (var w=0;w<9;w++){
-            alts=[];
-            if (board[counter]==0){
-              for (var val=1;val<10;val++){
-                match=false;
-                //check rows
-                var startAt=h*9;
-                for (var c=startAt;c<startAt+9;c++){
-                  if (board[c]==val){match=true; break;}
-                }
-      
-                //check columns
-                if (!match){
-                  startAt=w;
-                  for (var c=startAt;c<startAt+81;c+=9){
-                    if (board[c]==val){match=true; break;}
-                  }
-                }
-      
-                //check boxes
-                if (!match){
-                  startAt=27*Math.floor(counter/27)+3*Math.floor(w/3);
-                  //console.log(startAt);
-                  for (var c=0;c<9;c++){
-                    if (board[startAt+checkGrid[c]]==val){match=true; break;}
-                  }
-                }
-      
-                if (!match){
-                  alts.push(val); 
-                }
-              }
-            }
-            alternatives.push(alts);
-            counter++;
-          }
-        }
-        //console.log(alternatives);
-        console.log(new Date().getTime()-tme);
-      }
-      
-      function clearBoard(){
-        var elements=document.getElementsByClassName("numberbox");
-        for (var i=0;i<81;i++){
-          board[i]=0;
-          elements[i].value="";
-        }
-        var altElements=document.getElementsByClassName("altinfo")
-        for (var i=0;i<81;i++){
-          altElements[i].innerHTML="";
-        }
-      }
-      
-      function isValid(aggr){
-        for (var i=0;i<81;i++){
-          if (!canPut(board[i],i)||board[i]==0&&aggr==true){alert(i); return false;}
-        }
-        return true;
-      }
-      
-      function canPut(input,location){
-        var outArr=[0,1,2,3,4,5,6,7,8];
-        var i=Math.floor(location/9)*9;
-        for (var n=0;n<9;n++){
-          if (board[i+outArr[n]]==input&&i+outArr[n]!=location){return false;}  //alert(location); 
-        }
-        
-        //check columns
-        outArr=[0,9,18,27,36,45,54,63,72];
-        var i=location%9;
-        for (var n=0;n<9;n++){
-          if (board[i+outArr[n]]==input&&i+outArr[n]!=location){return false;}
-        }
-        
-        //check boxes
-        outArr=[0,1,2,9,10,11,18,19,20];
-        var h=Math.floor(location/27)*27,w=Math.floor((location%9)/3)*3;
-        for (var n=0;n<9;n++){
-          if (board[h+w+outArr[n]]==input&&h+w+outArr[n]!=location){return false;}
-        }
-        return true;
-      }*/
-      var selectedIndex;
-      //var board=[5,3,0,0,7,0,0,0,0,6,0,0,1,9,5,0,0,0,0,9,8,0,0,0,0,6,0,8,0,0,0,6,0,0,0,3,4,0,0,8,0,3,0,0,1,7,0,0,0,2,0,0,0,6,0,6,0,0,0,0,2,8,0,0,0,0,4,1,9,0,0,5,0,0,0,0,8,0,0,7,9];
-      //var board=[0,5,0,3,0,0,2,0,0,2,0,3,0,0,0,0,0,0,0,4,0,0,2,0,3,8,0,0,0,5,1,9,0,0,3,0,6,0,0,7,0,5,0,0,1,0,9,0,0,3,2,8,0,0,0,2,7,0,6,0,0,4,0,0,0,0,0,0,0,1,0,9,0,0,9,0,0,8,0,2,0];
-      //var board=[0,0,3,0,2,0,0,9,0,0,0,2,0,0,5,0,0,0,9,0,4,0,8,0,0,0,1,4,0,0,0,6,0,0,8,0,0,0,0,5,0,7,0,0,0,0,3,0,0,1,0,0,0,4,1,0,0,0,5,0,3,0,9,0,0,0,1,0,0,8,0,0,0,7,0,0,9,0,2,0,0];
-      var board=[4,0,0,0,0,0,8,0,5,0,3,0,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,2,0,0,0,0,0,6,0,0,0,0,0,8,0,4,0,0,0,0,0,0,1,0,0,0,0,0,0,0,6,0,3,0,7,0,5,0,0,2,0,0,0,0,0,1,0,4,0,0,0,0,0,0];
-      var alternatives=[];
-      var checkGrid=[0,1,2,9,10,11,18,19,20];
-      var changedStuff=true;
-      var time;
-      
-      //for backtrack solving
-      var savedBoards=[],insertAt=[],possibleValues=[],checked=[];
-      for (var i=0;i<80;i++){savedBoards.push(0); insertAt.push(0); possibleValues.push(0); checked.push(0);}
-      var level=0;
       
       function backtrackSolve(){
         while(true){
           var tmpArr=[];
-          //console.log("Level: "+level);
           for (var i=0;i<81;i++){tmpArr.push(savedBoards[level][i]);}
           board=tmpArr;
           board[insertAt[level]]=possibleValues[level][checked[level]];
-          //console.log(level+" - "+checked[level]+" - "+insertAt[level]);
-          //console.log(savedBoards[level]);
           level++;
-          if (logicSolve()){  //&&isValid(false)
-            if (isFull() && isValid(true)){alert("FINISHED - "+
-        (new Date().getTime()-time)); break;} //&&isValid(true)
+          if (logicSolve()){
+            if (isFull() && isValid(true)){break;}  //alert("FINISHED - "+(new Date().getTime()-time));
             else if (isFull() && !isValid(true)){
               goBack();
             }else{
               tmpArr=[];
               for (var i=0;i<81;i++){tmpArr.push(board[i]);}
               savedBoards[level]=tmpArr;
-              console.log("Board: "+board);
+              //console.log("Board: "+board);
               var firstBox=getBox();
               insertAt[level]=firstBox;
               possibleValues[level]=alternatives[firstBox];
-              console.log("Possible: "+possibleValues[level]);
-              //alert("This shouldn't happen!");
+              //console.log("Possible: "+possibleValues[level]);
             }
           }else{
             goBack();
@@ -508,196 +380,6 @@
         }
       }
       
-      for (var i=0;i<81;i++){
-        var outerbox=document.createElement("div");
-        outerbox.setAttribute("class","outerbox");
-        var alts=document.createElement("div");
-        alts.setAttribute("class","altinfo");
-        var box=document.createElement("input");
-        if (board[i]!=0){box.value=board[i];}
-        box.setAttribute("maxlength","1");
-        box.setAttribute("class","numberbox");
-        box.addEventListener("mousedown",function(){selectBox(this);});
-        box.addEventListener("keyup",function(){checkBox(this);});
-        outerbox.appendChild(alts);
-        outerbox.appendChild(box);
-        document.getElementById("sudoku").appendChild(outerbox);
-      }
-      document.getElementById("sudoku").addEventListener("keydown",function(event){switchBox(event);});
-      
-      function selectBox(input){
-        var boxes=document.getElementsByClassName("numberbox");
-        for (var i=0;i<boxes.length;i++){
-          if (boxes[i]==input){selectedIndex=i; break;}
-        }
-        //alert(selectedIndex);
-        //input.style.backgroundColor="red";
-      }
-      
-      function switchBox(evt){
-        //left:37, right:39, up:38, down:40
-        //alert(evt.keyCode)
-        var kc=evt.keyCode;
-        if (kc==37&&selectedIndex%9!=0){
-          selectedIndex--;
-        }else if (kc==39&&selectedIndex%9!=8){
-          selectedIndex++;
-        }else if (kc==38&&selectedIndex>=8){
-          selectedIndex-=9;
-        }else if (kc==40&&selectedIndex<72){
-          selectedIndex+=9;
-        }
-        document.getElementsByClassName("numberbox")[selectedIndex].select();
-      }
-      
-      function checkBox(element){
-        var val=element.value.charCodeAt(0);
-        board[selectedIndex]=0;
-        if (element.value!=""&&val>=49&&val<=57){board[selectedIndex]=parseInt(element.value);}
-        else {element.value="";}
-      }
-      
-      function coreSolve(){
-        time=new Date().getTime();
-        if (logicSolve() && !isFull()){
-          level=0;
-          var tmpBoard=[];
-          for (var i=0;i<81;i++){tmpBoard.push(board[i]);}
-          savedBoards[0]=tmpBoard;
-          var firstBox=getBox();
-          insertAt[0]=firstBox;
-          checked[0]=0;
-          possibleValues[0]=alternatives[firstBox];
-          backtrackSolve();
-        }
-        outInfo();
-        alert(isValid(true));
-      }
-      
-      function outInfo(){
-        var elements=document.getElementsByClassName("numberbox");
-        for (var i=0;i<81;i++){
-          if (board[i]!=0){elements[i].value=board[i];}
-        }
-        var altElements=document.getElementsByClassName("altinfo")
-        for (var i=0;i<81;i++){
-          var strOut="";
-          for (var n=0;n<alternatives[i].length;n++){
-            strOut+=alternatives[i][n];
-          }
-          altElements[i].innerHTML=strOut;
-        }
-      }
-      
-      function getBox(){
-        for (var i=2;i<10;i++){
-          for (var n=0;n<81;n++){
-            if (alternatives[n].length==i){
-              //alert(i+" "+n);
-              return n;
-            }
-          }
-        }
-      }
-      
-      function isFull(){
-        var full=true;
-        for (var i=0;i<81;i++){
-          if (board[i]==0){full=false; break;}
-        }
-        return full;
-      }
-      
-      //Solve as far as possible using only logic
-      function logicSolve(){
-        changedStuff=true;
-        while (changedStuff){
-          changedStuff=false;
-          getAlternatives();
-          exclusionSolve();
-          alienationSolve();
-          //alert("LOOP!");
-        }
-        //alert(new Date().getTime()-time);
-        var success=true;
-        for (var i=0;i<81;i++){
-          if (alternatives[i].length<=1&&board[i]==0){success=false; break;}
-        }
-        //if (!success){alert("ERROR");}
-        //outInfo();
-        //alert(isValid(true));
-        return success;
-      }
-      
-      function display(){
-        var elements=document.getElementsByClassName("numberbox");
-        for (var i=0;i<81;i++){
-          if (board[i]!=0){elements[i].value=board[i];}
-        }
-        changedStuff=true;
-      }
-      
-      function exclusionSolve(){
-        for (var i=0;i<81;i++){
-          //console.log(alternatives[i][0]);
-          if (alternatives[i].length==1&&canPut(alternatives[i][0],i)){
-            //elements[i].value=alternatives[i][0];
-            board[i]=alternatives[i][0];
-            //document.getElementsByClassName("numberbox")[i].style.backgroundColor="red";
-            changedStuff=true;
-          }
-        }
-      }
-      
-      function alienationSolve(){
-        //check rows
-        var outArr=[0,1,2,3,4,5,6,7,8];
-        for (var i=0;i<81;i+=9){
-          alienationHelper(i,outArr);
-        }
-        
-        //check columns
-        outArr=[0,9,18,27,36,45,54,63,72];
-        for (var i=0;i<9;i++){
-          alienationHelper(i,outArr);
-        }
-        
-        //check boxes
-        outArr=[0,1,2,9,10,11,18,19,20];
-        for (var h=0;h<81;h+=27){
-          for (var w=0;w<9;w+=3){
-            alienationHelper(h+w,outArr);
-          }
-        }
-      }
-      
-      function alienationHelper(startAt,inArr){
-        var oneToNine=[0,0,0,0,0,0,0,0,0];
-        var foundAt=[0,0,0,0,0,0,0,0,0];
-        var active,actIndex;
-        for (var m=0;m<9;m++){
-          actIndex=startAt+inArr[m];
-          active=alternatives[actIndex];
-          for (var i=0;i<active.length;i++){
-            if (board[actIndex]==0&&board[actIndex]!=active[i]){
-              oneToNine[active[i]-1]++;
-              foundAt[active[i]-1]=actIndex;
-            }else{
-              oneToNine[board[actIndex]-1]=2;
-            }
-          }
-        }
-        for (var c=0;c<9;c++){
-          if (oneToNine[c]==1){ //&&canPut(c+1,foundAt[c])
-            //elements[foundAt[c]].value=c+1;
-            board[foundAt[c]]=c+1;
-            //document.getElementsByClassName("numberbox")[foundAt[c]].style.backgroundColor="pink";
-            changedStuff=true;
-            //getAlternatives();
-          }
-        }
-      }
-      
       function getAlternatives(){
         var tme=new Date().getTime();
         alternatives=[];
@@ -743,8 +425,7 @@
             counter++;
           }
         }
-        //console.log(alternatives);
-        console.log(new Date().getTime()-tme);
+        //console.log(new Date().getTime()-tme);
       }
       
       function clearBoard(){
