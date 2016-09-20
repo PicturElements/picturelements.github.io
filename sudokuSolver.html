@@ -235,8 +235,7 @@
         for (var i=0;i<elements.length;i++){if (elements[i]==elem){index=i; break;}}
         elements=document.getElementsByClassName("numberbox");
         for (var i=0;i<81;i++){
-          elements[i]=allBoards[index][i];
-          board[i]=allBoards[index][i];
+          elements[i].value=allBoards[index][i];
         }
         //alert(index);
       }
