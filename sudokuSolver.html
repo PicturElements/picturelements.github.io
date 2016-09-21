@@ -438,7 +438,7 @@
           board[insertAt[level]]=possibleValues[level][checked[level]];
           level++;
           if (logicSolve()){
-            if (isFull() && isValid(true)){break;}  //alert("FINISHED - "+(new Date().getTime()-time));
+            if (isFull() && isValid(true)){console.log(level-1); break;}  //alert("FINISHED - "+(new Date().getTime()-time));
             else if (isFull() && !isValid(true)){
               goBack();
             }else{
