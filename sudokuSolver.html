@@ -282,10 +282,7 @@
       //All solving algorithms
       function coreSolve(){
         if (!isValid(false)){
-          var msg=document.getElementById("errormessage");
-          msg.innerHTML="Input error - can't solve puzzle";
-          msg.style.marginTop="2vw";
-          setTimeout(function(){msg.style.marginTop="-3vw";},4000);
+          error();
           return;
         }
         
@@ -302,6 +299,11 @@
           backtrackSolve();
         }
         outInfo();
+        
+        if (!isFull()||!isValid(true)){
+          error();
+          return;
+        }
         
         var msg=document.getElementById("successmessage");
         msg.innerHTML="Success! Sudoku solved in "+(new Date().getTime()-time)+"ms";
@@ -429,10 +431,7 @@
           try{
             for (var i=0;i<81;i++){tmpArr.push(savedBoards[level][i]);}
           }catch(e){
-            var msg=document.getElementById("errormessage");
-            msg.innerHTML="Input error - can't solve puzzle";
-            msg.style.marginTop="2vw";
-            setTimeout(function(){msg.style.marginTop="-3vw";},4000);
+            error();
             return;
           }
           board=tmpArr;
@@ -456,6 +455,13 @@
             goBack();
           }
         }
+      }
+      
+      function error(){
+        var msg=document.getElementById("errormessage");
+        msg.innerHTML="Input error - can't solve puzzle";
+        msg.style.marginTop="2vw";
+        setTimeout(function(){msg.style.marginTop="-3vw";},4000);
       }
       
       function goBack(){
