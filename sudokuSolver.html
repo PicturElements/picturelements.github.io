@@ -548,10 +548,10 @@
         return true;
       }
       
-      var isValidColor(){
+      function isValidColor(){
         var elements=document.getElementsByClassName("outerbox");
         for (var i=0;i<81;i++){
-          if (canPut(board[i],i)){
+          if (canPut(board[i],i)||board[i]==0){
             elements[i].style.backgroundColor="white";
           }else{
             elements[i].style.backgroundColor="#f33";
