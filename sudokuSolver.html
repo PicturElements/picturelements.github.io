@@ -277,6 +277,7 @@
         board[selectedIndex]=0;
         if (element.value!=""&&val>=49&&val<=57){board[selectedIndex]=parseInt(element.value);}
         else {element.value="";}
+        isValidColor();
       }
       
       //All solving algorithms
@@ -305,6 +306,7 @@
           return;
         }
         
+        isValidColor();
         var msg=document.getElementById("successmessage");
         msg.innerHTML="Success! Sudoku solved in "+(new Date().getTime()-time)+"ms";
         msg.style.marginTop="2vw";
@@ -462,6 +464,7 @@
         msg.innerHTML="Input error - can't solve puzzle";
         msg.style.marginTop="2vw";
         setTimeout(function(){msg.style.marginTop="-3vw";},4000);
+        isValidColor();
       }
       
       function goBack(){
@@ -543,6 +546,17 @@
           }
         }
         return true;
+      }
+      
+      var isValidColor(){
+        var elements=document.getElementsByClassName("outerbox");
+        for (var i=0;i<81;i++){
+          if (canPut(board[i],i)){
+            elements[i].style.backgroundColor="white";
+          }else{
+            elements[i].style.backgroundColor="#f33";
+          }
+        }
       }
       
       function canPut(input,location){
