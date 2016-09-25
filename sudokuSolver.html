@@ -353,8 +353,8 @@
         changedStuff=true;
         while (changedStuff){
           changedStuff=false;
-          exclusionSolve();
           getAlternatives();
+          exclusionSolve();
           alienationSolve();
         }
         var success=true;
@@ -373,13 +373,13 @@
       }
       
       function exclusionSolve(){
-        /*for (var i=0;i<81;i++){
+        for (var i=0;i<81;i++){
           if (alternatives[i].length==1&&canPut(alternatives[i][0],i)){
             board[i]=alternatives[i][0];
             changedStuff=true;
           }
-        }*/
-        var found,no;
+        }
+        /*var found,no;
         for (var i=0;i<81;i++){
           if (board[i]==0){
             found=0;
@@ -391,7 +391,7 @@
               changedStuff=true;
             }
           }
-        }
+        }*/
       }
       
       function alienationSolve(){
@@ -454,9 +454,9 @@
           level++;
           if (logicSolve()){
             if (isFull() && isValid(true)){console.log(level-1); break;}  //alert("FINISHED - "+(new Date().getTime()-time));
-            /*else if (isFull() && !isValid(true)){
+            else if (isFull() && !isValid(true)){
               goBack();
-            }*/else{
+            }else{
               tmpArr=[];
               for (var i=0;i<81;i++){tmpArr.push(board[i]);}
               savedBoards[level]=tmpArr;
