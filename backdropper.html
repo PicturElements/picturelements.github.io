@@ -376,6 +376,7 @@
       backdrop.add("fireworks",".testParent2","test1",[0,1]);
       backdrop.add("fireworks",".testParent2","test2",[2,3]);
       backdrop.start(30);
+      backdrop.canvasData("t:boxes")[0].size=40;
       backdrop.canvasData("t:boxes")[0].minOpacity=0.1;
       backdrop.canvasData("t:boxes")[0].maxOpacity=0.2;
       backdrop.addSpecificCSS("%test1","opacity:0.7; transform:rotate(15deg)");
@@ -383,28 +384,6 @@
       backdrop.add("fireworks",".testParent3","testing");
       backdrop.canvasData("%testing")[1].colors=["#f00","#fff","#00f"];
       //backdrop.remove("t:boxes",0);
-
-      function scroll(inID){
-        /*var rect=document.getElementById(inID).getBoundingClientRect();
-        console.log(rect);
-        window.scrollTo(0,rect.top);*/
-        window.location.href=inID;
-      }
-
-      window.onscroll=function(){
-        var scrollers=["intro","basic","advanced","end"];
-        var index=0;
-        for (var i=0;i<4;i++){
-          document.getElementsByClassName("footerbutton")[i].style="";
-          if (document.getElementById(scrollers[i]).getBoundingClientRect().top>0){
-            index=i-1;
-            break;
-          }
-        }
-        if (index>=0){
-          document.getElementsByClassName("footerbutton")[index].style="background-color:#85a; color:#305";
-        }
-      }
     </script>
   </body>
 </html>
