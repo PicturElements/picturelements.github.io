@@ -72,7 +72,7 @@ var backdrop={
       toRemove.push(index);
     }else{
       for (var i=0;i<localParents.length;i++){
-        toRemove.push(index[i]);
+        toRemove.push(i);
       }
     }
     
