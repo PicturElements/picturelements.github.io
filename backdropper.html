@@ -2,16 +2,409 @@
 <html>
   <head>
     <title>BackDropper background library</title>
-    <meta name="description" content="Add backgrounds to any element with the easy-to-use BackDropper library!">
+    <meta name="description" content="Add backgrounds to any element with this easy-to-use library!">
     <link rel="icon" href="pelement.png">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins|Russo+One" rel="stylesheet">
+    <script src="http://picturelements.github.io/testdropper.js"></script>
     <style>
       body{
         background-color:white;
+        font-family:Russo One,Arial,sans-serif;
         margin:0;
+      }
+
+      #full{
+        display:block;
+        position:fixed;
+        width:100%;
+        height:100%;
+        background-color:#305;
+      }
+
+      #content{
+        display:block;
+        position:absolute;
+        width:90%;
+        min-height:200px;
+        left:5%;
+        overflow:hidden;
+        margin-bottom:5vw;
+      }
+
+      #header{
+        display:block;
+        position:relative;
+        width:30vw;
+        height:15vw;
+        left:50%;
+        margin-left:-15vw;
+        margin-top:1vw;
+        margin-bottom:1vw;
+        background-image:url("https://github.com/PicturElements/picturelements.github.io/blob/master/images/BDLogo2.png?raw=true");
+        background-size:contain;
+      }
+
+      #maincontent{
+        display:block;
+        position:relative;
+        width:100%;
+        min-height:500px;
+        background-color:#ddd;
+      }
+
+      h1{
+        position:relative;
+        width:80%;
+        font-size:3vw;
+        left:10%;
+        text-align:center;
+        font-weight:bold;
+        padding-top:2vw;
+        border-bottom:0.2vw dotted #bbb;
+        color:#305;
+      }
+
+      p,li{
+        width:90%;
+        margin-left:5%;
+        font-family:Poppins,Arial,sans-serif;
+        font-size:1.2vw;
+      }
+
+      code{
+        background-color:#ccc;
+        padding:0.2vw;
+        padding-left:0.4vw;
+        padding-right:0.4vw;
+        border-radius:0.2vw;
+        color:#305;
+      }
+
+      example code{
+        background-color:#c9e;
+      }
+
+      example{
+        display:block;
+        position:relative;
+        width:94%;
+        left:3%;
+        background-color:#daf;
+        padding:1vw;
+        min-height:2px;
+        overflow:hidden;
+      }
+
+      .testParent,.testParent2,.testParent3{
+        display:block;
+        position:relative;
+        float:left;
+        width:5vw;
+        height:5vw;
+        margin-right:2vw;
+        background-color:#305;
+        margin-top:0.5vw;
+      }
+
+      .testParent3{
+        height:10vw;
+        width:20vw;
+      }
+
+      #footer{
+        display:block;
+        position:fixed;
+        width:90%;
+        left:5%;
+        height:4vw;
+        bottom:0;
+        background-color:#103;
+      }
+
+      .footerbutton{
+        display:block;
+        position:relative;
+        float:left;
+        width:17.6%;
+        height:3vw;
+        margin-left:2%;
+        top:0.5vw;
+        border:none;
+        background-color:#305;
+        color:#85a;
+        font-size:1.5vw;
+        text-align:center;
+        line-height:3.25vw;
+        cursor:pointer;
+      }
+
+      .footerbutton:hover{
+        background-color:#416;
+      }
+
+      .footerbutton_active{
+        background-color:#85a;
+        color:#305;
+      }
+
+      #copyright{
+        display:block;
+        position:relative;
+        width:100%;
+        text-align:center;
+        font-family:Poppins,Arial,sans-serif;
+        color:white;
+        opacity:0.5;
       }
     </style>
   </head>
   <body>
+    <div id="full">
+    </div>
+    <div id="content">
+      <div id="header"></div>
+      <div id="maincontent">
+        <h1 id="intro">Introduction</h1>
+        <p>
+          <b>BackDropper</b> is a JavaScript library intended to add dynamic backgrounds to web pages. It's designed to be as easy to use as possible and lends much of its simplicity from jQuery syntax. It's also designed to be highly customizable by using individual JavaScript objects for each background, which means that each can be made different.
+          <br>
+          <br>
+          <b>How to use:</b>
+        </p>
+          <ul>
+            <li>Import the library.</li>
+            <li>Specify what kind of background you need.</li>
+            <li>Specify into which element(s) to add it.</li>
+            <li>Animate the background.</li>
+          </ul>
+        <p>That's pretty much all there is to it. Let's get into the syntax!</p>
+        <h1 id="basic">Basic Syntax</h1>
+        <p>
+          First of all, we need to know how to write the core bit. As this library uses objects, each function is bound to a keyword. This keyword is <code>backdrop</code>. Everything that's not background variables to keep the code running can be accessed via this command.
+          <br>
+          This is also the keyword you have to use when adding backgrounds, so let's take a look at how we do this.
+          <br>
+          <br>
+          <example>
+            <b>Example 1: Adding a background and animating it</b>
+            <br>
+            First, add the background:
+            <br>
+            <code>backdrop.add("boxes","body");</code>
+            <br>
+            The script will append an HTML5 canvas to the body element, as well as all associated data required to run the backround animation. In this case, for type "boxes".
+            <br>
+            <br>
+            Second, start the animation:
+            <br>
+            <code>backdrop.start(30);</code>
+            <br>
+            This starts a thread that runs at 30 FPS. Bear in mind, this will apply to all backgrounds, so every background in the document will run at this frame rate.
+          </example>
+          <br>
+          Side note: use <code>.stop()</code> to end the animation.
+          <br>
+          <br>
+          Let's break down the syntax further.
+          <br>
+          <br>
+          <b>What does it all mean?</b>
+          <br>
+          In its most general form the <code>.add()</code> function can be written as this:
+          <br>
+          <code>backdrop.add("background type","parent element");</code>
+          <br>
+          where "background type" is, well, the background type, and the parent element is the element into which the background is added.
+          <br>
+          Now, there are many ways to access elements in JavaScript, and the library is capable of accessing all of them.
+          <br>
+          <br>
+          <example>
+            <b>Example 2: Different ways to access elements</b>
+            <br>
+            <code>backdrop.add("boxes","#container");</code>
+            <br>
+            The script will add a background to the first element with id="container".
+            <br>
+            <br>
+            <code>backdrop.add("boxes",".container");</code>
+            <br>
+            The script will add a background to each element with class="container".
+            <br>
+            <br>
+            <code>backdrop.add("boxes","div");</code>
+            <br>
+            The script will add a background to each element with the "div" tag.
+            <br>
+            <br>
+            <code>backdrop.add("boxes","t:boxes");</code>
+            <br>
+            The script will add a background to each element with type "boxes", i.e. add a new canvas to each canvas of type "boxes". It's ridiculous, I know.
+            <br>
+            <br>
+            <code>backdrop.add("boxes","%myBackground");</code>
+            <br>
+            The script will add a background to each element with nickname="myBackground". We will cover nicknames in the next part.
+            <br>
+          </example>
+        </p>
+        <h1 id="advanced">Advanced Syntax</h1>
+        <p>
+          <b>Nicknames and Types</b>
+          <br>
+          Nicknames are small tags you can give backgrounds in order to access them at a later point. Nicknames are denoted with a '%' prefix.
+          <br>
+          Types are tags automatically added to backgrounds to identify them. Since you can have many different backgrounds in any document, it can be useful to access them as groups. Types are denoted with a 't:' prefix.
+          <br>
+          <br>
+          <b>.add()</b>
+          <br>
+          The <code>.add()</code> function can be made much more interesting.
+          <br>
+          In its most simple form, it only requires two arguments, but it can take up to four:
+          <br>
+          <code>backdrop.add("boxes",".backParents","myBackground",[0,2]);</code>
+          <br>
+          where "myBackground" is a nickname you give the background, and [0,2] specifies in which elements with class "backParents" to add the backgrounds.
+          <br>
+          <br>
+          <example>
+            <b>Example 3: Indexes</b>
+            <br>
+            For whatever reason, you may need to add backgrounds to only certain elements. The libary makes this easy for you.
+            <br>
+            This applies backgrounds in two elments with class "testParent": <code>backdrop.add("fireworks",".testParent",[0,2]);</code> 
+            <br>
+            <test class="testParent"></test>
+            <test class="testParent"></test>
+            <test class="testParent"></test>
+            <test class="testParent"></test>
+          </example>
+          <br>
+          Side note: the script will omit any index which doesn't correspond to an element and will not throw an error.
+          <br>
+          <br>
+          <b>.remove()</b>
+          <br>
+          The <code>.remove()</code> function is fairly straight forward. It inputs CSS selectors ("#example",".example","example") or BackDropper-specific selectors ("%example","t:example") and, optionally, indexes.
+          <br>
+          <br>
+          <example>
+            <b>Example 4: Removing elements</b>
+            <br>
+            <code>backdrop.remove("body");</code>
+            <br>
+            This will remove <b>all</b> backgrounds within the body element, but so will <code>backdrop.remove("body",0)</code>. The index refers to the n:th element of its type. Since there's only one &lt;body&gt;, the script will alter the entire body content. <code>backdrop.remove("body",1)</code> will not have any effect by the same logic.
+            <br>
+            <br>
+            Similarly, this will apply to BackDropper selectors:
+            <br>
+            <code>backdrop.remove("t:boxes",0);</code>
+            <br>
+            This code will remove the background on this page, and that background only, because it's the first background of its type in the document.
+          </example>
+          <br>
+          Side note: the script will omit any index which doesn't correspond to an element and will not throw an error.
+          <br>
+          <br>
+          <b>.addCSS()</b>
+          <br>
+          This is a very general function. It simply lets you add CSS to every background element. This can also be done by using the <code>.backdrop_canvas</code> selector in your CSS file. Bear in mind that every time this function is called, the CSS will be overwritten.
+          <br>
+          <br>
+          <b>.addSpecificCSS()</b>
+          <br>
+          <code>.addSpecificCSS()</code> adds CSS to backgrounds by nickname or type.
+          <br>
+          <br>
+          <example>
+            <b>Example 5: Editing specific CSS</b>
+            <br>
+            The following backgrounds are defined as such: <code>backdrop.add("fireworks",".testParent2","test1",[0,1]);</code> and <code>backdrop.add("fireworks",".testParent2","test2",[2,3]);</code>. In essence, the two backgrounds to the left have nickname "test1", and the rest have "test2".
+            <br>
+            <test class="testParent2"></test>
+            <test class="testParent2"></test>
+            <test class="testParent2"></test>
+            <test class="testParent2"></test>
+            <br><br><br><br>
+            test1: <code>backdrop.addSpecificCSS("%test1","opacity:0.7; transform:rotate(15deg)");</code>
+            <br>
+            test2: <code>backdrop.addSpecificCSS("%test2","border:5px solid red; transform:rotate(-15deg)");</code>
+            <br>
+            As you can see, <code>.addSpecificCSS()</code> has added two different styles to the backgrounds. Bear in mind that every time this function is called, the CSS will be overwritten.
+          </example>
+          <br>
+          <b>.getElementsByNickname()</b>
+          <br>
+          <code>.getElementsByNickname()</code> returns an array of elements by nickname, much like, for example, <code>document.getElementsByClassName()</code>. You can edit elements directly using this.
+          <br>
+          <br>
+          <b>.getElementsByType()</b>
+          <br>
+          <code>.getElementsByType()</code> returns an array of elements by type, much like, for example, <code>document.getElementsByTagName()</code>. You can edit elements directly using this.
+          <br>
+          <br>
+          <b>.canvasData()</b>
+          <br>
+          <code>.canvasData()</code> lets you edit objects associated with each background to change how they behave.
+          <br>
+          <br>
+          <example>
+            <b>Example 6: Editing properties</b>
+            <br>
+            The backgrounds below are added like this: <code>backdrop.add("fireworks",".testParent3","testing");</code> Using <code>.canvasData()</code>, it's possible to edit the variables used to render the backgrounds.
+            <br>Using this snippet, <code>backdrop.canvasData("%testing")[1].colors=["#f00","#fff","#00f"];</code>, the script is told to only use three colors in the second background:
+            <br>
+            <test class="testParent3"></test>
+            <test class="testParent3"></test>
+          </example>
+        </p>
+        <p id="end"><br><br></p>
+      </div>
+      <div id="copyright">© 2016 PicturElements</div>
+    </div>
+    <div id="footer">
+      <div class="footerbutton" onclick=scroll("intro")>Introduction</div>
+      <div class="footerbutton" onclick=scroll("basic")>Basic Syntax</div>
+      <div class="footerbutton" onclick=scroll("advanced")>Advanced Syntax</div>
+      <div class="footerbutton" onclick=scroll(this)>Objects</div>
+      <div class="footerbutton" onclick=scroll(this)>Credits/License</div>
+    </div>
+    <script>
+      backdrop.add("boxes","#full");
+      backdrop.add("fireworks",".testParent",[0,2]);
+      backdrop.add("fireworks",".testParent2","test1",[0,1]);
+      backdrop.add("fireworks",".testParent2","test2",[2,3]);
+      backdrop.start(30);
+      backdrop.canvasData("t:boxes")[0].minOpacity=0.1;
+      backdrop.canvasData("t:boxes")[0].maxOpacity=0.2;
+      backdrop.addSpecificCSS("%test1","opacity:0.7; transform:rotate(15deg)");
+      backdrop.addSpecificCSS("%test2","box-sizing:border-box; border:5px solid red; transform:rotate(-15deg)");
+      backdrop.add("fireworks",".testParent3","testing");
+      backdrop.canvasData("%testing")[1].colors=["#f00","#fff","#00f"];
+      //backdrop.remove("t:boxes",0);
+
+      function scroll(inID){
+        /*var rect=document.getElementById(inID).getBoundingClientRect();
+        console.log(rect);
+        window.scrollTo(0,rect.top);*/
+        window.location.href=inID;
+      }
+
+      window.onscroll=function(){
+        var scrollers=["intro","basic","advanced","end"];
+        var index=0;
+        for (var i=0;i<4;i++){
+          document.getElementsByClassName("footerbutton")[i].style="";
+          if (document.getElementById(scrollers[i]).getBoundingClientRect().top>0){
+            index=i-1;
+            break;
+          }
+        }
+        if (index>=0){
+          document.getElementsByClassName("footerbutton")[index].style="background-color:#85a; color:#305";
+        }
+      }
+    </script>
   </body>
 </html>
