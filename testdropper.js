@@ -143,7 +143,8 @@ var backdrop={
         }
       }
       if (!found){
-        specificCSS.push(tmpName,".backdrop_canvas[nickname="+tmpName+"]{"+css+"}");
+        if (element.startsWith("%")){specificCSS.push(tmpName,".backdrop_canvas[nickname="+tmpName+"]{"+css+"}");}
+        else {specificCSS.push(tmpName,".backdrop_canvas[type="+tmpName+"]{"+css+"}");}
       }
       setCSS();
     }
@@ -255,7 +256,33 @@ function addElements(inArray,type,nick){
         boxInfo: arr,
         sines: arr2
       });
+    }else if (type=="circles"){
+      backData.push({
+        type: type,
+        width: w,
+        height: h,
+        minSize: 20,
+        maxSize: 50,
+        circleNo: 100,
+        maxSpeed: 1,
+        color: "rgba(255,255,255,0.3)",
+        array: []
+      });
+      setCircles();
     }
+  }
+}
+
+function setCircles(){
+  var data=backData[backData.length-1];
+  for (var i=0;i<data.circleNo;i++){
+    data.array.push({
+      x: Math.random()*data.width,
+      y: Math.random()*data.height,
+      dX: Math.random()*2*data.maxSpeed-data.maxSpeed,
+      dY: Math.random()*2*data.maxSpeed-data.maxSpeed,
+      r: Math.random()*(data.maxSize-data.minSize)+data.minSize
+    });
   }
 }
 
@@ -267,6 +294,8 @@ function paintEffects(){
       paintFirework(ctx,backData[i]);
     }else if (backData[i].type=="boxes"){
       paintBoxes(ctx,backData[i]);
+    }else if (backData[i].type=="circles"){
+      paintSpheres(ctx,backData[i]);
     }
   }
 }
@@ -326,13 +355,33 @@ function addFirework(data){
 function paintBoxes(ctx,data){
   ctx.clearRect(0,0,data.width,data.height);
   var counter=0,maxW=Math.ceil(data.width/20),maxH=data.boxInfo.length/maxW;
+  var lS=data.size;
   for (var h=0;h<maxH;h++){
     for (var w=0;w<maxW;w++){
       ctx.fillStyle="rgba("+data.color[0]+","+data.color[1]+","+data.color[2]+","+(data.minOpacity+Math.sin(data.boxInfo[counter])*(data.maxOpacity-data.minOpacity))+")";
-      ctx.fillRect(w*data.size,h*data.size,data.size,data.size);
+      ctx.fillRect(w*lS,h*lS,lS,lS);
       data.boxInfo[counter]+=data.sines[counter];
       counter++;
     }
+  }
+  console.log(counter);
+}
+
+function paintSpheres(ctx,data){
+  ctx.clearRect(0,0,data.width,data.height);
+  ctx.fillStyle=data.color;
+  var ind;
+  for (var i=0;i<data.circleNo;i++){
+    ind=data.array[i];
+    ctx.beginPath();
+    ctx.arc(ind.x,ind.y,ind.r,0,Math.PI*2);
+    ctx.fill();
+    ind.x+=ind.dX;
+    ind.y+=ind.dY;
+    if (ind.x>data.width+ind.r){ind.x=-ind.r;}
+    else if (ind.x<-ind.r){ind.x=data.width+ind.r;}
+    else if (ind.y>data.height+ind.r){ind.y=-ind.r;}
+    else if (ind.y<-ind.r){ind.y=data.height+ind.r;}
   }
 }
 
