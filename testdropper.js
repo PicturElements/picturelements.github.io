@@ -3,8 +3,8 @@ var rawCSS="display:block; position:absolute; top:0; left:0; width:100%; height:
 var specificCSS=[];
 var backThread=null;
 
-var tmp=document.getElementsByTagName("container");
-for (var i=0;i<tmp.length;i++){tmp[i].setAttribute("test",i);}
+//var tmp=document.getElementsByTagName("container");
+//for (var i=0;i<tmp.length;i++){tmp[i].setAttribute("test",i);}
 //add stylesheet
 function backdropInit(){
   var css=".backdrop_canvas{"+rawCSS+"}";
@@ -23,7 +23,6 @@ var backdrop={
     
     //gets target element(s)
     localParents=getAll(element);
-    //console.log(localParents);
     
     //edit/check nickname
     if (Array.isArray(nickname)){
@@ -150,6 +149,21 @@ var backdrop={
     }
   },
   
+  
+  //RESIZE
+  resize: function(){
+    for (var i=0;i<backData.length;i++){
+      var parent=backElements[i].parentElement;
+      var w=parent.offsetWidth, h=parent.offsetHeight;
+      if (backData[i].width!=w||backData[i].height!=h){
+        backData[i].width=w;
+        backData[i].height=h
+        backElements[i].width=w;
+        backElements[i].height=h;
+      }
+    }
+  },
+  
   //GET SINGLE CANVAS INSTANCE
   canvasData: function(element){
     var all=document.getElementsByClassName("backdrop_canvas"),out=[];
@@ -168,6 +182,30 @@ var backdrop={
       }
     }
     return out;
+  },
+  
+  //SET DATA FOR MULTIPLE OBJECTS
+  multiData: function(type,obj){
+    type=type.replace("t:",""); //just in case...
+    for (var i=0;i<backData.length;i++){
+      var bd=backData[i];
+      if (backData[i].type==type){
+        var values=Object.keys(obj),bdVals=Object.keys(bd);
+        for (var m=0;m<values.length;m++){
+          if (values[m]=="type"){console.warn("For integrity reasons, you cannot edit 'type' for this object.");}
+          for (var n=1;n<bdVals.length;n++){
+            if (bdVals[n]==values[m]){
+              bd[bdVals[n]]=obj[values[m]];
+            }
+          }
+        }
+      }
+      //refresh
+      if (type=="circles"){
+        bd.array=[];
+        setCircles(bd);
+      }
+    }
   }
 }
 
@@ -265,16 +303,15 @@ function addElements(inArray,type,nick){
         maxSize: 50,
         circleNo: 100,
         maxSpeed: 1,
-        color: "rgba(255,255,255,0.3)",
+        color: "rgba(255,255,255,0.1)",
         array: []
       });
-      setCircles();
+      setCircles(backData[backData.length-1]);
     }
   }
 }
 
-function setCircles(){
-  var data=backData[backData.length-1];
+function setCircles(data){
   for (var i=0;i<data.circleNo;i++){
     data.array.push({
       x: Math.random()*data.width,
