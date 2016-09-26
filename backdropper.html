@@ -27,7 +27,7 @@
         min-height:200px;
         left:5%;
         overflow:hidden;
-        margin-bottom:5vw;
+        margin-bottom:6vw;
       }
 
       #header{
@@ -67,7 +67,7 @@
         width:90%;
         margin-left:5%;
         font-family:Poppins,Arial,sans-serif;
-        font-size:1.2vw;
+        font-size:1.1vw;
       }
 
       code{
@@ -80,7 +80,21 @@
       }
 
       example code{
-        background-color:#c9e;
+        background-color:#bbf;
+      }
+
+      example code cmt{
+        position:absolute;
+        left:15vw;
+        color:#777;
+      }
+
+      #codeSample cmt{
+        left:25vw;
+      }
+
+      example code cmt:before{
+        content:"//";
       }
 
       example{
@@ -88,7 +102,7 @@
         position:relative;
         width:94%;
         left:3%;
-        background-color:#daf;
+        background-color:#ccf;
         padding:1vw;
         min-height:2px;
         overflow:hidden;
@@ -110,12 +124,24 @@
         width:20vw;
       }
 
+      li a{
+        color:#309;
+        text-decoration:none;
+      }
+
+      #spacer{
+        display:block;
+        position:relative;
+        width:90%;
+        border-bottom:0.2vw solid #305;
+      }
+
       #footer{
         display:block;
         position:fixed;
         width:90%;
         left:5%;
-        height:4vw;
+        height:5vw;
         bottom:0;
         background-color:#103;
       }
@@ -127,7 +153,7 @@
         width:17.6%;
         height:3vw;
         margin-left:2%;
-        top:0.5vw;
+        top:1vw;
         border:none;
         background-color:#305;
         color:#85a;
@@ -154,6 +180,18 @@
         font-family:Poppins,Arial,sans-serif;
         color:white;
         opacity:0.5;
+      }
+
+      #testBtn{
+        display:inline-block;
+        position:relative;
+        padding:0.5vw;
+        padding-left:1vw;
+        padding-right:1vw;
+        background-color:#507;
+        cursor:pointer;
+        color:#dcf;
+        font-family:Russo One;
       }
     </style>
   </head>
@@ -189,9 +227,9 @@
             <br>
             First, add the background:
             <br>
-            <code>backdrop.add("boxes","body");</code>
+            <code>backdrop.add("circles","body");</code>
             <br>
-            The script will append an HTML5 canvas to the body element, as well as all associated data required to run the backround animation. In this case, for type "boxes".
+            The script will append an HTML5 canvas to the body element, as well as all associated data required to run the backround animation. In this case, for type "circles".
             <br>
             <br>
             Second, start the animation:
@@ -221,48 +259,63 @@
           <example>
             <b>Example 2: Different ways to access elements</b>
             <br>
-            <code>backdrop.add("boxes","#container");</code>
+            <code>backdrop.add("circles","#container");</code>
             <br>
             The script will add a background to the first element with id="container".
             <br>
             <br>
-            <code>backdrop.add("boxes",".container");</code>
+            <code>backdrop.add("circles",".container");</code>
             <br>
             The script will add a background to each element with class="container".
             <br>
             <br>
-            <code>backdrop.add("boxes","div");</code>
+            <code>backdrop.add("circles","div");</code>
             <br>
             The script will add a background to each element with the "div" tag.
             <br>
             <br>
-            <code>backdrop.add("boxes","t:boxes");</code>
+            <code>backdrop.add("circles","t:boxes");</code>
             <br>
-            The script will add a background to each element with type "boxes", i.e. add a new canvas to each canvas of type "boxes". It's ridiculous, I know.
+            The script will add a background to each element with type "circles", i.e. add a new canvas to each canvas of type "circles". It's ridiculous, I know.
             <br>
             <br>
-            <code>backdrop.add("boxes","%myBackground");</code>
+            <code>backdrop.add("circles","%myBackground");</code>
             <br>
             The script will add a background to each element with nickname="myBackground". We will cover nicknames in the next part.
             <br>
           </example>
         </p>
         <h1 id="advanced">Advanced Syntax</h1>
+        <p><b>Functions and tricks covered in this section:</b></p>
+          <ul style="color:#305">
+            <li><a href="#nicknames">Nicknames and Types</a></li>
+            <li><a href="#add">.add()</a></li>
+            <li><a href="#remove">.remove()</a></li>
+            <li><a href="#resize">.resize()</a></li>
+            <li><a href="#addcss">.addCSS()</a></li>
+            <li><a href="#addspeccss">.addSpecificCSS()</a></li>
+            <li><a href="#bynickname">.getElementsByNickname()</a></li>
+            <li><a href="#bytype">.getElementsByType()</a></li>
+            <li><a href="#cdata">.canvasData()</a></li>
+            <li><a href="#multi">.multiData()</a></li>
+          </ul>
+        <p id="spacer"></p>
         <p>
-          <b>Nicknames and Types</b>
+          <b id="nicknames">Nicknames and Types</b>
           <br>
           Nicknames are small tags you can give backgrounds in order to access them at a later point. Nicknames are denoted with a '%' prefix.
           <br>
+          <br>
           Types are tags automatically added to backgrounds to identify them. Since you can have many different backgrounds in any document, it can be useful to access them as groups. Types are denoted with a 't:' prefix.
           <br>
-          <br>
-          <b>.add()</b>
+        </p><p id="spacer"></p><p>
+          <b id="add">.add()</b>
           <br>
           The <code>.add()</code> function can be made much more interesting.
           <br>
           In its most simple form, it only requires two arguments, but it can take up to four:
           <br>
-          <code>backdrop.add("boxes",".backParents","myBackground",[0,2]);</code>
+          <code>backdrop.add("circles",".backParents","myBackground",[0,2]);</code>
           <br>
           where "myBackground" is a nickname you give the background, and [0,2] specifies in which elements with class "backParents" to add the backgrounds.
           <br>
@@ -282,8 +335,8 @@
           <br>
           Side note: the script will omit any index which doesn't correspond to an element and will not throw an error.
           <br>
-          <br>
-          <b>.remove()</b>
+        </p><p id="spacer"></p><p>
+          <b id="remove">.remove()</b>
           <br>
           The <code>.remove()</code> function is fairly straight forward. It inputs CSS selectors ("#example",".example","example") or BackDropper-specific selectors ("%example","t:example") and, optionally, indexes.
           <br>
@@ -298,20 +351,24 @@
             <br>
             Similarly, this will apply to BackDropper selectors:
             <br>
-            <code>backdrop.remove("t:boxes",0);</code>
+            <code>backdrop.remove("t:circles",0);</code>
             <br>
             This code will remove the background on this page, and that background only, because it's the first background of its type in the document.
           </example>
           <br>
           Side note: the script will omit any index which doesn't correspond to an element and will not throw an error.
           <br>
-          <br>
-          <b>.addCSS()</b>
+        </p><p id="spacer"></p><p>
+        <b id="resize">.resize()</b>
+        <br>
+        <code>.resize()</code> resizes canvases when the window is resized. The script will automatically check if the parent element is resized, and if not, it will not change anything. It's added to a window resize event in your code. The reason why this isn't a built-in feature is to ensure that there are no clashes between the library and your code.
+        </p><p id="spacer"></p><p>
+          <b id="addcss">.addCSS()</b>
           <br>
           This is a very general function. It simply lets you add CSS to every background element. This can also be done by using the <code>.backdrop_canvas</code> selector in your CSS file. Bear in mind that every time this function is called, the CSS will be overwritten.
           <br>
-          <br>
-          <b>.addSpecificCSS()</b>
+        </p><p id="spacer"></p><p>
+          <b id="addspeccss">.addSpecificCSS()</b>
           <br>
           <code>.addSpecificCSS()</code> adds CSS to backgrounds by nickname or type.
           <br>
@@ -332,18 +389,18 @@
             <br>
             As you can see, <code>.addSpecificCSS()</code> has added two different styles to the backgrounds. Bear in mind that every time this function is called, the CSS will be overwritten.
           </example>
-          <br>
-          <b>.getElementsByNickname()</b>
+        </p><p id="spacer"></p><p>
+          <b id="bynickname">.getElementsByNickname()</b>
           <br>
           <code>.getElementsByNickname()</code> returns an array of elements by nickname, much like, for example, <code>document.getElementsByClassName()</code>. You can edit elements directly using this.
           <br>
-          <br>
-          <b>.getElementsByType()</b>
+        </p><p id="spacer"></p><p>
+          <b id="bytype">.getElementsByType()</b>
           <br>
           <code>.getElementsByType()</code> returns an array of elements by type, much like, for example, <code>document.getElementsByTagName()</code>. You can edit elements directly using this.
           <br>
-          <br>
-          <b>.canvasData()</b>
+        </p><p id="spacer"></p><p>
+          <b id="cdata">.canvasData()</b>
           <br>
           <code>.canvasData()</code> lets you edit objects associated with each background to change how they behave.
           <br>
@@ -357,6 +414,96 @@
             <test class="testParent3"></test>
             <test class="testParent3"></test>
           </example>
+        </p><p id="spacer"></p><p>
+          <b id="multi">.multiData()</b>
+          <br>
+          <code>.multiData()</code> lets you change variables. It's very similar to <code>.canvasData()</code>, but supports multiple variables as input <b>and</b> lets you apply it to multiple backgrounds.
+          <br>
+          <br>
+          <example>
+            <b>Example 7: Changing multiple variables in objects</b>
+            <br>
+            <br>
+            <code style="display:block">
+              backdrop.multiData("circles",{
+              <br>
+              &nbsp;&nbsp;color: "rgba(0,0,255,0.1)",
+              <br>
+              &nbsp;&nbsp;circleNo: 200
+              <br>
+              });
+            </code>
+            <br>
+            The above code changes the specified variables in every background with type "circles". The circles are specified to be blue instead of white, and their amount should change from 100 to 200. Click the button to test!
+            <br>
+            <test id="testBtn" onclick=test()>TEST! (blue,200)</test>
+          </example>
+        <br>
+        We will take a closer look at objects and variable names within objects in the next section.
+        </p>
+        <h1 id="objects">Objects</h1>
+        <p>
+          Objects are neat data structures. The library uses them because it has to deal with many different variables which have to be dynamically initiated. Objects also make it easier for users of this library to access the inner workings of the code. Let's take a look at the data structures behind each background.
+          <br>
+          <br>
+          <b>The following snippets contain the variables (and approximate default values) in each background object:</b>
+          <br>
+          <br>
+          <example>
+            <b>Background type 1: Fireworks</b>
+            <code style="display:block">
+              fireworks={
+              <br>&nbsp; type: type, <cmt>the type name, used to identify the background</cmt>
+              <br>&nbsp; width: w, <cmt>width of background</cmt>
+              <br>&nbsp; height: h, <cmt>height of background</cmt>
+              <br>&nbsp; counter: 0, <cmt>counter used to 'time' fireworks</cmt>
+              <br>&nbsp; interval: 10, <cmt>frames between each firework drop- smaller number => more fireworks</cmt>
+              <br>&nbsp; size: 25, <cmt>maximum size of fireworks</cmt>
+              <br>&nbsp; sine: 0.05, <cmt>'wiggle' of each firework -  larger value = more turbulence</cmt>
+              <br>&nbsp; dissipate: 0.2, <cmt>how quickly the fireworks disappear</cmt>
+              <br>&nbsp; minPoints: 3, <cmt>minimum number of points</cmt>
+              <br>&nbsp; maxPoints: 15, <cmt>maximum number of points</cmt>
+              <br>&nbsp; colors: [], <cmt>color of the fireworks - [] for random colors, ["CSS color","CSS color"] for palette</cmt>
+              <br>&nbsp; array: [] <cmt>extra variables to make things work - should NOT be modified</cmt>
+              <br>};
+            </code>
+            <br>
+            <b>Background type 2: Circles</b>
+            <br>
+            <code id="codeSample" style="display:block">
+              circles={
+              <br>&nbsp; type: type, <cmt>type name, used to identify the background</cmt>
+              <br>&nbsp; width: w, <cmt>width of background</cmt>
+              <br>&nbsp; height: h, <cmt>height of background</cmt>
+              <br>&nbsp; minSize: 20, <cmt>minimum radius of circle</cmt>
+              <br>&nbsp; maxSize: 50, <cmt>maximum radius of circle</cmt>
+              <br>&nbsp; circleNo: 100, <cmt>number of circles</cmt>
+              <br>&nbsp; maxSpeed: 1, <cmt>maximum speed of circles</cmt>
+              <br>&nbsp; color: "rgba(255,255,255,0.1)", <cmt>arbitrary color to add to circles - only one color at this point</cmt>
+              <br>&nbsp; array: [] <cmt>extra variables to make things work - should NOT be modified</cmt>
+              <br>};
+            </code>
+          </example>
+        </p>
+        <h1 id="credits">Credits/License</h1>
+        <p>
+          BackDropper was written by <a href="https://github.com/PicturElements">PicturElements</a> and is mainly intended as an excercise in making JavaScript libraries and using objects. Plese make sure that nothing unexpected happens when using this library. It's a fairly solid piece of code, but weird bugs may appear out of nowhere on different browsers, so do some checks just in case. Also, this library works like shit in IE at this point in time. I might fix it so it works in IE, too. Also check your task manager when developing using this library. After all, it uses canvas and may use up a lot of computing power if used superfluously. A 5% CPU power (weak-ish laptop) target may be a good idea.
+          <br>
+        </p><p id="spacer"></p><p>
+          <b>The MIT License (MIT)
+          <br>
+          Copyright (c) 2016 PicturElements</b>
+          <br>
+          <br>
+          Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+          <br>
+          <br>
+          The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+          <br>
+          <br>
+          THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+          <br>
+        </p><p id="spacer"></p><p>
         </p>
         <p id="end"><br><br></p>
       </div>
@@ -366,22 +513,72 @@
       <div class="footerbutton" onclick=scroll("intro")>Introduction</div>
       <div class="footerbutton" onclick=scroll("basic")>Basic Syntax</div>
       <div class="footerbutton" onclick=scroll("advanced")>Advanced Syntax</div>
-      <div class="footerbutton" onclick=scroll(this)>Objects</div>
-      <div class="footerbutton" onclick=scroll(this)>Credits/License</div>
+      <div class="footerbutton" onclick=scroll("objects")>Objects</div>
+      <div class="footerbutton" onclick=scroll("credits")>Credits/License</div>
     </div>
     <script src="http://picturelements.github.io/testdropper.js"></script>
     <script>
+      var clicked=false;
+
       backdrop.add("circles","#full");
       backdrop.add("fireworks",".testParent",[0,2]);
       backdrop.add("fireworks",".testParent2","test1",[0,1]);
       backdrop.add("fireworks",".testParent2","test2",[2,3]);
-      backdrop.start(30);
+      backdrop.start(20);
       backdrop.canvasData("t:circles")[0].color="rgba(255,255,255,0.1)";
+      /*backdrop.canvasData("t:boxes")[0].minOpacity=0.1;
+      backdrop.canvasData("t:boxes")[0].maxOpacity=0.2;*/
       backdrop.addSpecificCSS("%test1","opacity:0.7; transform:rotate(15deg)");
       backdrop.addSpecificCSS("%test2","box-sizing:border-box; border:5px solid red; transform:rotate(-15deg)");
       backdrop.add("fireworks",".testParent3","testing");
       backdrop.canvasData("%testing")[1].colors=["#f00","#fff","#00f"];
       //backdrop.remove("t:boxes",0);
+
+      function scroll(inID){
+        var scTo=document.body.scrollTop+document.getElementById(inID).getBoundingClientRect().top;
+        window.scrollTo(0,scTo+10);
+      }
+
+      window.onscroll=function(){
+        scrollAction();
+      }
+
+      function scrollAction(){
+        var scrollers=["intro","basic","advanced","objects","credits","end"];
+        var index=0;
+        for (var i=0;i<scrollers.length;i++){
+          if (i<scrollers.length-1){document.getElementsByClassName("footerbutton")[i].style="";}
+          if (document.getElementById(scrollers[i]).getBoundingClientRect().top>0){
+            index=i-1;
+            break;
+          }
+        }
+        if (index>=0){
+          if (index>=4){index=4;}
+          document.getElementsByClassName("footerbutton")[index].style="background-color:#85a; color:#305";
+        }
+      }
+
+      function test(){
+        clicked=!clicked;
+        if (clicked){
+          backdrop.multiData("circles",{ 
+            color: "rgba(0,0,255,0.1)", 
+            circleNo: 200 
+          });
+          document.getElementById("testBtn").innerHTML="TEST! (white,100)";
+        }else{
+          backdrop.multiData("circles",{ 
+            color: "rgba(255,255,255,0.1)", 
+            circleNo: 100 
+          });
+          document.getElementById("testBtn").innerHTML="TEST! (blue,200)";
+        }
+      }
+
+      window.onresize=function(){
+        backdrop.resize();
+      }
     </script>
   </body>
 </html>
