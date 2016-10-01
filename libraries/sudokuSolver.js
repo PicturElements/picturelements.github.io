@@ -21,7 +21,7 @@ var sudoku={
 		var success=coreSolve(array);
 		return {
 			solved: success,
-			solution: board,
+			solution: validSolution,
 			allSolutions: allSolved,
 			solutionNo: solveCount,
 			time: (new Date().getTime()-time)
