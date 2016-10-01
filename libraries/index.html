@@ -2,7 +2,7 @@
 <html>
   <head>
     <title></title>
-    <link rel="icon" href="pelement.png">
+    <link rel="icon" href="http://picturelements.github.io/images/pelement.png">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,700" rel="stylesheet" type="text/css">
     <script src="http://picturelements.github.io/libraries/sudokuSolver.js"></script>
     
@@ -17,9 +17,10 @@
   <body>
     <input id="lol1"></input>
     <input id="lol2"></input>
-    <button onclick=solve()></button>
+    <button onclick=solve()>SOLVE!</button>
     <script>
       function solve(){
+        sudoku.test;
         console.log(sudoku.solve(document.getElementById("lol1").value,document.getElementById("lol2").value));
       }
     </script>
