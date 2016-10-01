@@ -5,7 +5,7 @@ var board=[],alternatives=[],checkGrid=[0,1,2,9,10,11,18,19,20];
 var changedStuff=true,time;
 
 //Library-specific variables
-var allSolved=[];
+var allSolved=[],validSolution=[];
 var solveNo,solveCount;
 
 
@@ -32,6 +32,7 @@ var sudoku={
 function setAndReset(){
   solveCount=0;
   allSolved=[];
+	validSolution=[];
   
   savedBoards=[];
   insertAt=[];
@@ -175,6 +176,7 @@ function backtrackSolve(){
       if (isF && isV){
         solveCount++;
         allSolved.push(board);
+				validSolution=new Array(board);
         if (solveCount==solveNo){break;}
       }
       else if (isF && !isV){
