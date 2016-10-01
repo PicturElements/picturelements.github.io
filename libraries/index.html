@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel="icon" href="pelement.png">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,700" rel="stylesheet" type="text/css">
+    <script src="http://picturelements.github.io/libraries/sudokuSolver.js"></script>
+    
+    <style>
+      body{
+        background-color:white;
+        margin:0;
+       }
+    </style>
+    
+  </head>
+  <body>
+    <input id="lol1"></input>
+    <input id="lol2"></input>
+    <button onclick=solve()></button>
+    <script>
+      function solve(){
+        console.log(sudoku.solve(document.getElementById("lol1").value,document.getElementById("lol2").value));
+      }
+    </script>
+  </body>
+</html>
