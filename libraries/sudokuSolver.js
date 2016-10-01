@@ -17,7 +17,7 @@ var level;
 var sudoku={
 	solve: function(array,no){
 	 	solveNo=no;
-		if (no<1||no==null||isNaN(no)){solveNo=1;}
+		if (no<1||no==null||isNaN(no)){solveNo=1; alert("WOO");}
 		coreSolve(array);
 		return {
 			solved: (validSolution!=[]),
