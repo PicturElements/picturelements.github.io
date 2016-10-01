@@ -18,9 +18,9 @@ var sudoku={
 	solve: function(array,no){
 	 	solveNo=no;
 		if (no<1||no==null||isNaN(no)){solveNo=1;}
-		var success=coreSolve(array);
+		coreSolve(array);
 		return {
-			solved: success,
+			solved: (validSolution!=[]),
 			solution: validSolution,
 			allSolutions: allSolved,
 			solutionNo: solveCount,
