@@ -38,15 +38,15 @@ function setAndReset(){
   possibleValues=[];
   checked=[];
   for (var i=0;i<80;i++){savedBoards.push(0); insertAt.push(0); possibleValues.push(0); checked.push(0);}
-  board=[];
-  for (var i=0;i<input.length;i++){
-    board.push(input[i]);
-  }
 }
 
 //All solving algorithms
 function coreSolve(input){
   setAndReset();
+  board=[];
+  for (var i=0;i<input.length;i++){
+    board.push(input[i]);
+  }
   
   //Check if input is valid
   if (!isValid(false)){
