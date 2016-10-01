@@ -1,10 +1,5 @@
 //A small but powerful library to solve sudokus
 
-var sudoku={
-	solve: solveWrapper(input,no),
-	test: alert("lol")
-};
-
 var SelectedIndex=0;
 var board=[],alternatives=[],checkGrid=[0,1,2,9,10,11,18,19,20];
 var changedStuff=true,time;
@@ -19,18 +14,20 @@ var savedBoards=[],insertAt=[],possibleValues=[],checked=[];
 for (var i=0;i<80;i++){savedBoards.push(0); insertAt.push(0); possibleValues.push(0); checked.push(0);}
 var level;
 
-function solveWrapper(array,no){
-  solveNo=no;
-  if (no<1||no==null){no=1;}
-  var success=coreSolve(array);
-  return {
-    solved: success,
-    solution: board,
-    allSolutions: allSolved,
-    solutionNo: solveCount,
-    time: (new Date().getTime()-time)
-  }
-}
+var sudoku={
+	solve: function(array,no){
+	 	solveNo=no;
+		if (no<1||no==null){solveNo=1;}
+		var success=coreSolve(array);
+		return {
+			solved: success,
+			solution: board,
+			allSolutions: allSolved,
+			solutionNo: solveCount,
+			time: (new Date().getTime()-time)
+		}
+	}
+};
 
 function setAndReset(){
   solveCount=0;
