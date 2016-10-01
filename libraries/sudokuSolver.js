@@ -1,8 +1,9 @@
 //A small but powerful library to solve sudokus
 
 var sudoku={
-	solve: solveWrapper(input,no)
-}
+	solve: solveWrapper(input,no),
+	test: alert("lol")
+};
 
 var SelectedIndex=0;
 var board=[],alternatives=[],checkGrid=[0,1,2,9,10,11,18,19,20];
