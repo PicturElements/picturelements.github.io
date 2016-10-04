@@ -236,7 +236,7 @@
         var cnt=0;
         for (var i=0;i<url.length;i++){
           if (url.charAt(i)=='='){foundEq=true;}
-          else{
+          else if (foundEq){
             board[cnt]=parseInt(""+url.charAt(i));
             cnt++;
           }
