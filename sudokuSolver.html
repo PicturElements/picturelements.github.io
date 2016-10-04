@@ -233,13 +233,18 @@
       if (window.location.href.includes("?")){
         var url=window.location.href;
         var foundEq=false;
+        var cnt=0;
         for (var i=0;i<url.length;i++){
           if (url.charAt(i)=='='){foundEq=true;}
           else{
-           board[i]=parseInt(""+url.charAt(i)); 
+            board[cnt]=parseInt(""+url.charAt(i));
+            cnt++;
           }
         }
-        outInfo();
+        var elements=document.getElementsByClassName("numberbox");
+        for (var i=0;i<81;i++){
+          if (board[i]!=0){elements[i].value=board[i];}
+        }
         isValidColor();
       }
       
