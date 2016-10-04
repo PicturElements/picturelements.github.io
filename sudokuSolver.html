@@ -254,7 +254,6 @@
         var element=document.getElementById("levels")
         if (expanded){element.style.height="12.5vw"}
         else {element.style.height="0"}
-        clearBoard();
       }
       
       function selectLevel(elem){
@@ -266,6 +265,7 @@
           else {elements[i].value="";}
           board[i]=allBoards[index][i];
         }
+        clearBoard();
         //alert(index);
       }
       
