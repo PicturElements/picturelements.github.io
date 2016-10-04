@@ -201,19 +201,6 @@
         [5,0,0,9,0,7,4,0,3,0,4,0,0,0,0,6,0,7,8,0,0,0,0,2,0,1,0,0,0,8,3,0,0,0,7,0,0,0,0,0,7,0,0,0,0,0,3,0,0,0,4,2,0,0,0,8,0,2,0,0,0,0,1,7,0,3,0,0,0,0,6,0,6,0,1,7,0,3,0,0,5],
         [8,0,0,0,0,0,0,0,0,0,0,3,6,0,0,0,0,0,0,7,0,0,9,0,2,0,0,0,5,0,0,0,7,0,0,0,0,0,0,0,4,5,7,0,0,0,0,0,1,0,0,0,3,0,0,0,1,0,0,0,0,6,8,0,0,8,5,0,0,0,1,0,0,9,0,0,0,0,4,0,0]
       ];
-      
-      if (window.location.href.includes("?")){
-        var url=window.location.href;
-        var foundEq=false;
-        for (var i=0;i<url.length;i++){
-          if (url.charAt(i)=='='){foundEq=true;}
-          else{
-           board[i]=parseInt(""+url.charAt(i)); 
-          }
-        }
-        outInfo();
-        isValidColor();
-      }
     
       var alternatives=[];
       var checkGrid=[0,1,2,9,10,11,18,19,20];
@@ -243,12 +230,25 @@
       }
       document.getElementById("sudoku").addEventListener("keydown",function(event){switchBox(event);});
       
+      if (window.location.href.includes("?")){
+        var url=window.location.href;
+        var foundEq=false;
+        for (var i=0;i<url.length;i++){
+          if (url.charAt(i)=='='){foundEq=true;}
+          else{
+           board[i]=parseInt(""+url.charAt(i)); 
+          }
+        }
+        outInfo();
+        isValidColor();
+      }
+      
       function expando(){
         expanded=!expanded;
         var element=document.getElementById("levels")
         if (expanded){element.style.height="12.5vw"}
         else {element.style.height="0"}
-        isValidColor();
+        clearBoard();
       }
       
       function selectLevel(elem){
