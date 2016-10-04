@@ -244,6 +244,7 @@
         var elements=document.getElementsByClassName("numberbox");
         for (var i=0;i<81;i++){
           if (board[i]!=0){elements[i].value=board[i];}
+          else {elements[i].value="";}
         }
         isValidColor();
       }
