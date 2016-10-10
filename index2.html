@@ -646,7 +646,7 @@
             maxId=i;
           }
         }
-        wins[maxId].setAttribute("active",true);
+        if (maxId>=0){wins[maxId].setAttribute("active",true);}
         elem=document.getElementsByClassName("taskbaricon");
         for (var i=0;i<elem.length;i++){
           if (elem[i].getAttribute("activelevel")==2){elem[i].setAttribute("activelevel",1);}
