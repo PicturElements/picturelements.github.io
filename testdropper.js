@@ -1,7 +1,7 @@
 var types=["fireworks","circles","boxes"],backElements=[],backData=[];
 var rawCSS="display:block; position:absolute; top:0; left:0; width:100%; height:100%;",clientCSS="";
 var specificCSS=[];
-var backThread=null;
+var backThread=null,addedBackStyle=false;
 
 //var tmp=document.getElementsByTagName("container");
 //for (var i=0;i<tmp.length;i++){tmp[i].setAttribute("test",i);}
@@ -16,10 +16,23 @@ function backdropInit(){
 }
 
 var backdrop={
+  //ADD CSS IF NEEDED
+  init: function(){
+    if (document.getElementById("backdrop_style")==null){
+      backgroundInit();
+    }
+  },
+  
   //ADD CANVAS
   add: function(type,element,nickname,extraindex){
     var multiple=false,selected;
     var localParents=[];
+    
+    //add CSS element when document is loaded (provided the user places their script in the right part of the document.)
+    if (!addedBackStyle){
+      backdropInit();
+      addedBackStyle=true;
+    }
     
     //gets target element(s)
     localParents=getAll(element);
@@ -421,5 +434,3 @@ function paintSpheres(ctx,data){
     else if (ind.y<-ind.r){ind.y=data.height+ind.r;}
   }
 }
-
-backdropInit();
