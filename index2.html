@@ -427,9 +427,11 @@
       setLinks();
 
       function addWindow(id){
+        //enables nested "Home" pages 
+        tmpUrl=id==0?programData[id].url+"?"+(new Date().getTime()):programData[id].url;
         var elem=document.createElement("div");
         elem.setAttribute("class","window");
-        var inner="<div class=\"infobar\" id=\""+winCount+"\"><div class=\"close\" title=\"Close\" onclick=closeWin("+winCount+")>X</div><div class=\"max\" title=\"Toggle\" onclick=toggle("+winCount+")>◳</div><div class=\"min\" title=\"Minimize\" onclick=minWin("+winCount+")>_</div><div class=\"reload\" title=\"Reload\" onclick=reloadWin("+winCount+")>↻</div><div class=\"winicon\" style=\"background-image:url(http://picturelements.github.io/images/win_icons/"+programData[id].icon+".png)\"></div><div class=\"wintitle\">"+programData[id].name+"</div></div><div id=\"loader\"></div><div id=\"loader2\"></div><div id=\"loader3\"></div><iframe class=\"content\" src=\""+programData[id].url+"\"></iframe><div class=\"resize\" scale=\"lw\"></div><div class=\"resize\" scale=\"lwh\"></div><div class=\"resize\" scale=\"h\"></div><div class=\"resize\" scale=\"wh\"></div><div class=\"resize\" scale=\"w\"></div>";
+        var inner="<div class=\"infobar\" id=\""+winCount+"\"><div class=\"close\" title=\"Close\" onclick=closeWin("+winCount+")>X</div><div class=\"max\" title=\"Toggle\" onclick=toggle("+winCount+")>◳</div><div class=\"min\" title=\"Minimize\" onclick=minWin("+winCount+")>_</div><div class=\"reload\" title=\"Reload\" onclick=reloadWin("+winCount+")>↻</div><div class=\"winicon\" style=\"background-image:url(http://picturelements.github.io/images/win_icons/"+programData[id].icon+".png)\"></div><div class=\"wintitle\">"+programData[id].name+"</div></div><div id=\"loader\"></div><div id=\"loader2\"></div><div id=\"loader3\"></div><iframe class=\"content\" src=\""+tmpUrl+"\"></iframe><div class=\"resize\" scale=\"lw\"></div><div class=\"resize\" scale=\"lwh\"></div><div class=\"resize\" scale=\"h\"></div><div class=\"resize\" scale=\"wh\"></div><div class=\"resize\" scale=\"w\"></div>";
         elem.innerHTML=inner;
         elem.setAttribute("active",true);
         document.getElementById("desktop").appendChild(elem);
