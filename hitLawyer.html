@@ -5,11 +5,11 @@
         display:block;
         position:fixed;
         width:70%;
-        height:10%;
+        height:5vw;
         top:50%;
         left:50%;
         margin-left:-35%;
-        margin-top:-5%;
+        margin-top:-6vw;
         text-align: center;
         font-size: 3vw;
         font-family: Trebuchet MS,Arial,sans-serif;
@@ -22,6 +22,7 @@
         width:20%;
         left:50%;
         top:50%;
+        height:4vw;
         margin-left:-10%;
         margin-top:20px;
         font-size:2vw;
@@ -38,9 +39,6 @@
       "\"The greatest source of information ever!\" [citation needed] - J. Wales","\"sdfgsdbfsnmervt qbmtcnwbexd wrnmqwcxrqw\" - Khajiit"];
       var result;
       function setup(){
-        document.getElementById("input").style.height=""+(window.innerWidth/20)+"px";
-        document.getElementById("input").style.marginTop="-"+(window.innerWidth/20+20)+"px";
-        document.getElementById("btn").style.height=""+(window.innerWidth/30)+"px";
         document.getElementById("mainTest").innerHTML=testimonials[Math.floor(Math.random()*testimonials.length)];
         random();
       }
