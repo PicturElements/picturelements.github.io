@@ -1,0 +1,80 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <canvas id="matrix"></canvas>
+    <script>
+      var matrixSize=59,size,sqS,topL,roundOff=true;
+      document.getElementById("matrix").addEventListener("mousemove",function(event){matrixMove(event)});
+      lastTime=0,refresh=50;
+
+      function init(){
+        var canv=document.getElementById("matrix");
+        size=Math.min(window.innerHeight*0.7,window.innerHeight*0.7);
+        sqS=size/(matrixSize*2.5);
+        canv.width=size;
+        canv.height=size;
+        canv=canv.style;
+        canv.width=size+"px";
+        canv.height=size+"px";
+        canv.marginLeft=-size/2+"px";
+        canv.marginTop=-size/2+"px";
+        topL={
+          x: (window.innerWidth-size)/2,
+          y: (window.innerHeight-size)/2
+        };
+        draw();
+      }
+
+      window.onresize=function(){
+        init();
+      };
+
+      function matrixMove(evt){
+        var x=-1,y=-1;
+        var xPos=evt.clientX-topL.x,yPos=evt.clientY-topL.y;
+        var padd=size/(matrixSize+1);
+        if (roundOff){
+          xPos=Math.floor((xPos+padd/2)/padd)*padd;
+          yPos=Math.floor((yPos+padd/2)/padd)*padd;
+        }
+        for (var i=1;i<=matrixSize;i++){
+          if (Math.abs(xPos-padd*i)<=sqS){x=i;}
+          if (Math.abs(yPos-padd*i)<=sqS){y=i;}
+        }
+        var time=new Date().getTime();
+        if (time-lastTime>refresh){
+          draw(x,y);
+          lastTime=time;
+        }
+      }
+
+      function draw(x,y){
+        var ctx=document.getElementById("matrix").getContext("2d");
+        ctx.clearRect(0,0,size,size);
+        var padding=size/(matrixSize+1);
+        for (var h=1;h<=matrixSize;h++){
+          for (var w=1;w<=matrixSize;w++){
+            ctx.fillStyle=(w==x||h==y)&&(x!=-1&&y!=-1)?"#609":"#999";
+            var mult=(w==x&&h==y)?1.5:1;
+            ctx.beginPath();
+            ctx.arc(w*padding,h*padding,sqS*mult,0,2*Math.PI);
+            ctx.fill();
+          }
+        }
+        ctx.strokeStyle="#609";
+        ctx.lineWidth=sqS/2;
+        if (x!=-1&&y!=-1){
+          for (var i=1;i<=matrixSize;i++){
+            ctx.beginPath();
+            ctx.moveTo(i*padding,y*padding);
+            ctx.lineTo(x*padding,i*padding);
+            ctx.stroke();
+          }
+        }
+      }
+
+      init();
+    </script>
+  </body>
+</html>
