@@ -1038,8 +1038,8 @@ function updateSize(id){
 
 setInterval(newTime,1000);
 
-
-if (window.confirm("Want to go fullscreen?")){
+document.getElementById("gofull").addEventListener("click",function(event){fullscreen(event);})
+function fullscreen(evt){
   var elem=document.getElementsByTagName("body")[0];
   elem.webkitRequestFullscreen();
 }
