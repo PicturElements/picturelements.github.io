@@ -1037,4 +1037,9 @@ function updateSize(id){
 }
 
 setInterval(newTime,1000);
-document.getElementsByTagName("body")[0].webkitRequestFullscreen();
+
+
+if (window.confirm("Want to go fullscreen?")){
+  var elem=document.getElementsByTagName("body")[0];
+  elem.webkitRequestFullscreen();
+}
