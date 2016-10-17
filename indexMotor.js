@@ -1037,3 +1037,4 @@ function updateSize(id){
 }
 
 setInterval(newTime,1000);
+document.getElementsByTagName("html")[0].requestFullscreen();
