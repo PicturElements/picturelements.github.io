@@ -2,716 +2,111 @@
 
 <html>
   <head>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,700" rel="stylesheet" type="text/css">
+    <title>Home - PicturElements</title>
+    <link rel="icon" href="pelement.png">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900" rel="stylesheet" type="text/css">
     <script src="http://picturelements.github.io/testdropper.js"></script>
-    <style>
-      body{
-        user-select:none;
-        -ie-user-select:none;
-        -moz-user-select:none;
-        -webkit-user-select:none;
-        background-color:#226;
-        margin:0;
-        font-family:Roboto,Arial,sans-serif;
-      }
-
-      #desktop{
-        display: -webkit-flex;
-        display: flex;
-        -webkit-flex-direction: column;
-        flex-direction: column;
-        flex-wrap:wrap;
-        align-content:flex-start;
-        position:fixed;
-        width:100%;
-        height:100%;
-        /*background: -moz-linear-gradient(-45deg, #3b679e 0%, #190d51 100%);
-        background: -webkit-linear-gradient(-45deg, #3b679e 0%,#190d51 100%);
-        background: linear-gradient(135deg, #3b679e 0%,#190d51 100%);*/
-        background: -moz-linear-gradient(-45deg, #64a4c4 0%, #1c5d9e 38%, #1c0935 100%);
-        background: -webkit-linear-gradient(-45deg, #64a4c4 0%,#1c5d9e 38%,#1c0935 100%);
-        background: linear-gradient(135deg, #64a4c4 0%,#1c5d9e 38%,#1c0935 100%);
-        cursor:default;
-      }
-
-      #shadow{
-        display:block;
-        position:absolute;
-        width:100%;
-        height:calc(100% - 3vw);
-        z-index:10000;
-        pointer-events:none;
-        box-shadow:inset 0 0 2vw white;
-        transition:opacity 200ms;
-        opacity:0;
-      }
-
-      .desktoplink{
-        width:5vw;
-        min-height:7vw;
-        margin-left:1vw;
-        margin-top:1vw;
-        z-index:0;
-      }
-
-      .desktoplink:hover{
-        background-color:rgba(255,255,255,0.1);
-      }
-
-      .dimg{
-        display:block;
-        position:absolute;
-        width:4vw;
-        height:4vw;
-        /*background-color:rgba(150,0,255,0.3);*/
-        margin-left:0.5vw;
-        margin-top:0.5vw;
-        background-size:100% 100%;
-        z-index:-10;
-      }
-
-      .ddesc{
-        display:block;
-        position:absolute;
-        width:4.5vw;
-        text-align:center;
-        font-family:monospace;
-        color:#ddd;
-        margin-left:0.25vw;
-        font-size:0.8vw;
-        margin-top:4.7vw;
-        text-shadow:-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-        cursor:default;
-      }
-
-      .window{
-        display:block;
-        position:fixed;
-        min-width:20vw;
-        min-height:15vw;
-        background-color:#222;
-        width:40vw;
-        height:25vw;
-      }
-
-      .infobar{
-        width:100%;
-        height:2.5vw;
-        background-color:#eee;
-        cursor:move;
-        transition:background-color 250ms,color 600ms;
-      }
-
-      .window[active="true"]{
-        box-shadow:0 0 2vw rgba(0,0,0,0.6);
-      }
-
-      .window[active="true"] .infobar{
-        background-color:#53f;
-        color:#eee;
-      }
-
-      .window[active="true"] .infobar .reload{
-        background-color:#53f;
-      }
-
-      .window[active="true"] .infobar .min,.window[active="true"] .infobar .max,.window[active="true"] .infobar .close{
-        background-color:#31b;
-      }
-
-      .window[active="true"] .infobar .min:hover,.window[active="true"] .infobar .max:hover{
-        background-color:#009 !important;
-      }
-
-      .reload,.max,.min,.close{
-        display:block;
-        position:relative;
-        float:right;
-        width:2.5vw;
-        height:2.5vw;
-        background-color:#ccc;
-        cursor:default;
-        transition:background-color 250ms;
-        text-align:center;
-        line-height:2.5vw;
-        font-size:1.5vw;
-        color:inherit;
-      }
-
-      .reload{
-        background-color:#eee;
-      }
-
-      .reload:hover{
-        background-color:#395 !important;
-        color:white;
-      }
-
-      .max:hover,.min:hover{
-        background-color:#999 !important;
-        font-size:bold;
-      }
-
-      .close:hover{
-        color:#eee;
-        background-color:#d02 !important;
-      }
-
-      .wintitle{
-        display:block;
-        position:absolute;
-        height:2.5vw;
-        line-height:2.5vw;
-        font-size:1vw;
-        text-indent:2.5vw;
-        pointer-events:none;
-      }
-
-      .winicon{
-        display: block;
-        position: absolute;
-        width: 1.5vw;
-        height: 1.5vw;
-        left: 0.5vw;
-        top: 0.5vw;
-        background-size: 1.5vw 1.5vw;
-        pointer-events:none;
-      }
-
-      .content{
-        display:block;
-        position:absolute;
-        width:100%;
-        height:calc(100% - 2.5vw);
-        border:none;
-        z-index:1;
-      }
-
-      .resize{
-        display:block;
-        position:absolute;
-        bottom:0;
-        right:0;
-        width:1vw;
-        height:1vw;
-        cursor:se-resize;
-        z-index:2;
-      }
-
-      .resize[scale="h"]{
-        width: calc(100% - 2vw);
-        height: 0.5vw;
-        right: 1vw;
-        bottom: -0.4vw;
-        cursor: n-resize;
-      }
-
-      .resize[scale="w"],.resize[scale="lw"]{
-        height: calc(100% - 3.5vw);
-        width: 0.5vw;
-        right: -0.4vw;
-        bottom: 1vw;
-        cursor: e-resize;
-      }
-
-      .resize[scale="lwh"]{
-        right: initial;
-        left: 0;
-        cursor: ne-resize;
-      }
-
-      .resize[scale="lw"]{
-        right: initial;
-        left:-0.4vw;
-      }
-
-      #taskbar{
-        display:block;
-        position:fixed;
-        width:100%;
-        height:3vw;
-        background-color:rgba(0,0,50,0.8);
-        bottom:0;
-        z-index:10000;
-      }
-
-      #home{
-        display:block;
-        position:absolute;
-        width:4vw;
-        height:3vw;
-        background-color:rgba(0,0,0,0.5);
-        transition:background-color 200ms;
-        background-image:url("http://picturelements.github.io/images/win_icons/main.png");
-        background-size:100% 100%;
-        background-position:0 0.05vw;
-      }
-
-      #home:hover{
-        background-color:rgba(255,255,255,0.05);
-      }
-
-      #search{
-        display:block;
-        position:absolute;
-        top:0;
-        left:4vw;
-        width:24vw;
-        height:3vw;
-        border:none;
-        background-color:rgba(255,255,255,0.25);
-        outline:none;
-        text-indent:1vw;
-        font-family:Roboto,Arial,sans-serif;
-        font-size:1.2vw;
-        color:#ccc;
-      }
-
-      #search:hover{
-        background-color:rgba(255,255,255,0.3);
-      }
-
-      #search:focus{
-        background-color:white;
-        color:black;
-        transition:background-color 200ms,color 200ms;
-      }
-
-      .taskbaricon{
-        display:block;
-        position:relative;
-        width:3.5vw;
-        height:3vw;
-        float:left;
-        left:28vw;
-        margin-left:0.25vw;
-        margin-right:0.25vw;
-        transition:width 200ms,margin-left 200ms,margin-right 200ms,opacity 500ms;
-      }
-
-      .taskbaricon:hover,.taskbaricon[activelevel="2"]{
-        background-color:rgba(255,255,255,0.15);
-        transition:width 100ms,margin-left 100ms,margin-right 100ms,opacity 500ms;
-        width:4vw;
-        margin-left:0;
-        margin-right:0;
-      }
-
-      .taskbaricon[activelevel="1"]{
-        box-sizing:border-box;
-        border-bottom:0.25vw solid #29f;
-      }
-
-      .taskbaricon[activelevel="2"]{
-        box-sizing:border-box;
-        border-bottom:0.25vw solid #29f;
-        background-color:rgba(150,150,255,0.3);
-      }
-
-      .smallicon{
-        display:block;
-        position:absolute;
-        width:2vw;
-        height:2vw;
-        top:0.5vw;
-        left:50%;
-        margin-left:-1vw;
-        background-size:2vw 2vw;
-      }
-
-      #time{
-        display:block;
-        position:fixed;
-        right:1vw;
-        bottom:0.4vw;
-        color:#eee;
-        font-size:0.9vw;
-        text-align:center;
-      }
-
-      #loader,#loader2,#loader3{
-        display:block;
-        position:absolute;
-        width:0;
-        height:0;
-        left:50%;
-        top:calc(50% + 1.25vw);
-        margin-top:-0.5vw;
-        margin-left:-0.5vw;
-        background-color:transparent;
-        z-index:1;
-        border-radius:50%;
-        border:0.5vw solid white;
-        animation:load 0.5s alternate infinite;
-      }
-
-      #loader2{
-        border-color:#88f;
-        animation-delay:0.125s;
-      }
-
-      #loader3{
-        border-color:blue;
-        animation-delay:0.25s;
-      }
-
-      @keyframes load{
-        to{
-          width:6vw;
-          height:6vw;
-          margin-top:-3.5vw;
-          margin-left:-3.5vw;
-        }
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="indexStyle.css">
   </head>
   <body>
-    <div id="desktop">
-      <div id="shadow"></div>
+    <div id="desktopwrapper">
+      <div id="desktop">
+        <div id="test"></div>
+        <div id="selectbox"></div>
+        <div id="shadow"></div>
+      </div>
+    </div>
+    <div id="context">
+      <div class="contextitem">Open</div>
+      <div class="contextitem">Open All</div>
+      <div class="contextitem">Rename</div>
+      <div class="contextitem">Pin to taskbar</div>
+      <div class="contextitem">Pin</div>
+      <div class="contextitem">Unpin</div>
+      <div class="contextitem">Open new</div>
+    </div>
+    <div id="searchbar">
+      <div id="searchbarbar" expanded="false">
+        <div class="sbbitem" onclick=sbbToggle(this)>
+          <div id="sbbicon" style="transform:rotate(90deg)">|||</div>
+          <div id="sbblabel"><b>SEARCH</b></div>
+        </div>
+        <div class="sbbitem" onclick=sbbHome()>
+          <div id="sbbicon" style="background-image:url(http://picturelements.github.io/images/win_icons/homehome.png)"></div>
+          <div id="sbblabel">Home</div>
+        </div>
+        <div class="sbbitem2" onclick=openSettings()>
+          <div id="sbbicon" style="background-image:url(http://picturelements.github.io/images/win_icons/cog.png)"></div>
+          <div id="sbblabel">Settings</div>
+        </div>
+        <div class="sbbitem2" onclick=togglePower() style="display:none">
+          <div id="sbbicon" style="background-image:url(http://picturelements.github.io/images/win_icons/power.png)"></div>
+          <div id="sbblabel">Power</div>
+        </div>
+      </div>
+      <div id="powerbar">
+        <div class="poweritem">Restart</div>
+        <div class="poweritem">Power off</div>
+      </div>
+      <div id="innerbar"></div>
+    </div>
+    <div id="clockbar" style="display:none;">
+      <p id="clocklbl"></p>
+      <table id="calendar">
+      </table>
+      <div id="clock">
+        <div id="hour"></div>
+        <div id="minute"></div>
+        <div id="second"></div>
+        <div id="seconddot"></div>
+      </div>
+      <p onclick=openSettings() id="edittime">Edit time and date...</p>
     </div>
     <div id="taskbar">
       <div id="home"></div>
-      <input id="search" placeholder="Search my GitHub"></input>
-      <div id="time">22:20<br>2016-10-07</div>
-      <div class="taskbaricon" onclick=selectIcon(event,0,true) id="null" type="0" activelevel="0" title="Home">
-        <div class="smallicon" style="background-image:url(http://picturelements.github.io/images/win_icons/home.png);"></div>
-      </div>
-      <div class="taskbaricon" onclick=selectIcon(event,1,true) id="null" type="1" activelevel="0" title="Sudoku Solver">
-        <div class="smallicon" style="background-image:url(http://picturelements.github.io/images/win_icons/sudokusolver.png);"></div>
-      </div>
-      <div class="taskbaricon" onclick=selectIcon(event,2,true) id="null" type="2" activelevel="0" title="Mandelbrot Generator">
-        <div class="smallicon" style="background-image:url(http://picturelements.github.io/images/win_icons/mandelbrot.png);"></div>
+      <input id="search" placeholder="Search in PeOS" autocomplete="off"></input>
+      <div id="time" onclick=toggleClock()>22:20<br>2016-10-07</div>
+    </div>
+    <div id="settingsbuffer" style="display:none">
+      <div id="settingscontainer">
+        <h>Time and Date</h>
+        <p>Time zone:</p>
+        <select id="timezone" onchange=updateTime()>
+          <option>Local</option>
+          <option>Custom offset</option>
+        </select>
+        <input id="prectz" disabled="true" placeholder="Time offset in minutes" oninput=newTime()></input>
+        <input id="dateset" type="date" oninput=newTime()></input>
+        <p id="tzlbl"></p>
+        <br>
+        <button onclick=setTime()>Set time</button>
+        <h>Filenames</h>
+        <p>Reset all filenames to their defaults. This action will take effect immediately and cannot be undone.</p>
+        <button onclick=resetNames()>Reset to default</button>
+        <h>Windows</h>
+        <p>Set the default size of opened window. Default is 40x25.<br><br><span id="winW">Window width: 40</span></p>
+        <input class="sizeslider" type="range" min="20" max="100" value="40" oninput=updateSize(0)></input>
+        <p id="winH">Window height: 25</p>
+        <input class="sizeslider" type="range" min="15" max="80" value="25" oninput=updateSize(1)></input>
+        <br>
+        <br>
       </div>
     </div>
-    <script>
-      var xStart,yStart,selWin=0;
-      var prevX=0,prevY=0;
-      var clicked=false,resize=false,setFullscreen=0,attr;
-      var windows=[],winCount=0;
-
-      var programData=[
-        {name: "Home", url: "http://picturelements.github.io/index2", icon: "home"},
-        {name: "Sudoku Solver", url: "http://picturelements.github.io/sudokuSolver", icon: "sudokusolver"},
-        {name: "Mandelbrot Generator", url: "http://picturelements.github.io/mandelbrot", icon: "mandelbrot"},
-        {name: "Pitchfork Emporium", url: "http://pitchforkemporium.github.io/", icon: "pitchforkemporium"},
-        {name: "Boids", url: "http://aquaplexus.net/fishSim", icon: "boids"},
-        {name: "HTML Editor", url: "http://picturelements.github.io/editor", icon: "htmleditor"},
-        {name: "Bézier", url: "http://picturelements.github.io/bezier", icon: "bezier"},
-        {name: "Is it Prime?", url: "http://picturelements.github.io/isitprime", icon: "isitprime"},
-        {name: "N:th Prime", url: "http://picturelements.github.io/nthPrime", icon: "nthprime"},
-        {name: "reddit Live 2.0", url: "http://picturelements.github.io/redditLive", icon: "redditlive"},
-        {name: "Egg Hunt", url: "http://picturelements.github.io/egghunt", icon: "egghunt"},
-        {name: "Game of Life", url: "http://aquaplexus.net/gameoflife", icon: "gameoflife"},
-        {name: "Hit Lawyer", url: "http://picturelements.github.io/hitLawyer", icon: "hitlawyer"},
-        {name: "Fractal", url: "http://aquaplexus.net/fractal", icon: "fractal"},
-        {name: "Multiples", url: "http://picturelements.github.io/multiples", icon: "multiples"},
-        {name: "Fireworks", url: "http://aquaplexus.net/firework", icon: "fireworks"},
-        {name: "Phone Snake", url: "http://picturelements.github.io/phonesnake", icon: "phonesnake"},
-        {name: "Back Dropper", url: "http://picturelements.github.io/backdropper", icon: "backdropper"},
-        {name: "Parrots", url: "http://picturelements.github.io/parrots", icon: "parrots"},
-        {name: "Smoke", url: "http://picturelements.github.io/smoke", icon: "smoke"},
-        {name: "404.html", url: "http://picturelements.github.io/404", icon: "404"}
-      ];
-
-      function setLinks(){
-        var parent=document.getElementById("desktop");
-        for (var i=0;i<programData.length;i++){
-          var el=document.createElement("div");
-          el.setAttribute("class","desktoplink");
-          el.setAttribute("title",programData[i].name);
-          el.setAttribute("onclick","selectIcon(event,"+i+",false)");
-          el.innerHTML="<div class=\"dimg\" style=\"background-image:url(http://picturelements.github.io/images/win_icons/"+programData[i].icon+".png)\"></div> <p class=\"ddesc\">"+programData[i].name+"</p>"
-          parent.appendChild(el);
-        }
-      }
-      setLinks();
-
-      function addWindow(id){
-        //enables nested "Home" pages 
-        tmpUrl=id==0?programData[id].url+"?"+(new Date().getTime()):programData[id].url;
-        var elem=document.createElement("div");
-        elem.setAttribute("class","window");
-        var inner="<div class=\"infobar\" id=\""+winCount+"\"><div class=\"close\" title=\"Close\" onclick=closeWin("+winCount+")>X</div><div class=\"max\" title=\"Toggle\" onclick=toggle("+winCount+")>◳</div><div class=\"min\" title=\"Minimize\" onclick=minWin("+winCount+")>_</div><div class=\"reload\" title=\"Reload\" onclick=reloadWin("+winCount+")>↻</div><div class=\"winicon\" style=\"background-image:url(http://picturelements.github.io/images/win_icons/"+programData[id].icon+".png)\"></div><div class=\"wintitle\">"+programData[id].name+"</div></div><div id=\"loader\"></div><div id=\"loader2\"></div><div id=\"loader3\"></div><iframe class=\"content\" src=\""+tmpUrl+"\"></iframe><div class=\"resize\" scale=\"lw\"></div><div class=\"resize\" scale=\"lwh\"></div><div class=\"resize\" scale=\"h\"></div><div class=\"resize\" scale=\"wh\"></div><div class=\"resize\" scale=\"w\"></div>";
-        elem.innerHTML=inner;
-        elem.setAttribute("active",true);
-        document.getElementById("desktop").appendChild(elem);
-        var resizers=elem.getElementsByClassName("resize");
-        for (var i=0;i<resizers.length;i++){
-          resizers[i].addEventListener("mousedown",function(event){try{press(event,true);}catch(e){}});
-        }
-        var elm=elem.getElementsByClassName("infobar")[0];
-        elm.addEventListener("mousedown",function(event){try{press(event,false);}catch(e){}});
-        elem.style.left=0.3*window.innerWidth+"px";
-        elem.style.top=Math.abs(window.innerHeight/2-0.125*window.innerWidth)+"px";
-        windows.push({
-          xPos:[0.3*window.innerWidth,0],
-          yPos:[Math.abs(window.innerHeight/2-0.125*window.innerWidth),0],
-          z:winCount-1,   //I'm not entirely sure why this works...
-          sizeX:[40,100],
-          sizeY:[25,(window.innerHeight/window.innerWidth)*100-3],
-          edit:0,
-          collapsed:false
-        });
-
-        //set default taskbar icons to active instead of adding another icon
-        if (id<3){
-          var icon=document.getElementsByClassName("taskbaricon")[id];
-          if (icon.getAttribute("id")=="null"){
-            icon.id=winCount;
-            icon.setAttribute("type",id);
-            icon.setAttribute("activelevel",2);
-            icon.setAttribute("onclick","minWin("+winCount+")");
-            moveToTop(winCount);
-            winCount++;
-            return;
-          }
-        }
-
-        var iconEl=document.createElement("div");
-        iconEl.setAttribute("class","taskbaricon");
-        iconEl.setAttribute("id",winCount);
-        iconEl.setAttribute("type",id);
-        iconEl.setAttribute("activelevel",2);
-        iconEl.setAttribute("title",programData[id].name);
-        iconEl.setAttribute("onclick","minWin("+winCount+")");
-        iconEl.innerHTML="<div class=\"smallicon\" style=\"background-image:url(http://picturelements.github.io/images/win_icons/"+programData[id].icon+".png);\"></div>";
-        document.getElementById("taskbar").appendChild(iconEl);
-        moveToTop(winCount);
-        winCount++;
-      }
-
-      document.body.addEventListener("mousedown",function(event){winSelect=true; xStart=event.clientX; yStart=event.clientY;});
-      document.body.addEventListener("mousemove",function(event){try{moveWindow(event);}catch(e){}});
-      document.body.addEventListener("mouseup",function(event){try{release(event);}catch(e){}});
-
-      function press(evt,rez){
-        var id=rez?evt.target.parentElement.getElementsByClassName("infobar")[0].id:evt.target.id;
-        selWin=id;
-        xStart=event.clientX;
-        yStart=event.clientY;
-        clicked=true;
-        document.getElementsByClassName("content")[id].style.pointerEvents="none";
-        moveToTop(id);
-        resize=rez;
-        if (resize){
-          attr=evt.target.getAttribute("scale");
-        }
-      }
-
-      function release(event){
-        if (clicked){
-          var edit=windows[selWin].edit;
-          if (resize){
-            var mult=attr.includes("l")?-1:1;
-            if (attr.includes("w")){windows[selWin].sizeX[edit]=Math.max(windows[selWin].sizeX[edit]+((event.clientX-xStart)*mult/window.innerWidth*100),20);}
-            if (attr.includes("h")){windows[selWin].sizeY[edit]=Math.max(windows[selWin].sizeY[edit]+((event.clientY-yStart)/window.innerWidth*100),15);}
-            if (mult==-1){
-              windows[selWin].xPos[edit]+=(evt.clientX-xStart);
-            }
-          }else{
-            if (setFullscreen>0){
-              edit=(setFullscreen==1?1:0);
-              windows[selWin].edit=edit;
-              windows[selWin].xPos[edit]=setFullscreen<3?0:window.innerWidth/2;
-              windows[selWin].yPos[edit]=0;
-              windows[selWin].sizeX[edit]=(setFullscreen==1?100:50);
-              windows[selWin].sizeY[edit]=window.innerHeight/window.innerWidth*100-3;
-              var elem=document.getElementsByClassName("window")[selWin].style;
-              elem.left=setFullscreen<3?0:"50vw";
-              elem.top=0;
-              elem.width=setFullscreen==1?"100vw":"50vw";
-              elem.height=windows[selWin].sizeY[edit]+"vw";
-              elem.transition="100ms";
-              setTimeout(function(){elem.transition="none";},100);
-              document.getElementById("shadow").style.opacity=0;
-              setFullscreen=0;
-            }else{
-              windows[selWin].xPos[edit]+=(event.clientX-xStart);
-              windows[selWin].yPos[edit]+=(event.clientY-yStart);
-            }
-          }
-          clicked=false;
-          document.getElementsByClassName("content")[selWin].style.pointerEvents="auto";
-        }
-      }
-
-      function moveWindow(evt){
-        if (clicked){
-          var elem=document.getElementsByClassName("window")[selWin];
-          var sW=windows[selWin];
-          if (resize){
-            var mult=attr.includes("l")?-1:1;
-            if (attr.includes("w")){elem.style.width=(sW.sizeX[sW.edit]+(evt.clientX-xStart)/window.innerWidth*100*mult)+"vw";}
-            if (attr.includes("h")){elem.style.height=(sW.sizeY[sW.edit]+(evt.clientY-yStart)/window.innerWidth*100)+"vw";}
-            if (mult==-1){    //&&parseInt(elem.style.width.replace("vw"))>=20
-              elem.style.left=(sW.xPos[sW.edit]+evt.clientX-xStart)+"px";
-            }
-          }else{
-            elem.style.left=(sW.xPos[sW.edit]+evt.clientX-xStart)+"px";
-            elem.style.top=(sW.yPos[sW.edit]+evt.clientY-yStart)+"px";
-            if (sW.edit==1&&sW.xPos[sW.edit]==0&&sW.sizeX[sW.edit]==100&&evt.clientY-yStart>=window.innerHeight/100){
-              //alert("lol");
-              sW.edit=0;
-              var sPerc=evt.clientX/window.innerWidth;
-              var el=document.getElementsByClassName("window")[selWin];
-              el.style.width=sW.sizeX[0]+"vw";
-              el.style.height=sW.sizeY[0]+"vw";
-              sW.xPos[0]=evt.clientX-(sW.sizeX[0]/100*window.innerWidth)*sPerc;
-              sW.yPos[0]=evt.clientY-0.0125*window.innerWidth;
-              el.style.left=sW.xPos[0]+"px";
-              el.style.top=sW.yPos[0]+"px";
-              el.style.transition="50ms";
-              setTimeout(function(){el.style.transition="none";},50);
-            }else if (evt.clientY<=window.innerWidth/100){
-              document.getElementById("shadow").style="opacity:1; width:100%; left:0";
-              setFullscreen=1;
-            }else if (evt.clientX<=window.innerWidth/100){
-              document.getElementById("shadow").style="opacity:1; width:50%; left:0";
-              setFullscreen=2;
-            }else if (evt.clientX>=window.innerWidth/100*99){
-              document.getElementById("shadow").style="opacity:1; width:50%; left:50%";
-              setFullscreen=3;
-            }else{
-              document.getElementById("shadow").style.opacity="0";
-              setFullscreen=0;
-            }
-          } 
-        }
-      }
-
-      function closeWin(id){
-        document.getElementsByClassName("window")[id].style.display="none";
-        document.getElementsByTagName("iframe")[id].src="";
-        var icons=document.getElementsByClassName("taskbaricon");
-        for (var i=0;i<icons.length;i++){
-          if (icons[i].id==id){
-            if (i<3){
-              icons[i].id="null";
-              icons[i].setAttribute("activelevel",0);
-              icons[i].setAttribute("onclick","selectIcon(event,"+i+",true)");
-              for (var n=i+1;n<icons.length;n++){
-                if (icons[n].getAttribute("type")==icons[i].getAttribute("type")){
-                  icons[i].id=icons[n].id;
-                  icons[n].id="null";
-                  icons[n].setAttribute("type","null");
-                  icons[n].style.opacity="0";
-                  setTimeout(function(){icons[n].style.display="none"; findTopWin(); clicked=false;},500);
-                  return;
-                }
-              }
-            }else{
-              icons[i].style.opacity="0";
-              setTimeout(function(){icons[i].style.display="none"; findTopWin(); clicked=false;},500);
-              return;
-            }
-          }
-        }
-        findTopWin();
-        clicked=false;
-      }
-
-      function reloadWin(id){
-        var srcEl=document.getElementsByTagName("iframe")[id];
-        var src=srcEl.src;
-        srcEl.src=src;
-        clicked=false;
-      }
-
-      function toggle(id){
-        windows[id].edit=Math.abs(windows[id].edit-1);
-        var elem=document.getElementsByClassName("window")[id];
-        var edit=windows[id].edit;
-        elem.style.width=windows[id].sizeX[edit]+"vw";
-        elem.style.height=windows[id].sizeY[edit]+"vw";
-        elem.style.left=windows[id].xPos[edit]+"px";
-        elem.style.top=windows[id].yPos[edit]+"px";
-        moveToTop(id);
-        findTopWin();
-        elem.style.transition="100ms";
-        setTimeout(function(){elem.style.transition="none";},100);
-      }
-
-      function minWin(id){
-        if (document.getElementsByClassName("window")[id].getAttribute("active")=="true"||windows[id].collapsed){
-          windows[id].collapsed=!windows[id].collapsed;
-        }
-        moveToTop(id);
-        findTopWin();
-      }
-
-      function findTopWin(){
-        var max=-10,maxId=-1;
-        var wins=document.getElementsByClassName("window");
-        for (var i=0;i<windows.length;i++){
-          if (wins[i].style.display=="block"&&windows[i].z>max){
-            max=windows[i].z;
-            maxId=i;
-          }
-        }
-        if (maxId>=0){wins[maxId].setAttribute("active",true);}
-        elem=document.getElementsByClassName("taskbaricon");
-        for (var i=0;i<elem.length;i++){
-          if (elem[i].getAttribute("activelevel")==2){elem[i].setAttribute("activelevel",1);}
-          if (elem[i].id==maxId){elem[i].setAttribute("activelevel",2);}
-        }
-      }
-
-      function moveToTop(id){
-        var max=0;
-        var wins=document.getElementsByClassName("window");
-        for (var i=0;i<windows.length;i++){
-          if (windows[i].z>max){max=windows[i].z;}
-          wins[i].setAttribute("active",false);
-        }
-        if (max!=windows[id].z){
-          wins[id].style.zIndex=max+1;
-          windows[id].z=max+1;
-        }
-        wins[id].setAttribute("active",true);
-
-        var collapsed=windows[id].collapsed;
-        var elem=document.getElementsByClassName("window")[id];
-        elem.style.display=collapsed?"none":"block";
-        elem=document.getElementsByClassName("taskbaricon");
-        for (var i=0;i<elem.length;i++){
-          elem[i].setAttribute("activelevel",elem[i].getAttribute("activelevel")==0?0:1);
-          if (elem[i].id==id){
-            elem[i].setAttribute("activelevel",(collapsed?1:2));
-          }
-        }
-      }
-
-      function selectIcon(evt,id,singleClick){
-        if (Math.abs(evt.clientX-prevX)<5&&Math.abs(evt.clientY-prevY)<5||singleClick){
-          addWindow(id);
-          prevX=-100;
-        }else{
-          prevX=evt.clientX;
-          prevY=evt.clientY;
-        }
-      }
-
-      backdrop.add("circles","#desktop");
-      backdrop.multiData("circles",{ 
-        color: "rgba(255,255,255,0.05)",
-        circleNo: 100,
-        minSize: 5,
-        maxSize: 30
-      });
-      backdrop.addCSS("-webkit-filter:blur(1px)");
-      backdrop.start(10);
-
-      window.onresize=function(){
-        backdrop.resize();
-      }
-
-      function newTime(){
-        var date=new Date();
-        var month=date.getMonth()+1,day=date.getDate(),hour=date.getHours(),minute=date.getMinutes();
-        document.getElementById("time").innerHTML=""+(hour<10?"0"+hour:hour)+":"+(minute<10?"0"+minute:minute)+"<br>"+date.getFullYear()+"-"+(month<10?"0"+month:month)+"-"+(day<10?"0"+day:day);
-      }
-
-      setInterval(newTime,1000);
-    </script>
+    <div id="resultsbuffer" style="display:none">
+      <div id="resultsbar">
+        <div id="innerresults">
+          <div id="searchmsg">Start typing to browse programs, other programs, or programs.<br><br><pt>Protip: press any arrow key to get all programs.</pt></div>
+        </div>
+      </div>
+    </div>
+    <div id="mainbuffer" style="display:none">
+      <div id="programbar">
+        <div class="pbitem">
+          <div id="pbicon"></div>
+          <div id="pbtitle">LOLTEST</div>
+        </div>
+      </div>
+    </div>
   </body>
+  <script src="indexMotor.js"></script>
 </html>
