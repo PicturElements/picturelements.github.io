@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-
 <html>
   <head>
     <title>Home - PicturElements</title>
     <link rel="icon" href="pelement.png">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="indexStyle.css"><link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900" rel="stylesheet" type="text/css">
     <script src="http://picturelements.github.io/testdropper.js"></script>
-    <link rel="stylesheet" type="text/css" href="indexStyle.css">
   </head>
-  <body>
-    <div id="desktopwrapper">
+  <body oncontextmenu="return contextShow">
+    <button id="gofull" style="display:none; position:fixed; z-index:100;">GO FULLSCREEN</button>
+    <div id="desktopwrapper" class="grad backOverride">
       <div id="desktop">
         <div id="test"></div>
         <div id="selectbox"></div>
@@ -24,6 +23,10 @@
       <div class="contextitem">Pin</div>
       <div class="contextitem">Unpin</div>
       <div class="contextitem">Open new</div>
+      <div class="contextitem">Close</div>
+      <div class="contextitem">Fullscreen</div>
+      <div class="contextitem">Enable context menu</div>
+      <div class="contextitem">Change wallpaper</div>
     </div>
     <div id="searchbar">
       <div id="searchbarbar" expanded="false">
@@ -50,11 +53,11 @@
       </div>
       <div id="innerbar"></div>
     </div>
-    <div id="clockbar" style="display:none;">
+    <div id="clockbar" class="specColor" style="display:none;">
       <p id="clocklbl"></p>
       <table id="calendar">
       </table>
-      <div id="clock">
+      <div class="clock specColor">
         <div id="hour"></div>
         <div id="minute"></div>
         <div id="second"></div>
@@ -65,8 +68,17 @@
     <div id="taskbar">
       <div id="home"></div>
       <input id="search" placeholder="Search in PeOS" autocomplete="off"></input>
-      <div id="time" onclick=toggleClock()>22:20<br>2016-10-07</div>
+      <div id="infocorner">
+        <div id="time" onclick=toggleClock()>22:20<br>2016-10-07</div>
+        <div id="wifi"></div>
+        <div id="battery">
+          <!--<div id="batterylvl"></div>-->
+        </div>
+      </div>
     </div>
+    <div id="loadscreen"></div>
+    <style id="specCols"></style>
+  
     <div id="settingsbuffer" style="display:none">
       <div id="settingscontainer">
         <h>Time and Date</h>
@@ -88,6 +100,13 @@
         <input class="sizeslider" type="range" min="20" max="100" value="40" oninput=updateSize(0)></input>
         <p id="winH">Window height: 25</p>
         <input class="sizeslider" type="range" min="15" max="80" value="25" oninput=updateSize(1)></input>
+        <h id="backH">Color scheme/Backgrounds</h>
+        <p>Color scheme</p>
+        <div id="colorbar"></div>
+        <br>
+        <p>Desktop background</p>
+        <div id="backbar"></div>
+        <div id="preview" class="grad backOverride"></div>
         <br>
         <br>
       </div>
@@ -103,11 +122,23 @@
       <div id="programbar">
         <div class="pbitem">
           <div id="pbicon"></div>
-          <div id="pbtitle">LOLTEST</div>
+          <div id="pbtitle"></div>
         </div>
       </div>
+      <div id="puzzlebar">
+        <div class="puzzle specColor" wide="false">Test 1</div>
+        <div class="puzzle specColor" wide="true">Test 2</div>
+        <div class="puzzle specColor" wide="false">Test 3</div>
+        <div class="puzzle specColor" wide="true">Test 4</div>
+        <div class="puzzle specColor" wide="true">Test 5</div>
+        <div class="puzzle specColor" wide="false">Test 6</div>
+        <div class="puzzle specColor" wide="true">Test 7</div>
+        <div class="puzzle specColor" wide="false">Test 8</div>
+        <div class="puzzle specColor" wide="false">Test 9</div>
+        <div class="puzzle specColor" wide="true">Test 10</div>
+        <div class="puzzle specColor" wide="false">Test 11</div>
+        <div class="puzzle specColor" style="display:none" active></div>
+      </div>
     </div>
-  <button id="gofull">GO FULLSCREEN!</button>
   </body>
-  <script src="indexMotor.js"></script>
 </html>
