@@ -15,9 +15,14 @@ body{
   /*background: -moz-linear-gradient(-45deg, #3b679e 0%, #190d51 100%);
   background: -webkit-linear-gradient(-45deg, #3b679e 0%,#190d51 100%);
   background: linear-gradient(135deg, #3b679e 0%,#190d51 100%);*/
-  background: -moz-linear-gradient(-45deg, #64a4c4 0%, #1c5d9e 38%, #1c0935 100%);
+  /*background: -moz-linear-gradient(-45deg, #64a4c4 0%, #1c5d9e 38%, #1c0935 100%);
   background: -webkit-linear-gradient(-45deg, #64a4c4 0%,#1c5d9e 38%,#1c0935 100%);
   background: linear-gradient(135deg, #64a4c4 0%,#1c5d9e 38%,#1c0935 100%);
+  transition: background 500ms;*/
+  background-color:#222;
+  background-size:100vw 56vw;
+  background-position:center center;
+  background-repeat:no-repeat;
 }
 
 #desktop{
@@ -60,7 +65,7 @@ body{
 #context{
   display:none;
   position:fixed;
-  width:8vw;
+  min-width:8vw;
   min-height:2vw;
   background-color:white;
   z-index:15000;
@@ -72,11 +77,12 @@ body{
 .contextitem{
   display:block;
   position:relative;
-  width:8vw;
+  width:100%;
   height:2vw;
   font-size:1vw;
   line-height:2vw;
   text-indent:0.5vw;
+  margin-right:0.5vw;
 }
 
 .contextitem:hover{
@@ -86,7 +92,7 @@ body{
 .desktoplink{
   width:5vw;
   min-height:6vw;
-  margin-left:0.8vw;
+  margin-left:0.4vw;
   margin-top:0.4vw;
   z-index:0;
 }
@@ -170,15 +176,18 @@ body{
 }
 
 .window[active="true"] .infobar .reload{
-  background-color:#53f;
+  /*background-color:#53f;*/
+  background-color:rgba(255,255,255,0.1);
 }
 
 .window[active="true"] .infobar .min,.window[active="true"] .infobar .max,.window[active="true"] .infobar .close{
-  background-color:#31b;
+  /*background-color:#31b;*/
+  background-color:rgba(0,0,0,0.3);
 }
 
 .window[active="true"] .infobar .min:hover,.window[active="true"] .infobar .max:hover{
-  background-color:#009 !important;
+  /*background-color:#009 !important;*/
+  background-color:rgba(0,0,0,0.5) !important;
 }
 
 .reload,.max,.min,.close{
@@ -392,6 +401,59 @@ body{
   border:0.15vw solid #bbb;
 }
 
+#colorbar,#backbar{
+  display: block;
+  position: relative;
+  width: 96%;
+  height: 4.5vw;
+  left: 2%;
+  top: 0.5vw;
+}
+
+.coloroption,.backoption{
+  display:block;
+  position:relative;
+  float:left;
+  width:4.5vw;
+  height:4.5vw;
+  margin-right:1vw;
+  margin-bottom:0.5vw;
+}
+
+.coloroption[selected],.backoption[selected]{
+  outline:0.5vw solid #111;
+}
+
+#backbar{
+  height:11vw;
+  width:45%;
+  float:left;
+}
+
+.backoption{
+  background-size:100% 100%;
+  margin-bottom:1vw;
+}
+
+.col{
+  display:block;
+  position:relative;
+  width:4.5vw;
+  height:1.5vw;
+}
+
+#preview {
+  width: 55%;
+  display: block;
+  position: relative;
+  height: 16.5vw;
+  float: right;
+  background-size: 100% 100%;
+  margin-top: 0.5vw;
+  margin-bottom: 2vw;
+  background-color:#ccc;
+}
+
 #clockbar{
   display:block;
   position:fixed;
@@ -400,9 +462,11 @@ body{
   width:25vw;
   height:15vw;
   background-color:#ddd;
+  border-width: 0.5vw;
+  border-style: solid;
 }
 
-#clock{
+.clock{
   display:block;
   position:absolute;
   top:2.5vw;
@@ -505,7 +569,7 @@ body{
   position:fixed;
   width:100%;
   height:3vw;
-  background-color:rgba(0,0,50,0.8);
+  background-color:rgba(0,0,0,0.8);
   bottom:0;
   z-index:10000;
 }
@@ -515,7 +579,7 @@ body{
   position:absolute;
   width:3.5vw;
   height:3vw;
-  background-color:#004;
+  background-color:black;
   transition:background-color 200ms;
   background-image:url("http://picturelements.github.io/images/win_icons/main.png");
   background-size:100% 100%;
@@ -558,7 +622,7 @@ body{
   left:0;
   bottom:-100vh;
   width:27.5vw;
-  max-height:calc(90vh - 3vw);
+  max-height:calc(80vh - 3vw);
   height:50vw;
   background-color:rgba(0,0,0,0.9);
   transition:opacity 300ms,bottom 200ms,width 200ms,height 200ms;
@@ -573,7 +637,7 @@ body{
   left:0;
   width:3.5vw;
   height:100%;
-  background-color:#004;
+  background-color:black;
   z-index:10;
   overflow:hidden;
   transition:width 200ms;
@@ -781,7 +845,7 @@ kw{
 
 .taskbaricon[activelevel="2"]{
   box-sizing:border-box;
-  border-bottom:0.25vw solid #29f;
+  border-bottom:0.25vw solid;
   background-color:rgba(150,150,255,0.3);
 }
 
@@ -797,15 +861,75 @@ kw{
   pointer-events:none;
 }
 
+#infocorner{
+  display:block;
+  position:absolute;
+  right:0;
+  min-width:1vw;
+  height:3vw;
+}
+
 #time{
   display:block;
-  position:fixed;
+  position:relative;
+  float:right;
   right:1vw;
-  bottom:0.3vw;
+  top:0.5vw;
   color:#eee;
   font-size:0.9vw;
   text-align:center;
   cursor:default;
+}
+
+#wifi{
+  display:block;
+  position:relative;
+  float:right;
+  width:1vw;
+  height:1vw;
+  margin-right:2.3vw;
+  top:1.05vw;
+  background-image:url("http://picturelements.github.io/images/win_icons/wifi.png");
+  background-size:1vw 8vw;
+  background-repeat:no-repeat;
+  animation:signal 40s steps(7,end) infinite;
+}
+
+#battery{
+  display:block;
+  position:relative;
+  float:right;
+  width:1.2vw;
+  height:0.6vw;
+  margin-right:1vw;
+  top:1.3vw;
+  background-image:url("http://picturelements.github.io/images/win_icons/battery.png");
+  background-size:1.2vw 0.6vw;
+  background-repeat:no-repeat;
+}
+
+#batterylvl{
+  display:block;
+  position:absolute;
+  left:10%;
+  top:20%;
+  width:60%;
+  height:60%;
+  background-color:white;
+  transition:width 200ms;
+}
+
+#batterylvl:hover{
+  width:30%;
+}
+
+@keyframes signal{
+  to{background-position:0 -7vw}
+}
+
+#innerbar{
+  width:100%;
+  height:100%;
 }
 
 #programbar{
@@ -861,6 +985,82 @@ kw{
   line-height: 2vw;
   font-size: 1vw;
   margin-top:1vw;
+}
+
+#puzzlebar{
+  display:block;
+  position:absolute;
+  left:18.5vw;
+  width:39vw;
+  height:100%;
+  overflow-x:hidden;
+  overflow-y:auto;
+}
+
+.puzzle{
+  display:block;
+  position:relative;
+  float:left;
+  margin-left:0.5vw;
+  margin-top:0.5vw;
+  width:7vw;
+  height:7vw;
+  background-color:#006;
+  color:white;
+  font-size:1vw;
+  line-height:12vw;
+  text-indent:0.75vw;
+  cursor:default;
+}
+
+.puzzle[wide="true"]{
+  width:14.5vw;
+}
+
+.puzzle:active,.puzzle[active],.puzzle[style*="opacity: 0.2"]{
+  box-sizing:border-box;
+  border:0.25vw solid white;
+  line-height:11.5vw;
+  text-indent:0.5vw;
+}
+
+#loadscreen{
+  display:block;
+  position:fixed;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  background-color:black;
+  z-index:100000;
+  cursor:none !important;
+  transition:background-color 200ms, opacity 500ms;
+}
+
+#loadmsg {
+  display: block;
+  position: fixed;
+  text-align: center;
+  line-height: 80vh;
+  width: 100%;
+  font-size: 1.5vw;
+  font-weight: 300;
+  color: white;
+  bottom: 0;
+}
+
+#loadercontainer {
+  display: block;
+  position: fixed;
+  width: 100%;
+  height: 90%;
+}
+
+@keyframes fadescreen{
+  7.5%{opacity:1; background-color:black;}
+  15%{background-color:#268eee;}
+  99.9%{background-color:#268eee;}
+  100%{opacity:1; background-color:black;}
 }
 
 /*#loader,#loader2,#loader3{
@@ -950,3 +1150,25 @@ kw{
 ::-webkit-scrollbar-thumb:window-inactive {
   background: #777;
 }
+
+
+/*SPECIAL BACKGROUND COLORS*/
+/*.specColor{
+  background-color:#999;
+}
+
+.window[active="true"] .infoCol{
+  background-color:#aaa;
+}
+
+.borderCol{
+  border-color:#ddd !important;
+}*/
+
+/*RED - #600, #d42, #d44*/
+/*GREEN - #060, #3a2, #7f5*/
+/*BLUE - #005, #53f, #29f*/
+/*ORANGE - #a40, #d72, #da4*/
+/*PURPLE - #317, #74a, #85f*/
+/*DARK - #222, #333, #777*/
+/*LIGHT - #999, #aaa, #ddd*/
