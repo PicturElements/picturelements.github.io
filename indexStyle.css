@@ -282,7 +282,7 @@ body{
   height: 3vw;
   top: 1.8vw;
   left: 1.8vw;
-  background-image: url(http://picturelements.github.io/images/win_icons/error.png);
+  background-image: url(https://picturelements.github.io/images/win_icons/error.png);
   background-size:100% 100%;
 }
 
@@ -475,7 +475,7 @@ body{
   height:9vw;
   background-color:#004;
   border-radius:100%;
-  background-image:url("http://picturelements.github.io/images/win_icons/clockface.png");
+  background-image:url("https://picturelements.github.io/images/win_icons/clockface.png");
   background-size:100% 100%;
 }
 
@@ -581,7 +581,7 @@ body{
   height:3vw;
   background-color:black;
   transition:background-color 200ms;
-  background-image:url("http://picturelements.github.io/images/win_icons/main.png");
+  background-image:url("https://picturelements.github.io/images/win_icons/main.png");
   background-size:100% 100%;
   background-position:0 0.05vw;
 }
@@ -889,7 +889,7 @@ kw{
   height:1vw;
   margin-right:2.3vw;
   top:1.05vw;
-  background-image:url("http://picturelements.github.io/images/win_icons/wifi.png");
+  background-image:url("https://picturelements.github.io/images/win_icons/wifi.png");
   background-size:1vw 8vw;
   background-repeat:no-repeat;
   animation:signal 40s steps(7,end) infinite;
@@ -903,7 +903,7 @@ kw{
   height:0.6vw;
   margin-right:1vw;
   top:1.3vw;
-  background-image:url("http://picturelements.github.io/images/win_icons/battery.png");
+  background-image:url("https://picturelements.github.io/images/win_icons/battery.png");
   background-size:1.2vw 0.6vw;
   background-repeat:no-repeat;
 }
