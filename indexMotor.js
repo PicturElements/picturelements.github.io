@@ -1,12 +1,3 @@
-/* TODO:
-*  Wifi bar, battery perc icons
-*  Add "reset time" option
-*  Add power menu
-*  Fix index=-1 bug on icon select
-*  Sort programs in programbar
-*  Make anything work in IE
-*/
-
 var xStart=0,yStart=0,selWin=0;
 var prevX=0,prevY=0;
 var clicked=false,resize=false,setFullscreen=0,attr,select=false,preventEvents=false,expanded=false,slide=false;
@@ -53,28 +44,28 @@ if (bi!=null){backId=parseInt(bi);}
 
 var programData=[
   {name: "Error", url: "", icon: "error", keywords: ""},
-  {name: "Home", url: "http://picturelements.github.io/index2", icon: "home", keywords: "home,homepage,index,information"},
-  {name: "Sudoku Solver", url: "http://picturelements.github.io/sudokuSolver", icon: "sudokusolver", keywords: "sudoku,solver,games,interactive"},
-  {name: "Mandelbrot", url: "http://picturelements.github.io/mandelbrot", icon: "mandelbrot", keywords: "mandelbrot,julia,set,generator,fractal,interactive,math,canvas"},
-  {name: "Pitchfork Emporium", url: "http://pitchforkemporium.github.io/", icon: "pitchforkemporium", keywords: "pitchfork,emporium,store,webshop,reddit,api"},
-  {name: "Boids", url: "http://aquaplexus.net/fishSim", icon: "boids", keywords: "boids,craig,reynolds,interactive,fish,simulation"},
-  {name: "HTML Editor", url: "http://picturelements.github.io/editor", icon: "htmleditor", keywords: "html,editor,css,interactive,gadget"},
-  {name: "Bézier", url: "http://picturelements.github.io/bezier", icon: "bezier", keywords: "bezier,bézier,interactive,gadget"},
-  {name: "Is it Prime?", url: "http://picturelements.github.io/isitprime", icon: "isitprime", keywords: "prime,generator,math,information"},
-  {name: "N:th Prime", url: "http://picturelements.github.io/nthPrime", icon: "nthprime", keywords: "nth,prime,generator,math,information"},
-  {name: "reddit Live 2.0", url: "http://picturelements.github.io/redditLive", icon: "redditlive", keywords: "reddit,live,api,information"},
-  {name: "Egg Hunt", url: "http://picturelements.github.io/egghunt", icon: "egghunt", keywords: "egg,hunt,confused,travolta,game,reddit,easter"},
-  {name: "Game of Life", url: "http://aquaplexus.net/gameoflife", icon: "gameoflife", keywords: "game,life,interactive,simulation,conway"},
-  {name: "Hit Lawyer", url: "http://picturelements.github.io/hitLawyer", icon: "hitlawyer", keywords: "hit,lawyer,gadget"},
-  {name: "Fractal", url: "http://aquaplexus.net/fractal", icon: "fractal", keywords: "fractal,generator,interactive,math"},
-  {name: "Multiples", url: "http://picturelements.github.io/multiples", icon: "multiples", keywords: "multiples,math,interactive"},
-  {name: "Fireworks", url: "http://aquaplexus.net/firework", icon: "fireworks", keywords: "fireworks,interactive,gadget,canvas"},
-  {name: "Phone Snake", url: "http://picturelements.github.io/phonesnake", icon: "phonesnake", keywords: "phone,snake,game,interactive"},
-  {name: "Back Dropper", url: "http://picturelements.github.io/backdropper", icon: "backdropper", keywords: "back,dropper,library,background,canvas"},
-  {name: "Parrots", url: "http://picturelements.github.io/parrots", icon: "parrots", keywords: "parrots,dank,reddit,party,epilepsy"},
-  {name: "Smoke", url: "http://picturelements.github.io/smoke", icon: "smoke", keywords: "smoke,3d,canvas,math"},
-  {name: "404.html", url: "http://picturelements.github.io/404", icon: "404", keywords: "404,terminal,console,greentext"},
-  {name: "Matrix", url: "http://picturelements.github.io/matrix", icon: "matrix", keywords: "matrix,math,multiplication"}
+  {name: "Home", url: "https://picturelements.github.io/index2", icon: "home", keywords: "home,homepage,index,information"},
+  {name: "Sudoku Solver", url: "https://picturelements.github.io/sudokuSolver", icon: "sudokusolver", keywords: "sudoku,solver,games,interactive"},
+  {name: "Mandelbrot", url: "https://picturelements.github.io/mandelbrot", icon: "mandelbrot", keywords: "mandelbrot,julia,set,generator,fractal,interactive,math,canvas"},
+  {name: "Pitchfork Emporium", url: "https://pitchforkemporium.github.io/", icon: "pitchforkemporium", keywords: "pitchfork,emporium,store,webshop,reddit,api"},
+  {name: "Boids", url: "https://aquaplexus.net/fishSim", icon: "boids", keywords: "boids,craig,reynolds,interactive,fish,simulation"},
+  {name: "HTML Editor", url: "https://picturelements.github.io/editor", icon: "htmleditor", keywords: "html,editor,css,interactive,gadget"},
+  {name: "Bézier", url: "https://picturelements.github.io/bezier", icon: "bezier", keywords: "bezier,bézier,interactive,gadget"},
+  {name: "Is it Prime?", url: "https://picturelements.github.io/isitprime", icon: "isitprime", keywords: "prime,generator,math,information"},
+  {name: "N:th Prime", url: "https://picturelements.github.io/nthPrime", icon: "nthprime", keywords: "nth,prime,generator,math,information"},
+  {name: "reddit Live 2.0", url: "https://picturelements.github.io/redditLive", icon: "redditlive", keywords: "reddit,live,api,information"},
+  {name: "Egg Hunt", url: "https://picturelements.github.io/egghunt", icon: "egghunt", keywords: "egg,hunt,confused,travolta,game,reddit,easter"},
+  {name: "Game of Life", url: "https://aquaplexus.net/gameoflife", icon: "gameoflife", keywords: "game,life,interactive,simulation,conway"},
+  {name: "Hit Lawyer", url: "https://picturelements.github.io/hitLawyer", icon: "hitlawyer", keywords: "hit,lawyer,gadget"},
+  {name: "Fractal", url: "https://aquaplexus.net/fractal", icon: "fractal", keywords: "fractal,generator,interactive,math"},
+  {name: "Multiples", url: "https://picturelements.github.io/multiples", icon: "multiples", keywords: "multiples,math,interactive"},
+  {name: "Fireworks", url: "https://aquaplexus.net/firework", icon: "fireworks", keywords: "fireworks,interactive,gadget,canvas"},
+  {name: "Phone Snake", url: "https://picturelements.github.io/phonesnake", icon: "phonesnake", keywords: "phone,snake,game,interactive"},
+  {name: "Back Dropper", url: "https://picturelements.github.io/backdropper", icon: "backdropper", keywords: "back,dropper,library,background,canvas"},
+  {name: "Parrots", url: "https://picturelements.github.io/parrots", icon: "parrots", keywords: "parrots,dank,reddit,party,epilepsy"},
+  {name: "Smoke", url: "https://picturelements.github.io/smoke", icon: "smoke", keywords: "smoke,3d,canvas,math"},
+  {name: "404.html", url: "https://picturelements.github.io/404", icon: "404", keywords: "404,terminal,console,greentext"},
+  {name: "Matrix", url: "https://picturelements.github.io/matrix", icon: "matrix", keywords: "matrix,math,multiplication"}
 ];
 
 document.body.addEventListener("mousedown",function(event){winSelect=true; xStart=event.clientX; yStart=event.clientY; hideSearch();});
@@ -129,7 +120,7 @@ function setup(){
     el.setAttribute("selected","false");
     el.setAttribute("onclick","selectIcon(event,"+i+",false)");
     el.addEventListener("mousedown",function(event){showContext(event,0)});
-    el.innerHTML="<div class=\"dimg\" style=\"background-image:url(http://picturelements.github.io/images/win_icons/"+programData[i].icon+".png)\"></div> <p class=\"ddesc\">"+programData[i].name+"</p>";
+    el.innerHTML="<div class=\"dimg\" style=\"background-image:url(https://picturelements.github.io/images/win_icons/"+programData[i].icon+".png)\"></div> <p class=\"ddesc\">"+programData[i].name+"</p>";
     parent.appendChild(el);
   }
   for (var i=0;i<taskArr.length;i++){
@@ -150,7 +141,7 @@ function setup(){
 setup();
 
 function setCols(){
-  document.getElementById("specCols").innerHTML=".specColor{background-color:"+colors[colId][0]+"; border-color:"+colors[colId][0]+";}\n.window[active=\"true\"] .infoCol{background-color:"+colors[colId][1]+";}\n.borderCol{border-color:"+colors[colId][2]+" !important;}\n.grad{background: -moz-linear-gradient(-45deg, "+colors[colId][3]+"); background: -webkit-linear-gradient(-45deg, "+colors[colId][3]+"); background: linear-gradient(135deg, "+colors[colId][3]+"); background: linear-gradient(135deg, "+colors[colId][3]+");}"+(backId!=0?".backOverride{background:none; background-image:url(http://picturelements.github.io/images/wallpapers/"+backgrounds[backId-1]+");}":"")+"";
+  document.getElementById("specCols").innerHTML=".specColor{background-color:"+colors[colId][0]+"; border-color:"+colors[colId][0]+";}\n.window[active=\"true\"] .infoCol{background-color:"+colors[colId][1]+";}\n.borderCol{border-color:"+colors[colId][2]+" !important;}\n.grad{background: -moz-linear-gradient(-45deg, "+colors[colId][3]+"); background: -webkit-linear-gradient(-45deg, "+colors[colId][3]+"); background: linear-gradient(135deg, "+colors[colId][3]+"); background: linear-gradient(135deg, "+colors[colId][3]+");}"+(backId!=0?".backOverride{background:none; background-image:url(https://picturelements.github.io/images/wallpapers/"+backgrounds[backId-1]+");}":"")+"";
 }
 
 function addWindow(id,title,contStr,w,h){
@@ -186,7 +177,7 @@ function addWindow(id,title,contStr,w,h){
   }else{
     elem.setAttribute("type",id);
   }
-  var inner="<div class=\"infobar infoCol\" id=\""+winCount+"\"><div class=\"close\" title=\"Close\" onclick=closeWin("+winCount+")>✕</div><div class=\"max\" title=\"Toggle\" onclick=toggle("+winCount+")>◳</div><div class=\"min\" title=\"Minimize\" onclick=minWin("+winCount+")>_</div><div class=\"reload\" title=\"Reload\" onclick=reloadWin("+winCount+")>↻</div><div class=\"winicon\" style=\"background-image:url(http://picturelements.github.io/images/win_icons/"+data.icon+".png)\"></div><div class=\"wintitle\">"+data.name+"</div></div><iframe class=\"content\" src=\""+(id==0?tmpUrl:"")+"\"></iframe><div class=\"loadingoverlay\"><div id=\"loader\"></div><div id=\"loader2\"></div><div id=\"loader3\"></div></div>"+err+"<div class=\"resize\" scale=\"lw\"></div><div class=\"resize\" scale=\"lwh\"></div><div class=\"resize\" scale=\"h\"></div><div class=\"resize\" scale=\"wh\"></div><div class=\"resize\" scale=\"w\"></div>";
+  var inner="<div class=\"infobar infoCol\" id=\""+winCount+"\"><div class=\"close\" title=\"Close\" onclick=closeWin("+winCount+")>✕</div><div class=\"max\" title=\"Toggle\" onclick=toggle("+winCount+")>◳</div><div class=\"min\" title=\"Minimize\" onclick=minWin("+winCount+")>_</div><div class=\"reload\" title=\"Reload\" onclick=reloadWin("+winCount+")>↻</div><div class=\"winicon\" style=\"background-image:url(https://picturelements.github.io/images/win_icons/"+data.icon+".png)\"></div><div class=\"wintitle\">"+data.name+"</div></div><iframe class=\"content\" src=\""+(id==0?tmpUrl:"")+"\"></iframe><div class=\"loadingoverlay\"><div id=\"loader\"></div><div id=\"loader2\"></div><div id=\"loader3\"></div></div>"+err+"<div class=\"resize\" scale=\"lw\"></div><div class=\"resize\" scale=\"lwh\"></div><div class=\"resize\" scale=\"h\"></div><div class=\"resize\" scale=\"wh\"></div><div class=\"resize\" scale=\"w\"></div>";
   elem.innerHTML=inner;
   elem.setAttribute("active",true);
   elem.id=winCount;
@@ -254,7 +245,7 @@ function addTaskbarIcon(id,count,actLvl,name,icon,stickied){
   iconEl.setAttribute("activelevel",actLvl);
   iconEl.setAttribute("title",name);
   iconEl.setAttribute("onclick",stickied?"selectIcon(event,"+id+",true)":"minWin("+count+")");
-  iconEl.innerHTML="<div class=\"smallicon\" style=\"background-image:url(http://picturelements.github.io/images/win_icons/"+icon+".png);\"></div>";
+  iconEl.innerHTML="<div class=\"smallicon\" style=\"background-image:url(https://picturelements.github.io/images/win_icons/"+icon+".png);\"></div>";
   iconEl.addEventListener("mousedown",function(event){showContext(event,1)});
   if (elems.length<taskArr.length||!stickied){
     document.getElementById("taskbar").appendChild(iconEl);
@@ -787,7 +778,7 @@ function fillHome(){
     output+="<div class=\"pbspacer\">Often used</div>";
     for (var i=0;i<6;i++){
       if (locData[i].oftenUsed==0){break;}
-      output+="<div class=\"pbitem\" onclick=selectIcon(event,"+locData[i].index+",true)><div id=\"pbicon\" style=\"background-image:url(http://picturelements.github.io/images/win_icons/"+locData[i].icon+".png)\"></div><div id=\"pbtitle\">"+locData[i].name+" <span style=\"color:#666\">("+locData[i].oftenUsed+")</span></div></div>";
+      output+="<div class=\"pbitem\" onclick=selectIcon(event,"+locData[i].index+",true)><div id=\"pbicon\" style=\"background-image:url(https://picturelements.github.io/images/win_icons/"+locData[i].icon+".png)\"></div><div id=\"pbtitle\">"+locData[i].name+" <span style=\"color:#666\">("+locData[i].oftenUsed+")</span></div></div>";
     }
     output+="<div class=\"pbspacer\"></div>";
   }
@@ -815,7 +806,7 @@ function fillHome(){
       output+="<div class=\"pbspacer\">"+String.fromCharCode(cc)+"</div>";
       searchFor=cc;
     }
-    output+="<div class=\"pbitem\" onclick=selectIcon(event,"+locData[i].index+",true)><div id=\"pbicon\" style=\"background-image:url(http://picturelements.github.io/images/win_icons/"+locData[i].icon+".png)\"></div><div id=\"pbtitle\">"+locData[i].name+"</div></div>";
+    output+="<div class=\"pbitem\" onclick=selectIcon(event,"+locData[i].index+",true)><div id=\"pbicon\" style=\"background-image:url(https://picturelements.github.io/images/win_icons/"+locData[i].icon+".png)\"></div><div id=\"pbtitle\">"+locData[i].name+"</div></div>";
   }
   document.getElementById("programbar").innerHTML=output;
 }
@@ -877,7 +868,7 @@ function search(){
         name: programData[i].name,
         keywords: keyws.match(input)==null?keyws:keyws.replace(input,"<span class=\"highlight\">"+keyws.match(input)[0]+"</span>"),
         url: programData[i].url,
-        icon: "http://picturelements.github.io/images/win_icons/"+programData[i].icon+".png"
+        icon: "https://picturelements.github.io/images/win_icons/"+programData[i].icon+".png"
       });
     }
   }
@@ -1066,7 +1057,7 @@ function colorSelect(){
   
   inner="<div class='backoption grad' "+(backId==0?"selected":"")+" onclick=selIco(0)></div>";
   for (var i=1;i<backgrounds.length+1;i++){
-    inner+="<div class='backoption' "+(i==backId?"selected":"")+" onclick=selIco("+i+") style='background-image:url(http://picturelements.github.io/images/wallpapers/icons/"+(backgrounds[i-1].replace(".","Ico."))+")'></div>";
+    inner+="<div class='backoption' "+(i==backId?"selected":"")+" onclick=selIco("+i+") style='background-image:url(https://picturelements.github.io/images/wallpapers/icons/"+(backgrounds[i-1].replace(".","Ico."))+")'></div>";
   }
   document.getElementById("backbar").innerHTML=inner;
 }
