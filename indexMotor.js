@@ -2,21 +2,35 @@
 *  Wifi bar, battery perc icons
 *  Add "reset time" option
 *  Add power menu
+*  Fix index=-1 bug on icon select
 *  Sort programs in programbar
 *  Make anything work in IE
 */
 
-var xStart,yStart,selWin=0;
+var xStart=0,yStart=0,selWin=0;
 var prevX=0,prevY=0;
-var clicked=false,resize=false,setFullscreen=0,attr,select=false,preventEvents=false,expanded=false;
+var clicked=false,resize=false,setFullscreen=0,attr,select=false,preventEvents=false,expanded=false,slide=false;
 var windows=[],origNames=[],winCount=0;
 var last=0;
 var unix24Hrs=86400000;
 var contextAssort=[
   [0,1,2,3],
-  [4,5,6]
+  [4,5,6,7],
+  [8,9,10]
 ];
+var colors=[
+  ["#600","#d42","#d77","#ff5e5e 0%,#bd1929 38%,#0e0000 100%"],
+  ["#060","#3a2","#7f5","#64e25e 0%,#098022 38%,#051700 100%"],
+  ["#005","#53f","#29f","#64a4c4 0%,#1c5d9e 38%,#1c0935 100%"],
+  ["#a40","#d72","#da4","#ffbb5e 0%,#b14b03 38%,#350f00 100%"],
+  ["#317","#74a","#85f","#ae41cc 0%,#53136d 38%,#000000 100%"],
+  ["#222","#333","#777","#696969 0%,#232323 50%,#000000 100%"],
+  ["#999","#aaa","#ddd","#e8e8e8 0%,#a0a0a0 50%,#1f1f1f 100%"]
+];
+var specCols=["#68c464 0%,#1c5d9e 38%,#50005f 100%"];
 var DEF_WIN_W=40,DEF_WIN_H=25;
+var backgrounds=["Abstract.jpg","Bouncy.jpg","Gimignano.jpg","Flower.jpg","Bucks.jpg","Leaf.jpg","LonelyRoad.jpg","Flowers.jpg","Mandelbrot.png","Match.jpg"];
+contextShow=false;
 
 //localStorage-editable variables
 var taskArr=[1,2,21,3],oftenUsed=[];
@@ -30,9 +44,12 @@ if (localStorage.getItem("winW")!=null){
   DEF_WIN_H=parseInt(localStorage.getItem("winH"));
 }
 var ou=localStorage.getItem("oftenUsed");
-if (ou!=null){
-  oftenUsed=ou.split(",");
-}
+if (ou!=null){oftenUsed=ou.split(",");}
+var colId=2,backId=8;
+var ci=localStorage.getItem("colId");
+if (ci!=null){colId=parseInt(ci);}
+var bi=localStorage.getItem("backId");
+if (bi!=null){backId=parseInt(bi);}
 
 var programData=[
   {name: "Error", url: "", icon: "error", keywords: ""},
@@ -75,6 +92,11 @@ document.getElementsByClassName("contextitem")[3].addEventListener("mousedown",f
 document.getElementsByClassName("contextitem")[4].addEventListener("mousedown",function (event){contextPin(1);});
 document.getElementsByClassName("contextitem")[5].addEventListener("mousedown",function (){contextUnpin();});
 document.getElementsByClassName("contextitem")[6].addEventListener("mousedown",function (event){contextAddWin(event);});
+document.getElementsByClassName("contextitem")[7].addEventListener("mousedown",function (){contextClose();});
+document.getElementsByClassName("contextitem")[8].addEventListener("mousedown",function (){toggleFullscreen();});
+document.getElementsByClassName("contextitem")[9].addEventListener("mousedown",function (){contextShow=!contextShow;});
+document.getElementsByClassName("contextitem")[10].addEventListener("mousedown",function (){openSettings("backH");});
+document.getElementById("context").addEventListener("mousedown",function (){document.getElementById("context").style.display="none";});
 document.getElementById("desktop").addEventListener("mousedown",function(event){
   xStart=event.clientX;
   yStart=event.clientY;
@@ -86,6 +108,7 @@ document.getElementById("desktop").addEventListener("mousedown",function(event){
   document.getElementById("context").style.display="none";
   hideSearch();
   document.getElementById("clockbar").style.display="none";
+  showContext(event,2);
   event.stopPropagation();
 });
 document.getElementById("search").addEventListener("mousedown",function(event){showSearchFull(event);});
@@ -105,7 +128,6 @@ function setup(){
     el.setAttribute("title",programData[i].name);
     el.setAttribute("selected","false");
     el.setAttribute("onclick","selectIcon(event,"+i+",false)");
-    el.setAttribute("oncontextmenu","return false;");
     el.addEventListener("mousedown",function(event){showContext(event,0)});
     el.innerHTML="<div class=\"dimg\" style=\"background-image:url(http://picturelements.github.io/images/win_icons/"+programData[i].icon+".png)\"></div> <p class=\"ddesc\">"+programData[i].name+"</p>";
     parent.appendChild(el);
@@ -120,8 +142,16 @@ function setup(){
   }
   var tz=new Date().getTimezoneOffset()/-60;
   document.getElementById("timezone").getElementsByTagName("option")[0].innerHTML="Local (UTC"+(tz<0?"":"+")+""+(tz!=0?tz:"")+")";
+  setCols();
+  rez();
+  setTimeout(function(){
+  var elem=document.getElementById("loadscreen"); elem.innerHTML="<p id=\"loadmsg\">Starting up...</p><div id=\"loadercontainer\"><div id=\"loader\"></div><div id=\"loader2\"></div><div id=\"loader3\"></div>"; elem.style.backgroundColor="#268eee";},500);
 }
 setup();
+
+function setCols(){
+  document.getElementById("specCols").innerHTML=".specColor{background-color:"+colors[colId][0]+"; border-color:"+colors[colId][0]+";}\n.window[active=\"true\"] .infoCol{background-color:"+colors[colId][1]+";}\n.borderCol{border-color:"+colors[colId][2]+" !important;}\n.grad{background: -moz-linear-gradient(-45deg, "+colors[colId][3]+"); background: -webkit-linear-gradient(-45deg, "+colors[colId][3]+"); background: linear-gradient(135deg, "+colors[colId][3]+"); background: linear-gradient(135deg, "+colors[colId][3]+");}"+(backId!=0?".backOverride{background:none; background-image:url(http://picturelements.github.io/images/wallpapers/"+backgrounds[backId-1]+");}":"")+"";
+}
 
 function addWindow(id,title,contStr,w,h){
   oftenUsed[id]++;
@@ -156,7 +186,7 @@ function addWindow(id,title,contStr,w,h){
   }else{
     elem.setAttribute("type",id);
   }
-  var inner="<div class=\"infobar\" id=\""+winCount+"\"><div class=\"close\" title=\"Close\" onclick=closeWin("+winCount+")>✕</div><div class=\"max\" title=\"Toggle\" onclick=toggle("+winCount+")>◳</div><div class=\"min\" title=\"Minimize\" onclick=minWin("+winCount+")>_</div><div class=\"reload\" title=\"Reload\" onclick=reloadWin("+winCount+")>↻</div><div class=\"winicon\" style=\"background-image:url(http://picturelements.github.io/images/win_icons/"+data.icon+".png)\"></div><div class=\"wintitle\">"+data.name+"</div></div><iframe class=\"content\" src=\""+(id==0?tmpUrl:"")+"\"></iframe><div class=\"loadingoverlay\"><div id=\"loader\"></div><div id=\"loader2\"></div><div id=\"loader3\"></div></div>"+err+"<div class=\"resize\" scale=\"lw\"></div><div class=\"resize\" scale=\"lwh\"></div><div class=\"resize\" scale=\"h\"></div><div class=\"resize\" scale=\"wh\"></div><div class=\"resize\" scale=\"w\"></div>";
+  var inner="<div class=\"infobar infoCol\" id=\""+winCount+"\"><div class=\"close\" title=\"Close\" onclick=closeWin("+winCount+")>✕</div><div class=\"max\" title=\"Toggle\" onclick=toggle("+winCount+")>◳</div><div class=\"min\" title=\"Minimize\" onclick=minWin("+winCount+")>_</div><div class=\"reload\" title=\"Reload\" onclick=reloadWin("+winCount+")>↻</div><div class=\"winicon\" style=\"background-image:url(http://picturelements.github.io/images/win_icons/"+data.icon+".png)\"></div><div class=\"wintitle\">"+data.name+"</div></div><iframe class=\"content\" src=\""+(id==0?tmpUrl:"")+"\"></iframe><div class=\"loadingoverlay\"><div id=\"loader\"></div><div id=\"loader2\"></div><div id=\"loader3\"></div></div>"+err+"<div class=\"resize\" scale=\"lw\"></div><div class=\"resize\" scale=\"lwh\"></div><div class=\"resize\" scale=\"h\"></div><div class=\"resize\" scale=\"wh\"></div><div class=\"resize\" scale=\"w\"></div>";
   elem.innerHTML=inner;
   elem.setAttribute("active",true);
   elem.id=winCount;
@@ -218,13 +248,12 @@ function delayIframe(id,src){
 function addTaskbarIcon(id,count,actLvl,name,icon,stickied){
   var elems=document.getElementsByClassName("taskbaricon");
   var iconEl=document.createElement("div");
-  iconEl.setAttribute("class","taskbaricon");
+  iconEl.setAttribute("class","taskbaricon borderCol");
   iconEl.setAttribute("id",count);
   iconEl.setAttribute("type",id);
   iconEl.setAttribute("activelevel",actLvl);
   iconEl.setAttribute("title",name);
   iconEl.setAttribute("onclick",stickied?"selectIcon(event,"+id+",true)":"minWin("+count+")");
-  iconEl.setAttribute("oncontextmenu","return false");
   iconEl.innerHTML="<div class=\"smallicon\" style=\"background-image:url(http://picturelements.github.io/images/win_icons/"+icon+".png);\"></div>";
   iconEl.addEventListener("mousedown",function(event){showContext(event,1)});
   if (elems.length<taskArr.length||!stickied){
@@ -348,7 +377,7 @@ function moveWindow(evt){
     
     var elem=document.getElementsByClassName("desktoplink");
     var iconData=[];
-    var iW=window.innerWidth*0.05,iH=window.innerWidth*0.07;
+    var iW=window.innerWidth*0.05,iH=window.innerWidth*0.06;
     for (var i=0;i<elem.length;i++){
       elem[i].setAttribute("selected",false);
       var rect=elem[i].getBoundingClientRect();
@@ -402,6 +431,7 @@ function closeWin(id){
             icons[n].setAttribute("type","null");
             icons[n].style.opacity="0";
             //setTimeout(function(){icons[n].style.display="none"; findTopWin();},200);
+            icons[i].setAttribute("onclick","minWin("+icons[i].id+")");
             setTimeout(function(){icons[n].parentElement.removeChild(icons[n]); findTopWin();},200);
             clicked=false;
             return;
@@ -640,8 +670,98 @@ function showHome(evt){
   setTimeout(function(){
     document.getElementById("innerbar").innerHTML=document.getElementById("mainbuffer").innerHTML;
     fillHome();
+    var pieces=document.getElementById("innerbar").getElementsByClassName("puzzle");
+    for (var i=0;i<pieces.length;i++){
+      pieces[i].addEventListener("mousedown",function(event){selectPiece(event);});
+      pieces[i].addEventListener("mousemove",function(event){slidePiece(event);});
+      pieces[i].addEventListener("mouseup",function(event){placePiece(event);});
+    }
   },200);
   evt.stopPropagation();
+}
+
+function selectPiece(evt){
+  var pieces=document.getElementById("innerbar").getElementsByClassName("puzzle");
+  var sel=0,max=pieces.length-1;
+  var preBox=document.getElementById("puzzlebar").getBoundingClientRect(),preBox2;
+  for (var i=0;i<pieces.length;i++){
+    if (pieces[i]==evt.target){sel=i;}
+  }
+  preBox2=pieces[sel].getBoundingClientRect();
+  var box={
+    t: preBox2.top-preBox.top,
+    l: preBox2.left-preBox.left,
+    w: preBox2.width,
+    h: preBox2.height
+  };
+  pieces[sel].style.opacity="0.2";
+  pieces[max].setAttribute("wide",pieces[sel].getAttribute("wide"));
+  pieces[max].innerHTML=pieces[sel].innerHTML;
+  var sh=document.getElementById("puzzlebar").scrollTop;
+  pieces[max].style="display:block; position:absolute; margin-left:"+(evt.clientX-preBox.left-box.w/2)+"px; margin-top:"+(evt.clientY-preBox.top-box.h/2+sh)+"px";
+  slide=true;
+}
+
+function slidePiece(evt){
+  if (slide){
+    var pieces=document.getElementById("innerbar").getElementsByClassName("puzzle");
+    var count=0;
+    for (var i=0;i<pieces.length-1;i++){
+      count+=(pieces[i].getAttribute("wide")=="true"?2:1);
+      if (count==5){
+        count=0;
+      }else if (count==6){
+        var elem=document.createElement("div");
+        elem.setAttribute("class","puzzle");
+        elem.setAttribute("wide","false");
+        elem.setAttribute("style","opacity:0");
+        pieces[i].parentElement.insertBefore(elem,pieces[i]);
+        count=0;
+      }
+    }
+    var max=pieces.length-1;
+    var container=document.getElementById("puzzlebar");
+    var box=container.getBoundingClientRect();
+    var sh=container.scrollTop;
+    var box2=pieces[max].getBoundingClientRect();
+    pieces[max].style="display:block; position:absolute; margin-left:"+(evt.clientX-box.left-box2.width/2)+"px; margin-top:"+(evt.clientY-box.top-box2.height/2+sh)+"px";
+    var ghost;
+    for (var i=0;i<max;i++){
+      if (pieces[i].style.opacity=="0.2"){ghost=pieces[i]; break;}
+    }
+    
+    for (var i=0;i<max;i++){
+      var rect=pieces[i].getBoundingClientRect();
+      if (evt.clientX>rect.left&&evt.clientY>rect.top&&evt.clientX<rect.left+Math.min(rect.width,ghost.getBoundingClientRect().width)&&evt.clientY<rect.top+rect.height&&pieces[i]!=ghost){
+        var pe=ghost.parentElement;
+        pe.removeChild(ghost);
+        pe.insertBefore(ghost,pieces[i]);
+        break;
+      }
+    }
+    var tmpElem=document.getElementById("innerbar").getElementsByClassName("puzzle");
+    for (var i=0;i<tmpElem.length-1;i++){
+      if (tmpElem[i].style.opacity=="0"){
+        if (tmpElem[i+1]!=ghost){
+          tmpElem[i].parentElement.removeChild(tmpElem[i]);
+        }
+      }
+    }
+  }
+}
+
+function placePiece(){
+  var pieces=document.getElementById("innerbar").getElementsByClassName("puzzle");
+  for (var i=0;i<pieces.length-1;i++){
+    if (pieces[i].style.opacity=="0.2"){pieces[i].style.opacity="1"; break;}
+  }
+  pieces[pieces.length-1].style.display="none";
+  for (var i=0;i<pieces.length-1;i++){
+    if (pieces[i].style.opacity=="0"){
+      pieces[i].parentElement.removeChild(pieces[i]);
+    }
+  }
+  slide=false;
 }
 
 function fillHome(){
@@ -727,7 +847,13 @@ function togglePower(){
 }
 
 function restart(){
-  alert("RESTART");
+  var elem=document.getElementById("loadscreen");
+  elem.innerHTML="";
+  var inner="<p id=\"loadmsg\">Shutting down...</p><div id=\"loadercontainer\"><div id=\"loader\"></div><div id=\"loader2\"></div><div id=\"loader3\"></div>";
+  elem.style="display:block; opacity:0; animation:fadescreen 3500ms forwards 1; animation-delay:250ms;";
+  setTimeout(function(){elem.innerHTML=inner;},500);
+  setTimeout(function(){elem.style.backgroundColor="black"; elem.innerHTML=""},3750);
+  setTimeout(function(){location.reload();},4000);
 }
 
 function powerOff(){
@@ -805,6 +931,7 @@ function showContext(evt,type){
         if (evt.target==icons[i]){
           items[i<taskArr.length?4:5].style.display="none";
           items[6].innerHTML="Open "+(i<taskArr.length&&icons[i].getAttribute("activelevel")==0?"":"new");
+          items[7].style.display=icons[i].id=="null"?"none":"block";
         }
       }
       context.setAttribute("target",evt.target.getAttribute("type"));
@@ -813,8 +940,14 @@ function showContext(evt,type){
           context.setAttribute("targetIndex",i);
         }
       }
+    }else if (type==2){
+      if (!document.fullscreenElement&&!document.mozFullScreenElement&&!document.webkitFullscreenElement&&!document.msFullscreenElement){
+        items[8].innerHTML="Go fullscreen";
+      }else{
+        items[8].innerHTML="Exit fullscreen";
+      }
+      items[9].innerHTML=(contextShow?"Disable":"Enable")+" context menu";
     }
-    
     context.style.display="block";
     context.style.left=(evt.clientX+2)+"px";
     context.style.top=((evt.clientY+context.offsetHeight<window.innerHeight-window.innerWidth*0.03)?(evt.clientY+2):(evt.clientY-context.offsetHeight-2))+"px";
@@ -840,6 +973,12 @@ function contextOpen(evt,mult){
     document.getElementById("context").style.display="none";
   }
   evt.stopPropagation();
+}
+
+function contextClose(){
+  document.getElementById("context").style.display="none";
+  var toClose=document.getElementsByClassName("taskbaricon")[document.getElementById("context").getAttribute("targetIndex")].id;
+  closeWin(toClose);
 }
 
 function contextEdit(evt){
@@ -895,18 +1034,55 @@ function contextAddWin(evt){
   selectIcon(evt,target,true);
 }
 
-function openSettings(){
+function openSettings(scrTo){
   hideSearch();
-  addWindow(0,"Settings",null,50,30);
+  addWindow(0,"Settings",null,60,35);
   var dt=new Date();
   var date=new Date(dt.setTime(dt.getTime()+tzOffset*60000));
   var month=date.getMonth()+1,day=date.getDate();
   document.getElementById("dateset").value=date.getFullYear()+"-"+(month<10?"0"+month:month)+"-"+(day<10?"0"+day:day);
   document.getElementById("timezone").selectedIndex=tzIndex;
+  var prec=document.getElementById("prectz");
+  if (tzIndex==1&&prec.getAttribute("disabled")!=null){
+    prec.removeAttribute("disabled");
+    prec.value=tzOffset;
+  }
   newTime();
   document.getElementsByClassName("sizeslider")[0].value=DEF_WIN_W;
   document.getElementsByClassName("sizeslider")[1].value=DEF_WIN_H;
   updateSize(0);
+  colorSelect();
+  if (scrTo!=null){
+    document.getElementById("errcontent").scrollTop=document.getElementById(scrTo).offsetTop;
+  }
+}
+
+function colorSelect(){
+  var inner="";
+  for (var i=0;i<colors.length;i++){
+    inner+="<div class='coloroption' "+(i==colId?"selected":"")+" onclick=selCol("+i+")><div class='col' style='background-color:"+colors[i][0]+"'></div><div class='col' style='background-color:"+colors[i][1]+"'></div><div class='col' style='background-color:"+colors[i][2]+"'></div></div>";
+  }
+  document.getElementById("colorbar").innerHTML=inner;
+  
+  inner="<div class='backoption grad' "+(backId==0?"selected":"")+" onclick=selIco(0)></div>";
+  for (var i=1;i<backgrounds.length+1;i++){
+    inner+="<div class='backoption' "+(i==backId?"selected":"")+" onclick=selIco("+i+") style='background-image:url(http://picturelements.github.io/images/wallpapers/icons/"+(backgrounds[i-1].replace(".","Ico."))+")'></div>";
+  }
+  document.getElementById("backbar").innerHTML=inner;
+}
+
+function selCol(id){
+  colId=id;
+  localStorage.setItem("colId",id);
+  colorSelect();
+  setCols();
+}
+
+function selIco(id){
+  backId=id;
+  localStorage.setItem("backId",id);
+  colorSelect();
+  setCols();
 }
 
 function toggleClock(){
@@ -958,8 +1134,17 @@ backdrop.addCSS("-webkit-filter:blur(1px)");
 backdrop.start(10);
 
 window.onresize=function(){
+  rez();
+}
+
+function rez(){
   backdrop.resize();
   document.getElementById("context").style.display="none";
+  if (window.innerWidth/window.innerHeight<16/9){
+    document.getElementById("desktopwrapper").style.backgroundSize="177vh 100vh";
+  }else{
+    document.getElementById("desktopwrapper").style.backgroundSize="100vw 56.25vw";
+  }
 }
 
 function newTime(){
@@ -1006,7 +1191,7 @@ function setTime(){
   var index=document.getElementById("timezone").selectedIndex;
   
   if (index==0){tzOffset=offset;}
-  else if (index==1){tzOffset=document.getElementById("prectz").value+offset;}
+  else if (index==1){tzOffset=parseInt(document.getElementById("prectz").value)+offset;}
   else{tzOffset=(index-16+dt.getTimezoneOffset()/60)*60+offset;}
   
   newTime();
@@ -1023,11 +1208,12 @@ function updateTime(){
   }else{
     precTZ.setAttribute("disabled","");
   }
+  tzIndex=index;
   newTime();
 }
 
 function updateSize(id){
-  var val=document.getElementsByClassName("sizeslider")[id].value;
+  var val=parseInt(document.getElementsByClassName("sizeslider")[id].value);
   if (id==0){DEF_WIN_W=val;}
   else{DEF_WIN_H=val;}
   document.getElementById("winW").innerHTML="Window width: "+DEF_WIN_W;
@@ -1036,10 +1222,39 @@ function updateSize(id){
   localStorage.setItem("winH",DEF_WIN_H);
 }
 
+newTime();
 setInterval(newTime,1000);
+window.onload=function(){
+  setTimeout(function(){
+    document.getElementById("loadscreen").style.opacity=0;
+    setTimeout(function(){document.getElementById("loadscreen").style.display="none";},500);
+  },3500);
+};
+/*setInterval(function(){
+  document.getElementById("test").innerHTML=prevX+" - "+prevY;
+},10);*/
 
-document.getElementById("gofull").addEventListener("click",function(event){fullscreen(event);})
-function fullscreen(evt){
-  var elem=document.getElementsByTagName("body")[0];
-  elem.webkitRequestFullscreen();
+function toggleFullscreen() {
+  if (!document.fullscreenElement &&    // alternative standard method
+      !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {  // current working methods
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen();
+    } else if (document.documentElement.msRequestFullscreen) {
+      document.documentElement.msRequestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) {
+      document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.webkitRequestFullscreen) {
+      document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+    }
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+  }
 }
