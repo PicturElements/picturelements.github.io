@@ -361,11 +361,10 @@
       }
       
       function isFull(){
-        var full=true;
         for (var i=0;i<81;i++){
-          if (board[i]==0){full=false; break;}
+          if (board[i]==0){return false;}
         }
-        return full;
+        return true;
       }
       
       //Solve as far as possible using only logic
@@ -377,11 +376,10 @@
           exclusionSolve();
           alienationSolve();
         }
-        var success=true;
         for (var i=0;i<81;i++){
-          if (alternatives[i].length<=1&&board[i]==0){success=false; break;}
+          if (alternatives[i].length<=1&&board[i]==0){return false;}
         }
-        return success;
+        return true;
       }
       
       function display(){
