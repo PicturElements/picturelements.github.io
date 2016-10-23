@@ -1050,11 +1050,11 @@
         <p>
           This web app uses mathematical functions in two different forms to render sets. The simpler form uses a small piece of info, like "z<sup>2</sup>+0.1-0.5i", which is easy to write a script for to translate into meaningful data. However, some functions are more complex, and while it is possible to write a script that translates such input, it is very time consuming, as sometimes the script must be run for every single pixel. There is a better way! By separating the input into its meaningful components, it is possible to turn this data into actual JavaScript code.
           <br><br>
-          When a set with more complicated input is generated, the script injects a small script into the page which it can call ehenever necessary. By doing this, the script can run as fast with complicated input as with simple input.
+          When a set with more complicated input is generated, the script injects a small piece of code into the page which it can call whenever necessary. By doing this, the script can run (almost) as fast with complicated input as with simple input.
           <br><br>
-          But injecting scripts is dangerous. This is the basis of <a href="https://en.wikipedia.org/wiki/Cross-site_scripting">Cross-site scripting</a> and is a big issue for many websites. This is why the alert pops up. It lets you inspect the input before the script is allowed to intervene with it, thus minimizing the risk of malicious code getting run.
+          But injecting scripts is dangerous. This is the basis of <a href="https://en.wikipedia.org/wiki/Cross-site_scripting">Cross-site scripting</a> and is a big issue for many websites. This is why the alert pops up. It lets you inspect the input before the script is allowed to intervene with it, thus minimizing the risk of malicious code being run.
           <br><br>
-          It should be noted that it is very unlikely that malicious code would be let through the script-generating script, so this is just a security measure.
+          It should be noted that it is very unlikely that malicious code would be let through the script-generating script, because of syntax restrictions, so this is just a security measure.
         </p>
       </div>
     </div>
