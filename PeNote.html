@@ -1,0 +1,606 @@
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400" rel="stylesheet" type="text/css">
+    <title id="title">untitled</title>
+    <style>
+      body{
+        margin:0;
+      }
+
+      #header{
+        -ie-user-select:none;
+        -moz-user-select:none;
+        -webkit-user-select:none;
+        display:block;
+        position:fixed;
+        width:100%;
+        height:2vw;
+        background-color:#ddd;
+        font-family:Roboto;
+        font-size:1vw;
+        cursor:default;
+      }
+
+      .headeritem{
+        display:block;
+        position:relative;
+        float:left;
+        height:2vw;
+        line-height:2.1vw;
+        padding-left:0.5vw;
+        padding-right:0.5vw;
+      }
+
+      .headeritem:hover{
+        background-color:#ccc;
+      }
+
+      #dropdown{
+        display:none;
+        position:fixed;
+        width:15vw;
+        min-height:2vw;
+        top:2vw;
+        background-color:#eaeaea;
+        border:0.1vw solid #999;
+        z-index:10;
+        overflow:hidden;
+      }
+
+      .dropdownitem{
+        -ie-user-select:none;
+        -moz-user-select:none;
+        -webkit-user-select:none;
+        display:block;
+        position:relative;
+        width:13vw;
+        height:2vw;
+        left:2vw;
+        font-family:Roboto;
+        font-size:1vw;
+        line-height:2vw;
+        text-indent:0.5vw;
+        border-left:0.1vw solid #d5d5d5;
+        cursor:default;
+      }
+
+      .bottomline{
+        border-bottom:0.1vw solid #d5d5d5;
+      }
+
+      .dropdownitem:hover{
+        background-color:#ddd;
+      }
+
+      #editarea{
+        display:block;
+        position:fixed;
+        width:100%;
+        height:calc(100% - 2vw);
+        top:2vw;
+        outline:none;
+        font-size:1.4vw;
+        font-family:monospace;
+      }
+
+      /*#editinner{
+        display:block;
+        position:absolute;
+        width:97.5vw;
+        min-height:calc(100% - 0.5vw);
+        left:0.5vw;
+        top:0.5vw;
+        outline:none;
+      }
+
+      #editinner{
+        font-size:1.4vw;
+        font-family:monospace;
+      }
+
+      p,font{
+        margin:0 !important;
+        font-family: inherit !important;
+        font-size: inherit !important;
+      }*/
+
+      #shade{
+        display:none;
+        position:fixed;
+        width:100%;
+        height:100%;
+        background-color:black;
+        opacity:0;
+        animation:fade 200ms forwards 1;
+      }
+
+      #prompt{
+        display:none;
+        position:fixed;
+        min-width:10vw;
+        min-height:7vw;
+        background-color:#eee;
+        top:10vw;
+        left:50%;
+        overflow:hidden;
+        opacity:0;
+        -webkit-transform:scale(0.7);
+        font-family:Roboto,sans-serif;
+        animation:open 200ms forwards 1;
+        cursor:default;
+      }
+
+      #actionbar{
+        display:block;
+        position:relative;
+        width:100%;
+        height:2.5vw;
+        background-color:#ccc;
+      }
+
+      #close{
+        display:block;
+        position:absolute;
+        width:2.5vw;
+        height:2.5vw;
+        right:0;
+        background-color:#900;
+        color:white;
+        font-size:1.5vw;
+        line-height:2.5vw;
+        text-align:center;
+      }
+
+      #promptcontent{
+        display:block;
+        position:relative;
+        min-width:10vw;
+        min-height:5vw;
+        overflow:hidden;
+      }
+
+      #prompttext{
+        display:block;
+        position:relative;
+        width:90%;
+        left:5%;
+        text-align:center;
+        margin:1vw 0 1vw 0;
+        font-size:1.2vw;
+      }
+
+      .innerprompt{
+        display:block;
+        position:relative;
+      }
+
+      #save{
+        width:26vw;
+        height:5vw;
+      }
+
+      #saveas{
+        width:26vw;
+        height:7vw;
+      }
+
+      #open{
+        width:26vw;
+        height:17vw;
+      }
+
+      #buttongroup{
+        display:flex;
+        position:absolute;
+        bottom:0.5vw;
+        left:0.5vw;
+        width:calc(100% - 0.5vw);
+      }
+
+      button{
+        display:block;
+        position:relative;
+        font-size:1.1vw;
+        padding:0.25vw 0 0.25vw 0;
+        background-color:#bbb;
+        color:#333;
+        border:none;
+        outline:none;
+        cursor:pointer;
+        margin-right:0.5vw;
+        flex-grow:1;
+      }
+
+      button[active="false"]{
+        opacity:0.5;
+        pointer-events:none;
+      }
+
+      button:active{
+        background-color:#ccc;
+      }
+
+      input{
+        display:block;
+        position:relative;
+        left:0.5vw;
+        top:0.5vw;
+        width:calc(100% - 1vw);
+        height:2vw;
+        font-size:1.2vw;
+        box-sizing:border-box;
+        outline:none;
+      }
+
+      #namebox{
+        display:block;
+        position:relative;
+        left:0.5vw;
+        width:calc(100% - 1vw);
+        height:11vw;
+        margin-top:1vw;
+        background-color:white;
+        overflow-x:hidden;
+        overflow-y:auto;
+      }
+
+      .nameitem{
+        display:block;
+        position:relative;
+        float:left;
+        width:100%;
+        height:2vw;
+        font-size:1vw;
+        line-height:2vw;
+        text-indent:0.5vw;
+        background-color:#ddd;
+      }
+
+      .nameitem:nth-of-type(2n){
+        background-color:#ccc;
+      }
+
+      .nameitem:hover{
+        background-color:#bbb;
+      }
+
+      .nameinfo{
+        float:right;
+        margin-right:0.5vw;
+      }
+
+      @keyframes open{
+        to{
+          opacity:1;
+          -webkit-transform:scale(1);
+        }
+      }
+
+      @keyframes fade{
+        to{opacity:0.7;}
+      }
+    </style>
+  </head>
+  <body onclick="document.getElementById('dropdown').style.display='none'">
+    <div id="header">
+      <div class="headeritem" onclick=showDropdown(this,event)>File</div>
+      <div class="headeritem" onclick=showDropdown(this,event)>Edit</div>
+      <div class="headeritem" onclick=showDropdown(this,event)>Format</div>
+      <div class="headeritem" onclick=showDropdown(this,event)>View</div>
+      <div class="headeritem" onclick=showDropdown(this,event)>Help</div>
+    </div>
+    <div id="dropdown">
+      <div class="dropdownitem" onclick="newDoc()">New</div>
+      <div class="dropdownitem" onclick=openPrompt('open')>Open</div>
+      <div class="dropdownitem" onclick="save()">Save</div>
+      <div class="dropdownitem bottomline" onclick=openPrompt('saveas')>Save As</div>
+      <div class="dropdownitem">Exit</div>
+      <div class="dropdownitem bottomline">Undo</div>
+      <div class="dropdownitem" onclick=cutText()>Cut</div>
+      <div class="dropdownitem" onclick=copyText()>Copy</div>
+      <div class="dropdownitem" onclick=pasteText()>Paste</div>
+      <div class="dropdownitem bottomline" onclick=deleteText()>Delete</div>
+      <div class="dropdownitem">Search</div>
+      <div class="dropdownitem">Search Next</div>
+      <div class="dropdownitem">Replace</div>
+      <div class="dropdownitem bottomline">Go To</div>
+      <div class="dropdownitem">Select All</div>
+    </div>
+    <textarea id="editarea">
+    </textarea>
+    <div id="shade"></div>
+    <div id="prompt">
+      <div id="actionbar">
+        <div id="close" onclick=closePrompt()>X</div>
+      </div>
+      <div id="promptcontent">
+        
+      </div>
+    </div>
+    <div style="display:none">
+      <div id="save" class="innerprompt">
+        <p id="prompttext">Save untitled?</p>
+        <div id="buttongroup">
+          <button onclick=save()>Save</button>
+          <button onclick=execBuffer()>Don't save</button>
+          <button onclick=closePrompt()>Cancel</button>
+        </div>
+      </div>
+      <div id="saveas" class="innerprompt">
+        <input id="nameinput" placeholder="Name here" onkeyup=checkName()></input>
+        <p id="prompttext" style="margin-top:0.8vw; color:#a00;">Name cannot be blank.</p>
+        <div id="buttongroup">
+          <button id="savebtn" active="false" onclick=relaySave()>Save</button>
+          <button onclick=execBuffer()>Don't save</button>
+          <button onclick=closePrompt()>Cancel</button>
+        </div>
+      </div>
+      <div id="open" class="innerprompt">
+        <input id="nameinput" placeholder="Name here" onkeyup=checkName2()></input>
+        <div id="namebox">
+          <div class="nameitem">LOL<span class="nameinfo">4kb</span></div>
+          <div class="nameitem">LOL</div>
+          <div class="nameitem">LOL</div>
+          <div class="nameitem">LOL</div>
+        </div>
+        <div id="buttongroup">
+          <button id="savebtn" active="false" onclick=openDoc()>Open</button>
+          <button onclick=closePrompt()>Cancel</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      var cutoff=[0,5,15];
+      var sS,sE;
+      var title="";
+      var lastSave="",bufferAction="";
+      var names=[],namesElements=[];
+      var nms=localStorage.getItem("names");
+      if (nms!=null){names=nms.split(',');}
+      //document.getElementById("title").innerHTML
+
+      document.getElementById("editarea").addEventListener("keydown",function(event){
+        if (event.keyCode==9){
+          var elem=document.getElementById("editarea");
+          var str=elem.value,tmpStr="";
+          var selStart=elem.selectionStart,selEnd=elem.selectionEnd;
+          for (var i=0;i<str.length;i++){
+            if (i==selStart||(i==0&&selStart==0&&selEnd==0)){tmpStr+="    ";}
+            if (i<selStart||i>=selEnd){
+              tmpStr+=str[i];
+            }
+          }
+          if (selStart==selEnd&&selEnd==str.length){tmpStr+="    ";}
+          elem.value=tmpStr;
+          elem.selectionEnd=selStart+4;
+          event.preventDefault();
+        }
+        /*alert(document.getElementById("editarea").selectionStart);
+        alert(document.getElementById("editarea").selectionEnd);*/
+        /*var el=document.getElementById("editinner");
+        el.innerHTML=el.innerHTML.replace(/ /g,"lol")*/
+      });
+
+      document.getElementById("editarea").addEventListener("keyup",function(event){
+        if (lastSave!=document.getElementById("editarea").value&&title!=""){
+          document.getElementById("title").innerHTML="*"+title;
+        }else{
+          document.getElementById("title").innerHTML=title;
+        }
+      });
+
+      document.getElementById("editarea").addEventListener("mouseup",function(){
+        var elem=document.getElementById("editarea");
+        sS=elem.selectionStart;
+        sE=elem.selectionEnd;
+      });
+
+      function sortNames(){
+        for (var i=0;i<names.length;i++){
+          for (var n=i+1;n<names.length;n++){
+            if (names[i].localeCompare(names[n])>0){
+              var tmpName=names[i];
+              names[i]=names[n];
+              names[n]=tmpName;
+            }
+          }
+        }
+        namesElements=[];
+        for (var i=0;i<names.length;i++){
+          //just assume a UTF-8 character is stored in 1.5 bytes...
+          var ls=localStorage.getItem(names[i]);
+          var bytes=ls!=null?Math.floor(ls.length*1.5):0;
+          var suffix="B";
+          if (bytes>1000){
+            bytes/=1000;
+            suffix="KB";
+          }else if (bytes>1000000){
+            bytes/=1000000;
+            suffix="MB";
+          }
+          namesElements.push("<div class='nameitem' onclick=select(\""+names[i]+"\")>"+names[i]+"<span class='nameinfo'>"+bytes+" "+suffix+"</span></div>");
+        }
+        console.log(names);
+      }
+      sortNames();
+
+      function select(val){
+        document.getElementById('nameinput').value=val;
+        document.getElementById("savebtn").setAttribute("active",true);
+      }
+
+      function showDropdown(elem,evt){
+        var dd=document.getElementById("dropdown").style;
+        var items=document.getElementsByClassName("headeritem");
+        var selected=0;
+        for (var i=0;i<items.length;i++){
+          if (items[i]==elem){selected=i; break;}
+        }
+        items=document.getElementsByClassName("dropdownitem");
+        for (var i=0;i<items.length;i++){
+          items[i].style.display=(i>=cutoff[selected]&&i<cutoff[selected+1])?"block":"none";
+        }
+        dd.display="block";
+        dd.left=(elem.offsetLeft/window.innerWidth*100)+"vw";
+        getSelect();
+        evt.stopPropagation();
+      }
+
+      function newDoc(){
+        if (document.getElementById("title").innerHTML.startsWith('*')||title==""){
+          openPrompt("save");
+          return;
+        }
+        clearDoc();
+      }
+
+      function clearDoc(){
+        document.getElementById("editarea").value="";
+        title="";
+        document.getElementById("title").innerHTML="untitled";
+        lastSave="";
+      }
+
+      function openDoc(){
+        closePrompt();
+        var name=document.getElementById("nameinput").value;
+        document.getElementById("editarea").value=localStorage.getItem(name);
+      }
+
+      function relaySave(){
+        title=document.getElementById("nameinput").value;
+        names.push(title);
+        localStorage.setItem("names",names);
+        save();
+      }
+
+      function save(){
+        closePrompt();
+        if (title==""){
+          openPrompt("saveas");
+          return;
+        }
+        document.getElementById("title").innerHTML=title;
+        localStorage.setItem(title,document.getElementById("editarea").value);
+        lastSave=document.getElementById("editarea").value;
+        sortNames();
+        execBuffer();
+      }
+
+      function cutText(){
+        getSelect();
+        var succ=document.execCommand("cut");
+        succ?"":alert("Cut failed.");
+      }
+
+      function copyText(){
+        getSelect();
+        var succ=document.execCommand("copy");
+        succ?"":alert("Copy failed.");
+      }
+
+      function pasteText(){
+        setTimeout(function(){
+          document.getElementById("editarea").selectionStart=0;
+          document.getElementById("editarea").selectionEnd=0;
+          var succ=document.execCommand("paste");
+          succ?"":alert("Paste failed.");
+        },1);
+      }
+
+      function deleteText(){
+        //Could've used execCommand here too, but for compatibility reasons, it's better to just do it via vanilla JS.
+        var elem=document.getElementById("editarea");
+        var str=elem.value,tmpStr="";
+        for (var i=0;i<str.length;i++){
+          if (i<sS||i>=sE){tmpStr+=str[i];}
+        }
+        elem.value=tmpStr;
+      }
+
+      function getSelect(){
+        var elem=document.getElementById("editarea");
+        elem.selectionStart=sS;
+        elem.selectionEnd=sE;
+      }
+
+      function openPrompt(id){
+        var prompt=document.getElementById("prompt");
+        document.getElementById("promptcontent").innerHTML=document.getElementById(id).outerHTML;
+        prompt.style.display="block";
+        prompt.style.marginLeft=(prompt.offsetWidth/window.innerWidth*-50)+"vw";
+        document.getElementById("shade").style.display="block";
+
+        if (id=="save"){
+          document.getElementById("prompttext").innerHTML="Save '"+(title==""?"untitled":title)+"'?";
+        }else if (id=="open"){
+          addElements();
+        }
+      }
+
+      function addElements(){
+        var inner="";
+        for (var i=0;i<names.length;i++){
+          inner+=namesElements[i];
+        }
+        document.getElementById("namebox").innerHTML=inner;
+      }
+
+      function closePrompt(){
+        var prompt=document.getElementById("prompt").style.display="none";
+        document.getElementById("shade").style.display="none";
+      }
+
+      function execBuffer(){
+        closePrompt();
+        //alert(bufferAction);
+        if (bufferAction=="new"){
+          clearDoc();
+        }
+      }
+
+      function checkName(){
+        var inp=document.getElementById("nameinput").value;
+        var elem=document.getElementById("prompttext");
+        var btn=document.getElementById("savebtn");
+        btn.setAttribute("active",true);
+        elem.innerHTML="";
+        if (inp.replace(/ /g,"")==""){
+          elem.innerHTML="Name cannot be blank.";
+          btn.setAttribute("active",false);
+        }
+        for (var i=0;i<names.length;i++){
+          if (inp==names[i]&&inp!=title){
+            elem.innerHTML="Name already in use.";
+            btn.setAttribute("active",false);
+          }
+        }
+      }
+
+      function checkName2(){
+        var btn=document.getElementById("savebtn");
+        var val=document.getElementById("nameinput").value;
+        var inner="";
+        btn.setAttribute("active",false);
+        for (var i=0;i<names.length;i++){
+          if (names[i].startsWith(val)){
+            inner+=namesElements[i];
+          }
+          if (val==names[i]){
+            btn.setAttribute("active",true);
+          }
+        }
+        var btn=document.getElementById("namebox").innerHTML=inner;
+      }
+
+      function initAdd(){
+        var inner="0123456789";
+        document.getElementById("editarea").value=inner;
+      }
+
+      initAdd();
+
+      //localStorage.clear();
+    </script>
+  </body>
+</html>
