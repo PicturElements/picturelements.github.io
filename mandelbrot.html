@@ -210,6 +210,17 @@
         top: 55%;
       }
       
+      #urlout{
+        width:67.5%;
+      }
+      
+      #copylink {
+        position: absolute;
+        width: 20%;
+        margin-top: 0.1vw;
+        right: 5%;
+      }
+      
       #closebtn{
         display: block;
         position: absolute;
@@ -812,7 +823,8 @@
       <div id="sharepanel" class="popup">
         Share your Mandelbrot/Julia set!
         <div id="closebtn" onclick="closePopups(2)">[close]</div>
-        <input id="urlout" spellcheck="false" value="SLUTA GLO MATTIAS! Jag har inte hunnit med allt än!"></input>
+        <input id="urlout" spellcheck="false"></input>
+        <button id="copylink" onclick="copyLink()">Copy</button>
       </div>
       <!--onmousemove=slide() onmouseup=sPress(0)-->
       <div id="colorpanel" class="popup">
