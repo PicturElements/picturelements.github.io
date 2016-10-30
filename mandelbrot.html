@@ -590,7 +590,6 @@
         color:#999;
       }
       
-      
       #sliderinfo{
         position: absolute;
         margin-left: 1vw;
@@ -665,6 +664,13 @@
       
       function newPage(){
         window.location.href="http://picturelements.github.io/mandelbrot";
+      }
+    </script>
+    <script id="copyscript">
+      function copyLink(){
+        document.getElementById("urlout").select();
+        var succ=document.execCommand("copy");
+        succ?closePopups(-1):alert("Copy failed.");
       }
     </script>
   </head>
