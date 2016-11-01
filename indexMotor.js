@@ -20,7 +20,7 @@ var colors=[
 ];
 var specCols=["#68c464 0%,#1c5d9e 38%,#50005f 100%"];
 var DEF_WIN_W=40,DEF_WIN_H=25;
-var backgrounds=["Abstract.jpg","Bouncy.jpg","Gimignano.jpg","Flower.jpg","Bucks.jpg","Leaf.jpg","LonelyRoad.jpg","Flowers.jpg","Mandelbrot.png","Match.jpg"];
+var backgrounds=["Abstract.jpg","Bouncy.jpg","Gimignano.jpg","Flower.jpg","Bucks.jpg","Leaf.jpg","LonelyRoad.jpg","Flowers.jpg","Mandelbrot.png","Match.jpg","Leaves.png"];
 contextShow=false;
 
 //localStorage-editable variables
