@@ -114,7 +114,7 @@ function parseUrl(){
         toScan=false;
         if (count==-1){advancedGen=(tmpStr=="true"?true:false);}
         else if (count==0){advancedGen?document.getElementById("functionin2").value=tmpStr:document.getElementById("functionin").value=tmpStr;}
-        else if (count==1){document.getElementById("iterations").value=tmpStr;}
+        else if (count==1){document.getElementById("iterations").value=tmpStr; iterations=isNaN(tmpStr)?parseInt(tmpStr):50;}
         else if (count==2){document.getElementById("xOff").value=tmpStr;}
         else if (count==3){document.getElementById("yOff").value=tmpStr;}
         else if (count==4){document.getElementById("zoom").value=tmpStr;}
