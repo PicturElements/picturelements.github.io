@@ -824,7 +824,7 @@
       <div id="functionpanel2" class="popup" style="height:23vw; margin-top:-11.5vw">
         Advanced Julia set function definition
         <div id="closebtn" onclick="closePopups(1)">[close]</div>
-        <input id="functionin2" value="z^2+cos(x)+(sqrt(23)+0.125)i" spellcheck="false" style="width:41%; top:5.5vw" onkeyup=displayFunction()>
+        <input id="functionin2" value="z^3+PI/5+(E/5)i" spellcheck="false" style="width:41%; top:5.5vw" onkeyup=displayFunction()>
         <button style="margin-top:0;position:absolute;width:12vw;margin-left:27vw;height: 2.4vw;" onclick="goBack()">Back</button>
         <button style="margin-top:0;position:absolute;width:12vw;margin-left:40vw;height: 2.4vw;" onclick="pushFunction2(1)">Set function</button>
         <div id="limitations" style="display: block;position: absolute;font-size: 1vw;color: #555;width: 90%;margin-left: 5%;height: 8vw;line-height: 1.3vw;background-color: #ddd;margin-top: 4vw;">Requirements: integer power (e.g. z^4), imaginary part in complex number must be distincted with parentheses, with or without i at the end, e.g. z^2+0.5-(3*y)i.<br><br>Allowed functions/expressions:<br>x, y, PI, E, +, -, *, /, %, pow(x,power), sqrt(x), cbrt(x), sin(x), cos(x), tan(x), floor(x), abs(x), ceil(x), random(max value), log(x), log10(x), exp(x)</div>
@@ -1068,15 +1068,21 @@
     <div id="why" class="popup" style="height:30vw; margin-top:-15vw; width:60%; left:20%; z-index:100">
       <div id="closebtn" onclick="closePopups2(this)">[close]</div>
       <div id="inner">
+        <h style="display:block; text-align:center">Long story short</h>
+        <p>
+          Check that the text in the gray box contains things that look like ordinary mathematical expressions, like z^4+sin(45)-(0.5)i, for example. Anything that looks like a mathematical formula is safe to run. 
+          <br>
+          This web app uses a "sneaky hack" to speed up some processes. Mean-spirited people may find a way to sneak code into the share URL which could cause some damage. 
+        </p>
         <h style="display:block; text-align:center">Script injection</h>
         <p>
-          This web app uses mathematical functions in two different forms to render sets. The simpler form uses a small piece of info, like "z<sup>2</sup>+0.1-0.5i", which is easy to write a script for to translate into meaningful data. However, some functions are more complex, and while it is possible to write a script that translates such input, it is very time consuming, as sometimes the script must be run for every single pixel. There is a better way! By separating the input into its meaningful components, it is possible to turn this data into actual JavaScript code.
+          This web app uses mathematical functions in two different forms to render sets. The simpler form uses a small piece of info, like "z<sup>2</sup>+0.1-0.5i", which is easy to write a script for to translate into meaningful data. However, some functions are more complex, and while it is possible to write a script that translates such input, it is more time consuming, as sometimes the script must be run for every single pixel. There is a (slightly) better way! By separating the input into its meaningful components, it is possible to turn this data into actual JavaScript code.
           <br><br>
           When a set with more complicated input is generated, the script injects a small piece of code into the page which it can call whenever necessary. By doing this, the script can run (almost) as fast with complicated input as with simple input.
           <br><br>
-          But injecting scripts is dangerous. This is the basis of <a href="https://en.wikipedia.org/wiki/Cross-site_scripting">Cross-site scripting</a> and is a big issue for many websites. This is why the alert pops up. It lets you inspect the input before the script is allowed to intervene with it, thus minimizing the risk of malicious code being run.
+          But injecting scripts is dangerous. This is the basis of <a href="https://en.wikipedia.org/wiki/Cross-site_scripting">Cross-site scripting</a> and is a big issue for many users and websites. This is why the alert pops up. It lets you inspect the input before the script is allowed to intervene with it, thus minimizing the risk of malicious code being run. 
           <br><br>
-          It should be noted that it is very unlikely that malicious code would be let through the script-generating script, because of syntax restrictions, so this is just a security measure.
+          It should be noted that it is very unlikely that malicious code would be let through the script-generating script, because most code wouldn't make it through parsing, so this is just a security measure.
         </p>
       </div>
     </div>
