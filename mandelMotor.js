@@ -1,3 +1,4 @@
+//HERE BE VARIABLES
 var xOff=300,yOff=0,zoom=3,iterations=50,mode=0,prevH=0;
 var xOrig,yOrig,xRes,yRes,pressed=false,expanded=true,display=false,move=false,advancedGen=false;
 var width=window.innerWidth,height=window.innerHeight;
@@ -118,7 +119,7 @@ function parseUrl(){
         else if (count==3){document.getElementById("yOff").value=tmpStr;}
         else if (count==4){document.getElementById("zoom").value=tmpStr;}
         else if (count==5){if (tmpStr.length==1){selectedCol=parseInt(tmpStr);}else{fromHex(tmpStr);}}
-        else if (count==6){cycleLength=parseInt(tmpStr);}
+        else if (count==6){cycleLength=parseInt(tmpStr); setSlide();}
         else if (count==7){prevH=parseInt(tmpStr);}
         count++;
         tmpStr="";
