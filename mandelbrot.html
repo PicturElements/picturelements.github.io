@@ -659,7 +659,7 @@
       
       function setSlide(){
         var tmpStr=document.getElementById("iterations").value;
-        iterations=isNaN(tmpStr)?parseInt(tmpStr):50;
+        iterations=isNaN(tmpStr)?50:parseInt(tmpStr);
         var pos=cycleLength/(iterations*2);
         if (pos>1){pos=1; cycleLength=iterations*2;}
         document.getElementsByClassName("innerslider")[0].innerHTML=cycleLength;
