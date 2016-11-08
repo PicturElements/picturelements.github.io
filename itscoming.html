@@ -1,0 +1,213 @@
+<html>
+  <head>
+    <title>It's coming.</title>
+    <link rel="icon" href="pelement.png">
+    <style>
+      body{
+        display:block;
+        margin:0;
+        background-color:black;
+        width:100%;
+        height:100%;
+      }
+
+      #container{
+        display:flex;
+        position:relative;
+        justify-content:center;
+        /*Forgive me.*/
+        margin-top:calc(50vh - 5vw);
+      }
+
+      .number{
+        display:block;
+        position:relative;
+        float:left;
+        margin-right:1vw;
+        width:7vw;
+        height:10vw;
+        background:white;
+        font-family:Trebuchet MS,Arial,sans-serif;
+        font-size:10vw;
+        line-height:10vw;
+        text-align:center;
+        border-radius:0.5vw;
+      }
+
+      .flipbottom{
+        position:absolute;
+        border-radius:0 0 0.5vw 0.5vw;
+        height:5vw;
+        top:5vw;
+        overflow:hidden;
+        line-height:0;
+        transform-origin: 3.5vw 0;
+        transform: perspective(200px) rotateX(180deg);
+      }
+
+      .fliptop{
+        position:absolute;
+        border-radius:0.5vw 0.5vw 0 0;
+        height:5vw;
+        top:0;
+        overflow:hidden;
+        transform-origin: 3.5vw 5vw;
+        transform: perspective(200px) rotateX(0deg);
+        backface-visibility: hidden;
+      }
+
+      .lower{
+        position:absolute;
+        border-radius:0 0 0.5vw 0.5vw;
+        line-height:0;
+        height:5vw;
+        top:5vw;
+        overflow:hidden;
+      }
+
+      .push{
+        margin-right:2vw;
+      }
+
+      #broken{
+        display:none;
+        position:fixed;
+        bottom:0.5vw;
+        width:100%;
+        text-align:center;
+        font-size:1.5vw;
+        font-family:Trebuchet MS,Arial,sans-serif;
+        color:white;
+      }
+
+      @keyframes flip{
+        0%{
+          background:#999;
+        }
+        100%{
+          background:white;
+          transform: perspective(200px) rotateX(0deg);
+        }
+      }
+
+      @keyframes flip2{
+        50%{
+          background:#999;
+        }
+        100%{
+          background:white;
+          transform: perspective(200px) rotateX(-180deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div class="number main">
+        <span class="back"></span>
+        <div class="number lower"></div>
+        <div class="number flipbottom"></div>
+        <div class="number fliptop"></div>
+      </div>
+      <div class="number main push">
+        <span class="back"></span>
+        <div class="number lower"></div>
+        <div class="number flipbottom"></div>
+        <div class="number fliptop"></div>
+      </div>
+      <div class="number main">
+        <span class="back"></span>
+        <div class="number lower"></div>
+        <div class="number flipbottom"></div>
+        <div class="number fliptop"></div>
+      </div>
+      <div class="number main push">
+        <span class="back"></span>
+        <div class="number lower"></div>
+        <div class="number flipbottom"></div>
+        <div class="number fliptop"></div>
+      </div>
+      <div class="number main">
+        <span class="back"></span>
+        <div class="number lower"></div>
+        <div class="number flipbottom"></div>
+        <div class="number fliptop"></div>
+      </div>
+      <div class="number main push">
+        <span class="back"></span>
+        <div class="number lower"></div>
+        <div class="number flipbottom"></div>
+        <div class="number fliptop"></div>
+      </div>
+      <div class="number main">
+        <span class="back"></span>
+        <div class="number lower"></div>
+        <div class="number flipbottom"></div>
+        <div class="number fliptop"></div>
+      </div>
+      <div class="number main">
+        <span class="back"></span>
+        <div class="number lower"></div>
+        <div class="number flipbottom"></div>
+        <div class="number fliptop"></div>
+      </div>
+    </div>
+    <div id="broken">EVERYTHING IS BROKEN. PANIC.</div>
+    <script>
+      const THANK_GOD=1478725200000;
+      var counter=0;
+      var time=['-','-','-','-','-','-','-','-'];
+
+      function countdown(){
+        var diff=Math.floor((THANK_GOD-new Date().getTime())/1000);
+        if (diff<0){
+          diff=Math.floor(Math.random()*8553600);
+          document.getElementById("broken").style.display="block";
+        }
+        var days=Math.floor(diff/86430);
+        var hours=Math.floor(diff/3600)%24;
+        var minutes=Math.floor(diff/60)%60
+        var tmpTime=[
+          Math.floor(days/10),
+          days%10,
+          Math.floor(hours/10),
+          hours%10,
+          Math.floor(minutes/10),
+          minutes%10,
+          Math.floor(diff%60/10),
+          diff%10
+        ];
+        for (var i=0;i<time.length;i++){
+          if (time[i]!=tmpTime[i]){
+            flip(i,time[i],tmpTime[i]);
+          }
+        }
+        document.getElementById("test").innerHTML=tmpTime;
+      }
+
+      function count(){
+        counter++;
+        flip(0,counter%10,(counter+1)%10);
+      }
+
+      function flip(id,from,to){
+        var fb=document.getElementsByClassName("number flipbottom")[id];
+        var ft=document.getElementsByClassName("number fliptop")[id];
+        fb.style.animation="flip 700ms forwards 1";
+        ft.style.animation="flip2 700ms forwards 1";
+        document.getElementsByClassName("back")[id].innerHTML=to;
+        fb.innerHTML=to;
+        ft.innerHTML=from;
+        setTimeout(function(){
+          fb.style.animation="none";
+          ft.style.animation="none";
+          ft.innerHTML=to;
+          document.getElementsByClassName("number lower")[id].innerHTML=to;
+          time[id]=to;
+        },700);
+      }
+
+      setInterval(countdown,1000);
+    </script>
+  </body>
+</html>
