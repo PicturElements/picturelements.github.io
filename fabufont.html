@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>fabulous fonts.</title>
+    <link rel="icon" href="pelement.png">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+    <style>
+      @font-face {
+         font-family:papyrus;
+         src: url("https://picturelements.github.io/media/fonts/papyrus.otf");
+      }
+
+      @font-face {
+         font-family:boah;
+         src: url("https://picturelements.github.io/media/fonts/BIRTH_OF_A_HERO.otf");
+      }
+
+      @font-face {
+         font-family:hobo;
+         src: url("https://picturelements.github.io/media/fonts/HoboStd.otf");
+      }
+
+      @font-face {
+         font-family:comic;
+         src: url("https://picturelements.github.io/media/fonts/ComicSans.otf");
+      }
+
+      @font-face {
+         font-family:impact;
+         src: url("https://picturelements.github.io/media/fonts/Impact.otf");
+      }
+
+      body{
+        font-size:50px;
+      }
+
+      pap{
+        font-family:papyrus,serif;
+      }
+
+      boah{
+        font-family:boah,serif;
+      }
+
+      hobo{
+        font-family:hobo,serif;
+      }
+
+      com{
+        font-family:comic,serif;
+      }
+
+      imp{
+        font-family:impact,serif;
+      }
+
+      body{
+        margin:0;
+        font-family:Open Sans Condensed,sans-serif;
+        color:#eee;
+        overflow:hidden;
+      }
+
+      #logo{
+        display:block;
+        position:relative;
+        width:100%;
+        text-align:center;
+        margin-top:50px;
+      }
+
+      #maininput{
+        display:block;
+        position:relative;
+        width:90%;
+        min-width:90%;
+        max-width:90%;
+        left:5%;
+        height:200px;
+        margin-top:20px;
+        background-color:#333;
+        outline:none;
+        box-sizing:border-box;
+        border:5px solid #666;
+        color:#eee;
+        font-family:Open Sans Condensed,sans-serif;
+        font-size:25px;
+      }
+
+      #generate{
+        display:block;
+        position:relative;
+        width:90%;
+        left:5%;
+        height:50px;
+        background-color:#666;
+        border:none;
+        margin-top:20px;
+        cursor:pointer;
+        color:#eee;
+        margin-bottom:50px;
+        font-family:Open Sans Condensed,sans-serif;
+        font-size:30px;
+        outline:none;
+      }
+
+      #generate:hover{
+        background-color:#777;
+      }
+
+      #nice_part{
+        display:block;
+        position:absolute;
+        width:100%;
+        height:100%;
+        background-color:#222;
+        overflow:visible;
+        transition:margin-top 750ms cubic-bezier(0.68, -0.55, 0.56, 1);
+      }
+
+      #nice_part:after{
+        display:block;
+        position:absolute;
+        content:"";
+        width:100%;
+        height:100%;
+        background-color:#222;
+        margin-top:100vh;
+      }
+
+      #footer{
+        display:block;
+        position:absolute;
+        width:100%;
+        text-align:center;
+        font-size:15px;
+        margin-bottom:5px;
+        color:#888;
+      }
+
+      #wrapper{
+        display:block;
+        position:absolute;
+        width:100%;
+        height:100%;
+        overflow:auto;
+      }
+
+      #fabulous_part{
+        display:block;
+        position:absolute;
+        width:100%;
+        height:100%;
+        background: #ff0202;
+        background: -moz-linear-gradient(-45deg, #ff0202 0%, #fff202 16%, #1bff02 30%, #02ffff 47%, #020aff 64%, #ff02ee 82%, #ff0206 100%);
+        background: -webkit-linear-gradient(-45deg, #ff0202 0%,#fff202 16%,#1bff02 30%,#02ffff 47%,#020aff 64%,#ff02ee 82%,#ff0206 100%);
+        background: linear-gradient(135deg, #ff0202 0%,#fff202 16%,#1bff02 30%,#02ffff 47%,#020aff 64%,#ff02ee 82%,#ff0206 100%);
+        overflow:auto;
+        text-align:center;
+        color:black;
+        text-shadow:2px 2px 10px black;
+        line-height:160px;
+        transition:line-height 750ms;
+        transition-delay:400ms;
+      }
+
+      #expando{
+        display:block;
+        position:absolute;
+        width:50px;
+        height:30px;
+        background-color:#222;
+        margin-top:-30px;
+        border-radius:0 10px 0 0;
+        text-align:center;
+        line-height:30px;
+        font-size:20px;
+        cursor:pointer;
+      }
+
+      #expando:hover{
+        background-color:#333;
+      }
+
+      ::selection{
+        background: red;
+      }
+
+      #maininput::selection{
+        background:#69c;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="fabulous_part"></div>
+    <div id="nice_part">
+      <div id="expando" onclick="showNice()">▲</div>
+      <div id="wrapper">
+        <div id="logo">fabulous fonts.</div>
+        <textarea id="maininput" placeholder="Text here!" spellcheck="false"></textarea>
+        <button id="generate" onclick="showFabulous()">Fabulize text!</button>
+        <div id="footer">A brilliant tool made by PicturElements</div>
+      </div>
+    </div>
+    <script>
+      var msg="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in lectus vitae dui pharetra ultrices. Vestibulum porta, leo non vulputate molestie, odio nisl luctus velit, a blandit purus ipsum sit amet sapien. Nam sed varius eros, at blandit quam. In vehicula sapien enim, a mollis est blandit quis. Duis tristique fringilla lorem ut pretium. Proin dignissim condimentum lorem ac malesuada. Nullam ex dolor, varius eget magna eu, convallis elementum tortor. Praesent convallis vehicula dui, ac sagittis diam convallis dictum. Curabitur vestibulum ut ante et interdum. In ligula eros, volutpat et magna sit amet, blandit mollis quam. Mauris efficitur tincidunt urna, non ornare nibh aliquam ut.";
+      var minLen=3,maxLen=5;
+      var tags=["<pap>","<boah>","<hobo>","<com>","<imp>"];
+
+      document.getElementById("maininput").value=msg;
+
+      function genHTML(str){
+        var out="",start=0;
+        prevVal="";
+        for (var i=0;i<str.length;i++){
+          var take=minLen+Math.round(Math.random()*(maxLen-minLen));
+          if (start+take>str.length){take=str.length-start;}
+          var slce=str.slice(start,start+take);
+          var tag=genRandom(tags,prevVal);
+          prevVal=tag;
+          out+=(tag+""+slce+""+(tag.replace("<","</")));
+          start+=take;
+          i=start;
+        }
+        return out;
+      }
+
+      function genRandom(inArr,exclude){
+        var arr=[];
+        for (var i=0;i<inArr.length;i++){
+          if (exclude!=inArr[i]){
+            arr.push(inArr[i]);
+          }
+        }
+        var ind=Math.floor(Math.random()*arr.length);
+        return arr[ind];
+      }
+
+      function setCols(){
+        var elems=document.getElementById("fabulous_part").children;
+        for (var i=0;i<elems.length;i++){
+          elems[i].style.color="rgb("+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+")";
+        }
+      }
+
+      function showFabulous(){
+        document.getElementById("nice_part").style.marginTop="100vh";
+        document.getElementById("fabulous_part").innerHTML=genHTML(document.getElementById("maininput").value);
+        document.getElementById("fabulous_part").style.lineHeight="60px";
+        setCols();
+      }
+
+      function showNice(){
+        document.getElementById("nice_part").style.marginTop="0";
+        document.getElementById("fabulous_part").style.lineHeight="160px";
+      }
+    </script>
+  </body>
+</html>
