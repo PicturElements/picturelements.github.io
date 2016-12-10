@@ -146,6 +146,8 @@
 
       document.body.addEventListener("mousemove",function(event){
         blockLeft=event.clientX/window.innerWidth;
+        if (blockLeft<blockSide/2){blockLeft=blockSide/2;}
+        else if (blockLeft>1-blockSide/2){blockLeft=1-blockSide/2;}
         genBox();
       });
 
@@ -231,9 +233,6 @@
       }
 
       function animate(){
-        if (blockLeft<blockSide/2){blockLeft=blockSide/2;}
-        else if (blockLeft>1-blockSide/2){blockLeft=1-blockSide/2;}
-
         for (var i=0;i<hurdles.length;i++){
           for (var m=0;m<2;m++){
             for (var n=0;n<4;n++){
