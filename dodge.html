@@ -134,18 +134,15 @@
     </div>
     <script>
       var canv=document.getElementById("canvas"),ctx=canv.getContext("2d");
-      var blockSide=0.05,blockLeft=0.5,blockTop=0.3,minSpeed=0.002;
-      var hurdles=[],minGap=blockSide*2,minMinGap=blockSide*1.1,hurSpeed=0.005,addNext=0.1,box=[];
+      var blockSide=0.05,blockLeft=0.5,blockTop=0.3;
+      var hurdles=[],minGap=blockSide*2,minMinGap=blockSide*1.1,hurSpeed=0.0075,addNext=0.1,box=[];
       var backLines=[],lineNo=30;
-      var key=0;
-      var keys=[37,39,83,70];
-      var counter=0;
       var thread=null;
       var protips=["Next time, try trying!","It's a good idea not to hit the obstacles.","Me gran can do a better of of this, swer on me mum!","The record for this game is 183. Source: my ass.","I beat you yesterday. Whilst asleep. <span style='color:#999'>( ͡° ͜ʖ ͡°)</span>","Yer mom's a whore!","I bet a blindfolded chimp could beat you easily.","&lt;insert hilarious comment about how I pleasured your mother yesterday&gt;"];
       var tmpScore=localStorage.getItem("score");
       var score=0,prevScore=tmpScore==null?0:parseInt(tmpScore);
 
-      const MIN_GAP=blockSide*3,HUR_SPEED=0.005,ADD_NEXT=0.1;
+      const MIN_GAP=blockSide*3,HUR_SPEED=0.0075,ADD_NEXT=0.1;
 
       document.body.addEventListener("mousemove",function(event){
         blockLeft=event.clientX/window.innerWidth;
@@ -160,7 +157,6 @@
         document.getElementById("howto").style.display="none";
         document.getElementById("canvas").setAttribute("gta-ify",false);
         hurdles=[];
-        counter=0;
         if (score>prevScore){
           localStorage.setItem("score",score);
           prevScore=score;
@@ -278,7 +274,6 @@
           backLines.splice(0,1);
           addLine(backLines[backLines.length-1].pos+1/lineNo);
         }
-        counter++;
         paint();
       }
 
