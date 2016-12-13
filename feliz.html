@@ -1,0 +1,154 @@
+<html>
+  <head>
+    <title>Feliz Navidad Feliz Navidad Feliz Navidad Feliz Navidad</title>
+    <link rel="icon" href="pelement.png">
+    <link href="https://fonts.googleapis.com/css?family=Mountains+of+Christmas" rel="stylesheet">
+    <audio id="audio" src="https://picturelements.github.io/media/Feliz Navidad.mp3" type="audio/mp3"></audio>
+    <style>
+    body{
+      margin:0;
+      font-family:Mountains of Christmas,cursive;
+    }
+
+    #scene{
+      display:block;
+      position:fixed;
+      width:100%;
+      height:100%;
+      background: #000a4f;
+      background: -moz-linear-gradient(top, #000a4f 0%, #0f00b7 36%, #4096ee 73%);
+      background: -webkit-linear-gradient(top, #000a4f 0%,#0f00b7 36%,#4096ee 73%);
+      background: linear-gradient(to bottom, #000a4f 0%,#0f00b7 36%,#4096ee 73%);
+    }
+
+    #night{
+      display:block;
+      position:fixed;
+      width:100%;
+      height:100%;
+      background: #000000;
+      background: -moz-linear-gradient(top, #000000 0%, #00021e 36%, #12113f 74%);
+      background: -webkit-linear-gradient(top, #000000 0%,#00021e 36%,#12113f 74%);
+      background: linear-gradient(to bottom, #000000 0%,#00021e 36%,#12113f 74%);
+      opacity:0;
+      animation:day 15s alternate infinite;
+    }
+
+    #landscape{
+      display:block;
+      position:fixed;
+      background-image:url("https://picturelements.github.io/images/winterscene.png");
+      width:100%;
+      height:40vh;
+      background-size:133vh 40vh;
+      bottom:0;
+      animation:night 15s alternate infinite;
+    }
+
+    #snow, #snow2{
+      content:"";
+      display:block;
+      position:fixed;
+      top:0;
+      left:0;
+      width:100vw;
+      height:100vh;
+      pointer-events:none;
+      background-image:url("https://picturelements.github.io/images/snow1.png");
+    }
+
+    #snow{
+      animation:snow 10s linear infinite,night 15s alternate infinite;
+    }
+
+    #snow2{
+      background-image:url("https://picturelements.github.io/images/snow2.png");
+      animation:snow 15s linear infinite,night 15s alternate infinite;
+    }
+
+    #feliz{
+      display:block;
+      position:fixed;
+      width:100%;
+      height:100%;
+      text-align:center;
+      line-height:80vh;
+      font-size:8vw;
+      color:#900;
+    }
+
+    #celestial{
+      display:block;
+      position:fixed;
+      width:20vh;
+      height:20vh;
+      border-radius:50%;
+      background-color:#ffee5d;
+      box-shadow:0 0 20vh #fffe9f,0 0 10vh #fffe9f;
+      left:50%;
+      margin-left:-10vh;
+      bottom:30vh;
+      animation:daycycle 15s alternate linear infinite;
+    }
+
+    @keyframes snow{
+      to{background-position:200px 400px}
+    }
+
+    @keyframes day{
+      to{opacity:1;}
+    }
+
+    @keyframes night{
+      to{
+        -webkit-filter:brightness(25%);
+        -moz-filter:brightness(25%);
+        -ie-filter:brightness(25%);
+        filter:brightness(25%);
+      }
+    }
+
+    @keyframes daycycle{
+      5%{
+        bottom:30vh;
+        background-color:#ffee5d;
+        box-shadow:0 0 20vh #fffe9f,0 0 10vh #fffe9f;
+      }
+      50%{
+        bottom:-5vh;
+        background-color:red;
+        box-shadow:0 0 20vh #ff8328,0 0 10vh #ff8328;
+      }
+      50.001{
+        background-color:white;
+      }
+      95%{
+        bottom:20vh;
+        background-color:white;
+      }
+      100%{
+        bottom:20vh;
+        background-color:white;
+      }
+    }
+    </style>
+  </head>
+  <body>
+    <div id="scene">
+      <div id="night"></div>
+      <div id="celestial"></div>
+      <div id="snow2"></div>
+      <div id="feliz">¡Feliz Navidad!</div>
+      <div id="landscape"></div>
+      <div id="snow"></div>
+    </div>
+    <script>
+      var audio=document.getElementById("audio");
+      audio.play();
+      audio.addEventListener("ended", function(){
+        audio.currentTime=12.6;
+        audio.play();
+      });
+    </script>
+  </body>
+</html>
