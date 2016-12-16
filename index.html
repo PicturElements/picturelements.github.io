@@ -1,12 +1,12 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <title>Home - PicturElements</title>
-    <link rel="icon" href="pelement.png">
-    <link rel="stylesheet" type="text/css" href="indexStyle.css"><link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900" rel="stylesheet" type="text/css">
     <script src="https://picturelements.github.io/testdropper.js"></script>
   </head>
   <body oncontextmenu="return contextShow">
+    <audio id="taskbahSound" loop preload="auto">
+      <source src="https://picturelements.github.io/images/win_icons/LockIt.mp3">
+    </audio>
     <button id="gofull" style="display:none; position:fixed; z-index:100;">GO FULLSCREEN</button>
     <div id="desktopwrapper" class="grad backOverride">
       <div id="desktop">
@@ -27,6 +27,8 @@
       <div class="contextitem">Fullscreen</div>
       <div class="contextitem">Enable context menu</div>
       <div class="contextitem">Change wallpaper</div>
+      <div class="contextitem">Lock taskbar</div>
+      <div class="contextitem">Lock the taskbah</div>
     </div>
     <div id="searchbar">
       <div id="searchbarbar" expanded="false">
@@ -65,7 +67,7 @@
       </div>
       <p onclick=openSettings() id="edittime">Edit time and date...</p>
     </div>
-    <div id="taskbar">
+    <div id="taskbar" style="bottom: 0vw">
       <div id="home"></div>
       <input id="search" placeholder="Search in PeOS" autocomplete="off"></input>
       <div id="infocorner">
@@ -140,6 +142,5 @@
         <div class="puzzle specColor" style="display:none" active></div>
       </div>
     </div>
-    <script src="https://picturelements.github.io/indexMotor.js"></script>
   </body>
 </html>
