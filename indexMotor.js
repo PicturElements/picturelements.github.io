@@ -883,7 +883,7 @@ function search(){
   }
   var inHTML="";
   for (var i=0;i<results.length;i++){
-    inHTML+="<a class=\"result\" href=\""+results[i].url+"\" taget=\"_blank\"><div class=\"resultimg\" style=\"background-image:url("+results[i].icon+")\"></div><div class=\"resulttext\">"+results[i].name+"<br><kw>"+results[i].keywords+"</kw></div></a>"
+    inHTML+="<a class=\"result\" href=\""+results[i].url+"\" target=\"_blank\"><div class=\"resultimg\" style=\"background-image:url("+results[i].icon+")\"></div><div class=\"resulttext\">"+results[i].name+"<br><kw>"+results[i].keywords+"</kw></div></a>"
   }
   document.getElementById("innerresults").innerHTML=inHTML;
 }
