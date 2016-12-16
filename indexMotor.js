@@ -1,13 +1,24 @@
+/* TODO:
+*  Wifi bar, battery perc icons
+*  Add "reset time" option
+*  Add power menu
+*  Fix index=-1 bug on icon select
+*  Sort programs in programbar
+*  Make anything work in IE
+*/
+
 var xStart=0,yStart=0,selWin=0;
 var prevX=0,prevY=0;
 var clicked=false,resize=false,setFullscreen=0,attr,select=false,preventEvents=false,expanded=false,slide=false;
+var lockTaskbar=true,lockTaskbah=false,hide=true,preventHide=false;
 var windows=[],origNames=[],winCount=0;
 var last=0;
 var unix24Hrs=86400000;
 var contextAssort=[
   [0,1,2,3],
   [4,5,6,7],
-  [8,9,10]
+  [8,9,10],
+  [11,12]
 ];
 var colors=[
   ["#600","#d42","#d77","#ff5e5e 0%,#bd1929 38%,#0e0000 100%"],
@@ -20,7 +31,7 @@ var colors=[
 ];
 var specCols=["#68c464 0%,#1c5d9e 38%,#50005f 100%"];
 var DEF_WIN_W=40,DEF_WIN_H=25;
-var backgrounds=["Abstract.jpg","Bouncy.jpg","Gimignano.jpg","Flower.jpg","Bucks.jpg","Leaf.jpg","LonelyRoad.jpg","Flowers.jpg","Mandelbrot.png","Match.jpg","Leaves.png"];
+var backgrounds=["Abstract.jpg","Bouncy.jpg","Gimignano.jpg","Flower.jpg","Bucks.jpg","Leaf.jpg","LonelyRoad.jpg","Flowers.jpg","Mandelbrot.png","Match.jpg"];
 contextShow=false;
 
 //localStorage-editable variables
@@ -41,6 +52,7 @@ var ci=localStorage.getItem("colId");
 if (ci!=null){colId=parseInt(ci);}
 var bi=localStorage.getItem("backId");
 if (bi!=null){backId=parseInt(bi);}
+if (localStorage.getItem("lockTaskbar")=="0"){lockTaskbar=false;}
 
 var programData=[
   {name: "Error", url: "", icon: "error", keywords: ""},
@@ -74,6 +86,7 @@ document.body.addEventListener("mouseup",function(event){try{release(event);}cat
 document.getElementById("search").addEventListener("keyup",search);
 document.getElementById("searchbar").addEventListener("mousedown",function (event){showSearch(event);});
 document.getElementById("home").addEventListener("mousedown",function (event){showHome(event);});
+document.getElementById("taskbar").addEventListener("mousedown",function (event){showContext(event,3);});
 document.getElementsByClassName("poweritem")[0].addEventListener("mousedown",function (){restart();});
 document.getElementsByClassName("poweritem")[1].addEventListener("mousedown",function (){powerOff();});
 document.getElementsByClassName("contextitem")[0].addEventListener("mousedown",function (event){contextOpen(event,false);});
@@ -87,7 +100,9 @@ document.getElementsByClassName("contextitem")[7].addEventListener("mousedown",f
 document.getElementsByClassName("contextitem")[8].addEventListener("mousedown",function (){toggleFullscreen();});
 document.getElementsByClassName("contextitem")[9].addEventListener("mousedown",function (){contextShow=!contextShow;});
 document.getElementsByClassName("contextitem")[10].addEventListener("mousedown",function (){openSettings("backH");});
-document.getElementById("context").addEventListener("mousedown",function (){document.getElementById("context").style.display="none";});
+document.getElementsByClassName("contextitem")[11].addEventListener("mousedown",function (){lockTaskbar=!lockTaskbar; localStorage.setItem("lockTaskbar",lockTaskbar?1:0)});
+document.getElementsByClassName("contextitem")[12].addEventListener("mousedown",function (){toggleTaskbah();});
+document.getElementById("context").addEventListener("mousedown",function (){document.getElementById("context").style.display="none"; preventHide=false;});
 document.getElementById("desktop").addEventListener("mousedown",function(event){
   xStart=event.clientX;
   yStart=event.clientY;
@@ -97,6 +112,7 @@ document.getElementById("desktop").addEventListener("mousedown",function(event){
     elem[i].setAttribute("selected",false);
   }
   document.getElementById("context").style.display="none";
+  preventHide=false;
   hideSearch();
   document.getElementById("clockbar").style.display="none";
   showContext(event,2);
@@ -177,7 +193,7 @@ function addWindow(id,title,contStr,w,h){
   }else{
     elem.setAttribute("type",id);
   }
-  var inner="<div class=\"infobar infoCol\" id=\""+winCount+"\"><div class=\"close\" title=\"Close\" onclick=closeWin("+winCount+")>✕</div><div class=\"max\" title=\"Toggle\" onclick=toggle("+winCount+")>◳</div><div class=\"min\" title=\"Minimize\" onclick=minWin("+winCount+")>_</div><div class=\"reload\" title=\"Reload\" onclick=reloadWin("+winCount+")>↻</div><div class=\"winicon\" style=\"background-image:url(https://picturelements.github.io/images/win_icons/"+data.icon+".png)\"></div><div class=\"wintitle\">"+data.name+"</div></div><iframe class=\"content\" src=\""+(id==0?tmpUrl:"")+"\"></iframe><div class=\"loadingoverlay\"><div id=\"loader\"></div><div id=\"loader2\"></div><div id=\"loader3\"></div></div>"+err+"<div class=\"resize\" scale=\"lw\"></div><div class=\"resize\" scale=\"lwh\"></div><div class=\"resize\" scale=\"h\"></div><div class=\"resize\" scale=\"wh\"></div><div class=\"resize\" scale=\"w\"></div>";
+  var inner="<div class=\"infobar infoCol\" id=\""+winCount+"\"><div class=\"close\" title=\"Close\" onclick=closeWin("+winCount+")>✕</div><div class=\"max\" title=\"Toggle\" onclick=toggle("+winCount+")>◻</div><div class=\"min\" title=\"Minimize\" onclick=minWin("+winCount+")>_</div><div class=\"reload\" title=\"Reload\" onclick=reloadWin("+winCount+")>↻</div><div class=\"winicon\" style=\"background-image:url(https://picturelements.github.io/images/win_icons/"+data.icon+".png)\"></div><div class=\"wintitle\">"+data.name+"</div></div><iframe class=\"content\" src=\""+(id==0?tmpUrl:"")+"\"></iframe><div class=\"loadingoverlay\"><div id=\"loader\"></div><div id=\"loader2\"></div><div id=\"loader3\"></div></div>"+err+"<div class=\"resize\" scale=\"lw\"></div><div class=\"resize\" scale=\"lwh\"></div><div class=\"resize\" scale=\"h\"></div><div class=\"resize\" scale=\"wh\"></div><div class=\"resize\" scale=\"w\"></div>";
   elem.innerHTML=inner;
   elem.setAttribute("active",true);
   elem.id=winCount;
@@ -200,7 +216,7 @@ function addWindow(id,title,contStr,w,h){
     yPos:[Math.abs(window.innerHeight/2-(h/200)*window.innerWidth),0],
     z:winCount-1,   //I'm not entirely sure why this works...
     sizeX:[w,100],
-    sizeY:[h,(window.innerHeight/window.innerWidth)*100-3],
+    sizeY:[h,(window.innerHeight/window.innerWidth)*100-(lockTaskbar?3:0)],
     edit:0,
     collapsed:false
   });
@@ -297,7 +313,7 @@ function release(event){
         windows[selWin].xPos[edit]=setFullscreen<3?0:window.innerWidth/2;
         windows[selWin].yPos[edit]=0;
         windows[selWin].sizeX[edit]=(setFullscreen==1?100:50);
-        windows[selWin].sizeY[edit]=window.innerHeight/window.innerWidth*100-3;
+        windows[selWin].sizeY[edit]=window.innerHeight/window.innerWidth*100-(lockTaskbar?3:0);
         var elem=document.getElementsByClassName("window")[selWin].style;
         elem.left=setFullscreen<3?0:"50vw";
         elem.top=0;
@@ -346,6 +362,7 @@ function moveWindow(evt){
           el.style.top=sW.yPos[0]+"px";
           el.style.transition="50ms";
           setTimeout(function(){el.style.transition="none";},50);
+          var shadow=document.getElementById("shadow").style;
         }else if (evt.clientY<=window.innerWidth/100){
           document.getElementById("shadow").style="opacity:1; width:100%; left:0";
           setFullscreen=1;
@@ -359,6 +376,7 @@ function moveWindow(evt){
           document.getElementById("shadow").style.opacity="0";
           setFullscreen=0;
         }
+        document.getElementById("shadow").style.height=(lockTaskbar?"100%":"calc(100% + 2.8vw)")
       }
     } 
   }else if (select&&!preventEvents){
@@ -388,6 +406,13 @@ function moveWindow(evt){
         }
       }
     }
+  }
+  
+  //taskbar stuff
+  if (evt.clientY>window.innerHeight-window.innerWidth/100||document.getElementById("taskbar").style.bottom=="0vw"&&evt.clientY>window.innerHeight-window.innerWidth*0.03){
+    hide=false;
+  }else if (evt.clientY<window.innerHeight-window.innerWidth*0.03){
+    hide=true;
   }
 }
 
@@ -455,6 +480,7 @@ function toggle(id){
   var elem=document.getElementsByClassName("window")[id];
   var edit=windows[id].edit;
   elem.style.width=windows[id].sizeX[edit]+"vw";
+  windows[id].sizeY[1]=window.innerHeight/window.innerWidth*100-(lockTaskbar?3:0);
   elem.style.height=windows[id].sizeY[edit]+"vw";
   elem.style.left=windows[id].xPos[edit]+"px";
   elem.style.top=windows[id].yPos[edit]+"px";
@@ -518,17 +544,12 @@ function selectIcon(evt,id,singleClick){
   hideSearch();
   if (!preventEvents){
     var time=new Date().getTime();
-    if (Math.abs(evt.clientX-prevX)<5&&Math.abs(evt.clientY-prevY)<5||singleClick){
-      if (time-last<300||singleClick||evt.target.getAttribute("class")!="ddesc"){
-        addWindow(id,null,null,DEF_WIN_W,DEF_WIN_H);
-        prevX=-100;
-      }else{
-        editName(id);
-        preventEvents=true;
-      }
-    }else{
-      prevX=evt.clientX;
-      prevY=evt.clientY;
+    if (time-last<500||singleClick){
+      addWindow(id,null,null,DEF_WIN_W,DEF_WIN_H);
+      prevX=-100;
+    }else if(evt.target.getAttribute("class")=="ddesc"&&time-last<1000){
+      editName(id);
+      preventEvents=true;
     }
     last=time;
   }
@@ -628,6 +649,7 @@ function showSearchFull(evt){
   if (!expanded){
     showSearch(evt);
   }
+  preventHide=true;
   evt.stopPropagation();
 }
 
@@ -668,6 +690,7 @@ function showHome(evt){
       pieces[i].addEventListener("mouseup",function(event){placePiece(event);});
     }
   },200);
+  preventHide=true;
   evt.stopPropagation();
 }
 
@@ -938,11 +961,15 @@ function showContext(evt,type){
         items[8].innerHTML="Exit fullscreen";
       }
       items[9].innerHTML=(contextShow?"Disable":"Enable")+" context menu";
+    }else if (type==3){
+      items[11].innerHTML=(lockTaskbar?"✓&nbsp; ":"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")+"Lock taskbar";
+      items[12].innerHTML=(lockTaskbah?"✓&nbsp; ":"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")+"Lock the taskbah";
     }
     context.style.display="block";
     context.style.left=(evt.clientX+2)+"px";
     context.style.top=((evt.clientY+context.offsetHeight<window.innerHeight-window.innerWidth*0.03)?(evt.clientY+2):(evt.clientY-context.offsetHeight-2))+"px";
     evt.stopPropagation();
+    preventHide=true;
   }
 }
 
@@ -1025,6 +1052,17 @@ function contextAddWin(evt){
   selectIcon(evt,target,true);
 }
 
+function toggleTaskbah(){
+  lockTaskbah=!lockTaskbah;
+  var elem=document.getElementById("taskbahSound");
+  if (lockTaskbah){
+    elem.currentTime=0;
+    elem.play();
+  }else{
+    elem.pause();
+  }
+}
+
 function openSettings(scrTo){
   hideSearch();
   addWindow(0,"Settings",null,60,35);
@@ -1079,7 +1117,7 @@ function selIco(id){
 function toggleClock(){
   var elem=document.getElementById("clockbar");
   if (elem.style.display=="none"){openClock();}
-  else{elem.style.display="none";}
+  else{elem.style.display="none"; preventHide=false;}
 }
 
 function openClock(){
@@ -1107,6 +1145,7 @@ function openClock(){
     tCo+="</tr>";
   }
   document.getElementById("calendar").innerHTML=tCo;
+  preventHide=true;
   //alert(daysInMonth(1,2017));
 }
 
@@ -1170,6 +1209,18 @@ function newTime(){
   document.getElementById("tzlbl").innerHTML="Current time: "+dt.toLocaleString()+"";
 }
 
+function handleTaskbar(){
+  if (!lockTaskbar){
+    var tb=document.getElementById("taskbar").style;
+    console.log(tb.bottom);
+    if (hide&&tb.bottom=="0vw"&&!preventHide){
+      setTimeout(function(){if (hide){tb.bottom="-2.8vw";}},750);
+    }else if (!hide&&tb.bottom=="-2.8vw"){
+      tb.bottom="0vw";
+    }
+  }
+}
+
 function getOffset(){
   var dt=new Date();
   var dt2=new Date(),roundedDate=Math.floor((dt.getTime()-60000*dt2.getTimezoneOffset())/unix24Hrs)*unix24Hrs;
@@ -1215,6 +1266,7 @@ function updateSize(id){
 
 newTime();
 setInterval(newTime,1000);
+setInterval(handleTaskbar,50);
 window.onload=function(){
   setTimeout(function(){
     document.getElementById("loadscreen").style.opacity=0;
