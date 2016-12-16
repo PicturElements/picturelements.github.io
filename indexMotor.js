@@ -1219,7 +1219,7 @@ window.onload=function(){
   setTimeout(function(){
     document.getElementById("loadscreen").style.opacity=0;
     setTimeout(function(){document.getElementById("loadscreen").style.display="none";},500);
-  },3500);
+  },1500);
 };
 /*setInterval(function(){
   document.getElementById("test").innerHTML=prevX+" - "+prevY;
