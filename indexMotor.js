@@ -44,7 +44,7 @@ if (bi!=null){backId=parseInt(bi);}
 
 var programData=[
   {name: "Error", url: "", icon: "error", keywords: ""},
-  {name: "Home", url: "https://picturelements.github.io/index2", icon: "home", keywords: "home,homepage,index,information"},
+  {name: "Home", url: "https://picturelements.github.io/index", icon: "home", keywords: "home,homepage,index,information"},
   {name: "Sudoku Solver", url: "https://picturelements.github.io/sudokuSolver", icon: "sudokusolver", keywords: "sudoku,solver,games,interactive"},
   {name: "Mandelbrot", url: "https://picturelements.github.io/mandelbrot", icon: "mandelbrot", keywords: "mandelbrot,julia,set,generator,fractal,interactive,math,canvas"},
   {name: "Pitchfork Emporium", url: "https://pitchforkemporium.github.io/", icon: "pitchforkemporium", keywords: "pitchfork,emporium,store,webshop,reddit,api"},
