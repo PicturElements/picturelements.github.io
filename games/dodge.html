@@ -1,0 +1,339 @@
+<html>
+  <head>
+    <title>Dodge</title>
+    <link rel="icon" href="pelement.png">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,700" rel="stylesheet" type="text/css">
+    <style>
+      body{
+        margin:0;
+        overflow:hidden;
+        font-family:Roboto,Arial,sans-serif;
+      }
+      #canvas{
+        display:block;
+        position:absolute;
+        transition:filter 500ms;
+        transition-delay:0;
+      }
+      #canvas[gta-ify="true"]{
+        -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
+        transition:filter 3s;
+        transition-delay:500ms;
+      }
+      #shadow{
+        display:block;
+        position:fixed;
+        width:100%;
+        height:100%;
+        background-color:rgba(0,0,0,0.7);
+      }
+      @keyframes fade{
+        to{opacity:1;}
+      }
+      .popup{
+        display:block;
+        position:absolute;
+        width:40vw;
+        height:20vw;
+        top:50%;
+        left:50%;
+        margin-left:-20vw;
+        margin-top:-10vw;
+        background-color:#444;
+      }
+      h{
+        display:block;
+        position:relative;
+        width:100%;
+        text-align:center;
+        margin:1vw;
+        font-weight:100;
+        font-size:2.5vw;
+        color:#eee;
+      }
+      p{
+        display:block;
+        position:relative;
+        width:90%;
+        left:5%;
+        font-size:1.3vw;
+        line-height:1.7vw;
+        color:#eee;
+      }
+      #playbtn{
+        display:block;
+        position:absolute;
+        width:90%;
+        left:5%;
+        bottom:1vw;
+        height:3vw;
+        background:#666;
+        border:none;
+        color:#eee;
+        font-family:Roboto,Arial,sans-serif;
+        font-size:1.5vw;
+        outline:none;
+        cursor:pointer;
+      }
+      #playbtn:hover{
+        background-color:#777;
+      }
+      #score{
+        display:block;
+        position:absolute;
+        width:100%;
+        text-align:center;
+        margin-top:2vw;
+        font-size:2vw;
+        color:#eee;
+      }
+      @keyframes boop{
+        30%{transform:scale(1.4);}
+        100%{transform:scale(1);}
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" gta-ify="false"></canvas>
+    <div id="score">0 | 0</div>
+    <div id="shadow">
+      <div class="popup" id="howto">
+        <h>Welcome to mildyinfuriating's annoying game!</h>
+        <p>
+          <b>How to play:</b>
+          <br>
+          1. Move your cursor.
+          <br>
+          2. Avoid the pesky obstacles.
+          <br>
+          3. Don't die.
+        </p>
+        <button id="playbtn" onclick="startGame()">PLAY!</button>
+      </div>
+      <div class="popup" id="replay" style="height:15vw; margin-top:-7.5vw; display:none">
+        <h>FUCK!</h>
+        <p>
+          <b>Protip:</b>
+          <br>
+          <span id="protips">Next time, try trying!</span>
+        </p>
+        <button id="playbtn" onclick="startGame()">PLAY AGAIN!</button>
+      </div>
+    </div>
+    <script>
+      var canv=document.getElementById("canvas"),ctx=canv.getContext("2d");
+      var blockSide=0.05,blockLeft=0.5,blockTop=0.3;
+      var hurdles=[],minGap=blockSide*2,minMinGap=blockSide*1.1,hurSpeed=0.006,addNext=0.1,box=[];
+      var backLines=[],lineNo=30;
+      var thread=null;
+      var protips=["Next time, try trying!","It's a good idea not to hit the obstacles.","Me gran can do a better of of this, swer on me mum!","The record for this game is 183. Source: my ass.","I beat you yesterday. Whilst asleep. <span style='color:#999'>( ͡° ͜ʖ ͡°)</span>","Yer mom's a whore!","I bet a blindfolded chimp could beat you easily.","&lt;insert hilarious comment about how I pleasured your mother yesterday&gt;"];
+      var tmpScore=localStorage.getItem("score");
+      var score=0,prevScore=tmpScore==null?0:parseInt(tmpScore);
+      const MIN_GAP=blockSide*3,HUR_SPEED=0.006,ADD_NEXT=0.1;
+      document.body.addEventListener("mousemove",function(event){
+        blockLeft=event.clientX/window.innerWidth;
+        if (blockLeft<blockSide/2){blockLeft=blockSide/2;}
+        else if (blockLeft>1-blockSide/2){blockLeft=1-blockSide/2;}
+        genBox();
+      });
+      function startGame(){
+        var shadow=document.getElementById("shadow").style;
+        shadow.display="none";
+        shadow.opacity="0";
+        shadow.animation="fade 1s forwards 1";
+        document.getElementById("howto").style.display="none";
+        document.getElementById("canvas").setAttribute("gta-ify",false);
+        hurdles=[];
+        if (score>prevScore){
+          localStorage.setItem("score",score);
+          prevScore=score;
+        }
+        score=0;
+        setScore();
+        minGap=MIN_GAP;
+        hurSpeed=HUR_SPEED;
+        addNext=ADD_NEXT;
+        thread=setInterval(animate,20);
+      }
+      function stopGame(){
+        document.getElementById("canvas").setAttribute("gta-ify",true);
+        document.getElementById("protips").innerHTML=protips[Math.floor(Math.random()*protips.length)];
+        clearInterval(thread);
+        setTimeout(function(){
+          document.getElementById("shadow").style.display="block";
+          document.getElementById("replay").style.display="block";
+        },2000);
+      }
+      function setCanvas(){
+        var w=window.innerWidth,h=window.innerHeight;
+        canv.width=w;
+        canv.height=h;
+        canv.style.width=w+"px";
+        canv.style.height=h+"px";
+        genBox();
+        paint();
+      }
+      window.onresize=function(){
+        setCanvas();
+      }
+      function paint(){
+        var coll=checkCollision();
+        var w=window.innerWidth,h=window.innerHeight;
+        ctx.fillStyle="#222";
+        ctx.fillRect(0,0,w,h);
+        for (var i=0;i<backLines.length;i++){
+          ctx.fillStyle=backLines[i].col;
+          ctx.fillRect(0,backLines[i].pos*h,w,h/lineNo);
+        }
+        ctx.fillStyle="rgba(255,255,255,0.15)";
+        ctx.fillRect(0,h*blockTop-w*blockSide/2,w,w*blockSide);
+        ctx.fillRect(w*(blockLeft-blockSide/2),0,w*blockSide,h);
+        //Paint block
+        ctx.fillStyle=coll!=-1?"#f33":"#bbf";
+        ctx.beginPath();
+        ctx.moveTo(box[0][0]*w,box[0][1]*w);
+        for (var i=1;i<4;i++){
+          ctx.lineTo(box[i][0]*w,box[i][1]*w);
+        }
+        ctx.fill();
+        for (var i=0;i<hurdles.length;i++){
+          for (var j=0;j<2;j++){
+            ctx.fillStyle=coll==i*2+j?"#f33":"#bbf";
+            ctx.beginPath();
+            ctx.moveTo(hurdles[i].rect[j][0][0]*w,hurdles[i].rect[j][0][1]*h);
+            for (var n=1;n<4;n++){
+              ctx.lineTo(hurdles[i].rect[j][n][0]*w,hurdles[i].rect[j][n][1]*h);
+            }
+            ctx.fill();
+          }
+        }
+        if (coll!=-1){
+          stopGame();
+        }
+      }
+      function animate(){
+        for (var i=0;i<hurdles.length;i++){
+          for (var m=0;m<2;m++){
+            for (var n=0;n<4;n++){
+              hurdles[i].rect[m][n][1]-=hurSpeed;
+            }
+          }
+        }
+        for (var i=0;i<backLines.length;i++){
+          backLines[i].pos-=hurSpeed/4*3;
+        }
+        if (hurdles.length==0){
+          addHurdle();
+        }else if (hurdles[hurdles.length-1].rect[0][0][1]<addNext){
+          addHurdle();
+        }
+        if (hurdles.length>0){
+          for (var i=0;i<hurdles.length;i++){
+            if (hurdles[i].rect[0][2][1]<blockTop-blockSide/2&&!hurdles[i].checked){
+              score++;
+              hurdles[i].checked=true;
+              minGap=(MIN_GAP-minMinGap)*(1/(score/15+1))+minMinGap;
+              hurSpeed=(3-2/(score/25+1))*HUR_SPEED;
+              addNext=(3-2/(score/25+1))*ADD_NEXT;
+              setScore();
+              break;
+            }
+          }
+        }
+        if (hurdles[0].rect[0][0][1]<-1){
+          hurdles.splice(0,1);
+        }
+        if (backLines[0].pos<-1/lineNo){
+          backLines.splice(0,1);
+          addLine(backLines[backLines.length-1].pos+1/lineNo);
+        }
+        paint();
+      }
+      function contElem(elem,arr){
+        for (var i=0;i<arr.length;i++){
+          if (elem==arr[i]){
+            return true;
+          }
+        }
+        return false;
+      }
+      function addHurdle(){
+        var posX=Math.random()*(1-blockSide*2)+blockSide;
+        //var gap=(1+Math.random()*0.125)*minGap;
+        var gap=minGap;
+        hurdles.push({
+          rect: [[[0,1],[posX-gap/2,1],[posX-gap/2,1+blockSide],[0,1+blockSide]],[[posX+gap/2,1],[1,1],[1,1+blockSide],[posX+gap/2,1+blockSide]]],
+          checked: false
+        });
+      }
+      function genLines(){
+        for (var i=0;i<lineNo+10;i++){
+          addLine(1/lineNo*i);
+        }
+      }
+      function addLine(position){
+        var gray=10+Math.floor(Math.random()*30);
+        backLines.push({
+          col: "rgb("+gray+","+gray+","+gray*2+")",
+          pos: position
+        });
+      }
+      function genBox(){
+        var hb=blockSide/2;
+        var bt=(blockTop*window.innerHeight)/window.innerWidth;
+        box=[[blockLeft-hb,bt-hb],[blockLeft+hb,bt-hb],[blockLeft+hb,bt+hb],[blockLeft-hb,bt+hb]];
+      }
+      function map(arr){
+        var w=window.innerWidth,h=window.innerHeight;
+        var arr2=[];
+        for (var i=0;i<arr.length;i++){
+          arr2.push([arr[i][0]*w,arr[i][1]*h]);
+        }
+        return arr2;
+      }
+      function map2(arr){
+        var w=window.innerWidth;
+        var arr2=[];
+        for (var i=0;i<arr.length;i++){
+          arr2.push([arr[i][0]*w,arr[i][1]*w]);
+        }
+        return arr2;
+      }
+      function checkCollision(){
+        for (var i=0;i<hurdles.length;i++){
+          for (var j=0;j<2;j++){
+            if (collision(map2(box),map(hurdles[i].rect[j]))){
+              return 2*i+j;
+            }
+          }
+        }
+        return -1;
+      }
+      function collision(r1,r2){
+        for (var i=0;i<r1.length;i++){
+          if (pointIn(r2,r1[i][0],r1[i][1])){
+            return true;
+          }
+        }
+        for (var i=0;i<r2.length;i++){
+          if (pointIn(r1,r2[i][0],r2[i][1])){
+            return true;
+          }
+        }
+        return false;
+      }
+      function pointIn(rect,x,y){
+        return x>rect[0][0]&&x<rect[1][0]&&y>rect[1][1]&&y<rect[2][1];
+      }
+      function setScore(){
+        var elem=document.getElementById("score");
+        elem.innerHTML=score+" | "+prevScore;
+        elem.style.animation="boop 300ms 1";
+        setTimeout(function(){elem.style.animation="none";},300);
+      }
+      genLines();
+      setCanvas();
+    </script>
+  </body>
+</html>
