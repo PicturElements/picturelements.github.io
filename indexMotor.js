@@ -77,7 +77,8 @@ var programData=[
   {name: "Parrots", url: "https://picturelements.github.io/parrots", icon: "parrots", keywords: "parrots,dank,reddit,party,epilepsy"},
   {name: "Smoke", url: "https://picturelements.github.io/smoke", icon: "smoke", keywords: "smoke,3d,canvas,math"},
   {name: "404.html", url: "https://picturelements.github.io/404", icon: "404", keywords: "404,terminal,console,greentext"},
-  {name: "Matrix", url: "https://picturelements.github.io/matrix", icon: "matrix", keywords: "matrix,math,multiplication"}
+  {name: "Matrix", url: "https://picturelements.github.io/matrix", icon: "matrix", keywords: "matrix,math,multiplication"},
+  {name: "Dodge", url: "https://picturelements.github.io/games/dodge", icon: "dodge", keywords: "game,reddit,cursor,slide"}
 ];
 
 document.body.addEventListener("mousedown",function(event){winSelect=true; xStart=event.clientX; yStart=event.clientY; hideSearch();});
