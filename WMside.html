@@ -1,0 +1,147 @@
+<html>
+  <head>
+    <title>WholesomeMemes sidebar</title>
+    <link rel="icon" href="pelement.png">
+    <style>
+    body{
+      background-color:#111;
+    }
+
+    #container{
+      display:block;
+      position:absolute;
+      width:300px;
+      height:330px;
+      left:50%;
+      top:50%;
+      margin-top:-165px;
+      margin-left:-150px;
+      overflow:hidden;
+    }
+
+    #cabin {
+      display: block;
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background-image: url(//b.thumbs.redditmedia.com/qxUywdq3cucs1TF2Uar3shANXpuME-g5V8MPNTF73qw.png);
+      background-position: -9px -10px;
+      animation: shake 600ms forwards infinite;
+      box-shadow: inset 0 0 100px black;
+    }
+
+    #cabin span{
+      display:block;
+      color: black;
+      font-family: Comic Sans MS,cursive;
+      font-style: italic;
+      font-weight: bold;
+      font-size: 24px;
+      text-align: center;
+      text-shadow: 1px 1px 0 white, 1px -1px 0 white, -1px 1px 0 white, -1px -1px 0 white, 1px 0 0 white, -1px 0 0 white, 0 1px 0 white, 0 -1px 0 white;
+      margin-top:25px;
+    }
+
+    #background {
+      content: "";
+      display: block;
+      position:absolute;
+      width: 228px;
+      height: 114px;
+      margin-bottom: 106px;
+      margin-left: 30px;
+      margin-top: 90px;
+      background-image: url(//b.thumbs.redditmedia.com/clp_cBIEcb8xVUCHkHYpv2xnNeR2kwPevf64qb2a_aU.png);
+      -webkit-animation: move 20s linear infinite;
+      animation: move 20s linear infinite;
+    }
+
+    #bob{
+      content: "";
+      display: block;
+      position: absolute;
+      width: 300px;
+      height: 120px;
+      right: 20px;
+      background-image: url(//b.thumbs.redditmedia.com/He-dmiOjFprNwuXZtGEsmacDSkg8vvpNgyCUl4qm93M.png);
+      background-repeat: no-repeat;
+      background-position: 300px 0;
+      top: 100px;
+      -webkit-animation: moveBob 15s linear infinite;
+      animation: moveBob 15s linear infinite;
+      overflow: hidden;
+    }
+
+    #input{
+      display:block;
+      position:absolute;
+      width:68%;
+      height:25px;
+      bottom:0;
+      text-indent:5px;
+      box-sizing:border-box;
+    }
+
+    button{
+      display:block;
+      position:absolute;
+      width:30%;
+      height:25px;
+      bottom:0;
+      right:0;
+      cursor:pointer;
+    }
+
+    input,button{
+      border:none;
+      background-color:#444;
+      color:#ddd;
+      outline:none;
+    }
+
+    input:focus,button:active{
+      background-color:#555;
+    }
+
+    @keyframes move{
+        to{
+            background-position:-772px 0;
+        }
+    }
+
+    @keyframes shake{
+      50%{
+        background-position:-11px -9px
+      }
+      100%{
+        background-position:-9px -9px
+      }
+    }
+
+    @keyframes moveBob{
+      90%{
+        background-position:300px 0;
+      }
+      100%{
+        background-position:-50px 0;
+      }
+    }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="background"></div>
+      <div id="bob"></div>
+      <div id="cabin">
+        <span id="text"></span>
+      </div>
+      <input id="input" placeholder="text here"></input>
+      <button onclick="setHTML()">Set!</button>
+    </div>
+    <script>
+      function setHTML(){
+        document.getElementById("text").innerHTML=document.getElementById("input").value;
+      }
+    </script>
+  </body>
+</html>
