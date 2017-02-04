@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Bahiana" rel="stylesheet">
+    <style>
+      body{
+        display:flex;
+        height:100vh;
+        font-family:Bahiana,sans-serif;
+        font-size:2vw;
+        justify-content:center;
+        align-items:center;
+        background:black;
+      }
+
+      p{
+        display:none;
+        width:60%;
+        color:white;
+        animation:woop 200ms alternate infinite;
+      }
+
+      b{
+        display:flex;
+        justify-content:center;
+      }
+
+      @keyframes woop{
+        to{
+          -webkit-transform:scale(1.05);
+          -moz-transform:scale(1.05);
+          -ms-transform:scale(2); /*FUCK YOU FOR USING IE*/
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <audio loop autoplay src="https://incompetech.com/music/royalty-free/mp3-preview2/Delightful D.mp3"></audio>
+    <p id="boo">
+      <b><u>True</u>&nbsp;facts about USERNAME</b>
+      <br>
+      USERNAME sucks. It's true. Nobody sucks more than USERNAME. I've had people, very important people, come up to me saying "Man, I think USERNAME is a mighty faggot and a literal Hitler incarnate".
+      <br><br>
+      Once, USERNAME tried to uncuck themselves. Total failure. Absolutely pathetic, trust me. USERNAME is a total cuck, and they will always be.
+      <br><br>
+      Lastly, boo u USERNAME. u sux
+    </p>
+    <script>
+      var name=window.location.href.split("=")[1] || "thirdegree";
+      var boo=document.getElementById("boo");
+
+      boo.innerHTML=boo.innerHTML.replace(/USERNAME/g,name);
+      boo.style.display="block";
+    </script>
+  </body>
+</html>
