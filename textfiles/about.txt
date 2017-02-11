@@ -1,1 +1,4 @@
-PeNote - by PicturElements
+PeOS 2.0
+
+PeOS is written, designed, and maintained by PicturElements (github.com/PicturElements)
+Based on Windows 10, PeOS shares many features with its big brother, sans crashes, update prompts, and forced active hours.
