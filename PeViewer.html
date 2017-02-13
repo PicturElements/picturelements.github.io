@@ -1,0 +1,246 @@
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+    <style>
+      body{
+        font-size:10pt;
+        font-family:Roboto,sans-serif;
+        margin:0;
+        background:#222;
+      }
+
+      #fontview, #imgview, #audioview{
+        display:none;
+      }
+
+      .font #fontview, .img #imgview, .audio #audioview{
+        display:block;
+      }
+
+      #fontview{
+        background:white;
+        overflow-x:hidden;
+      }
+
+      p{
+        margin:0;
+        padding:0.25em;
+        border-bottom:1px solid black;
+      }
+
+      .font_enabled{
+        font-family:testfont;
+      }
+
+      .fontbox{
+        padding:0.25em;
+        white-space:nowrap;
+      }
+
+      .size{
+        margin:0 0.5em 0 0.25em;
+      }
+
+      #imgview[fillmode="fit"]{
+        overflow:hidden;
+        height:100vh;
+      }
+
+      #image{
+        pointer-events:none;
+      }
+
+      div[fillmode="fit"] #image{
+        max-width:100%;
+        max-height:100vh;
+      }
+
+      div[fillmode="scale"] #image{
+        max-width:100%;
+      }
+
+      .menubar{
+        display:flex;
+        position:fixed;
+        width:100vw;
+        top:0;
+        font-size:1vh;
+        height:8em;
+        background-color:rgba(0,0,0,0.5);
+        color:white;
+        align-items:center;
+        justify-content:center;
+        transition:500ms opacity;
+        cursor:default;
+      }
+
+      #imgname{
+        font-size:3em;
+        font-weight:300;
+        color:#ddd;
+        margin:0 5em;
+      }
+
+      .menubar_hidden .menubar{
+        opacity:0;
+        pointer-events:none;
+      }
+
+      .list{
+        min-width:2em;
+        font-size:2em;
+        height:2em;
+        background:#444;
+        align-self:flex-start;
+        margin-top:1em;
+        transition:height 300ms;
+        overflow:hidden;
+      }
+
+      .list:hover{
+        height:8em;
+      }
+
+      .list.second:hover{
+        height:6em;
+      }
+
+      .listitem,.listitem a{
+        display:flex;
+        height:2em;
+        color:white;
+        align-items:center;
+        padding:0 0.5em;
+      }
+
+      .listitem.wrapper{
+        padding:0;
+      }
+
+      .listitem:hover{
+        background-color:#4c4c4c;
+      }
+
+      .listitem a{
+        width:100%;
+        color:white;
+        text-decoration:none;
+      }
+
+      #imgview[fillmode="normal"] .normal, #imgview[fillmode="fit"] .fit, #imgview[fillmode="scale"] .scale{
+        background-color:#555;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="fontview">
+      <p>
+        Font name: <span id="fname"></span>
+        <br>
+        Version: 1.0
+        <br>
+        <span id="fdata"></span>
+      </p>
+      <p class="font_enabled" style="font-size:18pt">
+        abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ
+        <br>
+        0123456789 .:,; ' " (!?) +-*/=
+      </p>
+      <div id="showcase"></div>
+    </div>
+    <div id="imgview" class="menubar_hidden" fillmode="fit">
+      <img id="image"></img>
+      <div class="menubar">
+        <div class="list">
+          <div class="listitem">Fill Mode</div>
+          <div class="listitem normal" onclick="setMode('normal')">Normal (no scaling)</div>
+          <div class="listitem fit" onclick="setMode('fit')">Fit to window</div>
+          <div class="listitem scale" onclick="setMode('scale')">Scale to window width</div>
+        </div>
+        <div id="imgname">lel.jpg</div>
+        <div class="list second">
+          <div class="listitem">Options</div>
+          <div class="listitem" onclick="newTab()">Open image in new tab</div>
+          <div class="listitem wrapper"><a id="download" download>Download</a></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      var fontSizes=[12,18,24,36,48,60,72];
+      var testStr="The quick brown fox jumps over the lazy dog. 0123456789"
+      var inUrl=window.location.href;
+      var timeout=null;
+      var prevX=0,prevY=0;
+
+      var splitUrl=inUrl.split("?");
+      if (splitUrl.length==2){
+        var queries=splitUrl[1].split("&");
+        var type=queries[0].split("=")[1];
+        var url=queries[1].split("=")[1];
+        document.body.className=type;
+        if (type=="font"){addFonts(url);}
+        else if (type=="img"){addImg(url);}
+      }
+
+      function addFonts(furl){
+        var parent=document.getElementById("showcase");
+        for (var i=0;i<fontSizes.length;i++){
+          var box=document.createElement("div");
+          box.className="fontbox";
+          var size=document.createElement("span");
+          size.className="size";
+          size.innerHTML=fontSizes[i];
+          var font=document.createElement("span");
+          font.className="test font_enabled";
+          font.innerHTML=testStr;
+          font.style.fontSize=fontSizes[i]+"pt";
+
+          box.appendChild(size);
+          box.appendChild(font);
+          parent.appendChild(box);
+        }
+
+        var style=document.createElement("style");
+        style.innerHTML="@font-face{font-family:testfont;src:url("+furl+");}";
+        document.body.appendChild(style);
+
+        var splitUrl=url.split("/");
+        var splitSplit=splitUrl[splitUrl.length-1].split(".");
+        document.getElementById("fname").innerHTML=splitSplit[0];
+        var exts=["otf","OpenType Contours","ttf","TrueType Contours","woff","Web Open Font Format Contours"];
+        for (var i=0;i<exts.length;i+=2){
+          if (splitSplit[1]==exts[i]){
+            document.getElementById("fdata").innerHTML=exts[i+1];
+          }
+        }
+      }
+
+      function addImg(url){
+        document.getElementById("image").src=url;
+        document.getElementById("imgview").addEventListener("mousemove",function(event){
+          if (Math.pow(event.clientX-prevX,2)+Math.pow(event.clientY-prevY,2)>900){
+            var iv=document.getElementById("imgview");
+            clearTimeout(timeout);
+            iv.className="menubar_visible";
+            if (event.target.id=="imgview"){
+              timeout=setTimeout(function(){iv.className="menubar_hidden";},2000); 
+            }
+            prevX=event.clientX;
+            prevY=event.clientY;
+          }
+        });
+        document.getElementById("download").href=url;
+        var splitUrl=url.split("/");
+        document.getElementById("imgname").innerHTML=splitUrl[splitUrl.length-1];
+      }
+
+      function setMode(mode){
+        document.getElementById("imgview").setAttribute("fillmode",mode);
+      }
+
+      function newTab(){
+        window.open(document.getElementById("image").src);
+      }
+    </script>
+  </body>
+</html>
