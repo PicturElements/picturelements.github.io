@@ -1,0 +1,150 @@
+<html>
+  <head>
+    <title>Home - PicturElements</title>
+    <link rel="icon" href="pelement.png">
+    <link rel="stylesheet" type="text/css" href="indexStyle.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900" rel="stylesheet" type="text/css">
+    <script src="https://picturelements.github.io/testdropper.js"></script>
+  </head>
+  <body oncontextmenu="return contextShow">
+    <audio id="taskbahSound" loop preload="auto">
+      <source src="https://picturelements.github.io/images/win_icons/LockIt.mp3">
+    </audio>
+    <button id="gofull" style="display:none; position:fixed; z-index:100;">GO FULLSCREEN</button>
+    <div id="desktopwrapper" class="grad backOverride">
+      <div id="desktop">
+        <div id="test"></div>
+        <div id="selectbox"></div>
+        <div id="shadow"></div>
+      </div>
+    </div>
+    <div id="context">
+      <div class="contextitem">Open</div>
+      <div class="contextitem">Open All</div>
+      <div class="contextitem">Rename</div>
+      <div class="contextitem">Pin to taskbar</div>
+      <div class="contextitem">Pin</div>
+      <div class="contextitem">Unpin</div>
+      <div class="contextitem">Open new</div>
+      <div class="contextitem">Close</div>
+      <div class="contextitem">Fullscreen</div>
+      <div class="contextitem">Enable context menu</div>
+      <div class="contextitem">Change wallpaper</div>
+      <div class="contextitem">Lock taskbar</div>
+      <div class="contextitem">Lock the taskbah</div>
+    </div>
+    <div id="searchbar">
+      <div id="searchbarbar" expanded="false">
+        <div class="sbbitem" onclick=sbbToggle(this)>
+          <div id="sbbicon" style="transform:rotate(90deg)">|||</div>
+          <div id="sbblabel"><b>SEARCH</b></div>
+        </div>
+        <div class="sbbitem" onclick=sbbHome()>
+          <div id="sbbicon" style="background-image:url(https://picturelements.github.io/images/win_icons/homehome.png)"></div>
+          <div id="sbblabel">Home</div>
+        </div>
+        <div class="sbbitem2" onclick=openSettings()>
+          <div id="sbbicon" style="background-image:url(https://picturelements.github.io/images/win_icons/cog.png)"></div>
+          <div id="sbblabel">Settings</div>
+        </div>
+        <div class="sbbitem2" onclick=togglePower() style="display:none">
+          <div id="sbbicon" style="background-image:url(https://picturelements.github.io/images/win_icons/power.png)"></div>
+          <div id="sbblabel">Power</div>
+        </div>
+      </div>
+      <div id="powerbar">
+        <div class="poweritem">Restart</div>
+        <div class="poweritem">Power off</div>
+      </div>
+      <div id="innerbar"></div>
+    </div>
+    <div id="clockbar" class="specColor" style="display:none;">
+      <p id="clocklbl"></p>
+      <table id="calendar">
+      </table>
+      <div class="clock specColor">
+        <div id="hour"></div>
+        <div id="minute"></div>
+        <div id="second"></div>
+        <div id="seconddot"></div>
+      </div>
+      <p onclick=openSettings() id="edittime">Edit time and date...</p>
+    </div>
+    <div id="taskbar" style="bottom: 0vw">
+      <div id="home"></div>
+      <input id="search" placeholder="Search in PeOS" autocomplete="off"></input>
+      <div id="infocorner">
+        <div id="time" onclick=toggleClock()>22:20<br>2016-10-07</div>
+        <div id="wifi"></div>
+        <div id="battery">
+          <!--<div id="batterylvl"></div>-->
+        </div>
+      </div>
+    </div>
+    <div id="loadscreen"></div>
+    <style id="specCols"></style>
+  
+    <div id="settingsbuffer" style="display:none">
+      <div id="settingscontainer">
+        <h>Time and Date</h>
+        <p>Time zone:</p>
+        <select id="timezone" onchange=updateTime()>
+          <option>Local</option>
+          <option>Custom offset</option>
+        </select>
+        <input id="prectz" disabled="true" placeholder="Time offset in minutes" oninput=newTime()></input>
+        <input id="dateset" type="date" oninput=newTime()></input>
+        <p id="tzlbl"></p>
+        <br>
+        <button onclick=setTime()>Set time</button>
+        <h>Filenames</h>
+        <p>Reset all filenames to their defaults. This action will take effect immediately and cannot be undone.</p>
+        <button onclick=resetNames()>Reset to default</button>
+        <h>Windows</h>
+        <p>Set the default size of opened window. Default is 40x25.<br><br><span id="winW">Window width: 40</span></p>
+        <input class="sizeslider" type="range" min="20" max="100" value="40" oninput=updateSize(0)></input>
+        <p id="winH">Window height: 25</p>
+        <input class="sizeslider" type="range" min="15" max="80" value="25" oninput=updateSize(1)></input>
+        <h id="backH">Color scheme/Backgrounds</h>
+        <p>Color scheme</p>
+        <div id="colorbar"></div>
+        <br>
+        <p>Desktop background</p>
+        <div id="backbar"></div>
+        <div id="preview" class="grad backOverride"></div>
+        <br>
+        <br>
+      </div>
+    </div>
+    <div id="resultsbuffer" style="display:none">
+      <div id="resultsbar">
+        <div id="innerresults">
+          <div id="searchmsg">Start typing to browse programs, other programs, or programs.<br><br><pt>Protip: press any arrow key to get all programs.</pt></div>
+        </div>
+      </div>
+    </div>
+    <div id="mainbuffer" style="display:none">
+      <div id="programbar">
+        <div class="pbitem">
+          <div id="pbicon"></div>
+          <div id="pbtitle"></div>
+        </div>
+      </div>
+      <div id="puzzlebar">
+        <div class="puzzle specColor" wide="false">Test 1</div>
+        <div class="puzzle specColor" wide="true">Test 2</div>
+        <div class="puzzle specColor" wide="false">Test 3</div>
+        <div class="puzzle specColor" wide="true">Test 4</div>
+        <div class="puzzle specColor" wide="true">Test 5</div>
+        <div class="puzzle specColor" wide="false">Test 6</div>
+        <div class="puzzle specColor" wide="true">Test 7</div>
+        <div class="puzzle specColor" wide="false">Test 8</div>
+        <div class="puzzle specColor" wide="false">Test 9</div>
+        <div class="puzzle specColor" wide="true">Test 10</div>
+        <div class="puzzle specColor" wide="false">Test 11</div>
+        <div class="puzzle specColor" style="display:none" active></div>
+      </div>
+    </div>
+    <script src="indexMotor.js"></script>
+  </body>
+</html>
