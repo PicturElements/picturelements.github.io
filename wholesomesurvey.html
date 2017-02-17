@@ -1,0 +1,466 @@
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <style>
+      body{
+        font-size:1vw;
+        margin:0;
+        background-color:whitesmoke;
+        font-family:Open Sans,Arial,sans-serif;
+      }
+
+      #logocontainer {
+        display: flex;
+        justify-content: center;
+        margin-top: 3em;
+      }
+
+      #logo {
+        width: 9em;
+        height: 9em;
+        background-image: url(https://picturelements.github.io/images/surveyicon.png);
+        background-size: 9em 9em;
+      }
+
+      #logocontainer p {
+        font-size: 300%;
+        margin: 0;
+        align-self: center;
+        margin-left: 0.25em;
+        color: #2971ad;
+      }
+
+      #content{
+        position:relative;
+        width:90%;
+        margin:0 5%;
+        min-height:10em;
+      }
+
+      .item{
+        position:relative;
+        margin:4em 0;
+        background-color:white;
+        box-shadow:5px 5px 10px rgba(0,0,0,0.1);
+      }
+
+      .contentbox{
+        padding:1.5em;
+        overflow:hidden;
+      }
+
+      .count {
+        position: absolute;
+        border: 2em solid #12b1de;
+        margin: -1.5em;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+      }
+
+      .count:before {
+        content: attr(data-count);
+        display: block;
+        position: absolute;
+        margin: -1.6em -2.1em;
+        width: 2.5em;
+        text-align: center;
+        color: white;
+        font-weight: bold;
+      }
+
+      h1 {
+        margin: 0.5em 0 2em 0;
+        font-weight: bold;
+        font-size: 150%;
+        padding: 0.25em 0;
+        color: #222;
+        text-align: center;
+      }
+
+      img, .statsbox, .commentbox{
+        position:relative;
+        float:left;
+        width:49%;
+      }
+
+      img{
+        margin-bottom: 2em;
+      }
+
+      .statsbox{
+        height:100%;
+        margin-left:2%;
+        margin-bottom: 2em;
+      }
+
+      .bar{
+        width:70%;
+        height:4em;
+      }
+
+      .compositebar{
+        display:block;
+        width:100%;
+        height:4em;
+        margin-top:0.4em;
+        background-color:#12b1de;
+        cursor:pointer;
+      }
+
+      .compositebar.small{
+        height:1.5em;
+        overflow: hidden;
+      }
+
+      .bar:nth-of-type(1), .green{
+        background-color:#2ad235;
+      }
+
+      .bar:nth-of-type(2), .red{
+        background-color:#e62020;
+      }
+
+      .bar:nth-of-type(3), .yellow{
+        background-color:#f1e820;
+      }
+
+      .bar:nth-of-type(4), .blue{
+        background-color:#12b1de;
+      }
+
+      .stackable{
+        position:relative;
+        float:left;
+        height:100%;
+      }
+
+      .stackable:hover:after{
+        content:attr(data-perc);
+        display:block;
+        position:fixed;
+        background-color:#444;
+        color:white;
+        text-decoration:none;
+        height:2em;
+        top:2em;
+        left:50%;
+        -webkit-transform:translateX(-50%);
+        -moz-transform:translateX(-50%);
+        -ms-transform:translateX(-50%);
+        transform:translateX(-50%);
+        text-align:center;
+        line-height:2em;
+        z-index:2000;
+        padding:0 0.5em;
+      }
+
+      .compositebar:hover:after{
+        z-index:90;
+      }
+
+      .compositebar.small:hover{
+        height:2.3em;
+        margin-top:0;
+        margin-bottom:-0.4em;
+      }
+
+      .compositebar.small:hover:before,.compositebar.small:hover:after{
+        content:"";
+        display:block;
+        position:absolute;
+        width:87em;
+        height:1px;
+        background-color:white;
+        z-index:1000;
+        pointer-events:none;
+      }
+
+      .compositebar.small:hover:after{
+        margin-top:2.3em;
+      }
+
+      .statsbox p {
+        margin: 0.4em 0 0.15em 0;
+        color: #555;
+      }
+
+      .statsbox p:first-of-type {
+        margin-top: -0.3em;
+      }
+
+      .statsbox p span {
+        color: #bbb;
+        margin-left: 0.5em;
+      }
+
+      .infobox {
+        clear: left;
+        width: 100%;
+        min-height: 10px;
+        overflow: hidden;
+      }
+
+      .commentbox {
+        background-color: #fcfcfc;
+        height: 100%;
+        /*box-shadow: inset 0.3em 0.3em 1em rgba(0,0,0,0.1);*/
+      }
+
+      .commentbox + .commentbox{
+        margin-left:2%;
+      }
+
+      .commentbox h2 {
+        text-align: center;
+        margin: 0;
+        background-color: #12b1de;
+        color: white;
+        font-size: 120%;
+        padding: 0.25em 0;
+      }
+
+      .commentbox p {
+        margin: 0;
+        padding: 0.5em;
+      }
+
+      .commentbox p:nth-of-type(2n) {
+        background-color:whitesmoke;
+      }
+
+      .square {
+        width: 1em;
+        height: 1em;
+        display: inline-block;
+        margin: 0 0.25em -0.1em 0;
+      }
+
+      .square ~ .square{
+        margin-left:1em;
+      }
+
+      .item:first-of-type .contentbox{
+        padding:2.5em;
+      }
+
+      #footer{
+        display:flex;
+        position:relative;
+        width:90%;
+        left:5%;
+        height:5em;
+        background-color:white;
+        box-shadow:5px 5px 10px rgba(0,0,0,0.1);
+        justify-content:center;
+        align-items:center;
+        color:#aaa;
+      }
+
+      #footer p{
+        text-align:center;
+      }
+
+      #footer a{
+        text-decoration:none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="logocontainer">
+      <div id="logo"></div>
+      <p>
+        r/wholesomememes
+        <br>
+        Content Survey 2017
+      </p>
+    </div>
+    <div id="content">
+      <div class="item">
+        <div class="contentbox">
+          <h1>Intro & Overview</h1>
+          <p>
+            Last week, we ran a survey in /r/wholesomememes. We received responses from 1069 brave souls who made it through the 15 posts alive. We learned that there are certain types of posts that many redditors don't like in our sub, as well as many which most seem to enjoy. So now we have gone through the responses and have calculated the stats for several types of posts, and we're ready to show the results to you!
+            <br><br>
+            Before we start, let's get an overview of how you voted. All in all, we got <b id="count"></b> answers!
+            <br>
+            If you didn't take the survey, we showed users 15 posts and let them decide whether they would approve or remove each post, or if they wanted to take another action.
+            <br><br>
+            The alternatives are color-coded as follows:
+            <br>
+            <span class="square green"></span>Approve <span class="square red"></span>Remove <span class="square yellow"></span>Other <span class="square blue"></span>No answer
+            <br><br>
+            Before we even look at the specifics, here's a rundown of all answers:
+            <span id="totcontainer"></span>
+            <br>
+            Here's a more detailed breakdown. Click the bars to jump to posts.
+            <span id="barcontainer"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div id="footer">
+      <p>Made with love by <a href="https://www.reddit.com/user/PicturElements/">/u/PicturElements</a> for <a href="https://www.reddit.com/r/wholesomememes/">/r/wholesomememes</a>
+        <br>
+        Thanks for scrolling through! Have a nice day!
+      </p>
+    </div>
+    <script>
+      var answers=1069;
+      var data=[
+        {approve: 595, remove: 376, other: 40, title: "Remember the good times? (x-post /r/pokemongo)", url:"https://lh6.googleusercontent.com/JJw9h0GRuxk55ySspCKLqjrZlfitHAHwd8z51VAudBaakABUtzmgoMSL8b-csOVxjXUoMZwEHMCw1h5DC5FYHk127ovd0pTx1E6i9SYpXZrVZWRRlELtkc5vh9J6XnI6QfDMo-IA-pQ_SyM"},
+        {approve: 971, remove: 73, other: 11, title: "You're wholesome.", url:"https://lh4.googleusercontent.com/aY8ESlwu7j1DD8KClzwhpDe-jJZ2K3k1909EPFhwxR_I2WxLlTeao4ikGXVqBSlhx9lRWlhU-hxZB_HFQegVod-MpNy7FQiRBzqPYJO_x0qdOfdtSJHQeb7-JbnBoWFxGYPW1z2eoQ5qgpE"},
+        {approve: 756, remove: 212, other: 49, title: "Seen on AskReddit's \"What do you do to subtly fuck with people?\"", url:"https://lh3.googleusercontent.com/YHEkpavMupz0uFiIFAwvpbVlLLt8mITV77BJoLpjr2E0-G-vnzN3XT8IAmhpSLAy38Zb7VZgIHsG9UBqkoOq6yHpLPnC_7QSYKMUKD45jjIizKNFVNHvG9iCpYSutxiEbYgUXXPCqeYqmV8"},
+        {approve: 764, remove: 216, other: 34, title: "The \"meme\" my father sent me for my birthday", url:"https://lh4.googleusercontent.com/8kUhq8xAnPHugTmdKkVhO8np5EWX0GPp97Dmwix8KhClfLCJK7O8up0C684ta9HLtM1dCgSoiEBIBdKne57Ee82dXdSC8DNi0KWi3La7MjlSBWxE-KZ3X-Rd3I8KvdvTxHZ9WTuJWlFhLfM"},
+        {approve: 599, remove: 327, other: 52, title: "Amazon Echo Review", url:"https://lh3.googleusercontent.com/mixgAVegQct_JlessiwIU8bqLF6DSEln4zBZCRXYB8cutF4xrh4BXSKyj8XhDJ9E92jB370wSpNEK5N7ysaHQJqBTZM4VfiMZU9xRX5iiglQZ6eNgJN63MDKZw9LWNRCq0t0l8Tucd5vGYU"},
+        {approve: 847, remove: 151, other: 22, title: "My high school psychology teacher told my friend to post these pictures of him so I made him a good meme", url:"https://lh6.googleusercontent.com/D_f2xxO0mFGBCoZvIYBBZuojWjbwgJ_PrL6Ieg2l36PFWgneDwe5NeIu3VJxlfSU5nviGx4goNouWUTiV03xG8-lj91KS14D3EsaCHffMkTPogQF7prDsiSqgLVVLI67mKg1t-tYWoQnqoE"},
+        {approve: 853, remove: 166, other: 26, title: "Finally a drinking game the whole family can play", url:"https://lh5.googleusercontent.com/SDFGsakEFJfLYIOM-OGZ9NTNmdGyR4MaNfahDHuCXDkZoHPz2AEyCEc-dz0X66AFMUyM47OyrY574PQhhDbq9ByUbFKSE8mU2HNWGwUavjCyMwGBC7yqvzFdXxVq9y0k_KANTQ64XSvPmrM"},
+        {approve: 650, remove: 322, other: 36, title: ":D always makes me smile", url:"https://lh6.googleusercontent.com/d9Qq1k20Ynxzno4Bm4hWSa2UvYHBqPOY1Y1tKBChqRsbY8Q_AyQaYNp9Vdp8EYGGAJU9umX-mKSeJNEqw41JJhTDm3ZyQQEXNEWZFD1PY7U3ekXR9nYBETWPP0kcDaU7Q3rOTZ_kTNRSyMw"},
+        {approve: 994, remove: 42, other: 12, title: "Mutual friendship <3", url:"https://lh5.googleusercontent.com/jWEzwcUmXqnrkxHyZ8FonEoHQyuUlvvH-HyG9s4MtkbJ8WJHJ9Iaf6XGNkeG326MHG3Q-vnMKm_TqUjAIB7Txl-usQtIIOwNDjQnjDXCoYWHJDE0jx8yRcO_tIr0D0jYc8rJ-Eb1MCNJiT0"},
+        {approve: 798, remove: 207, other: 26, title: "Quick! The mods are asleep! Tuck them in, kiss them on the cheek, and wish for them a good night's sleep.", url:"https://lh4.googleusercontent.com/n_HnTJAP6IPMXydohG37CVDD7QxS0ggk60C6VOGR9Qqhb2yIYC7idblmSLyvcXckTED9kZdh6-nwEuIbuIsIMWJKjJe4_DHh0o37RDy7F7gwxnr0SDqWnbnzVdE9VPsl8JYU6_IhQXK0sbU"},
+        {approve: 585, remove: 337, other: 53, title: "/u/TheBigDsOpinion take on \"How do you subtly fuck with people?\" in /r/askreddit", url:"https://lh6.googleusercontent.com/Pq7R0g48JUdEXDHcNN8WshWtVDvLtiL7H5EDYJBNCuG0Mxl4yAa_Tk8pBhq82zgKqQs2sgH49UgjQ4OmcY-BaUKpIJ6xqg911_LbQLyQwzs7smYtcwMG4tJ03lZdJu0YGv0_gVaXXLGATIs"},
+        {approve: 740, remove: 241, other: 51, title: "From the Facebook page of the Mosque that was set on fire in Houston (X-post from /r/islam)", url:"https://lh4.googleusercontent.com/0LcLEsiQEn7FGSm9xEImMyhYxKyzUspz8VF3Y4dFiuY7tSVwQa6CQQxC4F76Q4QJRPIh2BStTuBgmvV4Sar7rg74f3O4bSWCPuLLKIW67eLJE3zpmT6ClKoypK7CFF98xFjFB1yTkSkXukg"},
+        {approve: 667, remove: 268, other: 52, title: "r/wholesomememes", url:"https://lh4.googleusercontent.com/MctGGmHCZyyJJ7dtjByt6HR7X-vtW39Jkt8EF6Si7qMOh0133ju_MBSGdtxWyikpCDG-o4vt9bCNw-mTYWOSQfTrdtZnOaz1ICYCPrP7RqnnfWpQ2UzC4ytzkI_OBNoQUlqSYO2AdXEzdPo"},
+        {approve: 789, remove: 219, other: 15, title: "Player from Zimbabwe makes his first game with new Swedish team after arriving in Sweden the day before. His hands got so cold he asked an opponent to tie his shoes mid-game.", url:"https://lh5.googleusercontent.com/wCiW4Nf4p8ZmqZ5dXoJX-rf4A9FDq5mhyibPWbxqV01_Ghgwi4iP_5ygDC-VUrEncD4puak9LL-IiypUXqMF8O5SO4TG0IFbwDaeMw0-AjABIzACNmWfC_HPCiuioMJL2YWCQiqlwWsCDAE"},
+        {approve: 927, remove: 94, other: 15, title: "A good boy ", url:"https://lh4.googleusercontent.com/WpTWFAnUmH4ci8xjwdttSHB3OS0SUzHYZAYHZMxh1Xd1LPWC2p_sradx-z9a4ofBIJE0KSm5PX7-RibyhxURUzcJd7QidKRdi2_3NXb_fX0s_3HaA-vuIhUai6WsfiY-W_jNfTkd4AjtehI"}
+      ];
+
+      var usercomments=[
+        ["Not really a meme","Not a meme, it's a Pokemon advertisement","Reminds me of how happy I was when it came out. I saw the world in a similar way.","Pop culture reference is close enough to a meme for me","Not really interesting, just a throwback","Nostalgia is not necessarily a healthy emotion"],
+        ["Not a meme","It's heartwarming and sweet","Very wholesome and inspires OC on the Subreddit, yay!","4AMshower are the best webcomics <3","Again in my last comment, it should make the reader happy and brighten their day a little. This is cute.","This is pretty wholesome, can't see a reason why it shouldn't be approved"],
+        ["It feels like it is genuinely sweet, and made me smile reading it.","wholesome, but not meme","not a meme, just a reddit comment","Its fine because I havent seen a ton of it, but I'm wary because this is very low effort and dont want a trend of just finding/posting nice answers in various subreddits.","Though a bit long, It's still a positive post","Not wholesome, is mean D:"],
+        ["Bob Ross","Bob Ross","This sub is all about bob Ross","I think it's a bit low effort and specific.","Wholesome. A meme. Also chuckle-worthy when you consider the headline. Yes good.","Bob Ross"],
+        ["Wholesome but not a meme","Is wholesome, but too sad to be a meme","I don't want /r/wholesomememes to turn into /r/UpliftingNews (e.g. \"my brother has cancer and will die tomorrow but look at this cute elephant the hospital gave him!\")","Non-meme. Too corporate as well","Add custom tag and then keep it.","This feels too much like feel-good advertising"],
+        ["Enthusiastic teachers are the best :)","This would fit in the wholesome-me-irl sub, if there was one","Low effort. Could use any stock photo of a positive person in a classroom.","This is 100% a wholesome meme","Dank may may","What's not to love? A straightforward post embodying genuine positive emotions."],
+        ["Common repost","Successfully supplants a meme promoting negative behavior with positive behavior.","Good message. strange picture of captain america for no reason. Let the community decide.","It was funny and wholesome but posted like five times recently","It's not very good content bit It IS wholesome","I'm an athlete and drink over a gallon of water every day and always remind all my friends to stay hydrated every day. This is helpful and friendly with that as I try to be"],
+        ["Meta","Extremely low effort post, image macro, self-referential.","MEME!!! Belongs here with its wholesome comrades","Is not actually wholesome but only speaking of the subreddit. More suited over at r/funny.","Advice animals should stay in its own subreddit, but using said Advice Animal in the comments is okay","I like it, but I don't think self-congratulatory posts should be mod-approved to keep it from becoming a circlejerk"],
+        ["Meme","Successfully supplants a negative meme with positivity.","Ok this is lovely because it reminds me of that feeling you get from helping others. This is r/wholesomememes",":) <-- this is how this post makes me feel","It's a meme. It shows positivity. It's not the best post by any stretch of the imagination, but I think it definitely fits the criteria for wholesomeness. Although it could also be seen as somewhat of an ego-trip by the poster, since they're humblebragging about their own wholesomeness.","Good outtake on showing that true friends help you in times of need! I like posts that show the \"reversal meme\" while the original version was less wholesome"],
+        ["Meta","Literally just a stock photo. Painfully bad.","This is the kind of meta I enjoy. Sweet, cute, and wholesome without feeling like it's just meta for the sake of being meta.","Wholesome, meme, turns expectations on head","These posts aren't memes...But I feel like they are a big part of what makes r/wholesomememes a community, and the positive place that it is, and more than just a collection of pictures. I think they are very important to a lot of people who visit wholesomememes to find positivity, love, and a sharing, caring community that we are","Kind of low-effort but still funny and sweet. Would only allow a few meta posts like this though. Too many meta posts and we'll become me_irl"],
+        ["Not a meme","It is a cute story. I am not sure about the wholesomeness level - but I don't know. Maybe that is just my opinion. Maybe the original thread about fucking with people is what strikes me as too negative.","doesn't really fit in the sub, also profanity","I'm unsure but LEANING towards remove due to the inclusion of the un-wholesome cynicism of the last included comment, plus it's a comment like thing in the first place which puts it on shakier ground than a pure meme or comic.","Again, I like posts from Reddit ending up in r/wholesomememes. It shows that people can be genuinely nice to strangers - and it has definitely influenced my own behaviour towards strangers in a positive way!","Isn't a meme, but unlike the first example of a screenshotted comment from that thread, it's less uplifting/wholesome. That puts it just on the \"remove\" side for me."],
+        ["No meme.","While it is wholesome, it's a bit charged politically, and could have the potential to go off the rails in the comments. Though seriously, this gave me a warm fuzzy feeling.","The response isnt faked; it's very uplifting in the face of a tragedy. If it was just the first guy offering to donate, i would reject it, but the mosque responding positively is nice and good content.","The original intent behind the comment was malicious and the responder turned it around to show that the troll wouldn't have their way today. I don't know if this is a meme though. And it seems like it could start some arguments. I'd really like limited or barely any politics on this sub. It's my place to escape all the terrible thigs happening in the world and just smile because things are going to be okay.","Awesome reaction to a islamophobe, 10/10 post","The face of /r/wholesomememes (or it should be!) because it turns something negative into something positive. Plus you don't necessarily need any more context, this post stands on its own. Edited memes/comics posts sometimes requires viewers to know the original to appreciate. I'm saying we need more posts that can stand on their own."],
+        ["Not a meme","Im mixed. I feel like why are you submitting an image, when youre clearly in the process of making a post, but why screenshot it.","While it is heavily meta and off-topic I feel like it's easy to browse through wholesomememes for the positivity but forget that we are all trying to be positive to each other. Knowing that an actual person is there to support us if we need to talk to someone can be helpful. If this kind of post isn't to be approved, I would support a sticky being put up where people can just post positive messages and \"message me if you want to talk\" comments for people to see.","ugh. this is hard","Nice and motivational.","bit boring if its just a text picture"],
+        ["Not a meme","This shows that sometimes we have to ask for help and sometimes we have to give it. It doesn't matter race, color, religion or origins, most people will be happy to help you no matter what or who you are.","SO WHOLESOME not a meme but STILL WHOLESOME","I don't think it will get a lot of views because it's not very much of a deed and awkward too, but it's wholesome, so no need to delete it","Not necessarily a meme. Instead it's just a nice act of kindness. While I love seeing people being kind to each other, it's unfortunately not a meme. I love the message though!","This is facebook-esque content... like the mma-fighter with the flag of flags"],
+        ["SO WHOLESOME","who doesn't love puppers. but... there are tonnes of subs for dog pictures. we have to differentiate ourselves a bit, because stuff like that tends to float to the top 100% (who would downvote a beautiful puppy just because it isn't very relevant?) and drown other content. we don't have anywhere else to go for that other content.","DOGGO","After my rant in a modmail about how the sub was turning into /r/puppers, I don't think this needs any further explanation.<br><br>\"Good boy\" =/= wholesome.<br>\"Good boy\" = dog.<br>Dog = cute (sometimes)<br>Cute =/= wholesome","This is sweet and a funny twist on the before/after memes. Plus dog is good boy.","Didn't think it was too cute until I read that his dog was deaf. I don't know what that says about me or the post. Going with other on this one."]
+      ];
+
+      var modcomments=[
+        ["This post was selected because it's a social media post, and we want to know how you reacted to the influx of such posts."],
+        ["This one was selected because of the comic content. I'm happy to see you seem to love them."],
+        ["This one is a social media one, too, but this time as a reddit comment, so we wanted to see what you thought about them."],
+        ["Here is a classic AdviceAnimals-style meme. Good stuff, because Bob Ross."],
+        ["This one is a trick one! This post was actually removed, and I'm happy so many of you spotted that it's basically an ad."],
+        ["Semi-social media one. Borderline /r/wholesomepics in my opinion, so your approval helps us nudge it in the right direction."],
+        ["This is a wholesome meme, but this is also a trick one! This image, as many of you knew, has been reposted many times in the sub, and so this was removed."],
+        ["This one, unsurprisingly, is a meta meme. We do allow them, but the disapproval of this one confirms that the 'Meta' filter was good idea."],
+        ["This one is a straight-up meme and of course you've approved the devil out of it! It's good to have these examples to calibrate the general feeling towards memes in our sub."],
+        ["This one is a tricky one. I personally think it's a bit low effort and would rather see it with superimposed text instead of the title taking the load. So, in essence this post was selected because it's a meta post and because it relies so heavily on the title."],
+        ["This one is also a double whammy. It's reddit comment content and the title is, in my opinion, less than ideal. In general, it seems like you don't like these memes as much as the others, so we should look into that."],
+        ["This one is very interesting. Again, social media content, and very wholesome at that. This one was also selected because it's a very infected subject in general, and we actually had to lock the thread because of islamophobic comments and general uncivility. Despite this, a massive majority of you decided to focus on the content, which I agree is the right way to deal with this."],
+        ["This one is also meta, and the title is not ideal. We love when you show us support and we will allow meta posts, but as always, it's good to see your input."],
+        ["Another trick one! This was removed because it's just a picture, and so should be posted to /r/wholesomepics. We included this in the survey to see how you felt about a format we normally ban, and the general opinion in the user notes section confirms that it's best left outside our sub."],
+        ["This is in the category we like to call \"/r/aww content\". We've seen a big influx of posts that could've done well in /r/aww or /r/mademesmile that would fit better in those subs. But it seems you love doggos and smol animols as much as the rest of reddit! Of course we aim to remove posts that are just pictures of cute animals."]
+      ];
+
+      function createPrestats(){
+        var parent=document.getElementById("barcontainer");
+        var totstats=[0,0,0,0];
+        for (var i=0;i<data.length;i++){
+          var stats=["Approve",data[i].approve,"Remove",data[i].remove,"Other",data[i].other,"None",(answers-data[i].approve-data[i].remove-data[i].other)];
+
+          var compositebar=document.createElement("a");
+          compositebar.href="#item_"+(i+1);
+          compositebar.className="compositebar small";
+          for (var n=0;n<4;n++){
+            var bar=document.createElement("div");
+            bar.className="bar stackable";
+            bar.style.width=toPerc(stats[n*2+1]/answers);
+            bar.setAttribute("data-perc","Post "+(i+1)+" | "+stats[n*2]+": "+toPerc(stats[n*2+1]/answers));
+            compositebar.appendChild(bar);
+            totstats[n]+=stats[n*2+1];
+          }
+          parent.appendChild(compositebar);
+        }
+
+        parent=document.getElementById("totcontainer");
+        compositebar=document.createElement("div");
+        compositebar.className="compositebar";
+        var totCount=totstats[0]+totstats[1]+totstats[2]+totstats[3];
+        for (var n=0;n<4;n++){
+          var bar=document.createElement("div");
+          bar.className="bar stackable";
+          bar.style.width=toPerc(totstats[n]/totCount);
+          bar.setAttribute("data-perc",stats[n*2]+": "+toPerc(totstats[n]/totCount)+" ("+totstats[n]+")");
+          compositebar.appendChild(bar);
+        }
+        parent.appendChild(compositebar);
+        document.getElementById("count").innerHTML=totCount;
+      }
+
+      function addData(){
+        for (var i=0;i<data.length;i++){
+          var item=document.createElement("div");
+          item.className="item";
+          item.id="item_"+(i+1);
+          var count=document.createElement("div");
+          count.className="count";
+          count.setAttribute("data-count",i+1);
+          var contentbox=document.createElement("div");
+          contentbox.className="contentbox";
+          var title=document.createElement("h1");
+          title.innerHTML=data[i].title;
+          var img=document.createElement("img");
+          img.src=data[i].url;
+          var statsbox=document.createElement("div");
+          statsbox.className="statsbox";
+
+          var stats=["Approve",data[i].approve,"Remove",data[i].remove,"Other",data[i].other,"None",(answers-data[i].approve-data[i].remove-data[i].other)];
+          var max=Math.max(stats[1],stats[3],stats[5]);
+          for (var n=0;n<8;n+=2){
+            var lbl=document.createElement("p");
+            lbl.innerHTML=stats[n]+": "+toPerc(stats[n+1]/answers)+"<span>("+stats[n+1]+")</span>";
+            statsbox.appendChild(lbl);
+            var bar=document.createElement("div");
+            bar.className="bar";
+            bar.style.width=toPerc(stats[n+1]/max);
+            statsbox.appendChild(bar);
+          }
+
+          var infobox=document.createElement("div");
+          infobox.className="infobox";
+          var commentbox=document.createElement("div");
+          commentbox.className="commentbox";
+          commentbox.innerHTML="<h2>Moderator notes</h2>";
+          addComments(commentbox,modcomments[i]);
+          var commentbox2=document.createElement("div");
+          commentbox2.className="commentbox";
+          commentbox2.innerHTML="<h2>User notes</h2>";
+          addComments(commentbox2,usercomments[i]);
+
+          contentbox.appendChild(count);
+          contentbox.appendChild(title);
+          contentbox.appendChild(img);
+          contentbox.appendChild(statsbox);
+          infobox.appendChild(commentbox);
+          infobox.appendChild(commentbox2);
+          contentbox.appendChild(infobox);
+          item.appendChild(contentbox);
+          document.getElementById("content").appendChild(item);
+        }
+      }
+
+      function toPerc(inp){
+        return Math.round(inp*1000)/10+"%";
+      }
+
+      function addComments(elem,arr){
+        for (var i in arr){
+          var p=document.createElement("p");
+          p.innerHTML=arr[i];
+          elem.appendChild(p);
+        }
+      }
+
+      createPrestats();
+      addData();
+    </script>
+  </body>
+</html>
