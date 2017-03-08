@@ -82,3 +82,8 @@ function loadLimericks(){
   xhttp.open("GET","https://raw.githubusercontent.com/PicturElements/picturelements.github.io/master/textfiles/limericks.txt",true);
   xhttp.send();
 }
+
+loadFont();
+loadCows();
+loadFortunes();
+loadLimericks();
