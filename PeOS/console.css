@@ -1,0 +1,96 @@
+body{
+  background:black;
+  margin:0;
+  height:100vh;
+  color:white;
+  font-size:1.3vw;
+  font-family:VT323,monospace;
+  font-variant-ligatures:none;
+  cursor:default;
+  font-weight:normal;
+}
+
+#wrapper,#wrapper2{
+  width:50%;
+  height:100%;
+  position:relative;
+  float:left;
+  overflow:auto;
+}
+
+.console{
+  padding:0.5em;
+}
+
+.console pre{
+  margin:0;
+  top:0;
+  min-height:1em;
+  line-height:1em;
+  font-family:VT323,monospace;
+  font-weight:inherit;
+}
+
+.inputbox{
+  display:flex;
+}
+
+.dir{
+  line-height:1em;
+}
+
+.input{
+  width:100%;
+  border:none;
+  outline:none;
+  background-color:transparent;
+  color:black;
+  font-size:1.3vw;
+  font-family:VT323,monospace;
+  padding:0;
+  min-height:1em;
+  font-variant-ligatures:none;
+  cursor:default;
+}
+
+.input::selection{
+  background-color:transparent;
+}
+
+.input_output{
+  pointer-events:none;
+  margin-top:-1em;
+}
+
+.caret{
+  display:none;
+  position:relative;
+  width:0.4em;
+  height:1em;
+  margin-top:-1em;
+  line-height:1em;
+}
+
+.caret div{
+  display:block;
+  position:absolute;
+  width:100%;
+  height:100%;
+  top:0;
+}
+
+.backcaret{
+  background:black;
+  color:white;
+}
+
+.frontcaret{
+  display:block;
+  animation:blink 1s steps(1,end) infinite;
+  background:white;
+  color:black;
+}
+
+@keyframes blink{
+  50%{opacity:0}
+}
