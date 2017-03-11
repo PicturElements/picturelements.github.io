@@ -177,8 +177,8 @@ function Console(parent){
     for (var i=cmds.length-1;i>=0;i--){
       if (cmds[i]==""){cmds.splice(i,1);}
     }
-    //prevent "can't read undefined" errors
-    cmds[0]=cmds[0] || "";
+    
+    cmds[0]=(cmds[0] || "").toLowerCase();
     if (cmds[0]=="cd"){
       if (cmds[1]!=undefined){
         cmds[1]=cmds[1].replace(/\//g,"\\");
