@@ -1,4 +1,4 @@
-body{
+.console{
   background:black;
   margin:0;
   height:100vh;
@@ -8,17 +8,6 @@ body{
   font-variant-ligatures:none;
   cursor:default;
   font-weight:normal;
-}
-
-#wrapper,#wrapper2{
-  width:50%;
-  height:100%;
-  position:relative;
-  float:left;
-  overflow:auto;
-}
-
-.console{
   padding:0.5em;
 }
 
