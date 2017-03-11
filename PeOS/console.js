@@ -37,7 +37,6 @@ function Console(parent){
       ["echo <string>","print string"],
       ["echo %variable","print internal variable (see: set)"],
       ["echo -vars","print all internal variables\n"],
-      ["error <messsage>","open error window\n"],
       ["figlet <string>","make totally badass ascii art"],
       ["figlet fortune","wise words in ascii glory (see: fortune)\n"],
       ["fortune","get a random piece of wisdom; probably not safe for work\n"],
@@ -45,6 +44,7 @@ function Console(parent){
       ["help help","get help categories\n"],
       ["open <url>","open window by url"],
       ["open <name>","open window by name\n"],
+      ["prompt <message>","open prompt\n"],
       ["set <name> <value>","set local variable; supports numbers, strings, arrays, and objects"],
       ["set /a <expression>","perform arithmetical operations on local variables; see help arithm\n"],
       ["|","Piping; supported by cowsay, figlet, and fortune (see: 'help piping')"],
@@ -337,10 +337,11 @@ function Console(parent){
       var out="\n\n"+compileCowsay(parsePiping(str.split(" | ")));
       print(out);
     }else if (cmds[0]=="open"){
-      consoleOpenWin(dirToConsoleUrl(cmds[1] || dirUrl));
+      //consoleOpenWin
+      alert(dirToConsoleUrl(cmds[1] || dirUrl));
       print("");
-    }else if (cmds[0]=="error"){
-      showError("Error",str.replace("error ",""));
+    }else if (cmds[0]=="prompt"){
+      openPopup("Prompt",str.replace("prompt ",""),"info");
       print("");
     }else{
       cmdPointer--;
@@ -529,7 +530,9 @@ function Console(parent){
   setInterval(printChar,10);
   inputElem.focus();
   addLine(null,true);
-  print(compileCowsay(cowsay("PicturElements PeOS [Version 2.0]\nCmd-PE v1.0.\n(C) 2017 PicturElements\n----------------------------------\nType 'help' for help with commands.","duck")));
+  setTimeout(function(){
+    print(compileCowsay(cowsay("PicturElements PeOS [Version 2.0]\nCmd-PE v1.0.\n(C) 2017 PicturElements\n----------------------------------\nType 'help' for help with commands.","duck")));
+  },500);
   loadDir(dirUrl,true);
 }
 
