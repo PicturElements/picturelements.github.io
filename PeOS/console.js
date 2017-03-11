@@ -332,6 +332,7 @@ function Console(parent){
     }else if (cmds[0]=="::"){
       print("");
     }else if (cmds[0]=="title"){
+      getParent(parent,"window").getElementsByClassName("wintitle")[0].innerHTML=str.replace("title ","");
       print("");
     }else if (cmds[0].startsWith("cow")||cmds[0]=="figlet"||cmds[0]=="fortune"){
       var out="\n\n"+compileCowsay(parsePiping(str.split(" | ")));
