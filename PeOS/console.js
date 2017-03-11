@@ -337,7 +337,7 @@ function Console(parent){
       var out="\n\n"+compileCowsay(parsePiping(str.split(" | ")));
       print(out);
     }else if (cmds[0]=="open"){
-      consoleOpenWin.(dirToConsoleUrl(cmds[1] || dirUrl));
+      consoleOpenWin(dirToConsoleUrl(cmds[1] || dirUrl));
       print("");
     }else if (cmds[0]=="prompt"){
       openPopup("Prompt",str.replace("prompt ",""),"info");
