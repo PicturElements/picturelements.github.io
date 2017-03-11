@@ -340,7 +340,7 @@ function Console(parent){
       consoleOpenWin(dirToConsoleUrl(cmds[1] || dirUrl));
       print("");
     }else if (cmds[0]=="error"){
-      showError("Error",cmds[1].replace("error ",""));
+      showError("Error",str.replace("error ",""));
       print("");
     }else{
       cmdPointer--;
