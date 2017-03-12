@@ -47,8 +47,10 @@ function Console(parent){
       ["prompt <message>","open prompt\n"],
       ["set <name> <value>","set local variable; supports numbers, strings, arrays, and objects"],
       ["set /a <expression>","perform arithmetical operations on local variables; see help arithm\n"],
+      ["title","set title of current console\n"],
       ["|","Piping; supported by cowsay, figlet, and fortune (see: 'help piping')"],
-      ["::","Comment"]
+      ["::","Comment"],
+      ["quit","close console"]
     ],
     colors:[
       [5],
@@ -343,6 +345,9 @@ function Console(parent){
     }else if (cmds[0]=="prompt"){
       openPopup("Prompt",str.replace("prompt ",""),"info");
       print("");
+    }else if (cmds[0]=="quit"){
+      setTimeout(function(){closeWin(getParent(parent,"window").id);});
+      print("Bye!");
     }else{
       cmdPointer--;
       cmdArr.splice(cmdPointer,1);
@@ -529,6 +534,7 @@ function Console(parent){
   }
   setInterval(printChar,10);
   inputElem.focus();
+  setCaret();
   addLine(null,true);
   setTimeout(function(){
     print(compileCowsay(cowsay("PicturElements PeOS [Version 2.0]\nCmd-PE v1.0.\n(C) 2017 PicturElements\n----------------------------------\nType 'help' for help with commands.","duck")));
@@ -566,6 +572,10 @@ function duplicate(str,amount){
   for (var i=0;i<amount;i++){out+=str;}
   return out;
 }
+
+var cmdWin=new Console(document.getElementById("wrapper"));
+
+
 
 
 
