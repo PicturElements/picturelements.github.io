@@ -346,7 +346,7 @@ function Console(parent){
       openPopup("Prompt",str.replace("prompt ",""),"info");
       print("");
     }else if (cmds[0]=="quit"){
-      setTimeout(function(){closeWin(getParent(parent,"window").id);});
+      setTimeout(function(){closeWin(getParent(parent,"window").id);},500);
       print("Bye!");
     }else{
       cmdPointer--;
