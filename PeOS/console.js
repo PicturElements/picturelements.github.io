@@ -174,7 +174,6 @@ function Console(parent){
   }
 
   function parseInput(str){
-    var origStr=str;
     str=conformString(str);
     var isArray=Array.isArray(objData);
     var cmds=str.split(" ");
@@ -182,24 +181,24 @@ function Console(parent){
     cmds[0]=(cmds[0] || "").toLowerCase();
     if (cmds[0]=="cd"){
       if (cmds[1]!=undefined){
-        cmds[1]=cmds[1].replace(/\//g,"\\");
+        cmds[1]=cmds[1].replace(/\\/g,"/");
         if (cmds[1]==".."){
           moveDirUp(false);
         }else if (cmds[1]=="-fst"||cmds[1]=="-nth"){
           var index=cmds[2] || 0;
           if (isArray){
             index=Math.max(Math.min(index,objData.length-1),0);
-            loadDir(dirUrl+"\\"+objData[index].name);
+            loadDir(dirUrl+"/"+objData[index].name);
           }else{
             print("This is the end of the line, buddy!");
           }
-        }else if (cmds[1].includes(":/")||cmds[1].includes(":\\")){
+        }else if (cmds[1].includes(":/")){
           loadDir(cmds[1]);
         }else{
           loadDir(dirUrl+"\\"+cmds[1]); 
         }
       }else{
-        loadDir("P:\\");
+        loadDir("P:/");
       }
     }else if (cmds[0]=="data"){
       var out="\n";
@@ -339,7 +338,7 @@ function Console(parent){
       var out="\n\n"+compileCowsay(parsePiping(str.split(" | ")));
       print(out);
     }else if (cmds[0]=="open"){
-      consoleOpenWin(dirToConsoleUrl(cmds[1] ? str.replace("open ","") : dirUrl),origStr);
+      consoleOpenWin(dirToConsoleUrl(cmds[1] ? str.replace("open ","") : dirUrl));
       print("");
     }else if (cmds[0]=="prompt"){
       openPopup("Prompt",str.replace("prompt ",""),"info");
@@ -430,12 +429,12 @@ function Console(parent){
   }
 
   function updateDir(url){
-    dirUrl=url.replace(/\\\\/g,"\\");
+    dirUrl=urlToDir(url);
     dir.innerHTML=dirUrl+">&nbsp;";
   }
 
   function loadDir(url,preventPrint,file){
-    url=url.replace(/\\\\/g,"\\");
+    url=url.replace(/\\/g,"/");
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
@@ -449,7 +448,7 @@ function Console(parent){
             }
           }
         }
-        if (!preventPrint&&!printing){print("Successfully loaded directory '"+url+"'.");}
+        if (!preventPrint&&!printing){print("Successfully loaded directory '"+urlToDir(url)+"'.");}
         //print(genDirStr("",objData,0));
         updateDir(url);
       }else if (this.status==403){
@@ -479,11 +478,11 @@ function Console(parent){
     }
   }
 
-  function dirToConsoleUrl(inp,orig){
+  function dirToConsoleUrl(inp){
     if (!inp.startsWith("P:")){
-      return orig;
+      return inp;
     }
-    var inputArr=inp.replace(/\//g,"\\").split("\\");
+    var inputArr=inp.split("/");
     var url="https://api.github.com/repos/PicturElements/"+inputArr[1]+"/contents";
     if (inputArr[1]==""){
       url="https://api.github.com/users/PicturElements/repos";
@@ -492,6 +491,18 @@ function Console(parent){
       url+="/"+inputArr[i];
     }
     return url;
+  }
+  
+  function urlToDir(inp){
+    if (inp.startsWith("P:")){
+      return inp;
+    }
+    inp=inp.split("?")[0].split("/");
+    var out="P:\\"+inp[5];
+    for (var i=7;i<inp.length;i++){
+      out+="\\"+inp[i];
+    }
+    return out;
   }
 
   function setCaret(){
