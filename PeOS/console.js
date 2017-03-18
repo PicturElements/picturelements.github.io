@@ -345,7 +345,8 @@ function Console(parent){
       print("");
     }else if (cmds[0]=="quit"){
       setTimeout(function(){closeWin(getParent(parent,"window").id);},500);
-      print("Exited console.");
+      print("\n\nExited console");
+      inputElem.parentElement.parentElement.innerHTML="";
     }else{
       if (cmds[0]==""){
         cmdPointer--;
