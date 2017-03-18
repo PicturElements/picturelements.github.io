@@ -174,6 +174,7 @@ function Console(parent){
   }
 
   function parseInput(str){
+    var origStr=str;
     str=conformString(str);
     var isArray=Array.isArray(objData);
     var cmds=str.split(" ");
@@ -338,7 +339,7 @@ function Console(parent){
       var out="\n\n"+compileCowsay(parsePiping(str.split(" | ")));
       print(out);
     }else if (cmds[0]=="open"){
-      consoleOpenWin(dirToConsoleUrl(cmds[1] ? str.replace("open ","") : dirUrl));
+      consoleOpenWin(dirToConsoleUrl(cmds[1] ? str.replace("open ","") : dirUrl),origStr);
       print("");
     }else if (cmds[0]=="prompt"){
       openPopup("Prompt",str.replace("prompt ",""),"info");
@@ -478,9 +479,9 @@ function Console(parent){
     }
   }
 
-  function dirToConsoleUrl(inp){
+  function dirToConsoleUrl(inp,orig){
     if (!inp.startsWith("P:")){
-      return inp;
+      return orig;
     }
     var inputArr=inp.replace(/\//g,"\\").split("\\");
     var url="https://api.github.com/repos/PicturElements/"+inputArr[1]+"/contents";
