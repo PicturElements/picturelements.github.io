@@ -31,7 +31,7 @@ function Console(parent){
       ["color <hex,hex>","set console colors. (e.g. color f0)\n"],
       ["cowsay <string>","make a cow say wise things; 'help cowsay' for full datasheet"],
       ["cowsay <string> <cow>","make a cow character say wise things; cowsay -l for list of cows"],
-      ["cowsay fortune","make the cow say wiser things if you have nothing good to offer (see: fortune)\n"],
+      ["cowsay fortune","make the cow say things if you have nothing good to offer (see: fortune)\n"],
       ["data","get GitHub API data for directory"],
       ["data <prop>","get object property value for data in current directory\n"],
       ["echo <string>","print string"],
@@ -174,11 +174,9 @@ function Console(parent){
   }
 
   function parseInput(str){
+    str=conformString(str);
     var isArray=Array.isArray(objData);
     var cmds=str.split(" ");
-    for (var i=cmds.length-1;i>=0;i--){
-      if (cmds[i]==""){cmds.splice(i,1);}
-    }
     
     cmds[0]=(cmds[0] || "").toLowerCase();
     if (cmds[0]=="cd"){
@@ -331,7 +329,7 @@ function Console(parent){
         }
       }
       print(out,null,"");
-    }else if (cmds[0]=="::"){
+    }else if (cmds[0].startsWith("::")){
       print("");
     }else if (cmds[0]=="title"){
       getParent(parent,"window").getElementsByClassName("wintitle")[0].innerHTML=str.replace("title ","");
@@ -340,21 +338,34 @@ function Console(parent){
       var out="\n\n"+compileCowsay(parsePiping(str.split(" | ")));
       print(out);
     }else if (cmds[0]=="open"){
-      consoleOpenWin(dirToConsoleUrl(cmds[1] || dirUrl));
+      consoleOpenWin(dirToConsoleUrl(cmds[1] ? str.replace("open ","") : dirUrl));
       print("");
     }else if (cmds[0]=="prompt"){
       openPopup("Prompt",str.replace("prompt ",""),"info");
       print("");
     }else if (cmds[0]=="quit"){
-      setTimeout(function(){closeWin(getParent(parent,"window").id);},500);
-      print("Bye!");
+      setTimeout(function(){closeWin(getParent(parent,"window").id);});
+      print("Exited console.");
     }else{
-      cmdPointer--;
-      cmdArr.splice(cmdPointer,1);
+      if (cmds[0]==""){
+        cmdPointer--;
+        cmdArr.splice(cmdPointer,1);
+      }
       print("Invalid command '"+cmds[0]+"'",1);
     }
   }
 
+  function conformString(str){
+    var notSpace=false,out="";
+    for (var i in str){
+      if (notSpace||str[i]!=" "){
+        out+=str[i];
+        notSpace=str[i]!=" ";
+      }
+    }
+    return out;
+  }
+  
   function genDirStr(obj,lvl,msg,noAddLine){
     var repl="\n"+duplicate("   ",lvl);
     var str="\n";
@@ -572,11 +583,6 @@ function duplicate(str,amount){
   for (var i=0;i<amount;i++){out+=str;}
   return out;
 }
-
-var cmdWin=new Console(document.getElementById("wrapper"));
-
-
-
 
 
 /*-----------------------------------------COWSAY STUFF------------------------------------------------*/
