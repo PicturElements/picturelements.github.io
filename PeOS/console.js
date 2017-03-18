@@ -435,6 +435,7 @@ function Console(parent){
 
   function loadDir(url,preventPrint,file){
     url=url.replace(/\\/g,"/");
+    if (url.startsWith("P:")){url=url.replace("//","/")}
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
