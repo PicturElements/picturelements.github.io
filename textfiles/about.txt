@@ -1,15 +1,21 @@
 PeOS 2.0
 
 PeOS is written, designed, and maintained by PicturElements (github.com/PicturElements)
-Based on Windows 10.
+PeOS is based on Windows 10.
 
 Updates since PeOS 1.0
 1. File explorer
-2. Added support for prompts
-3. Working battery meter
-4. SVG replacements for icons
+2. Working console
+3. Added support for prompts
+4. Working battery meter
 5. Improved startup screen
+6. Puzzle box functional
 
 Bug fixes since PeOS 1.0
 1. Window scaling bug fixed (window wouldn't scale if dragged over other window)
-2. Second window scaling bug fixed (scaling left side of window)
+2. Second window scaling bug fixed (scaling left side of window now works properly)
+
+Design changes since PeOS 1.0
+1. Desktop bokeh pattern removed
+2. Windows zoom in and out on open/close/min
+3. SVG replacements for icons, as well as centralized icon setting function
