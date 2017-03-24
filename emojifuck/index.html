@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <title>emojifuck - PicturElements</title>
+    <meta name="description" content="Mandelbrot/Julia set generator by PicturElements">
+    <link rel="icon" href="picturelements.github.io/pelement.png">
+  </head>
+  <body live="true" running="false" playing="true" emoji="true" comp="false">
+    <div class="wrapper">
+      <div id="buttonbar" class="noselect">
+        <div class="emojibutton">&gt;</div>
+        <div class="emojibutton">&lt;</div>
+        <div class="emojibutton">+</div>
+        <div class="emojibutton">-</div>
+        <div class="emojibutton">.</div>
+        <div class="emojibutton">,</div>
+        <div class="emojibutton">[</div>
+        <div class="emojibutton">]</div>
+      </div>
+      <textarea id="datain" spellcheck="false"></textarea>
+    </div>
+    <div class="wrapper">
+      <div id="infobar" class="noselect">
+        <div class="dataitem">runtime: <span id="runtime_data">N/A</span></div>
+        <div class="dataitem">instructions: <span id="instr_data">N/A</span></div>
+        <div class="dataitem">memory:<span id="mem_data">N/A</span></div>
+        <div class="dataitem">operators:<span id="op_data">N/A</span></div>
+      </div>
+      <div id="console"></div>
+      <input id="input" placeholder="Input bytes here"></input>
+    </div>
+    <div id="settingsbar" class="noselect">
+      <div class="settingsitem" onclick="run()" id="run" style="background-color:#777">run</div>
+      <div class="settingsitem" onclick="stop()" id="stop" style="background-color:#a00; display:none">stop</div>
+      <div class="settingsitem" onclick="pause()" id="pause" style="background-color:#c40; display:none">pause</div>
+      <div class="settingsitem" onclick="play()" id="play" style="background-color:green; display:none">play</div>
+      <div class="settingsitem" onclick="step()" id="step" style="background-color:#333; display:none">step</div>
+      <div class="settingsitem hideonrun">
+        max runtime:
+        <input type="number" value="100000" step="10000" min="0" data-name="maxiter"></input>
+      <span class="huh" title="Maximum number of instructions before script terminates.
+This is a security measure to prevent crashes, but can be set high.">?</span></div>
+      <div class="settingsitem" id="toggleEmoji" onclick="toggleMode()">emoji mode</div>
+      <div class="settingsitem" onclick="getRaw()">pure brainfuck</div>
+      <div class="settingsitem" onclick="openSaveOpen('save')">save</div>
+      <div class="settingsitem" onclick="openSaveOpen('open')">load</div>
+    </div>
+    <div id="livebar" class="noselect">
+      <div class="dataitem hideonrun" id="toggleLive" onclick="toggleLive()">simulation mode: on</div>
+      <div class="dataitem" id="toggleComp" onclick="toggleComp()">compressed: off</div>
+      <div class="dataitem hideonplay">throttling:<input type="number" value="10" step="2" min="0" data-name="throttle"></input><span class="huh" title="Set timeout between instructions (in milliseconds)">?</span></div>
+      <div class="dataitem hideonrun">max mem:<input type="number" value="1000" step="100" min="0" data-name="maxmem"></input><span class="huh" title="Maximum number of cells the script is allowed to show">?</span></div>
+    </div>
+    <div id="live">
+      <div id="opline"></div>
+      <div id="memory">
+        <div id="innermem"></div>
+      </div>
+    </div>
+    <div id="shadow">
+      <div id="plaintext" class="popup noselect">
+        <div class="close" onclick="closeWin(this);">×</div>
+        <textarea>lel</textarea>
+      </div>
+      <div id="saveopen" style="height:25em" class="popup noselect">
+        <div class="close" onclick="closeWin(this);">×</div>
+        <div id="inner">
+          <div id="sotitle"></div>
+          <input id="fileinput"></input>
+          <div id="files"></div>
+          <div id="sobuttons">
+            <div class="sobutton save" onclick="saveProject(this)">save</div>
+            <div class="sobutton open" onclick="openProject(this)">open</div>
+            <div class="sobutton save open" onclick="closeWin(this)">cancel</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <style id="search"></style>
+    <div id="ego" class="noselect">Emojifuck interpreter by <a href="https://picturelements.github.io/" target="_blank">PicturElements</a></div>
+  </body>
+</html>
