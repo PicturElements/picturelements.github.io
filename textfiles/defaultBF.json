@@ -9,7 +9,8 @@
       "input":"",
       "showEmoji":true,
       "live":true,
-      "comp":false
+      "comp":false,
+      "scroll":true
     },
     "created":1490287419613,
     "size":143
@@ -25,7 +26,8 @@
       "input":"This is a short sentence.",
       "showEmoji":true,
       "live":true,
-      "comp":false
+      "comp":false,
+      "scroll":true
     },
     "created":1490287817914,
     "size":75
@@ -41,7 +43,8 @@
       "input":"",
       "showEmoji":true,
       "live":true,
-      "comp":false
+      "comp":false,
+      "scroll":true
     },
     "created":1490288375422,
     "size":107
@@ -57,7 +60,8 @@
       "input":"",
       "showEmoji":false,
       "live":false,
-      "comp":false
+      "comp":false,
+      "scroll":true
     },
     "created":1490369649444,
     "size":1710
@@ -73,7 +77,8 @@
       "input":"",
       "showEmoji":true,
       "live":false,
-      "comp":false
+      "comp":false,
+      "scroll":true
     },
     "created":1490401136956,
     "size":670
@@ -89,7 +94,8 @@
       "input":"65",
       "showEmoji":true,
       "live":false,
-      "comp":false
+      "comp":false,
+      "scroll":true
     },
     "created":1490459131629,
     "size":1001
@@ -105,7 +111,8 @@
       "input":"10",
       "showEmoji":true,
       "live":false,
-      "comp":false
+      "comp":false,
+      "scroll":true
     },
     "created":1490459904479,
     "size":994
