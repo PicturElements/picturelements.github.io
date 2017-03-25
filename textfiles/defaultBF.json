@@ -61,5 +61,21 @@
     },
     "created":1490369649444,
     "size":1710
+  },
+  "pyramid5":{
+    "data":{
+      "vars":{
+        "maxiter":1000000,
+        "throttle":50,
+        "maxmem":1000
+      },
+      "code":"Pyramid5 by PicturElements\n\ngenerate 16 in b2 (b2=block #2)\n👉😂😂😂😂🙌😱👉😂😂😂😂👈🙏👉\n\nduplicate and double b2 to b0 and b1; move to b3\n🙌😱👈😂😂👈😂😂👉👉🙏👉\n\nadd 10 to b1 and b2\n😂😂😂😂😂🙌😱👈😂😂👈😂😂👉👉🙏\n\nresulting blocks: 32 42 10\n                  *  sp \\n\n\nfill b5 with a number; this number will be the height of the pyramid\n👉👉😂😂😂😂😂\n\nmain loop!\n🙌\n\nremove one from b5 and add one to b6\n😱👉😂👈\n\nduplicate the value of b5 to b3&4\n🙌😱👈😂👈😂👉👉🙏👈\n\ncopy back b4 to b5; move to b3\n🙌😱👉😂👈🙏👈\n\nfor each b3 print space\n🙌😱👈👈👈👌👉👉👉🙏\n\nmove to b6\n👉👉👉\n\ncopy b6 to b3&4\n🙌😱👈👈😂👈😂👉👉👉🙏👈👈👈\n\ncopy b3 to b6 and decrement b4\n🙌😱👉👉👉😂👈👈👈🙏👉😱\n\ndouble b4 to b3 and add one\n🙌😱👈😂😂👉🙏👈😂\n\nprint asterisks\n🙌😱👈👈👌👉👉🙏\n\nprint new line\n👈👌👉👉👉\n\n🙏",
+      "input":"",
+      "showEmoji":true,
+      "live":false,
+      "comp":false
+    },
+    "created":1490401136956,
+    "size":670
   }
 }
