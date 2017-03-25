@@ -116,5 +116,22 @@
     },
     "created":1490459904479,
     "size":994
+  },
+  "Adder"{
+    "data":{
+      "vars":{
+        "maxiter":1000000,
+        "throttle":10,
+        "maxmem":1000
+      },
+      "code":"Adder by PicturElements\nFunction: reads input as an addition expression and returns the sum\n\t  to the block where the pointer started off; an infinite number\n\t  of terms can be added although the maximum value of each term \n\t  must be less than 256 and the result will be the the real\n\t  answer mod 256\n\n########################################################################\n\nlet b0 and b1 be terminator blocks (0) for the addition loop and\nnumber parsing loop respectively; load first byte\n👉👉💯\n\nBuild number in blocks b1 to bn by loading byte and subtracting 43;\nThis creates a row of numbers where each digit is increased by 5\nThis is to prevent a 0 from being parsed as a terminator block but\nalso gives plus signs value 0 which terminates the number parsing\nloop so that the addition loop can be passed on\n🙌\n\n👉👉😂😂😂😂😂\n\n🙌😱👈😂😂😂😂😂😂😂😂😂👉🙏👈😱😱\n\n🙌😱👈😱👉🙏💯\n\n🙏\n\nadd 1 to block n plus 2; this is the base counter block (bsb); move to last digit\n👉👉😂👈👈👈\n\naddition loop\n🙌\n\nconditional: if last digit isn't zero do adding\n🙌\n\nmove to bsb and duplicate to next 2 block\n😱😱😱😱😱👉👉👉🙌😱👉😂👉😂👈👈🙏\n\ncopy back second duplicate bsb\n👉👉🙌😱👈👈😂👉👉🙏👈👈\n\ndecrement bsb and move to last digit\n🙌😱👈👈👈\n\nadd last digit to next two blocks\n🙌😱👉😂👉😂👈👈🙏\n\ncopy back first duplicate to last digit; move back to bsb\n👉🙌😱👈😂👉🙏👉👉🙏\n\nmultiply bsb by 10\n👉🙌😱👈😂😂😂😂😂😂😂😂😂😂👉🙏\n\nremove last digit and shift cells one step to the left; go back to new last digit\n👈👈👈👈🙌😱🙏👉👉🙌😱👈😂👉🙏👉🙌😱👈😂👉🙏👈👈👈👈\n\n🙏\n\ncompress and clean up\n👉👉👉🙌😱🙏👈🙌😱👈😂👉🙏😂👈👈👈\n\n🙏\n\nclean up and move result from b2 to b0\n👉👉👉😱👈🙌😱👈👈😂👉👉🙏👈👈\n\nPrint output for keks\n👌",
+      "input":"60+5",
+      "showEmoji":true,
+      "live":true,
+      "comp":false,
+      "scroll":true
+    },
+    "created":1490484394741,
+    "size":1551
   }
 }
