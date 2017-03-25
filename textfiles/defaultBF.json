@@ -117,7 +117,7 @@
     "created":1490459904479,
     "size":994
   },
-  "Adder"{
+  "Adder":{
     "data":{
       "vars":{
         "maxiter":1000000,
