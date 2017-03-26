@@ -23,13 +23,18 @@ div[onclick]{
   cursor:pointer;
 }
 
+div[onclick]:hover{
+  background-color:#777;
+}
+
+#run:hover{
+  background-color:#888;
+}
+
 .wrapper{
   width:49.5%;
   float:left;
   padding-bottom:1em;
-}
-
-.wrapper:first-of-type{
   margin-right:1%;
 }
 
@@ -152,10 +157,11 @@ body[running="true"] #run{
 
 body[live="false"] #live{
   height:0 !important;
+  min-height:0;
   opacity:0;
 }
 
-body[live="false"] #livebar .dataitem + .dataitem, body[running="true"] .hideonrun, body[playing="true"] .hideonplay{
+body[live="false"] #livebar .dataitem + .dataitem, body[running="true"] .hideonrun, body[running="true"][playing="true"] .hideonplay{
   opacity: 0.5;
   pointer-events: none;
 }
@@ -219,6 +225,10 @@ body[live="false"] #livebar .dataitem + .dataitem, body[running="true"] .hideonr
   min-height:1em;
 }
 
+.bar pre:nth-last-child(2) {
+  min-height: 0;
+}
+
 .error pre{
   color:#ecc;
 }
@@ -253,8 +263,16 @@ input[type="number"]{
   text-align:center;
 }
 
+#countbar, #memory, body[tour="true"] #console *{
+  pointer-events:none;
+}
+
+.memsquare.inactive{
+  color:#555;
+}
+
 .countsquare{
-  color:#777;
+  color:#888;
 }
 
 .spacer{
@@ -287,10 +305,13 @@ body[emoji="false"] .opsquare:after{
   display:flex;
   overflow:auto;
   resize:vertical;
+  height:16.3em;
+  min-height:16.3em;
 }
 
 #opline{
   display:flex;
+  position:relative;
   flex-grow:1;
   padding:0.25em;
   flex-wrap:wrap;
@@ -298,19 +319,36 @@ body[emoji="false"] .opsquare:after{
   overflow:auto;
 }
 
-#memory{
-  height:100%;
-  border-left:0.25em solid #666;
-  overflow:auto;
+#memwrapper{
+  display: flex;
+  flex-direction: column;
+  border-left: 0.25em solid #666;
+  overflow: hidden;
   flex-shrink:0;
+}
+
+#countbar {
+  height: 2em;
+  border-bottom: 1px solid #444;
+  box-sizing:border-box;
+}
+
+#memory{
+  overflow:auto;
+  flex-grow:1;
 }
 
 #innermem{
   display:flex;
+  position:relative;
   width:34em;
-  margin:0.5em;
   flex-wrap:wrap;
   align-content:flex-start;
+}
+
+#innermem .countsquare {
+  border-right: 1px solid #444;
+  box-sizing: border-box;
 }
 
 #shadow{
@@ -444,24 +482,31 @@ body[emoji="false"] .opsquare:after{
   color:#ddd;
 }
 
+.file:hover {
+  background-color: #666;
+}
+
 .file:nth-of-type(2n){
   background-color:#606060;
 }
 
-.file span{
-  pointer-events:none;
+.file span {
+  position: relative;
+  float: left;
+  pointer-events: none;
+  width: 40%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
-.file span:nth-of-type(2){
-  display:block;
-  position:absolute;
-  left:15em;
+.file span:nth-of-type(2) {
+  width: 25%;
 }
 
-.file span:nth-of-type(3){
-  display:block;
-  position:absolute;
-  right:0.5em;
+.file span:nth-of-type(3) {
+  width: 40%;
+  text-align: right;
 }
 
 ::-webkit-scrollbar {
@@ -478,14 +523,79 @@ body[emoji="false"] .opsquare:after{
   background:#666;
 }
 
-#ego{
-  color: #666;
-  text-align: center;
-  margin-top: 2em;
-}
-
-#ego a{
+a{
   color:#777;
   font-weight:bold;
   text-decoration:none;
+}
+
+#tipwrapper{
+  width:100%;
+  display:flex;
+  justify-content:center;
+}
+
+#tipbar{
+  display:flex;
+  position:relative;
+  background-color:#333;
+  border: 0.1em solid #666;
+  box-sizing:border-box;
+  margin:1em 0 2em 0;
+  padding:1em 0;
+  border-radius:1em;
+  align-items:center;
+  color:#ddd;
+}
+
+#tipbar a{
+  color:#eee;
+}
+
+#logo{
+  background-image:url("https://picturelements.github.io/images/emojifuck.png");
+  width:11.4em;
+  height:6em;
+  background-size:100% 100%;
+  margin-left:1em;
+}
+
+#tipbar p{
+  margin:0 1em;
+  padding-left:1em;
+  border-left:1px solid #666;
+}
+
+body[tour="false"] #slide_2, body[tour="true"] #slide_1{
+  display:none;
+}
+
+body[tour="false"] #tourbubble, body[tour="false"] #shadowbox{
+  display:none !important;
+}
+
+#tourbubble {
+  position: absolute;
+  color: #ddd;
+  padding: 0.5em;
+  background: #333;
+  border: 1px solid #666;
+  max-width: 20em;
+  margin-right: 0.5em;
+  pointer-events:none;
+}
+
+#tourbubble p {
+  margin: 0;
+}
+
+#tourbubble b {
+  font-size: 110%;
+}
+
+#shadowbox{
+  position: absolute;
+  background-color:rgba(255,255,255,0.15);
+  pointer-events:none;
+  box-sizing:border-box;
 }
