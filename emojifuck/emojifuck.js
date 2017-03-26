@@ -2,7 +2,8 @@ var data=[0],runData=[];
 var pointer=0,runPointer=0,inpPointer=0;
 var input,iters=0,runs=0;
 var outElem,msgElem,bar,time,thread=null;
-var showEmoji=true,live=true,comp=false;
+var showEmoji=true,live=true,scroll=true,comp=false,tour=false;
+var openName=null;
 
 var ops=["incp","decp","inc","dec","putchar","getchar","cond","break"];
 var origKeys=['>','<','+','-','.',',','[',']'];
@@ -20,8 +21,8 @@ var uservars={
   throttle:10,
   maxmem:1000
 };
-var projects=JSON.parse(localStorage.getItem("projects"));
-if (!projects){loadDefault();}
+var projects=JSON.parse(localStorage.getItem("projects")) || {};
+loadDefault();
 
 for (var i=0;i<buttons.length;i++){
   buttons[i].addEventListener("click",function(event){
@@ -57,11 +58,24 @@ infield.addEventListener("keydown",function(event){
           addChar(emoji[i],true);
         }
       }
-    },0);
+    },10);
+  }
+});
+var huhs=document.getElementsByClassName("huh");
+for (var i=0;i<huhs.length;i++){
+  huhs[i].addEventListener("click",function(event){
+    alert(event.target.title);
+  });
+}
+document.getElementById("files").addEventListener("click",function(event){
+  if (event.target.className=="file"){
+    document.getElementById("fileinput").value=event.target.getAttribute("true_name");
+    searchFiles();
   }
 });
 window.addEventListener("load",loadData);
 window.addEventListener("unload",saveData);
+document.body.addEventListener("mousemove",function(){addTourInfo(event)});
 document.getElementById("fileinput").addEventListener("keyup",searchFiles);
 
 function run(){
@@ -74,6 +88,7 @@ function run(){
   addLine();
   
   fillMem();
+  memsquares[0].classList.remove("inactive");
   runData=toDataArr(document.getElementById("datain").value);
   input=document.getElementById("input").value;
   document.body.setAttribute("running",true);
@@ -82,15 +97,24 @@ function run(){
     numinputs[i].value=uservars[numinputs[i].getAttribute("data-name")];
   }
   
+  main:
   for (var i=runData.length-1;i>=0;i--){
     if (runData[i].op=="cond"){
       for (var n=i+1;n<runData.length;n++){
         if (runData[n].jump==undefined&&runData[n].op=="break"){
           runData[i].jump=n;
           runData[n].jump=i;
-          break;
+          continue main;
         }
       }
+      showError("Failed to compile: unmatched bracket at character "+runData[i].pos);
+      infield.focus();
+      var start=normalizePos(runData[i].pos+i*(showEmoji?1:0));
+      infield.selectionStart=start-(showEmoji?2:1);
+      infield.selectionEnd=start;
+      time=new Date().getTime();
+      completeRun();
+      return;
     }
   }
   
@@ -98,8 +122,9 @@ function run(){
     if ((runData[i].op=="cond"||runData[i].op=="break")&&runData[i].jump==undefined){
       showError("Failed to compile: unmatched bracket at character "+runData[i].pos);
       infield.focus();
-      infield.selectionStart=normalizePos(runData[i].abspos)-2;
-      infield.selectionEnd=normalizePos(runData[i].abspos);
+      var start=normalizePos(runData[i].pos+i*(showEmoji?1:0));
+      infield.selectionStart=start-(showEmoji?2:1);
+      infield.selectionEnd=start;
       time=new Date().getTime();
       completeRun();
       return;
@@ -107,6 +132,13 @@ function run(){
   }
   
   time=new Date().getTime();
+  
+  if (runData.length==0){
+    completeRun();
+    return;
+  }
+  
+  document.title=(openName || "untitled")+" (running)";
   
   if (live){
     genLive();
@@ -173,7 +205,7 @@ function shortCycle(){
       runPointer++;
       iters++;
       if (iters>=uservars.maxiter){
-        showError("Max runtime exceeded");
+        showError("Max instruction count exceeded");
         completeRun();
         return
       }else if(pointer>=1000000){
@@ -203,39 +235,58 @@ function cycle(){
         hexCellsHigher();
       }
       memsquares[pointer].classList.add("active");
-      memsquares[pointer].innerHTML=data[pointer] || 0;
-      var memory=document.getElementById("memory");
-      var rect=memsquares[pointer].getBoundingClientRect();
-      memory.scrollTop=rect.height*(Math.floor(pointer/16))+rect.height/2-memory.offsetHeight/2;
+      memsquares[pointer].classList.remove("inactive");
+      memsquares[pointer].innerHTML=data[pointer];
+      if (scroll){
+        var memory=document.getElementById("memory");
+        var rect=memsquares[pointer].getBoundingClientRect();
+        memory.scrollTop=memsquares[pointer].offsetTop+rect.height/2-memory.offsetHeight/2;
+        
+        var opline=document.getElementById("opline");
+        var rect=opsquares[runPointer].getBoundingClientRect();
+        opline.scrollTop=opsquares[runPointer].offsetTop+rect.height/2-opline.offsetHeight/2;
+      }
     }
     runPointer++;
     iters++;
     if (iters>=uservars.maxiter){
-      showError("Max runtime exceeded");
+      showError("Max instruction count exceeded");
       completeRun();
     }
   }else{
-    opsquares[runPointer-1].classList.remove("active");
+    opsquares[runPointer>0?runPointer-1:0].classList.remove("active");
     completeRun();
   }
 }
 
 function completeRun(noPrint){
   var newTime=new Date().getTime()-time;
-  newTime=newTime<1000?(newTime+" ms"):(newTime/1000+" s");
+  if (newTime<1000){
+    newTime+=" ms";
+  }else{
+    var zeroes=(""+newTime).length-((""+newTime/1000).length-1);
+    newTime=""+(newTime/1000);
+    if (zeroes==4){newTime+="."; zeroes--;}
+    for (var i=0;i<zeroes;i++){
+      newTime+="0";
+    }
+    newTime+=" s";
+  }
   
   document.getElementById("runtime_data").innerHTML=newTime;
   document.getElementById("instr_data").innerHTML=iters;
   document.getElementById("mem_data").innerHTML=data.length;
   document.getElementById("op_data").innerHTML=runData.length;
   
+  document.getElementById("console").scrollTop=1e8;
+  
   if (!noPrint){
     addMsg();
     msgElem.innerHTML="run "+(++runs)+" ("+newTime+")";
     msgElem.className="gray";
-    document.getElementById("console").scrollTop=1e8;
     document.body.setAttribute("running",false);
     document.body.setAttribute("playing",false);
+    document.title=(openName || "untitled")+" - emojifuck";
     clearInterval(thread);
   }
 }
@@ -260,18 +311,18 @@ function Brainfuck(){
   }
   
   this.decp=function(){
-    pointer--;
-    if (pointer<0){pointer=data.length-1;}
+    var dl=data.length;
+    pointer=(dl-1+pointer)%dl;
   }
   
   this.putchar=function(){
     var char=String.fromCharCode(data[pointer]);
     if (char=="\n"){addMsg();}
-    else{msgElem.innerHTML+=char;}
+    else if(data[pointer]!=13){msgElem.innerHTML+=char;}
   }
   
   this.getchar=function(){
-    data[pointer]=input.charCodeAt(inpPointer);
+    data[pointer]=(input.charCodeAt(inpPointer) || 0);
     inpPointer++;
   }
   
@@ -292,7 +343,12 @@ function loadDefault(){
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      projects=JSON.parse(this.responseText);
+      var prjs=JSON.parse(this.responseText);
+      for (var i in prjs){
+        if (!projects[i]){
+          projects[i]=prjs[i];
+        }
+      }
     }
   };
   
@@ -309,11 +365,10 @@ function toDataArr(str,showNL){
     }
     for (var n=0;n<8;n++){
       if (keys[n]==str[i].charCodeAt(0)||!showEmoji&&origKeys[n]==str[i]){
-        count--;
+        if (showEmoji){count--;}
         opOut.push({
           op:ops[n],
           pos:count,
-          abspos:parseInt(i),
           opindex:n
         });
         break;
@@ -398,12 +453,21 @@ function toggleLive(){
   live=!live;
   document.body.setAttribute("live",live);
   document.getElementById("toggleLive").innerHTML="simulation mode: "+(live?"on":"off");
+  if (live){
+    document.getElementById("opline").innerHTML="";
+    fillMem();
+  }
 }
 
 function toggleComp(){
   comp=!comp;
   document.body.setAttribute("wrap",comp);
   document.getElementById("toggleComp").innerHTML="compressed: "+(comp?"on":"off");
+}
+
+function toggleScroll(){
+  scroll=!scroll;
+  document.getElementById("toggleScroll").innerHTML="auto scroll: "+(scroll?"on":"off");
 }
 
 function updateUserVars(evt){
@@ -449,19 +513,21 @@ function getRaw(){
 
 function saveData(returnObj){
   var data={
+    name:openName,
     vars:uservars,
     code:infield.value,
     input:document.getElementById("input").value,
     showEmoji:showEmoji,
     live:live,
-    comp:comp
+    comp:comp,
+    scroll:scroll
   };
   localStorage.setItem("userdata",JSON.stringify(data));
   return JSON.parse(JSON.stringify(data));
 }
 
 function loadData(obj){
-  var data=obj.constructor.name=="Event"?JSON.parse(localStorage.getItem("userdata")):obj;
+  var data=!obj||obj.constructor.name=="Event"?JSON.parse(localStorage.getItem("userdata")):obj;
   console.log(data);
   if (data!=null){
     infield.value=data.code;
@@ -473,6 +539,10 @@ function loadData(obj){
     if (data.showEmoji^showEmoji){toggleMode();}
     if (data.live^live){toggleLive();}
     if (data.comp^comp){toggleComp();}
+    if (data.scroll^scroll){toggleScroll();}
+    
+    openName=data.name || null;
+    document.title=(openName || "untitled")+" - emojifuck";
   }
 }
 
@@ -483,6 +553,8 @@ function saveProject(elem){
     elem.innerHTML="save over?";
     return;
   }
+  openName=name;
+  document.title=name+" - emojifuck";
   projects[name]={
     data:saveData(true),
     created:new Date().getTime(),
@@ -495,26 +567,62 @@ function saveProject(elem){
 
 function openProject(elem){
   var name=document.getElementById("fileinput").value;
-  if (!projects[name]){return;}
+  if (!projects[name]){
+    elem=document.querySelector(".file[name*='"+name.toLowerCase()+"']");
+    if (!elem){return}
+    name=elem.getAttribute("true_name");
+  }
   loadData(projects[name].data);
   closeWin(elem);
   document.getElementById("opline").innerHTML="";
   fillMem();
 }
 
+function newProject(elem){
+  if (thread){completeRun();}
+  runs=0;
+  openName=null;
+  document.title="untitled - emojifuck";
+  infield.value="";
+  document.getElementById("input").value="";
+  document.getElementById("console").innerHTML="";
+  document.getElementById("opline").innerHTML="";
+  document.getElementById("runtime_data").innerHTML="N/A";
+  document.getElementById("instr_data").innerHTML="N/A";
+  document.getElementById("mem_data").innerHTML="N/A";
+  document.getElementById("op_data").innerHTML="N/A";
+  fillMem();
+  closeWin(elem);
+}
+
 function genFileList(){
   var container=document.getElementById("files");
   container.innerHTML="";
+  var elems=[];
   for (var name in projects){
     var file=document.createElement("div");
     file.className="file";
-    file.setAttribute("name",name);
+    file.setAttribute("name",name.toLowerCase());
+    file.setAttribute("true_name",name);
     file.innerHTML="<span>"+name+"</span><span>"+projects[name].size+" characters</span><span>"+new Date(projects[name].created).toLocaleString()+"</span>";
-    file.addEventListener("click",function(event){
-      document.getElementById("fileinput").value=event.target.getAttribute("name");
-      searchFiles();
+    elems.push({
+      dom:file,
+      name:name
     });
-    container.appendChild(file);
+  }
+  
+  for (var i=0;i<elems.length;i++){
+    for (var n=i+1;n<elems.length;n++){
+      if (elems[i].name.localeCompare(elems[n].name)>0){
+        var tmpElem=elems[i];
+        elems[i]=elems[n];
+        elems[n]=tmpElem;
+      }
+    }
+  }
+  
+  for (var i in elems){
+    container.appendChild(elems[i].dom);
   }
 }
 
@@ -523,9 +631,10 @@ function openSaveOpen(type){
   var so=document.getElementById("saveopen");
   so.style.display="flex";
   so.setAttribute("type",type);
-  document.getElementById("fileinput").value="";
+  document.getElementById("fileinput").value=type=="save"&&openName?openName:"";
   genFileList();
   searchFiles();
+  document.getElementById("fileinput").focus();
 }
 
 function getParent(elem,cls){
@@ -538,20 +647,20 @@ function getParent(elem,cls){
 
 function searchFiles(){
   var term=document.getElementById("fileinput").value;
-  document.getElementById("search").innerHTML=term?".file[name*="+term+"]{display:flex;}":".file{display:flex;}";
+  document.getElementById("search").innerHTML=term?".file[name*='"+term.toLowerCase()+"']{display:flex;}":".file{display:flex;}";
   document.getElementsByClassName("sobutton")[0].innerHTML="save";
 }
 
 function fillMem(){
   var container=document.getElementById("innermem");
   container.innerHTML="";
-  memlen=16*7;
+  memlen=Math.min(16*7,uservars.maxmem);
   for (var i=0;i<memlen;i++){
     if (i%16==0){
-      addCountSq(Math.floor(i/16));
+      addCountSq(Math.floor(i/16),container);
     }
     var square=document.createElement("div");
-    square.className="memsquare";
+    square.className="memsquare inactive";
     square.innerHTML="0";
     container.appendChild(square);
   }
@@ -560,10 +669,10 @@ function fillMem(){
 
 function hexCellsHigher(){
   var container=document.getElementById("innermem");
-  addCountSq(Math.floor((memlen+1)/16));
+  addCountSq(Math.floor((memlen+1)/16),container);
   for (var i=0;i<16&&memlen+i<uservars.maxmem;i++){
     var square=document.createElement("div");
-    square.className="memsquare";
+    square.className="memsquare inactive";
     square.innerHTML="0";
     container.appendChild(square);
   }
@@ -571,11 +680,83 @@ function hexCellsHigher(){
   memsquares=container.getElementsByClassName("memsquare");
 }
 
-function addCountSq(val){
-  var container=document.getElementById("innermem");
+function addCountSq(val,container){
   var square=document.createElement("div");
   square.className="countsquare";
   square.innerHTML=val;
   container.appendChild(square);
 }
+
+function addCountBar(){
+  var container=document.getElementById("countbar");
+  addCountSq("",container);
+  for (var i=0;i<16;i++){
+    addCountSq(i,container);
+  }
+}
+addCountBar();
 fillMem();
+
+function closeTip(elem){
+  elem.parentElement.style.display="none";
+  setTour(false);
+}
+
+function startTour(){
+  saveData();
+  setTour(true);
+  document.getElementById("tourbubble").style.display="none";
+  document.getElementById("shadowbox").style.display="none";
+  infield.value="";
+  document.getElementById("input").value="";
+  if (!showEmoji){toggleMode();}
+  if (!live){toggleLive();}
+}
+
+function revert(){
+  loadData();
+  setTour(false);
+}
+
+function setTour(bool){
+  document.body.setAttribute("tour",bool);
+  tour=bool;
+}
+
+function addTourInfo(evt){
+  if (tour){
+    var td=getTourData(evt.target);
+    var tb=document.getElementById("tourbubble");
+    var sb=document.getElementById("shadowbox");
+    tb.style.display=td?"block":"none";
+    sb.style.display=td?"block":"none";
+    if (td){
+      var arr=td.split("|");
+      tb.innerHTML="<p><b>"+arr[0]+"</b><br>"+arr[1]+"</p>";
+      var rect=getAnchorElem(evt.target).getBoundingClientRect();
+      var top=window.scrollY+rect.top;
+      tb.style.top=((rect.top+rect.height+tb.offsetHeight+10<window.innerHeight)?(top+rect.height+5):(top-tb.offsetHeight-5))+"px";
+      tb.style.left=rect.left+"px";
+      sb.style.top=top+"px";
+      sb.style.left=rect.left+"px";
+      sb.style.width=rect.width+"px";
+      sb.style.height=rect.height+"px";
+    }
+  }
+}
+
+function getTourData(elem){
+  while(true){
+    var dt=elem.getAttribute("data-tour");
+    if (dt){return dt;}
+    else if (elem.tagName=="BODY"){return false;}
+    elem=elem.parentElement;
+  }
+}
+
+function getAnchorElem(elem){
+  while(true){
+    if (elem.tagName=="DIV"||elem.getAttribute("data-tour")!=null||elem.tagName=="BODY"){return elem;}
+    elem=elem.parentElement;
+  }
+}
