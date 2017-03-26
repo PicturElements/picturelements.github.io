@@ -1,6 +1,7 @@
 {
   "ABC":{
     "data":{
+      "name":"ABC",
       "vars":{
         "maxiter":1000,
         "throttle":20,
@@ -17,6 +18,7 @@
   },
   "String reverser":{
     "data":{
+      "name":"String reverser",
       "vars":{
         "maxiter":1000,
         "throttle":10,
@@ -34,6 +36,7 @@
   },
   "Hello World":{
     "data":{
+      "name":"Hello World",
       "vars":{
         "maxiter":1000,
         "throttle":8,
@@ -51,6 +54,7 @@
   },
   "Sierpinski":{
     "data":{
+      "name":"Sierpinski",
       "vars":{
         "maxiter":1000000,
         "throttle":10,
@@ -68,6 +72,7 @@
   },
   "pyramid5":{
     "data":{
+      "name":"pyramid5",
       "vars":{
         "maxiter":1000000,
         "throttle":50,
@@ -85,6 +90,7 @@
   },
   "Parser":{
     "data":{
+      "name":"Parser",
       "vars":{
         "maxiter":1000000,
         "throttle":10,
@@ -102,6 +108,7 @@
   },
   "Pyramid interactive":{
     "data":{
+      "name":"Pyramid interactive",
       "vars":{
         "maxiter":10000000,
         "throttle":10,
@@ -119,6 +126,7 @@
   },
   "Adder":{
     "data":{
+      "name":"Adder",
       "vars":{
         "maxiter":1000000,
         "throttle":10,
