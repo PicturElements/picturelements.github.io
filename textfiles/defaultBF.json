@@ -6,7 +6,7 @@
         "maxiter":1000,
         "throttle":20,
         "maxmem":1000},
-      "code":"fill cell #0 with 26\n👉😂😂😂😂😂🙌😱👈😂😂😂😂😂👉🙏👈😂\n\nfill cell #1 with 64\n👉👉😂😂😂😂😂😂😂😂🙌😱👈😂😂😂😂😂😂😂😂👉🙏👈👈\n\ndecrement cell #0; increment and print cell #1\n🙌😱👉😂👌👈🙏",
+      "code":"fill cell (hash)0 with 26\n>+++++[-<+++++>]<+\n\nfill cell (hash)1 with 64\n>>++++++++[-<++++++++>]<<\n\ndecrement cell (hash)0; increment and print cell (hash)1\n[->+.<]",
       "input":"",
       "showEmoji":true,
       "live":true,
@@ -24,7 +24,7 @@
         "throttle":10,
         "maxmem":1000
       },
-      "code":"scan characters into cells\n💯🙌👉💯🙏👈\n\ngo back through the cells and print\n🙌👌👈🙏",
+      "code":"scan characters into cells\n,[>,]<\n\ngo back through the cells and print\n[.<]",
       "input":"This is a short sentence.",
       "showEmoji":true,
       "live":true,
@@ -42,7 +42,7 @@
         "throttle":8,
         "maxmem":1000
       },
-      "code":"😂😂😂😂😂😂😂😂🙌👉😂😂😂😂🙌👉😂😂👉😂😂😂👉😂😂😂👉😂👈👈👈👈😱🙏👉😂👉😂👉😱👉👉😂🙌👈🙏👈😱🙏👉👉👌👉😱😱😱👌😂😂😂😂😂😂😂👌👌😂😂😂👌👉👉👌👈😱👌👈👌😂😂😂👌😱😱😱😱😱😱👌😱😱😱😱😱😱😱😱👌👉👉😂👌👉😂😂👌\n",
+      "code":"++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.",
       "input":"",
       "showEmoji":true,
       "live":true,
@@ -78,7 +78,7 @@
         "throttle":50,
         "maxmem":1000
       },
-      "code":"Pyramid5 by PicturElements\n\ngenerate 16 in b2 (b2=block #2)\n👉😂😂😂😂🙌😱👉😂😂😂😂👈🙏👉\n\nduplicate and double b2 to b0 and b1; move to b3\n🙌😱👈😂😂👈😂😂👉👉🙏👉\n\nadd 10 to b1 and b2\n😂😂😂😂😂🙌😱👈😂😂👈😂😂👉👉🙏\n\nresulting blocks: 32 42 10\n                  *  sp \\n\n\nfill b5 with a number; this number will be the height of the pyramid\n👉👉😂😂😂😂😂\n\nmain loop!\n🙌\n\nremove one from b5 and add one to b6\n😱👉😂👈\n\nduplicate the value of b5 to b3&4\n🙌😱👈😂👈😂👉👉🙏👈\n\ncopy back b4 to b5; move to b3\n🙌😱👉😂👈🙏👈\n\nfor each b3 print space\n🙌😱👈👈👈👌👉👉👉🙏\n\nmove to b6\n👉👉👉\n\ncopy b6 to b3&4\n🙌😱👈👈😂👈😂👉👉👉🙏👈👈👈\n\ncopy b3 to b6 and decrement b4\n🙌😱👉👉👉😂👈👈👈🙏👉😱\n\ndouble b4 to b3 and add one\n🙌😱👈😂😂👉🙏👈😂\n\nprint asterisks\n🙌😱👈👈👌👉👉🙏\n\nprint new line\n👈👌👉👉👉\n\n🙏",
+      "code":"Pyramid5 by PicturElements\n\ngenerate 16 in b2 (b2=block (hash)2)\n>++++[->++++<]>\n\nduplicate and double b2 to b0 and b1; move to b3\n[-<++<++>>]>\n\nadd 10 to b1 and b2\n+++++[-<++<++>>]\n\nresulting blocks: 32 42 10\n                  *  sp \\n\n\nfill b5 with a number; this number will be the height of the pyramid\n>>+++++\n\nmain loop!\n[\n\nremove one from b5 and add one to b6\n->+<\n\nduplicate the value of b5 to b3&4\n[-<+<+>>]<\n\ncopy back b4 to b5; move to b3\n[->+<]<\n\nfor each b3 print space\n[-<<<.>>>]\n\nmove to b6\n>>>\n\ncopy b6 to b3&4\n[-<<+<+>>>]<<<\n\ncopy b3 to b6 and decrement b4\n[->>>+<<<]>-\n\ndouble b4 to b3 and add one\n[-<++>]<+\n\nprint asterisks\n[-<<.>>]\n\nprint new line\n<.>>>\n\n]",
       "input":"",
       "showEmoji":true,
       "live":false,
@@ -96,7 +96,7 @@
         "throttle":10,
         "maxmem":1000
       },
-      "code":"Parser by PicturElements\nfunction: reads in input and returns it to the block where it started;\n\t  the next cells are set to zero\n\nlet b0 be a terminator block (0); load first byte\n👉💯\n\nbuild number in blocks b1 to bn by loading byte and subtracting 47;\nthis creates a row of numbers where each digit is increased by 1\nthis is to prevent a 0 from being parsed as a terminator block\n🙌\n\n👉👉😂😂😂😂😂😂😂\n\n🙌😱👈😂😂😂😂😂😂😂👉🙏👈😱😱\n\n🙌😱👈😱👉🙏💯\n\n🙏\n\nadd 1 to block n plus 2; this is the base counter block (bsb); move to last digit\n👉👉😂👈👈👈\n\nconditional: if last digit isn't zero do adding\n🙌\n\nmove to bsb and duplicate to next 2 block\n😱👉👉👉🙌😱👉😂👉😂👈👈🙏\n\ncopy back second duplicate bsb\n👉👉🙌😱👈👈😂👉👉🙏👈👈\n\ndecrement bsb and move to last digit\n🙌😱👈👈👈\n\nadd last digit to next two blocks\n🙌😱👉😂👉😂👈👈🙏\n\ncopy back first duplicate to last digit; move back to bsb\n👉🙌😱👈😂👉🙏👉👉🙏\n\nmultiply bsb by 10\n👉🙌😱👈😂😂😂😂😂😂😂😂😂😂👉🙏\n\nremove last digit and shift cells one step to the left; go back to new last digit\n👈👈👈👈🙌😱🙏👉👉🙌😱👈😂👉🙏👉🙌😱👈😂👉🙏👈👈👈👈\n\n🙏\n\ncleanup\n👉👉👉🙌😱🙏👈🙌😱👈👈😂👉👉🙏👈👈\n\nPrint output for keks\n👌",
+      "code":"Parser by PicturElements\nfunction: reads in input and returns it to the block where it started;\n\t  the next cells are set to zero\n\nlet b0 be a terminator block (0); load first byte\n>,\n\nbuild number in blocks b1 to bn by loading byte and subtracting 47;\nthis creates a row of numbers where each digit is increased by 1\nthis is to prevent a 0 from being parsed as a terminator block\n[\n\n>>+++++++\n\n[-<+++++++>]<--\n\n[-<->],\n\n]\n\nadd 1 to block n plus 2; this is the base counter block (bsb); move to last digit\n>>+<<<\n\nconditional: if last digit isn't zero do adding\n[\n\nmove to bsb and duplicate to next 2 block\n->>>[->+>+<<]\n\ncopy back second duplicate bsb\n>>[-<<+>>]<<\n\ndecrement bsb and move to last digit\n[-<<<\n\nadd last digit to next two blocks\n[->+>+<<]\n\ncopy back first duplicate to last digit; move back to bsb\n>[-<+>]>>]\n\nmultiply bsb by 10\n>[-<++++++++++>]\n\nremove last digit and shift cells one step to the left; go back to new last digit\n<<<<[-]>>[-<+>]>[-<+>]<<<<\n\n]\n\ncleanup\n>>>[-]<[-<<+>>]<<\n\nPrint output for keks\n.",
       "input":"65",
       "showEmoji":true,
       "live":false,
@@ -104,7 +104,7 @@
       "scroll":true
     },
     "created":1490459131629,
-    "size":1001
+    "size":1026
   },
   "Pyramid interactive":{
     "data":{
@@ -114,7 +114,7 @@
         "throttle":10,
         "maxmem":1000
       },
-      "code":"Pyramid Interactive by PicturElements\n\nHOW TO USE:\nEnter a number between 0 and 255 in the input field and click run!\n\nparse input and load to block #5\nto see how this code works load the \"Parser\" program\n👉👉👉👉👉👉💯🙌👉👉😂😂😂😂😂😂😂🙌😱👈😂😂😂😂😂😂😂👉🙏👈😱😱🙌😱👈😱👉🙏💯🙏👉👉😂👈👈👈🙌😱👉👉👉🙌😱👉😂👉😂👈👈🙏👉👉🙌😱👈👈😂👉👉🙏👈👈🙌😱👈👈👈🙌😱👉😂👉😂👈👈🙏👉🙌😱👈😂👉🙏👉👉🙏👉🙌😱👈😂😂😂😂😂😂😂😂😂😂👉🙏👈👈👈👈🙌😱🙏👉👉🙌😱👈😂👉🙏👉🙌😱👈😂👉🙏👈👈👈👈🙏👉👉👉🙌😱🙏👈🙌😱👈👈😂👉👉🙏👈👈👈👈👈👈\n\ngenerate 16 in b2 (b2=block #2)\n😂😂😂😂🙌😱👉😂😂😂😂👈🙏👉\n\nduplicate and double b2 to b0 and b1; move to b3\n🙌😱👈😂😂👈😂😂👉👉🙏👉\n\nadd 10 to b1 and b2\n😂😂😂😂😂🙌😱👈😂😂👈😂😂👉👉🙏\n\nresulting blocks: 32 42 10\n                  *  sp \\n\n\ngoto b5 and; this number will be the height of the pyramid\n👉👉\n\nmain loop!\n🙌\n\nremove one from b5 and add one to b6\n😱👉😂👈\n\nduplicate the value of b5 to b3&4\n🙌😱👈😂👈😂👉👉🙏👈\n\ncopy back b4 to b5; move to b3\n🙌😱👉😂👈🙏👈\n\nfor each b3 print space\n🙌😱👈👈👈👌👉👉👉🙏\n\nmove to b6\n👉👉👉\n\ncopy b6 to b3&4\n🙌😱👈👈😂👈😂👉👉👉🙏👈👈👈\n\ncopy b3 to b6 and decrement b4\n🙌😱👉👉👉😂👈👈👈🙏👉😱\n\ndouble b4 to b3 and add one\n🙌😱👈😂😂👉🙏👈😂\n\nprint asterisks\n🙌😱👈👈👌👉👉🙏\n\nprint new line\n👈👌👉👉👉\n\n🙏",
+      "code":"Pyramid Interactive by PicturElements\n\nHOW TO USE:\nEnter a number between 0 and 255 in the input field and click run!\n\nparse input and load to block (hash)5\nto see how this code works load the \"Parser\" program\n>>>>>>,[>>+++++++[-<+++++++>]<--[-<->],]>>+<<<[->>>[->+>+<<]>>[-<<+>>]<<[-<<<[->+>+<<]>[-<+>]>>]>[-<++++++++++>]<<<<[-]>>[-<+>]>[-<+>]<<<<]>>>[-]<[-<<+>>]<<<<<<\n\ngenerate 16 in b2 (b2=block (hash)2)\n++++[->++++<]>\n\nduplicate and double b2 to b0 and b1; move to b3\n[-<++<++>>]>\n\nadd 10 to b1 and b2\n+++++[-<++<++>>]\n\nresulting blocks: 32 42 10\n                  *  sp \\n\n\ngoto b5 and; this number will be the height of the pyramid\n>>\n\nmain loop!\n[\n\nremove one from b5 and add one to b6\n->+<\n\nduplicate the value of b5 to b3&4\n[-<+<+>>]<\n\ncopy back b4 to b5; move to b3\n[->+<]<\n\nfor each b3 print space\n[-<<<.>>>]\n\nmove to b6\n>>>\n\ncopy b6 to b3&4\n[-<<+<+>>>]<<<\n\ncopy b3 to b6 and decrement b4\n[->>>+<<<]>-\n\ndouble b4 to b3 and add one\n[-<++>]<+\n\nprint asterisks\n[-<<.>>]\n\nprint new line\n<.>>>\n\n]",
       "input":"10",
       "showEmoji":true,
       "live":false,
@@ -132,7 +132,7 @@
         "throttle":10,
         "maxmem":1000
       },
-      "code":"Adder by PicturElements\nFunction: reads input as an addition expression and returns the sum\n\t  to the block where the pointer started off; an infinite number\n\t  of terms can be added although the maximum value of each term \n\t  must be less than 256 and the result will be the the real\n\t  answer mod 256\n\n########################################################################\n\nlet b0 and b1 be terminator blocks (0) for the addition loop and\nnumber parsing loop respectively; load first byte\n👉👉💯\n\nBuild number in blocks b1 to bn by loading byte and subtracting 43;\nThis creates a row of numbers where each digit is increased by 5\nThis is to prevent a 0 from being parsed as a terminator block but\nalso gives plus signs value 0 which terminates the number parsing\nloop so that the addition loop can be passed on\n🙌\n\n👉👉😂😂😂😂😂\n\n🙌😱👈😂😂😂😂😂😂😂😂😂👉🙏👈😱😱\n\n🙌😱👈😱👉🙏💯\n\n🙏\n\nadd 1 to block n plus 2; this is the base counter block (bsb); move to last digit\n👉👉😂👈👈👈\n\naddition loop\n🙌\n\nconditional: if last digit isn't zero do adding\n🙌\n\nmove to bsb and duplicate to next 2 block\n😱😱😱😱😱👉👉👉🙌😱👉😂👉😂👈👈🙏\n\ncopy back second duplicate bsb\n👉👉🙌😱👈👈😂👉👉🙏👈👈\n\ndecrement bsb and move to last digit\n🙌😱👈👈👈\n\nadd last digit to next two blocks\n🙌😱👉😂👉😂👈👈🙏\n\ncopy back first duplicate to last digit; move back to bsb\n👉🙌😱👈😂👉🙏👉👉🙏\n\nmultiply bsb by 10\n👉🙌😱👈😂😂😂😂😂😂😂😂😂😂👉🙏\n\nremove last digit and shift cells one step to the left; go back to new last digit\n👈👈👈👈🙌😱🙏👉👉🙌😱👈😂👉🙏👉🙌😱👈😂👉🙏👈👈👈👈\n\n🙏\n\ncompress and clean up\n👉👉👉🙌😱🙏👈🙌😱👈😂👉🙏😂👈👈👈\n\n🙏\n\nclean up and move result from b2 to b0\n👉👉👉😱👈🙌😱👈👈😂👉👉🙏👈👈\n\nPrint output for keks\n👌",
+      "code":"Adder by PicturElements\nFunction: reads input as an addition expression and returns the sum\n\t  to the block where the pointer started off; an infinite number\n\t  of terms can be added although the maximum value of each term \n\t  must be less than 256 and the result will be the the real\n\t  answer mod 256\n\n(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)(hash)\n\nlet b0 and b1 be terminator blocks (0) for the addition loop and\nnumber parsing loop respectively; load first byte\n>>,\n\nBuild number in blocks b1 to bn by loading byte and subtracting 43;\nThis creates a row of numbers where each digit is increased by 5\nThis is to prevent a 0 from being parsed as a terminator block but\nalso gives plus signs value 0 which terminates the number parsing\nloop so that the addition loop can be passed on\n[\n\n>>+++++\n\n[-<+++++++++>]<--\n\n[-<->],\n\n]\n\nadd 1 to block n plus 2; this is the base counter block (bsb); move to last digit\n>>+<<<\n\naddition loop\n[\n\nconditional: if last digit isn't zero do adding\n[\n\nmove to bsb and duplicate to next 2 block\n----->>>[->+>+<<]\n\ncopy back second duplicate bsb\n>>[-<<+>>]<<\n\ndecrement bsb and move to last digit\n[-<<<\n\nadd last digit to next two blocks\n[->+>+<<]\n\ncopy back first duplicate to last digit; move back to bsb\n>[-<+>]>>]\n\nmultiply bsb by 10\n>[-<++++++++++>]\n\nremove last digit and shift cells one step to the left; go back to new last digit\n<<<<[-]>>[-<+>]>[-<+>]<<<<\n\n]\n\ncompress and clean up\n>>>[-]<[-<+>]+<<<\n\n]\n\nclean up and move result from b2 to b0\n>>>-<[-<<+>>]<<\n\nPrint output for keks\n.",
       "input":"60+5",
       "showEmoji":true,
       "live":true,
