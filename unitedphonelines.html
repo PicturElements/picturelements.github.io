@@ -1,0 +1,210 @@
+<html>
+  <head>
+    <title>United Phone lines - PicturElements</title>
+    <meta name="description" content="Yet another ridiculous phone number input system.">
+    <link rel="icon" href="pelement.png">
+    <style>
+      body{
+        display:flex;
+        font-size:1vw;
+        align-items:center;
+        justify-content:center;
+        flex-direction:column;
+        min-height:100vh;
+        margin:0;
+        -webkit-user-select:none;
+        -moz-user-select:none;
+        -ms-user-select:none;
+        font-family:monospace;
+        background:#2172ba;
+      }
+
+      p{
+        text-align:center;
+        color:white;
+        margin-bottom:2em;
+      }
+
+      #passengertray{
+        display:flex;
+        padding:0.5em 1em;
+        border-bottom:0.2em solid white;
+      }
+
+      .passengerbox{
+        display:flex;
+        position:relative;
+        font-size:3em;
+        min-height:1.4em;
+        margin:0 0.1em;
+        width:1.4em;
+        transition:width 200ms, margin 200ms;
+      }
+
+      .passengerbox.empty {
+        width:0;
+        margin:0;
+      }
+
+      .passenger{
+        display:block;
+        position:absolute;
+        width:1.4em;
+        height:1.4em;
+        background-color:white;
+        text-align:center;
+        line-height:1.4em;
+        cursor:pointer;
+      }
+
+      #buttonwrapper{
+        display:flex;
+        margin-top:2em;
+      }
+
+      .button{
+        position:relative;
+        float:left;
+        font-size:120%;
+        padding:0.5em 1em;
+        background-color:white;
+        cursor:pointer;
+        margin:0 0.5em;
+      }
+
+      .button:hover, .passenger:hover{
+        background:#eee;
+      }
+
+      a{
+        color:white;
+        font-weight:bold;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Thank you for choosing United Airlines!
+      <br>
+      Please enter your phone number by re-accommodating the boxes below:
+    </p>
+    <div id="passengertray"></div>
+    <div id="buttonwrapper">
+      <div class="button" onclick="genBoxes()">Restart</div>
+      <div class="button" onclick="book()">Book</div>
+    </div>
+    <script>
+      var physBoxes=[];
+      var activeBox=null,moved=false;
+
+      document.body.addEventListener("mousemove",function(event){move(event);});
+      document.body.addEventListener("touchmove",function(event){move(event);});
+      document.body.addEventListener("mouseup",up);
+      document.body.addEventListener("touchend",up);
+
+      function move(evt){
+        if (activeBox){
+          var ab=activeBox;
+          var dom=ab.dom;
+          var cX=evt.clientX || evt.touches[0].clientX;
+          var cY=evt.clientY || evt.touches[0].clientY;
+          ab.dX=((cX+ab.offsX)-ab.x+ab.dX)/2;
+          ab.dY=((cY+ab.offsY)-ab.y+ab.dY)/2;
+          ab.x=(cX+ab.offsX);
+          ab.y=(cY+ab.offsY);
+          dom.style.left=ab.x+"px";
+          dom.style.top=ab.y+"px";
+          moved=true;
+        }
+      }
+
+      function up(evt){
+        if (!activeBox){return;}
+        var dom=activeBox.dom;
+        if (dom.innerHTML=="9"){
+          dom.parentElement.classList.add("empty");
+        }
+        if (!moved){
+          activeBox.dX=Math.random()*30-15;
+          activeBox.dY=Math.random()*-20;
+        }
+        activeBox.active=false;
+        activeBox=null;
+      }
+
+      function genBoxes(){
+        var parent=document.getElementById("passengertray");
+        parent.innerHTML="";
+        for (var i=0;i<14;i++){
+          var box=document.createElement("div");
+          box.className="passengerbox";
+          for (var n=9;n>=0;n--){
+            var passenger=document.createElement("div");
+            passenger.className="passenger";
+            passenger.innerHTML=n;
+            box.appendChild(passenger);
+          }
+          box.addEventListener("mousedown",function(event){pickup(event);});
+          box.addEventListener("touchstart",function(event){pickup(event);});
+          parent.appendChild(box);
+        }
+        var passenger=document.createElement("div");
+        passenger.className="passenger";
+        passenger.innerHTML="+";
+        document.getElementsByClassName("passengerbox")[0].appendChild(passenger);
+      }
+
+      function createPhysBox(elem,x,y){
+        var rect=elem.getBoundingClientRect();
+        var box={
+          dom:elem,
+          x:rect.left,
+          y:rect.top,
+          offsX:rect.left-x,
+          offsY:rect.top-y,
+          dX:0,
+          dY:0,
+          active:true
+        }
+        physBoxes.push(box);
+        activeBox=box;
+      }
+
+      function pickup(evt){
+        var et=evt.target || evt.touches[0].target;
+        et.style.position="fixed";
+        et.style.zIndex="10000";
+        et.style.background="#ccc";
+        et.style.color="#333";
+        et.style.pointerEvents="none";
+        createPhysBox(et,(evt.clientX || evt.touches[0].clientX),(evt.clientY || evt.touches[0].clientY));
+        moved=false;
+      }
+
+      function physics(){
+        for (var i in physBoxes){
+          if (!physBoxes[i].active){
+            var box=physBoxes[i];
+            box.dY++;
+            box.x+=box.dX;
+            box.y+=box.dY;
+            box.dom.style.left=box.x+"px";
+            box.dom.style.top=box.y+"px";
+            if (box.y>window.innerHeight+200){
+              box.dom.style.display="none";
+              physBoxes.splice(i,1);
+              i--;
+            }
+          }
+        }
+      }
+
+      function book(){
+        document.body.innerHTML="<p>We're fully booked, but don't worry!<br>We recommend you watch these informative<br>videos for the best travelling experience:<br><br><a href='http://www.imdb.com/title/tt0137523/' target='_blank'>Fight Club</a><br><a href='http://www.imdb.com/title/tt0087538/' target='_blank'>Karate Kid</a><br><a href='http://www.imdb.com/title/tt0075148/' target='_blank'>Rocky</a></p>";
+      }
+
+      setInterval(physics,20);
+      genBoxes();
+    </script>
+  </body>
+</html>
