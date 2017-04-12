@@ -1,0 +1,3 @@
+Eh...
+
+Right, so this is a place where I story shit I write. It's not organized. It's not pretty. But there's a lot of fun things to explore!
