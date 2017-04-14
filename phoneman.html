@@ -4,6 +4,82 @@
     <meta name="description" content="Pretty much a fully functional version of Pac-man, because inputting phone numebrs the ordinary way is too plebeian.">
     <link rel="icon" href="pelement.png">
     <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+    <style>
+      body{
+        display:flex;
+        margin:0;
+        background-color:#111;
+        justify-content:center;
+        align-items:center;
+        flex-direction:column;
+        min-height:100vh;
+        color:white;
+        font-size:20px;
+        font-family:VT323,monospace;
+      }
+
+      p{
+        text-align:center;
+      }
+
+      #canvaswrapper{
+        display:flex;
+        position:relative;
+        min-width:0;
+        overflow:hidden;
+      }
+
+      canvas{
+        display:block;
+        position:absolute;
+        width:100%;
+        height:100%;
+      }
+
+      #buttonwrapper{
+        display:flex;
+        margin:10px;
+      }
+
+      .button{
+        border:2px solid blue;
+        padding:0.25em 0.5em;
+        border-radius:2px;
+        margin:0 10px;
+        cursor:pointer;
+        transition:background 200ms;
+      }
+
+      .button:hover{
+        background:blue;
+      }
+
+      #digit{
+        animation:blink steps(1,end) 1s infinite;
+      }
+
+      #paused_shadow{
+        display:flex;
+        background-color:rgba(0,0,0,0.7);
+        z-index:1000;
+        width:100%;
+        align-items:center;
+        justify-content:center;
+      }
+
+      #paused_shadow div{
+         text-align:center; 
+      }
+
+      #submit_msg{
+        display:none;
+      }
+
+      @keyframes blink{
+        50%{opacity:0.5;}
+        100%{opacity:1;}
+      }
+    </style>
   </head>
   <body>
     <audio id="error" src="https://picturelements.github.io/media/windows_sounds/error.wav"></audio>
