@@ -135,7 +135,7 @@
         cellData[activeCell]++;
         cells[activeCell].setAttribute("lvl",(cellData[activeCell]<4?cellData[activeCell]:"lots"));
         if (!thread){
-          countTime(true);
+          document.getElementById("timebar").innerHTML=(activeCell%35<28?("Day "+(activeCell+1)):"Vaction!")+" - "+(time<10?"0"+time:time)+":00 - Number: "+parseDigits();
         }
       }
 
