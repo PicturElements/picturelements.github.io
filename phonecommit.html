@@ -203,6 +203,8 @@
       }
 
       function restart(){
+        activeCell=0;
+        time=0;
         var val=document.getElementById("input").value;
         if (!isNaN(val)){
           val=parseInt(val);
