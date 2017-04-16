@@ -6,51 +6,57 @@
     <style>
       body{
         margin:0;
+        font-size:12px;
+        height:100vh;
+      }
+
+      #content{
+        display:flex;
+        height:100%;
+        flex-direction:column;
       }
 
       #header,#footer{
         -ms-user-select:none;
         -moz-user-select:none;
         -webkit-user-select:none;
-        display:block;
-        position:fixed;
+        display:flex;
+        position:relative;
         width:100%;
-        height:2vw;
+        height:2em;
         background-color:#ddd;
         font-family:Roboto;
-        font-size:1vw;
         cursor:default;
         box-sizing:border-box;
-        border-bottom:0.2vw solid #d5d5d5;
+        border-bottom:0.2em solid #d5d5d5;
       }
 
       #footer{
         display:none;
         bottom:0;
         border-bottom:none;
-        border-top:0.2vw solid #d5d5d5;
+        border-top:0.2em solid #d5d5d5;
       }
 
       #databar{
         display:block;
         position:absolute;
-        width:25vw;
-        height:2vw;
+        width:25em;
+        height:100%;
         right:0;
-        border-left:0.1vw solid #aaa;
-        line-height:1.9vw;
-        font-size:0.95vw;
-        text-indent:1vw;
+        border-left:0.1em solid #aaa;
+        line-height:2em;
+        text-indent:1em;
       }
 
       .headeritem{
         display:block;
         position:relative;
         float:left;
-        height:2vw;
-        line-height:2.1vw;
-        padding-left:0.5vw;
-        padding-right:0.5vw;
+        height:2em;
+        line-height:2.1em;
+        padding-left:0.5em;
+        padding-right:0.5em;
       }
 
       .headeritem:hover{
@@ -60,11 +66,11 @@
       #dropdown{
         display:none;
         position:fixed;
-        width:15vw;
-        min-height:2vw;
-        top:2vw;
+        width:15em;
+        min-height:2em;
+        top:2em;
         background-color:#eaeaea;
-        border:0.1vw solid #999;
+        border:0.1em solid #999;
         z-index:10;
         overflow:hidden;
       }
@@ -75,19 +81,18 @@
         -webkit-user-select:none;
         display:block;
         position:relative;
-        width:13vw;
-        height:2vw;
-        left:2.1vw;
+        width:13em;
+        height:2em;
+        left:2.1em;
         font-family:Roboto;
-        font-size:1vw;
-        line-height:2vw;
-        text-indent:0.5vw;
-        border-left:0.1vw solid #ccc;
+        line-height:2em;
+        text-indent:0.5em;
+        border-left:0.1em solid #ccc;
         cursor:default;
       }
 
       .bottomline{
-        border-bottom:0.1vw solid #ccc;
+        border-bottom:0.1em solid #ccc;
       }
 
       .dropdownitem:hover{
@@ -97,15 +102,14 @@
       .checkmark{
         display:block;
         position:absolute;
-        width:1.6vw;
-        height:1.6vw;
-        top:0.2vw;
-        margin-left:-1.9vw;
+        width:1.6em;
+        height:1.6em;
+        top:0.2em;
+        margin-left:-1.9em;
         background-color:#9bc4f6;
-        outline:0.1vw solid #3684e5;
-        font-size:1.2vw;
-        line-height:1.7vw;
-        text-indent:0.4vw;
+        outline:0.1em solid #3684e5;
+        line-height:1.7em;
+        text-indent:0.4em;
         pointer-events:none;
       }
 
@@ -114,17 +118,16 @@
       }
 
       #editarea{
-        display:block;
-        position:fixed;
+        display:flex;
+        position:relative;
         width:100%;
-        height:calc(100% - 2vw);
-        top:2vw;
         outline:none;
-        font-size:1.5vw;
-        font-family:monospace;
+        font-family:Consolas,monospace;
+        font-size:12pt;
         resize:none;
-        border:0.1vw solid #3684e5;
+        border:1px solid #3684e5;
         box-sizing:border-box;
+        flex-grow:1;
       }
 
       #editarea[wrap="soft"]{
@@ -136,15 +139,15 @@
       /*#editinner{
         display:block;
         position:absolute;
-        width:97.5vw;
-        min-height:calc(100% - 0.5vw);
-        left:0.5vw;
-        top:0.5vw;
+        width:97.5em;
+        min-height:calc(100% - 0.5em);
+        left:0.5em;
+        top:0.5em;
         outline:none;
       }
 
       #editinner{
-        font-size:1.4vw;
+        font-size:1.4em;
         font-family:monospace;
       }
 
@@ -157,6 +160,7 @@
       #shade{
         display:none;
         position:fixed;
+        top:0;
         width:100%;
         height:100%;
         background-color:black;
@@ -168,10 +172,10 @@
       #prompt{
         display:none;
         position:fixed;
-        min-width:10vw;
-        min-height:7vw;
+        min-width:10em;
+        min-height:7em;
         background-color:#eee;
-        top:10vw;
+        top:10em;
         left:50%;
         overflow:hidden;
         font-family:Roboto,sans-serif;
@@ -184,7 +188,7 @@
         display:block;
         position:relative;
         width:100%;
-        height:2.5vw;
+        height:2.5em;
         background-color:#ccc;
         -webkit-user-select:none;
         -moz-user-select:none;
@@ -194,30 +198,29 @@
       #prompttitle{
         display: block;
         position: absolute;
-        font-size: 1.2vw;
-        height: 2.5vw;
-        line-height: 2.5vw;
-        text-indent: 0.7vw;
+        height: 2.5em;
+        line-height: 2.5em;
+        text-indent: 0.7em;
       }
 
-      #close{
-        display:block;
-        position:absolute;
-        width:2.5vw;
-        height:2.5vw;
-        right:0;
-        background-color:#900;
-        color:white;
-        font-size:1.5vw;
-        line-height:2.5vw;
-        text-align:center;
+      #close {
+        display: block;
+        position: absolute;
+        width: 1.25em;
+        height: 1.25em;
+        right: 0;
+        background-color: #900;
+        color: white;
+        font-size: 200%;
+        line-height: 1.25em;
+        text-align: center;
       }
 
       #promptcontent{
         display:block;
         position:relative;
-        min-width:10vw;
-        min-height:5vw;
+        min-width:10em;
+        min-height:5em;
         overflow:hidden;
       }
 
@@ -228,36 +231,34 @@
         left:5%;
         text-align:center;
         margin:0;
-        margin-bottom:0.5vw;
-        font-size:1.2vw;
+        margin-bottom:0.5em;
       }
 
       .innerprompt{
         display:block;
         position:relative;
-        width:26vw;
+        width:26em;
       }
 
-      #buttongroup{
+      .buttongroup{
         display:flex;
         position:relative;
-        margin-top:0.5vw;
-        margin-bottom:0.5vw;
-        left:0.5vw;
-        width:25.5vw
+        margin-top:0.5em;
+        margin-bottom:0.5em;
+        left:0.5em;
+        width:25.5em
       }
 
       button {
         display: flex;
         position: relative;
-        font-size: 1.1vw;
-        padding: 0.25vw 0 0.25vw 0;
+        padding: 0.25em 0 0.25em 0;
         background-color: #bbb;
         color: #333;
         border: none;
         outline: none;
         cursor: pointer;
-        margin-right: 0.5vw;
+        margin-right: 0.5em;
         flex-grow: 1;
         flex-basis: 50px;
         justify-content: center;
@@ -276,31 +277,30 @@
         background-color:#ccc;
       }
 
-      input{
-        display:block;
-        position:relative;
-        left:0.5vw;
-        top:0.5vw;
-        width:25vw;
-        height:2vw;
-        font-size:1.2vw;
-        margin-bottom:1vw;
-        box-sizing:border-box;
-        outline:none;
+      input {
+        display: block;
+        position: relative;
+        left: 0.5em;
+        top: 0.5em;
+        width: 22.4em;
+        height: 2em;
+        text-indent: 0.5em;
+        margin-bottom: 1em;
+        box-sizing: border-box;
+        outline: none;
       }
 
       .tag {
-        margin: 0.5vw 0 -0.5vw 0.5vw;
-        font-size: 1vw;
+        margin: 0.5em 0 -0.5em 0.5em;
       }
 
       #namebox{
         display:block;
         position:relative;
-        left:0.5vw;
-        width:25vw;
-        min-height:2vw;
-        max-height:11vw;
+        left:0.5em;
+        width:25em;
+        min-height:2em;
+        max-height:11em;
         background-color:white;
         overflow-x:hidden;
         overflow-y:auto;
@@ -311,10 +311,9 @@
         position:relative;
         float:left;
         width:100%;
-        height:2vw;
-        font-size:1vw;
-        line-height:2vw;
-        text-indent:0.5vw;
+        height:2em;
+        line-height:2em;
+        text-indent:0.5em;
         background-color:#ddd;
       }
 
@@ -328,17 +327,21 @@
 
       .nameinfo{
         float:right;
-        margin-right:0.5vw;
+        margin-right:0.5em;
       }
 
-      #left{
+      .left{
         display:block;
-        font-size:1vw;
         text-align:left !important;
       }
 
       .hidden{
         display:none !important;
+      }
+
+      select {
+        width: 22.4em;
+        margin: 0.5em 0 0 0.5em;
       }
 
       @keyframes open{
@@ -360,19 +363,11 @@
       }
 
       @keyframes fade{
-        to{opacity:0.7;}
+        to{opacity:0.5;}
       }
     </style>
   </head>
-    <title id="title">untitled</title>
   <body onclick="document.getElementById('dropdown').style.display='none'">
-    <div id="header">
-      <div class="headeritem" onclick=showDropdown(this,event)>File</div>
-      <div class="headeritem" onclick=showDropdown(this,event)>Edit</div>
-      <div class="headeritem" onclick=showDropdown(this,event)>Format</div>
-      <div class="headeritem" onclick=showDropdown(this,event)>View</div>
-      <div class="headeritem" onclick=showDropdown(this,event)>Help</div>
-    </div>
     <div id="dropdown">
       <div class="dropdownitem" onclick="newDoc()">New</div>
       <div class="dropdownitem" onclick="openD()">Open</div>
@@ -382,7 +377,7 @@
       <div class="dropdownitem bottomline" onclick="openPrompt('custom','Ctrl-Z is easier, dude.','Undo')">Undo</div>
       <div class="dropdownitem" onclick="cutText()">Cut</div>
       <div class="dropdownitem" onclick="copyText()">Copy</div>
-      <div class="dropdownitem" onclick="openPrompt('custom','I\'ve not gotten paste working yet. Use Ctrl-V instead while I sort out the bugs!','Paste')">Paste</div>
+      <div class="dropdownitem" onclick="openPrompt('custom','JavaScript is shit with paste events. Something about fancy pancy security.','Paste')">Paste</div>
       <div class="dropdownitem bottomline" onclick="deleteText()">Delete</div>
       <div class="dropdownitem hidden">Search</div>
       <div class="dropdownitem hidden">Search Next</div>
@@ -390,482 +385,451 @@
       <div class="dropdownitem bottomline" onclick="openPrompt('custom','One does not simply walk into Mordor.','Go to')">Go To</div>
       <div class="dropdownitem" onclick="selectAll()">Select All</div>
       <div class="dropdownitem" onclick="toggleWrap()"><span class="checkmark" checked="false">✔</span>Word Wrap</div>
-      <div class="dropdownitem">Font...</div>
+      <div class="dropdownitem" onclick="openPrompt('font',null,'Font')">Font...</div>
       <div class="dropdownitem" onclick="toggleBar()"><span class="checkmark" checked="false">✔</span>Status Bar</div>
       <div class="dropdownitem bottomline" onclick="openPrompt('custom','HELP!','HELP!')">Show Help</div>
       <div class="dropdownitem" onclick="openPrompt('custom',about,'About PeNote')">About PeNote</div>
     </div>
-    <textarea id="editarea" wrap="soft" spellcheck="false"></textarea>
+    <div id="content">
+      <div id="header">
+        <div class="headeritem" onclick=showDropdown(this,event)>File</div>
+        <div class="headeritem" onclick=showDropdown(this,event)>Edit</div>
+        <div class="headeritem" onclick=showDropdown(this,event)>Format</div>
+        <div class="headeritem" onclick=showDropdown(this,event)>View</div>
+        <div class="headeritem" onclick=showDropdown(this,event)>Help</div>
+      </div>
+      <textarea id="editarea" wrap="soft" spellcheck="false"></textarea>
+      <div id="footer">
+        <div id="databar">Ln 1, Col 1</div>
+      </div>
+    </div>
     <div id="shade"></div>
     <div id="prompt">
       <div id="actionbar">
         <div id="prompttitle"></div>
-        <div id="close" onclick=relayClose()>X</div>
+        <div id="close" onclick=relayClose()>×</div>
       </div>
       <div id="promptcontent"></div>
-    </div>
-    <div id="footer">
-      <div id="databar">Ln 1, Col 1</div>
     </div>
     <div style="display:none">
       <div id="save" class="innerprompt">
         <p id="prompttext" style="margin-top:1vw; margin-bottom:1vw">Save untitled?</p>
-        <div id="buttongroup">
+        <div class="buttongroup">
           <button onclick=save()>Save</button>
           <button onclick=execBuffer()>Don't save</button>
           <button onclick=relayClose()>Cancel</button>
         </div>
       </div>
       <div id="saveas" class="innerprompt">
-        <input id="nameinput" placeholder="Name here" onkeyup=checkName()></input>
+        <input id="nameinput" placeholder="Name here" onkeyup=checkName()>
         <p id="prompttext" style="margin-top:0.8vw; color:#a00;">Name cannot be blank.</p>
         <div id="namebox"></div>
-        <div id="buttongroup">
+        <div class="buttongroup">
           <button id="savebtn" active="false" onclick=relaySave()>Save</button>
           <button onclick=execBuffer()>Don't save</button>
           <button onclick=relayClose()>Cancel</button>
         </div>
       </div>
       <div id="open" class="innerprompt">
-        <input id="nameinput" placeholder="Name here" onkeyup=checkName2()></input>
+        <input id="nameinput" placeholder="Name here" onkeyup=checkName2()>
         <div id="namebox"></div>
-        <div id="buttongroup">
+        <div class="buttongroup">
           <button id="savebtn" active="false" onclick=openDoc()>Open</button>
           <button onclick=relayClose()>Cancel</button>
         </div>
       </div>
       <div id="replace" class="innerprompt">
         <p class="tag">Search for:</p>
-        <input></input>
+        <input>
         <p class="tag">Replace with:</p>
-        <input></input>
-        <div id="buttongroup">
+        <input>
+        <div class="buttongroup">
           <button onclick=replace()>Replace all</button>
           <button onclick=relayClose()>Cancel</button>
         </div>
       </div>
       <div id="custom" class="innerprompt">
         <p id="prompttext" style="margin-top:1.5vw; margin-bottom:1.5vw"></p>
-        <div id="buttongroup">
+        <div class="buttongroup">
+          <button onclick=relayClose()>Close</button>
+        </div>
+      </div>
+      <div id="font" class="innerprompt">
+        <select id="font_select"></select>
+        <select id="size_select"></select>
+        <select id="weight_select">
+          <option style="font-style:normal">normal</option>
+          <option style="font-style:italic">italic</option>
+          <option style="font-weight:bold">bold</option>
+          <option style="font-weight:bold; font-style:italic">bold italic</option>
+        </select>
+        <div class="buttongroup">
+          <button onclick=setFont()>Set</button>
           <button onclick=relayClose()>Close</button>
         </div>
       </div>
     </div>
     <script>
-      var cutoff=[0,5,15,17,18,20];
-      var sS=0,sE=0;
-      var title="";
-      var lastSave="",bufferAction=null;
-      var names=[],namesElements=[];
-      var nms=localStorage.getItem("names");
-      if (nms!=null){names=nms.split(',');}
-      var wrap=false,bar=false,movable=false;
-      var about="<span id='left'>PicturElements Incorporated<br>Version 1.0 (Build 1337)<br>© 2016 PicturElements - pretty much no rights reserved<br><br>Any similarities with Microsoft Notepad (Running on Windows 8.1, build 9600) are purely coincidental.</span>";
-      if (localStorage.getItem("wrap")=="true"){toggleWrap();}
-      if (localStorage.getItem("bar")=="true"){toggleBar();}
-      var dX=0,dY=0,prevX=0,prevY=0;
-      var wait=0;
+      body{
+        margin:0;
+        font-size:12px;
+        height:100vh;
+      }
 
-      document.getElementById("actionbar").addEventListener("mousedown",function(event){movable=true; prevX=event.clientX; prevY=event.clientY;})
-      document.body.addEventListener("mouseup",function(){movable=false;})
-      document.body.addEventListener("mousemove",function(event){movePrompt(event);});
-      document.getElementById("editarea").addEventListener("keydown",function(event){
-        if (event.keyCode==9){
-          var elem=document.getElementById("editarea");
-          var str=elem.value,tmpStr="";
-          var selStart=elem.selectionStart,selEnd=elem.selectionEnd;
-          for (var i=0;i<str.length;i++){
-            if (i==selStart||(i==0&&selStart==0&&selEnd==0)){tmpStr+="    ";}
-            if (i<selStart||i>=selEnd){
-              tmpStr+=str[i];
-            }
-          }
-          if (selStart==selEnd&&selEnd==str.length){tmpStr+="    ";}
-          elem.value=tmpStr;
-          elem.selectionEnd=selStart+4;
-          event.preventDefault();
+      #content{
+        display:flex;
+        height:100%;
+        flex-direction:column;
+      }
+
+      #header,#footer{
+        -ms-user-select:none;
+        -moz-user-select:none;
+        -webkit-user-select:none;
+        display:flex;
+        position:relative;
+        width:100%;
+        height:2em;
+        background-color:#ddd;
+        font-family:Roboto;
+        cursor:default;
+        box-sizing:border-box;
+        border-bottom:0.2em solid #d5d5d5;
+      }
+
+      #footer{
+        display:none;
+        bottom:0;
+        border-bottom:none;
+        border-top:0.2em solid #d5d5d5;
+      }
+
+      #databar{
+        display:block;
+        position:absolute;
+        width:25em;
+        height:100%;
+        right:0;
+        border-left:0.1em solid #aaa;
+        line-height:2em;
+        text-indent:1em;
+      }
+
+      .headeritem{
+        display:block;
+        position:relative;
+        float:left;
+        height:2em;
+        line-height:2.1em;
+        padding-left:0.5em;
+        padding-right:0.5em;
+      }
+
+      .headeritem:hover{
+        background-color:#ccc;
+      }
+
+      #dropdown{
+        display:none;
+        position:fixed;
+        width:15em;
+        min-height:2em;
+        top:2em;
+        background-color:#eaeaea;
+        border:0.1em solid #999;
+        z-index:10;
+        overflow:hidden;
+      }
+
+      .dropdownitem{
+        -ie-user-select:none;
+        -moz-user-select:none;
+        -webkit-user-select:none;
+        display:block;
+        position:relative;
+        width:13em;
+        height:2em;
+        left:2.1em;
+        font-family:Roboto;
+        line-height:2em;
+        text-indent:0.5em;
+        border-left:0.1em solid #ccc;
+        cursor:default;
+      }
+
+      .bottomline{
+        border-bottom:0.1em solid #ccc;
+      }
+
+      .dropdownitem:hover{
+        background-color:#ddd;
+      }
+
+      .checkmark{
+        display:block;
+        position:absolute;
+        width:1.6em;
+        height:1.6em;
+        top:0.2em;
+        margin-left:-1.9em;
+        background-color:#9bc4f6;
+        outline:0.1em solid #3684e5;
+        line-height:1.7em;
+        text-indent:0.4em;
+        pointer-events:none;
+      }
+
+      .checkmark[checked="false"]{
+        display:none;
+      }
+
+      #editarea{
+        display:flex;
+        position:relative;
+        width:100%;
+        outline:none;
+        font-family:Consolas,monospace;
+        font-size:12pt;
+        resize:none;
+        border:1px solid #3684e5;
+        box-sizing:border-box;
+        flex-grow:1;
+      }
+
+      #editarea[wrap="soft"]{
+        white-space: pre;
+        overflow-wrap: normal;
+        overflow-x: auto;
+      }
+
+      /*#editinner{
+        display:block;
+        position:absolute;
+        width:97.5em;
+        min-height:calc(100% - 0.5em);
+        left:0.5em;
+        top:0.5em;
+        outline:none;
+      }
+
+      #editinner{
+        font-size:1.4em;
+        font-family:monospace;
+      }
+
+      p,font{
+        margin:0 !important;
+        font-family: inherit !important;
+        font-size: inherit !important;
+      }*/
+
+      #shade{
+        display:none;
+        position:fixed;
+        top:0;
+        width:100%;
+        height:100%;
+        background-color:black;
+        opacity:0;
+        animation:fade 200ms forwards 1;
+        z-index:10;
+      }
+
+      #prompt{
+        display:none;
+        position:fixed;
+        min-width:10em;
+        min-height:7em;
+        background-color:#eee;
+        top:10em;
+        left:50%;
+        overflow:hidden;
+        font-family:Roboto,sans-serif;
+        animation:open 200ms 1;
+        cursor:default;
+        z-index:20;
+      }
+
+      #actionbar{
+        display:block;
+        position:relative;
+        width:100%;
+        height:2.5em;
+        background-color:#ccc;
+        -webkit-user-select:none;
+        -moz-user-select:none;
+        -ie-user-select:none;
+      }
+
+      #prompttitle{
+        display: block;
+        position: absolute;
+        height: 2.5em;
+        line-height: 2.5em;
+        text-indent: 0.7em;
+      }
+
+      #close {
+        display: block;
+        position: absolute;
+        width: 1.25em;
+        height: 1.25em;
+        right: 0;
+        background-color: #900;
+        color: white;
+        font-size: 200%;
+        line-height: 1.25em;
+        text-align: center;
+      }
+
+      #promptcontent{
+        display:block;
+        position:relative;
+        min-width:10em;
+        min-height:5em;
+        overflow:hidden;
+      }
+
+      #prompttext{
+        display:block;
+        position:relative;
+        width:90%;
+        left:5%;
+        text-align:center;
+        margin:0;
+        margin-bottom:0.5em;
+      }
+
+      .innerprompt{
+        display:block;
+        position:relative;
+        width:26em;
+      }
+
+      .buttongroup{
+        display:flex;
+        position:relative;
+        margin-top:0.5em;
+        margin-bottom:0.5em;
+        left:0.5em;
+        width:25.5em
+      }
+
+      button {
+        display: flex;
+        position: relative;
+        padding: 0.25em 0 0.25em 0;
+        background-color: #bbb;
+        color: #333;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        margin-right: 0.5em;
+        flex-grow: 1;
+        flex-basis: 50px;
+        justify-content: center;
+      }
+
+      button:hover{
+        background-color:#ccc;
+      }
+
+      button[active="false"]{
+        opacity:0.5;
+        pointer-events:none;
+      }
+
+      button:active{
+        background-color:#ccc;
+      }
+
+      input {
+        display: block;
+        position: relative;
+        left: 0.5em;
+        top: 0.5em;
+        width: 22.4em;
+        height: 2em;
+        text-indent: 0.5em;
+        margin-bottom: 1em;
+        box-sizing: border-box;
+        outline: none;
+      }
+
+      .tag {
+        margin: 0.5em 0 -0.5em 0.5em;
+      }
+
+      #namebox{
+        display:block;
+        position:relative;
+        left:0.5em;
+        width:25em;
+        min-height:2em;
+        max-height:11em;
+        background-color:white;
+        overflow-x:hidden;
+        overflow-y:auto;
+      }
+
+      .nameitem{
+        display:block;
+        position:relative;
+        float:left;
+        width:100%;
+        height:2em;
+        line-height:2em;
+        text-indent:0.5em;
+        background-color:#ddd;
+      }
+
+      .nameitem:nth-of-type(2n){
+        background-color:#ccc;
+      }
+
+      .nameitem:hover{
+        background-color:#bbb;
+      }
+
+      .nameinfo{
+        float:right;
+        margin-right:0.5em;
+      }
+
+      .left{
+        display:block;
+        text-align:left !important;
+      }
+
+      .hidden{
+        display:none !important;
+      }
+
+      select {
+        width: 22.4em;
+        margin: 0.5em 0 0 0.5em;
+      }
+
+      @keyframes open{
+        from{
+          opacity:0;
+          -webkit-transform:scale(0.7);
         }
-        wait=0;
-        /*alert(document.getElementById("editarea").selectionStart);
-        alert(document.getElementById("editarea").selectionEnd);*/
-        /*var el=document.getElementById("editinner");
-        el.innerHTML=el.innerHTML.replace(/ /g,"lol")*/
-      });
-
-      document.getElementById("editarea").addEventListener("mouseup",function(){
-        setTimeout(function(){
-          var elem=document.getElementById("editarea");
-          sS=elem.selectionStart;
-          sE=elem.selectionEnd;
-        },20);
-      });
-
-      document.body.addEventListener("keydown",function(event){
-        if (event.ctrlKey){
-          var kc=event.keyCode;
-          //Ctrl-A
-          if (kc==65){
-            selectAll();
-            event.preventDefault();
-          }else if (kc==79){    //CTRL-O
-            openD();
-            event.preventDefault();
-          }else if (kc==83){    //CTRL-S
-            save();
-            event.preventDefault();
-          }else if (kc==72){    //CTRL-H
-            openPrompt("replace",null,"Replace")
-            event.preventDefault();
-          }
-        }
-      });
-
-      function movePrompt(evt){
-        if (movable){
-          dX+=(evt.clientX-prevX);
-          dY+=(evt.clientY-prevY);
-          var prompt=document.getElementById("prompt");
-          prompt.style.marginLeft=(dX/window.innerWidth*100)+"vw";
-          prompt.style.marginTop=(dY/window.innerHeight*100)+"vh";
-          prevX=evt.clientX;
-          prevY=evt.clientY;
-        }
-      }
-
-      function sortNames(){
-        for (var i=0;i<names.length;i++){
-          for (var n=i+1;n<names.length;n++){
-            if (names[i].localeCompare(names[n])>0){
-              var tmpName=names[i];
-              names[i]=names[n];
-              names[n]=tmpName;
-            }
-          }
-        }
-        namesElements=[];
-        for (var i=0;i<names.length;i++){
-          //just assume a UTF-8 character is stored in 1.5 bytes...
-          var ls=localStorage.getItem(names[i]);
-          var bytes=ls!=null?Math.floor(ls.length*1.5):0;
-          var suffix="B";
-          if (bytes>1000){
-            bytes/=1000;
-            suffix="KB";
-          }else if (bytes>1000000){
-            bytes/=1000000;
-            suffix="MB";
-          }
-          namesElements.push("<div class='nameitem' onclick=select(\""+names[i]+"\")>"+names[i]+"<span class='nameinfo'>"+bytes+" "+suffix+"</span></div>");
-        }
-        console.log(names);
-      }
-      sortNames();
-
-      function select(val){
-        document.getElementById('nameinput').value=val;
-        document.getElementById("savebtn").setAttribute("active",true);
-        document.getElementById("prompttext").innerHTML="Warning: Name already in use.";
-      }
-
-      function showDropdown(elem,evt){
-        var dd=document.getElementById("dropdown").style;
-        var items=document.getElementsByClassName("headeritem");
-        var selected=0;
-        for (var i=0;i<items.length;i++){
-          if (items[i]==elem){selected=i; break;}
-        }
-        items=document.getElementsByClassName("dropdownitem");
-        for (var i=0;i<items.length;i++){
-          items[i].style.display=(i>=cutoff[selected]&&i<cutoff[selected+1])?"block":"none";
-        }
-        dd.display="block";
-        dd.left=(elem.offsetLeft/window.innerWidth*100)+"vw";
-        getSelect();
-        evt.stopPropagation();
-      }
-
-      function newDoc(){
-        if (document.getElementById("title").innerHTML.startsWith('*')||title==""){
-          openPrompt("save");
-          bufferAction="new";
-          return;
-        }
-        clearDoc();
-      }
-
-      function clearDoc(){
-        document.getElementById("editarea").value="";
-        title="";
-        document.getElementById("title").innerHTML="untitled";
-        lastSave="";
-      }
-
-      function openD(){
-        if ((document.getElementById("title").innerHTML.startsWith('*')||title=="")&&document.getElementById("editarea").value!=""){
-          openPrompt("save");
-          bufferAction="open";
-          return;
-        }
-        openPrompt("open");
-      }
-
-      function openDoc(){
-        closePrompt();
-        var name=document.getElementById("nameinput").value;
-        document.getElementById("editarea").value=localStorage.getItem(name);
-        title=name;
-        document.getElementById("title").innerHTML=title;
-      }
-
-      function relaySave(){
-        title=document.getElementById("nameinput").value;
-        if (document.getElementById("prompttext").innerHTML!="Warning: Name already in use."){
-          names.push(title);
-          localStorage.setItem("names",names);
-        }
-        save();
-        execBuffer();
-      }
-
-      function save(){
-        closePrompt();
-        if (title==""){
-          setTimeout(function(){openPrompt("saveas");},200);
-          return;
-        }
-        document.getElementById("title").innerHTML=title;
-        localStorage.setItem(title,document.getElementById("editarea").value);
-        lastSave=document.getElementById("editarea").value;
-        sortNames();
-      }
-
-      function cutText(){
-        getSelect();
-        var succ=document.execCommand("cut");
-        succ?"":alert("Cut failed.");
-        sS=0;
-        sE=0;
-      }
-
-      function copyText(){
-        getSelect();
-        var succ=document.execCommand("copy");
-        succ?"":alert("Copy failed.");
-      }
-
-      function pasteText(evt){
-        /*document.getElementById("editarea").selectionStart=0;
-          document.getElementById("editarea").selectionEnd=0;*/
-
-        /*var cEvt = new ClipboardEvent("paste", {dataType: "text/plain", data: "some data"})
-        var data=cEvt.clipboardData.getData("text/plain");
-        //alert(data);
-        document.getElementById("editarea").select();
-        var succ=document.execCommand("paste");
-        succ?"":alert("Paste failed*/
-      }
-
-      function deleteText(){
-        //Could've used execCommand here too, but for compatibility reasons, it's better to just do it via vanilla JS.
-        var elem=document.getElementById("editarea");
-        var str=elem.value,tmpStr="";
-        for (var i=0;i<str.length;i++){
-          if (i<sS||i>=sE){tmpStr+=str[i];}
-        }
-        elem.value=tmpStr;
-        elem.select();
-        elem.selectionStart=sS;
-        elem.selectionEnd=sS;
-      }
-
-      function selectAll(){
-        var elem=document.getElementById("editarea");
-        elem.select();
-        sS=elem.selectionStart;
-        sE=elem.selectionEnd;
-      }
-
-      function getSelect(){
-        var elem=document.getElementById("editarea");
-        elem.focus();
-        elem.selectionStart=sS;
-        elem.selectionEnd=sE;
-      }
-
-      function openPrompt(id,content,title){
-        var prompt=document.getElementById("prompt");
-        document.getElementById("promptcontent").innerHTML=document.getElementById(id).outerHTML;
-        var tit=document.getElementById("prompttitle");
-        prompt.style.display="block";
-        prompt.style.left=(50+prompt.offsetWidth/window.innerWidth*-50)+"vw";
-        document.getElementById("shade").style.display="block";
-
-        if (id=="save"){
-          document.getElementById("prompttext").innerHTML="Save '"+(title==""||title==undefined?"untitled":title)+"'?";
-          tit.innerHTML="Save";
-        }else if (id=="open"){
-          createSelection();
-          tit.innerHTML="Open"
-        }else if (id=="saveas"){
-          document.getElementById("prompttext").innerHTML="Name cannot be blank.";
-          createSelection();
-          tit.innerHTML="Save As"
-        }else if (id=="custom"){
-          document.getElementById("prompttext").innerHTML=content;
-          tit.innerHTML=title;
-        }else{
-          tit.innerHTML=title;
-        }
-
-        prompt.style.top=(50+prompt.offsetHeight/window.innerHeight*-50)+"vh";
-        prompt.style.marginLeft=0;
-        prompt.style.marginTop=0;
-      }
-
-      function relayClose(){
-        bufferAction=null;
-        closePrompt();
-      }
-
-      function closePrompt(){
-        var prompt=document.getElementById("prompt");
-        prompt.style.animation="close 100ms forwards 1";
-        setTimeout(function(){
-          prompt.style.display="none";
-          prompt.style.animation="";
-          document.getElementById("promptcontent").innerHTML="";
-        },100);
-        document.getElementById("shade").style.display="none";
-        dX=0;
-        dY=0;
-      }
-
-      function execBuffer(){
-        //alert(bufferAction);
-        if (bufferAction=="new"){
-          clearDoc();
-        }else if (bufferAction=="open"){
-          relayClose();
-          setTimeout(function(){openPrompt("open")},200);
-          return;
-        }
-        relayClose();
-      }
-
-      function checkName(){
-        var inp=document.getElementById("nameinput").value;
-        var elem=document.getElementById("prompttext");
-        var btn=document.getElementById("savebtn");
-        btn.setAttribute("active",true);
-        elem.innerHTML="";
-        if (inp.replace(/ /g,"")==""){
-          elem.innerHTML="Name cannot be blank.";
-          btn.setAttribute("active",false);
-        }
-        for (var i=0;i<names.length;i++){
-          if (inp==names[i]&&inp!=title){
-            elem.innerHTML="Warning: Name already in use.";
-          }
-        }
-        createSelection();
-      }
-
-      function checkName2(){
-        var btn=document.getElementById("savebtn");
-        var val=document.getElementById("nameinput").value;
-        btn.setAttribute("active",false);
-        for (var i=0;i<names.length;i++){
-          if (val==names[i]){
-            btn.setAttribute("active",true);
-            break;
-          }
-        }
-        createSelection();
-      }
-
-      function createSelection(){
-        var val=document.getElementById("nameinput").value;
-        var inner="";
-        for (var i=0;i<names.length;i++){
-          if (names[i].startsWith(val)){
-            inner+=namesElements[i];
-          }
-        }
-        var btn=document.getElementById("namebox").innerHTML=inner;
-      }
-
-      function toggleWrap(){
-        wrap=!wrap;
-        var icon=document.getElementsByClassName("checkmark")[0];
-        icon.setAttribute("checked",wrap);
-        var area=document.getElementById("editarea");
-        area.setAttribute("wrap",(wrap?"hard":"soft"));
-        localStorage.setItem("wrap",wrap);
-      }
-
-      function toggleBar(){
-        bar=!bar;
-        var icon=document.getElementsByClassName("checkmark")[1];
-        icon.setAttribute("checked",bar);
-        document.getElementById("editarea").style.height=bar?"calc(100% - 4vw)":"calc(100% - 2vw)";
-        document.getElementById("footer").style.display=bar?"block":"none";
-        localStorage.setItem("bar",bar);
-      }
-
-      function replace(){
-        var elem=document.getElementById("editarea");
-        var inps=document.getElementById("prompt").getElementsByTagName("input");
-        var regex=new RegExp(inps[0].value,"g");
-        var matches=(elem.value.match(regex) || 0).length;
-        elem.value=elem.value.replace(regex,inps[1].value);
-        relayClose();
-        setTimeout(function(){openPrompt("custom",matches>0?("Replaced "+matches+" expression"+(matches==1?"":"s")+"."):"Found no expression to replace.","Replace");},100);
-      }
-
-      function initAdd(){
-        var inner="0123456789";
-        document.getElementById("editarea").value=inner;
-      }
-
-      function addFile(url){
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-          if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("editarea").value=this.responseText;
-          }
-        };
-        xhttp.open("GET",url,true);
-        xhttp.send();
-      }
-
-      function init(){
-        var url=window.location.href.split("url=");
-        if (url.length==2){
-          addFile(url[1]);
+        to{
+          opacity:1;
+          -webkit-transform:scale(1);
         }
       }
 
-      init();
-
-      setInterval(count,20);
-
-      function count(){
-        wait++;
-        if (wait==10){
-          //This is a pretty expensive operation, so it's best left for when the user isn't typing constantly. 
-          getPos();
-          if (lastSave!=document.getElementById("editarea").value){
-            document.getElementById("title").innerHTML="*"+title;
-          }else{
-            document.getElementById("title").innerHTML=title;
-          }
+      @keyframes close{
+        to{
+          opacity:0;
+          -webkit-transform:scale(0.7);
         }
       }
 
-      function getPos(){
-        var elem=document.getElementById("editarea");
-        //alert(elem.selectionStart);
-        //alert(elem.innerHTML.substring(0,elem.selectionStart));
+      @keyframes fade{
+        to{opacity:0.5;}
       }
     </script>
   </body>
