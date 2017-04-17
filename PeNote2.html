@@ -673,7 +673,6 @@
         document.title=title;
         localStorage.setItem(title,document.getElementById("editarea").value);
         lastSave=document.getElementById("editarea").value;
-        console.log("GOT HERE!");
         sortNames();
       }
 
@@ -880,6 +879,10 @@
             edit.selectionEnd=0;
             var fileArr=url.split("/");
             title=fileArr[fileArr.length-1];
+            if (!names.hasElem(title)){
+              names.push(title);
+              localStorage.setItem("names",names);
+            }
             save();
             setDatabar();
           }
@@ -968,6 +971,13 @@
         var wordCount=text!=""?text.split(" ").length:0;
         document.getElementById("databar").innerHTML=wordCount+" word"+(wordCount==1?"":"s")+", "+charCount+" character"+(charCount==1?"":"s")+"";
       }
+      
+      Array.prototype.hasElem=function(elem){
+        for (var i in this){
+          if (this[i]==elem)return true;
+        }
+        return false;
+      };
     </script>
   </body>
 </html>
