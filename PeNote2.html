@@ -877,7 +877,7 @@
             edit.value=this.responseText;
             edit.selectionStart=0;
             edit.selectionEnd=0;
-            var fileArr=url.splice("/");
+            var fileArr=url.split("/");
             title=fileArr[fileArr.length-1];
             save();
             setDatabar();
