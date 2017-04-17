@@ -1,7 +1,14 @@
 PeOS 2.0
 
 PeOS is written, designed, and maintained by PicturElements (github.com/PicturElements)
-PeOS is based on Windows 10.
+It's a highly functional mockup of a real OS (Windows 10) and features my small projects
+as apps on the desktop. 
+
+Disclaimer: This app, and the apps that run in it, were written at different stages of my
+long (and much like too many of my projects: unfinished) journey to webdev Nirvana, so any
+aneurysms you contract while spying my old code are your problem.
+
+---
 
 Updates since PeOS 1.0
 1. File explorer
@@ -16,6 +23,6 @@ Bug fixes since PeOS 1.0
 2. Second window scaling bug fixed (scaling left side of window now works properly)
 
 Design changes since PeOS 1.0
-1. Desktop bokeh pattern removed
+1. Desktop bokeh effect removed
 2. Windows zoom in and out on open/close/min
 3. SVG replacements for icons, as well as centralized icon setting function
