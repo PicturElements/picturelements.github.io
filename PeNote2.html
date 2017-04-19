@@ -481,8 +481,9 @@
       var names=[],namesElements=[];
       var nms=localStorage.getItem("names");
       if (nms!=null){names=nms.split(',');}
-      var wrap=false,bar=true,movable=false,clickedEdit=false;
+      var wrap=false,bar=false,movable=false,clickedEdit=false;
       var about="<span class='left'>PicturElements Incorporated<br>Version 1.0 (Build 1337)<br>© 2017 PicturElements - not many rights reserved<br><br>Any similarities with Microsoft Notepad (Running on Windows 8.1, build 9600) are purely coincidental.</span>";
+      toggleBar();
       if (localStorage.getItem("wrap")=="true"){toggleWrap();}
       if (localStorage.getItem("bar")=="false"){toggleBar();}
       var dX=0,dY=0,prevX=0,prevY=0;
