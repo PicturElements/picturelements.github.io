@@ -862,7 +862,7 @@
         var matches=(elem.value.match(regex) || 0).length;
         elem.value=elem.value.replace(regex,inps[1].value);
         relayClose();
-        setTimeout(function(){openPrompt("custom",matches>0?("Replaced "+matches+" match"+(matches==1?"":"s")+"."):"Found no matches to replace.","Replace");},100);
+        setTimeout(function(){openPrompt("custom",matches>0?("Replaced "+matches+" match"+(matches==1?"":"es")+"."):"Found no matches to replace.","Replace");},100);
       }
 
       function initAdd(){
