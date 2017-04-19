@@ -5,7 +5,7 @@ It's a highly functional mockup of a real OS (Windows 10) and features my small 
 as apps on the desktop. 
 
 Disclaimer: This app, and the apps that run in it, were written at different stages of my
-long (and much like too many of my projects: unfinished) journey to webdev Nirvana, so any
+long (and much like too many of my projects; unfinished) journey to webdev Nirvana, so any
 aneurysms you contract while spying my old code are your problem.
 
 ---
@@ -17,6 +17,7 @@ Updates since PeOS 1.0
 4. Working battery meter
 5. Improved startup screen
 6. Puzzle box functional
+7. Windows now resizable on all sides and in all corners
 
 Bug fixes since PeOS 1.0
 1. Window scaling bug fixed (window wouldn't scale if dragged over other window)
