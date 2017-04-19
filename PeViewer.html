@@ -1,6 +1,9 @@
 <html>
   <head>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+    <title>PeViewer</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
+    <script src="https://picturelements.github.io/utils/Tellune/Tellune.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://picturelements.github.io/utils/Tellune/Tellune.css">
     <style>
       body{
         font-size:10pt;
@@ -13,10 +16,16 @@
         display:none;
       }
 
-      .font #fontview, .img #imgview, .audio #audioview{
+      .font #fontview, .audio #audioview{
         display:block;
       }
-      
+
+      #imgview {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
       .font #fontview{
         background:white;
       }
@@ -51,6 +60,9 @@
 
       #image{
         pointer-events:none;
+        background-position: 0 0, 0.5em 0.5em;
+        background-size: 1em 1em;
+        background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee 100%),linear-gradient(45deg, #eee 25%, white 25%, white 75%, #eee 75%, #eee 100%);
       }
 
       div[fillmode="fit"] #image{
@@ -67,7 +79,7 @@
         position:fixed;
         width:100vw;
         top:0;
-        font-size:1vh;
+        font-size:5px;
         height:8em;
         background-color:rgba(0,0,0,0.5);
         color:white;
@@ -133,6 +145,10 @@
       #imgview[fillmode="normal"] .normal, #imgview[fillmode="fit"] .fit, #imgview[fillmode="scale"] .scale{
         background-color:#555;
       }
+
+      .buttonwrapper{
+        font-weight:100;
+      }
     </style>
   </head>
   <body>
@@ -152,7 +168,7 @@
       <div id="showcase"></div>
     </div>
     <div id="imgview" class="menubar_hidden" fillmode="fit">
-      <img id="image"></img>
+      <img id="image">
       <div class="menubar">
         <div class="list">
           <div class="listitem">Fill Mode</div>
@@ -170,7 +186,7 @@
     </div>
     <script>
       var fontSizes=[12,18,24,36,48,60,72];
-      var testStr="The quick brown fox jumps over the lazy dog. 0123456789"
+      var testStr="The quick brown fox jumps over the lazy dog. 0123456789";
       var inUrl=window.location.href;
       var timeout=null;
       var prevX=0,prevY=0;
@@ -183,6 +199,7 @@
         document.body.className=type;
         if (type=="font"){addFonts(url);}
         else if (type=="img"){addImg(url);}
+        else if (type=="audio"){addAudio(url);}
       }
 
       function addFonts(furl){
@@ -235,6 +252,10 @@
         document.getElementById("download").href=url;
         var splitUrl=url.split("/");
         document.getElementById("imgname").innerHTML=splitUrl[splitUrl.length-1];
+      }
+
+      function addAudio(url){
+        new Tellune(document.body,"14px",url);
       }
 
       function setMode(mode){
