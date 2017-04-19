@@ -680,27 +680,16 @@
       function cutText(){
         getSelect();
         var succ=document.execCommand("cut");
-        succ?"":alert("Cut failed.");
+        succ?null:openPrompt("custom","Cut failed.","Error");
         sS=0;
         sE=0;
+        setDatabar();
       }
 
       function copyText(){
         getSelect();
         var succ=document.execCommand("copy");
-        succ?"":alert("Copy failed.");
-      }
-
-      function pasteText(evt){
-        /*document.getElementById("editarea").selectionStart=0;
-          document.getElementById("editarea").selectionEnd=0;*/
-
-        /*var cEvt = new ClipboardEvent("paste", {dataType: "text/plain", data: "some data"})
-        var data=cEvt.clipboardData.getData("text/plain");
-        //alert(data);
-        document.getElementById("editarea").select();
-        var succ=document.execCommand("paste");
-        succ?"":alert("Paste failed*/
+        succ?null:openPrompt("custom","Copy failed.","Error");
       }
 
       function deleteText(){
@@ -714,6 +703,7 @@
         elem.select();
         elem.selectionStart=sS;
         elem.selectionEnd=sS;
+        setDatabar();
       }
 
       function selectAll(){
@@ -863,6 +853,7 @@
         elem.value=elem.value.replace(regex,inps[1].value);
         relayClose();
         setTimeout(function(){openPrompt("custom",matches>0?("Replaced "+matches+" match"+(matches==1?"":"es")+"."):"Found no matches to replace.","Replace");},100);
+        setDatabar();
       }
 
       function initAdd(){
@@ -900,7 +891,6 @@
       }
 
       init();
-
       setInterval(count,20);
 
       function count(){
@@ -972,7 +962,7 @@
         var wordCount=text!=""?text.split(" ").length:0;
         document.getElementById("databar").innerHTML=wordCount+" word"+(wordCount==1?"":"s")+", "+charCount+" character"+(charCount==1?"":"s")+"";
       }
-      
+
       Array.prototype.hasElem=function(elem){
         for (var i in this){
           if (this[i]==elem)return true;
