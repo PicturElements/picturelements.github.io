@@ -1,0 +1,269 @@
+.unlinked{
+  cursor:default;
+}
+
+.playing .showonpause, .paused .showonplay, .loading .showonpause, .loading .showonplay, .showonload{
+  display:none;
+}
+
+.loading .showonload{
+  display:block;
+}
+
+.buttonwrapper{
+  display:block;
+  position:absolute;
+  font-family:Roboto,Arial,sans-serif;
+  width:24em;
+  height:24em;
+  top:50%;
+  left:50%;
+  margin-left:-12em;
+  margin-top:-12em;
+  border-radius:50%;
+  overflow:hidden;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.button{
+  display:block;
+  position:absolute;
+  width:56%;
+  height:56%;
+  margin-top:22%;
+  margin-left:22%;
+  border-radius:50%;
+  background-color:#444;
+  overflow:hidden;
+  cursor:pointer;
+  transition:background-color 100ms;
+}
+
+.playstate {
+  position: absolute;
+  width: 15%;
+  height: 15%;
+  left: 42.5%;
+  top: 20%;
+}
+
+.playstate polygon, .playstate rect, .playstate circle{
+  fill:none;
+  stroke:white;
+  stroke-width:8;
+}
+
+.volumebox {
+  display: block;
+  position: absolute;
+  width: 90%;
+  left: 5%;
+  height: 20%;
+  top: 40%;
+  z-index:10;
+}
+
+.volumewrapper {
+  display: block;
+  position: absolute;
+  height: 10%;
+  width:100%;
+  background-color: #666;
+  top: 45%;
+  transition:height 200ms, top 200ms;
+  cursor:default;
+}
+
+.volumebox:hover .volumewrapper{
+  height: 40%;
+  top: 30%;
+}
+
+.volumebar {
+  display: block;
+  position:relative;
+  float:left;
+  width: 5%;
+  height: 100%;
+  background-color: #1981e5;
+  transition:background-color 200ms;
+}
+
+.paused .volumebar{
+  background-color:#f75068;
+}
+
+/*Challenge: figure out how this works*/
+
+.volumebar:hover ~ .volumebar, .volumebar.selected ~ .volumebar{
+  background-color:transparent;
+}
+
+.volumewrapper:hover .volumebar.selected ~ .volumebar, .volumebar:not(.selected):hover ~ .volumebar{
+  background-color:#888;
+}
+
+.volumebar.selected ~ .volumebar:hover ~ .volumebar, .volumebar:hover ~ .volumebar.selected ~ .volumebar, .volumewrapper:hover .volumebar.selected:hover ~ .volumebar{
+  background-color:transparent;
+}
+
+.middle {
+  position: absolute;
+  width: 10%;
+  left: 45%;
+  text-align: center;
+  top: -0.1em;
+}
+
+.bottomcontent{
+  display:flex;
+  position:absolute;
+  flex-direction:column;
+  font-size:120%;
+  width:100%;
+  height:40%;
+  top:50%;
+  color:#eee;
+  justify-content:center;
+}
+
+.playlist .bottomcontent{
+  height:45%;
+}
+
+.infowrapper{
+  display:flex;
+  width:100%;
+}
+
+.infowrapper > .counter, .counterwrapper{
+  border-right:0.05em solid #777;
+  padding:0 0.3em;
+  width:50%;
+  text-align:right;
+}
+
+.counter + .counter, .counterwrapper + .counterwrapper{
+  border-right:none;
+  text-align:left;
+}
+
+.playlistcounter{
+  display:none;
+}
+
+.playlist .playlistcounter{
+  display:flex;
+  font-size: 70%;
+  margin-top: 0.5em;
+}
+
+.skipbtn {
+  display: inline-block;
+  font-size: 120%;
+  width: 1.5em;
+  height: 1.5em;
+  line-height: 1.5em;
+  margin: -0.15em 0.4em;
+  background-color: #606060;
+  border-radius: 50%;
+  text-align: center;
+  cursor: default;
+}
+
+.skipbtn:hover{
+  background-color:#666;
+}
+
+/*SVG STARTS HERE*/
+
+.buttonwrapper svg{
+  display:block;
+  position:absolute;
+  width:100%;
+  height:100%;
+  fill:#f75068;
+  transition:transform 300ms, fill 300ms;
+}
+
+.path.second{
+  fill:rgba(255,255,255,0.3);
+}
+
+.sector.second{
+  -webkit-transform:scale(0.8);
+  transform:scale(0.8);
+}
+
+.circlesvg{
+  -webkit-transform:scale(0.5);
+  transform:scale(0.5);
+}
+
+line{
+  stroke-width:0.5;
+  stroke:#f75068;
+  transition:stroke 300ms;
+}
+
+.playing line{
+  stroke:#1981e5;
+}
+
+.playing svg{
+  fill:#1981e5;
+}
+
+.buttonwrapper:not(.loading):hover .circlesvg, .buttonwrapper:not(.loading).unlinked .circlesvg{
+  -webkit-transform:scale(1);
+  transform:scale(1);
+}
+
+.buttonwrapper > svg .circle{
+  stroke-width:4;
+  stroke-linecap:round;
+  cursor:pointer;
+  transition:stroke 200ms,stroke-width 200ms;
+}
+
+.buttonwrapper:hover > svg .circle{
+  stroke-width:8;
+}
+
+.buttonwrapper > svg .circle:hover, .buttonwrapper.unlinked > svg .circle{
+  stroke-width:10 !important;
+}
+
+.buttonwrapper:not(.loading):hover .sector.first, .buttonwrapper:not(.loading).unlinked .sector{
+  -webkit-transform:scale(1.05);
+  transform:scale(1.05);
+}
+
+.sector.first.shrink{
+  animation:shrink 300ms forwards 1;
+}
+
+.loader{
+  animation:rotate 1s linear infinite;
+  transform-origin:50% 50%;
+}
+
+@keyframes rotate{
+  to{transform:rotate(360deg);}
+}
+
+@keyframes shrink{
+  30%{
+    -webkit-transform:scale(1.1);
+    -moz-transform:scale(1.1);
+    -ms-transform:scale(1.1);
+  }
+  100%{
+    -webkit-transform:scale(0.8);
+    -moz-transform:scale(0.8);
+    -ms-transform:scale(0.8);
+  }
+}
