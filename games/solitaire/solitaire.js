@@ -1,4 +1,4 @@
-cardSvg={
+var cardSvg={
   hearts: [['l',10,-1],['l',-10,12],['l',-10,-12],['c',-5,-10,10,-10,10,-3],['c',0,-7,15,-7,10,3]],
   clubs: [['c',-15,-15,15,-15,0,0],['c',13,-15,13,15,0,0],['l',3,7],['l',-6,0],['l',3,-7],['c',-13,15,-13,-15,0,0]],
   diamonds: [['l',0,-11],['l',10,11],['l',-10,11],['l',-10,-11],['l',10,-11]],
@@ -33,16 +33,25 @@ document.body.addEventListener("mousemove",function(event){
   moveCards(event);
 });
 
+document.body.addEventListener("touchmove",function(event){
+  moveCards(event);
+});
+
 document.body.addEventListener("mouseup",function(event){
   dropCards(event);
 });
+
+document.body.addEventListener("touchend",function(event){
+  dropCards(event);
+});
+
 
 window.onresize=setHeapSpacing;
 
 function moveCards(evt){
   if (moveElem&&!noAction){
-    moveElem.style.left=(evt.clientX-offsX)+"px";
-    moveElem.style.top=(evt.clientY-offsY)+"px";
+    moveElem.style.left=((evt.clientX || evt.touches[0].clientX)-offsX)+"px";
+    moveElem.style.top=((evt.clientY || evt.touches[0].clientY)-offsY)+"px";
     movedElem=true;
   }
 }
@@ -242,6 +251,7 @@ function createCard(hidden,ca){
     flipCard(card,true);
   }
   card.addEventListener("mousedown",function(event){pickupCard(event);});
+  card.addEventListener("touchstart",function(event){pickupCard(event);});
   return card;
 }
 
@@ -331,8 +341,8 @@ function pickupCard(evt){
   //Pick up card, and if it's bounded by a wrapper, pick that up.
   moveElem=evt.target.parentElement.classList.contains("cardwrapper")?evt.target.parentElement:evt.target;
   var bcr=moveElem.getBoundingClientRect();
-  offsX=evt.clientX-bcr.left;
-  offsY=evt.clientY-bcr.top;
+  offsX=(evt.clientX || evt.touches[0].clientX)-bcr.left;
+  offsY=(evt.clientY || evt.touches[0].clientY)-bcr.top;
   
   pickupCoords={
     x:bcr.left,
@@ -551,7 +561,7 @@ function setHeapSpacing(noAnim){
   var css="";
   for (var i=0;i<heaps.length;i++){
     var cardCount=heaps[i].getElementsByClassName("card").length-2;
-    if (cardCount<1) continue;
+    if (cardCount<1) cardCount=1;
     var margin=Math.min(Math.max(Math.floor(marginSpace/cardCount),10),cardHeight/3);
     css+="#heap_"+i+" > .cardwrapper .cardwrapper {";
     css+="margin-top:"+margin+"px";
