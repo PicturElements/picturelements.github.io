@@ -2,7 +2,80 @@
   <head>
     <title>&lt;input&gt;</title>
     <link rel="icon" href="pelement.png">
-    <style></style>
+    <style>
+      body{
+        margin:0;
+        background:#eee;
+        font-family:monospace;
+      }
+
+      input{
+        font-family:monospace;
+      }
+
+      #header{
+        position:fixed;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        width:100%;
+        height:50px;
+        background:white;
+        top:0;
+        z-index:10;
+        border-bottom:1px solid #ddd;
+      }
+
+      #header div{
+        font-size:20px;
+      }
+
+      #mainwrapper{
+        padding:50px 30%;
+        margin-top:40px;
+      }
+
+      .inputwrapper{
+        padding:10px;
+        background:white;
+        margin-top:10px;
+        position:relative;
+        border: 2px solid transparent;
+      }
+
+      .error{
+        border:2px solid #ef0202;
+      }
+
+      .error:after {
+        content: "Invalid input";
+        display: block;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        padding: 0 10px;
+        height: 0;
+        color: white;
+        font-weight: bold;
+        border: 20px solid #ef0202;
+        border-top-color: transparent;
+        border-left-color: transparent;
+        border-right-width: 0;
+        line-height: 20px;
+        text-transform: uppercase;
+      }
+
+      .inputwrapper p{
+        margin-top:0;
+        margin-bottom:0.5em;
+      }
+
+      .hint{
+        display:block;
+        margin-top:0.5em;
+        color:#bbb;
+      }
+    </style>
   </head>
   <body>
     <audio id="audio" autoplay loop src="https://picturelements.github.io/images/nggyu.mp3"></audio>
