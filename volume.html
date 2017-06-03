@@ -1,0 +1,260 @@
+<html>
+  <head>
+    <title>&lt;input&gt;</title>
+    <link rel="icon" href="pelement.png">
+    <style></style>
+  </head>
+  <body>
+    <audio id="audio" autoplay loop src="https://picturelements.github.io/images/nggyu.mp3"></audio>
+    <div id="header">
+      <div>Volume: <span id="volume">0</span>%</div>
+    </div>
+    <div id="mainwrapper">
+      <div class="inputwrapper">
+        <input type="button" value="0%" data-value="0" onclick="incButton(this)">
+      </div>
+      <div class="inputwrapper" onclick="setCheckboxVol(event)">
+        <input type="checkbox">
+        <input type="checkbox">
+        <input type="checkbox">
+        <input type="checkbox">
+        <input type="checkbox">
+        <input type="checkbox">
+        <input type="checkbox">
+        <input type="checkbox">
+        <input type="checkbox">
+        <input type="checkbox">
+      </div>
+      <div class="inputwrapper">
+        <input type="color" onchange="setColVol(this)">
+      </div>
+      <div class="inputwrapper">
+        <input type="date" onchange="dateToVol(this)">
+      </div>
+      <div class="inputwrapper">
+        <input type="datetime-local" onchange="dateToVol(this)">
+      </div>
+      <div class="inputwrapper">
+        <input type="email" onchange="emailToVol(this)">
+        <br>
+        <span class="hint">Syntax: numberinletterform@something.com</span>
+      </div>
+      <div class="inputwrapper">
+        <input type="file" onchange="fileToVol(this)">
+      </div>
+      <div class="inputwrapper">
+        <input type="image" src="images/volume.png" onclick="setVolume(0.42)">
+      </div>
+      <div class="inputwrapper">
+        <input type="month" onchange="dateToVol(this)">
+      </div>
+      <div class="inputwrapper">
+        <input type="number" min="0" max="100" onchange="setVolume(this.value/100)">
+      </div>
+      <div class="inputwrapper">
+        <input type="password">
+        <br>
+        <span class="hint">Syntax: number in letter or number form</span>
+      </div>
+      <div class="inputwrapper" onclick="radioVol(event)">
+        <input type="radio" name="radio" value="0">
+        <input type="radio" name="radio" value="1">
+        <input type="radio" name="radio" value="2">
+        <input type="radio" name="radio" value="3">
+        <input type="radio" name="radio" value="4">
+        <input type="radio" name="radio" value="5">
+        <input type="radio" name="radio" value="6">
+        <input type="radio" name="radio" value="7">
+        <input type="radio" name="radio" value="8">
+        <input type="radio" name="radio" value="9">
+        <input type="radio" name="radio" value="10">
+      </div>
+      <div class="inputwrapper">
+        <input type="range" min="0" max="1" step="0.01" onchange="setVolume(this.value)">
+      </div>
+      <div class="inputwrapper">
+        <input type="reset" onclick="setVolume(0)">
+      </div>
+      <div class="inputwrapper">
+        <input type="search">
+        <br>
+        <span class="hint">Syntax: number in letter form</span>
+      </div>
+      <div class="inputwrapper">
+        <input type="submit" onclick="setVolume(1)">
+      </div>
+      <div class="inputwrapper">
+        <input type="tel">
+        <br>
+        <span class="hint">Can't really do anything fun with phone number inputs</span>
+      </div>
+      <div class="inputwrapper">
+        <input type="text">
+      </div>
+      <div class="inputwrapper">
+        <input type="time" onchange="timeToVol(this)">
+      </div>
+      <div class="inputwrapper">
+        <input type="url">
+        <br>
+        <span class="hint">Syntax: www.numberinletterform.com</span>
+      </div>
+      <div class="inputwrapper">
+        <input type="week" onchange="weekToVol(this)">
+      </div>
+    </div>
+    <script>
+      var digits=["zero","one","two","three","four","five","six","seven","eight","nine"];
+      var teens=["ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"];
+      var tens=["twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety","hundred"];
+      var subTwenty=digits.concat(teens);
+
+      document.querySelector("input[type=email]").addEventListener("keyup",emailToVol);
+      document.querySelector("input[type=password]").addEventListener("keyup",function(){textToVol(false,this);});
+      document.querySelector("input[type=search]").addEventListener("keyup",function(){textToVol(true,this);});
+      document.querySelector("input[type=tel]").addEventListener("keyup",function(){setVolume(this.value/100);});
+      document.querySelector("input[type=text]").addEventListener("keyup",function(){textToVol(true,this);});
+      document.querySelector("input[type=url]").addEventListener("keyup",urlToVol);
+
+      function parseNum(inp,forceString){
+        if (!forceString&&(typeof inp=="number"||!isNaN(inp))) return parseInt(inp);
+        var str=inp.toLowerCase();
+        for (var i=0;i<subTwenty.length;i++){
+          if (subTwenty[i]==str) return i;
+        }
+        var tot;
+        for (var i=0;i<tens.length;i++){
+          var reg=new RegExp("^"+tens[i]);
+          if (reg.test(str)){
+            str=str.replace(reg,"");
+            tot=(i+2)*10;
+          }
+        }
+        for (var i=0;i<digits.length;i++){
+          var reg=new RegExp(digits[i]);
+          if (reg.test(str)){
+            tot+=i;
+          }
+        }
+        return Math.min(tot,100);
+      }
+
+      function getParent(elem,cls){
+        while(true){
+          if (elem.classList.contains(cls)) return elem;
+          if (elem.tagName=="HTML") return null;
+          elem=elem.parentElement;
+        }
+      }
+
+      function setVolume(vol){
+        vol=Math.max(Math.min(vol,1),0) || 0;
+        document.getElementById("volume").innerHTML=Math.floor(vol*100);
+        document.getElementById("audio").volume=vol;
+      }
+
+      function incButton(elem){
+        var val=parseInt(elem.getAttribute("data-value"));
+        val=(val+1)%11;
+        elem.value=val*10+"%";
+        elem.setAttribute("data-value",val);
+        setVolume(val/10);
+      }
+
+      function setCheckboxVol(evt){
+        var parent=getParent(evt.target,"inputwrapper");
+        parent.classList.remove("error");
+        var boxes=parent.getElementsByTagName("input");
+        vol=0,foundBlock=false;
+        for (var i=0;i<boxes.length;i++){
+          if (!boxes[i].checked) foundBlock=true;
+          else{
+            if (foundBlock){
+              parent.classList.add("error");
+              return;
+            }
+            vol++;
+          }
+        }
+        setVolume(vol/10);
+      }
+
+      function setColVol(elem){
+        var tot=0,hex=elem.value;
+        for (var i=1;i<7;i+=2){
+          tot+=parseInt(hex.substr(i,2),16);
+        }
+        setVolume(tot/765);
+      }
+
+      function dateToVol(elem){
+        setVolume(new Date(elem.value).getTime()/new Date().getTime());
+      }
+
+      function emailToVol(){
+        var parent=getParent(this,"inputwrapper");
+        parent.classList.remove("error");
+        var split=this.value.split("@");
+        var vol=parseNum(split[0],true);
+        if (split.length>1&&(vol||vol==0)) setVolume(vol/100);
+        else parent.classList.add("error");
+      }
+
+      function fileToVol(elem){
+        var parent=getParent(elem,"inputwrapper");
+        parent.classList.remove("error");
+        var split=elem.files[0].name.split(".");
+        var vol=parseNum(split[0]);
+        if (split.length>1&&(vol||vol==0)) setVolume(vol/100);
+        else parent.classList.add("error");
+      }
+
+      function textToVol(forceString,elm){
+        var elem=elm || this;
+        var parent=getParent(elem,"inputwrapper");
+        parent.classList.remove("error");
+        var vol=parseNum(elem.value,forceString);
+        if (vol||vol==0) setVolume(vol/100);
+        else parent.classList.add("error");
+      }
+
+      function radioVol(evt){
+        if (evt.target.tagName=="INPUT"){
+          setVolume(evt.target.value/10);
+        }
+      }
+
+      function timeToVol(elem){
+        var times=elem.value.split(":");
+        setVolume((parseInt(times[0])+parseInt(times[1])/60)/24);
+      }
+
+      function urlToVol(){
+        var parent=getParent(this,"inputwrapper");
+        parent.classList.remove("error");
+        var split=this.value.split(".");
+        var vol=parseNum(split[1],true);
+        if (split.length>2&&(vol||vol==0)) setVolume(vol/100);
+        else parent.classList.add("error");
+      }
+
+      function weekToVol(elem){
+        var times=elem.value.split("-W");
+        var years=(parseInt(times[0])+parseInt(times[1])/53-1970)*31557600000;
+        setVolume(years/new Date().getTime());
+      }
+
+      function setup(){
+        document.getElementById("audio").volume=0;
+        var wrappers=document.getElementsByClassName("inputwrapper");
+        for (var i=0;i<wrappers.length;i++){
+          var p=document.createElement("p");
+          p.innerHTML=wrappers[i].children[0].getAttribute("type");
+          wrappers[i].insertBefore(p,wrappers[i].children[0]);
+        }
+      }
+
+      setup();
+    </script>
+  <body>
+</html>
