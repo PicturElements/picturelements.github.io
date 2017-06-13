@@ -291,8 +291,8 @@ function sendEvent(obj,forceCheck){
   evt.parentObject=parent;
   evt.name=parent.name;
   obj.item.dispatchEvent(evt);
-  parent.oldValue=oldPV;
   if (parent.changeCallback) parent.changeCallback(parent,evt);
+  parent.oldValue=oldPV;
 }
 
 function propagateUnfocus(obj){
