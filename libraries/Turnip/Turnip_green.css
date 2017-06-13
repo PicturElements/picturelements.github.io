@@ -1,0 +1,199 @@
+/*GENERAL*/
+.inputwrapper {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.inputitem {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 0.5em;
+}
+
+/*SLIDER*/
+.inputitem[type="slider"] {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  flex-wrap: wrap;
+}
+
+.sliderbox {
+  flex-grow: 1;
+  height: 2em;
+}
+
+.slidertext {
+  width: 5em;
+  border: none;
+  background: #555;
+  color: #aaa;
+  padding: 0.3em;
+  outline: none;
+}
+
+.sliderbar {
+  position: relative;
+  height: 0.4em;
+  background: #1b2;
+  border-radius: 0.4em;
+  margin: 0 1em;
+  margin-top: 0.8em;
+}
+
+.slidernub {
+  position: absolute;
+  width: 0.8em;
+  height: 0.8em;
+  background: #222;
+  border-radius: 50%;
+  border: 0.3em solid #1b2;
+  margin-top: -0.5em;
+  margin-left: -0.7em;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/*RADIO / BOOLEAN / MULTI*/
+.inputitem[type="radio"], .inputitem[type="multi"] {
+  margin-bottom: 0.5em;
+  /*flex-direction: column;*/
+}
+
+.togglebar {
+  display: flex;
+}
+
+.toggleitem {
+  display: flex;
+  justify-content: center;
+  background: #444;
+  color: #999;
+  padding: 0.4em 1em;
+  margin-left: 1px;
+  cursor: pointer;
+  font-size: 80%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.togglebar div:first-of-type {
+  border-radius: 0.25em 0 0 0.25em;
+  margin-left: 0;
+}
+
+.togglebar div:last-of-type {
+  border-radius: 0 0.25em 0.25em 0;
+}
+
+.togglebar div:first-of-type:last-of-type {
+  border-radius: 0.25em;
+}
+
+.inputitem .selected {
+  background: #1b2;
+  color: white;
+}
+
+/*TEXTAREA*/
+.inputitem[type="textarea"] {
+  display: block;
+  position: relative;
+  min-height: 200px;
+  padding-bottom: 1em;
+}
+
+.inputitem[type="textarea"] textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.3em 0.5em;
+  border: 1px solid #eeeeee;
+  margin: 0px;
+  min-height: 200px;
+}
+
+.CodeMirror {
+  min-height: 200px;
+  height: 100% !important;
+  border: 1px solid #eee;
+  font-size: 13px;
+}
+
+.CodeMirror-scroll {
+  min-height: 200px;
+}
+
+.resizebar {
+  position: absolute;
+  height: 1em;
+  width: 100%;
+  cursor: row-resize;
+  background: #eee;
+  touch-action: none;
+}
+
+/*GENERAL*/
+.inputitem > .inputitem {
+  width: auto;
+  margin-bottom: 0;
+}
+
+.inputitem > .lbl + .inputitem {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.lbl {
+  width: 100%;
+  border-top: 1px dashed rgba(255, 255, 255, 0.3);
+  padding-top: 1em;
+  margin-bottom: 0.5em;
+  color: white;
+  font-size: 80%;
+}
+
+.lbl:first-of-type, .lbl.noline {
+  padding-top: 0;
+  border: none;
+}
+
+.inputitem:not([type="slider"]) > .inputitem[type="radio"], .inputitem:not([type="slider"]) > .inputitem[type="multi"] {
+  margin-left: 0.5em;
+}
+
+.lbl + .inputitem {
+  margin-left: 0 !important;
+}
+
+.inputitem > .inputitem[type="slider"] {
+  width: 100%;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+/*UNFOCUS*/
+.unfocused > .sliderbox > .sliderbar {
+  background: #444;
+}
+
+.unfocused > .slidertext {
+  opacity: 0.5;
+}
+
+.unfocused > .sliderbox > .sliderbar > .slidernub {
+  border-color: #666;
+}
+
+.unfocused > .togglebar > .toggleitem {
+  background: #444;
+  color: #999;
+}
