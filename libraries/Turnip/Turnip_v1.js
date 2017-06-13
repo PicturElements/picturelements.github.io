@@ -45,6 +45,7 @@ function addSlider(parent,name,label,value,min,max,step,changeCallback){
     updateValue(data);
   });
   input.type="number";
+  input.step=step;
   var bar=document.createElement("div");
   bar.className="sliderbar";
   var nub=document.createElement("div");
@@ -103,8 +104,7 @@ function addRadioBool(isBool,parent,name,label,value,options,changeCallback){
     name:name,
     options:options,
     getValue:function(){
-      var pf=parseFloat(this.value);
-      return isNaN(pf)?this.value:pf;
+      return convertData(this.value);
     },
     changeCallback:changeCallback
   };
@@ -244,6 +244,12 @@ function addTextarea(parent,name,label,value,lang,changeCallback){
   parent.appendChild(wrapper);
   addCM(inputData[id]);
   return inputData[id];
+}
+
+function convertData(data){
+  if (data=="true"||data=="false") return data=="true";
+  if (!isNaN(data)) return parseFloat(data);
+  return data;
 }
 
 function addLabel(parent,str){
