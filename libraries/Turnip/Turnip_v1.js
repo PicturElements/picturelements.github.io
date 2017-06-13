@@ -290,8 +290,10 @@ function sendEvent(obj,forceCheck){
   evt.referenceObject=obj;
   evt.parentObject=parent;
   evt.name=parent.name;
-  obj.item.dispatchEvent(evt);
+  //call the callback before dispaching event, as the event can be used to finish
+  //things the callbacks did.
   if (parent.changeCallback) parent.changeCallback(parent,evt);
+  obj.item.dispatchEvent(evt);
   parent.oldValue=oldPV;
 }
 
