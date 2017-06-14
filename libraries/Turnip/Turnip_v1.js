@@ -247,6 +247,7 @@ function addTextarea(parent,name,label,value,lang,changeCallback){
 }
 
 function convertData(data){
+  if (typeof data!="string") return data;
   if (data=="true"||data=="false") return data=="true";
   if (!isNaN(data)) return parseFloat(data);
   return data;
