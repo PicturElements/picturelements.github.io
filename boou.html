@@ -53,8 +53,15 @@
       boo.style.display="block";
       
       try{
-        if (name.includes("turtle")||name.includes("att")){
+        var lc=name.toLowerCase();
+        if (lc.includes("turtle")||lc.includes("att")){
           boo.innerHTML="Except for his onion hate, there is nothing wrong with Awkward.";
+          boo.style.textAlign="center";
+        }else if (lc.includes("picturelements")){
+          boo.innerHTML="PE is the best. And he's got a magnum dong.";
+          boo.style.textAlign="center";
+        }else if (lc.includes("pussgurka")||lc.includes("pg")){
+          boo.innerHTML="PG is bae.";
           boo.style.textAlign="center";
         }
       }catch(e){}
