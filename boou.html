@@ -52,26 +52,23 @@
       boo.innerHTML=boo.innerHTML.replace(/USERNAME/g,name);
       boo.style.display="block";
       
-      try{
-        var lc=name.toLowerCase();
-        if (lc.includes("turtle")||lc.includes("att")){
-          boo.innerHTML="Except for his onion hate, there is nothing wrong with Awkward.";
-          boo.style.textAlign="center";
-        }else if (lc.includes("picturelements")){
-          boo.innerHTML="PE is the best. And he's got a magnum dong.";
-          boo.style.textAlign="center";
-        }else if (lc.includes("pussgurka")||lc.includes("pg")){
-          boo.innerHTML="PG is bae.";
-          boo.style.textAlign="center";
-        }
-      }catch(e){}
-      
       String.prototype.tst=function(){
         for (var i=0;i<arguments.length;i++){
           var regex=new RegExp(arguments[i],"gi");
           if (regex.test(this)) return true;
         }
         return false;
+      }
+      
+      var repl=null;
+      if (name.tst("turtle","att")) repl="Except for his onion hate, there is nothing wrong with Awkward.";
+      else if (name.tst("picturelements")) repl="PE is the best. And he's got a magnum dong.";
+      else if (name.tst("pussgurka","pg")) repl="PG is bae.";
+      else if (name.tst("merari")) repl="Mera is bae";
+      
+      if (repl){
+        boo.innerHTML=repl;
+        boo.style.textAlign="center";
       }
     </script>
   </body>
