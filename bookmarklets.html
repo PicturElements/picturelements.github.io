@@ -1,0 +1,313 @@
+<html>
+  <head>
+    <title>Bookmarklets</title>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700" rel="stylesheet">
+    <style>
+      body{
+        position:absolute;
+        margin:0;
+        font-family:Quicksand,monospace;
+        min-height:100vh;
+      }
+
+      #main {
+        margin-bottom: 4em;
+      }
+
+      h1{
+        text-align:center;
+      }
+
+      h2 {
+        color: #6b6bc5;
+        margin-bottom: 0;
+        font-size:110%;
+        padding: 0.3em;
+        background: #bcbcff;
+        cursor:pointer;
+      }
+
+      h3{
+        font-size:80%;
+        margin:0;
+        margin:0.7em 0 0.3em 0;
+        color:#aaa;
+      }
+
+      h3:first-of-type {
+        margin-top: 0;
+      }
+
+      h2:after{
+        content:"";
+        display:block;
+        position:absolute;
+        right:0.6em;
+        top:0.5em;
+        border:0.3em solid transparent;
+        border-bottom-color:#6b6bc5;
+      }
+
+      h2[expanded="false"]:after{
+        border-bottom-color:transparent;
+        border-top-color:#6b6bc5;
+        top:0.8em;
+      }
+
+      #contents {
+        display: inline-block;
+        position: relative;
+        max-width: 90%;
+        left: 5%;
+        background: whitesmoke;
+        white-space: nowrap;
+        padding: 10px;
+      }
+
+      #contents span {
+        display: inline-block;
+        font-weight: bold;
+        margin-bottom: 0.25em;
+      }
+
+      .contentitem {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        line-height: 1.6em;
+      }
+
+      #contents a {
+        color: #6b6bc5;
+        text-decoration: none;
+      }
+
+      button {
+        background: #bcbcff;
+        color: #42429a;
+        border: none;
+        outline:none;
+        cursor: pointer;
+        margin-left: 1.5em;
+        height: 1.5em;
+        line-height: 1em;
+        border-radius: 0.2em;
+        font-family: inherit;
+      }
+
+      h3 button {
+        margin-left: 0.5em;
+      }
+
+      .bookmarklet {
+        display: block;
+        position: relative;
+        width: 90%;
+        left: 5%;
+        box-sizing: border-box;
+        border-left: 3px solid #bcbcff;
+      }
+
+      .bookbox {
+        margin-left: 10px;
+        border: 1px solid #eee;
+        border-top: none;
+        border-left: none;
+        padding: 0 10px 10px 0;
+        margin-top:10px;
+        overflow:hidden;
+      }
+
+      h2[expanded="false"] + .bookbox{
+        height:0;
+        padding:0;
+        margin:0;
+        margin-bottom:-0.4em;
+      }
+
+      textarea{
+        resize:vertical;
+        width:100%;
+        min-height:7em;
+        border:none;
+        outline:none;
+        box-sizing:border-box;
+        padding:0.5em;
+        background:#eee;
+        margin-top: 0.2em;
+      }
+
+      #footer {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        height: 4em;
+        line-height: 4em;
+        bottom: 0;
+      }
+
+      #msgwrapper{
+        display:flex;
+        position:fixed;
+        justify-content:center;
+        align-items:flex-start;
+        top:0;
+        width:100%;
+        height:100%;
+        pointer-events:none;
+      }
+
+      #msg{
+        position:relative;
+        background:white;
+        padding:0.5em 1em;
+        border-radius:0.25em;
+        border:1px solid #ddd;
+        box-shadow:0.3em 0.3em 1em rgba(0,0,0,0.15);
+        margin-top:-3em;
+      }
+
+      #msg.pop{
+        animation:popup 2s alternate 2;
+      }
+
+      @keyframes popup{
+        15%{margin-top:2.5em;}
+        25%{margin-top:1.5em;}
+        100%{margin-top:1.5em;}
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <h1>PE's bookmarklets</h1>
+      <div id="contents">
+        <span>Contents</span>
+      </div>
+      <div id="bookwrapper"></div>
+    </div>
+    <div id="footer">©2017 PicturElements</div>
+    <div id="msgwrapper">
+      <div id="msg"></div>
+    </div>
+    <script>
+      var bw=document.getElementById("bookwrapper");
+
+      function createBookBox(obj){
+        var bm=document.createElement("div");
+        bm.className="bookmarklet";
+        bm.id=obj.name;
+        var header=bm.addTextElement("h2",obj.name);
+        header.onclick=toggleVisible;
+        header.setAttribute("expanded",true);
+
+        var box=document.createElement("div");
+        box.className="bookbox";
+        box.addTextElement("span",obj.description,"Description");
+
+        var clbl=box.addTextElement("h3","Code");
+        addCopyButton(clbl,obj.name,"copy",true);
+        var ta=document.createElement("textarea");
+        ta.value=obj.code;
+        ta.setAttribute("readonly","");
+        box.appendChild(ta);
+
+        if (obj.notes) box.addTextElement("span",obj.notes,"Notes");
+        box.addTextElement("span",obj.version,"Version");
+        box.addTextElement("span",obj.changelog,"Changelog");
+        box.addTextElement("span",toTimeString(obj.published),"Latest revision");
+
+        addContentItem(obj.name);
+
+        bm.appendChild(box);
+        bw.appendChild(bm);
+      }
+
+      function addContentItem(name,elem,inner){
+        var wrapper=document.createElement("div");
+        wrapper.className="contentitem";
+        var link=document.createElement("a");
+        link.innerHTML=name;
+        link.href="#"+name;
+        wrapper.appendChild(link);
+        addCopyButton(wrapper,name,"code");
+        (elem || document.getElementById("contents")).appendChild(wrapper);
+      }
+
+      function addCopyButton(elem,name,inner,preventJump){
+        var btn=document.createElement("button");
+        btn.innerHTML=inner;
+        btn.addEventListener("click",function(){
+          relayCopy(name,preventJump);
+        });
+        elem.appendChild(btn);
+      }
+
+      function relayCopy(name,preventJump){
+        var h2=document.getElementById(name).children[0];
+        if (h2.getAttribute("expanded")=="false") h2.click();
+        if (!preventJump) window.location.href=window.location.href.split("#")[0]+"#"+name;
+        copy(name,preventJump?0:500);
+      }
+
+      function copy(name,timeout){
+        var ta=document.getElementById(name).getElementsByTagName("textarea")[0];
+        ta.select();
+        setTimeout(function(){
+          msg(document.execCommand("copy")?("Copied "+name+"!"):"Copy failed.");
+        },timeout);
+      }
+
+      function msg(m){
+        var msg=document.getElementById("msg");
+        msg.innerHTML=m;
+        msg.classList.add("pop");
+        setTimeout(function(){
+          msg.classList.remove("pop");
+        },5000);
+      }
+
+      Element.prototype.addTextElement=function(tag,content,title){
+        if (title) this.addTextElement("h3",title);
+        var elem=document.createElement(tag);
+        elem.innerHTML=content;
+        this.appendChild(elem);
+        return elem;
+      };
+
+      function toggleVisible(){
+        this.setAttribute("expanded",this.getAttribute("expanded")=="false");
+      }
+
+      function toTimeString(epoch) {
+        var time = Math.floor((new Date().getUTCTime() / 1000) - epoch) / 60;
+        var units = [525960, "year", 43830, "month", 1440, "day", 60, "hour", 1, "minute"],
+            out = [];
+        for (var i = 0; i < units.length; i += 2) {
+          var newTime = Math.floor(time / units[i]);
+          if (newTime)
+            out.push(newTime + " " + units[i + 1] + (newTime == 1 ? '' : 's'));
+          time = time % units[i]
+        }
+        out = out.splice(0, 3);
+        return out.join(", ") + " ago";
+      }
+
+      Date.prototype.getUTCTime=function(){
+        return this.getTime()+this.getTimezoneOffset()*60000;
+      };
+
+      var xhr=new XMLHttpRequest();
+      xhr.onreadystatechange=function(){
+        if (this.readyState==4&&this.status==200){
+          var data=JSON.parse(xhr.responseText);
+          for (var i in data){
+            createBookBox(data[i]);
+          }
+        }
+      };
+      xhr.open("GET","https://picturelements.github.io/textfiles/bookmarklets.json",true);
+      xhr.send();
+    </script>
+  </body>
+</html>
