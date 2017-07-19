@@ -6,7 +6,8 @@
     "version":"2.5",
     "notes":"MannoNazi supports duration input in minutes/hours/days/months/years. Example: \"5 years 23 days\" or \"34 hours 2 days\". The order doesn't matter and you will be given an interpreted duration before the analysis begins.",
     "changelog":"This is the first public version of this bookmarklet.",
-    "published":"1500000000"
+    "published":"1500000000",
+    "domain":"reddit.com"
   },
   {
     "name":"Lookup",
@@ -15,7 +16,8 @@
     "version":"3",
     "notes":"Separate subreddit names by commas to browse many subs. The names are not case sensitive.",
     "changelog":"This is the first public version of this bookmarklet.",
-    "published":"1500000000"
+    "published":"1500000000",
+    "domain":"reddit.com"
   },
   {
     "name":"Anon",
@@ -24,7 +26,8 @@
     "version":"2",
     "notes":"Should also work in MannoMail.",
     "changelog":"This is the first public version of this bookmarklet.",
-    "published":"1500000000"
+    "published":"1500000000",
+    "domain":"reddit.com"
   },
   {
     "name":"Nuke",
@@ -33,6 +36,7 @@
     "version":"1",
     "notes":"Toolbox has this feature implemented.",
     "changelog":"This is the first public version of this bookmarklet.",
-    "published":"1500000000"
+    "published":"1500000000",
+    "domain":"reddit.com"
   }
 ]
