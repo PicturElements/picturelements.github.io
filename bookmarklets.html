@@ -8,6 +8,7 @@
         position:absolute;
         margin:0;
         font-family:Quicksand,monospace;
+        width: 100%;
         min-height:100vh;
       }
 
@@ -17,7 +18,6 @@
 
       h1{
         text-align:center;
-        margin-top: 0.5em;
       }
 
       h2 {
@@ -82,23 +82,61 @@
       #contents a {
         color: #6b6bc5;
         text-decoration: none;
+        height: 100%;
       }
 
       button {
         background: #bcbcff;
         color: #42429a;
         border: none;
-        outline:none;
+        outline: none;
         cursor: pointer;
         margin-left: 1.5em;
         height: 1.5em;
+        padding: 0 0.5em;
         line-height: 1em;
         border-radius: 0.2em;
         font-family: inherit;
+        font-size: inherit;
       }
 
       h3 button {
         margin-left: 0.5em;
+      }
+
+      .dragbtn {
+        font-size:0;
+      }
+
+      .copygroup {
+        display: inline-block;
+        height: 1.5em;
+      }
+
+      .contentitem .copygroup {
+        font-size: 90%;
+        display: flex;
+        align-items: center;
+      }
+
+      .dragbtn:before {
+        display: inline-block;
+        content: "drag";
+        color: #115a17;
+        font-weight: normal;
+        padding: 0 0.5em;
+        background: #77ec81;
+        height: 1.5em;
+        line-height: 1.5em;
+        border-radius: 0.2em;
+        margin-left: 0.5em;
+        font-size: 0.8rem;
+        text-decoration:none;
+      }
+
+      .contentitem .dragbtn:before {
+        font-size: 0.9rem;
+        margin-left:0.3em;
       }
 
       .bookmarklet {
@@ -107,17 +145,26 @@
         width: 90%;
         left: 5%;
         box-sizing: border-box;
-        border-left: 3px solid #bcbcff;
       }
 
       .bookbox {
-        margin-left: 10px;
+        padding: 1em;
         border: 1px solid #eee;
         border-top: none;
-        border-left: none;
-        padding: 0 10px 10px 0;
-        margin-top:10px;
-        overflow:hidden;
+        overflow: hidden;
+      }
+
+      .bookbox > *{
+        display:block;
+        position:relative;
+      }
+
+      .half {
+        width: 50%;
+        float: left;
+        margin-top:0.5em;
+        padding-top: 0.5em;
+        border-top: 1px solid #eee;
       }
 
       h2[expanded="false"] + .bookbox{
@@ -125,6 +172,11 @@
         padding:0;
         margin:0;
         margin-bottom:-0.4em;
+        border:none;
+      }
+
+      .bookmarklet:last-of-type .bookbox{
+        margin-bottom:0;
       }
 
       textarea{
@@ -136,7 +188,7 @@
         box-sizing:border-box;
         padding:0.5em;
         background:#eee;
-        margin-top: 0.2em;
+        margin-top: 0.4em;
       }
 
       #footer {
@@ -178,6 +230,18 @@
         25%{margin-top:1.5em;}
         100%{margin-top:1.5em;}
       }
+
+      ::-webkit-scrollbar {
+        width: 1em;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #ccc;
+      }
+
+      ::-webkit-scrollbar-corner {
+        background:#ddd;
+      }
     </style>
   </head>
   <body>
@@ -208,48 +272,66 @@
         box.addTextElement("span",obj.description,"Description");
 
         var clbl=box.addTextElement("h3","Code");
-        addCopyButton(clbl,obj.name,"copy",true);
+        addCopyGroup(clbl,obj,"copy",true);
         var ta=document.createElement("textarea");
         ta.value=obj.code;
         ta.setAttribute("readonly","");
         box.appendChild(ta);
 
         if (obj.notes) box.addTextElement("span",obj.notes,"Notes");
-        box.addTextElement("span",obj.version,"Version");
         box.addTextElement("span",obj.changelog,"Changelog");
-        box.addTextElement("span",toTimeString(obj.published),"Latest revision");
+        var half=document.createElement("div");
+        half.className="half";
+        var half2=half.cloneNode();
+        half.addTextElement("span",obj.version,"Version");
+        half2.addTextElement("span",toTimeString(obj.published),"Latest revision");
 
-        addContentItem(obj.name);
+        box.appendChild(half);
+        box.appendChild(half2);
+
+        addContentItem(obj);
 
         bm.appendChild(box);
         bw.appendChild(bm);
       }
 
-      function addContentItem(name,elem,inner){
+      function addContentItem(obj,elem,inner){
         var wrapper=document.createElement("div");
         wrapper.className="contentitem";
         var link=document.createElement("a");
-        link.innerHTML=name;
-        link.href="#"+name;
+        link.innerHTML=obj.name;
+        link.href="#"+obj.name;
         wrapper.appendChild(link);
-        addCopyButton(wrapper,name,"code");
+        addCopyGroup(wrapper,obj,"code");
         (elem || document.getElementById("contents")).appendChild(wrapper);
       }
 
-      function addCopyButton(elem,name,inner,preventJump){
+      function addCopyGroup(elem,obj,inner,preventJump){
+        var group=document.createElement("div");
+        group.className="copygroup";
         var btn=document.createElement("button");
         btn.innerHTML=inner;
         btn.addEventListener("click",function(){
-          relayCopy(name,preventJump);
+          relayCopy(obj.name,preventJump);
         });
-        elem.appendChild(btn);
+        group.appendChild(btn);
+        var a=document.createElement("a");
+        a.className="dragbtn";
+        a.href=obj.code;
+        a.innerHTML=obj.name+" v"+obj.version;
+        a.addEventListener("click",function(evt){
+          msg("Drag this to the bookmark bar!");
+          evt.preventDefault();
+        });
+        group.appendChild(a);
+        elem.appendChild(group);
       }
 
       function relayCopy(name,preventJump){
         var h2=document.getElementById(name).children[0];
         if (h2.getAttribute("expanded")=="false") h2.click();
         if (!preventJump) window.location.href=window.location.href.split("#")[0]+"#"+name;
-        copy(name,preventJump?0:500);
+        copy(name,preventJump?0:300);
       }
 
       function copy(name,timeout){
