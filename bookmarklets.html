@@ -12,21 +12,93 @@
         min-height:100vh;
       }
 
+      #header{
+        position: fixed;
+        top:0;
+        display: flex;
+        flex-direction:column;
+        border-bottom: 1px solid #ddd;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        background: whitesmoke;
+        width: 100%;
+        z-index: 10000;
+        height:6.5em;
+        overflow:hidden;
+        transition:height 300ms;
+      }
+
+      #header.minimized{
+        height:3em;
+      }
+
+      #header.minimized #logowrapper:first-of-type{
+        margin-top:-6.5em;
+      }
+
+      #header > div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        flex-shrink:0;
+        transition:margin-top 300ms;
+      }
+
+      #logowrapper{
+        height:6.5em;
+      }
+
+      #quicklinks{
+        height:3em;
+      }
+
+      #quicklinks a {
+        padding: 0.25em 0.4em;
+        border-radius: 0.3em;
+        text-decoration: none;
+        color: #6b6bc5;
+      }
+
+      a.selected {
+        background: #6b6bc5;
+        color: white !important;
+      }
+
+      #logo {
+        width: 4.5em;
+        height: 4.5em;
+        background-image: url(https://picturelements.github.io/images/PEB.png);
+        background-size: 100%;
+        margin-right:1em;
+      }
+
       #main {
         margin-bottom: 4em;
       }
 
+      #topcontent {
+        display: flex;
+        position: relative;
+        align-items:flex-start;
+        margin-top: 9em;
+        width: 90%;
+        left: 5%;
+      }
+
       h1{
-        text-align:center;
+        font-size:225%;
+        color:#272338;
+        margin:0;
       }
 
       h2 {
         color: #6b6bc5;
         margin-bottom: 0;
         font-size:110%;
-        padding: 0.3em;
+        padding: 0.3em 0.5em;
         background: #bcbcff;
         cursor:pointer;
+        margin-top:1.5em;
       }
 
       h3{
@@ -34,6 +106,12 @@
         margin:0;
         margin:0.7em 0 0.3em 0;
         color:#aaa;
+      }
+
+      h4{
+        font-size:130%;
+        margin-top:0;
+        margin-bottom:0.5em;
       }
 
       h3:first-of-type {
@@ -57,13 +135,20 @@
       }
 
       #contents {
-        display: inline-block;
-        position: relative;
-        max-width: 90%;
-        left: 5%;
         background: whitesmoke;
         white-space: nowrap;
         padding: 10px;
+        border: 1px solid #ddd;
+      }
+
+      #desc {
+        margin-left: 2em;
+        flex-grow: 1;
+      }
+
+      #desc a{
+        font-weight:bold;
+        text-decoration:none;
       }
 
       #contents span {
@@ -152,6 +237,7 @@
         border: 1px solid #eee;
         border-top: none;
         overflow: hidden;
+        background:#fafafa;
       }
 
       .bookbox > *{
@@ -159,19 +245,20 @@
         position:relative;
       }
 
-      .half {
-        width: 50%;
+      .third {
+        width: 33.33%;
         float: left;
         margin-top:0.5em;
-        padding-top: 0.5em;
-        border-top: 1px solid #eee;
+        padding-top: 1em;
+        border-top: 1px solid #e5e5e5;
+        text-align:center;
       }
 
       h2[expanded="false"] + .bookbox{
         height:0;
         padding:0;
         margin:0;
-        margin-bottom:-0.4em;
+        margin-bottom:-1em;
         border:none;
       }
 
@@ -186,9 +273,11 @@
         border:none;
         outline:none;
         box-sizing:border-box;
+        border:1px solid #ddd;
         padding:0.5em;
         background:#eee;
-        margin-top: 0.4em;
+        color:#117;
+        margin-top: 0.5em;
       }
 
       #footer {
@@ -209,6 +298,7 @@
         width:100%;
         height:100%;
         pointer-events:none;
+        z-index:10001;
       }
 
       #msg{
@@ -226,13 +316,13 @@
       }
 
       @keyframes popup{
-        15%{margin-top:2.5em;}
-        25%{margin-top:1.5em;}
-        100%{margin-top:1.5em;}
+        15%{margin-top:3em;}
+        25%{margin-top:2em;}
+        100%{margin-top:2em;}
       }
 
       ::-webkit-scrollbar {
-        width: 1em;
+        background:#eee;
       }
 
       ::-webkit-scrollbar-thumb {
@@ -243,12 +333,26 @@
         background:#ddd;
       }
     </style>
-  </head>
+  <head>
   <body>
     <div id="main">
-      <h1>PE's bookmarklets</h1>
-      <div id="contents">
-        <span>Contents</span>
+      <div id="header">
+        <div id="logowrapper">
+          <div id="logo"></div>
+          <h1>PE's bookmarklets</h1>
+        </div>
+        <div id="quicklinks"></div>
+      </div>
+      <div id="topcontent">
+        <div id="contents">
+          <span>Contents</span>
+        </div>
+        <div id="desc">
+          <h4>Welcome to PE's bookmarklet page!</h4>
+          <p>
+            This is the place where I store the little bookmarklets I've written. All bookmarklets are free to use, share, and modify, as per <a href="http://www.wtfpl.net/">the WTFPL license</a>. Each bookmarklet is designed for a specific purpose and a specific site. Bookmarklets are not guaranteed to work on other sites than the ones specified in the domain section for each. You can copy the code by selection or pressing the copy button and create a bookmarklet manually, or optimally drag the drag button to the taskbar field and the browser will create a bookmarklet automatically.
+          </p>
+        </div>
       </div>
       <div id="bookwrapper"></div>
     </div>
@@ -272,7 +376,7 @@
         box.addTextElement("span",obj.description,"Description");
 
         var clbl=box.addTextElement("h3","Code");
-        addCopyGroup(clbl,obj,"copy",true);
+        addCopyGroup(clbl,obj,true);
         var ta=document.createElement("textarea");
         ta.value=obj.code;
         ta.setAttribute("readonly","");
@@ -280,14 +384,19 @@
 
         if (obj.notes) box.addTextElement("span",obj.notes,"Notes");
         box.addTextElement("span",obj.changelog,"Changelog");
-        var half=document.createElement("div");
-        half.className="half";
-        var half2=half.cloneNode();
-        half.addTextElement("span",obj.version,"Version");
-        half2.addTextElement("span",toTimeString(obj.published),"Latest revision");
+        var third=document.createElement("div");
+        third.className="third";
+        var third2=third.cloneNode(),
+            third3=third.cloneNode();
+        third.addTextElement("span",obj.version,"Version");
+        var time=third2.addTextElement("span",toTimeString(obj.published),"Latest revision");
+        time.classList="timestamp";
+        time.timestamp=obj.published;
+        third3.addTextElement("span",obj.domain,"Domain");
 
-        box.appendChild(half);
-        box.appendChild(half2);
+        box.appendChild(third);
+        box.appendChild(third2);
+        box.appendChild(third3);
 
         addContentItem(obj);
 
@@ -301,23 +410,24 @@
         var link=document.createElement("a");
         link.innerHTML=obj.name;
         link.href="#"+obj.name;
+        document.getElementById("quicklinks").appendChild(link.cloneNode(true));
         wrapper.appendChild(link);
-        addCopyGroup(wrapper,obj,"code");
+        addCopyGroup(wrapper,obj);
         (elem || document.getElementById("contents")).appendChild(wrapper);
       }
 
-      function addCopyGroup(elem,obj,inner,preventJump){
+      function addCopyGroup(elem,obj,preventJump){
         var group=document.createElement("div");
         group.className="copygroup";
         var btn=document.createElement("button");
-        btn.innerHTML=inner;
+        btn.innerHTML="copy";
         btn.addEventListener("click",function(){
           relayCopy(obj.name,preventJump);
         });
         group.appendChild(btn);
         var a=document.createElement("a");
         a.className="dragbtn";
-        a.href=obj.code;
+        a.href=minify(obj.code);
         a.innerHTML=obj.name+" v"+obj.version;
         a.addEventListener("click",function(evt){
           msg("Drag this to the bookmark bar!");
@@ -363,6 +473,19 @@
         this.setAttribute("expanded",this.getAttribute("expanded")=="false");
       }
 
+      function minify(str){
+        return str.replace(/\n/g,"").replace(/ +/g," ");
+      }
+
+      function updateTimestamps(){
+        var times=document.getElementsByClassName("timestamp");
+        for (var i=0;i<times.length;i++){
+          times[i].innerHTML=toTimeString(times[i].timestamp);
+        }
+      }
+
+      setInterval(updateTimestamps,10000);
+
       function toTimeString(epoch) {
         var time = Math.floor((new Date().getUTCTime() / 1000) - epoch) / 60;
         var units = [525960, "year", 43830, "month", 1440, "day", 60, "hour", 1, "minute"],
@@ -379,6 +502,28 @@
 
       Date.prototype.getUTCTime=function(){
         return this.getTime()+this.getTimezoneOffset()*60000;
+      };
+
+      document.onscroll=function(){
+        var ht=document.getElementsByTagName("h2")[0].getBoundingClientRect().top,
+            header=document.getElementById("header"),
+            lg=document.getElementById("logowrapper").getBoundingClientRect().height,
+            ql=document.getElementById("quicklinks").getBoundingClientRect().height;
+        if (ht-lg>0) header.classList.remove("minimized");
+        else header.classList.add("minimized");
+
+        var sel=header.getElementsByClassName("selected")[0];
+        if (sel) sel.classList.remove("selected");
+
+        var urlArr=window.location.href.split("#"),
+            h2s=document.getElementsByTagName("h2"),
+            offs=document.body.scrollHeight-document.body.scrollTop-window.innerHeight;
+        for (var i=h2s.length-1;i>=0;i--){
+          if (h2s[i].getBoundingClientRect().top-ql<=0||!i||offs<20){
+            header.getElementsByTagName("a")[i].classList.add("selected");
+            break;
+          }
+        }
       };
 
       var xhr=new XMLHttpRequest();
