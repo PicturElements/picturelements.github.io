@@ -19,7 +19,7 @@ var solitaires={
     name:"Klondike",
     cardinfo:{
       viewmode:"down",  //default direction cards are placed
-      cardcount:[3]   //hearts,clubs,diamonds,spades
+      cardcount:[13]   //hearts,clubs,diamonds,spades
     },
     generalinfo:{
       redeals:Infinity,
