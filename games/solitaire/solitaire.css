@@ -40,10 +40,47 @@ body[expanded="true"] #gameinfo{
   margin-top:-2.5em;
 }
 
-#settingsinfo{
-  width:100%;
-  text-align:center;
-  font-size:130%;
+#settingsinfo {
+  display: flex;
+  width: 100%;
+  font-size: 130%;
+}
+
+.settingsitem {
+  flex-grow: 1;
+  flex-basis: 0;
+  text-align: center;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.settingsitem + .settingsitem {
+  border-left: 1px solid #338a28;
+}
+
+.settingsitem:after {
+  content: "";
+  display: block;
+  position: relative;
+  width: 130%;
+  margin-left: -15%;
+  height: 10px;
+  box-shadow: 0 0 2em 0.5em #3d9c4b;
+  bottom: -1em;
+  z-index:-1;
+  transition: bottom 300ms;
+}
+
+.settingsitem.selected:after{
+  bottom:0;
+}
+
+.settingsitem.hidden{
+  display:none;
+}
+
+.settingsitem.hidden.selected{
+  display:block;
 }
 
 #gameinfo > div{
@@ -69,6 +106,12 @@ body[expanded="true"] #gameinfo{
   display: flex;
   flex-direction: column;
 }
+
+/*body[expanded="true"] #gamecontainer {
+  -moz-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}*/
 
 #gamecontainer > div:first-of-type{
   margin-top:3em;
@@ -120,15 +163,11 @@ body[expanded="true"] #gameinfo{
   pointer-events:none;
 }
 
-.cmovable .cardwrapper .card{
-  pointer-events: auto;
-}
-
 .contentbar > .cardwrapper:not(.moving), .contentbar > .cardwrapper > .cardwrapper:not(.moving){
   margin-top:0;
 }
 
-.card:hover,.packet:hover,.moving > .card{
+.card:hover,.packet:hover,.moving > .card,.hint{
   box-shadow:0 0 1em #0af,0 0 1em #0af !important;
 }
 
@@ -148,7 +187,7 @@ body[expanded="true"] #gameinfo{
 .card:not(.bottom){
   background:white;
   box-shadow:0 -0.5em 1em rgba(0,0,0,0.3);
-  border: 0.1em solid #ddd;
+  border: 1px solid #ddd;
 }
 
 .card.bottom{
@@ -175,11 +214,12 @@ body[expanded="true"] #gameinfo{
 }
 
 .cardwrapper .cardwrapper .card:not(.hidden){
-  background: #eee;
+  background: #ddd;
 }
 
 .cmovable .cardwrapper .card{
   background:white !important;
+  pointer-events:auto;
 }
 
 .packets{
@@ -205,21 +245,6 @@ body[expanded="true"] #gameinfo{
 
 .packet .card{
   pointer-events:none !important;
-}
-
-.pile[redealable] .card.bottom:after{
-  content: "↻";
-  display: flex;
-  color: rgba(255,255,255,0.3);
-  font-size: 5em;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-}
-
-.pile[redealable="false"] .card.bottom:after{
-  content: "⨉";
 }
 
 .dump{
@@ -283,9 +308,13 @@ body[expanded="true"] #gameinfo{
   margin:0 !important;
 }
 
-.winning{
-  transition:transform 500ms, left 500ms, top 500ms;
+/*.winning{
+  transition:transform 500ms, left 500ms, top 500ms, box-shadow 500ms;
   pointer-events:none !important;
+}*/
+
+.card.winning{
+  box-shadow:0 0 1em rgba(0,0,0,0.3) !important;
 }
 
 .collapse .cardwrapper{
@@ -315,25 +344,53 @@ svg{
   fill:#c00;
 }
 
+.card[data-suit="3"] > svg path:first-of-type{
+  stroke-width: 0.5;
+  stroke: black;
+} 
+
 .card.hidden circle{
   fill: none;
   stroke: white;
   stroke-width: 3;
 }
 
+.card.bottom path {
+  fill: none;
+  stroke: white;
+  stroke-width: 1.8;
+}
+
+.card.bottom svg {
+  opacity: 0.3;
+}
+
+.deck[redealable="true"] .noredealable, .deck[redealable="false"] .redealable {
+  display: none;
+}
+
 /*UI stuff*/
 
-.btn{
+#buttonwrapper{
   position:absolute;
+  top:0;
+}
+
+.btn{
+  position:relative;
   width:3em;
   height:3em;
   border-radius:50%;
-  top:0;
   margin:0.5em;
   cursor:pointer;
   transition:background 500ms;
   background:rgba(0,0,0,0.6);
   z-index: 20000;
+  transition:opacity 200ms;
+}
+
+.btn + .btn{
+  z-index:15000;
 }
 
 .btn span{
@@ -345,14 +402,65 @@ svg{
   line-height:1.5em;
 }
 
-#restartbutton{
-  top:3.5em;
-}
-
-#actionbutton path{
+.btn path{
   stroke:white;
   stroke-width:2;
   transition:d 200ms;
+  fill:none;
+}
+
+.btn[data-title]:after {
+  content: attr(data-title);
+  display: inline-block;
+  position: absolute;
+  white-space: nowrap;
+  padding: 0.25em 0.5em;
+  border-radius: 0.25em;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  height: 1em;
+  line-height: 1em;
+  top: 0.75em;
+  left: 3em;
+  opacity:0;
+  pointer-events:none;
+  transition:left 200ms, opacity 200ms;
+}
+
+.btn[data-title]:hover:after{
+  transition-delay:500ms;
+  left:3.5em;
+  opacity:1;
+}
+
+.btn[data-hints="0"]{
+  opacity:0.6;
+}
+
+#hintbutton[data-level="2"]{
+  display:none;
+}
+
+#hintbutton:not([data-hints="0"]):not([data-level="1"]):before {
+  content: attr(data-hints);
+  display: block;
+  position: absolute;
+  color: white;
+  text-align: center;
+  min-width: 0.6em;
+  height: 1.3em;
+  padding: 0 0.4em;
+  line-height: 1.3em;
+  background: #f14f4f;
+  border-radius: 1em;
+  left: 2.5em;
+  margin: -0.4em;
+  pointer-events: none;
+}
+
+body[expanded="true"] #actionbutton:after{
+  opacity:0 !important;
+  left:3em !important;
 }
 
 body[expanded="true"] #actionbutton path:nth-of-type(1){
@@ -377,20 +485,31 @@ body[expanded="true"] #actionbutton{
   top:0;
   height:0;
   margin-top:1px;
-  background:rgba(0,0,0,0.7);
+  background:rgba(0,0,0,0.8);
   transition:height 500ms;
   z-index:20000;
   overflow:hidden;
+  white-space: nowrap;
 }
 
 body[expanded="true"] #actionscreen{
   height:100%;
 }
 
-.actionwrapper{
-  display:inline-block;
-  width:100%;
-  height:100%;
+.actionwrapper {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  transition: margin-left 500ms;
+}
+
+.actionwrapper + .actionwrapper{
+  margin-left:-0.25em;
+}
+
+#showcase {
+  padding: 2em;
   overflow: auto;
 }
 
@@ -403,7 +522,8 @@ body[expanded="true"] #actionscreen{
   cursor: pointer;
   transition: background 100ms;
   margin: 1em;
-  left: 10em;
+  left: 8em;
+  border: 1px solid rgba(255,255,255,0.1);
 }
 
 .showcaseitem:hover{
@@ -426,6 +546,37 @@ body[expanded="true"] #actionscreen{
   position: relative;
   text-align: center;
   margin: 0.85em 0 0 0;
+}
+
+.textpage {
+  color: white;
+  margin: 5em 20%;
+  overflow: hidden;
+  white-space: normal;
+}
+
+.textpage h2 {
+  margin-bottom: -0.4em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px dashed rgba(255,255,255,0.3);
+}
+
+.textpage p + h2{
+  margin-top:3em;
+}
+
+.textpage p {
+  font-size: 115%;
+}
+
+.textpage a {
+  text-decoration: none;
+  color: #5af;
+}
+
+#inputarea {
+  margin: 5em 20%;
+  font-size: 120%;
 }
 
 ::-webkit-scrollbar {
