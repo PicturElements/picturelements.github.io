@@ -1,4 +1,5 @@
-----START BOOKMARKLET (MannoMarker)----
+----START BOOKMARKLET----
+MannoMarker
 
 javascript:
 var authors = document.querySelectorAll(".content[role='main'] a.author"),
@@ -155,9 +156,8 @@ Proceed?")) {
   }
 }
 
-----END----
-
-----START BOOKMARKLET (Lookup)----
+----START BOOKMARKLET----
+Lookup
 
 javascript: (function(){
   var uData = [],
@@ -262,9 +262,8 @@ javascript: (function(){
   getUserData();
 })();
 
-----END----
-
-----START BOOKMARKLET (Anon)----
+----START BOOKMARKLET----
+Anon
 
 javascript: (function() {
   var usernames = document.querySelectorAll(".content[role=main] .md a[href*='/u/'],.content[role=main] .md a[href*='/user/'], .md a[href*='/u/'], .sitetable .author[href*='/user/'], a[class*='_author'], .ModAction__author"),
@@ -317,9 +316,8 @@ javascript: (function() {
   }
 })();
 
-----END----
-
-----START BOOKMARKLET (Nuke)----
+----START BOOKMARKLET----
+Nuke
 
 javascript: (function() {
   var prevElem = document.body,
@@ -374,5 +372,3 @@ javascript: (function() {
     return elem;
   }
 })()
-
-----END----
