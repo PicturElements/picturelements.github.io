@@ -363,7 +363,7 @@
     <script>
       var bw=document.getElementById("bookwrapper");
 
-      function createBookBox(obj){
+      function createBookBox(obj,code){
         var bm=document.createElement("div");
         bm.className="bookmarklet";
         bm.id=obj.name;
@@ -378,7 +378,7 @@
         var clbl=box.addTextElement("h3","Code");
         addCopyGroup(clbl,obj,true);
         var ta=document.createElement("textarea");
-        ta.value=obj.code;
+        ta.value=code;
         ta.setAttribute("readonly","");
         box.appendChild(ta);
 
@@ -529,14 +529,32 @@
       var xhr=new XMLHttpRequest();
       xhr.onreadystatechange=function(){
         if (this.readyState==4&&this.status==200){
-          var data=JSON.parse(xhr.responseText);
-          for (var i in data){
-            createBookBox(data[i]);
-          }
+          var data=JSON.parse(xhr.responseText),
+              xhr2=new XMLHttpRequest();
+          xhr2.onreadystatechange=function(){
+              if (this.readyState==4&&this.status==200){
+                  var code=extractCode(xhr.responseText);
+                  for (var i in data){
+                      createBookBox(data[i],code[data.name]);
+                  }
+              }
+          };
+          xhr2.open("GET","https://picturelements.github.io/textfiles/bookmarklets.txt",true);
+          xhr2.send();
         }
       };
       xhr.open("GET","https://picturelements.github.io/textfiles/bookmarklets.json",true);
       xhr.send();
+
+      function extractCode(txt){
+        var obj={},
+          arr=txt.split("----START BOOKMARKLET----\n"),
+          regex=/.+/i;
+        for (var i=1;i<arr.length;i++){
+          obj[regex.exec(arr[i])[0]]=arr[i].replace(regex,"").trim();
+          }
+        return obj;
+      }
     </script>
   </body>
 </html>
