@@ -2,7 +2,7 @@
 [META]
 $name: MannoMarker
 $description: Input a duration, and the script will throw all comments or posts from accounts made within that duration to the top of the page and hide the rest for easy detection of new accounts, spammers, and account farmers.
-$version: 2.5
+$version: '2.5'
 $changelog: This is the first public version of this bookmarklet.
 $published: 1500000000
 $domain: reddit.com
@@ -167,7 +167,7 @@ Proceed?")) {
 [META]
 $name: lookup
 $description: Input one or many subreddit names and the script will find all users on the page with recent history in any of the subreddits.
-$version: 3.0
+$version: '3.0'
 $changelog: This is the first public version of this bookmarklet.
 $notes: Separate subreddit names by commas to browse many subs. The names are not case sensitive.
 $published: 1500000000
@@ -281,7 +281,7 @@ javascript: (function(){
 [META]
 $name: Anon
 $description: Hides all usernames on the page and numbers and color codes them for clarity.
-$version: 2.0
+$version: '2.0'
 $changelog: This is the first public version of this bookmarklet.
 $notes: Should also work in MannoMail.
 $published: 1500000000
@@ -343,7 +343,7 @@ javascript: (function() {
 [META]
 $name: Nuke
 $description: Simply removes a comment and all its visible children.
-$version: 1.0
+$version: '1.0'
 $changelog: This is the first public version of this bookmarklet.
 $notes: Toolbox has this feature implemented.
 $published: 1500000000
