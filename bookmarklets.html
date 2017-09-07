@@ -572,11 +572,11 @@
             keyRegex=/\$.+:/i;
         for (var i=1;i<arr.length;i++){
           var obj={},
-              meta=metaRegex.exec(arr[i])[0].replace(/\[META\]/,""),
+              meta=metaRegex.exec(arr[i])[0].replace(/\[META\]/g,""),
               ex=propRegex.exec(meta);
               obj.code=arr[i].replace(metaRegex,"").trim();
           while (ex){
-            var key=ex[0].match(keyRegex)[0].replace(/\$|:/),
+            var key=ex[0].match(keyRegex)[0].replace(/\$|:/g,""),
                 value=smartConvert(ex[0].replace(keyRegex,"").trim());
             obj[key]=value;
             ex=propRegex.exec(meta);
