@@ -526,7 +526,7 @@
         }
       };
 
-      var xhr=new XMLHttpRequest();
+      /*var xhr=new XMLHttpRequest();
       xhr.onreadystatechange=function(){
         if (this.readyState==4&&this.status==200){
           var data=JSON.parse(xhr.responseText),
@@ -554,6 +554,43 @@
           obj[regex.exec(arr[i])[0]]=arr[i].replace(regex,"").trim();
           }
         return obj;
+      }*/
+      
+      var xhr=new XMLHttpRequest();
+      xhr.onreadystatechange=function(){
+        if (this.readyState==4&&this.status==200){
+          readData(this.responseText);
+        }
+      };
+      xhr.open("GET","https://picturelements.github.io/textfiles/bookmarklets.txt",true);
+      xhr.send();
+      
+      function readData(txt){
+        var arr=txt.split("----START BOOKMARKLET----\n"),
+            metaRegex=/(\[META\])[\s\S]+\1/gi,
+            propRegex=/\$.+:[^\$]+/gi,
+            keyRegex=/\$.+:/i;
+        for (var i=1;i<arr.length;i++){
+          var obj={},
+              meta=metaRegex.exec(arr[i])[0].replace(/\[META\]/,""),
+              ex=propRegex.exec(meta);
+              obj.code=arr[i].replace(metaRegex,"").trim();
+          while (ex){
+            var key=ex[0].match(keyRegex)[0].replace(/\$|:/),
+                value=smartConvert(ex[0].replace(keyRegex,"").trim());
+            obj[key]=value;
+            ex=propRegex.exec(meta);
+          }
+          console.log(obj);
+        }
+      }
+      
+      function smartConvert(str){
+        if (str=="true"||str=="false")
+          return str=="true";
+        if (!isNaN(str))
+          return Number(str);
+        return str;
       }
     </script>
   </body>
