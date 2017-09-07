@@ -586,6 +586,8 @@
       }
       
       function smartConvert(str){
+        if (/^"[\s\S]+"$/gi.test(str))
+          return str.substr(1,str.length-2);
         if (str=="true"||str=="false")
           return str=="true";
         if (!isNaN(str))
