@@ -1,0 +1,1254 @@
+<html>
+  <head></head>
+  <body>
+    <script>
+      //GOTO: nextInstance
+      var toolbox_primes=[2],tp_max=0;
+
+      //Extend Math object
+      (function () {
+        Math.csin=function(complex){
+          if (typeof complex!="object"){complex=Complex.parseComplex(complex);}
+          return new Complex(Math.sin(complex.re)*Math.cosh(complex.im),Math.cos(complex.re)*Math.sinh(complex.im));
+        }
+        Math.ccos=function(complex){
+          if (typeof complex!="object"){complex=Complex.parseComplex(complex);}
+          return new Complex(Math.cos(complex.re)*Math.cosh(complex.im),Math.sin(complex.re)*Math.sinh(complex.im));
+        }
+        Math.ctan=function(complex){
+          //This mess is sponsored by https://proofwiki.org/wiki/Tangent_of_Complex_Number
+          if (typeof complex!="object"){complex=Complex.parseComplex(complex);}
+          var r=complex.re,i=complex.im,t2r=Math.pow(Math.tan(r),2),t2i=Math.pow(Math.tanh(i),2);
+          var re=(Math.tan(r)-Math.tan(r)*t2i)/(1+t2r*t2i);
+          var im=(Math.tanh(i)+t2r*Math.tanh(i))/(1+t2r*t2i);
+          return new Complex(re,im);
+        }
+      })();
+
+      var Toolbox={
+        primes:function(max){
+          max=max || 100;
+          var primes=[2];
+
+          main:
+          for (var i=3;i<=max;i+=2){
+            for (var n=0;primes[n]*primes[n]<=i;n++){
+              if (i%primes[n]==0){continue main;}
+            }
+            primes.push(i);
+            if (i>tp_max){
+              toolbox_primes.push(i);
+              tp_max=i;
+            }
+          }
+          return primes;
+        },
+        gaussianRandom:function(inp){
+          var range=Math.sqrt(inp);
+          return (Math.random()*range)*(Math.random()*range);
+        },
+        fromQueryString(str,noFields){
+          var objOut={},fields=[];
+          var queries=str.substring(str.indexOf('?')+1).split(/&|;/);
+          for (var i=0;i<queries.length;i++){
+            var splitAt=queries[i].indexOf('='),field=queries[i].substring(0,splitAt);
+            objOut[field]=queries[i].substring(splitAt+1);
+            fields.push(field);
+          }
+          if (!noFields)objOut.fields=fields;
+          return objOut;
+        }
+      };
+
+      function* PrimeGenerator(){
+        var primes=[2],nextVal=2;
+        while (true){
+          if (nextVal==2){
+            nextVal++;
+            yield 2;
+          }
+          main:
+          for (var i=nextVal;i>0;i+=2){
+            for (var n=0;primes[n]*primes[n]<=i;n++){
+              if (i%primes[n]==0) continue main;	
+            }
+            primes.push(i);
+            nextVal+=2;
+            yield(i);
+          }
+        }
+      }
+
+      PrimeGenerator.prototype.nextPrime=function(){
+        return this.next().value;
+      }
+
+      String.prototype.isPalindrome=function(){
+        var str=this, pivot=Math.floor(str.length/2);
+        for (var i=0;i<pivot;i++){
+          if (str[i]!=str[str.length-1-i]){
+            return false;
+          }
+        }
+        return true;
+      };
+
+      Number.prototype.isPrime=function(){
+        if (this%1!=0||this<2){return false;}
+        var sqrt=Math.sqrt(this) || 4;
+        if (sqrt>tp_max){Toolbox.primes(sqrt)};
+
+        for (var i=0;toolbox_primes[i]<=sqrt;i++){
+          if (this%toolbox_primes[i]==0){return false;}
+        }
+        return true;
+      };
+
+      Number.prototype.factorize=function(unique){
+        var sqrt=Math.sqrt(this),val=this.valueOf();
+        if (sqrt==undefined){return [];}
+        if (sqrt>tp_max){Toolbox.primes(sqrt)};
+
+        var factors=[];
+        for (var i=0;toolbox_primes[i]<=sqrt;i++){
+          if (val%toolbox_primes[i]==0){
+            var tbp=toolbox_primes[i];
+            if (!unique||tbp!=factors[factors.length-1]){
+              factors.push(tbp);
+            }
+            val/=tbp;
+            i--;
+            if (val==1){return factors}
+          }
+        }
+        factors.push(val);
+        return factors;
+      };
+
+      Node.prototype.getClass=function(cl,index){
+        return index!=null?this.getElementsByClassName(cl)[index]:this.getElementsByClassName(cl);
+      };
+
+      Node.prototype.getTag=function(tag,index){
+        return index!=null?this.getElementsByTagName(tag)[index]:this.getElementsByTagName(tag);
+      };
+
+      Node.prototype.getId=function(id){
+        return this.getElementById(id);
+      };
+
+      Node.prototype.getElem=function(str,index){
+        var cti=str.toCTI();
+        return cti.get(this,index);
+      };
+
+      Node.prototype.findParent=function(str){
+        var cti=str.toCTI();
+        var name=cti.name,elem=this;
+        if (!elem.tagName){return null;}
+        while(true){
+          var ctiName=cti.ctiName(elem);
+          if (ctiName==name||ctiName.toLowerCase()==name){return elem;}
+          if (elem.tagName=="HTML"){return null;}
+          elem=elem.parentElement;
+        }
+      };
+
+      Node.prototype.nextInstance=function(selector,minDepth){
+        minDepth=minDepth || 0;
+        var depth=0,node=this;
+        while(true){
+          if (node.tagName=="HTML") break;
+          var next=node.querySelectorAll(selector);
+          if (next&&depth>=minDepth){
+            if (depth==0) return next[0];
+            for (var i=0;i<next.length;i++){
+              if (next[i]==this&&i<next.length-1) return next[i+1]; 
+            }
+          }
+          node=node.parentElement;
+          depth++;
+        }
+        return null;
+      };
+
+      String.prototype.toCTI=function(){
+        var str=this;
+        var fst=str[0];
+        str=(str[0]=="#"||str[0]==".")?str.substring(1,str.length):str;
+        if (fst=="#"){
+          return {
+            type:"id",
+            name:str,
+            get:function(node,index){
+              return document.getId(this.name);
+            },
+            ctiName:function(node){
+              return node.id;
+            }
+          }
+        }else if (fst=="."){
+          return {
+            type:"class",
+            name:str,
+            get:function(node,index){
+              return (node || document).getClass(this.name,index);
+            },
+            ctiName:function(node){
+              return node.className;
+            }
+          }
+        }
+        return {
+          type:"tag",
+          name:str,
+          get:function(node,index){
+            return (node || document).getTag(this.name,index);
+          },
+          ctiName:function(node){
+            return node.tagName;
+          }
+        }
+      };
+
+      String.prototype.includes=function(sub,startAt){
+        var count=0;
+        startAt=startAt || 0;
+        for (var i=startAt;i<this.length;i++){
+          if (this[i]==sub[count]){
+            count++;
+            if (count==sub.length){return true;}
+          }else{
+            count=0;
+          }
+        }
+        return false;
+      };
+
+      String.prototype.startsWith=function(sub,startAt){
+        startAt=startAt || 0;
+        for (var i=startAt;i<this.length;i++){
+          if (this[i]==sub[i]){
+            if (i==sub.length-1){return true;}
+          }else{
+            break;
+          }
+        }
+        return false;
+      };
+
+      String.prototype.endsWith=function(sub,offset){
+        offset=offset || 0;
+        var startAt=this.length-sub.length-offset;
+        if (startAt<0){return false;}
+        for (var i=startAt;i<this.length-offset;i++){
+          if (this[i]!=sub[i-startAt]){
+            return false;
+          }
+        }
+        return true;
+      };
+
+      Array.prototype.shuffle=function(self){
+        var arr=self?this:this.clone();
+        var len=arr.length;
+        for (var i=0;i<len;i++){
+          var random=Math.floor(Math.random()*len);
+          var tmpElem=arr[i];
+          arr[i]=arr[random];
+          arr[random]=tmpElem;
+        }
+        return arr;
+      };
+
+      Array.prototype.intersperse=function(){
+        var out=[];
+        for (var i=0;i<this.length;i++){
+          if (i>0){
+            for (var n in arguments){
+              out.push(arguments[n]);
+            }
+          }
+          out.push(this[i]);
+        }
+        return out;
+      };
+
+      Array.prototype.flatten=function(){
+        var out=[];
+        for (var n=0;n<this.length;n++){
+          if (Array.isArray(this[n])) out=out.concat(this[n].flatten());
+          else out.push(this[n]);
+        }
+        return out;
+      };
+
+      Array.prototype.union=function(arr){
+        arr=arr.clone();
+        var out=[];
+        for (var i=0;i<this.length;i++){
+          for (var n in arr){
+            if (this[i]==arr[n]){
+              arr.splice(n,1);
+              break;
+            }
+          }
+        }
+        return this.concat(arr);
+      };
+
+      Array.prototype.intersect=function(arr){
+        var out=[];
+        for (var i=0;i<this.length;i++){
+          for (var n in arr){
+            if (this[i]==arr[n]){
+              out.push(this[i]);
+              break;
+            }
+          }
+        }
+        return out;
+      };
+
+      Array.prototype.difference=function(arr){
+        var out=[];
+        main:
+        for (var i=0;i<this.length;i++){
+          for (var n in arr){
+            if (this[i]==arr[n]){
+              continue main;
+            }
+          }
+          out.push(this[i]);
+        }
+        return out;
+      };
+
+      Array.prototype.symdiff=function(arr){
+        return this.difference(arr).concat(arr.difference(this));
+      };
+
+      Array.createRange=function(start,stop,step){
+        step=step || 1;
+        var out=[];
+        if (arguments.length==1){
+          stop=start;
+          start=0;
+        }
+        for (var i=start;i<=stop;i+=step){
+          out.push(i);
+        }
+        return out;
+      };
+
+      Array.identityMatrix=function(side){
+        var out=[];
+        for (var h=0;h<side;h++){
+          var row=[];
+          for (var w=0;w<side;w++){
+            row.push(w==h?1:0);
+          }
+          out.push(row);
+        }
+        return out;
+      };
+
+      Array.rotationMatrix=function(x,y,z){
+        x=x || 0;
+        y=y || 0;
+        z=z || 0;
+        if (arguments.length<3){
+          return [[Math.cos(x),-Math.sin(x)],[Math.sin(x),Math.cos(x)]];
+        }
+        var matrices=[
+          [
+            [1,0,0],
+            [0,Math.cos(x),-Math.sin(x)],
+            [0,Math.sin(x),Math.cos(x)]
+          ],
+          [
+            [Math.cos(y),0,Math.sin(y)],
+            [0,1,0],
+            [-Math.sin(y),0,Math.cos(y)]
+          ],
+          [
+            [Math.cos(z),-Math.sin(z),0],
+            [Math.sin(z),Math.cos(z),0],
+            [0,0,1]
+          ]
+        ];
+        return matrices[0].multiply(matrices[1].multiply(matrices[2]));
+      };
+
+      Array.condense=function(arr){
+        var out=[];
+        for (var i=0;i<arr.length;i++){
+          if (Array.isArray(arr[i])) out=out.concat(arr[i]);
+          else out.push(arr[i]);
+        }
+        return out;
+      };
+
+      Array.prototype.add=function(arr2,sub){
+        var out=[];
+        var sign=sub?-1:1;
+        for (var h=0;h<this.length;h++){
+          var row=[];
+          for (var w=0;w<this[h].length;w++){
+            row.push(this[h][w]+sign*(arr2[h][w] || 0));
+          }
+          out.push(row);
+        }
+        return out;
+      };
+
+      Array.prototype.subtract=function(arr2){
+        return this.add(arr2,true);
+      };
+
+      Array.prototype.multiply=function(arr2){
+        if (typeof arr2=="number"){return this.mulConst(arr2);}
+        var out=[];
+        for (var i=0;i<this.length;i++){
+          var row=[];
+          for (var a=0;a<arr2[0].length;a++){
+            var tot=0;
+            for (var b=0;b<this[i].length;b++){
+              tot+=this[i][b]*arr2[b][a];
+            }
+            row.push(tot);
+          }
+          out.push(row);
+        }
+        return out;
+      };
+
+      Array.prototype.mulConst=function(mul){
+        var out=[];
+        for (var h=0;h<this.length;h++){
+          var row=[];
+          for (var w=0;w<this[h].length;w++){
+            row.push(this[h][w]*mul);
+          }
+          out.push(row);
+        }
+        return out;
+      };
+
+      Array.prototype.clone=function(){
+        var newArr=[]
+        for (var i=0;i<this.length;i++){
+          if (Array.isArray(this[i])){
+            newArr.push(this[i].clone());
+          }else{
+            newArr.push(this[i]);
+          }
+        }
+        return newArr;
+      };
+
+      Array.prototype.rref=function(aug){
+        var arr=this.clone(),eliminable=arr.length==arr[0].length;
+        if (!aug){
+          eliminable=true;
+          var matrix=Array.toAugmentedMatrix(arr);
+          arr=matrix.arr;
+          aug=matrix.aug;
+        }
+        for (var h=0;h<arr.length;h++){
+          if (arr[h][h]==0){
+            var canSwap=false;
+            for (var h2=h+1;h2<arr.length;h2++){
+              if (arr[h2][h]!=0){
+                var tmpLine=arr[h];
+                arr[h]=arr[h2];
+                arr[h2]=tmpLine;
+                tmpLine=aug[h];
+                aug[h]=aug[h2];
+                aug[h2]=tmpLine;
+                canSwap=true;
+                break;
+              }
+            }
+            if (!canSwap){eliminable=false; continue;}
+          }
+          var c=1/arr[h][h];
+          //divide
+          for (var w=0;w<arr[h].length;w++){
+            arr[h][w]*=c;
+          }
+          for (var w=0;w<aug[h].length;w++){
+            aug[h][w]*=c;
+          }
+          //eliminate
+          for (var h2=0;h2<arr.length;h2++){
+            if (h2==h){continue;}
+            var e=arr[h2][h];
+            for (var w=h;w<arr[h2].length;w++){
+              arr[h2][w]-=e*arr[h][w];
+            }
+            for (var w=0;w<aug[h2].length;w++){
+              aug[h2][w]-=e*aug[h][w];
+            }
+          }
+        }
+        return {rref:arr,aug:aug,eliminable:eliminable};
+      };
+
+      Array.toAugmentedMatrix=function(arr){
+        newArr=[],aug=[];
+        var w=arr[0].length,h=arr.length;
+        if (w>h){
+          for (var i=0;i<h;i++){
+            newArr.push(arr[i].slice(0,h));
+            aug.push(arr[i].slice(h));
+          }
+        }else{
+          newArr=arr;
+          for (var i=0;i<h;i++){
+            aug.push([0]);
+          }
+        }
+        return {arr:newArr,aug:aug};
+      };
+
+      Array.prototype.inverse=function(){
+        var inverse=this.rref(Array.identityMatrix(this.length));
+        return inverse.eliminable?inverse.aug:null;
+      };
+
+      Array.prototype.has=function(elem){
+        for (var i in this){
+          if (this[i]==elem)return true;
+        }
+        return false;
+      };
+
+      Object.equals=function(obj,obj2){
+        if (Object.len(obj)!=Object.len(obj2)) return false;
+        for (var i in obj){
+          if (obj2[i]!=undefined){
+            if (typeof obj[i]=="object"){
+              if (Array.isArray(obj[i])?!obj[i].equals(obj2[i]):!Object.equals(obj[i],obj2[i])){
+                return false;
+              }
+            }else if(obj[i]!==obj2[i]){
+              return false;
+            }
+          }else{
+            return false;
+          }
+        }
+        return true;
+      };
+
+      Object.len=function(obj){
+        if (typeof obj!="object"||Array.isArray(obj)) return -1;
+        var size=0;
+        for (var key in obj) {
+          if (obj.hasOwnProperty(key)) size++;
+        }
+        return size;
+      };
+
+      Array.prototype.equals=function(arr){
+        if (!Array.isArray(arr)) arr=[arr];
+        if (this.length!=arr.length) return false;
+
+        for (var i=0;i<this.length;i++){
+          if (typeof this[i]=="object"){
+            if (Array.isArray(this[i])){
+              if (!this[i].equals(arr[i])){
+                return false;
+              }
+            }else{
+              if (!Object.equals(this[i],arr[i])){
+                return false;
+              }
+            }
+          }else if(this[i]!==arr[i]){
+            return false;
+          }
+        }
+        return true;
+      };
+
+      Array.prototype.nub=function(deep){
+        var newArr=this.clone();
+        for (var i=0;i<newArr.length;i++){
+          var elem=newArr[i];
+          for (var n=i+1;n<newArr.length;n++){
+            if (deep&&typeof elem=="object"){
+              if (Array.isArray(elem)?elem.equals(newArr[n]):Object.equals(elem,newArr[n])){
+                newArr.splice(n,1);
+                n--;
+              }
+            }else if (newArr[n]==elem){
+              newArr.splice(n,1);
+              n--;
+            }
+          }
+        }
+        return newArr;
+      };
+
+      Array.prototype.last=function(index){
+        index=(index || 0)+1;
+        return this[this.length-index];
+      };
+
+      //---------------Sorting algorithms---------------
+
+      Array.prototype.mergeSort=function(){
+        var step=1,len=this.length;
+        var arr=this;
+        while (step<len){
+          var newArr=[];
+          for (var i=0;i<len;i+=step*2){
+            var p1=0,p2=0;
+            for (var c=0;c<step*2;c++){
+              var e1=arr[i+p1],e2=arr[i+step+p2];
+              if (e1<e2&&p1<step||p2==step){
+                if (e1!=undefined) newArr.push(e1);
+                p1++;
+              }else{
+                if (e2!=undefined) newArr.push(e2);
+                p2++;
+              }
+            }
+          }
+          arr=newArr;
+          step*=2;
+        }
+        return arr;
+      };
+
+      Array.prototype.bogoSort=function(){
+        main:
+        while (true){
+          var shuffled=this.shuffle();
+          for (var i=0;i<shuffled.length-1;i++){
+            if (shuffled[i]>shuffled[i+1]) continue main;
+          }
+          return shuffled;
+        }
+      };
+
+      Array.prototype.bubbleSort=function(){
+        var arr=this.clone(),len=this.length,swapped;
+        for (var i=0;i<len;i++){
+          swapped=false;
+          for (var n=0;n<len-i-1;n++){
+            if (arr[n+1]<arr[n]){
+              swapped=true;
+              var tmpElem=arr[n+1];
+              arr[n+1]=arr[n];
+              arr[n]=tmpElem;
+            }
+          }
+          if (!swapped) break;
+        }
+        return arr;
+      };
+
+      Array.prototype.insertionSort=function(){
+        var arr=this.clone();
+        for (var i=1;i<arr.length;i++){
+          for (var n=i;n>0;n--){
+            if (arr[n]<arr[n-1]){
+              var tmpElem=arr[n];
+              arr[n]=arr[n-1];
+              arr[n-1]=tmpElem;
+            }else{
+              break;
+            }
+          }
+        }
+        return arr;
+      };
+
+      Array.prototype.selectionSort=function(){
+        var arr=this.clone();
+        for (var i=0;i<arr.length;i++){
+          var min=arr[i],minIndex=i;
+          for (var n=i+1;n<arr.length;n++){
+            if (arr[n]<min){
+              min=arr[n];
+              minIndex=n;
+            }
+          }
+          var tmpElem=arr[i];
+          arr[i]=min;
+          arr[minIndex]=tmpElem;
+        }
+        return arr;
+      };
+
+      //If this looks familar to you, then yep, this is based on the standard Haskell QS solution.
+      Array.prototype.quickSort=function(){
+        if (this.length==0) return [];
+        var pivot=this.pop(),parts=qs_split(this,pivot);
+        return parts[0].quickSort().concat([pivot].concat(parts[1].quickSort()));
+      }
+
+      function qs_split(arr,pivot){
+        var arrOut=[[],[]];
+        for (var i=0;i<arr.length;i++){
+          arrOut[(arr[i]<pivot?0:1)].push(arr[i]);
+        }
+        return arrOut;
+      }
+
+      //---------------Complex class---------------
+
+      function Complex(re,im,polar){
+        if (typeof re=="string"){
+          var data=Complex.parseComplex(re);
+          re=data.re;
+          im=data.im;
+        }
+        this.re=re;
+        this.im=im;
+        this.polar=!!polar;
+
+        this.abs=function(){
+          return Math.sqrt(Math.pow(this.re,2)+Math.pow(this.im,2));
+        };
+
+        this.add=function(complex){
+          complex=Complex.parseComplex(complex);
+          return new Complex(this.re+complex.re,this.im+complex.im,this.polar);
+        };
+
+        this.clone=function(){
+          return JSON.parse(JSON.stringify(this));
+        };
+
+        this.divide=function(complex){
+          complex=Complex.parseComplex(complex);
+          var tmpRe=this.re,tmpIm=this.im;
+          var copyRe=complex.re,copyIm=complex.im;
+          var denom=Math.pow(copyRe,2)+Math.pow(copyIm,2);
+          return new Complex((tmpRe*copyRe+tmpIm*copyIm)/denom,(tmpIm*copyRe-tmpRe*copyIm)/denom,this.polar);
+        };
+
+        this.multiply=function(complex){
+          complex=Complex.parseComplex(complex);
+          var tmpRe=this.re,tmpIm=this.im;
+          var copyRe=complex.re,copyIm=complex.im;
+          return new Complex(tmpRe*copyRe-tmpIm*copyIm,tmpRe*copyIm+tmpIm*copyRe,this.polar);
+        };
+
+        this.pow=function(complex){
+          complex=Complex.parseComplex(complex);
+          console.log(complex);
+          var r=Math.pow(this.abs(),complex.abs());
+          var theta=Math.atan2(this.im,this.re)*(complex.re+complex.im);
+          return new Complex(Math.cos(theta)*r,Math.sin(theta)*r,this.polar);
+        };
+
+        this.subtract=function(complex){
+          complex=Complex.parseComplex(complex);
+          return new Complex(this.re-complex.re,this.im-complex.im,this.polar);
+        };
+
+        this.sqrt=function(nth){
+          nth=nth || 2;
+          return this.pow(1/nth);
+        };
+
+        this.toPolar=function(){
+          this.r=this.abs();
+          this.theta=Math.atan2(this.im,this.re);
+          this.polar=true;
+          return this;
+        };
+
+        this.toString=function(dg){
+          if (this.polar) return "r: "+this.complexRound(this.r,dg)+" θ: "+Math.abs(this.complexRound(this.theta,dg));
+          return this.complexRound(this.re,dg)+(this.im>=0?" + ":" - ")+Math.abs(this.complexRound(this.im,dg))+"i";
+        };
+
+        //meta functions
+        this.complexRound=function(inp,digits){
+          digits=digits || 3, pow=Math.pow(10,digits);
+          inp=parseFloat(inp);
+          return Math.round(inp*pow)/pow;
+        };
+
+        if (this.polar) this.toPolar();
+      }
+
+      (function(){
+        Complex.exponent=function(complex,base){
+          base=base || 0;
+          var log=Math.log(base);
+          var b=complex.im*log,ea=Math.exp(complex.re*log);
+          return new Complex(ea*Math.cos(b),ea*Math.sin(b));
+        };
+
+        Complex.exp=function(complex){
+          return Complex.exponent(complex,Math.E);
+        };
+
+        Complex.parseComplex=function(inp){
+          if (inp instanceof Complex) return inp;
+          var obj={re:0,im:0};
+
+          if (typeof inp=="string"){
+            var regex=/\-|i|[0-9]+/gi,
+                sign=1,
+                terms=[0],
+                lastIsNum=true;
+
+          main:
+          while (true){
+            var ex=regex.exec(inp);
+            if (ex==null) break;
+              switch (ex[0]){
+                case "-":
+                  sign*=-1;
+                  break;
+                case "i":
+                  if (terms.length==1){
+                    terms[0]=0;
+                    terms.push(sign);
+                  }else{
+                    if (terms.length==2&&lastIsNum) terms.splice(0,0,0);
+                    else if (!lastIsNum) terms[1]=1;
+                    terms[1]*=sign;
+                  }
+                  break main;
+                default:
+                  if (!isNaN(ex[0])){
+                    terms[terms.length-1]=parseFloat(ex[0])*sign;
+                    terms.push(0);
+                    sign=1;
+                  }
+                  lastIsNum=true;
+                  continue main;
+              }
+              lastIsNum=false;
+            }
+            obj.re=terms[0];
+            obj.im=terms[1] || 0;
+          }else{
+            obj.re=inp;
+          }
+          /*if (inp instanceof Complex) return inp;
+          var real=0,imaginary=0;
+          if (typeof inp=="string"){
+            var isIm=inp.includes("i"),couldEvaluate=false;
+            inp=inp.replace(/i/g,"");
+            for (var i=1;i<inp.length;i++){
+              if (inp[i]=='-'||inp[i]=='+'){
+                real=parseFloat(inp.substring(0,i));
+                imaginary=parseFloat(inp.substring(i,inp.length));
+                couldEvaluate=true;
+                break;
+              }
+            }
+            if (!couldEvaluate){
+              var tmpVal=parseFloat(inp);
+              real=isIm?0:tmpVal;
+              imaginary=isIm?tmpVal:0;
+            }
+          }else if (typeof inp=="number"){
+            real=inp;
+          }
+          if (isNaN(imaginary)) imaginary=1;*/
+          return obj;
+        };
+      })();
+
+      //--------FRACTION--------
+
+      function Fraction(n,d){
+        this.decimal=n/(d || 1);
+        var rational=Fraction.toRational(n,d);
+        this.numerator=rational[0];
+        this.denominator=rational[1];
+
+        this.toString=function(){
+          if (this.numerator==0) return "0";
+          var pre=Math.floor(this.numerator/this.denominator),
+              num=this.numerator%this.denominator;
+          return (pre?pre:"")+(num&&pre?" ":"")+(num?(Math.abs(num)+"/"+this.denominator):"");
+        };
+
+        this.toImproperString=function(){
+          return this.numerator+"/"+this.denominator;
+        };
+
+        this.toDecimal=function(maxDec){
+          maxDec=maxDec || 100;
+          var out="",
+              rem,
+              newNum=this.numerator;
+          for (var i=0;i<maxDec;i++){
+            out+=Math.floor(newNum/this.denominator);
+            rem=newNum%this.denominator;
+            newNum=rem*10;
+            if (!rem) break;
+            if (i==0) out+=".";
+          }
+          return out;
+        };
+
+        this.toRecurring=function(maxIter,maxMem){
+          maxIter=maxIter || 100000;
+          maxMem=maxMem || 50;
+          var startIndex=0,
+              rem=this.numerator%this.denominator,
+              rems=[rem],
+              digits=Math.floor(this.numerator/this.denominator),
+              decimals="";
+          for (var i=0;i<maxIter;i++){
+            if (!rem) break;
+            decimals+=Math.floor((10*rem)/this.denominator);
+            rem=(10*rem)%this.denominator;
+            for (var n=0;n<rems.length;n++){
+              if (rems[n]==rem){
+                var recurring=decimals.substr(n,i-n+1),
+                    pre=decimals.substr(0,n);
+                return {
+                  text:digits+"."+pre+"("+recurring+")",
+                  html:"<span>"+digits+"."+pre+"<span style='text-decoration:overline'>"+recurring+"</span></span>",
+                  repeat:recurring,
+                  length:recurring.length,
+                  index:n,
+                  isRecurring:true
+                };
+              }
+            }
+            if (rems.length<maxMem) rems.push(rem);
+          }
+          var full=digits+(decimals.length?".":"")+decimals;
+          return {
+            text:full,
+            html:"<span>"+full+"</span>",
+            repeat:null,
+            length:0,
+            index:null,
+            isRecurring:false
+          };
+        };
+
+        this.add=function(rn){
+          rn=Fraction.conform(rn);
+          var fracs=Fraction.toCD(this,rn);
+          return new Fraction(fracs[0][0]+fracs[1][0],fracs[0][1]);
+        };
+
+        this.subtract=function(rn){
+          rn=Fraction.conform(rn);
+          var fracs=Fraction.toCD(this,rn);
+          return new Fraction(fracs[0][0]-fracs[1][0],fracs[0][1]);
+        };
+
+        this.multiply=function(rn){
+          rn=Fraction.conform(rn);
+          return new Fraction(this.numerator*rn.numerator,this.denominator*rn.denominator);
+        };
+
+        this.divide=function(rn){
+          rn=Fraction.conform(rn);
+          return new Fraction(this.numerator*rn.denominator,this.denominator*rn.numerator);
+        };
+
+        this.mod=function(rn){
+          rn=Fraction.conform(rn);
+          var fracs=Fraction.toCD(this,rn);
+          return new Fraction(fracs[0][0]%fracs[1][0],fracs[0][1]);
+        };
+
+        this.pow=function(rn){
+          rn=Fraction.conform(rn);
+          //return new Fraction(Math.pow(this.numerator,rn.numerator),Math.pow(this.denominator,rn.denominator));
+        }
+      }
+
+      Fraction.conform=function(num){
+        if (num instanceof Fraction) return num;
+        return new Fraction(num);
+      };
+
+      Fraction.toRational=function(num,den){
+        function getPrecision(n){
+          if (isNaN(n)) return;
+            var str=""+n,
+            pow=0;
+          if (/e/.test(str)){
+            if (/e-/.test(str)) pow=Math.parseInt(str.split("e-")[1]);
+            }else{
+              pow=(str.split(".")[1] || "").length;
+            }
+          return Math.pow(10,pow);
+        }
+
+        if (den==undefined){
+          den=getPrecision(num);
+          num=Math.round(num*den);
+        }
+        var g=gcd(num,den);
+        return [Math.round(num/g),Math.round(den/g)];
+      };
+
+      Fraction.toCD=function(r1,r2){
+        r1=Fraction.conform(r1);
+        r2=Fraction.conform(r2);
+        var r1d=r1.denominator,
+            r2d=r2.denominator;
+        return [
+          [Math.floor(r1.numerator*r2d),r1d*r2d],
+          [Math.floor(r2.numerator*r1d),r1d*r2d]
+        ];
+      };
+
+      function gcd(a,b){
+        if (!b) return a;
+        return gcd(b,a%b);
+      }
+
+      //--------BIG INTEGER--------
+
+      function BigInteger(inp,sign){
+        this.digits=[];
+        if (typeof inp=="string"){
+          this.isNegative=inp[0]=="-";
+          inp=inp.replace(/-/g,"").replace(/\+/g,"");
+          for (var i=inp.length;i>=0;i){
+            i-=7;
+            var str="";
+            for (var n=0;n<7;n++){
+              if (i+n>=0&&i+n<inp.length){str+=inp[i+n];}
+            }
+            if (str!=""){this.digits.push(parseInt(str));}
+          }
+        }else{
+          this.digits=inp;
+          this.isNegative=sign;
+        };
+
+        this.abs=function(){
+          return new BigInteger(this.digits,false);
+        };
+
+        this.add=function(big,forceAction){
+          var carry=0;
+          if (this.isNegative==big.isNegative||forceAction){
+            var outArr=this.digits.slice(0);
+            for (var i=0;i<big.digits.length||carry==1;i++){
+              var tot=(outArr[i] || 0)+(big.digits[i] || 0)+carry;
+              outArr[i]=tot%1e7;
+              carry=tot<1e7?0:1;
+            }
+            return new BigInteger(outArr,this.isNegative);
+          }else{
+            return this.subtract(big,true);
+          }
+        };
+
+        this.clone=function(){
+          return JSON.parse(JSON.stringify(this));
+        };
+
+        this.subtract=function(big,forceAction){
+          var b1,b2,flipped=false;
+          if (this.isNegative==big.isNegative||forceAction){
+            if (BigInteger.innerMax(this,big,false,true)!=this){
+              b1=big.digits.slice(0);
+              b2=this.digits;
+              flipped=true;
+            }else{
+              b1=this.digits.slice(0);
+              b2=big.digits;
+            }
+            for (var i=0;i<b2.length;i++){
+              if (b1[i]<b2[i]){
+                b1[i]=b1[i]-b2[i]+1e7;
+                for (var n=i+1;n<b1.length;n++){
+                  b1[n]=(1e7+b1[n]-1)%1e7;
+                  if (b1[n]<1e7-1){break;}
+                }
+              }else{
+                b1[i]-=b2[i];
+              }
+            }
+          }else{
+            return this.add(big,true);
+          }
+          return new BigInteger(b1,this.isNegative^flipped);//.removeLeadingZeroes();
+        };
+
+        this.toString=function(){
+          var out="";
+          for (var i=this.digits.length-1;i>=0;i--){
+            out+=this.digits[i];
+          }
+          return (this.isNegative?"-":"")+out;
+        };
+
+        this.removeLeadingZeroes=function(){
+          var arr=this.digits;
+          for (var i=arr.length-1;i>=0;i--){
+            if (arr[i]!=0){
+              arr.splice(i+1,arr.length-i);
+              return this;
+            }
+          }
+          this.digits=[0];
+          return this;
+        };
+        this.removeLeadingZeroes();
+      };
+
+      (function () {
+        BigInteger.max=function(){
+          var vals=arguments,invert=false;
+          if (typeof arguments[0]=="boolean"&&arguments[0]){
+            invert=arguments[0];
+            vals=arguments[1];
+          }
+          while (vals.length>1){
+            var tmpVals=[];
+            for (var i=0;i<vals.length;i+=2){
+              tmpVals.push(BigInteger.innerMax(vals[i],vals[i+1],invert));
+            }
+            vals=tmpVals;
+          }
+          return vals[0];
+        };
+
+        BigInteger.innerMax=function(big,big2,invert,ignoreSign){
+          if (typeof big2!="object"){return big;}
+          if (big.isNegative!=big2.isNegative&&!ignoreSign){
+            var returnA=!big.isNegative^invert;
+            return returnA?big:big2;
+          }
+          var l=big.digits.length,l2=big2.digits.length;
+          if (l!=l2){
+            var returnA=(l>l2^big.isNegative)^invert&&!ignoreSign||ignoreSign&&l>l2;
+            return returnA?big:big2;
+          }
+          for (var i=l-1;i>=0;i--){
+            if (big.digits[i]<big2.digits[i]){
+              var returnA=invert^big.isNegative&&!ignoreSign||ignoreSign&&invert;
+              return returnA?big:big2;
+            }
+          }
+          return big;
+        };
+
+        BigInteger.min=function(){
+          return BigInteger.max(true,arguments);
+        };
+      })();
+
+      //--------TIMER--------
+
+      function Timer(date,callback){ 
+        var startTime=(date || new Date()).getTime(),
+            pauseOffset=0,
+            pauseTime=0,
+            callback=callback,
+            elapsed=0,
+            obj=this;
+
+        function tick(){
+          elapsed=new Date().getTime()-startTime-pauseOffset;
+          if (callback) callback(obj,elapsed);
+        }
+        var thread=setInterval(tick,50);
+
+        this.start=function(){
+          if (thread==null){
+            pauseOffset+=(new Date().getTime()-pauseTime);
+            thread=setInterval(tick,50);
+          }
+        };
+
+        this.stop=function(){
+          if (thread!=null) pauseTime=new Date().getTime();
+          clearInterval(thread);
+          thread=null;
+        };
+
+        this.getTime=function(){
+          return elapsed;
+        };
+
+        this.toString=function(time,short){
+          time=time || elapsed;
+          var units=[31557600000,"year","yr",2629800000,"month","mn",86400000,"day","d",3600000,"hour","h",60000,"minute","m",1000,"second","s",1,"millisecond","ms"];
+          var out=[],
+              offs=short?2:1;
+          for (var i=0;i<units.length;i+=3){
+            var tme=Math.floor(time/units[i]);
+            if (tme){
+              var unit=units[i+offs]+(tme!=1&&(offs==1||i<9)?"s":"");
+              out.push(tme+(offs==1?" ":"")+unit);
+            }
+            time%=units[i];
+          }
+          return out.join(" ");
+        };
+
+        this.toCompressedString=function(time,millis){
+          time=time || elapsed;
+          var units=[31557600000,2629800000,86400000,3600000,60000,1000],
+              out=[];
+          for (var i=0;i<units.length;i++){
+            var tme=Math.floor(time/units[i]);
+            if (tme||i>3) out.push(addZeroes(tme,(!i?-1:2)));
+            time%=units[i];
+          }
+
+          return out.join(":")+(millis?"."+addZeroes(time,3):"");
+
+          function addZeroes(val,len){
+            var numLen=val?Math.ceil(Math.log10(val+1)):1;
+            var out="";
+            for (var i=0;i<len-numLen;i++) out+="0";
+            return out+val;
+          }
+        };
+      }
+
+      Function.prototype.assign=function(args){
+        this.args=Array.condense(arguments);
+        return this;
+      };
+
+      Function.prototype.with=function(){
+        var types=Array.condense(arguments);
+        types=types.map(function(e){
+          return (typeof e=="string"||e==undefined||e==null)?e:e.name;
+        });
+        if (!this.args) throw new SyntaxError("Function.prototype.with must be used in association with Function.prototype.assign.");
+        var args=[].slice.call(this.args),
+            newArgs=[];
+        for (var i=0;i<types.length;i++){
+          newArgs.push(undefined);
+          for (var n=0;n<args.length;n++){
+            var name=getName(args[n]);
+            if (name==types[i]){
+              newArgs[i]=args.splice(n,1)[0];
+              break;
+            }
+          }
+        }
+        this.args=undefined;
+        return this.apply(this,newArgs);
+
+        function getName(val){
+          try{
+            return val.__proto__.constructor.name;
+          }catch(e){
+            return val
+          }
+        }
+      };
+    </script>
+  </body>
+</html>
