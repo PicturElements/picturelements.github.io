@@ -132,6 +132,9 @@
       }
       
       function prime(input){
+        if(typeof input !== 'number') {
+          return false;
+        }
         var foundprime=true;
         var allfactors=[];
         var input2=input;
