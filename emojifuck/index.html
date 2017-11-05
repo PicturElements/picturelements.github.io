@@ -1,25 +1,57 @@
 <html>
   <head>
-    <title>untitled - emojifuck</title>
+    <title>emojifuck</title>
     <meta name="description" content="Brainfuck - but in emoji">
     <link rel="icon" href="https://picturelements.github.io/pelement.png">
     <link href="fuckstyle.css" rel="stylesheet" type="text/css">
   </head>
   <body live="true" running="false" playing="true" emoji="true" comp="false" tour="false">
+    <a id="download" style="display:none"></a>
+    <div id="toolbar" class="noselect">
+      <div class="toolitem">File</div>
+      <div class="toolitem">Run</div>
+      <div class="toolitem">View</div>
+      <div class="toolitem">Export</div>
+      <div class="toolitem">Help</div>
+      <div id="titlebar">untitled</div>
+    </div>
+    <div id="toolcontext" class="noselect">
+      <div class="contextitem" onclick="newProject()"group="0">New <span>Alt+N</span></div>
+      <div class="contextitem" onclick="openSaveOpen('save')" group="0">Save project <span>Ctrl+S</span></div>
+      <div class="contextitem" onclick="openSaveOpen('open')" group="0">Load project <span>Ctrl+L</span></div>
+      <div class="contextitem" onclick="openSaveHistory('open')" group="0">Autosaved projects</div>
+      <div class="contextitem" onclick="run()" group="1">Run code <span>F6</span></div>
+      <div class="contextitem" onclick="cleanAndRun()" group="1">Clean and run <span>Ctrl+F6</span></div>
+      <div class="contextitem" onclick="toggleMode()" id="toggleEmoji" group="2">View mode: emoji <span>Alt+V</span></div>
+      <div class="contextitem" onclick="openAscii()" group="2">ASCII table <span>Alt+A</span></div>
+      <div class="contextitem" onclick="openDump()" group="2">Memory dump <span>Ctrl+M</span></div>
+      <div class="contextitem" onclick="clearConsole()" group="2">Clear console <span>Alt+C</span></div>
+      <div class="contextitem" onclick="getRaw()" group="3">Export as pure brainfuck</div>
+      <div class="contextitem" onclick="getRaw(true)" group="3">Export as Ook</div>
+      <div class="contextitem" onclick="download()" group="3">Download project</div>
+      <div class="contextitem" onclick="download(true)" group="3">Download all projects</div>
+      <div class="contextitem" onclick="startTour()" group="4">Enter tour mode</div>
+      <div class="contextitem" onclick="openHotkeys()" group="4">Hotkeys</div>
+    </div>
     <div id="tipwrapper">
       <div id="tipbar">
-        <div class="close" onclick="closeTip(this)">×</div>
+        <div class="close" onclick="closeTip(this)">
+          <svg width="100" height="100" viewBox="0 0 100 100">
+            <path d="M30 30L70 70"></path>
+            <path d="M70 30L30 70"></path>
+          </svg>
+        </div>
         <div id="logo"></div>
         <p id="slide_1">
           <b>Welcome to Emojifuck - facebook's choice!</b>
           <br>
           <br>
-          To learn how brainfuck works, click <a href="https://en.wikipedia.org/wiki/Brainfuck" target="_blank">here</a>
+          To learn how brainfuck works, click <a href="https://picturelements.github.io/emojifuck/about">here</a>
           <br>
           For a tour of emojifuck, click <a href="javascript:startTour()">here</a>
           <br>
           <br>
-          Tip: click the "load" button to load
+          Tip: click File > Load project to load
           <br>
           fun code samples!
         </p>
@@ -36,22 +68,39 @@
           infobox will appear to guide you.
           <br>
           <br>
-          Note: all data will be saved if you reload/close the tab.
+          Note: all current data will be saved if you reload/close the tab.
         </p>
       </div>
     </div>
     <div class="wrapper">
       <div id="buttonbar" class="noselect" data-tour="Emoji button|Click to insert command character.">
-        <div class="emojibutton">&gt;</div>
-        <div class="emojibutton">&lt;</div>
-        <div class="emojibutton">+</div>
-        <div class="emojibutton">-</div>
-        <div class="emojibutton">.</div>
-        <div class="emojibutton">,</div>
-        <div class="emojibutton">[</div>
-        <div class="emojibutton">]</div>
+        <div class="emojibutton hideonrun" title="memory pointer right">&gt;</div>
+        <div class="emojibutton hideonrun" title="memory pointer left">&lt;</div>
+        <div class="emojibutton hideonrun" title="increment block">+</div>
+        <div class="emojibutton hideonrun" title="decrement block">-</div>
+        <div class="emojibutton hideonrun" title="print char">.</div>
+        <div class="emojibutton hideonrun" title="get char">,</div>
+        <div class="emojibutton hideonrun" title="add conditional">[</div>
+        <div class="emojibutton hideonrun" title="add loop break">]</div>
       </div>
       <textarea id="datain" spellcheck="false" data-tour="Code window|All code that can be run is written here. Everything that isn't one of the 8 reserved commands will be ignored by the interpreter."></textarea>
+      <div id="actionbar" class="noselect">
+        <div class="settingsitem" onclick="run()" id="run" style="background-color:#777" data-tour="Run code|Interpret and run code">run</div>
+        <div class="settingsitem" onclick="stop()" id="stop" style="background-color:#a00; display:none" data-tour="Stop code|Stop execution immediately">stop</div>
+        <div class="settingsitem" onclick="pause()" id="pause" style="background-color:#c40; display:none" data-tour="Pause code|Interrupt code execution. Code will run from the stopping point if played again.">pause</div>
+        <div class="settingsitem" onclick="play()" id="play" style="background-color:green; display:none" data-tour="Play code|">play</div>
+        <div class="settingsitem" onclick="step()" id="step" style="background-color:#333; display:none" data-tour="Step code|Manually step through code instructions">step</div>
+        <div class="settingsitem hideonplay" data-tour="Maximum instructions|To stop the code from running wild, this stops the code if it's run through too many instructions.">
+        max instr:
+          <input type="number" value="100000" step="10000" min="0" data-name="maxiter">
+          <span class="huh" title="Maximum number of instructions before code terminates.
+This is a security measure to prevent crashes, but the value may be set high.">?</span>
+        </div>
+        <div class="emojibutton hideonrun" title="add comment" data-tour="Comment|All code after the comment character (on the same line) won't be run.">|</div>
+        <div class="emojibutton hideonrun" title="speed up" data-tour="Speed|Run code at full speed until paused/interrupted.">~</div>
+        <div class="emojibutton hideonrun" title="add interrupt" data-tour="Interrupt|Stop execution immediately.">$</div>
+        <div class="emojibutton hideonrun" title="add pause" data-tour="Pause|Pause execution. Press play to continue.">%</div>
+      </div>
     </div>
     <div class="wrapper" style="margin-right:0">
       <div id="infobar" class="noselect" data-tour="Stats|Information about executed code is displayed here live.">
@@ -63,46 +112,45 @@
       <div id="console" data-tour="Console|Output from code is printed here."></div>
       <input id="input" spellcheck="false" class="hideonrun" placeholder="Input bytes here" data-tour="Input|Characters input here can be ready by the code. Input is always read as ASCII code (A=65, etc).">
     </div>
-    <div id="settingsbar" class="noselect">
-      <div class="settingsitem" onclick="run()" id="run" style="background-color:#777" data-tour="Run code|Interpret and run code">run</div>
-      <div class="settingsitem" onclick="stop()" id="stop" style="background-color:#a00; display:none" data-tour="Stop code|Stop execution immediately">stop</div>
-      <div class="settingsitem" onclick="pause()" id="pause" style="background-color:#c40; display:none" data-tour="Pause code|Interrupt code execution. Code will run from the stopping point if played again.">pause</div>
-      <div class="settingsitem" onclick="play()" id="play" style="background-color:green; display:none" data-tour="Play code|">play</div>
-      <div class="settingsitem" onclick="step()" id="step" style="background-color:#333; display:none" data-tour="Step code|Manually step through code instructions">step</div>
-      <div class="settingsitem hideonrun" data-tour="Maximum instructions|To stop the code from running wild, this stops the code if it's run through too many instructions.">
-        max instructions:
-        <input type="number" value="100000" step="10000" min="0" data-name="maxiter">
-      <span class="huh" title="Maximum number of instructions before script terminates.
-This is a security measure to prevent crashes, but can be set high.">?</span></div>
-      <div class="settingsitem" id="toggleEmoji" onclick="toggleMode()" data-tour="Emoji/ASCII|Toggle between emoji and standard brainfuck characters to represent the commands.">emoji mode</div>
-      <div class="settingsitem" onclick="getRaw()" data-tour="Pure brainfuck|Get code as pure brainfuck, without comments, line breaks, etc.">pure brainfuck</div>
-      <div class="settingsitem" onclick="openSaveOpen('save')">save</div>
-      <div class="settingsitem" onclick="openSaveOpen('open')">load</div>
-    </div>
     <div id="livebar" class="noselect">
-      <div class="dataitem hideonrun" id="toggleLive" onclick="toggleLive()" data-tour="Toggle simulation mode|In simulation mode, the execution will be slowed down to show you how the code is run. In normal mode, the program will execute the code as quickly as possible.">simulation mode: on</div>
+      <div class="dataitem hideonrun" id="toggleLive" onclick="toggleLive()" data-tour="Toggle simulation mode|In simulation mode, the execution will be slowed down to show you how the code is run. In normal mode, the program will execute the code as fast as possible.">simulation mode: on</div>
       <div class="dataitem" id="toggleComp" onclick="toggleComp()" data-tour="Toggle compressed|on/off: hide/show line breaks in the live code window below.">compressed: off</div>
-      <div class="dataitem" id="toggleScroll" onclick="toggleScroll()" data-tour="Toggle auto scroll|on/off: enable/disable automatic scrolling in live windows so that active memory cells and executed commands are always visible.">auto scroll: on</div>
-      <div class="dataitem hideonplay" data-tour="Set throttle|Set how long the program waits between instructions.">throttling:<input type="number" value="10" step="2" min="0" data-name="throttle"><span class="huh" title="Set timeout between instructions (in milliseconds)">?</span></div>
-      <div class="dataitem hideonrun" data-tour="Maximum|Set the maximum number of cells the script is allowed to preview">max mem:<input type="number" value="1000" step="100" min="0" data-name="maxmem"><span class="huh" title="Maximum number of cells the script is allowed to preview.">?</span></div>
+      <div class="dataitem" id="toggleScroll" onclick="toggleScroll()" data-tour="Toggle auto scroll|on/off: enable/disable automatic scrolling in live windows so that active memory blocks and executed commands are always visible.">auto scroll: on</div>
+      <div class="dataitem" data-tour="Set throttle|Set how long the program waits between instructions.">
+        throttling:
+        <input type="range" value="63" min="0" max="400" data-name="throttle">
+        <span id="throttle_label">10</span>
+        <span class="huh" title="Set timeout between instructions (in milliseconds)">?</span>
+      </div>
+      <div class="dataitem hideonrun" data-tour="Maximum memory|Set the maximum number of memory blocks the simulator is allowed to preview">max mem:<input type="number" value="1000" step="100" min="0" data-name="maxmem"><span class="huh" title="Maximum number of memory blocks the simulator is allowed to preview.">?</span></div>
     </div>
     <div id="live" class="noselect">
       <div id="opline" data-tour="Live code|Shows code and which command is currently being executed."></div>
-      <div id="memwrapper" data-tour="Live memory|Shows current cell values">
-        <div id="countbar"></div>
-        <div id="memory">
-          <div id="innermem"></div>
+      <div class="memwrapper" data-tour="Live memory|Shows current block values">
+        <div class="countbar" id="countbar"></div>
+        <div class="mem" id="memory">
+          <div class="innermem" id="innermem"></div>
         </div>
       </div>
     </div>
     <div id="shadow">
       <div id="plaintext" class="popup noselect">
-        <div class="close" onclick="closeWin(this);">×</div>
-        <textarea>lel</textarea>
+        <div class="close" onclick="closeWin(this);">
+          <svg width="100" height="100" viewBox="0 0 100 100">
+            <path d="M30 30L70 70"></path>
+            <path d="M70 30L30 70"></path>
+          </svg>
+        </div>
+        <textarea spellcheck="false"></textarea>
       </div>
       <div id="saveopen" style="height:25em" class="popup noselect">
-        <div class="close" onclick="closeWin(this);">×</div>
-        <div id="inner">
+        <div class="close" onclick="closeWin(this);">
+          <svg width="100" height="100" viewBox="0 0 100 100">
+            <path d="M30 30L70 70"></path>
+            <path d="M70 30L30 70"></path>
+          </svg>
+        </div>
+        <div id="inner" class="innerpopup">
           <div id="sotitle"></div>
           <input id="fileinput" spellcheck="false">
           <div id="files"></div>
@@ -112,6 +160,115 @@ This is a security measure to prevent crashes, but can be set high.">?</span></d
             <div class="sobutton open" onclick="newProject(this)">new</div>
             <div class="sobutton save open" onclick="closeWin(this)">cancel</div>
           </div>
+        </div>
+      </div>
+      <div id="ascii" style="width:initial; height:25em" class="popup noselect">
+        <div class="close" onclick="closeWin(this);">
+          <svg width="100" height="100" viewBox="0 0 100 100">
+            <path d="M30 30L70 70"></path>
+            <path d="M70 30L30 70"></path>
+          </svg>
+        </div>
+        <div class="innerpopup">
+          <div id="asciiwrapper">
+            <div id="asciiblock"></div>
+          </div>
+          <div id="asciileft">
+            <div id="asciidisplay">A</div>
+            <p id="asciinum">65</p>
+            <div id="charerror">Note: this is just a placeholder for the real character. The real character appears blank.</div>
+          </div>
+        </div>
+      </div>
+      <div id="memdump" style="width:initial; height:25em" class="popup noselect">
+        <div class="close" onclick="closeWin(this);">
+          <svg width="100" height="100" viewBox="0 0 100 100">
+            <path d="M30 30L70 70"></path>
+            <path d="M70 30L30 70"></path>
+          </svg>
+        </div>
+        <div class="innerpopup">
+          <div class="memwrapper">
+            <div class="countbar" id="dumpcountbar"></div>
+            <div class="mem" id="memory">
+              <div class="innermem" id="dumpinner"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="autosave" class="popup noselect">
+        <div class="close" onclick="closeWin(this);">
+          <svg width="100" height="100" viewBox="0 0 100 100">
+            <path d="M30 30L70 70"></path>
+            <path d="M70 30L30 70"></path>
+          </svg>
+        </div>
+        <div class="innerpopup">
+          <table id="savecontent"></table>
+        </div>
+      </div>
+      <div id="hotkeys" class="popup noselect">
+        <div class="close" onclick="closeWin(this);">
+          <svg width="100" height="100" viewBox="0 0 100 100">
+            <path d="M30 30L70 70"></path>
+            <path d="M70 30L30 70"></path>
+          </svg>
+        </div>
+        <div class="innerpopup">
+          <table>
+            <tr>
+              <td>Ctrl+S</td>
+              <td>Save project to LocalStorage</td>
+            </tr>
+            <tr>
+              <td>Ctrl+L / Ctrl+O</td>
+              <td>Open project from LocalStorage</td>
+            </tr>
+            <tr>
+              <td>Alt+N</td>
+              <td>Create new project</td>
+            </tr>
+            <tr>
+              <td>F6</td>
+              <td>Run code</td>
+            </tr>
+            <tr>
+              <td>Ctrl+F6</td>
+              <td>Clean up and run code</td>
+            </tr>
+            <tr>
+              <td>Alt+A</td>
+              <td>Open ASCII table window</td>
+            </tr>
+            <tr>
+              <td>Alt+V</td>
+              <td>Toggle ASCII/Emoji view mode</td>
+            </tr>
+            <tr>
+              <td>Ctrl+M</td>
+              <td>Get memory dump from executed code</td>
+            </tr>
+            <tr>
+              <td>Alt+C</td>
+              <td>Clear console</td>
+            </tr>
+            <tr>
+              <td>Esc</td>
+              <td>While running - halt execution</td>
+            </tr>
+            <tr>
+              <td>Esc</td>
+              <td>Close windows. Will not halt execution if closing window.</td>
+            </tr>
+            <tr>
+              <td>Space</td>
+              <td>While running - play/pause execution</td>
+            </tr>
+            <tr>
+              <td>Tab</td>
+              <td>While running and paused - Jump to next instruction</td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>
