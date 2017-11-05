@@ -1,8 +1,14 @@
 body{
   font-size:1vw;
-  font-family:monospace;
-  margin:1em;
+  font-family:Consolas,monospace;
+  margin:0 1em 1em 1em;
   background-color:#111;
+  color:#ddd;
+  min-height:100vh;
+}
+
+input,textarea{
+  color:#ddd;
 }
 
 .noselect{
@@ -15,8 +21,7 @@ input,textarea{
   outline:none;
   font-size:100%;
   background-color:#333;
-  color:#ddd;
-  font-family:monospace;
+  font-family:Consolas,monospace;
 }
 
 div[onclick]{
@@ -28,14 +33,15 @@ div[onclick]:hover{
 }
 
 #run:hover{
-  background-color:#888;
+  background-color:#888!important;
 }
 
 .wrapper{
   width:49.5%;
   float:left;
-  padding-bottom:1em;
+  padding-bottom:1.5em;
   margin-right:1%;
+  margin-top: 3em;
 }
 
 #datain,#input,#console,#live{
@@ -45,7 +51,6 @@ div[onclick]:hover{
   box-sizing:border-box;
   background-color:#222;
   border:0.25em solid #666;
-  color:white;
   padding:0.5em;
   border-top:none;
 }
@@ -56,7 +61,15 @@ div[onclick]:hover{
 
 #datain{
   color:#888;
-  min-height:18.5em;
+  line-height:1.2em;
+}
+
+#datain[readonly] {
+  cursor: default;
+}
+
+body[emoji="false"] #datain{
+  color:#ccc;
 }
 
 #input{
@@ -69,7 +82,7 @@ div[onclick]:hover{
   padding:0;
 }
 
-#buttonbar,#settingsbar,#infobar,#livebar{
+#buttonbar,#settingsbar,#infobar,#livebar,#actionbar{
   display:flex;
   width:100%;
   height:2em;
@@ -85,13 +98,87 @@ div[onclick]:hover{
   height:3em;
 }
 
-#livebar{
-  margin-top:2em;
-}
-
 #livebar .dataitem {
   flex-shrink: 0;
   flex-basis: 0;
+  padding: 0 1em;
+}
+
+#throttle_label {
+  width: 2em;
+}
+
+#actionbar {
+  margin-top: 0.75em;
+  height: 2.5em;
+}
+
+#actionbar .emojibutton {
+  flex-grow: 0;
+  width: 11%;
+}
+
+#toolbar{
+  position:fixed;
+  width:100%;
+  height:2em;
+  left:0;
+  background-color:#333;
+  z-index:1000;
+  box-shadow:0 0.5em 1em rgba(0,0,0,0.5);
+}
+
+.toolitem{
+  display:flex;
+  position:relative;
+  height:100%;
+  float:left;
+  font-size:90%;
+  align-items:center;
+  padding:0 0.75em;
+  cursor:pointer;
+}
+
+.toolitem.active,.toolitem.active:hover{
+  background-color:#666 !important;
+}
+
+#toolcontext{
+  display:none;
+  position:fixed;
+  border:1px solid #666;
+  background-color:#333;
+  z-index:1001;
+}
+
+.contextitem{
+  font-size:90%;
+  padding:0.3em 0.5em;
+  cursor:pointer;
+}
+
+.contextitem span {
+  color: #999;
+  float: right;
+  margin-left: 5em;
+}
+
+.toolitem:nth-of-type(2n),.contextitem:nth-of-type(2n){
+  background-color:#3a3a3a;
+}
+
+.toolitem:hover,.contextitem:hover{
+  background-color:#444 !important;
+}
+
+#titlebar {
+  display: block;
+  width: 40%;
+  height: 100%;
+  margin-left: 30%;
+  text-align: center;
+  line-height: 2em;
+  cursor:default;
 }
 
 .emojibutton,.settingsitem,.dataitem{
@@ -102,7 +189,6 @@ div[onclick]:hover{
   background-color:#666;
   align-items:center;
   justify-content:center;
-  color:#ddd;
   transition:transform 100ms;
 }
 
@@ -129,7 +215,7 @@ div[onclick]:hover{
 
 .emojibutton:before{
   content:attr(data-emoji);
-  margin-right:1em;
+  margin-right:0.8em;
 }
 
 .emojibutton:hover{
@@ -166,9 +252,13 @@ body[live="false"] #livebar .dataitem + .dataitem, body[running="true"] .hideonr
   pointer-events: none;
 }
 
+body[running="true"] #actionbar .emojibutton.hideonrun{
+  display:none;
+}
+
 #console{
   color:white;
-  font-family:monospace;
+  font-family:Consolas,monospace;
   overflow-x:hidden;
   overflow-y:auto;
   resize:vertical;
@@ -245,8 +335,7 @@ input[type="number"]{
   background-color:rgba(0,0,0,0.2);
   border:none;
   outline:none;
-  font-family:monospace;
-  color:#ddd;
+  font-family:Consolas,monospace;
   font-size:1em;
   width:7em;
   text-indent:0.5em;
@@ -263,7 +352,7 @@ input[type="number"]{
   text-align:center;
 }
 
-#countbar, #memory, body[tour="true"] #console *{
+#countbar, body[tour="true"] #live .mem, body[tour="true"] #console *{
   pointer-events:none;
 }
 
@@ -280,8 +369,12 @@ input[type="number"]{
   width:100%;
 }
 
+.opsquare + .spacer{
+  border-top:1px solid #333;
+}
+
 body[wrap="true"] .spacer{
-  width:0;
+  display:none;
 }
 
 body[emoji="true"] .opsquare{
@@ -305,8 +398,8 @@ body[emoji="false"] .opsquare:after{
   display:flex;
   overflow:auto;
   resize:vertical;
-  height:16.3em;
-  min-height:16.3em;
+  height:17em;
+  min-height:17em;
 }
 
 #opline{
@@ -319,7 +412,7 @@ body[emoji="false"] .opsquare:after{
   overflow:auto;
 }
 
-#memwrapper{
+.memwrapper{
   display: flex;
   flex-direction: column;
   border-left: 0.25em solid #666;
@@ -327,18 +420,18 @@ body[emoji="false"] .opsquare:after{
   flex-shrink:0;
 }
 
-#countbar {
+.countbar {
   height: 2em;
   border-bottom: 1px solid #444;
   box-sizing:border-box;
 }
 
-#memory{
+.mem{
   overflow:auto;
   flex-grow:1;
 }
 
-#innermem{
+.innermem{
   display:flex;
   position:relative;
   width:34em;
@@ -346,7 +439,7 @@ body[emoji="false"] .opsquare:after{
   align-content:flex-start;
 }
 
-#innermem .countsquare {
+.innermem .countsquare {
   border-right: 1px solid #444;
   box-sizing: border-box;
 }
@@ -355,17 +448,19 @@ body[emoji="false"] .opsquare:after{
   display:none;
   position:fixed;
   top:0;
+  left:0;
   width:100%;
   height:100%;
   background-color:rgba(0,0,0,0.7);
   justify-content:center;
   align-items:center;
+  z-index:2000;
 }
 
 .popup{
   display:none;
-  position:absolute;
   width:40em;
+  position:relative;
   height:20em;
   background-color:#222;
   border-radius:1em;
@@ -377,8 +472,7 @@ body[emoji="false"] .opsquare:after{
   width:100%;
   resize:none;
   background-color:#333;
-  border:0.25em solid #666;
-  color:#ddd;
+  border:1px solid #666;
   padding:0.5em;
 }
 
@@ -388,20 +482,31 @@ body[emoji="false"] .opsquare:after{
   width:1em;
   height:1em;
   background-color:#444;
-  color:#ddd;
   border-radius:50%;
   right:-0.5em;
   top:-0.5em;
-  text-align:center;
-  line-height:1em;
   cursor:pointer;
   border:0.1em solid #ddd;
 }
 
-#inner{
+.close svg{
+  width:100%;
+  height:100%;
+}
+
+.close path{
+  stroke:#ddd;
+  stroke-width:10;
+}
+
+.innerpopup{
   display:flex;
   width:100%;
   margin:1em;
+  overflow:auto;
+}
+
+#inner{
   margin-top:0.8em;
   flex-direction:column;
 }
@@ -423,7 +528,6 @@ body[emoji="false"] .opsquare:after{
 
 #sotitle{
   width:100%;
-  color:#ddd;
   text-align:center;
   font-size:120%;
   margin-bottom:0.8em;
@@ -445,7 +549,6 @@ body[emoji="false"] .opsquare:after{
   align-items:center;
   justify-content:center;
   background-color:#666;
-  color:#ddd;
   margin-right:1em;
   cursor:pointer;
 }
@@ -473,24 +576,23 @@ body[emoji="false"] .opsquare:after{
   overflow:auto;
 }
 
-.file{
+.file,.saveitem{
   display:none;
   cursor:pointer;
   flex-shrink:0;
   padding:0.4em 0.5em;
   background-color:#555;
-  color:#ddd;
 }
 
-.file:hover {
-  background-color: #666;
+.file:hover,.saveitem:hover {
+  background-color: #666!important;
 }
 
-.file:nth-of-type(2n){
+.file:nth-of-type(2n),.saveitem:nth-of-type(2n){
   background-color:#606060;
 }
 
-.file span {
+.file span, .saveitem span {
   position: relative;
   float: left;
   pointer-events: none;
@@ -541,11 +643,10 @@ a{
   background-color:#333;
   border: 0.1em solid #666;
   box-sizing:border-box;
-  margin:1em 0 2em 0;
+  margin:4em 0 -1em 0;
   padding:1em 0;
   border-radius:1em;
   align-items:center;
-  color:#ddd;
 }
 
 #tipbar a{
@@ -576,7 +677,6 @@ body[tour="false"] #tourbubble, body[tour="false"] #shadowbox{
 
 #tourbubble {
   position: absolute;
-  color: #ddd;
   padding: 0.5em;
   background: #333;
   border: 1px solid #666;
@@ -598,4 +698,125 @@ body[tour="false"] #tourbubble, body[tour="false"] #shadowbox{
   background-color:rgba(255,255,255,0.15);
   pointer-events:none;
   box-sizing:border-box;
+}
+
+#asciiwrapper{
+  overflow:auto;
+}
+
+#asciiblock {
+  display: block;
+  width: 34em;
+  min-height: 0;
+  overflow: hidden;
+  border-bottom: 1px solid #333;
+  border-right: 1px solid #333;
+  cursor:default;
+}
+
+.asciisquare {
+  position: relative;
+  float: left;
+  width: 2em;
+  height: 2em;
+  text-align: center;
+  line-height: 2em;
+  cursor:pointer;
+}
+
+.asciisquare:hover{
+  background-color:#444;
+}
+
+.asciisquare,#asciiblock .countsquare{
+  box-sizing: border-box;
+  border-top: 1px solid #333;
+  border-left: 1px solid #333;
+}
+
+#asciileft {
+  position: relative;
+  float: left;
+  width: 10em;
+  margin-left: 1em;
+}
+
+#asciidisplay {
+  font-size: 1000%;
+  width: 100%;
+  height: 1.4em;
+  text-align: center;
+  line-height: 1.4em;
+  box-sizing: border-box;
+  border: 1px solid #666;
+}
+
+#asciinum {
+  text-align: center;
+  font-size: 150%;
+  margin-top: 0.5em;
+  padding: 0.2em;
+  background: #333;
+}
+
+#charerror {
+  display:none;
+  text-align: center;
+  font-size: 70%;
+}
+
+.asciisquare[charcode]:after {
+  content: "";
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: 0.25em solid #aaa;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+}
+
+#memdump .memwrapper{
+  border:1px solid #666;
+}
+
+#autosave .innerpopup{
+  background-color:#333;
+  overflow:auto;
+}
+
+#savecontent{
+  overflow:auto;
+  border-collapse: collapse;
+  width:100%;
+}
+
+.saveitem {
+  display: table-row;
+  width: 100%;
+  height: 1.8em;
+}
+
+.saveitem td {
+  padding: 0 0.5em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.saveitem td:first-of-type {
+  width: 50%;
+}
+
+.saveitem td:last-of-type {
+  text-align: right;
+  padding: 0 0.5em;
+}
+
+table{
+  width:100%;
+}
+
+#hotkeys table td:first-of-type {
+  width: 30%;
 }
