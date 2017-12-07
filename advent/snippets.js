@@ -41,3 +41,18 @@ function getSurroundingVal(x,y){
 	lgArr[y][x]=count;
 }
 lgArr
+
+//----------
+
+var ord=1024,
+	side=Math.ceil(Math.sqrt(ord));
+
+side=side%2==1?side:side+1;
+var depth=Math.floor(side/2),
+	diff=side**2-ord,
+	side2=Math.abs((ord%side+side-1)%side-Math.floor(side/2));
+depth+side2
+
+//----------
+
+
