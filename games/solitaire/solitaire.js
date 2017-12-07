@@ -706,7 +706,7 @@ function pickupCard(evt){
     offsY:(evt.clientY || evt.touches[0].clientY)-bcr.top
   }
   //console.log(offsX+" - "+offsY);
-  moveCards(evt);
+  //moveCards(evt);
   parentPile=getParentPile(moveElem);
   setHeapSpacing(true,parentPile);
   movedElem=false;
