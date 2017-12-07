@@ -710,6 +710,7 @@ function pickupCard(evt){
   parentPile=getParentPile(moveElem);
   setHeapSpacing(true,parentPile);
   movedElem=false;
+  moveElem.classList.add("moving");
   evt.stopPropagation();
 }
 
