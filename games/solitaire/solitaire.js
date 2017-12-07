@@ -399,7 +399,6 @@ window.onresize=setHeapSpacing;
 
 function moveCards(evt){
   if (moveElem&&!noAction){
-    moveElem.classList.add("moving");
     var x=(evt.clientX || evt.touches[0].clientX),
         y=(evt.clientY || evt.touches[0].clientY);
     moveElem.style.left=(x-pickupData.offsX)+"px";
@@ -707,7 +706,7 @@ function pickupCard(evt){
     offsY:(evt.clientY || evt.touches[0].clientY)-bcr.top
   }
   //console.log(offsX+" - "+offsY);
-  //moveCards(evt);
+  moveCards(evt);
   parentPile=getParentPile(moveElem);
   setHeapSpacing(true,parentPile);
   movedElem=false;
