@@ -54,5 +54,53 @@ var depth=Math.floor(side/2),
 depth+side2
 
 //----------
+//Day 8
+var registers={},
+	exprs=document.body.innerText.trim().split("\n").map(e => e.split(" ")),
+	compMax=0,
+	totMax=0;
 
+for (var i=0;i<exprs.length;i++){
+	var exp=exprs[i];
+	if (parseBool(exp)){
+		var val=getOptiVal(registers[exp[0]])+(getOptiVal(exp[2])*(exp[1]=="inc"?1:-1));
+		registers[exp[0]]=val;
+		if (val>compMax)
+			compMax=val;
+	}
+}
+
+for (var key in registers){
+	if (registers[key]>totMax)
+		totMax=registers[key];
+}
+
+console.log(totMax,compMax);
+
+//Could probably 
+function parseBool(expr){
+	var a=getOptiVal(expr[4]),
+		b=getOptiVal(expr[6]);
+	
+	switch (expr[5]){
+		case "==":
+			return a==b;
+		case ">=":
+			return a>=b;
+		case "<=":
+			return a<=b;
+		case "!=":
+			return a!=b;
+		case ">":
+			return a>b;
+		case "<":
+			return a<b;
+	}
+}
+
+function getOptiVal(val){
+	if (isNaN(val))
+		return registers[val] || 0;
+	return Number(val);
+}
 
