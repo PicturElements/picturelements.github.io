@@ -77,7 +77,6 @@ for (var key in registers){
 
 console.log(totMax,compMax);
 
-//Could probably 
 function parseBool(expr){
 	var a=getOptiVal(expr[4]),
 		b=getOptiVal(expr[6]);
@@ -104,3 +103,40 @@ function getOptiVal(val){
 	return Number(val);
 }
 
+//----------
+//Day 9
+
+//a
+var inpClean=document.body.innerText.replace(/!.|[^<>{}]/g,"").replace(/<[^>]{0,}>/g,""),
+	clean=inpClean,
+	cleanBuffer="",
+	lvl=1,
+	score=0,
+	layer=0;
+
+while (clean){
+	cleanBuffer="";
+	layer=0;
+	for (var i=0;i<clean.length;i++){
+		if (clean[i]=="}"){
+			layer--;
+			if (!layer){
+				score+=lvl;
+				continue;
+			}
+		}else{
+			layer++;
+			if (layer==1)
+				continue;
+		}
+		if (layer)
+			cleanBuffer+=clean[i];
+	}
+	lvl++;
+	clean=cleanBuffer;
+}
+console.log(score);
+
+//b
+var escaped=document.body.innerText.replace(/!./g,"");
+console.log(escaped.length-escaped.replace(/<[^>]{0,}>/g,"<>").length);
