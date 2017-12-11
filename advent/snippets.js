@@ -140,3 +140,72 @@ console.log(score);
 //b
 var escaped=document.body.innerText.replace(/!./g,"");
 console.log(escaped.length-escaped.replace(/<[^>]{0,}>/g,"<>").length);
+
+//----------
+//Day 10
+//a
+var keys=document.body.innerText.split(",").map(Number),
+	skip=0,
+	pointer=0,
+	arr=[];
+
+for (var i=0;i<256;i++)
+	arr.push(i);
+
+for (var i=0;i<keys.length;i++){
+	flip(pointer,keys[i]);
+	pointer=(pointer+skip+keys[i])%256;
+	skip++;
+}
+console.log(arr[0]*arr[1]);
+
+function flip(start,length){
+	var hl=Math.floor(length/2);
+	for (var i=0;i<hl;i++){
+		var cur=(start+i)%256,
+			cur2=(start+length-i-1)%256,
+			tmp=arr[cur];
+		arr[cur]=arr[cur2];
+		arr[cur2]=tmp;
+	}
+}
+
+//b
+var keys=[].slice.call(document.body.innerText.trim()).map(e => e.charCodeAt(0)).concat([17, 31, 73, 47, 23]),
+	skip=0,
+	pointer=0,
+	arr=[],
+	hash="";
+
+for (var i=0;i<256;i++)
+	arr.push(i);
+
+for (var i=0;i<64;i++){
+	for (var j=0;j<keys.length;j++){
+		flip(pointer,keys[j]);
+		pointer=(pointer+skip+keys[j])%256;
+		skip++;
+	}
+}
+
+for (var i=0;i<16;i++){
+	var xor=arr[i*16];
+	for (var j=1;j<16;j++)
+		xor^=arr[i*16+j];
+	var hex=xor.toString(16);
+	if (hex.length==1)
+		hex="0"+hex;
+	hash+=hex;
+}
+console.log(hash);
+
+function flip(start,length){
+	var hl=Math.floor(length/2);
+	for (var i=0;i<hl;i++){
+		var cur=(start+i)%256,
+			cur2=(start+length-i-1)%256,
+			tmp=arr[cur];
+		arr[cur]=arr[cur2];
+		arr[cur2]=tmp;
+	}
+}
