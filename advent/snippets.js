@@ -209,3 +209,49 @@ function flip(start,length){
 		arr[cur2]=tmp;
 	}
 }
+
+//------
+//Day 12
+var keys=document.body.innerText.trim().split("\n").map(e => e.split("<-> ")[1].split(", ").map(Number)),
+	len=keys.length,
+	connected=[],
+	groupCount=1;
+
+for (var i=0;i<len;i++)
+	connected.push(null);
+
+//a
+connected[0]=true;
+for (var i=0;i<len;i++){
+	getPipes(i);
+}
+console.log(connected.filter(e => e).length);
+
+//b
+while (true){
+	connected=connected.map(e => e?e:null);
+	var idx=connected.indexOf(null);
+	if (idx<0)
+		break;
+	connected[idx]=true;
+	groupCount++;
+	for (var i=idx;i<len;i++)
+		getPipes(i);
+}
+console.log(groupCount);
+
+function getPipes(index){
+	if (connected[index]!==null)
+		return connected[index];
+	for (var i=0;i<keys[index].length;i++){
+		connected[index]=false;
+		var k=keys[index][i];
+		if (getPipes(k)){
+			connected[index]=true;
+			connected[k]=true;
+			return true;
+		}
+	}
+	connected[index]=null;
+	return false;
+}
