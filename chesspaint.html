@@ -1,0 +1,214 @@
+<html>
+  <head>
+    <title>Sådan färg borde man ha!</title>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;
+        touch-action: none;
+      }
+
+      #board-wrapper {
+        position: absolute;
+        font-size: 1vh;
+        width: 80em;
+        height: 80em;
+        top: 50%;
+        left: 50%;
+        margin: -40em;
+      }
+
+      .board {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        margin-left: 1em;
+        background: #efe2d1;
+        box-shadow: -0.5em 0 0.5em rgba(0,0,0,0.1);
+      }
+
+      .board.first {
+        box-shadow: -0.5em 0 0.5em transparent;
+      }
+
+      .board.first, .board.first > .board {
+        margin-left: 0;
+      }
+
+      #grid {
+        position: absolute;
+        background: #fba02b;
+        height: 100%;
+      }
+
+      #boardc {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .switch #board{
+        animation: slideAway 1s 1;
+      }
+
+      .switch .board.first {
+        animation: shadowIn 1s 1;
+      }
+
+      .switch .board.first > .board {
+        animation: slideIn 1s 1;
+      }
+
+      @keyframes slideAway {
+        50% {
+          opacity: 1;
+        }
+        100% {
+          margin-left: 100em;
+          opacity: 0;
+        }
+      }
+
+      @keyframes slideIn {
+        to {
+          margin-left: 1em;
+        }
+      }
+
+      @keyframes shadowIn {
+        to {
+          box-shadow: -0.5em 0 0.5em rgba(0,0,0,0.1);
+        }
+      }
+
+      @media (max-aspect-ratio: 1/1){
+        #board-wrapper {
+          font-size: 1vw;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="board-wrapper">
+      <div class="board first">
+        <div class="board">
+          <div class="board">
+            <div class="board">
+              <div id="board" class="board">
+                <svg id="grid" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <pattern id="backgrid" x="0" y="0" width="0.25" height="0.25">
+                      <rect x="0" y="0" width="5" height="5"></rect>
+                      <rect x="5" y="5" width="5" height="5"></rect>
+                    </pattern>
+                  </defs>
+                  <rect fill="url(#backgrid)" width="40" height="40"></rect>
+                </svg>
+                <canvas id="boardc"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      var canv=document.getElementById("boardc"),
+          ctx=canv.getContext("2d"),
+          radius=30,
+          drawing=false,
+          prevCoords=[];
+
+      function init(){
+        var bcr=document.getElementById("board").getBoundingClientRect(),
+            s=bcr.width;
+        radius=s/6;
+        canv.width=s;
+        canv.height=s;
+        ctx.fillStyle="#efe2d1";
+        ctx.fillRect(0,0,s,s);
+      }
+
+      function erase(x,y){
+        ctx.fillStyle="rgba(0,0,0,0.2)";
+        ctx.globalCompositeOperation="source-atop";
+        ctx.beginPath();
+        ctx.arc(x+2,y+2,radius,0,Math.PI*2);
+        ctx.fill();
+        ctx.fillStyle="black";
+        ctx.globalCompositeOperation="destination-out";
+        ctx.beginPath();
+        ctx.arc(x,y,radius,0,Math.PI*2);
+        ctx.fill();
+      }
+
+      function eraseStart(evt){
+        drawing=true;
+        smartErase(evt);
+      }
+
+      function smartErase(evt){
+        if (!drawing)
+          return;
+
+        var t=evt.touches,
+            bcr=document.getElementById("board").getBoundingClientRect(),
+            top=bcr.top,
+            left=bcr.left;
+        if (t){
+          for (var i=0;i<t.length;i++)
+            erase(t[i].clientX-left,t[i].clientY-top);
+        }else
+          erase(evt.clientX-left,evt.clientY-top);
+        evt.preventDefault();
+      }
+
+      function relayEraseEnd(){
+        console.log("hmm...");
+        eraseEnd(true);
+      }
+
+      function eraseEnd(block){
+        if (block!==true)
+          drawing=false;
+        if (checkBlank()){
+          var bw=document.getElementById("board-wrapper");
+          bw.classList.add("switch");
+          setTimeout(function(){
+            bw.classList.remove("switch");
+            init();
+          },1000);
+          drawing=false;
+        }
+      }
+
+      function checkBlank(){
+        var s=canv.width,
+            id=ctx.getImageData(0,0,s,s),
+            sampleW=Math.floor(s/20);
+
+        for (var i=0;i<s;i+=sampleW){
+          for (var j=0;j<s;j+=sampleW){
+            if (id.data[(i*s+j)*4+3])
+              return false;
+          }
+        }
+        return true;
+      }
+
+      document.body.addEventListener("mousedown",eraseStart);
+      document.body.addEventListener("touchstart",eraseStart);
+      document.body.addEventListener("mousemove",smartErase);
+      document.body.addEventListener("touchmove",smartErase);
+      document.body.addEventListener("mouseup",eraseEnd);
+      document.body.addEventListener("touchend",eraseEnd);
+      document.body.addEventListener("mouseleave",relayEraseEnd);
+      document.body.addEventListener("touchleave",relayEraseEnd);
+
+      window.onresize=init;
+      init();
+    </script>
+  </body>
+</html>
