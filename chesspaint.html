@@ -52,16 +52,28 @@
         height: 100%;
       }
 
+      #tomt {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        font-size: 6.6667em;
+        text-align: center;
+        color: #dcc3a3;
+      }
+
       .switch #board{
-        animation: slideAway 1s 1;
+        animation: slideAway 1s forwards 1;
       }
 
       .switch .board.first {
-        animation: shadowIn 1s 1;
+        animation: shadowIn 1s forwards 1;
       }
 
       .switch .board.first > .board {
-        animation: slideIn 1s 1;
+        animation: slideIn 1s forwards 1;
       }
 
       @keyframes slideAway {
@@ -99,6 +111,7 @@
         <div class="board">
           <div class="board">
             <div class="board">
+              <div id="tomt">Tom T. leksaker AB</div>
               <div id="board" class="board">
                 <svg id="grid" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
                   <defs>
@@ -131,6 +144,11 @@
         canv.height=s;
         ctx.fillStyle="#efe2d1";
         ctx.fillRect(0,0,s,s);
+        ctx.font=(radius/2)+"px serif";
+        ctx.fillStyle="#dcc3a3";
+        ctx.textAlign="center";
+        ctx.textBaseline="middle";
+        ctx.fillText("Tom T. leksaker AB",s/2,s/2);
       }
 
       function erase(x,y){
@@ -168,7 +186,6 @@
       }
 
       function relayEraseEnd(){
-        console.log("hmm...");
         eraseEnd(true);
       }
 
