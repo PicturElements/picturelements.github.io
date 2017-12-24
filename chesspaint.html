@@ -213,8 +213,8 @@
             id=ctx.getImageData(0,0,s,s),
             sampleW=Math.floor(s/20);
 
-        for (var i=0;i<s;i+=sampleW){
-          for (var j=0;j<s;j+=sampleW){
+        for (var i=10;i<s;i+=sampleW){
+          for (var j=10;j<s;j+=sampleW){
             if (id.data[(i*s+j)*4+3])
               return false;
           }
