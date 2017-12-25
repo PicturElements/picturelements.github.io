@@ -3,12 +3,32 @@
     <title>Höhö sån där färg skulle man ha!</title>
     <link rel="icon" href="pelement.png">
     <meta name="description" content="HÖHÖ SÅN DÄR FÄRG SKULLE MAN HA!!!">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <style>
       body {
         margin: 0;
         height: 100vh;
         overflow: hidden;
         touch-action: none;
+        font-family: "Open Sans", Arial, sans-serif;
+      }
+
+      .data-bar {
+        position: absolute;
+        width: 100%;
+        height: 5em;
+        text-align: center;
+        color: #888;
+        font-size: 2vh;
+        line-height: 5em;
+      }
+
+      .data-bar + .data-bar {
+        bottom: 0;
+      }
+
+      .data-bar span:not(.no-bold) {
+        font-weight: bold;
       }
 
       #board-wrapper {
@@ -59,6 +79,7 @@
         justify-content: center;
         width: 100%;
         height: 100%;
+        font-family: serif;
         font-size: 6.6667em;
         text-align: center;
         color: #dcc3a3;
@@ -107,10 +128,26 @@
         #board-wrapper {
           font-size: 1vw;
         }
+
+        .data-bar {
+          font-size: 3vw;
+          top: 50%;
+          margin: -18.3em 0;
+        }
+
+        .data-bar + .data-bar {
+          margin: 13.333em 0;
+        }
       }
     </style>
   </head>
   <body>
+    <div class="data-bar">
+      <span id="finished">0</span> <span id="board-txt" class="no-bold">färdigmålade bräden</span> | <span id="time">0,00</span>s
+    </div>
+    <div class="data-bar" style="display:none">
+      senaste målning tog <span id="last"></span>s | snitt <span id="avg"></span>s
+    </div>
     <div id="board-wrapper">
       <div class="board first">
         <div class="board">
@@ -139,7 +176,16 @@
           ctx=canv.getContext("2d"),
           radius=30,
           drawing=false,
-          prevCoords=[];
+          prevCoords=[],
+          timestamp=0,
+          lastTS=0,
+          gameData={
+            finished: 0,
+            last: 0,
+            avg: 0
+          };
+
+      gameData=JSON.parse(localStorage.getItem("gameData")) || gameData;
 
       function init(){
         var bcr=document.getElementById("board").getBoundingClientRect(),
@@ -154,6 +200,16 @@
         ctx.textAlign="center";
         ctx.textBaseline="middle";
         ctx.fillText("Tom T. leksaker AB",s/2,s/2);
+
+        timestamp=Date.now();
+        document.getElementById("finished").innerHTML=gameData.finished;
+        document.getElementById("board-txt").innerHTML=gameData.finished==1?"färdigmålat bräde":"färdigmålade bräden"
+        var lst=document.getElementById("last");
+        if (gameData.finished){
+          lst.parentElement.style.display="";
+          lst.innerText=gameData.last.toFixed(2).replace(".",",");
+          document.getElementById("avg").innerText=gameData.avg.toFixed(2).replace(".",",");
+        }
       }
 
       function erase(x,y){
@@ -197,14 +253,20 @@
       function eraseEnd(block){
         if (block!==true)
           drawing=false;
-        if (checkBlank()){
+        if (checkBlank()&&timestamp!=1e15){
           var bw=document.getElementById("board-wrapper");
           bw.classList.add("switch");
           setTimeout(function(){
             bw.classList.remove("switch");
             init();
           },1000);
+          var fin=(lastTS-timestamp)/1000;
+          gameData.finished++;
+          gameData.last=fin;
+          gameData.avg=((gameData.finished-1)*gameData.avg+fin)/gameData.finished;
           drawing=false;
+          timestamp=1e15;
+          localStorage.setItem("gameData",JSON.stringify(gameData));
         }
       }
 
@@ -222,6 +284,13 @@
         return true;
       }
 
+      function tick(){
+        var diff=Date.now()-timestamp;
+        lastTS=Date.now();
+        if (diff>0)
+          document.getElementById("time").innerHTML=(diff/1000).toFixed(2).replace(".",",");
+      }
+
       document.body.addEventListener("mousedown",eraseStart);
       document.body.addEventListener("touchstart",eraseStart);
       document.body.addEventListener("mousemove",smartErase);
@@ -230,6 +299,7 @@
       document.body.addEventListener("touchend",eraseEnd);
       document.body.addEventListener("mouseleave",relayEraseEnd);
       document.body.addEventListener("touchleave",relayEraseEnd);
+      setInterval(tick,20);
 
       window.onresize=init;
       init();
