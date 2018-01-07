@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name=Description content="Gaussian distribution...">
+  <meta name=keywords content="joke, animation, Gauss">
+  <meta name=author content="Andrei Kashcha">
+  <title>Gaussian Distribution</title>
+  <style>
+    body {
+      display: flex;
+      margin: 0;
+      flex-direction: column;
+      height: 100vh;
+      font-family: monospace;
+    }
+
+    #content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+      background: #222;
+    }
+
+    #controls {
+      padding: 10px;
+      border-top: 1px dashed #555;
+      background: #333;
+      color: #eee;
+    }
+
+    .question {
+      color: #aaa;
+      cursor: help;
+    }
+
+    input {
+      background: #222;
+      border: 1px solid #555;
+      padding: 5px 10px;
+      color: white;
+      font: inherit;
+      outline: none;
+    }
+
+    input:first-of-type {
+      width: 50%;
+    }
+
+    button {
+      background: #222;
+      border: 1px solid #555;
+      padding: 5px 10px;
+      font: inherit;
+      color: white;
+      cursor: pointer;
+      outline: none;
+    }
+
+    input:focus, button:focus {
+      border-color: #888;
+    }
+
+    #credit {
+      float: right;
+      line-height: 25px;
+      margin-right: 10px;
+    }
+
+    a {
+      color: #8a8aff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 120%;
+      vertical-align: bottom;
+    }
+  </style>
+</head>
+<body>
+<div id="content">
+  <canvas id="canv"></canvas>
+</div>
+<div id="controls">
+  <input id="src-inp" spellcheck="false" placeholder="image URL">
+  <button onclick="requestStart()">Play</button>
+  | max size <span class="question" title="OPTIONAL. Sets the maximum size (width or height) of the image. If the input image is bigger in any direction it will be resized to specification, making the animation run smoother on the smaller data set. Leave blank or 0 for full size.">(?)</span>:
+  <input id="max-size" placeholder="max size (optional)" value="500">
+  <span id="credit" style="float: right">Original code by <a href="https://github.com/anvaka" target="_blank" rel="noopener noreferrer">anvanka</a></span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.3.5/chroma.min.js"></script>
+<script id="jsbin-javascript">
+  var colorSet = new Map(); // maps color value to pixel info
+  var img = document.createElement('img');
+  var canvas = document.getElementById('canv');
+  var ctx;
+  // I use state to determine whether it should expand or collapse
+  var currentStage = 1;
+  // This is to properly scale the height of the chart
+  var maxColorsInBin = 0;
+  // Width and height of the working image
+  var width, height;
+  
+  // Meta info, max size data
+  var running = false,
+      requestFlow = 0,  //0: do nothing, 1: restart, 2: break
+      maxSize = null;
+    
+  // Make sure image has CORS setup, otherwise we will not have access
+  // to it
+  img.crossOrigin = 'Anonymous';
+
+  function start() {
+    width = img.width;
+    height = img.height;
+    var maxS=Math.max(width,height);
+    if (maxSize !== null && maxS > maxSize){
+      var scale=maxSize/maxS;
+      width = Math.round(width*scale);
+      height = Math.round(height*scale);
+    }
+    
+    canvas.width = width;
+    canvas.height = height;
+    
+    ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0, width, height);
+    var imgData = ctx.getImageData(0, 0, width, height);
+    var pixels = imgData.data;
+    // We are going to collect pixel values first
+    for (var x = 0; x < width; ++x) {
+      for (var y = 0; y < height; ++y) {
+        var i = (x + y * width) * 4;
+        var r = pixels[i + 0];
+        var g = pixels[i + 1];
+        var b = pixels[i + 2];
+        var a = pixels[i + 3];
+        var color = chroma(r, g, b) 
+        var colorKey = color.get('hsl.l')
+        var pixelInfo = colorSet.get(colorKey);
+        if (!pixelInfo) {
+          pixelInfo = {
+            points: [],
+          };
+          colorSet.set(colorKey, pixelInfo);
+        }
+        pixelInfo.points.push({
+          // original position of a pixel
+          x: x,
+          y: y,
+          // Randomly assign animation lifespan
+          timeSpan: Math.round(Math.random() * 120) + 30,
+          // current frame number, used for interpolation
+          frame: 0,
+          // Where this pixel should go? Will be computed by computeDestinations()
+          destX: 0,
+          destY: 0,
+          // Current color
+          color: color
+        });
+        // We need to know the highest point of a chart, to properly scale it inside
+        // available canvas
+        if (pixelInfo.points.length > maxColorsInBin) maxColorsInBin = pixelInfo.points.length;
+      }
+    }
+    // Now that we have all pixels collected, lets figure out.
+    computeDestinations();
+    // I did a small pause before initial animation, to set the stage
+    
+    setTimeout(() => {
+      requestAnimationFrame(move);
+    }, 1000);
+  }
+  function interploate(t) {
+    // This is easeInOutQuad function. See more here https://gist.github.com/gre/1650294
+    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+  }
+  function lerp(a, b, t) {
+    // simple linear interploation.
+    return b * t + a * (1 - t);
+  }
+  // Main animation loop
+  function move() {
+    if (requestFlow > 0){
+      if (requestFlow == 1)
+        initAnvanka();
+      requestFlow = 0;
+      return;
+    }
+    
+    // When all pixels cannot be moved anymore, we switch the mode.
+    var hasMore = false;
+    // Need to pick neutral background color to not blend with original colors
+    ctx.fillStyle = '#676767';
+    ctx.fillRect(0, 0, width, height);
+    var imgData = ctx.getImageData(0, 0, width, height);
+    var pixels = imgData.data;
+    // Okay, let's move the pixels
+    colorSet.forEach((pixelInfo, colorKey) => {
+      pixelInfo.points.forEach((point) => {
+        // given current frame, use easing to figure out offset of a pixel
+        var t = interploate(point.frame/point.timeSpan);
+        if (currentStage === 1 && point.frame < point.timeSpan) {
+          point.frame += 1;
+          // if at least one point was moved - keep trying on the next frame
+          hasMore = true;
+        }  else if (currentStage === 2 & point.frame > 0) {
+          point.frame -= 1;
+          hasMore = true;
+          // I want to restore portrait faster than collapsing it:
+          if (point.frame > 0) point.frame -= 1;
+        }
+        var x = Math.round(lerp(point.x, point.destX, t));
+        var y = Math.round(lerp(point.y, point.destY, t));
+        // Color has four components, thus multplying by 4
+        var pixelIndex = (x + y * width) * 4;
+        var color = point.color.rgba();
+        pixels[pixelIndex + 0] = color[0];
+        pixels[pixelIndex + 1] = color[1];
+        pixels[pixelIndex + 2] = color[2];
+        pixels[pixelIndex + 3] = color[3] * 255;
+      });
+    });
+    // All pixels updated on this frame, lets draw them
+    ctx.putImageData(imgData, 0, 0);
+
+    if (!hasMore) {
+      // 3 is just a trick. If current state can be only 1 or 2, then
+      // assigning 3 - currentState guarantees that we flip only between
+      // these two states.
+      currentStage = 3 - currentStage;
+      hasMore = true;
+      // Start next loop after a little pause
+      setTimeout(() => {
+        requestAnimationFrame(move)
+      }, 1000);
+    } else {
+      requestAnimationFrame(move);
+    }
+  }
+  function computeDestinations() {
+    // This function computes where the pixel should go, based on its value
+    var binCount = 256;
+    var binWidth = (width/binCount);
+    colorSet.forEach((pixelInfo, colorKey) => {
+      var pointBin = colorKey * binCount;
+      var xOffset = pointBin * binWidth;
+      var yOffset = 1/maxColorsInBin;
+      pixelInfo.points.forEach((point, idx) => {
+        point.destX = xOffset;
+        // I add small coefficients to make a padding.
+        point.destY = height * 0.85 - 0.80 * height * idx /maxColorsInBin;
+      })
+    });
+  }
+  
+  function requestStart(){
+    if (running)
+      requestFlow = 1;
+    else
+      initAnvanka();
+  }
+  
+  function initAnvanka(){
+    //PE's stuff
+    currentStage = 1;
+    maxColorsInBin = 0;
+    running = true;
+    colorSet = new Map();
+    maxSize = parseInt(document.getElementById("max-size").value) || null;
+    
+    // When image is loaded - run the code.
+    img.onload =  start;
+    img.onerror = function(){
+      alert("There is something wrong with this image or URL.");
+      document.getElementById("src-inp").select();
+      running = false;
+      requestFlow = 1;
+    };
+    
+    // Trigger image load. The image was originally taken from
+    // https://en.wikipedia.org/wiki/Carl_Friedrich_Gauss
+    img.src = document.getElementById("src-inp").value;
+  }
+</script>
+</body>
+</html>
