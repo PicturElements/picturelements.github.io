@@ -5,8 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <link rel="icon" href="pelement.png">
-  <meta name="description" content="HSL pixel separator graph maker - original by avanka">
-  <meta name=keywords content="joke, animation, Gauss">
+  <meta name="description" content="HSL pixel separator graph maker - original by anvaka">
   <meta name=author content="Andrei Kashcha">
   <title>Gaussian Distribution</title>
   <style>
@@ -89,7 +88,7 @@
   <button onclick="requestStart()">Play</button>
   | max size <span class="question" title="OPTIONAL. Sets the maximum size (width or height) of the image. If the input image is bigger in any direction it will be resized to specification, making the animation run smoother on the smaller data set. Leave blank or 0 for full size.">(?)</span>:
   <input id="max-size" placeholder="max size (optional)" value="500">
-  <span id="credit" style="float: right">Original code by <a href="https://github.com/anvaka" target="_blank" rel="noopener noreferrer">anvanka</a></span>
+  <span id="credit" style="float: right">Original code by <a href="https://github.com/anvaka" target="_blank" rel="noopener noreferrer">anvaka</a></span>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.3.5/chroma.min.js"></script>
@@ -187,7 +186,7 @@
   function move() {
     if (requestFlow > 0){
       if (requestFlow == 1)
-        initAnvanka();
+        initAnvaka();
       requestFlow = 0;
       return;
     }
@@ -262,10 +261,10 @@
     if (running)
       requestFlow = 1;
     else
-      initAnvanka();
+      initAnvaka();
   }
   
-  function initAnvanka(){
+  function initAnvaka(){
     //PE's stuff
     currentStage = 1;
     maxColorsInBin = 0;
