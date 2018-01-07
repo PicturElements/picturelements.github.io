@@ -4,7 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <meta name=Description content="Gaussian distribution...">
+  <link rel="icon" href="pelement.png">
+  <meta name="description" content="HSL pixel separator graph maker - original by avanka">
   <meta name=keywords content="joke, animation, Gauss">
   <meta name=author content="Andrei Kashcha">
   <title>Gaussian Distribution</title>
