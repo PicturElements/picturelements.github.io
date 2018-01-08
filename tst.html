@@ -1,153 +1,36 @@
-<div class="wt-form-wrapper wt-embed" style="width: 600px;">
-  <div class="wt-form wt-19-form">
-    <div class="page-box wt-page wt-19-page">
-      <div class="wt-input-wrapper-wrapper">
-        <div class="wt-input-wrapper">
-          <span class="wt-19-inp-header wt-inp-header">
-            <span class="wt-inp-header-inner">Salutation</span>
-            <span class="wt-19-required-char wt-required-char" title="required">*</span>
-          </span>
-          <select class="wt-19-input wt-selection selbox-inp" value="none" placeholder="" name="salutation_UfUq">
-            <option value="">No salutation</option>
-            <option value="Mr.">Mr.</option>
-            <option value="Mrs.">Mrs.</option>
-            <option value="Ms.">Ms.</option>
-            <option value="Dear">Dear</option>
-          </select>
-        </div>
-      </div>
-      <div class="wt-input-wrapper-wrapper">
-        <div class="wt-input-wrapper">
-          <span class="wt-19-inp-header wt-inp-header">
-            <span class="wt-inp-header-inner">Country code</span>
-            <span class="wt-19-required-char wt-required-char" title="required">*</span>
-          </span>
-          <select class="wt-19-input wt-selection ccode-inp" value="none" placeholder="" name="countrycode_fJJJ">
-            <option value="none">No country selected</option>
-            <option value="61">Australia</option>
-            <option value="1">Canada</option>
-            <option value="353">Ireland</option>
-            <option value="44">United Kingdom</option>
-            <option value="1">United States</option>
-          </select>
-        </div>
-        <div class="wt-input-wrapper">
-          <span class="wt-19-inp-header wt-inp-header">
-            <span class="wt-inp-header-inner">First name</span>
-            <span class="wt-19-required-char wt-required-char" title="required">*</span>
-          </span>
-          <input class="wt-19-input wt-input name-inp" type="text" placeholder="" name="firstname_JJWq">
-        </div>
-      </div>
-      <div class="wt-footer wt-19-footer">
-        <button class="wt-submit wt-19-submit">submit</button>
-      </div>
-    </div>
-    <div class="wt-status-wheel-wrapper">
-      <div class="wt-status-wheel wt-loading-wheel">
-        <div class="wt-loading-spinner"></div>
-        <div class="wt-loading-spinner"></div>
-        <div class="wt-loading-spinner"></div>
-      </div>
-      <div class="wt-status-wheel wt-success-wheel">
-        <svg viewbox="-1 -1 12 12">
-          <path d="M3 4.5 l-1 1 l2 2 l4 -4 l-1 -1 l-3 3"></path>
-        </svg>
-      </div>
-      <div class="wt-status-wheel wt-fail-wheel">
-        <svg viewbox="-1 -1 12 12">
-          <path d="M4 5 l-1.5 1.5 l1 1 l1.5 -1.5 l1.5 1.5 l1 -1 l-1.5 -1.5 l1.5 -1.5 l-1 -1 l-1.5 1.5 l-1.5 -1.5 l-1 1"></path>
-        </svg>
-      </div>
+<div class="tfws-modal-wrapper" id="wtfs-TjRNwPbVRh">
+  <link rel="stylesheet" href="http://localhost:1000/static/external/widgets/modal/modal.css">
+  <style>
+    .wtfs-modal-header {
+    	color: hsl(216,56%,32%);
+    }
+    
+    .wtfs-submit-btn {
+    	background: transparent;
+    	border: 2px solid hsl(216,56%,42%);
+    	border-radius: 4px;
+    	color: hsl(216,56%,42%);
+    }
+    
+    .wtfs-submit-btn:hover, .wtfs-submit-btn:focus {
+    	background: hsl(216,56%,42%);
+    	color: white;
+    }
+    
+    .wtfs-submit-btn:active {
+    	background: hsl(216,56%,52%);
+    	border-color: hsl(216,56%,52%);
+    }
+  </style>
+  <div class="wtfs-modal">
+    <div class="wtfs-modal-header" id="mod-title">Modal title</div>
+    <div class="wtfs-modal-content" id="mod-content">This is some modal text.</div>
+    <div class="wtfs-modal-footer">
+      <a href="" class="wtfs-submit-btn" id="mod-btn">OK</a>
     </div>
   </div>
-  <link rel="stylesheet" href="http://localhost:1000/static/external/form_files/form.css">
-  <style>
-	.wt-embed .wt-19-form {
-		font-family: Trebuchet MS;
-		font-size: 16px;
-		font-weight: 400;
-		color: #3d3d3d;
-		text-align: left;
-		background: #ffffff;
-		border-radius: 5px;
-		border: 2px solid #dddddd
-	}
-	.wt-embed .wt-19-page {
-		padding: 10px
-	}
-	.wt-embed .wt-19-input {
-		font-family: Trebuchet MS;
-		font-size: 16px;
-		font-weight: 400;
-		color: #686868;
-		text-align: left;
-		background: #f9f9f9;
-		border-radius: 4px;
-		border: 1px dashed #8b8b8b;
-		padding: 2px 3px
-	}
-	.wt-embed .wt-19-input::-webkit-input-placeholder{
-		font-weight: 400;
-		color: #c5c5c5
-	}
-	.wt-embed .wt-19-input::-moz-placeholder{
-		font-weight: 400;
-		color: #c5c5c5
-	}
-	.wt-embed .wt-19-input:-ms-input-placeholder{
-		font-weight: 400;
-		color: #c5c5c5
-	}
-	.wt-embed .wt-19-input:-moz-placeholder{
-		font-weight: 400;
-		color: #c5c5c5
-	}
-	.wt-embed .wt-19-error {
-		background: #ffd1d1;
-		border-radius: 5px;
-		border: 1px solid #c10000
-	}
-	.wt-embed .wt-19-inp-header {
-		font-family: Trebuchet MS;
-		font-size: 12px;
-		font-weight: 600;
-		color: #383838;
-		text-align: left
-	}
-	.wt-embed .wt-19-required-char {
-		color: #ff0000
-	}
-	.wt-embed .wt-19-header {
-		font-family: Trebuchet MS;
-		font-size: 25px;
-		font-weight: 600;
-		color: #383838;
-		text-align: left
-	}
-	.wt-embed .wt-19-body-text {
-		font: inherit
-	}
-	.wt-embed .wt-19-submit {
-		font-size: 18px;
-		font-weight: 400;
-		color: #ffffff;
-		text-align: left;
-		background: #2f64a4;
-		border-radius: 5px;
-		border: none;
-		padding: 4px 15px
-	}
-	.wt-embed .wt-19-footer {
-		justify-content: flex-end
-	}
-  </style>
-  <script src="http://localhost:1000/static/js/picturelements/selbox.js">
-  </script>
-  <link rel="stylesheet" href="http://localhost:1000/static/css/selbox.css">
+  <script src="http://localhost:1000/static/external/widgets/modal/modal.js"></script>
   <script>
-    function addFormScript(t){if(document.getElementById("wt-form-script"))t();else{var e=document.createElement("script");e.setAttribute("src","http://localhost:1000/static/external/form_files/form.js"),e.id="wt-form-script",document.body.appendChild(e),e.onload=t}}addFormScript(function(){new Form(19,"http://localhost:1000",false)});
+    new WTFSModal('2172xYiHY3594H39','TjRNwPbVRh');
   </script>
-  <input name="selflink" value="" type="hidden">
-  <input name="company_id" value="NTM=" type="hidden">
 </div>
