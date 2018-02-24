@@ -1,36 +1,229 @@
-<div class="wtfs-modal-wrapper" id="wtfs-vOFaGVbRbF">
-  <link rel="stylesheet" href="http://localhost:1000/static/external/widgets/modal/modal.css">
-  <style>
-    .wtfs-modal-header {
-    	color: hsl(216,56%,32%);
-    }
-    
-    .wtfs-submit-btn {
-    	background: transparent;
-    	border: 2px solid hsl(216,56%,42%);
-    	border-radius: 4px;
-    	color: hsl(216,56%,42%);
-    }
-    
-    .wtfs-submit-btn:hover, .wtfs-submit-btn:focus {
-    	background: hsl(216,56%,42%);
-    	color: white;
-    }
-    
-    .wtfs-submit-btn:active {
-    	background: hsl(216,56%,52%);
-    	border-color: hsl(216,56%,52%);
-    }
-  </style>
-  <div class="wtfs-modal">
-    <div class="wtfs-modal-header" id="mod-title">Modal title</div>
-    <div class="wtfs-modal-content" id="mod-content">This is some modal text.</div>
-    <div class="wtfs-modal-footer">
-      <a href="" class="wtfs-submit-btn" id="mod-btn" target="blank" rel="noopener nofollow">OK</a>
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>
+  		Indirectory Bot
+  	</title>
+  </head>
+  <body>
+<div class="wt-form-wrapper wt-embed" style="justify-content: center;display: flex;">
+  <div class="wt-form wt-17-form">
+    <div class="page-box wt-page wt-17-page">
+      <div class="wt-input-wrapper-wrapper">
+        <div class="wt-input-wrapper">
+          <span class="wt-17-inp-header wt-inp-header required">
+            <span class="wt-inp-header-inner">First name</span>
+            <span class="wt-17-required-char wt-required-char" title="required">*</span>
+          </span>
+          <input class="wt-17-input wt-input name-inp" type="text" placeholder="" name="firstname" required="">
+        </div>
+        <div class="wt-input-wrapper">
+          <span class="wt-17-inp-header wt-inp-header required">
+            <span class="wt-inp-header-inner">Last name</span>
+            <span class="wt-17-required-char wt-required-char" title="required">*</span>
+          </span>
+          <input class="wt-17-input wt-input name-inp" type="text" placeholder="" name="lastname" required="">
+        </div>
+      </div>
+      <div class="wt-input-wrapper-wrapper">
+        <div class="wt-input-wrapper">
+          <span class="wt-17-inp-header wt-inp-header required">
+            <span class="wt-inp-header-inner">Store Name</span>
+            <span class="wt-17-required-char wt-required-char" title="required">*</span>
+          </span>
+          <input class="wt-17-input wt-input text-inp" type="text" placeholder="e.g. Google" name="storename" required="">
+        </div>
+      </div>
+      <div class="wt-input-wrapper-wrapper">
+        <div class="wt-input-wrapper" id="foc-box">
+          <span class="wt-17-inp-header wt-inp-header required">
+            <span class="wt-inp-header-inner">Email address</span>
+            <span class="wt-17-required-char wt-required-char" title="required">*</span>
+          </span>
+          <input class="wt-17-input wt-input email-inp" type="text" placeholder="e.g. admin@google.com" name="email" required="">
+        </div>
+      </div>
+      <div class="wt-input-wrapper-wrapper">
+        <div class="wt-input-wrapper" id="foc-box">
+          <span class="wt-17-inp-header wt-inp-header required">
+            <span class="wt-inp-header-inner">
+              Postal Code (for local matches)
+            </span>
+            <span class="wt-17-required-char wt-required-char" title="required">*</span>
+          </span>
+          <input class="wt-17-input wt-input text-inp" type="text" placeholder="e.g. 42240" name="postal_code" required="">
+        </div>
+      </div>
+      <div class="wt-input-wrapper-wrapper">
+        <div class="wt-input-wrapper" id="foc-box">
+          <span class="wt-17-inp-header wt-inp-header required">
+            <span class="wt-inp-header-inner">What is your store style?</span>
+            <span class="wt-17-required-char wt-required-char" title="required">*</span>
+          </span>
+          <select class="wt-17-input wt-selection selbox-inp" value="none" placeholder="" name="store_style" required="">
+            <option value="">Select a style</option>
+            <option value="Scandi.">Scandi</option>
+            <option value="Contemporary">Contemporary</option>
+            <option value="Traditional">Traditional</option>
+            <option value="Boho">Boho</option>
+          </select>
+        </div>
+      </div>
+      <div class="wt-input-wrapper-wrapper">
+        <div class="wt-input-wrapper" id="foc-box">
+          <span class="wt-17-inp-header wt-inp-header required">
+            <span class="wt-inp-header-inner">What are your store values?</span>
+            <span class="wt-17-required-char wt-required-char" title="required">*</span>
+          </span>
+          <select class="wt-17-input wt-selection selbox-inp" value="none" placeholder="" name="values" required="">
+            <option value="">Select a value</option>
+            <option value="Aust Made">Aust Made.</option>
+            <option value="Handmade">Handmade</option>
+            <option value="Designer/Artist">Designer/Artist</option>
+            <option value="Pure Material">Pure Material</option>
+          </select>
+        </div>
+      </div>
+      <div class="wt-input-wrapper-wrapper">
+        <div class="wt-input-wrapper" id="foc-box">
+          <span class="wt-17-inp-header wt-inp-header">
+            <span class="wt-inp-header-inner">
+              What products would you like more of on your shelves?
+            </span>
+            <span class="wt-17-required-char wt-required-char" title="required">*</span>
+          </span>
+          <select class="wt-17-input wt-selection selbox-inp" value="none" placeholder="" name="product_type">
+            <option value="">Select a product type</option>
+            <option value="Fashion/Accessories">Fashion/Accessories</option>
+            <option value="Kids">Kids</option>
+            <option value="Homeware/Gifts">Homeware/Gifts</option>
+            <option value="Personal Care">Personal Care</option>
+          </select>
+        </div>
+      </div>
+      <div class="wt-footer wt-17-footer">
+        <button class="wt-submit wt-17-submit">submit</button>
+      </div>
+    </div>
+    <div class="wt-status-wheel-wrapper">
+      <div class="wt-status-wheel wt-loading-wheel">
+        <div class="wt-loading-spinner"></div>
+        <div class="wt-loading-spinner"></div>
+        <div class="wt-loading-spinner"></div>
+      </div>
+      <div class="wt-status-wheel wt-success-wheel">
+        <svg viewbox="-1 -1 12 12">
+          <path d="M3 4.5 l-1 1 l2 2 l4 -4 l-1 -1 l-3 3"></path>
+        </svg>
+      </div>
+      <div class="wt-status-wheel wt-fail-wheel">
+        <svg viewbox="-1 -1 12 12">
+          <path d="M4 5 l-1.5 1.5 l1 1 l1.5 -1.5 l1.5 1.5 l1 -1 l-1.5 -1.5 l1.5 -1.5 l-1 -1 l-1.5 1.5 l-1.5 -1.5 l-1 1"></path>
+        </svg>
+      </div>
     </div>
   </div>
-  <script src="http://localhost:1000/static/external/widgets/modal/modal.js"></script>
+  <link rel="stylesheet" href="https://www.wowtools.io/static/external/form_files/form.css">
+  <style>
+    .wt-embed .wt-17-form {
+    	font-family: Trebuchet MS;
+    	font-size: 16px;
+    	font-weight: 400;
+    	color: #f6f6f6;
+    	text-align: left;
+    	background: #1a1a1a;
+    	border-radius: 0px;
+    	border: none
+    }
+    
+    .wt-embed .wt-17-page {
+    	padding: 10px
+    }
+    
+    .wt-embed .wt-17-input, .wt-embed .wt-17-input + .wt-option-box {
+    	font-family: Trebuchet MS;
+    	font-size: 16px;
+    	font-weight: 400;
+    	color: #f6f6f6;
+    	text-align: left;
+    	background: #393939;
+    	border-radius: 4px;
+    	border: 1px solid #565656;
+    	padding: 2px 3px
+    }
+    
+    .wt-embed .wt-17-input::-webkit-input-placeholder{
+    	font-weight: 400;
+    	color: #8a8a8a
+    }
+    
+    .wt-embed .wt-17-input::-moz-placeholder{
+    	font-weight: 400;
+    	color: #8a8a8a
+    }
+    
+    .wt-embed .wt-17-input:-ms-input-placeholder{
+    	font-weight: 400;
+    	color: #8a8a8a
+    }
+    
+    .wt-embed .wt-17-input:-moz-placeholder{
+    	font-weight: 400;
+    	color: #8a8a8a
+    }
+    
+    .wt-embed .wt-17-error {
+    	background: #ffd1d1;
+    	border-radius: 5px;
+    	border: 1px solid #c10000
+    }
+    
+    .wt-embed .wt-17-inp-header {
+    	font-family: Trebuchet MS;
+    	font-size: 12px;
+    	font-weight: 600;
+    	color: #f6f6f6;
+    	text-align: left
+    }
+    
+    .wt-embed .wt-17-required-char {
+    	color: #ff0000
+    }
+    
+    .wt-embed .wt-17-header {
+    	font-family: Trebuchet MS;
+    	font-size: 25px;
+    	font-weight: 600;
+    	color: #383838;
+    	text-align: left
+    }
+    
+    .wt-embed .wt-36-body-text {
+    	font: inherit
+    }
+    
+    .wt-embed .wt-17-submit {
+    	font-size: 18px;
+    	font-weight: 400;
+    	color: #ffffff;
+    	text-align: left;
+    	background: #18ba55;
+    	border-radius: 3px;
+    	border: none;
+    	padding: 4px 25px
+    }
+    
+    .wt-embed .wt-17-footer {
+    	justify-content: flex-end
+    }
+  </style>
+  <script src="https://www.wowtools.io/static/js/picturelements/selbox.js"></script>
+  <link rel="stylesheet" href="https://www.wowtools.io/static/css/selbox.css">
   <script>
-    new WTFSModal('2172xYiHY3594H39','vOFaGVbRbF');
+    function addFormScript(t){if(document.getElementById("wt-form-script"))t();else{var e=document.createElement("script");e.setAttribute("src","https://www.wowtools.io/static/external/form_files/form.js"),e.id="wt-form-script",document.body.appendChild(e),e.onload=t}}addFormScript(function(){new Form(17,"https://www.wowtools.io",false)});
   </script>
+  <input name="selflink" value="" type="hidden">
+  <input name="company_id" value="NTM=" type="hidden">
 </div>
+</body>
+</html>
