@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   </head>
   <body>
-<div class="wt-form-wrapper wt-embed" style="justify-content: center;display: flex;">
+<div class="wt-form-wrapper wt-embed">
   <div class="wt-form wt-17-form">
     <div class="page-box wt-page wt-17-page">
       <div class="wt-input-wrapper-wrapper">
@@ -106,7 +106,7 @@
     </div>
     <div class="wt-success-msg wt-17-success-msg">
       <div id="ty-header">
-        <span class="purple">Thank you!</span> Keep an eye on your inbox for your <span class="purple">match</span> results!
+        <span class="purple">Thank you!</span> Keep an eye on your inbox for your <span class="purple">match</span> results...
       </div>
       <div id="img-box">
         <img src="http://localhost:1000/static/images/Indirectory/IndirectoryFooter.png">
@@ -231,7 +231,6 @@
     /*Indirectory specific*/
     
     body {
-      margin: 0;
       background: #1a1a1a;
     }
     
@@ -243,6 +242,42 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      height: 100vh;
+    }
+    
+    #ty-header {
+      font-family: Arial Black;
+      color: #7395a2;
+      text-transform: uppercase;
+      font-size: 120%;
+      text-align: center;
+      width: 22em;
+      max-width: 100%;
+      margin-bottom: 20px;
+      letter-spacing: 0.04em;
+      word-spacing: 0.05em;
+    }
+    
+    .purple {
+      color: #b23b99;
+    }
+    
+    #img-box img {
+      width: 100%;
+      display: block;
+    }
+    
+    #join-box {
+      color: #bc2da0;
+      background: white;
+      width: 100%;
+      padding: 10px 20px;
+      font-family: Arial;
+      font-weight: 700;
+      text-transform: uppercase;
+      box-sizing: border-box;
+      letter-spacing: 0.035em;
+      text-align: center;
     }
   </style>
   <!--<script src="https://www.wowtools.io/static/js/picturelements/selbox.js"></script>
