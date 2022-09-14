@@ -458,7 +458,7 @@
           if (userGuess<guess){command="^^^^Nope. "+userGuess+" is too small.";}
           else if (userGuess>guess){command="^^^^Nope. "+userGuess+" is too large.";}
           else if (userGuess==guess){
-            command="^^^^YES! "+userGuess+" is correct! You needed "+guesses+" guesses."+spacing;
+            command="^^^^YES! "+userGuess+" is correct! You needed "+guesses+" guesses. <a onclick="checkInput(&quot;HOME&quot;)">You can also click here.</a>"+spacing;
             action=0;
           }else{command="^^^^"+inStr+" is not a valid input. Try again!"; guesses--;}
         }else if (action==4){
